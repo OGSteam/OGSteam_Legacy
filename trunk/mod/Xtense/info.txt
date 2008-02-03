@@ -1,2 +1,0 @@
-Module complémentaire de la toolbar Xtense pour Firefox , par <b>Verite</b> et <b>Bousteur</b> (basé sur naq_ogsplugin)
-<a href='http://www.ogsteam.fr/forums/forum-40'>Informations</a>
