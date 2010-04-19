@@ -1,0 +1,40 @@
+<!-- BEGIN announcments_row -->
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{L_ANNOUNCMENTS}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+		<table class="tablebg" cellspacing="1" width="100%">
+			<tr>
+				<td class="cat">
+					{announcments_row.ATTACH_ICON_IMG}<!-- IF announcments_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcments_row.U_VIEW_COMMENTS}"><strong>{announcments_row.TITLE}</strong></a>
+				</td>
+			</tr>
+			<tr>
+				<td class="row1">
+					<span class="gensmall">{L_POSTED_BY}: <strong><a href="{announcments_row.U_USER_PROFILE}">{announcments_row.POSTER}</a></strong></span>
+	<!-- IF announcments_row.FLAGS -->&nbsp;
+	<img src="./images/flags/{announcments_row.FLAGS}.gif" border="0" width="15" alt="{announcments_row.FLAGS}" title="{announcments_row.FLAGS}">
+	<!-- ENDIF -->					
+					<br /><br />
+					{announcments_row.TEXT}<br /><br />
+					<span style="float: right;">{announcments_row.OPEN}<a href="{announcments_row.U_READ_FULL}">{announcments_row.L_READ_FULL}</a>{announcments_row.CLOSE}</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="row1" align="center">
+					<span style="float: left;">{announcments_row.MINI_POST_IMG}{announcments_row.TIME}</span>
+					<span style="float: right;"><a href="{announcments_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {announcments_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcments_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+  </div>
+</div>
+<!-- END announcments_row -->
+

@@ -1,0 +1,111 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+<!-- IF S_EDIT -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl><br>
+	<fieldset>
+	<form id="acp_portal_config" method="post" action="{U_ACTION}">
+<hr>	
+	<dl>
+		<dt><label for="config_name">{L_NOM_BLOC}:</label>
+		<br>{L_NOM_BLOC_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_name" type="text" id="config_name" value="{CN}" size="35" />
+		</dd>
+	</dl>
+<hr>
+<!-- IF CS == "2" -->
+	<dl>
+		<select name="config_scroll" class="post">		
+		<option value="2" <!-- IF CS == "2" --> selected <!-- ENDIF -->>Scroll : {L_NOT_AVAILABLE}
+		</select>
+	</dl>
+<hr>	
+<!-- ENDIF -->
+<!-- IF CS == "0" -->
+	<dl>
+		<dt><label for="config_scroll">{L_SCROLL_BLOC}:</label>
+		<br>{L_SCROLL_BLOC_EXPLAIN}<br /><span></dt>
+		<dd>
+		<select name="config_scroll" class="post">		
+		<option value="0" <!-- IF CS == "0" --> selected <!-- ENDIF -->>{L_NONE}
+		<option value="1" <!-- IF CS == "1" --> selected <!-- ENDIF -->>{L_YES}
+		</select>
+		</dd>
+	</dl>
+<hr>
+<!-- ENDIF -->
+<!-- IF CS == "1" -->
+	<dl>
+		<dt><label for="config_scroll">{L_SCROLL_BLOC}:</label>
+		<br>{L_SCROLL_BLOC_EXPLAIN}<br /><span></dt>
+		<dd>
+		<select name="config_scroll" class="post">		
+		<option value="0" <!-- IF CS == "0" --> selected <!-- ENDIF -->>{L_NONE}
+		<option value="1" <!-- IF CS == "1" --> selected <!-- ENDIF -->>{L_YES}
+		</select>
+		</dd>
+	</dl>
+<hr>
+<!-- ENDIF -->
+<!-- IF CF  -->
+	<dl>
+		<dt><label for="config_forum">{L_FORUM_EXCEPT}:</label>
+		<br>{L_FORUM_EXCEPT_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_forum" type="text" id="config_forum" value="{CF}" size="35" />
+		</dd>
+	</dl>
+<hr>
+<!-- ENDIF -->		
+	<dl>
+		<dt><label for="config_value">{L_NOM_VALUE}:</label>
+		<br>{L_NOM_VALUE_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_value" type="text" id="config_value" value="{CV}" size="3" />
+		</dd>
+	</dl>	
+
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_CONFIG}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+
+	<h1><center>{L_ACP_PORTAL_CONFIG_EXPLAIN}</center></h1>
+	<p><center>{L_ACP_PORTAL_CONFIG_EXPLAIN2}</center></p>
+
+	<fieldset class="tabulated">
+	<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th><center>{L_NAME_BLOC}</center></th>
+		<th><center>{L_SCROOL}</center></th>
+		<th><center>{L_N_AFF}</center></th>		
+		<th><center>{L_ACTION}</center></th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN portal_config -->
+		<!-- IF portal_config.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;">{portal_config.CN}</td>
+		<td style="text-align: center;">
+		  <!-- IF portal_config.CS == "0" -->{L_NONE}<!-- ENDIF -->
+		  <!-- IF portal_config.CS == "1" -->{L_YES}<!-- ENDIF -->
+		  <!-- IF portal_config.CS == "2" -->{L_NOT_AVAILABLE}<!-- ENDIF -->		  
+		</td>
+		<td style="text-align: center;">{portal_config.CV}</td>		
+		<td style="text-align: center;"><a href="{portal_config.U_EDIT}">{ICON_EDIT}</a></td>
+	</tr>
+	<!-- END portal_config -->
+	</tbody>
+	</table>
+	</fieldset>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

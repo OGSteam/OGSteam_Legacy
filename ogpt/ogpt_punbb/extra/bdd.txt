@@ -1,0 +1,217 @@
+/// premiere version
+CREATE TABLE `mod_fofo_ogs` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(254) default NULL,
+  `tutos` text,
+  `actif` enum('0','1') NOT NULL default '1',
+  `lien` varchar(255) NOT NULL,
+  `ordre` int(11) default '1',
+  `version` varchar(5) NOT NULL,
+  `developpeur` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+-- 
+-- Contenu de la table `mod_fofo_ogs`
+-- 
+
+INSERT INTO `mod_fofo_ogs` (`id`, `title`, `description`, `tutos`, `actif`, `lien`, `ordre`, `version`, `developpeur`) VALUES 
+(1, 'Galaxie', 'visionnez la galaxie via notre forum', 'D''apres e célébre serveur de ''ogsteam : ogspy (www.ogsteam.fr), parcourez une cartographie de votre univers.\r\n\r\nSeront bientôt ajouté : les phalanges, recycleurs dispo, mip a porté et phalange amies ....\r\n\r\n\r\nen étendant promenez vous a volonté ia les flèches ( droite / gauche ) ou par les cases a remplir', '1', 'galaxie.php', 2, '0.1', 'Machine'),
+(2, 'Profil_ogs', 'definissez vos acces et vos parametre ogspy forum', 'Pour profitez au maximum des modules du portail ogpt, remplissez les cases demandées ( pm, mod de pass, pseudo ...)\r\n\r\n\r\nenjoy', '1', 'profil_ogs.php', 1, '0.1', 'Machine'),
+(3, 'Exchange', 'lisez vos messages ingame sur le forum via le mod exchange d ogspy', 'Module Basé sur L''excellent mod Exchange développé pour le serveur ogspy\r\n\r\ncette modification vous permettra de retrouver :\r\n\r\n=> les messages joueurs\r\n=> les messages alliances\r\n\r\nMais également de faire des recherches :\r\n\r\n=> par joueur\r\n=> par mots clefs\r\n\r\nenjoy\r\n', '1', 'exchange.php?type=joueur', 3, '0.1', 'Machine'),
+(4, 'Aide', 'mod regroupant tous les autres', 'Page que vous êtes en train de visiter, ''aide a pour but de vous aidez a vous diriger et a utiliser au mieux les mods disponible sur ce portail\r\n\r\n\r\npas grand chose d''autres a dire si ce n''est qu''il vous faudra lire les descriptifs et tutos de chaque mod si vous avez besoin d''aide\r\n\r\nautrement contactez moi sur l''ogsteam\r\n\r\nhttp://www.ogsteam.fr/\r\n\r\nenjoy :)', '1', 'aide.php', 10, '0.1', 'Machine'),
+(5, 'admin Ogs', 'module d administration', 'Comme son nom l''indique ....\r\n\r\n\r\n s''agit de l''admin du portail ou seul les administrateurs du site pourront modifier les paramètres ogspy de celui ci ...\r\n\r\n', '1', 'admin_ogs.php', 1, '0.1', 'Machine'),
+(7, 'recherche joueurs', 'rechercher des joueurs dans la base', 'a suivre', '1', 'rech_joueur.php', 1, '0.1', 'Machine'),
+(8, 'empire', 'visionner votre empire', 'a suivre', '1', 'empire.php', 1, '0.1', 'Machine'),
+(6, 'recherche alliance', 'recherche des alliances dans la base', 'a venir', '1', 'rech_ally.php', 1, '0.1', 'Machine');
+
+
+
+
+
+
+
+INSERT INTO `config` (`conf_name`, `conf_value`) VALUES 
+
+('sys', '499'),
+('gal', '9'),
+('OGPT', '2.1');
+
+
+
+ALTER TABLE `users` ADD `id_ogspy` TINYINT( 11 ) NOT NULL DEFAULT '0';
+ALTER TABLE `users` CHANGE `id_ogspy` `id_ogspy` INT( 11 ) NOT NULL DEFAULT '0';
+ALTER TABLE `users` ADD `pm_g` TINYINT( 11 ) NOT NULL DEFAULT '0';
+ALTER TABLE `users` CHANGE `pm_g` `pm_g` INT( 11 ) NOT NULL DEFAULT '0';
+ALTER TABLE `users` ADD `pm_s` TINYINT( 11 ) NOT NULL DEFAULT '0';
+ALTER TABLE `users` CHANGE `pm_s` `pm_s` INT( 11 ) NOT NULL DEFAULT '0';
+
+
+
+////////////////////// maj du 24/10 ////////////////
+
+CREATE TABLE `mod_fofo_records` (
+  `nom_record` varchar(20) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `mod_fofo_ogs` (`id`, `title`, `description`, `tutos`, `actif`, `lien`, `ordre`, `version`, `developpeur`) VALUES 
+(9, 'production', 'combien prodisez vous', 'a suivre', '1', 'prod.php', 2, '0.1', 'Machine'),
+(10, 'records', 'galerie des records de l alliance', 'a suivre', '1', 'records.php', 1, '0.1', 'Machine');
+
+
+//////////// 02/11/2008
+
+
+
+
+// modif bdd des mod
+
+
+ALTER TABLE `mod_fofo_ogs` CHANGE `actif` `actif` INT( 1 ) NOT NULL DEFAULT '1'
+
+
+/// ajout bdd pour panneau modif ulterieur
+
+
+CREATE TABLE `pan_fofo_ogs` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(254) default NULL,
+  `actif` int(1) NOT NULL default '1',
+  `lien` varchar(255) NOT NULL,
+  `ordre` int(11) default '1',
+  `version` varchar(5) NOT NULL,
+  `developpeur` varchar(30) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM ;
+
+
+/// 09/11/08
+(11, 'stat', 'stat de l alliance', 'a suivre', '1', 'stat.php', 1, '0.1', 'coeur noir/machine');
+
+
+
+19/11/08
+
+
+-- 
+-- Structure de la table `mod_pandore`
+-- 
+
+CREATE TABLE `mod_pandore` (
+  `id` int(10) NOT NULL auto_increment,
+  `sender` varchar(30) NOT NULL default '-1',
+  `id_sender` int(10) NOT NULL default '-1',
+  `nom` varchar(30) NOT NULL default '-1',
+  `total_point` int(30) NOT NULL default '-1',
+  `date` int(10) NOT NULL default '-1',
+  `points_bat` varchar(30) NOT NULL default '-1',
+  `points_def` varchar(30) NOT NULL default '-1',
+  `points_rech` varchar(30) NOT NULL default '-1',
+  `points_flotte` varchar(30) NOT NULL default '-1',
+  `points_manquant` varchar(30) NOT NULL default '-1',
+  `nb_vaisseaux` int(30) NOT NULL default '-1',
+  `nb_vaisseaux_manquant` int(30) NOT NULL default '-1',
+  `max_edlm` int(30) NOT NULL default '-1',
+  `edlm` int(30) NOT NULL default '-1',
+  `max_dest` int(30) NOT NULL default '-1',
+  `dest` int(30) NOT NULL default '-1',
+  `max_sat` int(30) NOT NULL default '-1',
+  `sat` int(30) NOT NULL default '-1',
+  `max_bb` int(30) NOT NULL default '-1',
+  `bb` int(30) NOT NULL default '-1',
+  `max_se` int(30) NOT NULL default '-1',
+  `se` int(30) NOT NULL default '-1',
+  `max_rc` int(30) NOT NULL default '-1',
+  `rc` int(30) NOT NULL default '-1',
+  `max_vc` int(30) NOT NULL default '-1',
+  `vc` int(30) NOT NULL default '-1',
+  `max_vb` int(30) NOT NULL default '-1',
+  `vb` int(30) NOT NULL default '-1',
+  `max_cr` int(30) NOT NULL default '-1',
+  `cr` int(30) NOT NULL default '-1',
+  `max_clo` int(30) NOT NULL default '-1',
+  `clo` int(30) NOT NULL default '-1',
+  `max_cl` int(30) NOT NULL default '-1',
+  `cl` int(30) NOT NULL default '-1',
+  `max_gt` int(30) NOT NULL default '-1',
+  `gt` int(30) NOT NULL default '-1',
+  `max_pt` int(30) NOT NULL default '-1',
+  `pt` int(30) NOT NULL default '-1',
+  `max_tr` int(30) NOT NULL default '-1',
+  `tr` int(30) NOT NULL default '-1',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+/// 21/11
+
+INSERT INTO `mod_fofo_ogs` (`id`, `title`, `description`, `tutos`, `actif`, `lien`, `ordre`, `version`, `developpeur`) VALUES
+(13, 'pandore', 'les forces de vos ennemis en fiche', 'a suivre', '1', 'pandore.php', 8, '0.1', 'Machine');
+
+INSERT INTO `mod_fofo_ogs` (`id`, `title`, `description`, `tutos`, `actif`, `lien`, `ordre`, `version`, `developpeur`) VALUES
+(14, 'conv', 'convertir et envoyer directement vos rc et er sur fofo', 'a suivre', '1', 'conv.php', 8, '0.1', 'Machine');
+
+
+
+///08/01
+///ajut de variable config ['ogspy_prefix']
+INSERT INTO `ogameportail`.`config` (
+`conf_name` ,
+`conf_value`
+)
+VALUES (
+'ogspy_prefix', 'ogspy_'
+);
+
+
+
+///////////////////////////////////////////////////////////////////
+v2.1 et 2.11
+toutes modifs prises en compte jusque la par l'installe
+///////////////////////////////////////////////////////////////
+
+04/02
+
+
+// table pour globale 'ogpt'
+CREATE TABLE `ogpt` (
+  `conf_name` varchar(255) NOT NULL default '',
+  `conf_value` text,
+  PRIMARY KEY  (`conf_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+/// table pour les favories
+CREATE TABLE `favorie` (
+  `galaxy` enum('1','2','3','4','5','6','7','8','9') collate latin1_general_ci NOT NULL default '1',
+  `system` smallint(3) NOT NULL default '0',
+  `row` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15') collate latin1_general_ci NOT NULL default '1',
+  `player` varchar(20) collate latin1_general_ci default NULL,
+   `sender` int(11) NOT NULL default '0',
+  UNIQUE KEY `univers` (`galaxy`,`system`,`row`),
+  KEY `player` (`player`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+
+le 05//02
+ajout des couleurs en bdd
+
+
+INSERT INTO `ogpt` (`conf_name`, `conf_value`) VALUES
+('i', '#FFFFFF'),
+('iI', '#FFFFFF'),
+('d', '#FFFFFF'),
+('v', '#FFFFFF'),
+('iv', '#FFFFFF'),
+('iIv', '#FFFFFF'),
+('b', '#FFFFFF'),
+('bv', '#FFFFFF'),
+('bvi', '#FFFFFF'),
+('bvIi', '#FFFFFF');
+('f', '#FFFFFF');

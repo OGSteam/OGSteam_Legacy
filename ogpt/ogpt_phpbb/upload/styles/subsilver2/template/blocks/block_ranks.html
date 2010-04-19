@@ -1,0 +1,32 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{L_RANKS}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+					<td>
+					<center>					
+	<!-- BEGIN ranks -->
+		<!-- IF ranks.S_ROW_COUNT is even -->
+		<tr class="row1">
+		<!-- ELSE -->
+		<tr class="row2">
+		<!-- ENDIF -->
+		<td style="text-align: center; height: 25px;">
+		<span class="gensmall">{ranks.RANK_TITLE}</span>
+		<br>
+		<!-- IF ranks.S_RANK_IMAGE -->
+		<img src="{ranks.RANK_IMAGE}" alt="{ranks.RANK_TITLE}" title="{ranks.RANK_TITLE}" />
+		<!-- ELSE -->
+		<!-- ENDIF --></td>
+		
+	</tr>
+	<!-- END ranks -->
+</td>
+					</center>
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>

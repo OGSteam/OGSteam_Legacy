@@ -1,0 +1,199 @@
+30/04/2008
+v1.9b
+* (fix) prise en compte du nouveau positionnement de la date.
+14/01/2008
+v1.9a
+* (mod) prise en compte de la phrase concernant l'activité des rapports OGame.
+
+14/12/2007
+v1.9
+* (online) prise en compte de la phrase concernant l'activité des rapports OGame.
+
+04/04/2007
+v1.8c
+* (online) compatibilité avec E-UniverS.
+* correction du bug des dates fantaisistes.
+
+24/03/2007
+v1.8b
+* ajout du style pour les forums punBB.
+* précision sur les balises BBCode employées dans la selectbox.
+* amélioration de la détection des nombres (prise en compte des nombres "bruts", formatés avec un point ou un espace).
+
+26/02/2007
+v1.8
+* compatible OGame 0.76 (formatage des nombres avec un point pour séparateur de milliers).
+* correction du bug de formatage des nombres (séparateur toujours actif même décoché).
+* changement de quelques tooltips.
+
+13/01/2007
+v1.7c
+* changement d'hébergeur pour <a href="http://restyler-ogame.ovh.org">REstyler</a>.
+* changement du mode de contact : remplacement du formulaire par un <a href="http://restyler-ogame.ovh.org/contact/">mini forum</a> (plus convivial encore que le mail).
+* petites uniformisations entre le mod et le site.
+* sécurisation des dossiers.
+* (mod) correction de l'emplacement du rapport d'espionnage de test.
+
+02/12/2006
+v1.7b
+* allègement du cookie.
+* fixation de la taille des caractères pour les options.
+
+29/11/2006
+v1.7
+* ajout de l'export HTML.
+* aperçu compatible avec l'export HTML.
+* ajout d'un rapport d'espionnage complet pour tester les capacités de REstyler.
+
+14/10/2006
+v1.6c
+* adaptation de REstyler à OGSpy.
+
+03/10/2006
+v1.6b
+* nettoyage complet du code.
+
+01/10/2006
+v1.6
+* ajout de l'option "Grouper les rapports".
+* changement de l'apparence : passage au nouveau skin "Evolution".
+* correction d'un bug dans l'aperçu avec plusieurs rapports.
+* choix du séparateur de milliers (espace ou point).
+* ajout des &lt;label&gt; (permet que le clic sur le texte coche l'option).
+
+29/09/2006
+v1.5
+* ajout de la mise en forme de plusieurs rapports d'espionnage en une fois.
+* correction du retour à la ligne après le numéro de version dans le lien "Généré par REstyler ..."
+* ajout d'une barre de séparation lorsqu'il y a plusieurs rapports.
+
+28/08/2006
+v1.4d
+* sélection de tout le rapport formaté quand on clique dessus.
+* amélioration mineure des propriétés CSS.
+
+19/07/2006
+v1.4c
+* détection de l'EDLM (comme la techno "graviton", elle sera toujours mise en valeur).
+* ajout de l'option du séparateur de milliers ; cela permet d'avoir le rapport formaté complètement compatible avec Speedsim (lorsque cette option est désactivée).
+
+09/07/2006
+v1.4b
+* allègement de la page principale : page dédiée pour le changelog (un tiers du poids en moins ! ).
+
+v1.4
+* la sauvegarde des options fonctionne enfin !!! les options sont chargées automatiquement à la fin du chargement de la page.
+
+12/06/2006
+v1.3b
+* quelques optimisations du code PHP ;)
+
+11/06/2006
+v1.3
+* changement radical de design... plus compact, et plus lisible (enfin, j'espère).
+* ajout de l'icône pour le changement de couleur. Il faut maintenant cliquer sur cette icône pour avoir la palette.
+
+09/06/2006
+v1.2
+* ajout des BBCode des forums SMF, LDU, WBB lite, ainsi que d'un style très épuré.
+* ajout de la possibilité de changement du BBcode selon le forum.
+
+23/05/2006
+v1.01b
+* traduction de la date en français... merci Lycos...
+
+22/05/2006
+v1.01
+* ajout de l'option d'affichage de la probabilité de destruction de la flotte (contre-espionnage).
+
+21/05/2006
+v1.0b
+* petit changement de mise en page dans les options (changement de l'ordre).
+
+20/05/2006
+v1.0
+* lorsque les couleurs sont remises par défaut, le code hexadécimal correspondant est affiché (au lieu d'être vide).
+* changement de mise en page (position des options).
+* ajout de la sauvegarde des options via un cookie.
+
+14/05/2006
+v0.9
+* suppression de la copie automatique du rapport formaté dans le presse-papiers.
+* ajout de la palette de couleurs pour faciliter le choix.
+* détection automatique du numéro de version.
+* ajout du choix des couleurs.
+
+02/05/2006
+v0.8f
+* correction de l'envoi de mail (qui ne fonctionnait plus depuis le changement du compteur de visiteurs, donc depuis hier).
+* simplification (pour moi) concernant le changelog.
+
+01/05/2006
+v0.8e
+* changement du compteur de visiteurs.
+* affichage de la date en toutes lettres (la date est basée sur l'année en cours).
+* correction du graviton (il n'était plus détecté avec le nettoyage de code de la v0.8c).
+
+29/04/2006
+v0.8d
+* correction du lien vers la page de REstyler.
+* centrage de l'aperçu.
+
+28/04/2006
+v0.8c
+* mise en variable de tous les champs texte lus et affichés.
+* amélioration du code (création de fonctions pour les parties redondantes).
+
+22/04/2006
+v0.8b
+* ajout d'un lien à la fin du rapport formaté.
+* modification de l'aperçu.
+* changement des couleurs pour la flotte et les défenses.
+
+20/04/2006
+v0.8
+* ajout d'une icône (personnalise un peu plus la page lorsqu'elle est en favoris / marque-pages).
+* ajout d'un formulaire de contact (plus rapide qu'un simple lien mailto).
+* ajout d'un bouton pour mettre tous les seuils à zéro.
+* ajout d'infobulles pour tous les champs et les boutons.
+
+12/04/2006
+v0.7
+* ajout de l'aperçu. Un grand merci à la <a href="http://www.takanacity.com/" title="website of Takana's OGame Tools">Takana's Team</a> pour leur code !
+
+11/04/2006
+v0.6
+* ajout de la sélection automatique du résultat (sous IE, cela fait un copier/coller direct dans le presse-papiers).
+
+09/04/2006
+v0.5b
+* amélioration de la présentation de la page (positionnement des boutons en CSS).
+* correction d'un bug pour le résultat compacté.
+
+08/04/2006
+v0.5
+* ajout de l'option de compactage du résultat (présentation similaire à celle d'OGame : deux éléments par ligne).
+
+v0.4c
+* amélioration de la détection des données.
+
+02/04/2006
+v0.4b
+* détection du graviton.
+
+v0.4
+* ajout et modification de couleurs pour le rapport d'espionnage (palette identique que ce soit pour un fond sombre ou clair).
+* ajout du style Epic Blue.
+* amélioration de la présentation de la page.
+
+30/03/2006
+v0.3
+* mise en ligne.
+* ajout de la possibilité d'effacer les coordonnées.
+
+v0.2
+* conservation des valeurs saisies.
+* ajout des seuils.
+
+v0.1
+* première version :D

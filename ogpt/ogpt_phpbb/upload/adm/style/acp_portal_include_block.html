@@ -1,0 +1,586 @@
+<!-- INCLUDE overall_header.html -->
+<script type="text/javascript">
+	/*
+	* Montre / Cache un div
+	*/
+	function DivStatus( nom, numero )
+		{
+			var divID = nom + numero;
+			if ( document.getElementById && document.getElementById( divID ) ) // Pour les navigateurs récents
+				{
+					Pdiv = document.getElementById( divID );
+					PcH = true;
+		 		}
+			else if ( document.all && document.all[ divID ] ) // Pour les veilles versions
+				{
+					Pdiv = document.all[ divID ];
+					PcH = true;
+				}
+			else if ( document.layers && document.layers[ divID ] ) // Pour les très veilles versions
+				{
+					Pdiv = document.layers[ divID ];
+					PcH = true;
+				}
+			else
+				{
+					
+					PcH = false;
+				}
+			if ( PcH )
+				{
+					Pdiv.className = ( Pdiv.className == 'cachediv' ) ? '' : 'cachediv';
+				}
+		}
+
+</script>
+<link href="style/portal.css" rel="stylesheet" type="text/css" media="screen" />
+<a name="maincontent"></a>
+<!-- IF S_EDIT_COLL -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl><br>
+	<form id="acp_portal_include_block" method="post" action="{U_ACTION_COLL}">
+		<fieldset>
+	<a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a>	
+	<dl>
+		<dt><label for="config_coll_pacing">{L_PACING}:</label>
+		<br>{L_PACING_BLOC_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_coll_pacing" type="text" id="config_coll_pacing" value="{PACING}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="config_g_w">{L_GAUCHE}:</label>
+		<br>{L_NOM_GAUCHE_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_g_w" type="text" id="config_g_w" value="{GAUCHE_W}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="config_d_w">{L_DROITE}:</label>
+		<br>{L_NOM_DROITE_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_d_w" type="text" id="config_d_w" value="{DROITE_W}" size="10" />
+		</dd>
+	</dl>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="savecoll" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_CONFIG}" /></center>
+	</p>
+	</form>
+	</fieldset>
+<!-- ENDIF -->
+<!-- IF not S_EDIT_COLL  -->	
+<!-- IF S_EDIT_PERM -->
+	<h1><center>{L_LAXCISTE_ACP_PORTAL_INCLUDE_BLOCK_PERM}</center></h1>
+	<br>
+	<form id="acp_portal_include_block" method="post" action="{U_ACTION_PERM}">	
+	<fieldset>
+	<a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a>		
+
+	<dl>
+		<dt><label for="portal_block_includes_view">{L_PERM}&nbsp;&nbsp;<i>{BLOCK_NOM}</i></label>
+		<br>{L_PERM_EXPLAIN}<br /><span></dt>
+		<dd>
+		<select name="portal_block_includes_view" class="post">
+		<option value="1" <!-- IF BLOCK_VIEW === "1" --> selected <!-- ENDIF -->>{L_ALL}</option>	
+		<option value="2" <!-- IF BLOCK_VIEW === "2" --> selected <!-- ENDIF -->>{L_REG}</option>	
+		<option value="3" <!-- IF BLOCK_VIEW === "3" --> selected <!-- ENDIF -->>{L_MOD}</option>
+		<option value="4" <!-- IF BLOCK_VIEW === "4" --> selected <!-- ENDIF -->>{L_ADMIN}</option>	
+		</select>			
+		</dd>
+	</dl>	
+	<br>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="saveperm" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_ANNUL}" /></center>
+	</p>
+	</form>	
+<!-- ENDIF -->
+<!-- IF not S_EDIT_PERM -->
+<!-- IF S_EDIT -->
+	<h1><center>{L_LAXCISTE_ACP_PORTAL_INCLUDE_BLOCK}</center></h1>
+	<br>
+	<fieldset>
+	<form id="acp_portal_include_block" method="post" action="{U_ACTION}">	
+	<dl>
+	<a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a>
+		<dt><label for="portal_block_includes_nom">{L_BLOCK_NAME}</label>
+		<br>{L_BLOCK_NAME_LAXCISTE}<br /><span></dt>
+		<dd><input name="portal_block_includes_nom" type="text" id="portal_block_includes_nom" value="{BLOCK_NOM}" size="30" />
+		</dd>
+	</dl>		
+<hr>
+	<dl>
+		<dt><label for="portal_block_includes_name">{L_BLOCK_HTML}</label>
+		<br>{L_BLOCK_HTML_LAXCISTE}<span></dt>
+		<dd>
+		<select name="portal_block_includes_name" class="post">
+		<!-- BEGIN file_name -->			
+		<option value="{file_name.S_BLOCK_HTML}" <!-- IF file_name.S_BLOCK_HTML == BLOCK_HTML -->selected <!-- ENDIF -->>{file_name.S_BLOCK_HTML}</option>
+		<!-- END file_name -->			
+			</select>		
+
+		</dd>
+	</dl>
+<hr>			
+	<dl>
+		<dt><label for="portal_block_includes_position">{L_BLOCK_POS}</label>
+		<br>{L_BLOC_ORD_LAXCISTE}<br /><span></dt>
+		<dd>
+		<select name="portal_block_includes_position" class="post">
+				<option value="4" <!-- IF BLOCK_POS === "4" --> selected <!-- ENDIF -->>{L_BLOC_HAUT}</option>
+				<option value="1" <!-- IF BLOCK_POS === "1" --> selected <!-- ENDIF -->>{L_BLOC_GAUCHE}</option>				
+				<option value="2" <!-- IF BLOCK_POS === "2" --> selected <!-- ENDIF -->>{L_BLOCK_CENTRES}</option>				
+				<option value="3" <!-- IF BLOCK_POS === "3" --> selected <!-- ENDIF -->>{L_BLOC_DROIT}</option>
+				<option value="5" <!-- IF BLOCK_POS === "5" --> selected <!-- ENDIF -->>{L_BLOC_BAS}</option>				
+		</select>
+		</dd>
+	</dl>
+<hr>	
+	<dl>
+		<dt><label for="portal_block_includes_view">{L_PERM}</label>
+		<br>{L_PERM_EXPLAIN}<br /><span></dt>
+		<dd>
+		<select name="portal_block_includes_view" class="post">
+		<option value="1" <!-- IF BLOCK_VIEW === "1" --> selected <!-- ENDIF -->>{L_ALL}</option>	
+		<option value="2" <!-- IF BLOCK_VIEW === "2" --> selected <!-- ENDIF -->>{L_REG}</option>	
+		<option value="3" <!-- IF BLOCK_VIEW === "3" --> selected <!-- ENDIF -->>{L_MOD}</option>
+		<option value="4" <!-- IF BLOCK_VIEW === "4" --> selected <!-- ENDIF -->>{L_ADMIN}</option>	
+		</select>			
+		</dd>
+	</dl>	
+<hr>	
+	<dl>
+		<dt><label for="config_name">{L_BLOCK_ACTIV}</label>
+		<br>{L_BLOCK_ACTIV_LAXCISTE}<br /><span></dt>
+		<dd>
+		{L_DISABLE_BLOC} : 
+		<label><input type="radio" class="radio" name="portal_block_includes_disable" value="0" <!-- IF not  BLOCK_DISABLE -->
+ 		checked="checked"<!-- ENDIF --> /></label>
+		{L_ENABLE_BLOC} : 
+		<label><input type="radio" class="radio" name="portal_block_includes_disable" value="1" <!-- IF BLOCK_DISABLE --> 
+		checked="checked"<!-- ENDIF --> /></label>		
+		</dd>
+	</dl>		
+	<br>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_ANNUL}" /></center>
+	</p>
+	</form>
+	</fieldset>
+	
+<!-- ELSE -->
+	<!-- IF S_VERSION_CHECK -->
+	<!-- IF S_UP_TO_DATE -->
+	<!-- ELSE -->
+		<div id="acp1">
+		<div class="panel5">
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				<center>{L_VERSION_NOT_UP_TO_DATE_ACP}</center>
+				<br>&nbsp;&nbsp;{L_CURRENT_VERSION}	{CURRENT_VERSION}
+				<br>&nbsp;&nbsp;{L_LATEST_VERSION}	{LATEST_VERSION} 
+				<br><br><center><a target="_blank" href="{VERSION_DONLOAD}">{L_VERSION_DONLOAD}</a></center></dd>
+				</div>
+		<span class="corners-bottom"><span></span></span>					
+		</div>
+		</div>	
+	<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- IF not S_EDIT_COLL  -->
+	<br>
+				<center>{L_CURRENT_VERSION}	{CURRENT_VERSION}</center>	
+	<br>		
+	<h1><center>{L_ACP_PORTAL_CONFIG_EXPLAIN}</center></h1>
+	<p><center>{L_ACP_PORTAL_CONFIG_PACING3}</center></p>
+
+	<fieldset class="tabulated">
+		<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th><center>{L_GAUCHE}</center></th>
+		<th><center>{L_PACING}</center></th>		
+		<th><center>{L_DROITE}</center></th>		
+		<th><center>{L_ACTION}</center></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN portal_config_coll -->
+		<td style="text-align: center;">{portal_config_coll.GAUCHE_W}</td>
+		<td style="text-align: center;">{portal_config_coll.PACING}</td>		
+		<td style="text-align: center;">{portal_config_coll.DROITE_W}</td>	
+		<td style="text-align: center;"><a href="{portal_config_coll.U_EDIT_COLL}">{ICON_EDIT}</a></td>
+	</tr>
+	<!-- END portal_config -->
+	</tbody>
+	</table>
+	</fieldset>
+	<br>
+	<h1><center>{L_LAXCISTE_ACP_PORTAL_INCLUDE_BLOCK}</center></h1>
+	<br>	
+<div name="acp2" id="acp2" class="cachediv" colspan="3">	
+		<div class="panel4">
+			<span class="corners-top"><span></span></span>
+				<div id="content2">
+		<b>&nbsp;<a href="javascript:DivStatus( 'acp', '2' )">{L_LEGENDE_PORTAL}</a></b>		
+		<br><br>		
+		<img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}">
+		&nbsp;&nbsp;{L_OFFLIGNE}
+		<br>
+		<img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}">
+		&nbsp;&nbsp;{L_ONLIGNE}
+		<br>
+		{ICON_MOVE_UP}
+		&nbsp;&nbsp;{L_ICON_MOVE_UP}
+		<br>
+		{ICON_MOVE_DOWN}
+		&nbsp;&nbsp;{L_ICON_MOVE_DOWN}
+		<br>		
+		<img border="0" src="images/icon_move_top.gif">
+		&nbsp;&nbsp;{L_ICON_MOVE_TOP}
+		<br>
+		<img border="0" src="images/icon_move_boton.gif">
+		&nbsp;&nbsp;{L_ICON_MOVE_BOTOM}
+		<br>
+		<img border="0" src="images/icon_move_left.gif">
+		&nbsp;&nbsp;{L_ICON_MOVE_LEFT}
+		<br>
+		<img border="0" src="images/icon_move_right.gif">
+		&nbsp;&nbsp;{L_ICON_MOVE_RIGHT}
+		<br>
+		<img border="0" src="images/icon_move_left_direct.gif">
+		{L_ICON_MOVE_LEFT_DIRECT}
+		<br>
+		<img border="0" src="images/icon_move_right_direct.gif">
+		{L_ICON_MOVE_RIGHT_DIRECT}
+		<br>
+		<img border="0" src="images/icon_move_top_direct.gif">
+		{L_ICON_MOVE_TOP_DIRECT}
+		<br>
+		<img border="0" src="images/icon_move_boton_direct.gif">
+		{L_ICON_MOVE_BOTON_DIRECT}		
+		<br>
+		{ICON_EDIT}
+		&nbsp;&nbsp;{L_ICON_EDIT}
+		<br>
+		<img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}">		
+		&nbsp;&nbsp;{L_ICON_DELETE}
+		<br>
+		<img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}">		
+		&nbsp;&nbsp;{L_PERMS}
+		<br>
+		<img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}">		
+		&nbsp;&nbsp;{L_PERM_REG}
+		<br>
+		<img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}">		
+		&nbsp;&nbsp;{L_PERM_MOD}
+		<br>
+		<img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}">
+		&nbsp;&nbsp;{L_PERM_ADM}		
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+	  </div>	
+</div>  	
+	<fieldset class="tabulated">
+	<form id="acp_portal_include_block" method="post" action="{U_ACTION}">
+		<div id="acp1">
+		<div class="panel2">
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				<a href="javascript:DivStatus( 'acp', '2' )"><b>{L_LAXCISTE_ACP_PORTAL}
+				&nbsp;&#8226;&nbsp;{L_LEGENDE_ICON}</a></b>
+				<br><br>
+
+	<table class="row5" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+    <td width="100%" colspan="3" class="row5"  valign="top"><center><b>{L_BLOC_HAUT}</b></center><br> 
+<!-- BEGIN block --><!-- IF block.BLOCK_POS == "4" -->
+<center>
+		<div id="acp2">
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<div class="panel2">
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<div class="panel3">
+		<!-- ENDIF -->
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				{block.BLOCK_NOM}
+		<br><br>
+		<!-- IF block.BLOCK_VIEW === "1" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "2" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "3" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_VIEW === "4" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}"></a>
+		<!-- ENDIF -->			
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		&nbsp;
+		<a href="{block.U_EDIT}">{ICON_EDIT}</a>
+		<!-- ENDIF -->
+		&nbsp;		
+		<!-- IF block.BLOCK_ID =="1" -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF block.BLOCK_ID == block.BLOCK_TOTAL_HAUT-->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+		&nbsp;
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_DISABLE}"><img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_ENABLE}"><img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}"></a>
+		<!-- ENDIF -->
+		&nbsp;		
+		<a href="{block.U_MOVE_BOTTOM}"><img border="0" src="images/icon_move_boton.gif"></a>
+		&nbsp;
+		<a href="{block.U_MOVE_BOTON_DIRECT}"><img border="0" src="images/icon_move_boton_direct.gif"></a>		
+		&nbsp;
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_DELETE}" ><img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}"></a>
+		<!-- ENDIF -->		
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>				
+</center>	
+<!-- ENDIF --><!-- END block -->		
+	</td>
+  </tr>
+  <tr>
+    <td width="30%" class="row5" valign="top"><center><b>{L_BLOC_GAUCHE}</b></center><br>
+<!-- BEGIN block --><!-- IF block.BLOCK_POS == "1" -->
+<center>
+		<div id="acp2">
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<div class="panel2">
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<div class="panel3">
+		<!-- ENDIF -->
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				{block.BLOCK_NOM}
+		<br><br>
+		<!-- IF block.BLOCK_EDIT == "0" -->		
+		<a href="{block.U_EDIT}">{ICON_EDIT}</a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "1" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "2" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "3" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_VIEW === "4" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_ID =="1" -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;<!-- IF block.BLOCK_ID == block.BLOCK_TOTAL_GAUCHE -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_DISABLE}"><img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_ENABLE}"><img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<a href="{block.U_MOVE_RIGHT}"><img border="0" src="images/icon_move_right.gif"></a>
+		<a href="{block.U_MOVE_RIGHT_DIRECT}"><img border="0" src="images/icon_move_right_direct.gif"></a>		
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_DELETE}" ><img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}"></a>
+		<!-- ENDIF -->		
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>				
+</center>
+<!-- ENDIF --><!-- END block -->	
+	</td>
+    <td width="40%" class="row5" valign="top"><center><b>{L_BLOCK_CENTRES}</b></center><br>
+<!-- BEGIN block --><!-- IF block.BLOCK_POS == "2" -->
+<center>
+		<div id="acp2">
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<div class="panel2">
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<div class="panel3">
+		<!-- ENDIF -->
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				{block.BLOCK_NOM}
+		<br><br>
+		<!-- IF block.BLOCK_VIEW === "1" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "2" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "3" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_VIEW === "4" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}"></a>
+		<!-- ENDIF -->			
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		&nbsp;
+		<a href="{block.U_EDIT}">{ICON_EDIT}</a>
+		<!-- ENDIF -->
+		&nbsp;		
+		<a href="{block.U_MOVE_LEFT}"><img border="0" src="images/icon_move_left.gif"></a>
+		&nbsp;		
+		<!-- IF block.BLOCK_ID =="1" -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF block.BLOCK_ID == block.BLOCK_TOTAL_MILIEU-->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+		&nbsp;			
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_DISABLE}"><img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_ENABLE}"><img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}"></a>
+		<!-- ENDIF -->			
+		&nbsp;
+		<a href="{block.U_MOVE_CENTER_TOP}"><img border="0" src="images/icon_move_top.gif"></a>
+		&nbsp;
+		<a href="{block.U_MOVE_CENTER_BOTON}"><img border="0" src="images/icon_move_boton.gif"></a>		
+		&nbsp;		
+		<a href="{block.U_MOVE_RIGHT}"><img border="0" src="images/icon_move_right.gif"></a>
+		&nbsp;		
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_DELETE}" ><img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}"></a>
+		<!-- ENDIF -->		
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>				
+</center>
+<!-- ENDIF --><!-- END block -->	
+	</td>
+    <td width="30%" class="row5" valign="top"><center><b>{L_BLOC_DROIT}</b></center><br>
+<!-- BEGIN block --><!-- IF block.BLOCK_POS == "3" -->
+<center>
+		<div id="acp2">
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<div class="panel2">
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<div class="panel3">
+		<!-- ENDIF -->
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				{block.BLOCK_NOM}
+		<br><br>
+		<!-- IF block.BLOCK_VIEW === "1" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "2" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "3" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_VIEW === "4" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}"></a>
+		<!-- ENDIF -->			
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_EDIT}">{ICON_EDIT}</a>
+		<!-- ENDIF -->		
+		<a href="{block.U_MOVE_LEFT_DIRECT}"><img border="0" src="images/icon_move_left_direct.gif"></a>
+		<a href="{block.U_MOVE_LEFT}"><img border="0" src="images/icon_move_left.gif"></a>			
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_DISABLE}"><img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_ENABLE}"><img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_ID =="1" -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;<!-- IF block.BLOCK_ID ==  block.BLOCK_TOTAL_DROIT -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_DELETE}" ><img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}"></a>
+		<!-- ENDIF -->		
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>				
+</center>
+<!-- ENDIF --><!-- END block -->	
+	</td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="3" class="row5" valign="top"><center><b>{L_BLOC_BAS}</b></center><br>
+<!-- BEGIN block --><!-- IF block.BLOCK_POS == "5" -->
+<center>
+		<div id="acp2" colspan="3">
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<div class="panel2">
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<div class="panel3">
+		<!-- ENDIF -->
+			<span class="corners-top"><span></span></span>
+				<div id="content2">
+				{block.BLOCK_NOM}
+		<br><br>
+		<!-- IF block.BLOCK_VIEW === "1" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm.gif" alt="{L_ALL}" title="{L_ALL}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "2" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_reg.gif" alt="{L_REG}" title="{L_REG}"></a>
+		<!-- ENDIF -->	
+		<!-- IF block.BLOCK_VIEW === "3" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_mod.gif" alt="{L_MOD}" title="{L_MOD}"></a>
+		<!-- ENDIF -->
+		<!-- IF block.BLOCK_VIEW === "4" -->
+		<a href="{block.U_EDIT_PERM}"><img border="0" src="images/perm_adm.gif" alt="{L_ADMIN}" title="{L_ADMIN}"></a>
+		<!-- ENDIF -->			
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		&nbsp;	
+		<a href="{block.U_EDIT}">{ICON_EDIT}</a>
+		<!-- ENDIF -->
+		&nbsp;		
+		<!-- IF block.BLOCK_ID =="1" -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF block.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{block.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->
+		&nbsp;
+		<!-- IF block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_DISABLE}"><img border="0" src="images/offline.png" alt="{L_DISABLE_BLOC}" title="{L_DISABLE_BLOC}"></a>
+		<!-- ENDIF -->		
+		<!-- IF not block.BLOCK_DISABLE_IMG -->
+		<a href="{block.U_ENABLE}"><img border="0" src="images/online.png" alt="{L_ENABLE_BLOC}" title="{L_ENABLE_BLOC}"></a>
+		<!-- ENDIF -->
+		&nbsp;		
+		<a href="{block.U_MOVE_TOP}"><img border="0" src="images/icon_move_top.gif"></a>
+		&nbsp;
+		<a href="{block.U_MOVE_TOP_DIRECT}"><img border="0" src="images/icon_move_top_direct.gif"></a>		
+		&nbsp;
+		<!-- IF block.BLOCK_EDIT == "0" -->
+		<a href="{block.U_DELETE}" ><img border="0" src="images/icon_delete.gif" alt="{L_U_DEL}" title="{L_U_DEL}"></a>
+		<!-- ENDIF -->
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>				
+</center><br>	
+<!-- ENDIF --><!-- END block -->
+	</td>
+  </tr>
+</table>
+					</div>
+		<span class="corners-bottom"><span></span></span>					
+				</div>
+			</div>	
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_BLOCK}" />
+	</p>
+	</form>
+	</fieldset>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>			
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->

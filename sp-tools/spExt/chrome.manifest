@@ -1,0 +1,4 @@
+content spgdbtoolajax chrome/content/
+overlay chrome://browser/content/browser.xul chrome://spgdbtoolajax/content/spgdbtoolajax.xul
+skin	spgdbtoolajax	classic/1.0	chrome/skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://spgdbtoolajax/skin/overlay.css

@@ -1,0 +1,16 @@
+/* subsilver Style Portal
+By sjpphpbb.net
+These style definitions are mainly IE specific 
+tweaks required due to its poor CSS support.
+-------------------------------------------------*/
+
+.cat_block {
+	color: #075072;
+	height: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color: #006699;
+	background-image: url('./images/cellpic4.gif');
+	white-space: nowrap;
+	padding: 2px 2px;
+}

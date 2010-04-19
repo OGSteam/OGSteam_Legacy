@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<hack>
+   <name>SjpPortal-phpBB3</name> 
+   <version>Version: 1.0.5 RC4</version> 
+   <development>RC4</development> 
+   <copyright><![CDATA[&copy;2007 ...]]></copyright> 
+   <license link="http://www.gnu.org/copyleft/gpl.html">GNU GPL v2</license> 
+   <author> 
+      <name>sjpphpbb</name> 
+      <email>sjpphpbb@club-internet.fr</email> 
+      <website>http://sjpphpbb.net/phpbb3/</website> 
+   </author> 
+   <description><![CDATA[Les donnés actuellement gérable via l'admin.
+Largeur des colonnes de droite et de gauche.
+Espacement entre les colonnes.
+Nom du bloc et nombres d’affichage des bots.
+Nom du bloc, nombres d’affichage et scroll oui ou nom des récent topiques.
+Nom du bloc, nombres d’affichage des derniers membres inscrit.
+Nom du bloc, nombres d’affichage du top posteurs.
+]]></description> 
+   <website title="Entraide a phpbb3">http://sjpphpbb.net/phpbb3/</website> 
+   <support title="Voir le sujet">http://sjpphpbb.net/phpbb3/viewtopic.php?f=37&amp;t=380</support> 
+</hack>

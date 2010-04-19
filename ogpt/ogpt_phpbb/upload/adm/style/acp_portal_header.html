@@ -1,0 +1,177 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+<!-- IF S_EDIT_LOGO -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_portal_header" method="post" action="{U_ACTION_2}">
+	<dl>
+		<label for="header_logo_image"><b>{L_LOG_IMG}</b><br>{L_LOG_IMG_EXPLAIN}</label><br><br>
+		<input name="header_logo_image" type="text" id="header_logo_image" value="{IMG_LOGO}"  size="60" /><br>
+	</dl>
+	<hr>
+	<dl>
+		<label for="header_logo_name"><b>{L_SIT_NAM}</b><br>{L_SIT_NAM_EXPLAIN}</label><br><br>
+		<input name="header_logo_name" type="text" id="header_logo_name" value="{NAME_SITE}"  size="30" /><br>
+	</dl>
+	<hr>
+	<dl>
+		<label for="header_logo_desc"><b>{L_SIT_DESC}</b><br>{L_SIT_DESC_EXPLAIN}</label><br><br>
+		<input name="header_logo_desc" type="text" id="header_logo_desc" value="{DESC_SITE}"  size="30" /><br>
+	</dl>	
+	<hr>
+	<dl>
+		<label for="header_portal_disable"><b>{L_ACT_HEA}</b><br>{L_ACT_HEA_EXPLAIN}</label><br><br>
+		<select name="header_portal_disable" class="post">
+		<option value="0" <!-- IF HEADER_DISABLE == "0" --> selected <!-- ENDIF -->>{L_IMG_PERM_FORUM}
+		<option value="1" <!-- IF HEADER_DISABLE == "1" --> selected <!-- ENDIF -->>{L_IMG_PERM_PORTAL}	
+		</select><br>
+	</dl>	
+	<hr>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save2" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" /></center>
+	</p>
+	</form>
+	</fieldset>
+<!-- ENDIF -->
+<!-- IF S_EDIT -->
+	<h1>{L_EDIT_EXPLAIN}</h1>
+	<fieldset>
+	<form id="acp_portal_header" method="post" action="{U_ACTION}">	
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="header_titre">{L_BUL}:</label><br>{L_BUL_EXPLAIN}</dt>
+		<dd><input name="header_titre" type="text" id="header_titre" value="{TITRE}" size="30" /></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="header_image">{L_IMAGE}:</label><br>{L_IMAGE_EXPLAIN}</dt>
+		<dd>		
+		<select name="header_image" class="post">
+		<!-- BEGIN file_name -->	
+		<option value="{file_name.S_IMG_IMAGE}" <!-- IF file_name.S_IMG_IMAGE == IMG_IMAGE -->selected <!-- ENDIF -->>{file_name.S_IMG_IMAGE}</option>
+		<!-- END file_name -->			
+		</select>
+		<!-- IF IMG_IMAGE -->			
+		&nbsp;&nbsp;<img border="0" src="../styles/prosilver/theme/images/icon_header/{IMG_IMAGE}">
+		<!-- ENDIF -->		
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="header_ulr_img">{L_URL}:</label><br>{L_URL_EXPLAIN}</dt>
+		<dd><input name="header_ulr_img" type="text" id="header_ulr_img" value="{IMG_URL}" size="50" /></dd>
+	</dl>
+<hr>	
+	<dl>
+		<dt><label for="header_portal_disable">{L_VIEW_BY} :</label><br>{L_VIEW_BY_EXPLAIN}<br /></span></dt>
+		<dd><div align="left"><select name="header_portal_disable" class="post">
+		<option value="1" <!-- IF IMG_DISABLE == "1" --> selected <!-- ENDIF -->>{L_ALL}	
+		<option value="2" <!-- IF IMG_DISABLE == "2" --> selected <!-- ENDIF -->>{L_REG}	
+		<option value="3" <!-- IF IMG_DISABLE == "3" --> selected <!-- ENDIF -->>{L_MOD}
+		<option value="4" <!-- IF IMG_DISABLE == "4" --> selected <!-- ENDIF -->>{L_ADMIN}	
+		</select></dd>
+	</dl>	
+		<input name="header_no" type="hidden" id="header_no" value="{IMG_NO}" size="10" />
+	</div>
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+	</fieldset>
+	</form>
+<!-- ELSE -->
+<!-- IF not S_EDIT_LOGO -->
+	<h1><center>{L_ACP_HEADER}</center></h1>
+	<br>
+	<center>{L_ACP_HEADER_EXPLAIN}</center><br>
+	<form id="acp_sow_images" method="post" action="{U_ACTION_2}">
+	<table cellspacing="1" border='0'>
+	<thead>
+	<tr>
+		<th><center>{L_HEADER_LOGO_IMG}</center></th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+		<!-- BEGIN header_titre -->
+		<table width="100%" cellspacing="0" border="0">
+		<tr>
+			<td width="45%"><img src="../styles/prosilver/theme/images/icon_header/{header_titre.IMG_LOGO} "/></td>
+			<td width="55%"><h1><center>{header_titre.NAME_SITE}</center>
+			</h1><span class="gen"><center>{header_titre.DESC_SITE}</center></td>
+		</tr>
+		<tr>
+			<td width="45%">&nbsp;</td>
+			<td width="55%">		
+			<!-- END header_titre -->
+			<!-- BEGIN header -->			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="../{header.HEADER_URL_IMG}"><img src="../styles/prosilver/theme/images/icon_header/{header.HEADER_IMAGE} "/></a>
+			<!-- END header -->			
+			<!-- BEGIN header_titre --></td>
+		</tr>
+		<tr>
+			<td width="45%">&nbsp;</td>
+			<td width="55%"><td style="text-align: center;" rowspan="2">
+			{L_HEADER_EDITER}&nbsp;&nbsp;<a href="{header_titre.U_IMG_LOGO}">{ICON_EDIT}</a></td>
+		</tr>
+		</table>			
+		<!-- END header_titre -->
+	</form>
+	</p></td>
+	</td>
+	</table>
+	<br>
+	<center>{L_HEADER_LOGO_IMG_EXPLAIN}</center><br>
+	<fieldset class="tabulated">
+	<form id="acp_portal_header" method="post" action="{U_ACTION}">
+	<table cellspacing="1">
+	<thead>
+	<tr>
+		<th><center>{L_IMAGES}</center></th>
+		<th><center>{L_NOM_NAM}</center></th>
+		<th><center>{L_URL}</center></th>
+		<th><center>{L_PERM}</center></th>		
+		<th><center>{L_ACTION}</center></th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN header -->
+		<!-- IF header.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;"><img src="../styles/prosilver/theme/images/icon_header/{header.HEADER_IMAGE} "/></td>
+		<td style="text-align: center;">{header.HEADER_TITRE}</td>
+		<td style="text-align: center;"><a target="_blank" href="../{header.HEADER_URL_IMG}">{header.HEADER_URL_IMG}</a></td>
+		<td style="text-align: center;"><div align="center">
+		  <!-- IF header.HEADER_DISABLE == "1" -->{L_ALL}<!-- ENDIF -->	
+		  <!-- IF header.HEADER_DISABLE == "2" -->{L_REG}<!-- ENDIF -->
+		  <!-- IF header.HEADER_DISABLE == "3" -->{L_MOD}<!-- ENDIF -->
+		  <!-- IF header.HEADER_DISABLE == "7" -->{L_ADMIN}<!-- ENDIF -->	  
+		</td>		
+		<td style="text-align: center;"  width="100px">
+		<!-- IF header.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{header.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;&nbsp;
+		<!-- IF header.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{header.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF --><br><br>
+		<a href="{header.U_EDIT}">{ICON_EDIT}</a>
+		&nbsp;&nbsp;<a href="{header.U_DELETE}">{ICON_DELETE}</a>
+		</td>
+	</tr>
+	<!-- END header -->
+	</tbody>
+	</table>
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_LINK}" />
+	</p>
+	</fieldset>
+	</form>
+<!-- ENDIF -->	
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

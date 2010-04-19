@@ -1,0 +1,19 @@
+<!-- Toolbar buttons and labels -->
+<!ENTITY toolbar.name "Galaxytool Toolbar">
+<!ENTITY toolbar.activate "Włącz GTP">
+<!ENTITY toolbar.activate.t "Włącz wtyczkę Galaxytool">
+<!ENTITY toolbar.options "Opcje GTP">
+<!ENTITY toolbar.options.t "Opcje wtyczki Galaxytool">
+<!ENTITY toolbar.reports "Wczytaj RS">
+<!ENTITY toolbar.reports.t "Wczytaj raporty szpiegowskie ze strony">
+<!ENTITY toolbar.statusLabel "Status:">
+<!ENTITY toolbar.statusInfo "brak">
+<!ENTITY toolbar.reloadLabel "Włącz wtyczkę przy starcie">
+
+<!-- Options dialog labels -->
+<!ENTITY dialog.title "Opcje wtyczki Galaxytool">
+<!ENTITY dialog.caption "Opcje wtyczki Galaxytool">
+<!ENTITY dialog.ogameurl "Nazwa serwera Universum">
+<!ENTITY dialog.galaxytoolurl "Adres Galaxytoola">
+<!ENTITY dialog.username "Użytkownik">
+<!ENTITY dialog.password "Hasło">

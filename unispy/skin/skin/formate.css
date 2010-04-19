@@ -1,0 +1,606 @@
+/*
+Skin UniverS - By Puppet Master
+*/
+td, th, textarea, body, table
+{
+  font-family          : Verdana, Tahoma, Helvetica, sans-serif;
+  font-size            : 10px;
+}
+
+table td
+{
+  font-family          : Arial,Verdana;
+  font-size            : 10px;
+  color : white
+}
+
+p
+{
+  font-family          : Arial,Verdana;
+  font-size            : 10px;
+}
+
+body
+{
+  font: 12px Arial,Verdana;
+}
+
+body p
+{
+  border:0px !important;
+  font-size:12px !important;
+    color: rgb(196, 92, 56);
+}
+body p u
+{
+  font-size:12px !important;
+    color: rgb(196, 92, 56);
+}
+body p b
+{
+  font-size:12px !important;
+    color: rgb(196, 92, 56);
+}
+
+/* améliorations "couleurs en dur" pour firefox,opéra */
+* font[color="#ffffff"],* font[color="lightblue"]{
+ color: orange;
+}
+* font[color="#ffffff"],* font[color="orange"]{
+ color: orange;
+}
+* font[color="#ff0000"],* font[color="red"]{
+ color: red;
+}
+* font[color="#00ff00"],* font[color="lime"]{
+ color: lime;
+}
+
+/* améliorations "images inutiles réduites" pour firefox,opéra
+* img[width="200"],* img[width="75"],* img[width="120"],* img[width="50"],* img[width="30"]{
+ width: 18px !important;
+ height: 18px !important;
+ background-color: white;
+ padding: 2px;
+ border-bottom: 1px solid #aaaaaa;
+ border-right: 1px solid #aaaaaa;
+}*/
+
+/* améliorations non activées.
+* div,* th,* table{
+ width: * !important;
+}
+*/
+
+img
+{
+  border               : 0px;
+}
+
+p table
+{
+  border               : 0px;
+}
+
+p td
+{
+  text-align           : center;
+}
+
+* td{
+empty-cells:show;
+}
+
+table table
+{
+  border               : 0px;
+  padding              : 0px;
+  margin               : 0px;
+}
+
+body
+{
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-image:url("img/bg_skin.jpg.png");
+	background-color: #000000;
+}
+
+body form table th table input
+{
+  /* min-width: 40px; */
+}
+
+th, td.a, td.b, td.c, td.f, td.g, td.h, td.i, td.j, td.k, td.l, td.m,
+td.n, td.o, td.q, td.r, td.v, .style td, p td, table.s th img
+{
+	font-size            : 11px;
+	font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+th, td.a, td.b, td.c, td.f, td.g, td.h, td.i, td.j, td.k, td.l, td.m,
+td.n, td.o, td.q, td.r, td.v, .style td, p td
+{
+	background-color: rgb(20, 62, 80);
+	border-bottom: 1px solid  black;
+	border-right: 1px solid  black;
+	border-top: 1px solid  black;
+	border-left: 1px solid  black;
+}
+
+td.menu
+{
+	font-size            : 11px;
+	font-family          : Verdana,Arial;
+	background-color: rgb(20, 62, 80);
+	border-bottom: 1px solid  black;
+	border-right: 1px solid  black;
+	/*border-top: 1px solid  black;*/
+	border-left: 1px solid  black;
+}
+
+input, select
+{
+	font-size            : 10px;
+	font-family          : Verdana,Arial;
+	border-bottom: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	color: rgb(185, 208, 217);
+	background-color: rgb(20, 62, 80);
+    border-top-color: rgb(185, 208, 217);
+    border-right-color: rgb(185, 208, 217);
+    border-bottom-color: rgb(185, 208, 217);
+    border-left-color: rgb(185, 208, 217);
+}
+th
+{
+  text-align           : center;
+}
+
+td.a
+{
+  text-align           : center;
+  	color: #B5B692;
+}
+
+td.b
+{
+  padding              : 0px;
+}
+
+td.c
+{
+  /*background-image     : url(img/bg.jpg);*/
+	background-position  : left;
+	font-weight          : bold;
+	color: #B5B692;
+	padding-left         : 3px;
+	background-color     : #0d1b35;
+}
+
+td.c a:link, td.c a:hover, td.c a:visited
+{
+  color                : #E6EBFB;
+}
+
+textarea
+{
+	font-size            : 10px;
+	font-family          : Arial,Verdana;
+	color: #B5B692;
+	background-color     : rgb(22, 64, 76);
+}
+
+textarea
+{
+  width                : 100%;
+}
+
+td.k input
+{
+  text-align           : left;
+}
+
+td.g
+{
+  font-weight          : bold;
+  text-align           : right;
+}
+
+td.h
+{
+  text-align           : center;
+}
+
+td.i
+{
+  text-align           : center;
+}
+
+td.j
+{
+  text-align           : center;
+}
+
+td.k, td.k input
+{
+  text-align           : center;
+}
+
+td.l
+{
+	vertical-align       : top;
+	padding-bottom              : 0px;
+    color: rgb(185, 208, 217);
+	border:0px;
+	border-bottom:1px solid black;
+	border-right: 1px solid  black;
+	border-top: 1px solid  black;
+	border-left: 1px solid  black;
+	background-color: rgb(20, 62, 80);
+
+}
+
+td.titmsg, td.titmsg a:link ,td.titmsg a:hover ,td.titmsg a:visited
+{
+  background-position  : left;
+  font-weight          : bold;
+  color                : #FEFEFE;
+  padding-left         : 3px;
+  background-color: #143e50;
+
+}
+td.titmsgprive, td.titmsgprive a:link ,td.titmsgprive a:hover ,td.titmsgprive a:visited
+{
+  background-image     : url(img/bg.jpg);
+  background-position  : left;
+  font-weight          : bold;
+  color                : orange;
+  padding-left         : 3px;
+  background-color     : #0d1b35;
+
+}
+
+td.msgbat, td.msgbat a:link, td.msgbat a:hover, td.msgbat a:visited
+{
+  background-image     : url(img/bg.jpg);
+  background-position  : left;
+  font-weight          : bold;
+  color                : red;
+  padding-left         : 3px;
+  background-color     : #0d1b35;
+
+}
+
+
+td.msgvid
+{
+
+	background-color: rgb(20, 62, 80);
+}
+td.m
+{
+  font-weight          : bold;
+  text-align           : right;
+  color                : black;
+}
+
+td.n
+{
+  font-weight          : bold;
+  text-align           : right;
+  text-align           : center;
+  color                : black;
+}
+
+td.o
+{
+  text-align           : center;
+  color                : black;
+}
+
+td.q
+{
+  font-weight          : bold;
+
+
+  text-align           : center;
+  vertical-align       : middle;
+  color                : black;
+}
+
+td.r
+{
+  text-align           : right;
+  color                : black;
+}
+
+td.v
+{
+  font-weight          : bold;
+  text-align           : right;
+  color                : #f7f7f7;
+}
+
+td.s
+{
+  color                : black;
+}
+
+table.s th
+{
+  border               : 0px;
+}
+
+table.s th img
+{
+}
+
+div.z
+{
+  font-weight          : bold;
+  color                : white;
+}
+
+a
+{
+	color: rgb(98, 145, 181);
+  text-decoration      : none;
+  font-weight          : bold;
+}
+
+a.s
+{
+  color                : black;
+}
+
+a.t
+{
+  color                : black;
+}
+
+a:hover
+{
+	color				: rgb(119, 153, 255);
+	  text-decoration	: underline;
+}
+
+.menu_sep1
+{
+  background-color     : #0d1b35;
+  height: 30px;
+}
+
+.menu_sep2
+{
+  background-color     : #0d1b35;
+  height: 14px;
+}
+
+.style td
+{
+  color                : black;
+  border-top           : 0px;
+
+
+}
+
+.style div a
+{
+  height               : 100%;
+  width                : 100%;
+  color                : black;
+
+
+}
+
+.style div a:link
+{
+  height               : 100%;
+  width                : 100%;
+  color                : black;
+
+
+}
+
+.style div a:visited
+{
+  height               : 100%;
+  width                : 100%;
+  color                : #333333;
+
+
+}
+
+.style div a:hover
+{
+  color                : white !important;
+  background-color: black;
+  height               : 100%;
+  width                : 100%;
+  text-decoration      : none;
+}
+
+.style
+{
+  margin-top           : 15px;
+}
+
+h1
+{
+  border-bottom        : 0px white solid;
+  width                : 98%;
+  text-align           : center;
+}
+
+
+.allymember {
+color: #FCF905;
+}
+
+.noob {
+color: #a0ffa0;
+}
+
+.strong {
+color: red;
+}
+
+.vacation {
+color: skyblue;
+}
+
+.inactive {
+color: #FE962E;
+}
+
+.longinactive {
+color: #DE5901;
+}
+
+.banned {
+text-decoration: line-through;
+}
+
+.flight {
+ font-size:11px;
+
+}
+.flight a {
+  text-decoration:underline;
+}
+.flight th{
+ border-bottom:1px solid #cccccc;
+ border-right:1px solid #cccccc;
+}
+
+.return {
+	color: #999999 !important;
+}
+.return th{
+color: #999999 !important;
+border:0;
+border-top:1px solid #cccccc;
+border-left:2px solid #cccccc;
+background-color:#eeeeee;
+}
+
+.holding {
+}
+
+*.ownattack {
+  color: #6ca35d !important;
+}
+*.owncolony {
+  color: white !important;
+}
+*.owndeploy {
+  color: white !important;
+}
+*.owndestroy {
+  color: gold !important;
+}
+*.ownespionage {
+  color: #b9b12b !important;
+}
+*.ownfederation {
+  color: 33CC00 !important;
+}
+*.ownharvest {
+  color: #654141 !important;
+}
+*.ownhold {
+  color: #80a0C0 !important;
+}
+*.ownmissile {
+  color: white !important;
+  font-size:11px;
+  background-color: #6ca35d !important;
+}
+*.owntransport {
+  color: #0080bc !important;
+}
+
+.flight.attack {
+  color: #a00000 !important;
+  background-color: white !important;
+}
+.attack {
+  color: white !important;
+  background-color: #a00000 !important;
+}
+
+*.colony {
+ color: rgb(167,167,167) !important;
+}
+*.deploy {
+  color: white !important;
+}
+*.destroy {
+  color: gold !important;
+}
+*.espionage {
+  color: #9e101d !important;
+}
+*.federation {
+  color: CC0000 !important;
+}
+*.harvest {
+  color: yellow !important;
+}
+*.hold {
+  color: #80a0C0 !important;
+}
+*.missile {
+  font-size:11px;
+  color: white !important;
+  background-color: #800000 !important;
+}
+*.transport {
+  color: #b64a94 !important;
+}
+
+.success {
+  color: white;
+}
+
+.error {
+  color: red;
+}
+
+.warning {
+  color: orange;
+}
+
+.notice {
+  color: yellow;
+}
+
+.combatreport {
+  color: red;
+}
+
+.espionagereport {
+  color: orange;
+}
+
+/*ressources*/
+.prix{
+  color: orange;
+}
+
+/* Bouton RSS / RSS buton */
+a.rss:link, a.rss:visited, a.rss:active {
+	color: #fff;
+	background: #f90;
+	border: 1px outset #f90;
+	text-decoration: none;
+	padding: 0.1em 0.3em;
+	font-size: 85%;
+}
+a.rss:hover {
+	color: #fff;
+	border: 1px inset #f90;
+}

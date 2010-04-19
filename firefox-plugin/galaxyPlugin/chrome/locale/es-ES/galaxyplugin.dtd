@@ -1,0 +1,20 @@
+<!-- Toolbar buttons and labels -->
+<!ENTITY toolbar.name "Barra de Herramientas Galaxytool">
+<!ENTITY toolbar.activate "Activar GTP">
+<!ENTITY toolbar.activate.t "Activar Galaxytool Plugin">
+<!ENTITY toolbar.options "Opciones GTP">
+<!ENTITY toolbar.options.t "Opciones Galaxytool Plugin">
+<!ENTITY toolbar.reports "Obtener Informes">
+<!ENTITY toolbar.reports.t "Leer Informe de Espionaje desde la pagina">
+<!ENTITY toolbar.statusLabel "Estado:">
+<!ENTITY toolbar.statusInfo "nada">
+<!ENTITY toolbar.reloadLabel "Activar barra de herramientas al inciar">
+<!ENTITY toolbar.registraruniverso "Registrar todo el Universo">
+
+<!-- Options dialog labels -->
+<!ENTITY dialog.title "Opciones Galaxyplugin">
+<!ENTITY dialog.caption "Opciones Galaxytool">
+<!ENTITY dialog.ogameurl "Nombre de Servidor del Universo OGame">
+<!ENTITY dialog.galaxytoolurl "URL Galaxytool">
+<!ENTITY dialog.username "Usuario">
+<!ENTITY dialog.password "Clave">

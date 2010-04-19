@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://unifox/locale/unifox.dtd">
+
+<overlay id="UniFoxOverlay"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:nc="http://home.netscape.com/NC-rdf#"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://global/content/strres.js"/>
+<script type="application/x-javascript" src="chrome://unifox/content/unifoxCommon.js" />
+<script type="application/x-javascript" src="chrome://unifox/content/re.js" />
+<script type="application/x-javascript" src="chrome://unifox/content/converter.js" />
+<script type="application/x-javascript" src="chrome://unifox/content/unifox.js" />
+<script type="application/x-javascript" src="chrome://unifox/content/dateLibrary.js" />
+<script type="application/x-javascript" src="chrome://unifox/content/unifoxByMax485.js" />
+
+<popup id="contentAreaContextMenu">
+	<menuitem id="unifox-config-menu" label="&unifox.menu.configure;" oncommand="configureUniFox();" hidden="true"/>
+	<menuitem id="unifox-switch-menu" label="&unifox.menu.configure;" oncommand="ufSwitchUniFox();" hidden="true"/>
+</popup>
+
+<commandset id="mainCommandSet">
+	<!--<command id="ufBarSwitch" oncommand="ufBar.switchHS();" />-->
+	<command id="configureUniFox" oncommand="configureUniFox();" />
+	<command id="restartFirefox" oncommand="uf_restartApp();" />
+	<command id="switchUniFox" oncommand="ufSwitchUniFox();" />
+	<command id="reloadChromeFirefox" oncommand="uf_reloadChrome();" />
+	<command id="OpenExtensionManagerFirefox" oncommand="uf_OpenExtensionManager();" />
+
+</commandset>
+
+<keyset id="mainKeyset">
+    <!--<key id="key_bar" 
+				 key="u" 
+				 modifiers="alt" 
+				 command="ufBarSwitch"/>-->
+	<key id="key_configureUnifox" 
+				 key="u" 
+				 modifiers="alt,accel" 
+				 command="configureUniFox"/>
+	<key id="key_restartFirefoxByUnifox" 
+				 key="g" 
+				 modifiers="alt,accel" 
+				 command="restartFirefox"/>
+	<key id="key_reloadChromeFirefoxByUnifox" 
+				 key="j" 
+				 modifiers="alt,accel" 
+				 command="reloadChromeFirefox"/>
+	<key id="key_configure2" 
+				 key="i" 
+				 modifiers="alt,accel" 
+				 command="OpenExtensionManagerFirefox"/>
+</keyset>
+
+<!--<toolbox id="navigator-toolbox">
+	 <toolbar id="unifoxBar" toolbarname="UniFox" hidden="true">
+      <toolbarbutton class="tabs-closebutton" id="unifoxbar_closebutton" tooltiptext="Close" oncommand="ufBar.hide();"/>
+		<toolbarbutton id="unifoxbar_saveAttackerButton" label="&unifox.bar.saveAttacker;" tooltiptext="&unifox.bar.saveAttacker;" oncommand="ufBar.save('a');"/>
+		<label id="unifoxbar_prompter" value=""/>
+	</toolbar>
+</toolbox>-->
+<!--<script type="application/x-javascript" src="chrome://unifox/content/toolbar.js" />-->
+<script type="application/x-javascript">
+	try
+	{
+
+	}
+	catch(e)
+	{
+	alert(e);
+	}</script>
+<stringbundle id="ufLang" src="chrome://unifox/locale/unifox.properties"/>
+<style>
+</style>
+</overlay>

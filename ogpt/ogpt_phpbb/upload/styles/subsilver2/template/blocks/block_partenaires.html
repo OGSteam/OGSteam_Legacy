@@ -1,0 +1,27 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%" colspan="3">{L_PARTENAIRES}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+					<td>
+					<!-- BEGIN partenaires -->
+					<!-- IF partenaires.S_ROW_COUNT is even -->
+					<tr class="row2">
+					<!-- ELSE -->	
+					<tr class="row1">
+					<!-- ENDIF -->
+					<td align="center">
+					<a target="_blank" href="{partenaires.PARTENAIRES_URL}" alt="{partenaires.PARTENAIRES_URL}" title="{partenaires.PARTENAIRES_URL}"><img border="0" src="./{partenaires.PARTENAIRES_IMG}" ></a>
+					</td>
+					<td align="center">
+					<img border="0" src="./{partenaires.PARTENAIRES_FLAG}" alt="{partenaires.PARTENAIRES_URL}" title="{partenaires.PARTENAIRES_URL}"></a>
+					</td>	
+					</tr>
+					<!-- END partenaires --> 
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>  

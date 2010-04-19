@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>OGameObject</name>
+    <version>1.0.2308.41731</version>
+    <fullname>OGameObject, Version=1.0.2308.41731, Culture=neutral, PublicKeyToken=null</fullname>
+  </assembly>
+  <members>
+    <member name="T:OGameObject.AttackReport">
+      <summary>
+     Rapport de bataille 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.AttackReport.Exist(System.Int32,System.Int32,System.DateTime)">
+      <summary>
+   Verifie l'existence d'un rapport de bataille 
+ </summary>
+ <param name="AttackPlID">ID de l'attaquant</param>
+ <param name="DefenderPlID">ID de l'attaqué</param>
+ <param name="AttacTime">Date de l'attaque</param>
+ <returns />
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.AttackReport.FromDataRow(System.Data.DataRow)">
+      <summary>
+   Initialisation à partir d'une ligne de donnée 
+ </summary>
+ <param name="drow">La ligne de donnée</param>
+ <returns>Un nouveau rapport de bataille</returns>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.AttackReport.FromID(System.Int32)">
+      <summary>
+ Initialisation à partir d'un ID 
+ </summary>
+ <param name="AttackID">identificateur du rapport de bataille</param>
+ <returns>le rapport ou nothing </returns>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.AttackReport.Create">
+      <summary>
+ Insertion d'un rapport de bataille en base de donnée 
+ </summary>
+ <remarks>
+ Si le rapport existe, il n'y a pas de reinsertion 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.AttackReport.ToString">
+      <summary>
+ Renvoie une Chaine de caracteres representant le rapport de battaille 
+ </summary>
+ <returns>Le rapport sous la forme "date coord attaquant coord attaqué"</returns>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.AttackReportCol">
+      <summary>
+  Collection typé de classe AttackReport 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.AttackreportRegex">
+      <summary>
+   Detection des rapports de battailles 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.AttackResult">
+      <summary>
+     Classe de resultat de rapport de bataille 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.DBConfigEntry">
+      <summary>
+  Entrée de configuration dans la base de donnée 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.DBConfigEntryCol">
+      <summary>
+     Collection typés de DBConfigEntry 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.FleetCommand">
+      <summary>
+ Classe gerant les retour de flotte 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.FleetCommandCol">
+      <summary>
+ Collection typés des retour de flottes 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.FleetCommandRegx">
+      <summary>
+  Detection des retours de flottes 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.Galaxy">
+      <summary>
+  Classe representant un systeme (15 planètes) d'une galaxie 
+ </summary>
+ <remarks>
+  Elle aurait pas du s'appeller Galaxy :p 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="P:OGameObject.Galaxy.PlanetNum(System.Int32)">
+      <summary>
+ Renvoie une planete du systeme 
+ </summary>
+ <param name="index">numéro de la planète</param>
+ <value>La planète ou nothing</value>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="P:OGameObject.Galaxy.Coords">
+      <summary>
+ Coordonnées du systeme 
+ </summary>
+ <value>sous la forme G:SSS</value>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.Galaxy.FromCoords(System.Int32,System.Int32)">
+      <summary>
+ Recupère le systeme des coordonnées spécifiés 
+ </summary>
+ <param name="aGalaxy">Numéro de galaxie</param>
+ <param name="aSystem">numéro du systeme</param>
+ <returns>systeme pointé</returns>
+ <remarks>
+ Si le systeme n'existe pas , il est crée. Ne retourne donc jamais nothing 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.GalaxyCol">
+      <summary>
+ Collection typés de systeme (Galaxy) 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.GalaxyRegX">
+      <summary>
+     Detection des systemes presse papiers et distant (ogspy) 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="M:OGameObject.GalaxyRegX.GalaxyFromData2(System.String)">
+      <summary>
+  Analyse des données à la recherche d'info de planètes d'un systeme (ctrl-a ctrl-c) 
+ </summary>
+ <param name="RAWDATA">le texte brut</param>
+ <returns>le systeme (jamais nothing)</returns>
+ <remarks>
+ Basé sur la detection des systemes dans ogspy (Kyzer) 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.OGameDBEngine">
+      <summary>
+ Classe principale d'accés/Creation à la base de donnée OGS 
+ </summary>
+ <remarks>
+ Contient une propriété partagé pointant sur une instance d'un eventuel moteur déja lancé 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="P:OGameObject.OGameDBEngine.Default">
+      <summary>
+ Propriété partagé contenant une instance d'un moteur de BD 
+ </summary>
+ <value>Le moteur instancie ou nothing</value>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.OGameLanguage">
+      <summary>
+  Embryon d'internationalisation 
+ </summary>
+ <remarks>
+ Non utilisé pour l'instant 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.Planet">
+      <summary>
+     Objet Planète 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.PlanetCol">
+      <summary>
+ Collection typés de planètes 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.PlanetRegx">
+      <summary>
+ Detection des rapports d'espionnages et des constructions/recherches 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.Player">
+      <summary>
+ Objet Joueur 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.PlayerRank">
+      <summary>
+     Statistique joueur 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.PlayerRankCol">
+      <summary>
+  Collection typés de statistiques joueurs 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.RemoteAccount">
+      <summary>
+  Compte distant OGSPY 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.RemoteAccountCol">
+      <summary>
+  Collection typés de comptes distant 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.SharingDB">
+      <summary>
+ Interface avec OGSpy 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.spydata">
+      <summary>
+ Formes numérique des données d'espionages 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.SpyReport">
+      <summary>
+  Objet Rapport d'espionnage 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.UniverseDB">
+      <summary>
+  Information fichier et options d'une base de donnée univers 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="F:OGameObject.UniverseDB.template_lang">
+      <summary>
+ Langage des templates de detection de l'univers 
+ </summary>
+ <remarks>
+ Par defaut FR 
+ </remarks>
+ <history>
+ 	[eric]	28/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.UniversesDBCol">
+      <summary>
+ Collection typés d'UniversesDB 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.ConstantsVersion">
+      <summary>
+ Classe avec methodes shareable pour les constantes globales 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="F:OGameObject.ConstantsVersion.OGSVersio">
+      <summary>
+ Numéro de version global d'OGS 
+ </summary>
+ <remarks>
+ Sous la forme "AAMMJJ" (Année/Mois/Jour) 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.Functions">
+      <summary>
+ Fonctions et definitions fourre-tout 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.PatternsServer">
+      <summary>
+ Template regular expressions de detections de données ogame 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+    <member name="T:OGameObject.Sound">
+      <summary>
+   Gestion du son 
+ </summary>
+ <remarks>
+ Probablement a sortir d'OGameObject.dll 
+ </remarks>
+ <history>
+ 	[eric]	26/04/2006	Created 
+ </history></member>
+  </members>
+</doc>

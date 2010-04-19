@@ -1,0 +1,47 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+			<dl>
+				<dt>{L_PORTAL_NAV}</dt>
+			</dl>
+		</ul>
+	<ul class="topiclist forums">
+		<li>
+			<dl>
+				<dd>
+				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<!-- BEGIN portal_menu_row -->				
+				<tr align="left" class="<!-- IF portal_menu_row.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+				<td>&nbsp;
+				<img src="./images/icon_menu/{portal_menu_row.PORTAL_MENU_ICON}" alt="" align="bottom" border="0" />
+				<a href="{portal_menu_row.U_PORTAL_MENU_LINK}">
+				&nbsp;{portal_menu_row.PORTAL_MENU_NAME}</a></span>					
+				</td>
+				</tr>
+			<!-- END portal_menu_row -->
+			<!-- IF not S_USER_LOGGED_IN -->			
+				<tr>
+				<td>&nbsp;
+				<img src="images/icon_menu/menu_register.gif" alt="" align="bottom" border="0" />
+				<a href="ucp.php?mode=register">&nbsp;Enregistrer vous ?</a></span>					
+				</td>
+				</tr>			
+			<!-- ENDIF -->
+			<!-- IF U_ACP -->			
+				<tr>
+				<td>
+				&nbsp;<img src="images/icon_menu/menu_rang.gif" alt="" align="bottom" border="0" />
+				&nbsp;&nbsp;<a href="{U_ACP}">{L_ACP_PORTAL}</a></span>
+				</td>
+				</tr>
+			<!-- ENDIF -->				
+			</table>
+			</dd>
+			</dl>
+			</li>
+			</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+##################################################################
+# Copyrigh GUNNING Sky et Guillouet Bruno
+# Licence : GNU/GPL
+# Modifiable à souhaits, à une seule condition :
+# laisser le lien vers le site http://www.graphiks.net sur le chat.
+#
+# Version Originale non modifié
+##################################################################
+
+ !! IMPORTANT >
+  Votre version de PHP doit être supérieur à 4.1.0 !
+  Si ce n'es pas le cas, on ne peut pas garantir que ça va fonctionner.
+ !! IMPOTANT <
+ 
+ 
+ Autre chose : la version 3.0b fonctionne très mal hez lycos et ifrance.
+ 
+ 
+ Infos supplémentaires : 
+ Fonctionne bien sur : ifrance, free, lycos (sur les autres aussi, mais ces trois là ont posé problèmes ;))
+
+Dezipper le fichier.
+
+Uploader le repertoire myspeach.
+(ne pas changer le nom du repertoire)
+
+Naviguer jusqu'a la page http://www.votresite.com/myspeach/
+Une fois ici, vous n'avez plus qu'a suivre les consignes
+
+
+Pour accéder a votre section admin, allez sur :
+
+http://votresite.com/myspeach/admin/
+Entrer login+mot de passe que vous avez mis au cours de l'installation.
+
+
+Pour accéder au ancien messages, regarder dans le repertoire saves, et ouvrer les fichier qu'il contient.
+
+
+Suggestion ou remarque : sky@graphiks.net
+
+le site :
+http://www.graphiks.net/ 
+
+
+Merci d'avoir choisi MySpeach.
+GUNNING Sky

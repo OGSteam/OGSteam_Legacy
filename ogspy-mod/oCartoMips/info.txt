@@ -1,0 +1,2 @@
+Module de calcul de port&eacute;e des MIP, par <b>Baton</b> tir&eacute; du site <a href='http://ogametools.breizh-web.net/'>Otools</a>
+Version 1.1a

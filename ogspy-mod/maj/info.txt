@@ -1,0 +1,2 @@
+Module de v&eacute;rification de MAJ des galaxies et des classements, par <b>ben.12</b>
+<a href='http://www.ogsteam.fr/forums/sujet-1640'>Informations</a>

@@ -1,0 +1,9 @@
+#GTPlugin-activate,#GTPlugin-options,#GTPlugin-reports {
+    width:75px;
+}
+
+#GTPlugin-status-label,#GTPlugin-status-view {
+    padding-top:2px;
+    font-size:10pt;
+    color:blue;
+}

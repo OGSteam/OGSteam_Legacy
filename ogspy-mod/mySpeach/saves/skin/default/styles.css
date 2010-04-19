@@ -1,0 +1,40 @@
+.MYtout { font-size:10px; background-color:#54638A; font-family:Verdana; width:600px; border:3px outset #93b5db; } /* Style qui defini la structure du chat */
+.MSli { list-style-type:none; margin:2px; background-color:#F1F5FA; padding:0; border:3px inset #93b5db; } /* Style cellule du chat */
+.MStitre, .barre { font-size:14px; font-weight:bold; font-variant:small-caps; /* color:#000; */ background:#54638A /* url('skin/default/blob.gif') no-repeat bottom left */ ; border-bottom:1px solid #FFFFFF /* blanc */; text-align:center; padding:2px; margin:0; } /* Taille du titre du chat */ 
+.MStxtAutre { font-size:10px; color:#000000; } /* autres textes */
+.MSpseudo { font-size:10px; color:grey; font-weight:bold; } /* Pseudos normaux */ 
+.MSmodo { font-size:10px; color:orange; font-weight:bold; } /* Pseudo Moderateur */ 
+.MStexte { font-size:10px; color:#000000; } /* Texte du chat */ 
+.MSdate { font-size:8px; color:#888888; } /* Style des dates */ 
+.My_Tail { font-size:10px; } /* Style du texte en pied du chat */ 
+.My_Root { font-size:10px; color:#ff0000; font-weight:bold; } /* Pseudos administrateur */ 
+.My_altern1 { padding:2px; } /* Couleur qui alterne n 1*/ 
+.My_altern2 { padding:2px; } /* Couleur qui alterne n 2*/ 
+#count big { color:red; } /* Quand on ecrit, le pseudo change de couleur, ceci change la couleur. */ 
+.My_historique { font-size:10px; font-family:Verdana; color:#333333; } /* Taille du texte historique */ 
+#popupAddressbook { display:none; position:absolute; left:160px; top:10px; width:350px; height:355px; background-color:#C0D2E9; border:3px outset #93b5db; } /* !! Les CSS qui suivent sont a modifier que si vous savez ce que vous faite !! */ 
+.barre { text-align:right; height:1.4em; }
+.barre a {padding:0;margin:2px; text-decoration:none; border:#FFD62F outset 1px; } /* contient les images fermer/reduire popup */
+#pop_titre { float:left; font-weight:bold; color:#000000; margin-left:40px; }  
+#pop { height:320px; border:3px inset #93b5db; overflow:auto; background-color:#F1F5FA; background-position:50%; margin:2px; }  
+#pop table { background-color:transparent; }  
+#contextMenu { position:absolute; left:0; top:0; padding:5px; z-index:2; background-color:#C0D2E9; width:130px; visibility:hidden; border:3px outset #93b5db; }  
+#slct_ip { font-size:0.6em; }  
+#contextMenu a { text-decoration:none; color:#000000; font-size:0.8em; }  
+#contextMenu a div { width:125px; cursor:default; }  
+#contextMenu a div img { border:none; }  
+#contextMenu a:hover div { color:#000000; background-color:#F1F5FA; }  
+.My_basduchat { padding:2px; text-align:center; } /* Style qui defini le bas du chat */
+#pal { text-align:center; margin:auto; }
+#temoin { height:1em; border:0;width:95%;} /* temoin de mise en forme du texte */
+.My_basduchat input { background-color:#F1F5FA; color:#000000}
+.petit_boutton { display:inline; background-color:#F1F5FA; border:outset #93b5db 2px; font-family:monospace; font-size:1em;padding:1px;} /* plus les styles suivants */
+#chr_b {background-image:url('skin/default/bold.gif');background-position:60% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_i {background-image:url('skin/default/italic.gif');background-position:60% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_s {background-image:url('skin/default/strike.gif');background-position:0% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_u {background-image:url('skin/default/underline.gif');background-position:50% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_sup {background-image:url('skin/default/super.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_big {background-image:url('skin/default/big.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_small {background-image:url('skin/default/small.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+.pop_dring {background-color:#F1F5FA;text-align:center;}
+.pop_dring span {font-size:10px; color:#000000; }

@@ -1,0 +1,3853 @@
+<ui version="4.0" >
+ <class>simulatorWidget</class>
+ <widget class="QWidget" name="simulatorWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>801</width>
+    <height>547</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>simulatorWidget</string>
+  </property>
+  <widget class="QGroupBox" name="groupBoxFlotte" >
+   <property name="geometry" >
+    <rect>
+     <x>4</x>
+     <y>4</y>
+     <width>333</width>
+     <height>329</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Flotte</string>
+   </property>
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
+   <widget class="QLineEdit" name="dCle" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>84</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lRe" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>184</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Recycleur</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lDe" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>264</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Destr.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldEm" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>284</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldCle" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>84</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lSs" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>244</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>S. solaire</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laBo" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>224</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldGt" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>64</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aClo" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>104</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldSe" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>204</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aVc" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>164</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dClo" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>104</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldSs" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>244</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aRe" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>184</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="resetDef" >
+    <property name="geometry" >
+     <rect>
+      <x>116</x>
+      <y>24</y>
+      <width>20</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Cliquez pour effacer</string>
+    </property>
+    <property name="text" >
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laRe" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>184</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lClo" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>104</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Ch. lourd</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lCr" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>124</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Croiseur</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laDe" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>264</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lBo" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>224</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Bomb.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lSe" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>204</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>S. espio.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldVb" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>144</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dVb" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>144</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laVb" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>144</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laClo" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>104</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lVb" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>144</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>V. bataille</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aSe" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>204</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldVc" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>164</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dCro" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>124</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lVc" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>164</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>V. de colo</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldBo" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>224</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lCle" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>84</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Ch. léger</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laPt" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>44</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dVc" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>164</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lGt" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>64</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>G. transpo.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldDe" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>264</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldRe" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>184</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldPt" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>44</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aCro" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>124</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aVb" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>144</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldTr" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>304</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laEm" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>284</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laTr" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>304</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aBo" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>224</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aGt" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>64</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="resetAtt" >
+    <property name="geometry" >
+     <rect>
+      <x>176</x>
+      <y>24</y>
+      <width>20</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Cliquez pour effacer</string>
+    </property>
+    <property name="text" >
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dGt" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>64</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laCle" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>84</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldClo" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>104</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laCr" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>124</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laGt" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>64</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laSe" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>204</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldCr" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>124</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="laVc" >
+    <property name="geometry" >
+     <rect>
+      <x>256</x>
+      <y>164</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dPt" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>44</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dRe" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>184</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aPt" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>44</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aCle" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>84</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dEm" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>284</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dDe" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>264</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dSs" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>244</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dBo" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>224</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dSe" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>204</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTr" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>304</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Traqueur</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lEm" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>284</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>EDLM</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aEm" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>284</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aDe" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>264</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="aTr" >
+    <property name="geometry" >
+     <rect>
+      <x>196</x>
+      <y>304</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dTr" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>304</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lPt" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>44</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>P. transpo.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="swapFlottes" >
+    <property name="geometry" >
+     <rect>
+      <x>144</x>
+      <y>24</y>
+      <width>26</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Echanger les flottes</string>
+    </property>
+    <property name="text" >
+     <string>&lt;-></string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lDef" >
+    <property name="geometry" >
+     <rect>
+      <x>28</x>
+      <y>24</y>
+      <width>59</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Défenseur</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lAtt" >
+    <property name="geometry" >
+     <rect>
+      <x>204</x>
+      <y>24</y>
+      <width>57</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Attaquant</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveDef" >
+    <property name="geometry" >
+     <rect>
+      <x>92</x>
+      <y>24</y>
+      <width>20</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Sauvegarder la flotte</string>
+    </property>
+    <property name="text" >
+     <string>S</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nextWave" >
+    <property name="geometry" >
+     <rect>
+      <x>308</x>
+      <y>24</y>
+      <width>20</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Vague suivante</string>
+    </property>
+    <property name="text" >
+     <string>-></string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="haveEngeener" >
+    <property name="geometry" >
+     <rect>
+      <x>288</x>
+      <y>20</y>
+      <width>14</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Le défenseur possède l'officier ingénieur</string>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBoxDefense" >
+   <property name="geometry" >
+    <rect>
+     <x>4</x>
+     <y>336</y>
+     <width>197</width>
+     <height>209</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Défense</string>
+   </property>
+   <widget class="QLineEdit" name="dPb" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>144</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldLo" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>64</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dGb" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>164</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lLe" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>44</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>L. léger</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dAi" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>104</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dLp" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>124</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldCg" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>84</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lCg" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>84</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>C. gauss</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lLp" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>124</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>L. plasma</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldAi" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>104</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lLo" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>64</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>L.lourd</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldPb" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>144</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldLp" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>124</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldGb" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>164</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dCg" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>84</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lAi" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>104</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>A. ions</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lGb" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>164</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>G. bouclier</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lPb" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>144</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>P. bouclier</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dLm" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>24</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dLe" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>44</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dLo" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>64</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lLm" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>24</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>L. missile</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldLm" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>24</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldle" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>44</y>
+      <width>68</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lMi" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>184</y>
+      <width>55</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>M. inter.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ldMi" >
+    <property name="geometry" >
+     <rect>
+      <x>124</x>
+      <y>184</y>
+      <width>68</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dMi" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>184</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBoxTech" >
+   <property name="geometry" >
+    <rect>
+     <x>204</x>
+     <y>336</y>
+     <width>133</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Technologies</string>
+   </property>
+   <widget class="QLabel" name="lTar" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>31</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Ar.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTim" >
+    <property name="geometry" >
+     <rect>
+      <x>80</x>
+      <y>56</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>im.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTbo" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>55</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Bo.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lThy" >
+    <property name="geometry" >
+     <rect>
+      <x>80</x>
+      <y>80</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>hy.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekDboucl" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>55</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie bouclier défenseur</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTdef" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>18</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Déf.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTpr" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>79</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Pr.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekAboucl" >
+    <property name="geometry" >
+     <rect>
+      <x>52</x>
+      <y>55</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie bouclier attaquant</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekAprotec" >
+    <property name="geometry" >
+     <rect>
+      <x>52</x>
+      <y>79</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie protection attaquant</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTco" >
+    <property name="geometry" >
+     <rect>
+      <x>80</x>
+      <y>32</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>co.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekHyp" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>79</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie hyperespace</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTprop" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>18</y>
+      <width>26</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Prop.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekComb" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>31</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technolgie combustion</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekImp" >
+    <property name="geometry" >
+     <rect>
+      <x>96</x>
+      <y>55</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie impulsion</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTatt" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>18</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Att.</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekDarmes" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>31</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie armes défenseur</string>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekAarmes" >
+    <property name="geometry" >
+     <rect>
+      <x>52</x>
+      <y>31</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie armes attaquant</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tekDprotec" >
+    <property name="geometry" >
+     <rect>
+      <x>20</x>
+      <y>79</y>
+      <width>24</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Technologie protection défenseur</string>
+    </property>
+    <property name="maxLength" >
+     <number>2</number>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBoxRess" >
+   <property name="geometry" >
+    <rect>
+     <x>212</x>
+     <y>440</y>
+     <width>117</width>
+     <height>105</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Ressources</string>
+   </property>
+   <widget class="QLineEdit" name="ressD" >
+    <property name="geometry" >
+     <rect>
+      <x>16</x>
+      <y>60</y>
+      <width>89</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Deutérium</string>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ressC" >
+    <property name="geometry" >
+     <rect>
+      <x>16</x>
+      <y>40</y>
+      <width>89</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Cristal</string>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ressM" >
+    <property name="geometry" >
+     <rect>
+      <x>16</x>
+      <y>20</y>
+      <width>89</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Métal</string>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignRight</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelFret" >
+    <property name="geometry" >
+     <rect>
+      <x>4</x>
+      <y>84</y>
+      <width>53</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Nombre de vaisseaux pour pillage</string>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+    <property name="alignment" >
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBoxFret" >
+    <property name="geometry" >
+     <rect>
+      <x>60</x>
+      <y>80</y>
+      <width>54</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Choix du type de vaisseau</string>
+    </property>
+    <item>
+     <property name="text" >
+      <string>pt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>gt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>cle</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>clo</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>cr</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>vb</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>vc</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>re</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>bo</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>de</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>edlm</string>
+     </property>
+    </item>
+    <item>
+     <property name="text" >
+      <string>tr</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QTabWidget" name="results" >
+   <property name="geometry" >
+    <rect>
+     <x>340</x>
+     <y>136</y>
+     <width>460</width>
+     <height>409</height>
+    </rect>
+   </property>
+   <property name="focusPolicy" >
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="tabShape" >
+    <enum>QTabWidget::Rounded</enum>
+   </property>
+   <property name="currentIndex" >
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabResult" >
+    <attribute name="title" >
+     <string>Résultat</string>
+    </attribute>
+    <widget class="QLabel" name="lReSim" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>12</y>
+       <width>80</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Simulations :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rnbRounds" >
+     <property name="geometry" >
+      <rect>
+       <x>196</x>
+       <y>12</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReRes" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>32</y>
+       <width>62</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Résultat :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReTou" >
+     <property name="geometry" >
+      <rect>
+       <x>156</x>
+       <y>12</y>
+       <width>40</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>tours :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelResult" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>32</y>
+       <width>351</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rnbSims" >
+     <property name="geometry" >
+      <rect>
+       <x>96</x>
+       <y>12</y>
+       <width>50</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>52</y>
+       <width>441</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lRePer" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>72</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Pertes :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertes" >
+     <property name="geometry" >
+      <rect>
+       <x>66</x>
+       <y>72</y>
+       <width>370</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReCdrd" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>92</y>
+       <width>50</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Cdr :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelCdr" >
+     <property name="geometry" >
+      <rect>
+       <x>66</x>
+       <y>92</y>
+       <width>370</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReGaid" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>112</y>
+       <width>50</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Gains :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelGains" >
+     <property name="geometry" >
+      <rect>
+       <x>66</x>
+       <y>112</y>
+       <width>370</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line_2" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>136</y>
+       <width>441</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReButT" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>152</y>
+       <width>54</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Butin T. :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReButR" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>172</y>
+       <width>54</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Butin R. :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="buttinR" >
+     <property name="geometry" >
+      <rect>
+       <x>66</x>
+       <y>172</y>
+       <width>370</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="buttinT" >
+     <property name="geometry" >
+      <rect>
+       <x>66</x>
+       <y>152</y>
+       <width>370</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line_3" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>192</y>
+       <width>441</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReTot" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>212</y>
+       <width>40</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Total :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelTotal" >
+     <property name="geometry" >
+      <rect>
+       <x>56</x>
+       <y>212</y>
+       <width>380</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line_4" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>236</y>
+       <width>441</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lRePeD" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>292</y>
+       <width>63</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Pertes D. :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesDmin" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>292</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelCdrMoy" >
+     <property name="geometry" >
+      <rect>
+       <x>212</x>
+       <y>312</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesAmoy" >
+     <property name="geometry" >
+      <rect>
+       <x>212</x>
+       <y>272</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelRecyMoy" >
+     <property name="geometry" >
+      <rect>
+       <x>212</x>
+       <y>352</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelCdrMin" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>312</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReMin" >
+     <property name="geometry" >
+      <rect>
+       <x>105</x>
+       <y>252</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>minimum</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReGai" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>332</y>
+       <width>60</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Gains :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReMoy" >
+     <property name="geometry" >
+      <rect>
+       <x>232</x>
+       <y>252</y>
+       <width>61</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>moyenne</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesAmax" >
+     <property name="geometry" >
+      <rect>
+       <x>336</x>
+       <y>272</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelRecyMin" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>352</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lRePeA" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>272</y>
+       <width>62</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Pertes A. :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesAmin" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>272</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line1" >
+     <property name="geometry" >
+      <rect>
+       <x>186</x>
+       <y>253</y>
+       <width>20</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesDmoy" >
+     <property name="geometry" >
+      <rect>
+       <x>212</x>
+       <y>292</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPertesDmax" >
+     <property name="geometry" >
+      <rect>
+       <x>336</x>
+       <y>292</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelGainsMoy" >
+     <property name="geometry" >
+      <rect>
+       <x>212</x>
+       <y>332</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReMax" >
+     <property name="geometry" >
+      <rect>
+       <x>356</x>
+       <y>252</y>
+       <width>69</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>maximum</string>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReCdr" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>312</y>
+       <width>60</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Cdr :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lReRec" >
+     <property name="geometry" >
+      <rect>
+       <x>16</x>
+       <y>352</y>
+       <width>60</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string>Recy. :</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelGainsMax" >
+     <property name="geometry" >
+      <rect>
+       <x>336</x>
+       <y>332</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelGainsMin" >
+     <property name="geometry" >
+      <rect>
+       <x>86</x>
+       <y>332</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelRecyMax" >
+     <property name="geometry" >
+      <rect>
+       <x>336</x>
+       <y>352</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="Line" name="line1_2" >
+     <property name="geometry" >
+      <rect>
+       <x>316</x>
+       <y>252</y>
+       <width>20</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="frameShape" >
+      <enum>QFrame::VLine</enum>
+     </property>
+     <property name="frameShadow" >
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelCdrMax" >
+     <property name="geometry" >
+      <rect>
+       <x>336</x>
+       <y>312</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font" >
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="alignment" >
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabGraph" >
+    <attribute name="title" >
+     <string>Graph</string>
+    </attribute>
+    <widget class="QSlider" name="histoBarSlider" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>92</y>
+       <width>160</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="focusPolicy" >
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="toolTip" >
+      <string>Nombres de barres</string>
+     </property>
+     <property name="minimum" >
+      <number>2</number>
+     </property>
+     <property name="maximum" >
+      <number>50</number>
+     </property>
+     <property name="value" >
+      <number>15</number>
+     </property>
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxChooseHisto" >
+     <property name="geometry" >
+      <rect>
+       <x>8</x>
+       <y>36</y>
+       <width>149</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="toolTip" >
+      <string>Données à afficher</string>
+     </property>
+     <item>
+      <property name="text" >
+       <string>Gains attaquant</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Gains défenseur</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Pertes attaquant</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Pertes défenseur</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>CDR</string>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>Recycleurs</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabAtt" >
+    <attribute name="title" >
+     <string>Attaquant</string>
+    </attribute>
+    <widget class="QTextBrowser" name="aDetails" >
+     <property name="geometry" >
+      <rect>
+       <x>-3</x>
+       <y>0</y>
+       <width>461</width>
+       <height>385</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabDef" >
+    <attribute name="title" >
+     <string>Défenseur</string>
+    </attribute>
+    <widget class="QTextBrowser" name="dDetails" >
+     <property name="geometry" >
+      <rect>
+       <x>-3</x>
+       <y>0</y>
+       <width>461</width>
+       <height>385</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBoxTrajet" >
+   <property name="geometry" >
+    <rect>
+     <x>484</x>
+     <y>4</y>
+     <width>313</width>
+     <height>117</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string>Trajet</string>
+   </property>
+   <widget class="QLabel" name="lTrPo" >
+    <property name="geometry" >
+     <rect>
+      <x>184</x>
+      <y>60</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>&lt;b>%&lt;/b></string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTrvit" >
+    <property name="geometry" >
+     <rect>
+      <x>207</x>
+      <y>20</y>
+      <width>53</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Vitesse</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTrCib" >
+    <property name="geometry" >
+     <rect>
+      <x>104</x>
+      <y>20</y>
+      <width>32</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Cible</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="phalLCD" >
+    <property name="geometry" >
+     <rect>
+      <x>8</x>
+      <y>88</y>
+      <width>165</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Heure locale de départ</string>
+    </property>
+    <property name="frameShape" >
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow" >
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="numDigits" >
+     <number>19</number>
+    </property>
+    <property name="segmentStyle" >
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+    <property name="value" stdset="0" >
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="timeLcd" >
+    <property name="geometry" >
+     <rect>
+      <x>183</x>
+      <y>88</y>
+      <width>120</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Durée du trajet</string>
+    </property>
+    <property name="frameShape" >
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow" >
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="numDigits" >
+     <number>12</number>
+    </property>
+    <property name="segmentStyle" >
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+    <property name="value" stdset="0" >
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lTrDep" >
+    <property name="geometry" >
+     <rect>
+      <x>24</x>
+      <y>20</y>
+      <width>40</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font" >
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text" >
+     <string>Départ</string>
+    </property>
+    <property name="wordWrap" >
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QSlider" name="vitesse" >
+    <property name="geometry" >
+     <rect>
+      <x>156</x>
+      <y>38</y>
+      <width>149</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="minimum" >
+     <number>10</number>
+    </property>
+    <property name="maximum" >
+     <number>100</number>
+    </property>
+    <property name="value" >
+     <number>100</number>
+    </property>
+    <property name="orientation" >
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="cible" >
+    <property name="geometry" >
+     <rect>
+      <x>88</x>
+      <y>36</y>
+      <width>60</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Coordonnées de la cible sous forme x:xxx:xx</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="vitesseLcd" >
+    <property name="geometry" >
+     <rect>
+      <x>151</x>
+      <y>62</y>
+      <width>30</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="frameShape" >
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow" >
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="numDigits" >
+     <number>3</number>
+    </property>
+    <property name="segmentStyle" >
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+    <property name="value" stdset="0" >
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="deutLcd" >
+    <property name="geometry" >
+     <rect>
+      <x>202</x>
+      <y>62</y>
+      <width>101</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Deuterium consomé</string>
+    </property>
+    <property name="frameShape" >
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow" >
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="numDigits" >
+     <number>10</number>
+    </property>
+    <property name="segmentStyle" >
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+   </widget>
+   <widget class="QDateTimeEdit" name="phallange" >
+    <property name="geometry" >
+     <rect>
+      <x>6</x>
+      <y>60</y>
+      <width>141</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="focusPolicy" >
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="toolTip" >
+     <string>Date/heure de l'impact souhaité</string>
+    </property>
+    <property name="displayFormat" >
+     <string>dd/MM/yy HH:mm:ss</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="depart" >
+    <property name="geometry" >
+     <rect>
+      <x>8</x>
+      <y>36</y>
+      <width>77</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="toolTip" >
+     <string>Coordonnées de départ sous forme x:xxx:xx</string>
+    </property>
+    <property name="editable" >
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLineEdit" name="copyPaste" >
+   <property name="geometry" >
+    <rect>
+     <x>374</x>
+     <y>72</y>
+     <width>81</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="focusPolicy" >
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="toolTip" >
+    <string>Collez votre rapport ici</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="simuler" >
+   <property name="geometry" >
+    <rect>
+     <x>360</x>
+     <y>12</y>
+     <width>105</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="font" >
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="cursor" >
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="focusPolicy" >
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="toolTip" >
+    <string>Démarrer la simulation</string>
+   </property>
+   <property name="text" >
+    <string>START</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>dPt</tabstop>
+  <tabstop>dGt</tabstop>
+  <tabstop>dCle</tabstop>
+  <tabstop>dClo</tabstop>
+  <tabstop>dCro</tabstop>
+  <tabstop>dVb</tabstop>
+  <tabstop>dVc</tabstop>
+  <tabstop>dRe</tabstop>
+  <tabstop>dSe</tabstop>
+  <tabstop>dBo</tabstop>
+  <tabstop>dSs</tabstop>
+  <tabstop>dDe</tabstop>
+  <tabstop>dEm</tabstop>
+  <tabstop>dTr</tabstop>
+  <tabstop>dLm</tabstop>
+  <tabstop>dLe</tabstop>
+  <tabstop>dLo</tabstop>
+  <tabstop>dCg</tabstop>
+  <tabstop>dAi</tabstop>
+  <tabstop>dLp</tabstop>
+  <tabstop>dPb</tabstop>
+  <tabstop>dGb</tabstop>
+  <tabstop>dMi</tabstop>
+  <tabstop>aPt</tabstop>
+  <tabstop>aGt</tabstop>
+  <tabstop>aCle</tabstop>
+  <tabstop>aClo</tabstop>
+  <tabstop>aCro</tabstop>
+  <tabstop>aVb</tabstop>
+  <tabstop>aVc</tabstop>
+  <tabstop>aRe</tabstop>
+  <tabstop>aSe</tabstop>
+  <tabstop>aBo</tabstop>
+  <tabstop>aDe</tabstop>
+  <tabstop>aEm</tabstop>
+  <tabstop>aTr</tabstop>
+  <tabstop>tekDarmes</tabstop>
+  <tabstop>tekDboucl</tabstop>
+  <tabstop>tekDprotec</tabstop>
+  <tabstop>tekAarmes</tabstop>
+  <tabstop>tekAboucl</tabstop>
+  <tabstop>tekAprotec</tabstop>
+  <tabstop>tekComb</tabstop>
+  <tabstop>tekImp</tabstop>
+  <tabstop>tekHyp</tabstop>
+  <tabstop>ressM</tabstop>
+  <tabstop>ressC</tabstop>
+  <tabstop>ressD</tabstop>
+  <tabstop>cible</tabstop>
+  <tabstop>comboBoxFret</tabstop>
+  <tabstop>aDetails</tabstop>
+  <tabstop>dDetails</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

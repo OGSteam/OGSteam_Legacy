@@ -1,0 +1,22 @@
+/********************************************
+*	filename	: TODO.TXT
+*	desc.		: 1.08a
+*	Author		: AirBAT
+*	created		: 19/04/2008
+*	modified	: -
+*   	last modif. 	: creation
+*********************************************/
+
+Vous trouverez dans ce fichier la liste des modifications qui seront apportees dans les futures versions.
+Ce fichier sera maintenu a jour au fur et a mesure de l avancement du developpement.
+
+
+----------
+TODO
+----------
+
+- supprimer les informations d empire
+- refaire le design
+- modifier et ameliorer la detection des lunes
+- refaire l agencement du tableau des flottes
+- représentation graphique de la présence dans l univers

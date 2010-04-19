@@ -1,0 +1,32 @@
+<!-- aucun accent ici -->
+<univlist>
+	<uni>
+		<name>univers1</name>
+		<univserver>beta1.e-univers.org</univserver>
+	</uni>
+	<uni>
+		<name>univers2</name>
+		<univserver>beta2.e-univers.org</univserver>
+	</uni>
+	<uni>
+		<name>univers3</name>
+		<univserver>beta3.e-univers.org</univserver>
+	</uni>
+	<uni>
+		<name>univers4</name>
+		<univserver>beta4.e-univers.org</univserver>
+	</uni>	
+	<uni>
+		<name>univers5</name>
+		<univserver>beta5.e-univers.org</univserver>
+	</uni>	
+	<uni>
+		<name>univers6</name>
+		<univserver>beta6.e-univers.org</univserver>
+	</uni>	
+	<uni>
+		<name>btest</name>
+		<univserver>bt.e-univers.org</univserver>
+	</uni>
+</univlist>	
+

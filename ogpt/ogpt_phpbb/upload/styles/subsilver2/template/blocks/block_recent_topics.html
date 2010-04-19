@@ -1,0 +1,83 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%" colspan="7">{RECENT_TOPICS_TITRE}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+					<td>
+<!-- BEGIN static -->	
+	<tr>
+			<span class="genmed">
+	<td valign="middle" align="left" class="row2">
+			<span class="genmed"><b>{L_RECENT_SUJET}</b></span></td>
+	<td valign="middle" align="left" class="row2">
+			<span class="genmed"><b>{L_RECENT_VU}</b></span></td>
+	<td valign="middle" align="left" class="row2">
+			<span class="genmed"><b>{L_RECENT_REP}</b></span></td>		
+	<td valign="middle" align="center" width="150px" class="row2">
+			<span class="genmed"><b>{L_RECENT_AUTEUR}</b></span></td>
+	<td valign="middle" align="center" class="row2">
+			<span class="genmed"><b>#</b></span></td>			
+	<td valign="middle" align="center"class="row2">
+			<span class="genmed"><b>#</b></span></td>		
+			</span>
+	</tr>
+<!-- END static -->		
+<!-- BEGIN config_scroll -->
+	<tr>
+			<span class="genmed">
+	<td  align="left" class="row2">								
+									<marquee id="recent_topics" behavior="scroll" direction="up" height="200" scrolldelay="100" scrollamount="2" loop='infinite' onmouseover='this.stop()' onmouseout='this.start()' >
+									<br /><br />
+									<!-- BEGIN recent_topic_row -->
+		<!-- IF config_scroll.recent_topic_row.FLAG -->
+		<img src="./images/flags/{config_scroll.recent_topic_row.FLAG}.gif" border="0" width="15" alt="{config_scroll.recent_topic_row.FLAG}">&nbsp;
+		<!-- ENDIF -->									
+		<img src="./images/portal/{config_scroll.recent_topic_row.IMG_USER}" />&nbsp;
+		<a href="{config_scroll.recent_topic_row.U_POSTER}">&nbsp;
+		<span<!-- IF config_scroll.recent_topic_row.S_COLOR -->
+		{config_scroll.recent_topic_row.S_COLOR}<!-- ENDIF -->>
+		{config_scroll.recent_topic_row.S_POSTER}</span></a>		
+		<a href="{config_scroll.recent_topic_row.U_TITLE}" ><b>{config_scroll.recent_topic_row.L_TITLE}</b></a>&nbsp;
+		le {scroll.recent_topic_row.S_POSTTIME}<br /><br />
+		<!-- END recent_topic_row -->
+		...<br /><br /><br /><br /><br /><br /><br /></td>
+		</marquee>
+<!-- END config_scroll -->
+<!-- BEGIN static -->
+	<!-- BEGIN recent_topic_row -->	
+		<!-- IF static.recent_topic_row.S_ROW_COUNT is even -->
+	<tr class="row1">
+	<!-- ELSE -->	
+	<tr class="row2">
+	<!-- ENDIF -->
+		<span class="genmed">
+		<td valign="middle" align="left"><span class="genmed2">
+		<a href="{static.recent_topic_row.U_TITLE}">{static.recent_topic_row.L_TITLE}</a></span>
+		<br><span class="genmed2">{static.recent_topic_row.S_POSTTIME}
+		</span></td>
+		<td valign="middle" align="center">
+		<span class="genmed2">{static.recent_topic_row.TOTAL_VIEWS}</a></span></td>
+		<td valign="middle" align="center">
+		<span class="genmed2">{static.recent_topic_row.TOTAL_REPLIES}</a></span></td>			
+		<td valign="middle" align="left"><img src="./images/portal/{static.recent_topic_row.IMG_USER}" />&nbsp;<a href="{static.recent_topic_row.U_POSTER}"><span class="genmed2"><font color="#{static.recent_topic_row.S_COLOR}">{static.recent_topic_row.S_POSTER}</font></span></a></td>		
+		<td valign="middle" align="center">
+		<!-- IF static.recent_topic_row.URL -->		
+		<a target="_blank" href="{static.recent_topic_row.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+		<!-- ENDIF -->		
+		</td>		
+		<td valign="middle" align="left">
+		<!-- IF static.recent_topic_row.FLAG -->		
+		<span class="genmed2">
+		<img src="./images/flags/{static.recent_topic_row.FLAG}.gif" border="0" width="15" alt="{static.recent_topic_row.FLAG}"></center>
+		<!-- ENDIF -->		
+		</td>		
+		</span>
+	<!-- END recent_topic_row -->	
+<!-- END static -->		
+				</tr>					
+			</table>
+		</td>
+</table> 
+

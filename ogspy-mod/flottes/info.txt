@@ -1,0 +1,3 @@
+﻿Module permetant de faire un bilan de votre flotte planete par planete, ainsi qu'un total joueur et alliance.
+Compatible v3.04, v3.05, v3.10 et UniSpy 1.0
+<a href='http://ogsteam.fr/sujet-4504-mod-flottes-new'>Informations</a>

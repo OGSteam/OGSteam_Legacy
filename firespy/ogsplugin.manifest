@@ -1,0 +1,4 @@
+content ogsplugin jar:chrome/ogsplugin.jar!/content/ xpcnativewrappers=yes
+locale ogsplugin fr-FR jar:chrome/ogsplugin.jar!/locale/fr-FR/
+locale ogsplugin en-US jar:chrome/ogsplugin.jar!/locale/en-US/
+skin ogsplugin classic jar:chrome/ogsplugin.jar!/skin/classic/

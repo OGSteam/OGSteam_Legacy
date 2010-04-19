@@ -1,0 +1,32 @@
+Matières premières sur Planet test [1:234:56] le 11-15 22:26:24
+Métal:	14793600 	Cristal:	5144870
+Deutérium:	1039590 	Energie:	35489
+Flotte
+Grand transporteur	175 	Chasseur léger	230638
+Chasseur lourd	20 	Croiseur	15
+Vaisseau de bataille	7 	Recycleur	20
+Sonde espionnage	18 	Satellite solaire	13075
+Étoile de la mort	1
+Défense
+Lanceur de missiles	17000	Artillerie laser légère	11000
+Artillerie laser lourde	1500	Canon de Gauss	300
+Artillerie à ions	864	Lanceur de plasma	135
+Petit bouclier	1	Grand bouclier	1
+Missile Interception	40
+Bâtiments
+Mine de métal	30	Mine de cristal	27
+Synthétiseur de deutérium 	24	Centrale électrique solaire	25
+Usine de robots	11	Usine de nanites	3
+Chantier spatial	12	Hangar de métal	10
+Hangar de cristal	9	Réservoir de deutérium	6
+Laboratoire de recherche	12	Terraformeur	5
+Silo de missiles	4
+Recherche
+Technologie Espionnage	9	Technologie Ordinateur	10
+Technologie Armes	11	Technologie Bouclier	11
+Technologie Protection des vaisseaux spatiaux	10	Technologie Energie	12
+Technologie Hyperespace	6	Réacteur à combustion	9
+Réacteur à impulsion	6	Propulsion hyperespace	7
+Technologie Laser	10	Technologie Ions	6
+Technologie Plasma	7	Technologie Graviton	1
+Probabilité de destruction de la flotte d'espionnage :1%

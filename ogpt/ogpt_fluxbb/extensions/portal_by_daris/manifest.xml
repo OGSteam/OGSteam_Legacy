@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension engine="1.0">
+	<id>portal_by_daris</id>
+	<title>Portal by Daris</title>
+	<version>2.3.3</version>
+	<description>Adds a portal to forum</description>
+	<author>Daris</author>
+	<minversion>1.3 Beta</minversion>
+	<maxtestedon>1.3 Beta</maxtestedon>
+	<install><![CDATA[
+require_once FORUM_ROOT.'extensions/portal_by_daris/install.php';
+install();
+
+]]></install>
+	<uninstall><![CDATA[
+require_once FORUM_ROOT.'extensions/portal_by_daris/install.php';
+uninstall();
+
+]]></uninstall>
+
+	<hooks>
+
+		<hook id="re_rewrite_rules"><![CDATA[
+require $ext_info['path'].'/include/rewrite_rules.php';
+]]></hook>
+
+		<hook id="in_start"><![CDATA[
+if (isset($_GET['page']) || isset($_GET['pages']))
+	require $ext_info['path'].'/page.php';
+elseif (empty($_GET) || (isset($_GET['login']) && count($_GET) == 1))
+	require $ext_info['path'].'/index.php';
+]]></hook>
+
+		<hook id="co_modify_url_scheme"><![CDATA[
+// Setup the URL rewriting scheme
+if (file_exists($ext_info['path'].'/include/url/'.$forum_config['o_sef'].'.php'))
+	require $ext_info['path'].'/include/url/'.$forum_config['o_sef'].'.php';
+else
+	require $ext_info['path'].'/include/url/Default.php';
+]]></hook>
+
+
+		<hook id="hd_head"><![CDATA[
+// hd_head hook could be executed from a function (like message), so we need to globalize language variable
+global $lang_portal;
+
+if (!defined('FORUM_PORTAL') && count($forum_page['crumbs']) > 1)
+{
+	array_insert($forum_page['crumbs'], 1, array($forum_page['crumbs'][0][0], forum_link($forum_url['forums'])));
+	$forum_page['crumbs'][0][0] = $lang_common['Index'];
+}
+
+if (!defined('FORUM_PORTAL') && $forum_config['o_portal_panels_all_pages'] == 1 && strpos(FORUM_PAGE, 'admin-') === false && FORUM_PAGE != 'message')
+	define('FORUM_PORTAL', $ext_info['path'].'/');
+
+if (defined('FORUM_PORTAL'))
+{
+	$forum_head['style_portal'] = '<link rel="stylesheet" type="text/css" media="screen" href="'. $ext_info['url'].'/style/style.css" />';
+
+	$tpl_main = str_replace('<!-- forum_crumbs_end -->', '', $tpl_main);
+	
+	// add portal_top before forum_main
+	$tpl_main = str_replace('<!-- forum_main_menu -->', '<!-- portal_top -->'."\n".'<!-- forum_main_menu -->', $tpl_main);
+	
+	// add portal_bottom before forum_stats
+	$tpl_main = str_replace('<!-- forum_qpost -->', '<!-- forum_qpost -->'."\n".'<!-- portal_bottom -->'."\n".'<!-- forum_crumbs_end -->', $tpl_main);
+	
+	
+	if (file_exists(FORUM_CACHE_DIR.'cache_panels.php'))
+		require FORUM_CACHE_DIR.'cache_panels.php';
+
+	if (!defined('FORUM_PANELS_LOADED'))
+	{
+		require FORUM_PORTAL.'include/cache.php';
+		generate_panels_cache();
+		require FORUM_CACHE_DIR.'cache_panels.php';
+	}
+}
+]]></hook>
+
+		<hook id="ft_end"><![CDATA[
+
+require $ext_info['path'].'/panels.php';
+
+]]></hook>
+
+		<hook id="ca_admin_menu_new_sublink"><![CDATA[
+
+if (FORUM_PAGE_SECTION == 'start' || FORUM_PAGE_SECTION == 'options')
+{
+	global $lang_portal;
+
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php'))
+		require_once $ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php';
+	else
+		require_once $ext_info['path'].'/lang/English/portal.php';
+}
+
+if (FORUM_PAGE_SECTION == 'start')
+{
+	$adnav_sublinks[] = '<li'.((FORUM_PAGE == 'admin-pages') ? ' class="isactive"' : '').'><a href="'.forum_link($forum_url['admin_pages']).'">'.$lang_portal['Pages'].'</a></li>';
+	$adnav_sublinks[] = '<li'.((FORUM_PAGE == 'admin-panels') ? ' class="isactive"' : '').'><a href="'.forum_link($forum_url['admin_panels']).'">'.$lang_portal['Panels'].'</a></li>';
+}
+elseif (FORUM_PAGE_SECTION == 'options')
+	$adnav_sublinks[] = '<li'.((FORUM_PAGE == 'admin-options-portal') ? ' class="isactive"' : '').'><a href="'.forum_link($forum_url['admin_options_portal']).'">'.$lang_portal['Portal'].'</a></li>';
+]]></hook>
+
+		<hook id="fn_generate_navlinks_end"><![CDATA[
+global $lang_portal;
+
+// Load portal.php language file
+if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php'))
+	require_once $ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php';
+else
+	require_once $ext_info['path'].'/lang/English/portal.php';
+
+
+$links['index'] = '<li id="navportal"'.((FORUM_PAGE == 'news' || FORUM_PAGE == 'pages') ? ' class="isactive"' : '').'><a href="'.forum_link($forum_url['index']).'"><span>'.$lang_common['Index'].'</span></a></li>';
+
+array_insert($links, 1, '<li id="navindex"'.((FORUM_PAGE == 'index') ? ' class="isactive"' : '').'><a href="'.forum_link($forum_url['forums']).'"><span>'.$lang_common['Forum'].'</span></a></li>', 'forum');
+
+]]></hook>
+
+		<hook id="aop_new_section"><![CDATA[
+if ($section == 'portal')
+	require $ext_info['path'].'/admin/portal.php';
+]]></hook>
+
+		<hook id="aop_new_section_validation"><![CDATA[
+if ($section == 'portal')
+{
+	$form['portal_news_count'] = intval($form['portal_news_count']);
+	if (!isset($form['portal_news_avatar']) || $form['portal_news_avatar'] != '1') $form['portal_news_avatar'] = '0';
+	if (!isset($form['portal_panels_all_pages']) || $form['portal_panels_all_pages'] != '1') $form['portal_panels_all_pages'] = '0';
+}
+]]></hook>
+
+		<hook id="aop_start"><![CDATA[
+if (isset($_POST['form']['portal_news_forums']))
+	$_POST['form']['portal_news_forums'] = implode(',', $_POST['form']['portal_news_forums']);
+]]></hook>
+
+		<!-- RSS -->
+
+		<hook id="ex_qr_get_topics"><![CDATA[
+$valid_portal_feed = array('news');
+($hook = get_hook('xn_portal_by_daris_ex_qr_get_topics_add_valid_feed')) ? eval($hook) : null;
+
+if (isset($_GET['portal_feed']) && in_array($_GET['portal_feed'], $valid_portal_feed))
+{
+	$query['SELECT'] .= ', t.first_post_id, p.message';
+	$query['JOINS'][] = array('LEFT JOIN' => 'posts AS p', 'ON' => 't.first_post_id=p.id');
+	$query['WHERE'] .= ' AND t.forum_id IN('.$forum_config['o_portal_'.$_GET['portal_feed'].'_forums'].')';
+}
+]]></hook>
+
+		<hook id="ex_modify_cur_topic_item"><![CDATA[
+$valid_portal_feed = array('news');
+($hook = get_hook('xn_portal_by_daris_ex_modify_cur_topic_item_add_valid_feed')) ? eval($hook) : null;
+
+if (isset($_GET['portal_feed']) && in_array($_GET['portal_feed'], $valid_portal_feed))
+{
+	require_once FORUM_ROOT.'include/parser.php';
+	
+	if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php'))
+		require_once $ext_info['path'].'/lang/'.$forum_user['language'].'/portal.php';
+	else
+		require_once $ext_info['path'].'/lang/English/portal.php';
+
+	$desc = $lang_portal['News'].': <a href="'.forum_link($forum_url['topic'], array($cur_topic['id'], sef_friendly($cur_topic['subject'])));
+	
+	($hook = get_hook('xn_portal_by_daris_ex_modify_cur_topic_item')) ? eval($hook) : null;
+
+	$desc .= '">'.$cur_topic['subject'].'</a><br />'."\n".parse_message(strlen($cur_topic['message']) > 400 ? substr($cur_topic['message'], 0, 400).'...' : $cur_topic['message'], 1);
+
+	$feed['items'][count($feed['items']) - 1]['description'] = $desc;
+}
+]]></hook>
+
+		<!-- / RSS -->
+	</hooks>
+</extension>

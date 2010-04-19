@@ -1,0 +1,196 @@
+/* OGStats */
+
+/* Mise en page */
+
+body
+{
+background: #061229;
+width: 755px;
+margin: auto;
+margin-top: 10px;
+margin-bottom: 10px;
+font-family: Arial;
+font-size: small;
+}
+
+img
+{
+border: 0px;
+}
+
+/* En tête */
+
+#en_tete
+{
+width: 751px;
+height: 88px;
+text-align: center;
+font-size: 12px;
+background-color: #344566;
+margin-bottom: 4px;
+border: 2px #c6c6c6 solid;
+}
+
+.imageflottante
+{
+float: left;
+}
+
+/* Menu */
+
+#menu
+{
+float: left;
+font-size: small;
+}
+
+.titre_menu
+{
+font-family: Arial, serif;
+border: 1px #415680 solid;
+background-color: #212c41;
+color: white;
+height: 13px;
+width: 119px;
+font-size: x-small;
+margin-bottom: 4px;
+text-indent: 3px;
+}
+
+.element_menu
+{
+width: 119px;
+height: auto;
+border: 1px #415680 solid;
+background-color: #344566;
+margin-bottom: 4px;
+padding-bottom: 4px;
+color: white;
+text-align: left;
+}
+
+.flag_menu
+{
+width: 119px;
+height: auto;
+border: 1px #415680 solid;
+background-color: #344566;
+margin-bottom: 4px;
+padding-top: 3px;
+text-align: center;
+vertical-align: middle;
+}
+
+
+.element_menu a
+{
+color: #B3B3B3;
+}
+
+.textmenu
+{
+color: #B3B3B3;
+}
+
+.element_menu a:hover
+{
+color: yellow;
+}
+
+.inscription
+{
+font-weight: bold;
+text-decoration: blink;
+}
+
+/* Connexion */
+
+#cnxt
+{
+font-family: Arial, serif;
+border: 1px #415680 solid;
+background-color: #212c41;
+color: white;
+margin-left: 125px;
+height: 13px;
+font-size: x-small;
+margin-bottom: 4px;
+text-indent: 3px;
+}
+
+#form_cnxt
+{
+border: 1px #415680 solid;
+background-color: #344566;
+margin-left: 125px;
+height: 22px;
+font-size: 10px;
+margin-bottom: 4px;
+margin-bottom: 4px;
+text-indent: 3px;
+padding-top: 3px;
+}
+
+/* Corps */
+
+#titre_corps
+{
+font-family: Arial, serif;
+border: 1px #415680 solid;
+background-color: #212c41;
+color: white;
+margin-left: 125px;
+height: 13px;
+font-size: x-small;
+margin-bottom: 4px;
+text-indent: 3px;
+}
+
+#corps
+{
+margin-left: 125px;
+margin-bottom: 4px;
+padding-left: 10px;
+padding-right: 10px;
+color: #FFFFFF;
+background-color: #344566;
+border: 1px #415680 solid;
+font-family: Verdana, Arial;
+}
+
+#corps h1,h2
+{
+text-align: center;
+font-family: Verdana, Arial;
+}
+
+#corps h2
+{
+font-size: medium;
+text-decoration: underline;
+}
+
+input,option,select
+{
+font-size: 10px;
+font-family: Arial;
+}
+
+#infos
+{
+border: 1px #415680 solid;
+font-family: Arial, serif;
+background-color: #344566;
+color: #878787;
+margin-left: 125px;
+height: 13px;
+font-size: x-small;
+margin-top: 4px;
+margin-bottom: 4px;
+text-align: center;
+}
+
+#infos a
+{
+color: #878787;
+}

@@ -1,0 +1,41 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{RECENT_POSTER_TITRE}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+<table  width="100%" cellpadding="2" cellspacing="2" border="0" >
+	<tr>
+		<td align="left" nowrap="nowrap"><b>Pseudo</b></td>
+		<td align="right" nowrap="nowrap"><b>{L_POSTE}</b></td>
+		<td align="right" nowrap="nowrap"><b>#</b></td>
+		<td align="right" nowrap="nowrap"><b>#&nbsp;&nbsp;</b></td>
+	</tr>
+<!-- BEGIN top_posters -->
+<tr class="<!-- IF top_posters.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+		<td align="left" valign="middle">
+			<img src="./images/portal/{top_posters.IMG_USER}" />&nbsp;<strong><a href="{top_posters.U_USERNAME}"><font color="#{top_posters.USERNAME_COLOR}">{top_posters.USERNAME}
+</font></span></a></strong><br />
+		</td>
+		<td align="right" nowrap="nowrap" valign="middle"><center><a href="{top_posters.S_SEARCH_ACTION}">{top_posters.POSTER_POSTS}</a></center></td>
+		<td align="right" nowrap="nowrap" valign="middle">
+		<!-- IF top_posters.URL -->
+		<a target="_blank" href="{top_posters.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+		<!-- ENDIF -->
+		</td>
+		<td align="right" nowrap="nowrap" valign="middle">
+			<!-- IF top_posters.USER_FLAG -->&nbsp;
+			<img src="./images/flags/{top_posters.USER_FLAG}.gif" border="0" width="15" alt="{top_posters.USER_FLAG}" title="{top_posters.USER_FLAG}">&nbsp;</center>
+			<!-- ENDIF -->
+		</td>
+	</tr>
+<!-- END top_posters --> 
+</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div> 

@@ -1,0 +1,2 @@
+Ce fichier pour commiter quelque chose afin de voir si les hooks de subversion sont correctement configuré... :p
+Petit test

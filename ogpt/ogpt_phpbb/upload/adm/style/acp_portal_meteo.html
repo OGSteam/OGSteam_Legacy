@@ -1,0 +1,45 @@
+﻿<!-- INCLUDE overall_header.html -->
+<!-- admin_meteo.tpl  by sjpphpbb http://sjpphpbb.net -->
+		<form action"{U_SEL_ACTION}" method="post" name="post">
+<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+       <th width="100%" class="thHead">{L_LAXCISTE_METEO_ADMIN}</span>
+<tr>
+    <td class="row1"><span class="gensmall"><center>{L_LAXCISTE_METEO_ADMIN2}</center>
+</span>
+</table>
+<br>
+<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+<tr>
+      <th class="thHead" colspan="2">{L_LAXCISTE_METEO_ADMIN3}</span></th>
+</tr>
+
+
+ <tr>
+    <td class="row1">{L_METEO_TITRE}</td>
+    <td class="row1"><input type="text" size="25" class="post" maxlength="25" name="meteo_titre"  value="{METEO_TITRE}" /></td>
+</tr>
+<tr>
+    <td class="row1">{L_METEO_FOND}</td>
+    <td class="row1"><input type="text" size="10" class="post" maxlength="6" name="meteo_fond"  value="{METEO_FOND}" /></td>
+</tr>
+<tr>
+    <td class="row1">{L_METEO_TEXTE}</td>
+    <td class="row1"><input type="text" size="10" class="post" maxlength="6" name="meteo_texte"  value="{METEO_TEXTE}" /></td>
+ 	</table>
+		<table width="100%" cellpadding="4" cellspacing="1" border="0" class="tablebg" align="left" >
+    		<tr>
+  			<tr>
+        			<td class="row2" colspan="2">
+			<input type="hidden" name="id" value="NULL" />
+		<input type="hidden" name="msg_id" value="{MSG_ID}" />
+		<center><input class="button1" type="submit" id="submit" name="save-edited" value="{L_SAVE}" />
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+
+	</form>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_LAXCISTE_METEO_COPYRIGHT}</a></center> 
+        </td>
+    </tr>
+</table>
+<br />
+<!-- INCLUDE overall_footer.html -->

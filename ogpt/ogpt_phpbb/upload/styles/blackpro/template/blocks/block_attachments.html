@@ -1,0 +1,39 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{ATTACH_TITRE}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">		
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" align="center" class="row1">				
+				<tr>
+					<td>
+					<center>
+	<tr>
+    <td align="left" nowrap="nowrap"><span class="gensmall"><strong>{L_TOP_FILENAME}</strong></span></td>
+    <td align="center" nowrap="nowrap"><span class="gensmall"><strong>{L_TOP_DATE}</strong></span></td>	
+    <td align="center" nowrap="nowrap"><span class="gensmall"><strong>{L_TOP_FILESIZE}</strong></span></td>
+    <td align="center" nowrap="nowrap"><span class="gensmall"><strong>{L_TOP_COUNT}</strong></span></td>	
+  </tr>
+  <!-- BEGIN attach -->
+  <!-- IF attach.S_ROW_COUNT is even -->
+  <tr class="row2">
+    <!-- ELSE -->
+  <tr class="row1">
+    <!-- ENDIF -->
+    <td class="genmed2" align="left" valign="middle"><img src="images/portal/icon_topic_attach.gif" />&nbsp;
+	<a href="{attach.U_FILE}" target="_blank">{attach.REAL_FILENAME}</a></td>
+    <td class="genmed2" align="center" nowrap="nowrap" valign="middle">{attach.ATTACH_DATE}</td>	
+    <td class="genmed2" align="center" nowrap="nowrap" valign="middle">{attach.FILESIZE}</td>
+    <td class="genmed2" align="center" nowrap="nowrap" valign="middle">{attach.ATTACH_COUNT}&nbsp;{L_TOP_X}</td>
+  <!-- END attach -->
+		</td>
+	</tr>
+</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

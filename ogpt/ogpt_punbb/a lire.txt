@@ -1,0 +1,15 @@
+PunOgpt
+
+vu les grandes difficultées a obtenir des versions correctes de fluxbb1.3 stable, et bien que le forum soit super interessant,
+une nouvelle branche est developpé, afin de proposer au plus vite le portail.
+
+comme le nom l'indique il tournera sur punbb 
+
+le principe sera simple, il suffira d'uploader les fichiers qui seront developper sur votre ftp contenant punbb et ogspy,
+
+l'install automatique fera le reste
+
+important, aucune modification des pages punbb ne sera effectué ...!!!!!!!!!!
+
+
+j'espere une premiere mouture(alpha) d'ici mi octobre et la premiere rc fin octobre ...

@@ -1,0 +1,52 @@
+Changelog du module News
+
+v1.60 :
+* Changement du parser BBcode
+* Ajout de bouton insertion BBcode
+* Ajout gestion de smiley
+* Ajout possibilité d'utiliser directement en html
+* Ajout système de gestion des droits
+* Ajout test pour les boutons de défilement des News
+* Ajout de commentaires dans le code
+* Ajout d'une fonction de prévisualisation
+* Retouches de l'interface
+
+v1.53 : (03/12/06)
+* Suppression requêtes INSERT… SELECT
+* Suppression fonction is_spammer
+* Correction erreurs d'appel de table (matable.mavar)
+
+v1.52 : (26/11/06)
+* Correction erreurs balises <option>
+* Correction requêtes install et update
+
+v1.51 :  (25/11/06)
+* Ajout de boutons de défilement dans l'onglet News et l'onglet Divers
+* Ajout limitation d'affichage à 10 messages pour l'onglet Divers
+* Modification requêtes d'affichage
+
+v1.5 :  (25/11/06)
+* Ajout droit d'administration pour le groupe "News"
+* Modification système de stockage
+* Ajout possibilité de modifier les sous-catégories
+    + Ajout
+    + Suppression
+    + Renommage
+* Modification affichage des listes déroulantes
+    + Seules les sous-catégories contenant des informations apparaitrons a l'utilisateur
+* Ajout d'une page "Divers"
+* Modification gestion des smiley (par Oxid-Fox)
+
+v1.4c :
+* Correction erreurs de droits
+
+v1.4b :
+* Correction erreur lors de l'update
+
+v1.4a :
+* Ajout d'un onglet 'Aide'
+    + Séparation des news par mod
+
+v1.3 :
+* Taille des champs dans l'édition des news
+* Passage à la dernière version 1.0.14 du parser de BBCode (inclusion de nouveaux tags dont les couleurs)

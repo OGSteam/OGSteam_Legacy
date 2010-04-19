@@ -1,0 +1,424 @@
+QMainWindow {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #001, stop:0.1 #647596);
+	background-image: url(./config/styles/lucette in the sky/stripes.png);
+}
+
+/* Fond bleu fonçé pour toutes les frames histoire que les widgets oubliés restent dans le "ton" */
+QFrame {
+	background-color: #263148;
+}
+
+/* Les groupbox */
+QGroupBox {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	color : black;
+	font-size: 11px;
+	font-weight: bold;
+	border-radius: 4px;
+	border: 2px solid #222;
+	background-image: url(./config/styles/lucette in the sky/stars.png);
+}
+
+/* titre des groupbox */
+QGroupBox::title {
+	subcontrol-position: top center;
+	border-top: 2px solid #222;
+}
+
+/* les labels */
+QLabel {
+	background-color: transparent;
+	font-size: 11px;
+}
+
+/*les labels des noms des vaisseaux, plus petits */
+#lPt, #lGt, #lCle, #lClo, #lCr, #lVb, #lVc, #lRe, #lSe, #lSs, #lBo, #lDe, #lEm, #lTr, #lLm, #lLe, #lLo, #lCg, #lAi, #lLp, #lPb, #lGb, #lMi {
+	font-size: 9px;
+}
+
+/* les labels des résultats, réglage des couleurs */
+#labelPertes, #labelPertesAmin, #labelPertesAmoy, #labelPertesAmax, #labelPertesDmoy, #labelPertesDmax, #labelPertesDmin {color: #660000}
+#labelCdr, #buttinT, #labelCdrMin, #labelCdrMoy, #labelCdrMax {color: #000066}
+#labelGains, #buttinR, #labelTotal, #labelGainsMin, #labelGainsMoy, #labelGainsMax {color: #003300}
+
+/* les lineedit */
+QLineEdit {
+	font-size: 11px;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161128, stop:0.2 #263148, stop:1 #263148);
+	color: #228822;
+	font-weight: bold;
+	padding-top: 2px;
+	border: 1px solid black;
+}
+
+/* On remet une taille normale pour depart et cible pour éviter qu'ils dépassent */
+#depart, #cible {
+	font-weight: normal;
+}
+
+/* Les (le) datetimeedit */
+QDateTimeEdit {
+	font-size: 11px;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161128, stop:0.2 #263148, stop:1 #263148);
+	color: #228822;
+	border: 1px solid black;
+	padding-top: 4px;
+	padding-right: 15px;
+}
+
+
+/* les onglets */
+QTabBar::tab {
+	color: #ababab;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	border: 2px solid #222;
+	border-bottom: 1px solid #222;
+	min-width: 8ex;
+	padding: 3px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+/* l'onglet selectionné */
+QTabBar::tab:selected {
+	color: #cdcdcd;
+	border-bottom: 0px;
+	margin-left: -4px;
+         margin-right: -4px;
+}
+
+/* onglet selectionné en position 1 */
+QTabBar::tab:first:selected {
+	margin-left: 0; /* the first selected tab has nothing to overlap with on the left */
+}
+
+/* onglet selectionné en dernière position */
+QTabBar::tab:last:selected {
+	margin-right: 0; /* the last selected tab has nothing to overlap with on the right */
+}
+
+/* un seul onglet */
+QTabBar::tab:only-one {
+	margin: 0; /* if there is only one tab, we don't want overlapping margins */
+}
+
+/* les onglets non selectionnés */
+QTabBar::tab:!selected {
+	margin-top: 3px; /* make non-selected tabs look smaller */
+}
+
+/* La "frame" des onglets de résultats */
+#results::pane {
+	border: 2px solid #222;
+	border-radius: 4px;
+}
+
+/*la "frame" des onglets généraux (en haut) */
+#tabWidget::pane {
+	border: 0px;
+	border-top: 1px solid #222;
+	margin-top : 2px;
+}
+
+/* l'ensemble des onglets de résultats */
+#results::tab-bar {
+	alignment: center;
+}
+
+/* la frame générale des onglets de résultat */
+#tabResult, #tabGraph {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	background-image: url(./config/styles/lucette in the sky/stars.png);
+}
+
+/* les fonds des textbrowser attaquant et defenseur */
+#aDetails, #dDetails {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	background-image: url(./config/styles/lucette in the sky/stars.png);
+	border: 0px;
+	padding: 8px;
+}
+
+/*la frame des onglets principaux */
+#tabWidget > QFrame {
+	background-image: url(./config/styles/lucette in the sky/stars.png);
+}
+
+/*les lignes dans les résultats*/
+#line, #line_2, #line_3, #line_4, #line1, #line1_2 {
+	background-color: transparent;
+}
+
+/* les panneaux LCD */
+QLCDNumber {
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161128, stop:0.2 #263148, stop:1 #263148);
+	color: #887722;
+	border: 1px solid black
+}
+
+/* les boutons */
+QPushButton {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 3px;
+}
+
+/* la barre de menus */
+QMenuBar {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:0.6 #344566, stop:1 #263148);
+}
+
+/* le fond des menus */
+QMenu {
+	background-color: #354667;
+	color: #ababab;
+	border: 1px solid black;
+}
+
+/* les éléments des menus */
+QMenuBar::item {
+	color: #ababab;
+	font-weight: bold;
+	background: transparent;
+}
+
+/* les listes déroulantes */
+QComboBox {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	border: 1px solid black;
+	border-radius: 2px;
+	padding: 1px 18px 1px 3px;
+}
+
+/* la partie éditable des listes déroulantes */
+QComboBox:editable {
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #161128, stop:0.2 #263148, stop:1 #263148);
+	color: #228822;
+	border: 1px solid black;
+}
+
+/* le bouton de défilement des listes déroulantes éditables */
+QComboBox::drop-down:editable {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	border-left-width: 1px;
+	border-left-color: black;
+	border-left-style: solid;
+}
+
+/* le bouton de défilement des listes déroulantes non éditables */
+QComboBox::drop-down:!editable {
+	border-left-width: 1px;
+	border-left-color: black;
+	border-left-style: solid;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+/* l'image de la flèche d'une liste déroulante */
+QComboBox::down-arrow {
+	width: 7px;
+	height: 7px;
+	image: url(./config/styles/lucette in the sky/down.svg);
+}
+
+/* le fond de la liste d'une liste déroulante */
+QComboBox QAbstractItemView {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	border: 1px solid black;
+	selection-background-color: #263148;
+}
+
+/* les tooltips */
+QToolTip {
+	border: 1px solid black;
+	color: #adadad;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+}
+
+/* les datetimeedit, par défaut comme les lineedit déjà définis */
+
+/* datetimeedit, bouton du haut */
+QDateTimeEdit::up-button {
+	subcontrol-origin: border;
+	subcontrol-position: top right;
+	border: 1px solid black;
+	border-top-right-radius: 2px;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	width: 16px;
+}
+
+/* datetimeedit, image du bouton du haut */
+QDateTimeEdit::up-arrow {
+	width: 7px;
+	height: 5px;
+	image: url(./config/styles/lucette in the sky/up.svg);
+}
+
+/* datetimeedit, bouton du bas */
+QDateTimeEdit::down-button {
+	subcontrol-origin: border;
+	subcontrol-position: bottom right;
+	border: 1px solid black;
+	border-bottom-right-radius: 2px;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #647596, stop:1 #344566);
+	width: 16px;
+}
+
+/* datetimeedit, image du bouton du bas */
+QDateTimeEdit::down-arrow {
+	width: 7px;
+	height: 5px;
+	image: url(./config/styles/lucette in the sky/down.svg);
+}
+
+
+/* les entêtes de listes, tables... */
+QHeaderView::section {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+		stop:0 #344566, stop: 0.5 #647596,
+		stop: 0.6 #344566, stop:1 #647596);
+	color: #adadad;
+	font-weight: bold;
+	padding-left: 4px;
+	padding-top: 4px;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 0px;
+}
+
+/* les listes, arbres... */
+QTreeWidget {
+	border-radius: 4px;
+	border: 2px solid #222;
+	color: #adadad;
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	alternate-background-color: #364158;
+}
+
+/* la boite d'édition de commentaires */
+#commentEdit {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+}
+
+/* la boite d'affichage de rapport d'espionnage */
+#reBrowser {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #647596);
+	border: 2px solid #222;
+	border-radius: 4px;
+}
+
+
+/* le fond des dialogues (fenêtres secondaires) */
+QDialog {
+	background-color: #263148;
+	background-image: url(./config/styles/lucette in the sky/stars.png)
+}
+
+/* le fond des sliders */
+QSlider::groove:horizontal {
+	border: 0px;
+	height: 2px;
+	background: #222;
+}
+
+/* la poignée des sliders */
+QSlider::handle:horizontal {
+	background: transparent;
+	width: 18px;
+	margin: -7px 0;
+	image: url(./config/styles/lucette in the sky/star.svg);
+}
+
+QDialog QStackedWidget {
+	background-image: url(./config/styles/lucette in the sky/stars.png)
+}
+
+
+QScrollBar:horizontal {
+	border: 1px solid black;
+	height: 15px;
+	margin: 0px 20px 0 20px;
+}
+
+QScrollBar::handle:horizontal {
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #263148);
+	min-width: 20px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+QScrollBar::add-line:horizontal {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #263148);
+	width: 18px;
+	subcontrol-position: right;
+	subcontrol-origin: margin;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+QScrollBar::sub-line:horizontal {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #344566, stop:1 #263148);
+	width: 18px;
+	subcontrol-position: left;
+	subcontrol-origin: margin;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+
+
+
+
+QScrollBar:vertical {
+	border: 1px solid black;
+	width: 15px;
+	margin: 20px 0px 20 0px;
+}
+
+QScrollBar::handle:vertical {
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #344566, stop:1 #263148);
+	min-height: 20px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+QScrollBar::add-line:vertical {
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #344566, stop:1 #263148);
+	height: 18px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+QScrollBar::sub-line:vertical {
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #344566, stop:1 #263148);
+	height: 18px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
+}
+
+
+
+
+
+
+
+QSplitter {
+	background: transparent;
+}

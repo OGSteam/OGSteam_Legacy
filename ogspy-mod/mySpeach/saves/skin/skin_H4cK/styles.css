@@ -1,0 +1,49 @@
+.MYtout { font-size:10px; background-color:#000; color:#0f0; font-family:monospace; width:600px; border:1px solid #0f0; } /* Style qui defini la structure du chat */
+.MSli { list-style-type:none; margin:4px; background-color:#040; padding:0; border:1px solid #0f0; } /* Style cellule du chat */ 
+.MStitre, .barre { font-size:14px; font-weight:bold; font-variant:small-caps; color:#0f0; background:#000; border-bottom:1px solid #0F0; text-align:center; padding:2px; margin:0; background-image:url('skin/skin_H4cK/88x31.gif'); } /* Taille du titre du chat */ 
+.MStxtAutre { font-size:10px; color:#000000; } /* autres textes */ 
+.MSpseudo { font-size:10px; color:grey; font-weight:bold; } /* Pseudos normaux */ 
+.MSmodo { font-size:10px; color:orange; font-weight:bold; } /* Pseudo Moderateur */ 
+.MStexte { font-size:10px; color:#000000; } /* Texte du chat */ 
+.MSdate { font-size:8px; color:#888888; } /* Style des dates */ 
+.My_Tail { font-size:10px; } /* Style du texte en pied du chat */ 
+.My_Root { font-size:10px; color:#ff0000; font-weight:bold; } /* Pseudos administrateur */ 
+.My_altern1 { padding:2px; } /* Couleur qui alterne n 1*/ 
+.My_altern2 { padding:2px; } /* Couleur qui alterne n 2*/ 
+#count big { color:red; } /* Quand on ecrit, le pseudo change de couleur, ceci change la couleur. */ 
+.My_historique { font-size:10px; font-family:monospace; color:#0f0; } /* Taille du texte historique */ 
+#popupAddressbook { display:none; position:absolute; left:160px; top:10px; width:350px; height:355px; background-color:#000; border:1px solid #0f0; } /* !! Les CSS qui suivent sont a modifier que si vous savez ce que vous faite !! */ 
+.barre { text-align:right; height:1.4em; }  
+.barre a { padding:0; margin:2px; text-decoration:none; background-color:#3c6; border:#0f0 solid 1px; } /* contient les images fermer/reduire popup */ 
+#pop_titre { float:left; font-weight:bold; color:#0f0; margin-left:40px; } /* barre titre de la popup smileys */ 
+#pop { height:320px; border:1px solid #0f0; overflow:auto; background-color:#040; background-position:50%; margin:4px; font-family:monospace; color:#0f0; } /* interieur de la popup smileys */ 
+#pop table { background-color:transparent; color:#0f0; } /* contenu de l'historique */ 
+#pop table a:link { color:#3c6; text-decoration:none; }  
+#pop table a:visited { color:#3c6; text-decoration:none; }  
+#pop table a:hover { color:#0f0; text-decoration:none; }  
+#contextMenu { position:absolute; left:0; top:0; padding:5px; z-index:2; font-family:monospace; color:#0f0; background-color:#040; width:130px; visibility:hidden; border:1px solid #0f0; }  
+#slct_ip { font-size:0.6em; background-color:#040; color:#0f0; border-color:#0f0; }  
+#contextMenu a { text-decoration:none; color:#3c6; font-size:0.8em; }  
+#contextMenu a div { width:125px; cursor:default; }  
+#contextMenu a div img { border:none; }  
+#contextMenu a:hover div { color:#0f0; border-right:1px solid #0f0; }  
+.My_basduchat { padding:2px; text-align:center; background-image:url('skin/skin_H4cK/88x31.gif'); } /* Style qui defini le bas du chat */
+.go { border:outset #0f0 1px; cursor:pointer;}
+.go:active {border:inset #0f0 1px;}
+.My_basduchat input { background-color:#040; border-color:#0f0; color:#000000; }
+.My_basduchat .link { background-color:#040; color:#0f0;width:50%;margin:auto;} /* le div des liens smileys, historique plus le compteur de connectés */
+.My_basduchat div a:link, .My_basduchat a:link { color:#3c6; text-decoration:none; }
+.My_basduchat div a:visited, .My_basduchat a:visited { color:#3c6; text-decoration:none; }  
+.My_basduchat div a:hover,.My_basduchat a:hover { color:#0f0; text-decoration:none; }  
+#pal { text-align:center; margin:auto; }  
+#temoin { height:1em; border:0; width:95%; } /* temoin de mise en forme du texte */ 
+.petit_boutton { display:inline; background-color:#3c6; border:outset #0f0 2px; font-family:monospace; font-size:1em; padding:1px; } /* plus les styles suivants */
+#chr_b { background-image:url('skin/default/bold.gif'); background-position:60% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_i { background-image:url('skin/default/italic.gif'); background-position:60% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_s { background-image:url('skin/default/strike.gif'); background-position:0% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_u { background-image:url('skin/default/underline.gif'); background-position:50% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_sup { background-image:url('skin/default/super.gif'); background-position:55% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_big { background-image:url('skin/default/big.gif'); background-position:55% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+#chr_small { background-image:url('skin/default/small.gif'); background-position:55% 50%; background-repeat:no-repeat; } /* background-position: horisontal(%) vertical(%)*/ 
+.pop_dring { background-color:#040; text-align:center; }  
+.pop_dring span { font-size:10px; color:#0f0; }  

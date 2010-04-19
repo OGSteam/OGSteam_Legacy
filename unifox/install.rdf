@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="rdf:#$WmLaT"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:maxVersion="3.6.*"
+                   em:minVersion="2.0a1" />
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="{b66bc4c3-6d25-4a10-8c59-01daa9063052}"
+                   em:name="UniFox"
+                   em:version="1.4.0.7"
+                   em:type="2"
+                   em:description="Enhance user experience with e-univers.com"
+                   em:creator="Jormund"
+                   em:homepageURL="http://forum.e-univers.org/"
+                   em:optionsURL="chrome://unifox/content/unifoxOptions.xul"
+                   em:iconURL="chrome://unifox/skin/UniFox_32.gif"
+                   em:updateURL="http://svn.ogsteam.fr/Unifox/update.rdf"
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEUlf6x5XCjedwb85jtt4WxEOFNhdZTHeXn4+yB48OcREypczrVXlcGiR1nwA/QFXXwPe1u0GM+8Cl8Cs7yuJtndyc15YEJaN/3e0vM8+5LHp9W6iRmK+psk3ICevxNY9Jf5LoIs7zvpos84GMds/jswvdmyoPeWUY0UjrjFRtbwIDAQAB">
+    <em:targetApplication RDF:resource="rdf:#$WmLaT"/>
+  </RDF:Description>
+</RDF:RDF> 

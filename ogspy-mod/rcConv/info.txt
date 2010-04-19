@@ -1,0 +1,3 @@
+<table><tr><th>Module de mise en forme de RC et de RR par <b>Aeris</b> et <b>Bartheleway</b></th></tr>
+<tr><th><a href='http://ogsteam.fr/forums/sujet-3897'>Lien sur le forum</a></th></tr>
+<tr><th><a href='http://trac.ogsteam.fr/wiki/rcconv'>Lien sur le wiki</a></th></tr></table>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!-- Lien vers la page contenant les chaines à afficher dans le fichier xul -->
+<!DOCTYPE window SYSTEM "chrome://xtense2/locale/prefs.dtd">
+
+<window xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+title="&checking.title;" id="xtense" resizable="true" orient="vertical"
+width="400" height="500" flex="1"
+style="padding:5px;">
+
+<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/Prefs.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/ServerItem.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/crypt.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/ui/servers_check.js"/>
+
+<script type="application/x-javascript" src="chrome://xtense2/locale/servers_check.js"/>
+
+<vbox flex="1">
+	<hbox>
+		<image id="img" style="padding-right:3px; list-style-image:url(chrome://xtense2/skin/images/ajax.gif);" />
+		<description>&checking.description;</description>
+	</hbox>
+	<label id="status">&checking.status;</label>
+	
+	<groupbox flex="1">
+		<caption label="&checking.caption;" />
+		<textbox multiline="true" id="log" value="" flex="1" />
+	</groupbox>
+	
+	<hbox>
+		<button label="&checking.close;" id="close" onclick="window.close();" />
+		<button label="&checking.return;" id="accept" onclick="Xopen_prefs(true);" />
+	</hbox>
+</vbox>
+
+</window>

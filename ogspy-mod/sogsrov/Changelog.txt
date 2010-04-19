@@ -1,0 +1,70 @@
+ - v0.3
+ * [Upd] mise à jour sécurité sql et des paramètres http, principalement avec
+         du cas par cas ou avec intval, puisque les valeurs traitées sont des
+         entiers pas trop gros
+ * [Upd] entête commentaires PHP : réécriture propre et détaillée du readme +
+         ajout de la version anglaise
+ * [Add] traduction néerlandaise (Dutch or 'nl')
+ * [Fix] si file_get_contents() & file_put_contents() n'existent pas on les
+         définit (merci Akryus & thedarkshaman)
+ * [Add] intégration à OGSpy v3.02
+################################################################################
+- v0.2
+ * [Fix] correction d'un petit bug au redimensionnement avec le menu à gauche
+         (bug rapporté par El RavakilleR)
+ * [Upd] les liens pour 'Classer par:', sans gras lorsque c'est le classement
+         courant
+ * [Upd] fichier PHP réarrangé, commentaires, variables de conf, ajout de la
+         license... on se prépare à une intégration propre à OGSpy pour les
+         prochaines versions...
+ * [Add] toutes les variables dépendant de la langue sont dans un fichier
+         séparé, donc le script est désormais multilingue : j'ai fait français
+         et anglais, si d'autres veulent faire le reste, c'est volontiers !
+         De plus, on peut choisir sa langue directement dans l'interface !
+ * [Upd] code html du design de l'affichage des RE un peu modifié : on affiche
+         plus le 'planète/lune et position', puisqu'on le voit juste en dessous
+         avec le 'matières premières sur '
+################################################################################
+ - v0.1-beta7
+ * [Add] importation de rapports à partir de la base de données OGSpy : à 
+         partir d'un formulaire dans lequel on peut choisir : d'importer tous
+         les RE disponibles ou d'importer les RE d'un intervalle de galaxie,
+         d'un intervalle de systèmes, dans les dernières X heures pour avoir
+         les plus récents [nécessite que vous ayez la base de donnée OGSpy
+         configurée, bien évidemment]
+ * [Add] classement par priorité
+################################################################################
+ - v0.1-beta6
+ * [Add] pagination, avec un nombre max de rapports par page, super pratique
+         et gagne en rapidité si il y a beaucoup de rapports d'espionnage
+ * [Upd] code pour la suppression des rapports amélioré
+         + nouvelle option'supprimer affichés'
+################################################################################
+ - v0.1-beta5
+ * [Add] choix où se situe le menu de contrôle de sogsrov (gauche/droite)
+ * [Upd] calcul du nombre de vaisseaux nécessaires pour le raid. Maintenant
+         c'est le vrai, algo de calcul. Inconvénient : assez coûteux en temps,
+         mais comme ça on a le nombre réel de vaisseaux à envoyer.
+ * [Add] number_format pour les chiffres (ça ajoute les '.' toutes les 3
+         centaines) et reconnaissance des RE qui ont des '.' dans les chiffres
+ * [Upd] variables pour connection base de donnée OGSpy renommées pour plus
+         de clarté conjointement avec les variables d'OGSpy
+         (et ajout du table_prefix)
+ * [Upd] mise à jour du texte dans le script + tutorial rapide d'installation
+################################################################################
+ - v0.1-beta4
+ * [Add] on retombe sur le bon rapport après édition notes/priorité (via ancres)
+ * [Add] lors de l'ajout d'un RE déjà présent, priorité et notes sont gardées
+################################################################################
+ - v0.1-beta3
+ * [Fix] tout petit bug dans la requête sql de recherche (variable en double)
+################################################################################
+ - v0.1-beta2
+ * [Fix] bug des rapports d'espionnage de lunes (El RavakilleR)
+ * [Add] couleur pour lunes (+ design) plus l'ajout de deux énormes features,
+         super utiles, et qui bouffent du joli code que j'aime bien :)
+ * [Add] Notes
+ * [Add] Priorités (+ couleurs & design)
+################################################################################
+ - v0.1-beta
+ * première version

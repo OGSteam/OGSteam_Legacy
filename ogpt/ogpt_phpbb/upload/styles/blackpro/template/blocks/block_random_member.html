@@ -1,0 +1,47 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{L_RND_MEMBER}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+	<tr align="left">
+			<td>
+				<!-- BEGIN random_member -->
+					<span style="float:left;font-size:12px;"><center>
+			<!-- IF random_member.USER_FLAG -->&nbsp;
+			<img src="./images/flags/{random_member.USER_FLAG}.gif" border="0" width="15" alt="{random_member.USER_FLAG}" title="{random_member.USER_FLAG}">&nbsp;
+			<!-- ENDIF -->					
+					<a href="{random_member.U_USERNAME}">
+					<font color="#{random_member.USERNAME_COLOR}">{random_member.USERNAME}</a></font>
+					<span style="float:right;"></span><br /></center>
+					<br />
+						<div align="center">
+					<!-- IF random_member.USER_AVATAR -->						
+						{random_member.USER_AVATAR}
+						<!-- ELSE -->
+						<img src="./images/portal/no_avatar.gif"/>
+					<!-- ENDIF -->						
+						</div>
+						<span style="float:left;">{L_RND_JOIN}:</span><span style="float:right;padding-right:10px;">{random_member.JOINED}</span><br />
+						<span style="float:left;">{L_RND_POSTS}:</span><span style="float:right;padding-right:10px;">{random_member.USER_POSTS}</span><br />
+					<!-- IF random_member.USER_OCC -->
+						<span style="float:left;">{L_RND_OCC}:</span><span style="float:right;padding-right:10px;">{random_member.USER_OCC}</span><br />
+					<!-- ENDIF -->
+					<!-- IF random_member.USER_FROM -->
+						<span style="float:left;">{L_RND_FROM}:</span><span style="float:right;padding-right:10px;">{random_member.USER_FROM}</span><br />
+					<!-- ENDIF -->
+					<!-- IF random_member.U_WWW -->
+						<span style="float:left;"><a href="{random_member.U_WWW}" title="{random_member.U_WWW}" target="_blank">{L_RND_WWW}</a></span><span style="float:right;"></span><br />
+					<!-- ENDIF -->
+				<!-- END random_member -->
+			</td>	
+</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

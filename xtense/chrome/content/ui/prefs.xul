@@ -1,0 +1,307 @@
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://xtense2/skin/xtense.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://xtense2/locale/prefs.dtd">
+
+<prefwindow id="xtense" title="Xtense options" onload="window.sizeToContent();"
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" ondialogaccept="Xoptions.validate(); return false;"
+persist="screenX screenY width" buttons="">
+
+	<prefpane id="servers" label="&tab.accounts;">
+		<grid>
+			<columns>
+				<column/>
+				<column width="15"/>
+				<column width="150"/>
+				<column flex="1"/>
+				<column width="130"/>
+				<column width="130"/>
+				<column/>
+				<column/>
+			</columns>
+			<rows>
+				<row>
+					<label value="N°"/>
+					
+					<label><image class="active" tooltiptext="&acc.active;" /></label>
+					<label><image class="link" /> &acc.univers;</label>
+					<label><image class="link" /> &acc.serverurl;</label>
+					<label><image class="user" /> &acc.username;</label>
+					<label><image class="password" /> &acc.password;</label>
+					<spacer />
+					<label><image class="force" tooltiptext="&checking.check.t;" /></label>
+				</row>
+				<row>
+					<label value="1" style="font-size:12pt;" tabindex="1"/>
+					<checkbox id="active0" checked="true" />
+					<textbox id="univers0" flex="1"/>
+					<textbox id="url0" flex="1"/>
+					<textbox id="username0" maxlength="20" flex="1"/>
+					<textbox id="password0" type="password" maxlength="32" flex="1"/>
+					<vbox><spacer flex="1" /><image class="clear" tooltiptext="&checking.delete.t;" onclick="Xoptions.lineReset(0);" /><spacer flex="1"/></vbox>
+					<checkbox id="force0" tooltiptext="&checking.check.t;" />
+				</row>
+				<row>
+					<label value="2" style="font-size:12pt;" tabindex="6"/>
+					<checkbox id="active1" checked="true" />
+					<textbox id="univers1" flex="1"/>
+					<textbox id="url1" flex="1"/>
+					<textbox id="username1" maxlength="20" flex="1"/>
+					<textbox id="password1" type="password" maxlength="32" flex="1"/>
+					<vbox><spacer flex="1" /><image class="clear" tooltiptext="&checking.delete.t;" onclick="Xoptions.lineReset(1);" /><spacer flex="1"/></vbox>
+					<checkbox id="force1" tooltiptext="&checking.check.t;" />
+				</row>
+				<row>
+					<label value="3" style="font-size:12pt;" tabindex="11"/>
+					<checkbox id="active2" checked="true" />
+					<textbox id="univers2" flex="1"/>
+					<textbox id="url2" flex="1"/>
+					<textbox id="username2" maxlength="20" flex="1"/>
+					<textbox id="password2" type="password" maxlength="32" flex="1"/>
+					<vbox><spacer flex="1" /><image class="clear" tooltiptext="&checking.delete.t;" onclick="Xoptions.lineReset(2);" /><spacer flex="1"/></vbox>
+					<checkbox id="force2" tooltiptext="&checking.check.t;" />
+				</row>
+				<row>
+					<label value="4" style="font-size:12pt;" tabindex="16"/>
+					<checkbox id="active3" checked="true" />
+					<textbox id="univers3" flex="1"/>
+					<textbox id="url3" flex="1"/>
+					<textbox id="username3" maxlength="20" flex="1"/>
+					<textbox id="password3" type="password" maxlength="32" flex="1"/>
+					<vbox><spacer flex="1" /><image class="clear" tooltiptext="&checking.delete.t;" onclick="Xoptions.lineReset(3);" /><spacer flex="1"/></vbox>
+					<checkbox id="force3" tooltiptext="&checking.check.t;" />
+				</row>
+				<row>
+					<label value="5" style="font-size:12pt;" tabindex="21"/>
+					<checkbox id="active4" checked="true" />
+					<textbox id="univers4" flex="1"/>
+					<textbox id="url4" flex="1"/>
+					<textbox id="username4" maxlength="20" flex="1"/>
+					<textbox id="password4" type="password" maxlength="32" flex="1"/>
+					<vbox><spacer flex="1" /><image class="clear" tooltiptext="&checking.delete.t;" onclick="Xoptions.lineReset(4);" /><spacer flex="1"/></vbox>
+					<checkbox id="force4" tooltiptext="&checking.check.t;" />
+				</row>
+			</rows>	
+		</grid>
+		<!--<vbox id="eval_box" flex="1">
+			<label>&eval_box;</label>
+			<textbox multiline="true" id="eval_content" flex="1" />
+			<hbox>
+				<button onclick="try{ $('eval_return').value = 'Return: ' + eval($('eval_content').value );} catch(e){show_backtrace(e);}" label="EVAL" />
+				<label style="font-family: monospace;" id="eval_return" />
+			</hbox>
+		</vbox>-->
+	</prefpane>
+	
+	<prefpane id="pages" label="&tab.pages;">
+		<preferences id="pagesPrefs">
+          <preference id="handle-system-pref" name="Xtense.handle-system" type="bool" />
+          <preference id="handle-buildings-pref" name="Xtense.handle-buildings" type="bool" />
+          <preference id="handle-researchs-pref" name="Xtense.handle-researchs" type="bool" />
+          <preference id="handle-fleet-pref" name="Xtense.handle-fleet" type="bool" />
+          <preference id="handle-defense-pref" name="Xtense.handle-defense" type="bool" />
+          <preference id="handle-ranking-pref" name="Xtense.handle-ranking" type="bool" />
+          <preference id="handle-messages-pref" name="Xtense.handle-messages" type="bool" />
+          <preference id="handle-rc-pref" name="Xtense.handle-rc" type="bool" />
+          <preference id="handle-ally_list-pref" name="Xtense.handle-ally_list" type="bool" />
+          <preference id="handle-overview-pref" name="Xtense.handle-overview" type="bool" />
+          <!--<preference id="handle-resources-pref" name="Xtense.handle-resources" type="bool" />-->
+          <preference id="handle-fleetSending-pref" name="Xtense.handle-fleetSending" type="bool" />
+			 
+          <preference id="msg-only_checked-pref" name="Xtense.msg-only_checked" type="bool" />
+          <preference id="msg-spy-pref" name="Xtense.msg-spy" type="bool" />
+          <preference id="msg-ennemy_spy-pref" name="Xtense.msg-ennemy_spy" type="bool" />
+          <preference id="msg-rc-pref" name="Xtense.msg-rc" type="bool" />
+          <preference id="msg-msg-pref" name="Xtense.msg-msg" type="bool" />
+          <preference id="msg-ally_msg-pref" name="Xtense.msg-ally_msg" type="bool" />
+          <preference id="msg-expeditions-pref" name="Xtense.msg-expeditions" type="bool" />
+      </preferences> 
+		<groupbox>
+			<caption label="&opt.page;"/>
+			<grid>
+				<columns>
+					<column />
+					<column />
+					<column />
+					<column />
+				</columns>
+				
+				<rows>
+					<row flex="1">
+    					<checkbox id="handle-system" preference="handle-system-pref" label="&opt.handle.system;"  />
+    					<checkbox id="handle-buildings" preference="handle-buildings-pref" label="&opt.handle.building;"  />
+						<checkbox id="handle-researchs" preference="handle-researchs-pref" label="&opt.handle.researchs;" />
+						<checkbox id="handle-fleet" preference="handle-fleet-pref" label="&opt.handle.fleet;"  />
+					</row>
+					<row flex="1">
+    					<checkbox id="handle-defense" preference="handle-defense-pref" label="&opt.handle.defense;"  />
+    					<checkbox id="handle-ranking" preference="handle-ranking-pref" label="&opt.handle.ranking;" />
+						<checkbox id="handle-messages" preference="handle-messages-pref" label="&opt.handle.messages;"  />
+						<checkbox id="handle-rc" preference="handle-rc-pref" label="&opt.handle.rc;"  />
+					</row>
+					<row flex="1">
+    					<checkbox id="handle-ally_list" preference="handle-ally_list-pref" label="&opt.handle.ally_list;"  />
+    					<checkbox id="handle-overview" preference="handle-overview-pref" label="&opt.handle.overview;" />
+						<!--<checkbox id="handle-resources" preference="handle-resources-pref" label="&opt.handle.resources;" />-->
+						<checkbox id="handle-fleetSending" preference="handle-fleetSending-pref" label="&opt.handle.fleetSending;" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		
+		<groupbox>
+			<caption label="&opt.msg;"/>
+			<grid>
+				<columns>
+					<column />
+					<column />
+					<column />
+				</columns>
+				<rows>
+					<row flex="1">
+    					<checkbox id="msg-only_checked" preference="msg-only_checked-pref" label="&opt.msg.only_checked;" flex="1" />
+    					<checkbox id="msg-spy" preference="msg-spy-pref" label="&opt.msg.spy;" flex="1" />
+						<checkbox id="msg-ennemy_spy" preference="msg-ennemy_spy-pref" label="&opt.msg.ennemy_spy;" flex="1" />
+					</row>
+					<row flex="1">
+						<checkbox id="msg-rc" preference="msg-rc-pref" label="&opt.msg.rc;" flex="1" />
+    					<checkbox id="msg-msg" preference="msg-msg-pref" label="&opt.msg.msg;" flex="1" />
+    					<checkbox id="msg-ally_msg" preference="msg-ally_msg-pref" label="&opt.msg.ally_msg;" flex="1" />
+					</row>
+					<row flex="1">
+						<checkbox id="msg-expeditions" preference="msg-expeditions-pref" label="&opt.msg.expeditions;" flex="1" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="config" label="&tab.options;">
+		<preferences id="configPrefs">
+          <preference id="autostart-pref" name="Xtense.autostart" type="bool" />
+          <preference id="fixpopups-pref" name="Xtense.fixpopups" type="bool" />
+          <preference id="autohide-pref" name="Xtense.autohide" type="bool" />
+          <preference id="context-menu-pref" name="Xtense.context-menu" type="bool" />
+          <preference id="messages-cache-pref" name="Xtense.messages-cache" type="bool" />
+          <preference id="log-display-time-pref" name="Xtense.log-display-time" type="bool" />
+          <preference id="display-execution-time-pref" name="Xtense.display-execution-time" type="bool" />
+          <preference id="display-new-messages-pref" name="Xtense.display-new-messages" type="bool" />
+          <preference id="debug-pref" name="Xtense.debug" type="bool" />
+          <preference id="dev-pref" name="Xtense.dev" type="bool" />
+			 
+          <preference id="log-max-size-pref" name="Xtense.log-max-size" type="int" />
+		</preferences>
+		<groupbox>
+			<caption label="&opt.general;"/>
+			<grid>
+				<columns>
+					<column />
+					<column />
+					<column />
+				</columns>
+				<rows>
+					<row>
+						<checkbox id="autostart" preference="autostart-pref" label="&opt.autostart;" />
+						<checkbox id="fixpopups" preference="fixpopups-pref" label="&opt.fixpopups;" />
+					</row>
+					<row>
+						<checkbox id="autohide" preference="autohide-pref" label="&opt.autohide;" />
+						<checkbox id="context-menu" preference="context-menu-pref" label="&opt.context-menu;" />
+					</row>
+					<row>
+						<checkbox id="messages-cache" preference="messages-cache-pref" label="&opt.messages-cache;" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox>
+			<caption label="&opt.log;" />
+			
+			<hbox flex="1" align="center">
+				<checkbox id="log-display-time" preference="log-display-time-pref" label="&opt.log-display-time;" />
+				<checkbox id="display-execution-time" preference="display-execution-time-pref" label="&opt.display-execution-time;" />
+				<checkbox id="display-new-messages" preference="display-new-messages-pref" label="&opt.display-new-messages;" />
+			</hbox>
+			<hbox flex="1" align="center">
+				<label value="&opt.log-time-format;" control="log-time-format" />
+				<menulist id="log-time-format" label="&opt.log-time-format;">
+					<menupopup>
+						<menuitem label="HH:MM" />
+						<menuitem label="HH:MM:SS" />
+						<menuitem label="&opt.log.day-month; HH:MM:SS" />
+					</menupopup>
+				</menulist>
+			</hbox>
+			<hbox flex="1" align="center">
+				<label value="&opt.log-max-size;" control="log-max-size" />
+				<textbox label="&opt.log-max-size;" id="log-max-size" maxlength="3" style="width: 40px;" preference="log-max-size-pref"/>
+			</hbox>
+		</groupbox>
+		
+		<hbox>
+			
+			
+			<groupbox>
+				<caption label="&opt.developers;" />
+				<checkbox id="debug" preference="debug-pref" label="&opt.debug;" />
+				<checkbox id="dev" preference="dev-pref" label="&opt.dev;" />
+			</groupbox>
+		</hbox>
+	</prefpane>
+	
+	<prefpane id="about" label="&tab.about;">
+		<groupbox>
+			<caption label="&opt.info;"/>
+			
+			<grid flex="1">
+				<columns>
+					<column flex="1" />
+					<column flex="1" />
+				</columns>
+				<rows>
+					<row>
+						<label>&opt.about;</label>
+						<label onclick="open_link('http://www.ogsteam.fr/');" class="text-link">www.ogsteam.fr</label>
+					</row>
+					<row>
+						<label>&opt.license;</label>
+						<label onclick="open_link('http://www.gnu.org/licenses/gpl-3.0.txt');" class="text-link">GNU/GPL</label>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<groupbox>
+			<caption label="&opt.links;" />
+			<label onclick="open_link('http://ogsteam.fr/forums/forum-40-xtense');" class="text-link">&opt.forum;</label>
+		</groupbox>
+		
+		<groupbox>
+			<caption label="&opt.contrib;" />
+			
+			<!--<label value="&opt.contrib.debug;" style="font-weight: bold;" />-->
+			<label value="Jedinight" />
+			<label value="Jormund" />
+			<label value="Scaler" />
+			<label value="Sylar" />
+			<label value="&opt.contrib.others;" />
+		</groupbox>
+	</prefpane>
+	
+	<!--
+		Bug #341884	- https://bugzilla.mozilla.org/show_bug.cgi?id=341884
+		Obligés de forcer l'affichage des boutons, boutons "normaux" cachés via le CSS
+	-->
+	<hbox class="" flex="1" style="margin-bottom: 5px;">
+		<spacer flex="1"/>
+		<button class="dialog-button" icon="accept" label="&window.accept;" oncommand="Xoptions.validate()" default="true"/>
+		<button class="dialog-button" icon="close" label="&window.close;" oncommand="window.close();"/>
+	</hbox>
+	
+	<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Prefs.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/crypt.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/ui/prefs.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Servers.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/ServerItem.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/locale/prefs.js"/>
+</prefwindow>

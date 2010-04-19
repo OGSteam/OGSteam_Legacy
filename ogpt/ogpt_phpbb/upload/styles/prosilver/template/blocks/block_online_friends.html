@@ -1,0 +1,63 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{BLOCK_TITRE}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+<table width="100%" cellpadding="2" cellspacing="0" border="0">
+	<tr align="left">
+		<td>
+					<!-- BEGIN friends_online -->					
+					<!-- IF friends_online.S_ROW_COUNT is even -->
+					<tr class="row2">
+					<!-- ELSE -->	
+					<tr class="row1">
+					<!-- ENDIF -->
+					<td align="left" valign="middle" width="20px">
+					<img src="./images/portal/online.png" border="0">
+					</td>										
+					<td align="center" valign="middle">
+					<span class="genmed2">{friends_online.USERNAME_FULL}</span><br />
+					</td>
+					<td align="left" valign="middle" width="20px">
+					<!-- IF friends_online.USER_FLAG -->
+					<img src="./images/flags/{friends_online.USER_FLAG}.gif" border="0" width="15" alt="{friends_online.USER_FLAG}" title="{friends_online.USER_FLAG}">
+					<!-- ENDIF -->
+					<!-- END friends_online -->					
+					</td>										
+				</tr>
+					<!-- BEGIN friends_offline -->				
+					<!-- IF friends_offline.S_ROW_COUNT is even -->
+					<tr class="row2">
+					<!-- ELSE -->	
+					<tr class="row1">
+					<!-- ENDIF -->
+					<td align="left" valign="middle" width="20px">
+					<img src="./images/portal/offline.png" border="0">
+					</td>					
+					<td align="center" valign="middle">
+					<span class="genmed2">{friends_offline.USERNAME_FULL}</span><br />
+					</td>
+					<td align="left" valign="middle" width="20px">
+					<!-- IF friends_offline.USER_FLAG -->
+					<img src="./images/flags/{friends_offline.USER_FLAG}.gif" border="0" width="15" alt="{friends_offline.USER_FLAG}" title="{friends_offline.USER_FLAG}">
+					<!-- ENDIF --> 
+					</td>
+					<!-- END friends_offline -->
+					<!-- IF not friends_online.USERNAME_FULL -->
+					<!-- IF not friends_offline.USERNAME_FULL -->
+					<td align="center" valign="middle">					
+					<span class="genmed2">{L_NO_FRIENDS}</span>	
+					</td>
+					<!-- ENDIF -->
+					<!-- ENDIF -->					
+		</td>	
+</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

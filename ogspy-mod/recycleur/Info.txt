@@ -1,0 +1,14 @@
+Bonjour,
+ceci est un module d'ogspy permettant de voir auxquels coordonn&eacute;es 
+sont dispos&eacute;s les recycleurs, phalanges des personnes utilisant ogspy.
+
+Simple d'utilisation grâce au menu, il y a une surface administration 
+dans laquelle on peut supprimer toutes les donn&eacute;es en une seule fois.
+D'autre fonctionnalit&eacute;s seront ajout&eacute;s au fur et &agrave; mesure :)
+
+DeusIrae > OgsTeam > GoldzoneWeb 
+
+Contact : 
+
+MP Forum : DeusIrae 
+Merci d'avance. 

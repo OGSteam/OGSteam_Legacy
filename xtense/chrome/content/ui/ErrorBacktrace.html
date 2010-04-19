@@ -1,0 +1,197 @@
+<html>
+<head>
+<title id="title">=</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body {
+  min-width: 480px;
+  background-color: #FFF;
+  color: #000;
+  font-size:11px;
+  font-family: Tahoma, Arial, Verdana;
+}
+#error_description {
+  color: #333;
+}
+#error_name, #error_message, #error_backtrace {
+  color: #333;
+  font-family: monospace;
+}
+#backtrace {
+  display: none;
+}
+
+naslov  { color: #000; }
+atline  { color: #666; font-family: Tahoma; }
+line    { color: #900; font-weight: bold; }
+file    { color: #900; font-weight: bold; font-family: Tahoma; }
+code    {
+  color: #000;
+  padding: 1px;
+  width: 100%;
+}
+.divcode{
+  padding: 1px;
+  padding-bottom: 5px;
+  border: #999 1px dashed;
+  width: 100%;
+}
+
+input {
+  width: 80px;
+  height: 20px;
+  border: #999 1px solid;
+}
+
+.info { color: #600; }
+
+</style>
+</head>
+<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/></script>
+<script type="text/javascript">
+
+var Xtense = XgetMainInstance();
+var CONST_SHOWLOCATION = true;
+
+var error = window.arguments[0];
+
+if(!error) try{throw('window.dialogArguments is undefined or null');}catch(e){error=e;};
+
+var szDesc      = 'Line <line>@line</line> of file <file>@file</file>:'
+var szEntry     = '<atline>Line <line>@line</line> @file:</atline><div class="divcode">\t<code>@code</code>\n</div>';
+var szEntryFile = ' of file <file>"@file"</file>';
+
+function getErrorBacktrace(e, location){
+  try {
+    location = location||false;
+    var s = '<naslov>Backtrace:</naslov> [<div id="backtrace">';
+    if(e.stack){
+      var trace = e.stack.split('\n');
+      for(var i=0; i<trace.length; i++)
+      {
+        trace[i]=trace[i].replace(/(.{0,})@(.{0,}):([\d]{1,})/gi,'$1�$2�$3').split('�');
+      };
+      // backtrace object incorrectly filled, fix it
+      for(var i=trace.length-1; i>0; i--)
+      {
+        trace[i][0] = trace[i-1][0];
+      };
+      trace[0][0] = '['+e.message+']';
+      for(var i=0; i<trace.length-1; i++)
+      {
+        s += szEntry.replace(/@line/i, (trace[i][2]||'unknown'))
+                    .replace(/@file/i, (location?szEntryFile.replace(/@file/i,(trace[i][1]||(e.fileName||'unknown'))):''))
+                    .replace(/@code/i, (trace[i][0]||'[statement source code not available]'));
+      }
+    }
+    else if(e.lineNumber)
+    {
+      s += szEntry
+            .replace(/@line/i, (e.lineNumber||'unknown'))
+            .replace(/@file/i, (e.fileName||'unknown'))
+            .replace(/@code/i, (e.message||e.toString()));
+    }
+    else
+    {
+      s = '[ Custom Error: \n\t' + e.toString();
+    };
+    return s+'</div><span id="showbacktrace" href="#" onclick="showBacktrace();">...Show Backtrace...</span>]\n';
+  }catch(e){ return e.toString(); };
+};
+
+function showErrorInfo(e){
+  try {
+    e = e||error;
+    if(typeof(e)=='string') e = new Error(e);
+
+    var errDesc = document.getElementById('error_description');
+    var errName = document.getElementById('error_name');
+    var errMsg  = document.getElementById('error_message');
+    var errTrace= document.getElementById('error_backtrace');
+    document.getElementById('version').innerHTML = 'Toolbar version '+Xtense.VERSION;
+
+    document.title = 'Toolbar error : '+(e.name||'Error');
+    errDesc.innerHTML = szDesc
+                          .replace(/@line/i, (e.lineNumber||'unknown'))
+                          .replace(/@file/i, (e.fileName||'unknown'));
+
+    errName.innerHTML = '<naslov>Error &nbsp;:</naslov> <text>'+ (e.name||'Error')+'</text>';
+    errMsg.innerHTML  = '<naslov>Message:</naslov> <text>'+e.toString()+'</text>';
+
+    errTrace.innerHTML = (getErrorBacktrace(e, CONST_SHOWLOCATION))
+                          .replace(/\n/g, '<br/>\r\n')
+                          .replace(/\t/g, '&nbsp;&nbsp;');
+
+    window.sizeToContent();
+    showBacktrace();
+  }catch(Err){
+    alert('Err:'+Err+'\n\nWhile displaying:'+e);
+  }
+}
+
+function showBacktrace(){
+  document.getElementById('showbacktrace').style.display = 'none';
+  document.getElementById('backtrace').style.display = 'block';
+  window.sizeToContent();
+  if(window.outerWidth>800){
+    window.resizeTo(800, window.outerHeight+window.scrollMaxY);
+    window.moveTo(Math.ceil((window.screen.width-800)/2), Math.ceil((window.screen.height-window.outerHeight)/2));
+  }
+}
+
+function copyDocumentContent(){
+  try {
+
+    var copytext = document.getElementById('errorContent').textContent
+                    .replace(/Backtrace\: \[/i, 'Backtrace: [\n')
+                    .replace(/\.\.\.Show Backtrace\.\.\./i, '')
+                    .replace(/\"\:  /gi, '":\n  ');
+
+    var str   = Components.classes["@mozilla.org/supports-string;1"]
+                  .createInstance(Components.interfaces.nsISupportsString);
+    if (!str) return false;
+    str.data  = copytext;
+    var trans = Components.classes["@mozilla.org/widget/transferable;1"]
+                  .createInstance(Components.interfaces.nsITransferable);
+    if (!trans) return false;
+    trans.addDataFlavor("text/unicode");
+    trans.setTransferData("text/unicode", str, copytext.length * 2);
+    var clipid = Components.interfaces.nsIClipboard;
+    var clip   = Components.classes["@mozilla.org/widget/clipboard;1"].getService(clipid);
+    if (!clip) return false;
+    clip.setData(trans, null, clipid.kGlobalClipboard);
+
+
+  }catch(e){
+    showErrorInfo(new Error(e));
+  }
+  return true;
+}
+
+function copyErrorText(){
+	try {
+		copystatus.innerHTML = ((copyDocumentContent()) ? '<font color=orange>Copie effectuée</font>' : '<font color=red>Impossible de copier l\'erreur</font>');
+	} catch(e) {
+		alert(e);
+	}
+}
+
+</script>
+
+<body onload="showErrorInfo()">
+<p class="info">Une erreur est survenue lors de la récupération des données de la page par la barre d'outils Xtense 2.</p>
+<p><strong>Informations à envoyer</strong></p>
+<div id="errorContent">
+	<span id="version">Toolbar version []</span><br />
+	<span id="error_description">[Line nnn of file http://.../:]</span><br/>
+	<span id="error_name">[Error Title]</span><br/>
+	<span id="error_message">[Error Message]</span><br/>
+	<span id="error_backtrace">[Error Backtrace]</span><br/>
+	<div style="text-align:right;">
+		<span id="copystatus">...</span>
+		<input type=button onclick="copyErrorText();" value="Copier l'erreur"/>
+		<input type=button onclick="window.close();" value="Fermer"/>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<br>
+<style type="text/css">
+.thumbnail{
+	z-index: 0;
+	position:relative;
+}
+
+.thumbnail:hover{
+	background-color: transparent;
+	z-index: 5;
+}
+
+.thumbnail span{
+	position: absolute;
+	background-color:#fff;
+	padding: 4px;
+	left: 0px;
+	border: 1px solid #52513f;
+	display: none;
+	color: #000;
+	text-decoration: none;
+		width: 150px;
+}
+
+.thumbnail span img{
+	border-width: 0;
+	padding: 2px;
+}
+
+.thumbnail:hover span{
+	position:absolute;
+	display:block;
+	top: -100px;
+	left: 1px;
+}
+</style>
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{SOW_TITRE}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+				<!-- BEGIN show -->				
+					<td align="center">		
+					<span class="thumbnail">{show.IMAGE}<span class="gensmall"><br>{show.TITRE}<br>{show.INFO3}<br><hr>{show.U_INFO}</span> 
+					</td>
+				<!-- END show --> 					
+				</tr>					
+			</table>
+		</td>
+</table>

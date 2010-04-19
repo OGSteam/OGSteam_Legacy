@@ -1,0 +1,45 @@
+<?php
+
+$lang['admin_CreateNewAccount'] = 'Cr&eacute;ation d\'un nouveau compte';
+$lang['admin_EditAccount'] = 'Édition d\'un compte';
+$lang['admin_Create'] = 'Cr&eacute;er';
+$lang['admin_RegisteredOn'] = 'Inscrit le';
+$lang['admin_ActiveAccount'] = 'Compte actif';
+$lang['admin_InActiveAccount'] = 'Compte inactif';
+$lang['admin_CoAdmin'] = 'Co-administrateur';
+$lang['admin_RankingManagement'] = 'Gestion des classements';
+$lang['admin_MembersManagement'] = 'Gestion des membres';
+$lang['admin_LastConnection'] = 'Derni&egrave;re connexion';
+$lang['admin_ServerRights'] = 'Droits sur le serveur';
+$lang['admin_AddSolarSystem'] = 'Ajout de syst&egrave;mes solaires';
+$lang['admin_AddSpyReport'] = 'Ajout de rapports d\'espionnages';
+$lang['admin_AddRanking'] = 'Ajout de classements';
+$lang['admin_ViewHiddenPosition'] = 'Affichage des positions prot&eacute;g&eacute;es';
+$lang['admin_ExternalClientRights'] = 'Droits clients externes (Xtense²)';
+$lang['admin_ModsRestricts'] = 'Mod(s) bloqu&eacute;(s)';
+$lang['admin_ServerConnection'] = 'Connexion au serveur';
+$lang['admin_ImportSolarSystem'] = 'Importation de syst&egrave;mes solaires';
+$lang['admin_ExportSolarSystem'] = 'Exportation de syst&egrave;mes solaires';
+$lang['admin_ImportSpyReport'] = 'Importation de rapports d\'espionnages';
+$lang['admin_ExportSpyReport'] = 'Exportation de rapports d\'espionnages';
+$lang['admin_ImportRanking'] = 'Importation de classements';
+$lang['admin_ExportRanking'] = 'Exportation de classements';
+$lang['admin_ValidateParameters'] = 'Valider les param&egrave;tres de';
+$lang['admin_ModifParameters'] = 'Modifier les param&egrave;tres de %s';
+$lang['admin_DeleteUser'] = 'Effacer le compte de %s';
+$lang['admin_ConfirmDelete'] = 'Êtes-vous sûr de vouloir supprimer %s ?';
+$lang['admin_PasswordChange'] = 'Changer le mot de passe de %s';
+$lang['admin_ConfirmPasswordChange'] = 'Êtes-vous sûr de vouloir changer le mot de passe de %s ?';
+$lang['admin_name'] = 'Nom';
+$lang['admin_pass'] = 'Mot de passe';
+$lang['admin_LeaveBlankPwd'] = 'Laissez vide pour un mot de passe al&eacute;atoire';
+$lang['admin_Rights'] = 'Droits';
+$lang['admin_Group'] = 'Groupe';
+$lang['admin_Ratio'] = 'Ratio';
+$lang['admin_InfoAccessAdmin'] = 'L\'utilisateur est Admin';
+$lang['admin_InfoAccessCoAdmin'] = 'L\'utilisateur est Co-Admin';
+$lang['admin_InfoAccessRankingMan'] = 'L\'utilisateur a le droit de g&eacute;rer les classements';
+$lang['admin_InfoAccessMembersMan'] = 'L\'utilisateur a le droit de g&eacute;rer les membres';
+$lang['admin_MembersAccess'] = 'Droit d\'Acc&egrave;s de %s';
+$lang['admin_Access'] = 'Acc&egrave;s';
+?>

@@ -1,0 +1,2 @@
+Module visualisation des mise a jour galaxie en couleur, par <b>Machine</b> tir&eacute; du portail OGPT
+Version 1.1a

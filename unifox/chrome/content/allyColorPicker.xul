@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/skin/pref/pref.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://unifox/locale/unifox.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&unifox.prefs.allyPicker;"
+	id="unifox-colorPicker"
+	buttons="accept, cancel"
+	ondialogaccept="return uf_confirmAlly();"
+	onload="uf_initAlly(); window.sizeToContent();"
+	orient="vertical"
+	autostretch="always"
+	persist="screenX screenY"
+	flex="1">
+
+    <script type="application/x-javascript" src="chrome://unifox/content/unifoxCommon.js" />
+    <script type="application/x-javascript" src="chrome://unifox/content/unifoxOptions.js" />
+
+
+<!--<groupbox>-->
+	<!--<caption label="&unifox.prefs.allyColors;"/>-->
+			<vbox>
+				<hbox>
+					<vbox>
+					<button label="&unifox.prefs.colorButton;"
+						oncommand="uf_openColor('ufAllyNameColor','ufAllyNameColor');"/>
+					<groupbox>
+					<caption label="&unifox.prefs.allyColor;" />
+					<textbox id="ufAllyNameColor"/>
+					</groupbox>
+					</vbox>
+					<vbox>
+					<button label="&unifox.prefs.colorButton;"
+						oncommand="uf_openColor('ufAllyBackgroundColor','ufAllyBackgroundColor');"/>
+					<groupbox>
+					<caption label="&unifox.prefs.allyBackground;" />
+					<textbox id="ufAllyBackgroundColor"/>
+					</groupbox>
+					</vbox>
+				</hbox>	
+				<groupbox>
+				<caption label="&unifox.prefs.allyName;" />
+				<textbox id="ufAllyName"/>
+				</groupbox>
+			</vbox>
+
+<!--</groupbox>-->
+</dialog>
+

@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+div.messagerie  *{
+	color: white;
+	font-family:sans-serif;
+		}
+.messagerie th {
+	
+	background: black;
+	text-align: left;
+}
+.messagerie td {
+	
+	background: #222222;
+	text-align: left;
+}
+.messagerie table {
+	border: 5px;
+	}
+.messagerie a {
+		color: red;
+	}
+.messagerie a:HOVER {
+		color: rgb(255,125,125);
+	}
+.messagerie .menubar {
+		background-color: #444444;
+		vertical-align: top;
+		text-align: left;
+		color: white;
+		}
+.messagerie input {
+		background-color: white;
+		color:black;
+		text-align: left;
+	}
+.messagerie .from {
+		background-color: #222222;
+		vertical-align: top;
+		text-align: left;
+		color:white;
+		font-family:sans-serif;
+		font-size:medium;
+
+		}
+.messagerie .post {
+		border: 5px;
+		border-color: aqua;
+		background-color: #E0E0E0;
+		vertical-align: top;
+		text-align: left;
+		color:black;
+		font-family:sans-serif;
+		font-size:small;
+		
+		
+	}
+	

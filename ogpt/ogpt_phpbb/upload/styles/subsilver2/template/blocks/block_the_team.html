@@ -1,0 +1,59 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{L_THE_TEAM}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" class="row2">				
+				<tr>
+
+					<td  colspan="4" align="center">{L_ADMINISTRATORS}</td>
+					</tr>
+				<!-- BEGIN admin -->
+				<tr class="row1">
+				<td align="left" width="20"><img src="./images/portal/founder.png" /></td>
+				<td align="center"> &nbsp;<b><span class="genmed2">{admin.USERNAME_FULL}</span></b></td>				
+				<td align="center">
+				<!-- IF admin.URL -->				
+				<a target="_blank" href="{admin.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>					<!-- ENDIF -->
+				</td>
+				
+				<td align="right">
+				<!-- IF admin.USER_FLAG -->				
+			<img src="./images/flags/{admin.USER_FLAG}.gif" border="0" width="15" alt="{admin.USER_FLAG}">&nbsp;
+			<!-- ENDIF -->
+			</td>
+		</tr>
+<!-- BEGINELSE -->
+	<tr>
+		<td class="row1" colspan="4" align="center"><span class="gensmall">{L_NO_ADMINS}</span></td>
+	</tr>
+<!-- END admin -->
+			<tr class="row2">
+				<td colspan="4"align="center">{L_MODERATORS}</td>
+			</tr>
+			<!-- BEGIN mod -->
+			<tr class="row1">
+			<td align="left" width="20"><img src="./images/portal/mod.png" /></td>
+			<td align="center"> &nbsp;<b><span class="genmed2">{mod.USERNAME_FULL}</span></b></td>		
+			<td align="center">
+			<!-- IF mod.URL -->				
+			<a target="_blank" href="{mod.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+			<!-- ENDIF -->
+			</td>					
+			<td align="right">
+			<!-- IF mod.USER_FLAG -->				
+			<img src="./images/flags/{mod.USER_FLAG}.gif" border="0" width="15" alt="{mod.USER_FLAG}">&nbsp;
+			<!-- ENDIF -->
+			</td>
+	</tr>
+<!-- BEGINELSE -->
+	<tr>
+		<td class="row1" colspan="3" align="center"><span class="genmed2">{L_NO_MODS}</span></td>
+	</tr>
+<!-- END mod -->
+					</center>
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>

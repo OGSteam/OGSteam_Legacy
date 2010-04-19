@@ -1,0 +1,32 @@
+/*ajoute une ligne au-dessus de l'objet cible lors d'un drag&drop */
+listbox listitem[dragover="top"] {
+	border-top-color: black;
+}
+listbox listitem[dragover="bottom"] {
+	border-bottom-color: black;
+}
+
+/*tab[last-tab="true"]
+{
+  -moz-appearance: tab;
+  margin-top: 2px;
+  border-top: 2px solid red;
+  border-right: 2px solid;
+  border-left: 2px solid;
+  border-bottom: 1px solid ThreeDHighlight;
+  -moz-border-top-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-radius-topleft: 2px;
+  -moz-border-radius-topright: 2px;
+  -moz-border-radius-bottomright: 1px;
+  padding: 1px 4px 2px 4px;
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+}*/
+/*#messagesVbox1{
+width:100px;
+}
+#messagesVbox2{
+width:60%;
+}*/

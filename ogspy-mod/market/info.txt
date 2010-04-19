@@ -1,0 +1,2 @@
+Module d'interface avec OGSMarket et autres serveurs priv&eacute;s
+<a href='http://www.ogsteam.fr/forums/sujet-1405-mod-market-relier-votre-ogspy-serveur-ogsmarket'>Informations</a>

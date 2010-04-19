@@ -1,0 +1,2 @@
+Module Client IRC en Java avec #channels alliances,univers
+<a href='http://www.ogsteam.fr/forums/sujet-1314-mod-communication'>Informations</a>

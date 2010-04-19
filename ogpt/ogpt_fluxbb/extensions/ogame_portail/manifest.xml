@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension engine="1.0">
+  <id>ogame_portail</id>
+  <title>admin Ogame portail</title>
+  <version>4.1a</version>
+  <description>OGPT portail pour ogame : OGPT4.1</description>
+  <author>Machine</author>
+  <minversion>1.3 Beta</minversion>
+  <maxtestedon>1.3 Beta</maxtestedon>
+
+  <note type="install"> Place dans management </note>
+  <dependencies>
+    <dependency>portal_by_daris</dependency>
+	<dependency>private_messaging</dependency>
+  </dependencies>
+  <install>
+
+
+  
+  
+
+    <![CDATA[
+	
+	// paramettre des panneaux
+         $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_galaxie\', \'9\')');
+         $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_systeme\', \'499\')');
+          $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_ogspy_prefixe\', \'ogspy_\')');
+           $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_pan_top_maj\', \'5\')');
+           $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_pan_top_spy\', \'5\')');
+           $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_top_spy_total\', \'0\')');
+            $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (`conf_name`, `conf_value`) VALUES (\'o_ogameportail_pan_topflop\', \'10\')');
+           $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_topflop_order\', \'1\')');
+           $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_gog\', \'10\')');
+             $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_pspy\', \'1\')');
+             $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_mspy\', \'1\')');
+              $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_topally\', \'5\')');
+                $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_topjoueur\', \'5\')');
+                $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_lastspy\', \'1\')');
+                $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_pan_qns_day\', \'15\')');		
+				
+				/// alliance	
+   $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_ally\', \'\')');  
+    $forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_alliance_active\', \'0\')');		
+
+
+
+// ratio pour les recherches et galaxie
+					
+					
+					
+
+					$forum_db->add_field('users', 'ratio', 'int', false, 0, 'style');
+					$forum_db->query('INSERT INTO '.$forum_db->prefix.'config (conf_name,conf_value) VALUES (\'o_ogameportail_ratio\', \'0\')');
+					
+
+     	// Regenerate the config cache
+			require_once FORUM_ROOT.'include/cache.php';
+			generate_config_cache();
+
+
+    
+	
+/// table pour le mod commerce
+/// table commerce_vente
+
+
+	
+	$commerce_vente = array(
+		'FIELDS'		=> array(
+			'id'			=> array(
+						'datatype'		=> 'SERIAL',
+						'allow_null'	=> false
+					),
+			'date'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+			'fin'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),		
+			'id_user'		=> array(
+				'datatype'		=> 'INT(10) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'username'			=> array(
+						'datatype'		=> 'VARCHAR(200)',
+						'allow_null'	=> false,
+						'default'		=> '""'
+			),			
+			'ressource'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'quantite'	=> array(
+				'datatype'		=> 'INT(12) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+		
+				'vs'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'vsquantite'	=> array(
+				'datatype'		=> 'INT(12) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			
+				'vs2'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'vs2quantite'	=> array(
+				'datatype'		=> 'INT(12) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'commentaire'		=> array(
+						'datatype'		=> 'TEXT',
+						'allow_null'	=> true
+					),
+			'livraison'	=> array(
+				'datatype'		=> 'INT(2) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),	
+				'reservation'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			
+			'pseudo'			=> array(
+						'datatype'		=> 'VARCHAR(200)',
+						'allow_null'	=> false,
+						'default'		=> '""'
+			),	
+						
+			'id_user_r'		=> array(
+				'datatype'		=> 'INT(10) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),	
+			'vente'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			
+			'satisfaction'	=> array(
+				'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),
+			'commentaire_satisfaction'		=> array(
+				'datatype'		=> 'TEXT',
+				'allow_null'	=> true
+			),
+		),
+		
+			'PRIMARY KEY'	=> array('id'),
+			);
+
+			$forum_db->create_table('commerce_vente', $commerce_vente);
+	
+	
+	/// option commerce dans la table user
+	
+	$forum_db->add_field('users', 'commerce_mp', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_mail', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_alerte_d', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_alerte_c', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_alerte_m', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_pt_neg', 'int', false, 1, 'style');
+	$forum_db->add_field('users', 'commerce_pt_pos', 'int', false, 1, 'style');
+
+	
+		/// table commerce group
+	
+	$commerce_groupe = array(
+		'FIELDS'		=> array(
+			'id_vente'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED ',
+						'allow_null'	=> false
+					),
+					
+		'id_groupe'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED ',
+						'allow_null'	=> false
+					),
+	
+		'permission'			=> array(
+						'datatype'		=> 'INT(1) UNSIGNED',
+				'allow_null'	=> false,
+				'default'		=> '0'
+			),						
+		),
+		
+		
+			);
+
+			$forum_db->create_table('commerce_groupe', $commerce_groupe);
+	
+	
+	/// exchange
+	
+	$forum_db->add_field('users', 'ogs_user_name', 'text', false, '', 'style');
+	$forum_db->add_field('users', 'ogs_user_password', 'text', false, '', 'style');
+	$forum_db->add_field('users', 'ogs_user_id', 'int', false, '0', 'style');
+	
+	
+	]]>
+	
+	
+	
+  </install>
+
+  <uninstall>
+    <![CDATA[
+    
+/// paramettre des panneaux
+      	$forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_galaxie\'') or error(__FILE__, __LINE__);
+	$forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_systeme\'') or error(__FILE__, __LINE__);
+	$forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_ogspy_prefixe\'') or error(__FILE__, __LINE__);
+        $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_top_maj\'') or error(__FILE__, __LINE__);
+         $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_top_spy\'') or error(__FILE__, __LINE__);
+            $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_top_spy_total\'') or error(__FILE__, __LINE__);
+         	$forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_topflop\'') or error(__FILE__, __LINE__);
+	$forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_topflop_order\'') or error(__FILE__, __LINE__);
+         $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_gog\'') or error(__FILE__, __LINE__);
+          $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_pspy\'') or error(__FILE__, __LINE__);
+            $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_mspy\'') or error(__FILE__, __LINE__);
+            $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_topally\'') or error(__FILE__, __LINE__);
+             $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_topjoueur\'') or error(__FILE__, __LINE__);
+              $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_lastspy\'') or error(__FILE__, __LINE__);
+              $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_day\'') or error(__FILE__, __LINE__);
+
+
+/// alliance
+			  
+		
+		  $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_alliance_active\'') or error(__FILE__, __LINE__);
+              $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_pan_qns_lastspy\'') or error(__FILE__, __LINE__);
+              $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_ally\'') or error(__FILE__, __LINE__);
+		
+		
+		
+		///suppression ratio
+			  
+		$forum_db->drop_field($forum_db->prefix.'users', 'ratio');	  
+		 $forum_db->query('DELETE FROM '.$forum_db->prefix.'config WHERE conf_name=\'o_ogameportail_ratio\'') or error(__FILE__, __LINE__);
+
+
+
+
+			// Regenerate the config cache
+			require_once FORUM_ROOT.'include/cache.php';
+			generate_config_cache();
+
+    ]]>
+  </uninstall>
+  <hooks>
+ 
+		
+		<hook id="ca_admin_menu_new_sublink">
+			<![CDATA[
+				
+			
+				if(file_exists(FORUM_ROOT.'extensions/ogame_portail/lang/'.$forum_user['language'].'/ogame_portail.php'))
+					require FORUM_ROOT.'extensions/ogame_portail/lang/'.$forum_user['language'].'/ogame_portail.php';
+				else
+					require FORUM_ROOT.'extensions/ogame_portail/lang/English/ogame_portail.php';
+				
+				
+				if (FORUM_PAGE_SECTION == 'options') {
+					$adnav_sublinks[] = '<li'.((FORUM_PAGE == 'ogame_portail') ? ' class="isactive"' : '').'><a href="'.forum_link('extensions/ogame_portail/admin/ogame_portail.php').'">'.$lang_ogame_portail['ogameportail'].'</a></li>'; }
+			]]>
+		</hook>
+		
+		
+		<hook id="fn_generate_navlinks_end">
+			<![CDATA[
+
+/// appel de recherche ogs
+				array_insert($links, count($links), '<li id="recherche"><a href="'.forum_link('extensions/ogame_portail/vue/recherche.php').'"><span>recherche OGS</span></a></li>');
+				
+				array_insert($links, count($links), '<li id="stat"><a href="'.forum_link('extensions/ogame_portail/vue/statistique.php').'"><span>stat OGS</span></a></li>');
+				
+				
+					array_insert($links, count($links), '<li id="commerce"><a href="'.forum_link('extensions/ogame_portail/vue/commerce.php?voir').'"><span>commerce</span></a></li>');
+			]]>
+		
+		</hook>
+		
+		
+		
+	
+		
+		
+  </hooks>
+</extension>
+

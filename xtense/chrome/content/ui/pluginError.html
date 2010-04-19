@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Debug Window</title>
+<style>
+
+body {
+	min-width: 500px;
+	background-color: #FFF;
+	color: #000;
+	font-size:11px;
+	font-family: Tahoma, Arial, Verdana;
+	margin: 5px;
+	
+}
+
+.info {
+	color: #900;
+}
+
+#error_content {
+	padding: 1px;
+	padding-left: 10px;
+	border: #999 1px dashed;
+	font-family: monospace;
+	width: 500px;
+	max-height: 500px;
+	overflow: auto;
+}
+
+input {
+	height: 20px;
+	border: #999 1px solid;
+}
+
+#foot {
+	margin-top: 10px;
+	text-align: right;
+}
+
+</style>
+</head>
+<body onload="window.sizeToContent();">
+	<p class="info">La réponse envoyée par le plugin Xtense n'est pas valide</p>
+	<p><strong>Informations à envoyer</strong></p>
+	
+	<div id="errorContent">
+<span>HTTP status : <span id="http_status"></span></span><br />
+<span>Plugin URL : <span id="plugin_url"></span></span><br />
+<div>
+Response [
+<pre id="error_content"></pre>
+]
+</div>
+	</div>
+	
+	<div id="foot">
+		<span id="copy_status">...</span>
+		<input id="copy_button" type=button onclick="copy();" value="Copier le contenu"/>
+		<input type=button onclick="window.close();" value="Fermer"/>
+	</div>
+	
+<script type="text/javascript">
+try {
+	
+	var args = window.arguments[0];
+	document.getElementById('error_content').innerHTML = args.content.replace(/</gi, '&lt;');
+	document.getElementById('http_status').innerHTML = args.status;
+	document.getElementById('plugin_url').innerHTML = args.server.url;
+	
+	function copyDocumentContent(){
+		try {
+			var copytext = document.getElementById('errorContent').textContent;
+			var str   = Components.classes["@mozilla.org/supports-string;1"]
+				.createInstance(Components.interfaces.nsISupportsString);
+			if (!str) return false;
+			str.data  = copytext;
+			var trans = Components.classes["@mozilla.org/widget/transferable;1"]
+				.createInstance(Components.interfaces.nsITransferable);
+			if (!trans) return false;
+			trans.addDataFlavor("text/unicode");
+			trans.setTransferData("text/unicode", str, copytext.length * 2);
+			var clipid = Components.interfaces.nsIClipboard;
+			var clip   = Components.classes["@mozilla.org/widget/clipboard;1"].getService(clipid);
+			if (!clip) return false;
+			clip.setData(trans, null, clipid.kGlobalClipboard);
+		} catch(e) {
+			alert('Une erreur critique est arrivée lors de la copie');
+		}
+		return true;
+	}
+	
+	function copy() {
+		document.getElementById('copy_status').innerHTML = '<font color=red>Impossible de copier l\'erreur</font>';
+		if (copyDocumentContent()) document.getElementById('copy_status').innerHTML = '<font color=orange>Copie effectuée</font>';
+	}
+	
+	//window.sizeToContent();
+	//window.moveTo(Math.ceil((window.screen.width-window.outerWidth)/2), Math.ceil((window.screen.height-window.outerHeight)/2));
+} catch (e) { alert(e); }
+</script>
+</body>
+</html>

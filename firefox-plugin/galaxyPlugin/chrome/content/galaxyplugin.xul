@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://galaxyplugin/skin/galaxyplugin.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://galaxyplugin/locale/galaxyplugin.dtd">
+
+<overlay id="GTPlugin-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript" src="chrome://galaxyplugin/content/galaxyplugin.js"/>
+
+<toolbox id="navigator-toolbox">
+
+<stringbundleset id="localeStrings">
+	<stringbundle id="gtStrings" src="chrome://galaxyplugin/locale/galaxyplugin.properties"/>
+</stringbundleset>
+
+	<toolbar id="GTPlugin-Toolbar" accesskey="T" class="chromeclass-toolbar"
+	context="toolbar-context-menu" toolbarname="&toolbar.name;"
+	hidden="false" persist="hidden">
+        <toolbaritem id="GTPlugin-toolbaritem" flex="0">	
+    	<toolbarbutton id="GTPlugin-activate" tooltiptext="&toolbar.activate.t;"
+                   label="&toolbar.activate;" oncommand="GTPlugin_Activate()" 
+                   image="chrome://galaxyplugin/skin/images/enable.gif"/>
+    	<toolbarbutton id="GTPlugin-options" tooltiptext="&toolbar.options.t;"
+                   label="&toolbar.options;" oncommand="GTPlugin_Options()"
+                   image="chrome://galaxyplugin/skin/images/options.gif"/>
+    	<toolbarbutton id="GTPlugin-reports" tooltiptext="&toolbar.reports.t;"
+                   label="&toolbar.reports;" oncommand="GTPlugin_FindReports()"
+                   image="chrome://galaxyplugin/skin/images/report.gif"/>                   
+    	<label id="GTPlugin-status-label" control="GTPlugin-status" value="&toolbar.statusLabel;"/>
+    	<label id="GTPlugin-status-view" control="GTPlugin-status-view" value="&toolbar.statusInfo;"/>
+        </toolbaritem>
+	</toolbar>
+</toolbox>
+</overlay>

@@ -1,0 +1,19 @@
+<!-- Toolbar buttons and labels -->
+<!ENTITY toolbar.name "Galaxtool Toolbar">
+<!ENTITY toolbar.activate "Aktivieren">
+<!ENTITY toolbar.activate.t "Toolbar aktivieren">
+<!ENTITY toolbar.options "Optionen">
+<!ENTITY toolbar.options.t "Toolbar Optionen">
+<!ENTITY toolbar.reports "Spioberichte">
+<!ENTITY toolbar.reports.t "angezeigte Spionageberichte zum Galaxietool senden">
+<!ENTITY toolbar.statusLabel "Status:">
+<!ENTITY toolbar.statusInfo "nichts">
+<!ENTITY toolbar.reloadLabel "Automatisches aktivieren der Toolbar beim Start">
+
+<!-- Options dialog labels -->
+<!ENTITY dialog.title "Galaxieplugin Optionen">
+<!ENTITY dialog.caption "Galaxietool Optionen">
+<!ENTITY dialog.ogameurl "OGame Universum Servername">
+<!ENTITY dialog.galaxytoolurl "Galaxietool URL">
+<!ENTITY dialog.username "Nutzername">
+<!ENTITY dialog.password "Password">

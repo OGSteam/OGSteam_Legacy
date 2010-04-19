@@ -1,0 +1,37 @@
+#rss a {
+	color: white;
+	font-weight:normal;
+}
+
+#rss .channelTitle{
+	font-weight:bold;
+	font-size:1.1em;
+}
+
+#rss .itemTitle{
+/*font-weight:bold;*/
+}
+
+#rss .itemDate{
+/*font-style:italic;*/
+}
+
+#rss .summary{
+/*font-style:italic;*/
+}
+
+#rss .new{
+text-decoration: blink;
+}
+
+#rss .new:after{
+content: ' (new)';
+}
+
+#rss{
+	position:absolute;
+	right:10px; 
+	top:10px; 
+	color:white;
+	background-color:black;
+}

@@ -1,0 +1,1 @@
+del /F "Release\Install OgameFarmingInterface.exe"

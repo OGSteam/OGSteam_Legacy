@@ -1,0 +1,26 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%" colspan="3">{L_MEMBRES_LOC}</th>
+<tr>
+	<td nowrap="nowrap" width="5%"><span class="gensmall">{L_FLAGS}</span></td>
+	<td nowrap="nowrap" width="35%"><span class="gensmall">{L_USERNAME}</span></td>
+	<td nowrap="nowrap" width="60%"><span class="gensmall">{L_FORUM_LOCATION}</span></td>
+</tr>
+<!-- BEGIN user_row -->
+	<!-- IF user_row.S_ROW_COUNT is even -->
+	<tr class="row2">
+	<!-- ELSE -->	
+	<tr class="row1">
+	<!-- ENDIF -->	
+		<td ><span class="genmed2">
+			<!-- IF user_row.USER_FLAG -->		
+			<img src="./images/flags/{user_row.USER_FLAG}.gif" border="0" width="15" alt="{user_row.USER_FLAG}" title="{user_row.USER_FLAG}">
+			<!-- ENDIF -->
+			</td>		
+		<td ><span class="genmed2"><!-- IF user_row.U_USER_PROFILE --><a href="{user_row.U_USER_PROFILE}"><!-- ENDIF -->{user_row.USERNAME}<!-- IF user_row.U_USER_PROFILE --></a><!-- ENDIF --></p></td>
+		<td ><span class="genmed2"><a href="{user_row.U_FORUM_LOCATION}">{user_row.FORUM_LOCATION}</a></p></td>
+	</tr>
+<!-- END user_row -->
+					</td>
+				</tr>					
+			</table>

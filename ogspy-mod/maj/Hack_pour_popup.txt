@@ -1,0 +1,58 @@
+
+Installation d'une fenêtre popup lors de la connexion pour les membres en retard sur leurs mises à jour:
+
+Information:
+	Cette fenêtre s'affiche quand plus de 30% d'une partie, dont le membre est responsable, n'est pas à jour.
+
+1. Copier le fichier "popup.php" dans le dossier "/mod/MAJ/" de votre serveur.
+
+
+2. Editer le fichier "/index.php" d'OGSpy.
+	
+	Ligne 84, après:
+	
+		case "login_web" :
+	
+	Ajouter:
+	
+		// début de hack MAJ
+		$pub_goto .= '&action2=verif_maj';
+		// fin de hack MAJ
+
+
+3. Editez le fichier "/views/page_header.php" d'OGSpy.
+
+	A la fin du fichier ajouter:
+	
+<?php
+	// début de hack MAJ
+	include "./mod/MAJ/popup.php";
+	// fin de hack MAJ
+?>
+
+
+4. Renvoyez les deux fichiers sur votre serveur.
+
+
+5. C'est fini :)
+
+
+Incompatibilité:
+
+Si vous aviez changé la page d'accueil en suivant les modification à faire dicté par vérité à cette adresse http://www.ogsteam.fr/forums/viewtopic.php?pid=14132#p14132 ,
+veuillez revenir dessus en faisant:
+
+-Puis-je changer la page qui s'affiche par défaut après la connexion ???
+=>Oui pour cela il faut que tu édites le fichier include/user.php
+tu cherches:
+
+log_('login');
+redirection("index.php?action=".$pub_goto);
+
+et tu le remplaces par:
+
+log_('login');
+if ($pub_goto=='' || $pub_goto[0]=='&') redirection("index.php?action=actionpourtapage".$pub_goto);
+else  redirection("index.php?action=".$pub_goto);
+
+En changeant actionpourtapage, par l'action de la page que tu veux afficher.

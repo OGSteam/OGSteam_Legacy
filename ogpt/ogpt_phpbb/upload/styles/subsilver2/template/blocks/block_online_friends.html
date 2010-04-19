@@ -1,0 +1,55 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{BLOCK_TITRE}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+
+					<!-- BEGIN friends_online -->					
+					<!-- IF friends_online.S_ROW_COUNT is even -->
+					<tr class="row2">
+					<!-- ELSE -->	
+					<tr class="row1">
+					<!-- ENDIF -->
+					<td align="left" valign="middle" width="20px">
+					<img src="./images/portal/online.png" border="0">
+					</td>										
+					<td align="center" valign="middle">
+					<span class="gensmall">{friends_online.USERNAME_FULL}</span><br />
+					</td>
+					<td align="left" valign="middle" width="20px">
+					<!-- IF friends_online.USER_FLAG -->
+					<img src="./images/flags/{friends_online.USER_FLAG}.gif" border="0" width="15" alt="{friends_online.USER_FLAG}" title="{friends_online.USER_FLAG}">
+					<!-- ENDIF -->
+					<!-- END friends_online -->					
+					</td>										
+				</tr>
+					<!-- BEGIN friends_offline -->				
+					<!-- IF friends_offline.S_ROW_COUNT is even -->
+					<tr class="row2">
+					<!-- ELSE -->	
+					<tr class="row1">
+					<!-- ENDIF -->
+					<td align="left" valign="middle" width="20px">
+					<img src="./images/portal/offline.png" border="0">
+					</td>					
+					<td align="center" valign="middle">
+					<span class="gensmall">{friends_offline.USERNAME_FULL}</span><br />
+					</td>
+					<td align="left" valign="middle" width="20px">
+					<!-- IF friends_offline.USER_FLAG -->
+					<img src="./images/flags/{friends_offline.USER_FLAG}.gif" border="0" width="15" alt="{friends_offline.USER_FLAG}" title="{friends_offline.USER_FLAG}">
+					<!-- ENDIF --> 
+					</td>
+					<!-- END friends_offline -->
+					<!-- IF not friends_online.USERNAME_FULL -->
+					<!-- IF not friends_offline.USERNAME_FULL -->
+					<td align="center" valign="middle">					
+					<span class="gensmall">{L_NO_FRIENDS}</span>	
+					</td>
+					<!-- ENDIF -->
+					<!-- ENDIF -->					
+				</tr>					
+			</table>
+		</td>
+</table>

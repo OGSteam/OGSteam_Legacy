@@ -1,0 +1,335 @@
+
+menuitem.title {
+	font-weight: bold;
+}
+
+prefwindow > .prefWindow-dlgbuttons {
+	display: none;
+}
+
+
+/** Tabs **/
+
+radio[pane="servers"] {
+	list-style-image: url(chrome://xtense2/skin/images/prefs-servers.png);
+}
+
+radio[pane="pages"] {
+	list-style-image: url(chrome://xtense2/skin/images/prefs-page.png);
+}
+
+radio[pane="config"] {
+	list-style-image: url(chrome://xtense2/skin/images/prefs-conf.png);
+}
+
+radio[pane="about"] {
+	list-style-image: url(chrome://xtense2/skin/images/prefs-about.png);
+}
+
+tab image#accounts {
+	list-style-image : url(chrome://xtense2/skin/images/server.png);
+}
+
+tab image#pages {
+	list-style-image : url(chrome://xtense2/skin/images/pages.png);
+}
+
+tab image#about {
+	list-style-image : url(chrome://xtense2/skin/images/info.png);
+}
+
+tab image#options {
+	list-style-image : url(chrome://xtense2/skin/images/options.png);
+}
+
+.url {
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+	color: teal;
+	padding-left: 20px;
+	background: no-repeat 0px center url(chrome://xtense2/skin/images/link.png);
+}
+
+.url:hover {
+	text-decoration: none;
+}
+
+/** Accounts **/
+.link {
+	list-style-image : url(chrome://xtense2/skin/images/link.png);
+}
+
+.user {
+	list-style-image : url(chrome://xtense2/skin/images/user.png);
+}
+
+.password {
+	list-style-image : url(chrome://xtense2/skin/images/password.png);
+}
+
+.force {
+	list-style-image : url(chrome://xtense2/skin/images/check.png);
+}
+
+.clear {
+	list-style-image : url(chrome://xtense2/skin/images/delete.png);
+}
+
+.active {
+	list-style-image : url(chrome://xtense2/skin/images/active.png);
+}
+
+
+/** TOOLBAR **/
+
+image.calls-success {
+	background-image: url(chrome://xtense2/skin/images/calls-success.png);
+}
+
+image.calls-warning {
+	background-image: url(chrome://xtense2/skin/images/calls-warning.png);
+}
+
+image.calls-error {
+	background-image: url(chrome://xtense2/skin/images/calls-error.png);
+}
+
+image.info {
+	background-image: url(chrome://xtense2/skin/images/info.png);
+}
+
+.icon {
+	min-height: 16px;
+	min-width: 16px;
+	background: no-repeat center center;
+}
+
+.icon-top {
+	min-height: 16px;
+	min-width: 16px;
+	background: no-repeat center 2px;
+}
+
+image.calls-success {
+	
+}
+
+
+#xtense-log {
+	list-style-image : url(chrome://xtense2/skin/images/log.png);
+}
+
+#xtense-options {
+	list-style-image : url(chrome://xtense2/skin/images/options.png);
+}
+
+#xtense-log {
+	list-style-image : url(chrome://xtense2/skin/images/log.png);
+}
+
+#bin {
+	list-style-image : url(chrome://xtense2/skin/images/bin.png);
+}
+
+.enable {
+	list-style-image : url(chrome://xtense2/skin/images/enable.png);
+}
+
+.disable {
+	list-style-image : url(chrome://xtense2/skin/images/disable.png);
+}
+
+#xtense-send {
+	list-style-image : url(chrome://xtense2/skin/images/send.png);
+}
+
+#xtense-send[disabled="true"] {
+	list-style-image : url(chrome://xtense2/skin/images/send_disabled.png);
+}
+
+/** Log **/
+
+window.log {
+	padding: 10px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.log #content > vbox > hbox {
+	/*border-bottom: 1px solid #DDD;*/
+	border-bottom: 1px solid ThreeDShadow;
+}
+
+.log .normal, .status .normal {}
+.log .warning, .status .warning {
+	color: #FF9900;
+}
+.log .error, .status .error {
+	color: red;
+}
+.status .success {
+	color: green;
+}
+.log .success {
+	color: #93B300;
+}
+
+.log .comment, .status .comment {
+	font-style: italic;
+	color: #999;
+}
+
+.callsList label {
+	margin: 0px 1px;
+}
+
+.log .empty {
+	text-align: center;
+	font-weight: bold;
+}
+
+.log .selected {
+	color: HighlightText !important;
+	background: Highlight;
+}
+
+.log #left-panel {
+	margin-right: 10px;
+	min-width: 400px;
+}
+
+.log #right-panel {
+	margin-left: 10px;
+}
+
+.log #content {
+	overflow: auto;
+}
+
+#extra > row, #extra > label {
+	padding-left: 20px;
+}
+
+#extra > .title {
+	margin-top: 10px;
+	font-weight: bold;
+	padding-left: 20px;
+	min-height: 16px;
+	background: left center no-repeat;
+}
+
+#extra > .calls {
+	background-image: url(chrome://xtense2/skin/images/calls-success.png);
+}
+
+#extra > .messages {
+	background-image: url(chrome://xtense2/skin/images/message.png);
+}
+
+#extra > .debug {
+	background-image: url(chrome://xtense2/skin/images/bug.png);
+}
+
+/*.no-new-message image{
+background-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
+min-width: 26px;
+}
+.new-messages image{
+background-image: url(chrome://xtense2/skin/images/new-messages.jpg);
+min-width: 26px;
+}
+.no-new-message button{
+list-style-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
+min-width: 26px;
+}
+.new-messages button{
+list-style-image: url(chrome://xtense2/skin/images/new-messages.jpg);
+min-width: 26px;
+}*/
+.no-new-message toolbarbutton{
+list-style-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
+}
+.new-messages toolbarbutton{
+list-style-image: url(chrome://xtense2/skin/images/new-messages.jpg);
+}
+.new-messages label{
+/*text-decoration: blink;*//*impossible sur FF à l'heure où j'écris*/
+color:red;
+}
+.no-new-messages label{
+/*text-decoration: none;*/
+color:black;
+}
+/*** FROM KEMPELTON SKIN ***/
+/** View Selector **/
+/*
+.paneSelector, .viewSelector {
+  background-color: rgb(90, 116, 164);
+  color: white;
+  background-image: url(chrome://xtense2/skin/images/view.png);
+  background-position: center bottom;
+  background-repeat: repeat-x;
+  border-bottom: 2px groove ThreeDFace;
+  margin: 0;
+  padding: 0;
+}
+
+.viewSelector radio,
+radio[pane] {
+  -moz-appearance: none;
+  background-color: transparent;
+  background-position: center bottom;
+  background-repeat: repeat-x;
+  margin: 0 1px;
+  padding: 4px 0 2px;
+  min-width: 5.5em;
+}
+
+.viewSelector radio:hover,
+radio[pane]:hover {
+  background-color: rgb(94, 138, 188);
+  background-image: url(chrome://xtense2/skin/images/view-hover.png);
+  color: white;
+}
+
+.viewSelector radio[selected="true"],
+radio[pane][selected="true"] {
+  background-color: rgb(174, 198, 226);
+  background-image: url(chrome://xtense2/skin/images/view-selected.png);
+  color: black;
+}
+
+.paneButtonIcon, .viewButtonIcon {
+  width: 32px;
+  height: 32px;
+}
+*/
+groupbox {
+  margin: 5px;
+  border: none;
+  border-top: 1px solid ThreeDShadow;
+  -moz-border-radius: 0px;
+  padding: 5px;
+}
+
+.groupbox-body {
+  padding: inherit;
+}
+
+caption {
+  font-weight: bold;
+  margin-bottom: 2px;
+  padding: 0px 3px;
+  margin-left: 0px;
+  background-color: -moz-Dialog;
+}
+
+tabpanels caption {
+  background-color: menu;
+}
+
+/**** END KEMPELTON ****/
+

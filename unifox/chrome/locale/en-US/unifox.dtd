@@ -1,0 +1,410 @@
+<!--en-US -->
+<!ENTITY unifox.bar.saveAttacker
+ "Save attacker's fleet">
+<!ENTITY unifox.menu.configure
+ "Configure UniFox">
+<!ENTITY unifox.menu.unifoxDisabled
+ "Enable UniFox">
+<!ENTITY unifox.menu.unifoxEnabled
+ "Disable UniFox">
+
+<!ENTITY unifox.prefs.allyPicker
+ "Ally or player's properties">
+<!ENTITY unifox.prefs.allyColors
+ "Allies and players coloring">
+<!ENTITY unifox.prefs.addAlly
+ "Add a name">
+<!ENTITY unifox.prefs.editAlly
+ "Edit">
+<!ENTITY unifox.prefs.deleteAlly
+ "Delete selection">
+ 
+<!ENTITY unifox.prefs.RSS
+ "Display RSS on overview">
+
+<!ENTITY unifox.prefs.prodTime
+ "Show production time">
+<!ENTITY unifox.prefs.symbolPicker
+ "Production time properties">
+<!ENTITY unifox.prefs.symbolPicker2
+ "Production time icon">
+<!ENTITY unifox.prefs.default
+ "Default">
+<!ENTITY unifox.prefs.symbol1
+ "Main icon">
+<!ENTITY unifox.prefs.symbol2
+ "Secondary icon">
+<!ENTITY unifox.prefs.SPTLO
+ "Show after building time">
+<!ENTITY unifox.prefs.freightOrder
+ "Order of filling for freight">
+<!ENTITY unifox.prefs.freightOrderDesc
+ "Drag&amp;drop the elements of the list to change the order. The first resource of the list will be loaded first in the ships when you click on the 'Toutes les ressources' button">
+
+<!ENTITY unifox.prefs.preferences
+ "UniFox Options">
+<!ENTITY unifox.prefs.selectUniverse
+ "Automatic selection of universe, login and password">
+<!ENTITY unifox.prefs.saveLastUniverse
+ "Save the last universe used, and select it on login page">
+<!ENTITY unifox.prefs.server
+ "Server">
+<!ENTITY unifox.prefs.universe
+ "Universe">
+<!ENTITY unifox.prefs.activate
+ "Activate">
+<!ENTITY unifox.prefs.disable
+ "Disable">
+<!ENTITY unifox.prefs.colorPicker
+ "Color selection">
+<!ENTITY unifox.prefs.colorPicker2
+ "Pick a color :">
+<!ENTITY unifox.prefs.allyColor
+ "Text :">
+<!ENTITY unifox.prefs.allyBackground
+ "Background :">
+<!ENTITY unifox.prefs.allyName
+ "Exact ally tag :">
+<!ENTITY unifox.prefs.color
+ "Color :">
+<!ENTITY unifox.prefs.colorButton
+ "Choose">
+<!ENTITY unifox.prefs.highlightPrivates
+ "Private messages">
+<!ENTITY unifox.prefs.highlightAllyMessages
+ "Ally messages">
+<!ENTITY unifox.prefs.highlightBigDebris
+ "Highlight big debris fields">
+<!ENTITY unifox.prefs.debrisMin
+ "Minimum size to highlight :">
+<!ENTITY unifox.prefs.infosDeltas
+ "Display the differences between building levels in buildings info.">
+
+<!ENTITY unifox.prefs.addRanks
+ "Add rank after the player's name, in the galaxy.">
+<!ENTITY unifox.prefs.textColor
+ "Color of the texts inserted by UniFox (dates...).">
+<!ENTITY unifox.prefs.foregroundColor
+ "Text">
+<!ENTITY unifox.prefs.backgroundColor
+ "Background">
+<!ENTITY unifox.prefs.RENeededShips
+ "Show the number of ships required to take half of the resources in Spy report">
+<!ENTITY unifox.prefs.RENeededShip
+ "Sent ship :">
+<!ENTITY unifox.prefs.RENeededShipCapacity
+ "Capacity :">
+<!ENTITY unifox.prefs.debugMode
+ "Activate debug mode (shows error messages)">
+
+<!ENTITY unifox.prefs.coordCopy
+ "Coord Copy: Whenever a text is selected, it searches for coordinates if they are they will appear as the destination on the fleet mission afterwards.">
+<!ENTITY unifox.prefs.RECopy
+ "SR Copy: Whenever a spy report is fully selected, it will be saved, and paste in the game's simulator next time you open it.">
+<!ENTITY unifox.prefs.simulator
+ "Add buttons in the simulator (enable save/load fleets and targets).">
+<!ENTITY unifox.prefs.lastFleets
+ "Load last defending and attacking fleets in the simulator.">
+<!ENTITY unifox.prefs.messageSignature
+ "Private messages signature">
+<!ENTITY unifox.prefs.msgSignText
+ "Signature">
+<!ENTITY unifox.prefs.type
+ "Type">
+<!ENTITY unifox.prefs.add
+ "Add">
+<!ENTITY unifox.prefs.edit
+ "Edit">
+<!ENTITY unifox.prefs.user
+ "User :">
+<!ENTITY unifox.prefs.pass
+ "Password :">
+<!ENTITY unifox.prefs.ally
+ "Ally :">
+<!ENTITY unifox.prefs.url
+ "URL :">
+
+<!ENTITY unifox.prefs.messageFormat
+ "Private messages format">
+<!ENTITY unifox.prefs.boldChar
+ "bold">
+<!ENTITY unifox.prefs.italicChar
+ "italic">
+<!ENTITY unifox.prefs.BBcode
+ "Activate BBCode">
+<!ENTITY unifox.prefs.addMessageOption
+ "Add an option on the message page, to delete non-selected messages">
+
+<!ENTITY unifox.prefs.missionPreference
+ "Mission type priorities">
+<!ENTITY unifox.prefs.attack
+ "Attack">
+<!ENTITY unifox.prefs.spy
+ "Spy">
+<!ENTITY unifox.prefs.recollect
+ "Recollect">
+<!ENTITY unifox.prefs.colonise
+ "Colonise">
+<!ENTITY unifox.prefs.extract
+ "Extract">
+<!ENTITY unifox.prefs.transport
+ "Transport">
+<!ENTITY unifox.prefs.deploy
+ "Station">
+<!ENTITY unifox.prefs.delete
+ "Delete">
+<!ENTITY unifox.prefs.deleteAll
+ "Reset">
+<!ENTITY unifox.prefs.missionPreference.description
+ "UniFox will select the firt mission the fleet can do, in the order of the list.">
+
+<!ENTITY unifox.prefs.datesFromDurations
+ "Show dates deduced from durations">
+<!ENTITY unifox.prefs.flotaTime
+ "Show fleet arrival time">
+<!ENTITY unifox.prefs.flotaReturnTime
+ "Show fleet retreat time">
+<!ENTITY unifox.prefs.buildingTime
+ "Show shipyard's queue finishing time">
+<!ENTITY unifox.prefs.addOverviewTime
+ "Show event hours in overview">
+<!ENTITY unifox.prefs.removeOverviewTime
+ "Removes countdown in overview">
+<!ENTITY unifox.prefs.buildingsTime
+ "Show building construction finishing time">
+<!ENTITY unifox.prefs.researchTime
+ "Show research finishing time">
+<!ENTITY unifox.prefs.showFleetTime
+ "Show arrival and return time of the fleet while sending">
+<!ENTITY unifox.prefs.fleetReturnTime
+ "Show return time, result of a click on the Return button">
+<!ENTITY unifox.prefs.timersInterval
+ "Time between dates refreshment on fleet pages (in ms) :">
+<!ENTITY unifox.prefs.VEReturnTime
+ "Show return time of Extracting Ships">
+<!ENTITY unifox.prefs.VESpeed
+ "&#x0025; of speed for Extracting fleets :">
+ 
+<!ENTITY unifox.prefs.coloriseRessources
+ "Ressources color, according to disponibility (red or green)">
+<!ENTITY unifox.prefs.addGalaxyLinks
+ "Add Galaxy links on coordinates in Overview">
+<!ENTITY unifox.prefs.resizeImg
+ "Resize pictures.">
+<!ENTITY unifox.prefs.unifoxImgSize
+ "Size (in pixels):">
+<!ENTITY unifox.prefs.descriptionTooltips
+ "Put descriptions in tooltips">
+<!ENTITY unifox.prefs.addMaxButtons 'Add
+ "max" buttons'>
+<!ENTITY unifox.prefs.restructurateBody
+ "Change organisation of page's body">
+<!ENTITY unifox.prefs.showTransportsNeeded
+ "Show how many transports are needed to remove all ressources">
+   <!ENTITY unifox.prefs.Flotte_lien_pour_aider_vidage_ressources
+ "Show how many transports are needed to remove ressources per type">
+ <!ENTITY unifox.prefs.Flotte_lien_pour_aider_remplir_converto
+ "Show how many transports are needed to fill converters">
+<!ENTITY unifox.prefs.hours
+ "Hours">
+<!ENTITY unifox.prefs.buttons
+ "Buttons">
+<!ENTITY unifox.prefs.display
+ "Display">
+
+<!ENTITY unifox.prefs.CR.autocopy
+ "Copy automaticaly the converted report"> 
+<!ENTITY unifox.prefs.CR.showCoords
+ "Display coordinates">
+<!ENTITY unifox.prefs.CR.showTechnos
+ "Display technologies">
+<!ENTITY unifox.prefs.CR.separator
+ "Thousands separator">
+<!ENTITY unifox.prefs.CR.showLostUnits
+ "Display units lost between first and last round">
+<!ENTITY unifox.prefs.CR.showEndLoss
+ "Display losses">
+<!ENTITY unifox.prefs.CR.showTotalRenta
+ "Display total rentability">
+<!ENTITY unifox.prefs.CR.showTotalCDR
+ "Display total DF">
+<!ENTITY unifox.prefs.CR.showTotalGain
+ "Display total gains">
+<!ENTITY unifox.prefs.CR.showRentability
+ "Display rentability">
+<!ENTITY unifox.prefs.CR.showDetailledRentability
+ "Display all 3 resources in rentability">
+<!ENTITY unifox.prefs.CR.showDetailledCDR
+ "Display all 3 resources in DF">
+<!ENTITY unifox.prefs.CR.showDetailledGain
+ "Display all 3 resources in gain">
+<!ENTITY unifox.prefs.CR.recyclingPlayer
+ "Recycler: ">
+<!ENTITY unifox.prefs.CR.recyclingPlayer.unknown
+ "Unknown">
+<!ENTITY unifox.prefs.CR.recyclingPlayer.attacker
+ "Attacker">
+<!ENTITY unifox.prefs.CR.recyclingPlayer.defender
+ "Defender">
+<!ENTITY unifox.prefs.CR.showAttackersName
+ "Display attacker's name">
+<!ENTITY unifox.prefs.CR.showDefendersName
+ "Display defender's name">
+<!ENTITY unifox.prefs.CR.showFlyingTime
+ "Display flying time">
+<!ENTITY unifox.prefs.CR.showConsumption
+ "Display consumption">
+<!ENTITY unifox.prefs.CR.startText
+ "Begin message">
+<!ENTITY unifox.prefs.CR.afterBattleMessage
+ "Middle message">
+<!ENTITY unifox.prefs.CR.resultText
+ "Result message">
+<!ENTITY unifox.prefs.CR.endText
+ "Final message">
+<!ENTITY unifox.prefs.CR.attackersAlly
+ "Attacker's alliance">
+<!ENTITY unifox.prefs.CR.defendersAlly
+ "Defender's alliance">
+<!ENTITY unifox.prefs.CR.texts
+ "Text">
+<!ENTITY unifox.prefs.CR.colors
+ "Associated color">
+<!ENTITY unifox.prefs.ufCRcolors
+ "Units colors">
+ 
+<!ENTITY unifox.prefs.converter
+ "Automatic filling of the converter">
+<!ENTITY unifox.prefs.converterQuantity
+ "Quantity">
+<!ENTITY unifox.prefs.converter1stRes
+ "Original resource">
+<!ENTITY unifox.prefs.converter2dRes
+ "Created resource">
+
+ <!ENTITY unifox.prefs.ufM.all_pages
+ "On all pages">
+ <!ENTITY unifox.prefs.ufM.change_planetes_with_UP_and_DOWN
+ "Change the planets with the Up and Down arrows on the keyboard">
+ <!ENTITY unifox.prefs.ufM.elargir_corps_page
+ "Expanding the body of the page">
+ <!ENTITY unifox.prefs.ufM.tous_agrandir_ou_evenement
+ "While enlarge (If unchecked, then only the event will be enlarged)">
+ <!ENTITY unifox.prefs.ufM.suppr_affichage_colonie_en_bas
+ "Suppress the display of colonies at the bottom">
+ <!ENTITY unifox.prefs.ufM.show_ress_in_flight
+ "Show the number of resources in flight">
+ <!ENTITY unifox.prefs.ufM.show_pourcent_points
+ "View percentage points when moving the cursor on the different categories">
+ <!ENTITY unifox.prefs.ufM.page_rename_planete
+ "Rename Page Planet">
+ <!ENTITY unifox.prefs.ufM.record_password_for_remove_planete
+ "Save the password to delete the planet">
+ <!ENTITY unifox.prefs.ufM.submit_form_with_Enter_key
+ "Submit form by pressing the Enter key">
+ <!ENTITY unifox.prefs.ufM.agrandir_zone_saisi
+ "Larger areas of seizure">
+  <!ENTITY unifox.prefs.ufM.agrandir_zone_saisi_dynamiquement
+ "dynamically">
+ <!ENTITY unifox.prefs.ufM.tranformer_coordonnees_en_lien_galaxie
+ "Transforms the coordinates in links to the galaxy">
+ <!ENTITY unifox.prefs.ufM.mettre_separateur_miliers_dans_rapport_espionnage
+ "Save thousands separator in the reports of spying">
+ <!ENTITY unifox.prefs.ufM.add_link_for_send_messages_ally
+ "Add link to send messages alliance">
+ <!ENTITY unifox.prefs.ufM.show_history_for_answer
+ "View history in messages">
+ <!ENTITY unifox.prefs.ufM.show_link_in_RC_for_send_in_formatting
+ "Show a link to the RC to send in the trainer">
+ <!ENTITY unifox.prefs.ufM.colorize_messages_indicating_the_arrival_of_a_friendly_fleet
+ "Colorize the messages indicating the arrival of a friendly fleet">
+ <!ENTITY unifox.prefs.ufM.show_rentability_defender
+ "Show the profitability of defense">
+ <!ENTITY unifox.prefs.ufM.create_battle_report_formatted_with_result
+ "Create a battle report formatted with the result">
+ <!ENTITY unifox.prefs.ufM.vue_globale
+ "Overview">
+ <!ENTITY unifox.prefs.ufM.calc_ress_platform
+ "Calculate the number of resources dock">
+ <!ENTITY unifox.prefs.ufM.stats
+ "Ranking">
+ <!ENTITY unifox.prefs.ufM.change_hundred_with_LEFT_and_RIGHT
+ "Change the hundreds with arrows Left and Right">
+ <!ENTITY unifox.prefs.ufM.alliance
+ "Ally">
+ <!ENTITY unifox.prefs.ufM.in_members_liste_change_coord_in_links_of_galaxy
+ "In the list of members, transforming the coordinates in links to the galaxy">
+ <!ENTITY unifox.prefs.ufM.texte
+ "Text">
+ <!ENTITY unifox.prefs.ufM.arriere-plan
+ "Background">
+ 
+<!ENTITY unifox.tabs.general
+ "General">
+<!ENTITY unifox.tabs.colors
+ "Colors">
+<!ENTITY unifox.tabs.misc
+ "Misc">
+<!ENTITY unifox.tabs.times
+ "Times">
+<!ENTITY unifox.tabs.comp
+ "Calculations">
+<!ENTITY unifox.tabs.act
+ "Actions">
+<!ENTITY unifox.tabs.display
+ "Display">
+<!ENTITY unifox.tabs.messages
+ "Messages">
+<!ENTITY unifox.tabs.galaxy
+ "Galaxy">
+<!ENTITY unifox.tabs.buildings
+ "Buildings">
+<!ENTITY unifox.tabs.research
+ "Research">
+<!ENTITY unifox.tabs.shipyard
+ "Shipyard">
+<!ENTITY unifox.tabs.overview
+ "Overview">
+
+<!ENTITY unifox.tabs.others
+ "Others">
+<!ENTITY unifox.tabs.fleet
+ "Fleet">
+<!ENTITY unifox.tabs.help
+ "Help">
+<!ENTITY unifox.tabs.simu
+ "Simulator">
+<!ENTITY unifox.tabs.conv
+ "Converter"> 
+<!ENTITY unifox.tabs.CRconv
+ "CR converter">
+<!ENTITY unifox.tabs.byMax485
+ "By Max485">
+ 
+<!ENTITY unifox.about.title
+ "About UniFox">
+<!ENTITY unifox.about.unifoxBy
+ "UniFox by :">
+<!ENTITY unifox.about.foxgameBy
+ "Original extenstion, FoxGame, by:">
+<!ENTITY unifox.about.iconDesign
+ "Icon design :">
+<!ENTITY unifox.about.homePage
+ "Web page :">
+<!ENTITY unifox.about.specialThanksTo
+ "Special thanks to :">
+
+<!ENTITY unifox.help.tabsDetails
+ "">
+<!ENTITY unifox.help.firstTime
+ "">
+<!ENTITY unifox.help.tabsGeneral
+ "">
+
+<!--<!ENTITY unifox.tabs.stats
+ "Statistics">-->
+<!--<!ENTITY unifox.prefs.optionsSortByPage
+ "Check in order to sort options by game pages, uncheck to sort by type of function">-->
+<!--<!ENTITY unifox.prefs.converterMult
+ "Unit">-->
+<!-- EOF -->

@@ -1,0 +1,40 @@
+﻿<!-- INCLUDE overall_header.html -->
+<!-- admin_link.tpl  by sjpphpbb http://sjpphpbb.net -->
+		<form action"{U_SEL_ACTION}" method="post" name="post">
+<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+       <th width="100%" class="thHead">{L_LAXCISTE_LINK_ADMIN}</span>
+<tr>
+    <td class="row1"><span class="gensmall"><center>{L_LAXCISTE_LINK_ADMIN2}</center>
+</span>
+</table>
+<br>
+<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+<tr>
+      <th class="thHead" colspan="2">{L_LAXCISTE_LINK_ADMIN3}</span></th>
+</tr>
+
+<tr>
+    <td class="row1">{L_LINK}</td>
+    <td class="row1"><input type="text" size="100" class="post" maxlength="100" name="portal_link"  value="{LINK}" /></td>
+</tr>
+<tr>
+    <td class="row1">{L_LOGO}</td>
+    <td class="row1"><input type="text" size="100" class="post" maxlength="100" name="portal_logo"  value="{LOGO}" /></td>
+ 	</table>
+		<table width="100%" cellpadding="4" cellspacing="1" border="0" class="tablebg" align="left" >
+    		<tr>
+  			<tr>
+        			<td class="row2" colspan="2">
+			<input type="hidden" name="id" value="NULL" />
+		<input type="hidden" name="msg_id" value="{MSG_ID}" />
+		<center><input class="button1" type="submit" id="submit" name="save-edited" value="{L_SAVE}" />
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+
+	</form>
+		<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+        </td>
+    </tr>
+</table>
+<br />
+<!-- INCLUDE overall_footer.html -->

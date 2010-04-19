@@ -1,0 +1,15 @@
+#SPGdbAJAX-button-getgalaxy {
+    list-style-image: url("chrome://spgdbtoolajax/skin/getgalaxy.gif");
+}
+
+#SPGdbAJAX-button-getranking {
+    list-style-image: url("chrome://spgdbtoolajax/skin/getranking.gif");
+}
+
+#SPGdbAJAX-button-options {
+    list-style-image: url("chrome://spgdbtoolajax/skin/page_white_wrench.png");
+}
+
+#SPGdbAJAX-button-getSpy {
+    list-style-image: url("chrome://spgdbtoolajax/skin/page_white_magnify.png");
+}

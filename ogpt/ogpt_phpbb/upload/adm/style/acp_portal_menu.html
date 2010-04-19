@@ -1,0 +1,107 @@
+ <!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+<!-- IF S_EDIT -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_menu" method="post" action="{U_ACTION}">
+	<dl>
+		<dt><label for="bot_name">{L_URL_IMG_EXPLAIN}:</label><br />{L_URL_IMG_EXPLAIN2}<span>
+	</dt>
+		<dd>
+		<select name="menu_img" class="post">
+		<!-- BEGIN file_name -->	
+		<option value="{file_name.S_MENU_IMG}" <!-- IF file_name.S_MENU_IMG == MENU_IMG -->selected <!-- ENDIF -->>{file_name.S_MENU_IMG}</option>
+		<!-- END file_name -->	
+			</select>
+		<!-- IF MENU_IMG -->			
+		&nbsp;&nbsp;<img border="0" src="./../images/icon_menu/{MENU_IMG}">
+		<!-- ENDIF -->		
+		</dd>
+	</dl>
+<hr>	
+	<dl>
+		<dt><label for="bot_name">{L_NOM_URL_EXPLAIN}:</label><br /><span></dt>
+		<dd><input name="menu_name" type="text" id="menu_name" value="{MENU_NAME}" size="40" />
+		</dd>
+	</dl>	
+<hr>
+	<dl>
+		<dt><label for="bot_name">{L_URL_EXPLAIN}:</label><br /><span>{L_URL_EXPLAIN_2}</span></dt>
+		<dd><input name="menu_url" type="text" id="menu_url" value="{MENU_URL}" size="40" /></dd>
+	</dl>
+<hr>	
+	<dl>
+		<dt><label for="menu_view">{L_VIEW_BY_EXPLAIN}:</label><br /></span></dt>
+		<dd><div align="left"><select name="menu_view" class="post">
+		<option value="1" <!-- IF MENU_VIEW == "1" --> selected <!-- ENDIF -->>{L_ALL}	
+		<option value="2" <!-- IF MENU_VIEW == "2" --> selected <!-- ENDIF -->>{L_REG}	
+		<option value="3" <!-- IF MENU_VIEW == "3" --> selected <!-- ENDIF -->>{L_MOD}
+		<option value="4" <!-- IF MENU_VIEW == "4" --> selected <!-- ENDIF -->>{L_ADMIN}	
+		</select></dd>
+	</dl>		
+<hr>
+		<input name="menu_order" type="hidden" id="menu_order" value="{MENU_ORDER}" size="10" />
+	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_MENU}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+
+	<p><center>{L_ACP_MENU__EXPLAIN}</center></p>
+
+	<form id="acp_quote" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+	<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+
+		<th><center>{L_URL_IMG_2}</th>
+		<th><center>{L_NAME_LIEN}</center></th>
+		<th><center>{L_URL_LIEN}</center></th>
+		<th><center>{L_VIEW_BY}</center></th>
+		<th><center>{L_ACTION}</center></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN menu -->
+		<!-- IF menu.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;"><img border="0" src="./../images/icon_menu/{menu.MENU_IMG}"></td>
+		<td style="text-align: center;">{menu.MEU_NAME}</td>
+		<td style="text-align: center;">{menu.MENU_URL}</td>
+		<td style="text-align: center;"><div align="center">
+		  <!-- IF menu.MENU_VIEW == "1" -->{L_ALL}<!-- ENDIF -->	
+		  <!-- IF menu.MENU_VIEW == "2" -->{L_REG}<!-- ENDIF -->
+		  <!-- IF menu.MENU_VIEW == "3" -->{L_MOD}<!-- ENDIF -->
+		  <!-- IF menu.MENU_VIEW == "4" -->{L_ADMIN}<!-- ENDIF -->	  
+		</td>		
+		<td style="text-align: center;" width="100px">
+		<!-- IF menu.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{menu.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF menu.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{menu.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF -->&nbsp;
+		<a href="{menu.U_EDIT}">{ICON_EDIT}</a>&nbsp;			 
+		<a href="{menu.U_DELETE}">{ICON_DELETE}</a>
+		</td>
+	</tr>
+	<!-- END menu -->
+	</tbody>
+	</table>
+
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_URL}" />
+	</p>
+	</fieldset>
+
+	</form>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,396 @@
+/* ______________________________________________________________
+
+                                  dd                 dd               .d
+                                ddddddd             ddddddd          ddddddd
+ Skin MoDifed & powered        ddddddddd          dddddddddd        ddddddddd      d
+  ~~~~~~~~~~~~~~~~~~~         dddddddddd         ddddddddddd      ddddddddddd     dd
+     by Erreur32             ddd     dddd       ddd      ddd      ddd     ddd     dd
+                            ddd        dd      .dd        ddd     dd       dd     dd
+       ~~~~~~~~             ddd        ddd     dd.        ddd    dd        ddd    dd
+                            dd          dd     dd          dd    dd         dd    dd
+                           .dd          dd    ddd          dd    dd         dd    dd        .d            dd            d.     .d
+      MiX  Skin            dd           dd    dd.                dd             dddddd    .ddddd       ddddddd     dd  dddd   ddddd
+                           dd           ddd   dd                 .dd            dddddd   dddddddd      dddddddd    dd dddddd dddddd
+          For              dd            dd   dd                  ddd           dddddd   ddddddddd    ddddddddd.   dd.dddddd ddddddd
+                           dd            dd   dd                  ddddd           dd    .dd     dd    dd     ddd   ddd    dddd   .dd
+      OGSpy  (Only)        dd            dd   dd                   dddddd         dd    dd      dd    d.      dd   ddd    ddd     dd
+                           dd            dd   dd                    ddddddd       dd    dd       d    d       dd   dd      dd     dd
+                           dd            dd   dd      dddddddd        dddddd      dd    d        dd           dd   dd      dd     dd
+                           dd            dd   dd      dddddddd          ddddd     dd    d        dd          .dd   dd      dd     dd
+                           dd            dd   dd      dddddddd            dddd    dd   .ddddddddddd       dddddd   dd      dd     dd
+                           dd            dd   dd           ddd             ddd    dd   dddddddddddd    ddddddddd   dd      dd     dd
+                           dd           ddd   dd           ddd              dd    dd   dddddddddddd   ddddddd.dd   dd      dd     dd
+                           dd           dd    dd           ddd   dd         dd    dd   dd             ddd.    dd   dd      dd     dd
+                           ddd          dd    ddd          ddd   dd         dd    dd    d            dd.      dd   dd      dd     dd
+                            dd          dd     dd          ddd   dd         dd    dd    dd           dd       dd   dd      dd     dd
+                            dd.        ddd     dd          ddd   dd         dd    dd    dd       d.  dd       dd   dd      dd     dd
+                            ddd        dd      ddd        .ddd   ddd       ddd    dd    dd      ddd  dd      ddd   dd      dd     dd
+                             ddd     .ddd       ddd      dddd.    ddd      dd     dd    ddd     dd   dd     dddd   dd      dd     dd
+                              dddddddddd         ddddd.ddddd.     ddddd..dddd     ddd.   dddd.dddd   ddddddddddd   dd      dd     dd
+                              ddddddddd          dddddddddd.       ddddddddd      dddd   dddddddd     ddddddd dd   dd      dd     dd
+                               ddddddd             ddddddd          ddddddd       dddd    dddddd      .ddddd  dd   dd      dd     dd
+                                  dd                 .d.               dd           d       .d          dd
+Epic blue MoDified
+
+
+
+*/
+
+
+., #, td, th, textarea, body, table
+{
+  font-family	: Tahoma,sans-serif;
+  font-size	: 11px;
+}
+
+img
+{
+  border               : 0px;
+}
+
+p table
+{
+  border               : 0px;
+}
+
+p td
+{
+  text-align           : center;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+table table
+{
+  border               : 0px;
+}
+
+table table td
+{
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+body
+{
+  color                : #E6EBFB;
+  margin-top           : 1px;
+  margin-left          : 1px;
+  background-color     : #040e1e;
+  background-image     : url(img/background_.jpg);
+  background-attachment: fixed;
+  background-repeat    : no-repeat;
+  background-position  : top left;
+  scrollbar-arrow-color: #E6EBFB;
+  scrollbar-base-color: #344566;
+  scrollbar-track-color: #344566;
+  scrollbar-face-color: #344566;
+  scrollbar-highlight-color: #344566;
+  scrollbar-3dlight-color: #465673;
+  scrollbar-darkshadow-color: #344566;
+  scrollbar-shadow-color: #465673;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+body.style{
+	background-image: none;
+}
+
+body.style table {
+	margin:0px;
+}
+
+body form table th table input
+{
+  width: 60px;
+}
+
+th, td.a, td.b, td.c, td.f, input, select,
+td.g, td.h, td.i, td.j, td.k, td.l, td.m,
+td.n, td.o, td.q, td.r, td.v, .style td,
+textarea, p td, table.s th img
+{
+  border               : 1px #3A3A3A solid;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+th, td.a, td.b, td.c, td.f, input, select, td.g,
+td.h, td.i, td.j, td.k, td.m, td.o, td.q, td.r,
+td.v, td.s, .style td, p td
+{
+  background-image     : url(img/fundo.png);
+  background-color     : #000000;
+    	background-color     : transparent;
+    filter: alpha(opacity=70);
+    /* background-color     : transparent;*/
+}
+
+th
+{
+  text-align           : center;
+  padding-left         : 3px;
+  padding-right        : 3px;
+}
+
+td.a
+{
+  height               : 39px;
+  text-align           : center;
+}
+
+td.b
+{
+  padding              : 3px;
+}
+
+td.c
+{
+  font-weight          : bold;
+  color                : #E6EBFB;
+  padding-left         : 3px; 
+   background-image     : url(img/header.jpg);
+  	background-repeat: repeat;
+    filter: alpha(opacity=90) ;
+     /* 	background-color     : transparent;*/
+ /* background-image     : url(img/balken.gif);*/
+}
+
+td.f, input, select, textarea
+{
+  color                : #FFFF8A;
+  background-color     : #575B65;
+}
+
+textarea
+{
+  width                : 100%;
+}
+
+td.k input
+{
+  text-align           : left;
+}
+
+td.g
+{
+  font-weight          : bold;
+  text-align           : right;
+  color                : #E6EBFB;
+}
+
+td.h
+{
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.i
+{
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.j
+{
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.k, td.k input
+{
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.l
+{
+  background-color     : #2F2F2F;
+  color                : #E6EBFB;
+  vertical-align       : top;
+  padding              : 3px;
+  background-image     : url(img/bkb2.png);
+}
+
+td.m
+{
+  font-weight          : bold;
+  text-align           : right;
+  width                : 86px;
+  color                : #E6EBFB;
+}
+
+td.n
+{
+  font-weight          : bold;
+  text-align           : right;
+  width                : 89px;
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.o
+{
+  text-align           : center;
+  color                : #E6EBFB;
+}
+
+td.q
+{
+  font-weight          : bold;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+  text-align           : center;
+  vertical-align       : middle;
+  color                : #E6EBFB;
+}
+
+td.r
+{
+  text-align           : right;
+  color                : #E6EBFB;
+}
+
+td.v
+{
+  font-weight          : bold;
+  text-align           : right;
+  color                : #f7f7f7;
+}
+
+td.s
+{
+  color                : #E6EBFB;
+}
+
+table.s th
+{
+  border               : 0px;
+}
+
+table.s th img
+{
+  width                : 89px;
+  height               : 89px;
+}
+
+div.z
+{
+  font-weight          : bold;
+  color                : #E6EBFB;
+}
+
+a
+{
+  color                : #E6EBFB;
+  text-decoration      : none;
+  font-weight          : bold;
+}
+
+a.s
+{
+  color                : #E6EBFB;
+}
+
+a.t
+{
+  color                : #E6EBFB;
+}
+
+a:hover
+{
+  color                : #EDC455;
+  text-decoration      : underline;
+}
+
+.style td
+{
+  color                : #E6EBFB;
+  border-top           : 0px; 
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+.style div a
+{
+  height               : 100%;
+  width                : 100%;
+  color                : #FFFFFF;
+  font-size            : 11px;
+  font-family          : Trebuchet MS,Arial,Helvetica,sans-serif;
+}
+
+.style div a:link
+{
+  height               : 100%;
+  width                : 100%;
+  color                : #f2f2f2;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+  outline              : 0;
+}
+
+.style div a:visited
+{
+  height               : 100%;
+  width                : 100%;
+  color                : #f2f2f2;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+}
+
+.style div a:hover
+/*{
+  background-color     : #415680;
+  height               : 100%;
+  width                : 100%;
+  text-decoration      : none;
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+  color                : #E6EBFB;
+}*/
+{
+  background-color     : transparent;
+  background-image     : url(img/links2.gif);
+  font-family          : Verdana, Arial;
+  font-size            : 10px;
+  font-weight          : normal;
+  color                : #FF7700;
+    padding-top: 0px;
+    width: 110px;
+    height: 13px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-decoration: none;
+    display: block;
+}
+
+.style
+{
+  margin-top           : 15px;
+}
+
+a { outline: 0; }
+a img { border: 0; }
+
+h1
+{
+  font-size            : 11px;
+  font-family          : Tahoma,sans-serif;
+  border-bottom        : 0px #2F2F2F; solid;
+  /*   border-bottom        : 0px #344566; solid; */
+  width                : 98%;
+  text-align           : center;
+}
+
+.style td
+{
+ 
+  font-family          : Trebuchet MS, Arial, Helvetica, sans-serif;
+  font-size            : 10px;
+background-image: url(img/fond.png);
+	background-repeat: repeat;
+    filter: alpha(opacity=80);
+  	background-color     : transparent;
+  	}

@@ -1,0 +1,61 @@
+<!-- IF S_PORTAL_HEADER -->
+<!-- INCLUDE portal_header.html -->
+<!-- ELSE -->
+<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+<link href="styles/subsilver2/theme/portal.css" rel="stylesheet" type="text/css" media="screen" />
+<br>
+<table width="100%" border="0" align="center" >  
+<tr>
+<td width="100%">
+			<!-- BEGIN haut_block_files -->
+			<div id="{haut_block_files.HAUT_BLOCK_ID}" style="display">
+                        {haut_block_files.HAUT_BLOCKS}
+            </div>
+			<!-- END haut_block_files -->
+    </td>
+  </tr>
+</table>
+<table width="100%"  cellspacing="{PACING}" border="0" align="center" >  
+<tr>
+<!-- bloc gauche -->
+    <td  width="{GAUCHE_W}px"  valign="top" align="center"  >
+	
+			<!-- BEGIN left_block_files -->
+			<div id="{left_block_files.LEFT_BLOCK_ID}" style="display">
+                        {left_block_files.LEFT_BLOCKS}
+            </div>
+			<!-- END left_block_files -->
+
+    </td>      
+<!-- bloc centre -->    
+    <td   valign="top" align="center" background="./images/fond.gif">
+    
+			<!-- BEGIN middle_block_files -->
+	        <div id="{middle_block_files.MIDDLE_BLOCK_ID}" style="display">
+						{middle_block_files.MIDDLE_BLOCKS}
+            </div>
+			<!-- END middle_block_files -->
+        
+    </td>
+<!-- bloc droite -->    
+    <td  width="{DROITE_W}px"  valign="top" align="center" >
+
+			<!-- BEGIN right_block_files -->
+			<div id="{right_block_files.RIGHT_BLOCK_ID}" style="display">
+                        {right_block_files.RIGHT_BLOCKS}
+			</div>
+			<!-- END right_block_files -->
+
+    </td>  
+</tr>
+</table>
+<tr>
+            <!-- BEGIN bas_block_files -->
+			<div id="{bas_block_files.BAS_BLOCK_ID}" style="display">
+                        {bas_block_files.BAS_BLOCKS}
+            </div>
+			<!-- END bas_block_files -->
+    </td>
+  </tr>
+<!-- INCLUDE portal_footer.html -->

@@ -1,0 +1,32 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{RECENT_LAST_MEMBERS_TITRE}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+<table width="100%" cellpadding="2" cellspacing="2" border="0" >
+	<tr>
+	<td  align="left" nowrap="nowrap"><b>{L_LATEST_USERNAME}</b></td>
+	<td  align="center" nowrap="nowrap"><b>{L_LATEST_JOINED}</b></td>
+	<td  align="right" nowrap="nowrap"><b>#&nbsp;&nbsp;</b></td>	
+	</tr>
+	<!-- BEGIN latest_members -->
+			<tr class="<!-- IF latest_members.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+			<td align="left" valign="middle"><img src="./images/portal/user.png" /><a href="{latest_members.U_USERNAME}">&nbsp;<strong><font color="#{latest_members.USERNAME_COLOR}">{latest_members.USERNAME}</font></strong></span></a><br /></td>
+			<td align="center" nowrap="nowrap" valign="middle">{latest_members.JOINED}</td>
+			<td align="right" nowrap="nowrap" valign="middle">
+		<!-- IF latest_members.USER_FLAG -->&nbsp;
+		<img src="./images/flags/{latest_members.USER_FLAG}.gif" border="0" width="15" alt="{latest_members.USER_FLAG}" title="{latest_members.USER_FLAG}">&nbsp;</center>
+		<!-- ENDIF -->
+		</td>	
+	</tr>
+	<!-- END latest_members -->
+</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

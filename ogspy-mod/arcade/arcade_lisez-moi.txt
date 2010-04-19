@@ -1,0 +1,196 @@
+Module Arcade 2.1 
+(c) 2006 OGSteam
+http://www.ogsteam.fr
+
+			--------------------------------------
+			A LIRE EN ENTIER POUR AVOIR UNE CHANCE
+			QUE LE MOD ARCADE FONCTIONNE ....
+			--------------------------------------
+
+	Ce module est pour les serveurs d'alliance OGSpy version supérieure ou égale à la 3.02
+
+
+NOTE: lors de l'installation des jeux via l'interface administrateur, une décompression des fichiers
+tar fait appel au fonctions du serveur. Seul les serveurs de type un*x ont été testés.
+Je ne sais notamment pas , si ca fonctionne sur les serveurs de type windows... (je parierai que non)
+Dans ce cas, il est nécessaire d'uploader soit meme avec son client ftp les différents fichiers 
+(swf, gif, et fichiers accessoires) au bon endroit... ce qui peut etre pas si "facile" que ca.
+
+
+Installation:
+------------
+
+	- Uploader le contenu de l'archive dans le repertoire 'mod' d'OGSpy
+	
+	- Afin de récupérer les scores des jeux Flash de type IBPro il est nécessaire d'éditer
+	le fichier 'index.php' d'OGSpy.
+	^^^ LES SCORES NE SERONT PAS ENREGISTRES SANS CET EDITION DU FICHIER INDEX.PHP
+	
+
+--------------------------------------------------------------------------	
+--------------------------------------------------------------------------	
+<-- ouvrir [ogspy_root]/index.php et trouver au début du fichier -->
+
+require_once("common.php");
+
+<-- Ajouter aprés -->
+require_once("mod/Arcade/arcade_intercept.php");
+
+<-- Sauvegarder et reuploader le fichier sur votre serveur -->
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------	
+
+
+Creation du repertoire accessoire des jeux IBPro:
+------------------------------------------------
+
+Vous devez créer dans le repertoire d'ogspy un sous-repertoire nommé 'arcade'
+lui meme contenant un sous repertoire nommé 'gamedata'. Ce repertoire doit avoir
+les droits suffisant pour que le mod puisse y écrire dedans les nouveaux jeux uploadés.
+Par exemple: chmod 777 [ogspy_root]/arcade/gamedata
+
+
+Droits sur les repertoires
+--------------------------
+
+Certains repertoires, notamment ceux qui sont suceptible de recevoir les uploads de
+l'admin (nouveaux jeux d'arcade) nécessite un droit en ecriture "777".
+(plus précisément, l'user apache doit pouvoir y écrire dedans)
+
+Vous pouvez modifier ces droits soit avec votre client ftp et/ou en mode console.
+
+Il s'agit de:
+- mod/Arcade/games
+- mod/Arcade/pics
+- mod/Arcade/tmp
+- arcade/gamedata
+
+NB: ces droits ne sont nécessaires que si vous utilisez l'upload du panneau d'administration, 
+si vous utilisez votre client ftp usuel , et installez les jeux manuellement, vous n'en avez
+pas besoin.
+
+
+Panneau d'Administration du module Arcade:
+-----------------------------------------
+	- il permet les opérations suivantes :
+		* suppression des scores
+		* configuration des options (log etendu, autorisation des coadmins, forçage 
+		de noms)
+		* Bannir et débannir des joueurs peu scrupuleux (qui triche sur les scores)
+		* Ajout de nouveaux Jeux (ils doivent etre compatible avec le modArcade cad
+		à ce stade , de type Flash IBPRO)
+
+Installation de nouveaux Jeux :
+-------------------------------
+- Par defaut seul un seul jeu est installé, il s'agit de Pacman de Neaves
+- Vous pouvez installer autant de jeux que vous le souhaitez , il suffit que ce soit
+  des jeux flash, et que vous mettiez les eventuels fichiers accessoires/secondaires
+  au bon endroit sur votre serveur.
+- Pour que les jeux soumettent leur score au module, il est nécessaire qu'ils aient été
+  adaptés. Le ModArcade est compatible avec tout les jeux prévu pour la plateforme
+  nommé IBPRO.
+
+Note sur l'adapatation IBPRO et le ModArcade:
+--------------------------------------------
+Le jeux IBPro soumettent leur score au serveur en appellant le fichier index.php avec des paramètres
+incluant bien sur le score, mais aussi le "petit nom" du jeu , qu'on appellera 'scorename'.
+La connaissance de ce scorename est important puisque c'est lui qui permettra la sauvegarde des 
+scores des joueurs.
+
+Bien souvent, le scorename correspond au nom du fichier swf sans son extension.
+soit 'nomdujeu' pour un fichier qui se nommerait 'nomdujeu.swf'.
+(Mais ca _peut_ ne pas etre le cas)
+
+Le fichier swf principal du jeu sera dans le repertoire mod/Arcade/games/ , une image, optionelle mais
+recommandé peut lui etre associé , elle sera dans le repertoire mod/Arcade/pics.
+
+Dans leur format le plus simple, nous avons donc un fichier SWF (le jeu) et un fichier image (un gif).
+
+Certains jeux, que ce soit pour leur adapation IBPRO ou pour des données supplémentaires, font appel a 
+d'autres fichiers qui seront teléchargé à partir de votre serveur.
+Ces fichiers secondaires sont attendu dans le repertoire [racine]/arcade/gamedata/[NomDuJeu]. 
+Se pose alors le probleme de l'emplacement d'OGSpy. En effet , ces fichiers secondaires sont souvent 
+appellés à partir du repertoire racine _dans_ lequel se trouve ogspy.
+
+Donc si vous avez installer , et accedez à OGSpy à partir de http://www.serveur.net/ogspy , les fichiers
+secondaires seront cherchés dans http://www.serveur.net/ogspy/arcade/gamedata/[NomDuJeu]
+
+Cependant , certain mal adaptés , chercheront leur fichier secondaire dans 
+http://www.serveur.net/arcade/gamedata/[NomDuJeu]
+
+
+Plusieurs méthodes sont possibles pour installer un jeu  :
+----------------------------------------------------------
+
+A) Installation Manuelle
+
+Cette méthode est la méthode générale , marchant pour tout les jeux ibpro (les autres aussi mais
+sans soumission de score)
+
+Recupérez une archive d'un jeu (google est votre ami...).
+A l'intérieur de l'archive se trouveront
+1) un fichier.swf
+2) une image optionelle
+3) un fichier texte optionnel indiquant le scorename et les dimensions souhaités pour le jeu
+4) Accesoirement un fichier PHP qui peut contenir les memes informatios que le fichier texte
+   ci dessus
+5) Accessoirement, des fichiers secondaires qui seront dans un sous-repertoire /gamedata/[NomDuJeu]
+
+
+<--- Installation d'un jeu --->
+Uploadez le fichier swf dans mod/Arcade/games
+Uploadez l'image dans mod/Arcade/pics
+Uploadez le contenu de gamedata dans [ogspy]/arcade/gamedata 
+
+Allez dans le panneau d'administration du ModArcade
+
+Reperez le sous-panneau 'Installation des jeux deja uploadés sur le serveur'
+Dans la boite liste doit se trouver le fichier swf que vous avez mis dans mod/Arcade/games.
+Selectionnez le et appuyer sur le bouton.
+
+Remplir alors les différents champs avec les valeurs adéquates
+<------------------------------>
+
+
+Pour les installations semi-automatiques et automatiques, il faut que les repertoires
+accueillant les jeux soit autorisés en ecriture (chmod 777), d'autre part les scripts
+d'installations fesant appel à des outils unix, je ne suis pas sur du tout qu'une
+installation avec cette méthode sous Windows, fonctionne.
+Afin que les sous panneau correspondant apparraisent dans le panneau d'administration, 
+les options 'arcade_serverrootpath' et 'arcade_uploadpath' doivent etre renseignés , et 
+reellement exister avec des droits en ecriture)
+
+B) Installation semi-Automatique
+
+Dans le panneau d'administration des jeux se trouve un sous panneau 
+'Upload et Installation d'un nouveau Jeu Flash (*.swf)'
+Il permet d'uploader à partir de votre ordinateur un fichier swf et une image.
+(donc il ne permet pas le transfert d'eventuels fichier secondaires qui seraient dans gamedata)
+
+Remplissez les différents champs et soumettez vos fichiers.
+
+
+C) Installation automatique
+Certains jeux de type IBPRO sont fournis sous forme de fichier tar (= archive)
+Il suffit d'uploadez le fichier tar dans le panneau approprié pour qu'automatiquement
+- le swf et l'image soient copiés dans leur bon repertoire
+- le contenu d'un eventuel repertoire gamedata soit correctement copiés lui aussi
+- le fichier de configuration php soit lu et interprétés pour inserer dans la base
+de données les bonnes valeurs
+
+
+
+En cas de bug :
+--------------
+	- http://www.ogsteam.fr : Site de l'OGSteam
+	- ericalens@ogsteam.fr (mon mail a moi qu'il est a moi)
+	- irc:irc.ogamenet.net/#OGStratege
+	- les signaux de fumée (mais il faut me téléphoner avant pour que je regarde par
+	la fenètre si je vois ces signaux)
+
+License:
+-------
+Le module lui meme est libre de droit.
+Les jeux que vous recupérez sur le net ont les droits de leurs auteurs respectifs.
+Merci de bien vouloir les respecter.
+

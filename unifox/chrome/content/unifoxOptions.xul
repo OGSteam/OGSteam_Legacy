@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/skin/pref/pref.css" type="text/css"?>
+<?xml-stylesheet href="chrome://unifox/content/options.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://unifox/locale/unifox.dtd" >
+
+<dialog id="unifox.config"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&unifox.prefs.preferences;"
+	buttons="accept, cancel"
+	ondialogaccept=" return ufsavePreferences();" 
+	onload="ufinitWindow(); window.sizeToContent();"
+	height="550">	<!--width="535"-->
+
+
+
+	
+	<script src="chrome://global/content/nsDragAndDrop.js"/>
+	<script src="chrome://global/content/nsTransferable.js"/>
+	<script src="chrome://unifox/content/dragAndDrop.js"/>
+	
+	<script type="application/x-javascript" src="chrome://unifox/content/unifoxCommon.js"/>
+   <script type="application/x-javascript" src="chrome://unifox/content/unifoxOptions.js"/>
+	<script type="application/x-javascript" src="chrome://unifox/content/about.js" />
+
+<tabbox id="tabbox" flex="1" style="overflow: -moz-scrollbars-vertical;">
+  <tabs id="typeTabs">
+  	  	<tab linkedpanel="inviPanel" id="inviTab0" name="invitab" hidden="true"/>
+   <tab linkedpanel="colorsPanel" id="colors" label="&unifox.tabs.colors;" selected="true"/>
+   <tab linkedpanel="actionsPanel" id="actions" label="&unifox.tabs.act;"/>
+	<tab linkedpanel="compPanel" id="comp" label="&unifox.tabs.comp;"  />
+	<tab linkedpanel="displayPanel" id="display" label="&unifox.tabs.display;" />
+	<tab linkedpanel="othersPanel" id="others" label="&unifox.tabs.others;" />
+	<tab linkedpanel="aboutPanel" id="about" label="&unifox.about.title;"/>
+	<tab linkedpanel="helpPanel" id="help" label="&unifox.tabs.help;"/>
+
+  </tabs>
+  <tabs id="pageTabs">
+		<tab linkedpanel="inviPanel" id="inviTab1" name="invitab" hidden="true"/>
+	<tab linkedpanel="overviewPanel" id="overview" label="&unifox.tabs.overview;" />
+	<tab linkedpanel="buildingsPanel" id="buildings" label="&unifox.tabs.buildings;" />
+	<tab linkedpanel="researchPanel" id="research" label="&unifox.tabs.research;" />
+
+	<tab linkedpanel="shipyardPanel" id="shipyard" label="&unifox.tabs.shipyard;" />
+	<tab linkedpanel="fleetPanel" id="fleet" label="&unifox.tabs.fleet;" />
+	<tab linkedpanel="galaxyPanel" id="galaxy" label="&unifox.tabs.galaxy;" />
+	<tab linkedpanel="messagesPanel" id="messages" label="&unifox.tabs.messages;" />
+	</tabs>
+	<tabs id="pageTabs2">
+		<tab linkedpanel="inviPanel" id="inviTab2" name="invitab" hidden="true"/>
+		<tab linkedpanel="simuPanel" id="simu" label="&unifox.tabs.simu;" />
+		<tab linkedpanel="convPanel" id="conv" label="&unifox.tabs.conv;" />
+		<tab linkedpanel="CRconvPanel" id="CRconv" label="&unifox.tabs.CRconv;" />
+		<tab linkedpanel="byMax485Panel" id="byMax485" label="&unifox.tabs.byMax485;" />
+	</tabs>
+	<tabpanels id="tabpanels" flex="1" >
+
+   <tabpanel orient="vertical" id="colorsPanel">
+			<hbox id="colorsHbox">
+				<vbox id="colorsVbox" >	
+					<groupbox id="allyColorsGbox">
+						<caption label="&unifox.prefs.allyColors;"/>
+						<vbox>
+							<checkbox id="unifoxAllyColors" label="&unifox.prefs.activate;"/>
+							<hbox>
+								<listbox  
+									ondraggesture="nsDragAndDrop.startDrag(event, dndObserver)"
+									ondragover="nsDragAndDrop.dragOver(event, dndObserver)"
+									ondragdrop="nsDragAndDrop.drop(event, dndObserver)"
+									id="unifoxAllyColorsList" rows="5" seltype="multiple" 
+									style="max-width: 15em;" flex="1" oncommand="uf_refreshName();">
+								</listbox>
+								<vbox>
+									<button label="&unifox.prefs.addAlly;" top="300" left="100" elem="listitem" ondraggesture="nsDragAndDrop.startDrag(event,listObserver);"
+										oncommand="uf_addAllyButton()"/>
+									<button label="&unifox.prefs.editAlly;"
+										oncommand="uf_editAlly()"/>
+									<button label="&unifox.prefs.deleteAlly;"
+										oncommand="uf_removeAlly()"/>
+									<spring flex="1" />
+								</vbox>
+								<spring flex="1" />
+								<vbox>
+								<textbox id="ufAllyNameColor" hidden="true"/>
+								<textbox id="ufAllyName" hidden="true"/>
+								<textbox id="ufAllyBackgroundColor" hidden="true"/>
+								<checkbox id="allyListMode" label="test" hidden="true"/>
+								</vbox>
+							</hbox>
+						</vbox>
+					</groupbox>	
+					<groupbox id="textColorGbox">
+						<caption label="&unifox.prefs.textColor;"/>
+							<hbox>
+								<vbox><spring flex="1" />
+								<label control="ufTextColor" value="&unifox.prefs.color;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufTextColor"/>
+								<button label="&unifox.prefs.colorButton;"
+									oncommand="uf_openColor('ufTextColor','ufTextColor');"/>
+							</hbox>
+					</groupbox>
+					<groupbox id="privateMessagesGbox">
+						<caption label="&unifox.prefs.highlightPrivates;"/>
+							<hbox>
+						      	<checkbox id="unifoxHighlightPrivates" label="&unifox.prefs.activate;"/>
+								<vbox><spring flex="1" />
+								<label control="ufPrivateColor" value="&unifox.prefs.color;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufPrivateColor"/>
+								<button label="&unifox.prefs.colorButton;"
+									oncommand="uf_openColor('ufPrivateColor','ufPrivateColor');"/>
+							</hbox>
+					</groupbox>
+					<groupbox id="allyMessagesGbox">
+					<caption label="&unifox.prefs.highlightAllyMessages;"/>
+						<hbox>
+								<checkbox id="unifoxHighlightAllyMessages" label="&unifox.prefs.activate;"/>
+							<vbox><spring flex="1" />
+							<label control="ufAllyColor" value="&unifox.prefs.color;"/>
+							<spring flex="1" />
+							</vbox>
+							<textbox id="ufAllyColor"/>
+							<button label="&unifox.prefs.colorButton;"
+								oncommand="uf_openColor('ufAllyColor','ufAllyColor');"/>
+						</hbox>
+					</groupbox>
+					<groupbox id="highlightBigDebrisGbox">
+						<caption label="&unifox.prefs.highlightBigDebris;"/>
+						<vbox>
+							<hbox>
+						      	<checkbox id="unifoxHighlightBigDebris" label="&unifox.prefs.activate;"/>
+								<vbox><spring flex="1" />
+								<label control="ufDebrisColor" value="&unifox.prefs.color;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufDebrisColor"/>
+								<button label="&unifox.prefs.colorButton;"
+									oncommand="uf_openColor('ufDebrisColor','ufDebrisColor');"/>
+							</hbox>
+							<hbox>
+								<vbox><spring flex="1" />
+								<label control="ufDebrisMin" value="&unifox.prefs.debrisMin;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufDebrisMin"/>
+							</hbox>
+						</vbox>
+					</groupbox>
+					<groupbox id="messageFormatGbox">
+						<caption label="&unifox.prefs.messageFormat;"/>
+						<vbox>
+							<hbox>
+								<checkbox id="ufWrittenMessages" label="&unifox.prefs.activate;"/>
+								<checkbox id="ufWrittenMessagesBold" label="&unifox.prefs.boldChar;" />
+								<checkbox id="ufWrittenMessagesItalic" label="&unifox.prefs.italicChar;" />
+							</hbox>
+							<hbox>
+								<vbox><spring flex="1" />
+								<label control="ufWrittenMessagesColor" value="&unifox.prefs.foregroundColor;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufWrittenMessagesColor" width="60"/>
+								<button label="&unifox.prefs.colorButton;"
+									oncommand="uf_openColor('ufWrittenMessagesColor','ufWrittenMessagesColor');"/>
+								<vbox><spring flex="1" />
+								<label control="ufWrittenMessagesBackground" value="&unifox.prefs.backgroundColor;"/>
+								<spring flex="1" />
+								</vbox>
+								<textbox id="ufWrittenMessagesBackground" width="60"/>
+								<button label="&unifox.prefs.colorButton;"
+									oncommand="uf_openColor('ufWrittenMessagesBackground','ufWrittenMessagesBackground');"/>
+							</hbox>
+						</vbox>
+					</groupbox>	
+			   </vbox>
+    
+			</hbox>
+	    </tabpanel>
+
+		<tabpanel orient="vertical" id="actionsPanel">
+			<vbox id="actionsVbox">		
+				<checkbox id="unifoxCoordCopy" label="&unifox.prefs.coordCopy;"/>
+				<checkbox id="unifoxSimulator" label="&unifox.prefs.simulator;"/>
+				<checkbox id="unifoxRECopy" label="&unifox.prefs.RECopy;"/>
+				<checkbox id="unifoxLastFleets" label="&unifox.prefs.lastFleets;"/>
+				<checkbox id="unifoxAddMessageOption" label="&unifox.prefs.addMessageOption;"/>
+				<groupbox id="missionPreferenceGbox">
+					<caption label="&unifox.prefs.missionPreference;"/>
+					<hbox>
+					<vbox width="87">
+						<listbox id="uf_missionPriorities" rows="7" style="max-width: 10em;" flex="1">
+						</listbox>
+					</vbox>
+					<vbox width="87">						
+						<button label="&unifox.prefs.delete;"
+							oncommand="uf_borrarUltimo('uf_missionPriorities','uf_missionButton');"/>
+						<button label="&unifox.prefs.deleteAll;"
+							oncommand="uf_borrarLista('uf_missionPriorities','uf_missionButton');"/>
+						<spring flex="1" />
+					</vbox>
+					<vbox width="80">
+						<button id="uf_missionButton1" label="&unifox.prefs.attack;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.attack;','1'); this.setAttribute('hidden','true');"/>
+						<button id="uf_missionButton2" label="&unifox.prefs.spy;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.spy;','2'); this.setAttribute('hidden','true');"/>
+						<button id="uf_missionButton3" label="&unifox.prefs.recollect;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.recollect;','3'); this.setAttribute('hidden','true');"/>
+						<button id="uf_missionButton4" label="&unifox.prefs.colonise;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.colonise;','4'); this.setAttribute('hidden','true');"/>
+						<spring flex="1" />
+					</vbox>
+					<vbox width="80">
+						<button id="uf_missionButton5" label="&unifox.prefs.extract;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.extract;','5'); this.setAttribute('hidden','true');"/>
+						<button id="uf_missionButton6" label="&unifox.prefs.transport;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.transport;','6'); this.setAttribute('hidden','true');"/>
+						<button id="uf_missionButton7" label="&unifox.prefs.deploy;"
+							oncommand="uf_anadir('uf_missionPriorities','&unifox.prefs.deploy;','7'); this.setAttribute('hidden','true');"/>
+						<spring flex="1" />
+					</vbox>
+					<separator class="groove" />
+	   			 <vbox flex="1" style="max-width: 20em">
+					    <description>
+							&unifox.prefs.missionPreference.description;
+					    </description>
+				    </vbox>
+				    <spring flex="1" />
+				    </hbox>
+				    
+				</groupbox>
+				<groupbox id="converterGbox">
+					<caption label="&unifox.prefs.converter;"/>
+					<vbox>
+						<checkbox id="unifoxConverter" label="&unifox.prefs.activate;"/>
+						<hbox>
+							<groupbox>
+								<caption label="&unifox.prefs.converterQuantity;"/>
+								<textbox id="ufConverterQuantity" width="70" maxlength="10"/>
+							</groupbox>
+							<groupbox>
+								<caption label="&unifox.prefs.converter1stRes;"/>
+								<menulist sizetopopup="always" id="ufConverterFirstRes">
+									<menupopup id="ufConverterFirstResPopup">
+										<menuitem id="Titane-0" label="Titane" value="0"/>
+										<menuitem id="Carbone-1" label="Carbone" value="1"/>
+										<menuitem id="Tritium-2" label="Tritium" value="2"/>
+									</menupopup>
+								</menulist>
+							</groupbox>
+							<groupbox>
+								<caption label="&unifox.prefs.converter2dRes;"/>
+								<menulist sizetopopup="always" id="ufConverterSdRes">
+									<menupopup id="ufConverterSdResPopup">
+										<menuitem id="Titane-0" label="Titane" value="0"/>
+										<menuitem id="Carbone-1" label="Carbone" value="1"/>
+										<menuitem id="Tritium-2" label="Tritium" value="2"/>
+									</menupopup>
+								</menulist>
+							</groupbox>
+							<spring flex="1" />
+						</hbox>
+					</vbox>
+				</groupbox>
+				<groupbox id="messageSignatureGbox">
+					<caption label="&unifox.prefs.messageSignature;"/>
+					<checkbox id="unifoxMessageSignature" label="&unifox.prefs.activate;"/>
+					<label control="msgSign" value="&unifox.prefs.msgSignText;:"/>
+					<textbox id="ufMsgSign" rows="4" style="max-width: 44em;" multiline="true" value=""/>
+				</groupbox>
+			</vbox>
+	    </tabpanel>
+		 <tabpanel orient="vertical" id="compPanel">
+			<vbox id="compVbox">
+				<groupbox id="RENeededShipsGbox">
+					<caption label="&unifox.prefs.RENeededShips;"/>
+						<hbox>
+							<vbox>
+								<spring flex="1" />
+								<checkbox id="ufRENeededShips" label="&unifox.prefs.activate;"/>
+								<spring flex="1" />
+							</vbox>
+							<vbox>
+								<spring flex="1" />
+								<label control="unifoxRENeededShip" value="&unifox.prefs.RENeededShip;"/>
+								<spring flex="1" />
+							</vbox>
+							<menulist sizetopopup="always" size="50" id="ufRENeededShip" oncommand="ufUpdateShipCapacity(this);">
+								<menupopup id="ufRENeededShipPopup">
+								</menupopup>
+							</menulist>
+							<vbox>
+								<spring flex="1" />
+								<label control="RENeededShipCapacity" value="&unifox.prefs.RENeededShipCapacity;"/>
+								<spring flex="1" />
+							</vbox>
+							<textbox id="RENeededShipCapacity" readonly="true" value="test" clickSelectsAll="true"/>
+						</hbox>
+					</groupbox>
+				<groupbox id="hoursGbox">
+					<caption label="&unifox.prefs.hours;"/>
+					<checkbox id="unifoxFleetReturnTime" label="&unifox.prefs.fleetReturnTime;"/>
+					
+				</groupbox>
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="displayPanel">
+			<vbox id="displayVbox">
+				
+				
+				<groupbox id="buttonsGbox">
+					<caption label="&unifox.prefs.buttons;"/>
+				
+				</groupbox>	
+			</vbox>
+		</tabpanel>
+		
+		<tabpanel orient="vertical" id="aboutPanel">
+			<groupbox id="aboutContent" align="left" orient="horizontal" flex="1">
+<vbox>
+	<hbox>
+		<spring flex="1" />
+		<vbox>
+			<spring flex="1" />
+			<label value="UniFox" style="font-weight: bold; font-size: x-large;"/>
+		</vbox>
+		<vbox>
+			<spring flex="1" />
+		</vbox>
+		<spring flex="1" />
+		<image src="chrome://unifox/skin/UniFox.gif"/>
+		<spring flex="1" />
+	</hbox>
+	<hbox>
+		<vbox>
+	  		<label value="&unifox.about.unifoxBy;" style="font-weight: bold;"/>
+	  		<label value="Jormund"/>
+			<label value="denjormund@gmail.com" class="url" style="color: blue; cursor: pointer" onclick="ufSendMail('mailto:denjormund@gmail.com');" />
+			<separator class="thin"/>
+			<label value="Max485"/>
+			<label value="Max485@fserv.fr" class="url" style="color: blue; cursor: pointer" onclick="ufSendMail('mailto:Max485@fserv.fr');" />
+
+	 		<separator class="thin"/>
+			<label value="&unifox.about.foxgameBy;" style="font-weight: bold;"/>
+	  		<label value="Ramiro Aparicio"/>
+	  		<label value="frisco82@gmail.com" class="url" style="color: blue; cursor: pointer" onclick="ufSendMail('mailto:frisco82@gmail.com');" />
+		</vbox>
+	</hbox>
+	<separator class="thin"/>
+	<separator class="thin"/>
+	<hbox>
+		<vbox>
+		</vbox>
+		<vbox>
+	  		<label value="&unifox.about.homePage;" style="font-weight: bold;"/>
+			<label value="topic UniFox (forum E-Univers)" 
+						class="url" 
+						style="color: blue; cursor: pointer" 
+						onclick="ufOpen_link('http://forum.e-univers.org/index.php?showtopic=9010');"/>
+	  		<spring flex="1" />
+		</vbox>
+	</hbox>
+	<separator class="thin"/>
+	<separator class="thin"/>
+	<hbox>
+		<vbox>
+		</vbox>
+		<vbox>
+	  		<label value="&unifox.about.specialThanksTo;" style="font-weight: bold;"/>
+	  		<label value="Tochaga" class="url" style="color: blue; cursor: pointer" onclick="ufOpen_link('http://forum.e-univers.org/index.php?showuser=1440');"/>
+	  		<label value="The_Invader" class="url" style="color: blue; cursor: pointer" onclick="ufOpen_link('http://forum.e-univers.org/index.php?showuser=4646');"/>
+	  		<spring flex="1" />
+		</vbox>
+	</hbox>
+	<separator class="thin"/>
+	<separator class="thin"/>
+	<hbox>
+		<vbox>
+		</vbox>
+		<vbox>
+	  		<label value="&unifox.about.iconDesign;" style="font-weight: bold;"/>
+	  		<label value="Mero" class="url" style="color: blue; cursor: pointer" onclick="ufOpen_link('http://forum.e-univers.org/index.php?showuser=4262');"/>
+	  		<spring flex="1" />
+		</vbox>
+	</hbox>
+</vbox>
+</groupbox>
+
+			
+	    </tabpanel>
+		<tabpanel orient="vertical" id="helpPanel">			
+				<vbox id="helpVbox">
+					<description>
+					&unifox.help.tabsGeneral;
+					</description>
+					<separator class="groove" />
+					<description>
+					&unifox.help.firstTime;
+					</description>
+					<separator class="groove" />
+					<description>
+					&unifox.help.tabsDetails;
+					</description>					
+			    </vbox>
+	    </tabpanel>
+		<tabpanel orient="vertical" id="overviewPanel">
+			<vbox id="overviewVbox">
+				<checkbox id="unifoxAddOverviewTime" label="&unifox.prefs.addOverviewTime;"/>
+			</vbox>
+			<groupbox id="VueGeneraleGbox">
+				<checkbox id="ufM_agrandir_page" label="&unifox.prefs.ufM.elargir_corps_page;"/>
+				<checkbox id="ufM_agrandir_page_entiere" label="&unifox.prefs.ufM.tous_agrandir_ou_evenement;"/>
+				<checkbox id="ufM_supprimer_colo" label="&unifox.prefs.ufM.suppr_affichage_colonie_en_bas;"/>
+				<checkbox id="ufM_afficher_ressources_en_vol" label="&unifox.prefs.ufM.show_ress_in_flight;"/>
+				<checkbox id="ufM_afficher_pourcentage_points" label="&unifox.prefs.ufM.show_pourcent_points;"/>
+			</groupbox>
+		</tabpanel>		
+		<tabpanel orient="vertical" id="buildingsPanel">
+			<vbox id="buildingsVbox">
+				<checkbox id="unifoxBuildingsTime" label="&unifox.prefs.buildingsTime;"/>
+				<checkbox id="unifoxInfosDeltas" label="&unifox.prefs.infosDeltas;"/>
+				<hbox id="prodTimeHbox">
+					<checkbox id="unifoxProdTime" label="&unifox.prefs.prodTime;"/>
+					<button label="&unifox.prefs.colorButton;" oncommand="uf_openSymbol();"/>
+				</hbox>
+				<groupbox id="displayGbox">
+					<caption label="&unifox.prefs.display;"/>
+					<checkbox id="unifoxRestructurateBody" label="&unifox.prefs.restructurateBody;"/>
+					<hbox>
+						<checkbox id="unifoxResizeImg" label="&unifox.prefs.resizeImg;"/>
+						<vbox><spring flex="1" />
+						<label control="unifoxImgSize" value="&unifox.prefs.unifoxImgSize;"/>
+						<spring flex="1" /></vbox>
+						<textbox id="unifoxImgSize" width="35"/>
+					</hbox>
+					<checkbox id="unifoxDescriptionTooltips" label="&unifox.prefs.descriptionTooltips;"/>
+					<checkbox id="unifoxColoriseRessources" label="&unifox.prefs.coloriseRessources;"/>		
+				</groupbox>
+			</vbox>
+		</tabpanel>		
+		<tabpanel orient="vertical" id="researchPanel">
+			<vbox id="researchVbox">
+				<checkbox id="unifoxResearchTime" label="&unifox.prefs.researchTime;"/>
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="shipyardPanel">
+			<vbox id="shipyardVbox">
+				<checkbox id="unifoxMaxButton" label="&unifox.prefs.addMaxButtons;"/>
+			</vbox>
+			<checkbox id="ufM_chantier_agrandir_zones_saisi" label="&unifox.prefs.ufM.agrandir_zone_saisi;"/>
+		</tabpanel>
+		<tabpanel orient="vertical" id="fleetPanel">
+			<vbox id="fleetVbox">
+				<checkbox id="unifoxAddGalaxyLinks" label="&unifox.prefs.addGalaxyLinks;"/>
+				<checkbox id="unifoxTransportsNeeded" label="&unifox.prefs.showTransportsNeeded;"/>
+				<checkbox id="unifoxFleetTime" label="&unifox.prefs.showFleetTime;"/>
+				<checkbox id="uf_Flotte_lien_pour_aider_vidage_ressources" label="&unifox.prefs.Flotte_lien_pour_aider_vidage_ressources;"/>
+				<checkbox id="uf_Flotte_lien_pour_aider_remplir_converto" label="&unifox.prefs.Flotte_lien_pour_aider_remplir_converto;"/>
+				
+				<checkbox id="ufM_envoyer_formulaire_via_touche_enterInFlotte" label="&unifox.prefs.ufM.submit_form_with_Enter_key;"/>
+				<checkbox id="ufM_flotte_agrandir_zones_saisi" label="&unifox.prefs.ufM.agrandir_zone_saisi;"/>
+					
+				<hbox id="timersIntervalBox">
+					<vbox><spring flex="1" />
+					<label control="unifoxTimersInterval" value="&unifox.prefs.timersInterval;"/>
+					<spring flex="1" /></vbox>
+					<textbox id="unifoxTimersInterval" width="35"/>
+				</hbox>
+				<checkbox id="unifoxVEReturnTime" label="&unifox.prefs.VEReturnTime;"/>
+	    		<hbox id="VESpeedBox">
+					<vbox><spring flex="1" />
+					<label control="" value="&unifox.prefs.VESpeed;"/>
+					<spring flex="1" /></vbox>
+					<menulist sizetopopup="always" size="30" id="ufVESpeed">
+						<menupopup id="ufVESpeedPopup">
+						</menupopup>
+					</menulist>
+				</hbox>
+				
+				<!--<hbox >-->
+					<groupbox id="freightOrderBox">		
+						<caption label="&unifox.prefs.freightOrder;"/>
+						<hbox>
+							<listbox  
+								ondraggesture="nsDragAndDrop.startDrag(event, dndObserver)"
+								ondragover="nsDragAndDrop.dragOver(event, dndObserver)"
+								ondragdrop="nsDragAndDrop.drop(event, dndObserver)"
+								id="unifoxFreightOrder" rows="3"
+								style="max-width: 15em;" flex="1">
+							</listbox>
+							<separator class="groove" />
+							<vbox flex="1" style="max-width: 30em">
+								<description>
+								&unifox.prefs.freightOrderDesc;
+								</description>
+							</vbox>
+							<spring flex="1" />
+						</hbox>
+					</groupbox>
+				<!--</hbox>-->
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="galaxyPanel">
+			<vbox id="galaxyVbox">
+				<checkbox id="unifoxAddRanks" label="&unifox.prefs.addRanks;"/>
+				
+				</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="messagesPanel">
+				<checkbox id="ufM_messages_mettre_lien_sur_coords" label="&unifox.prefs.ufM.tranformer_coordonnees_en_lien_galaxie;"/>
+				<checkbox id="ufM_messages_ajouter_separateur_milier_dans_rapports_espionnage" label="&unifox.prefs.ufM.mettre_separateur_miliers_dans_rapport_espionnage;"/>
+				<checkbox id="ufM_messages_envoyer_message_alli" label="&unifox.prefs.ufM.add_link_for_send_messages_ally;"/>
+				<checkbox id="ufM_messages_ajouter_historique_dans_message" label="&unifox.prefs.ufM.show_history_for_answer;"/>
+				<checkbox id="ufM_messages_afficher_lien_sur_RC_pour_formater" label="&unifox.prefs.ufM.show_link_in_RC_for_send_in_formatting;"/>
+				
+				<groupbox id="colorer_message_flotte_ami">
+					<caption label="&unifox.prefs.ufM.colorize_messages_indicating_the_arrival_of_a_friendly_fleet;"/>
+					
+					<hbox>
+						<checkbox id="ufM_messages_colorer_message_flotte_amical" label="&unifox.prefs.activate;"/>
+						
+						<vbox>
+							<spring flex="1" />
+							<label control="ufM_messages_colorer_message_flotte_amical_color_texte" value="&unifox.prefs.ufM.texte; : "/>
+							<spring flex="1" />
+						</vbox>
+						<textbox id="ufM_messages_colorer_message_flotte_amical_color_texte"/>
+						
+						<vbox>
+							<spring flex="1" />
+							<label control="ufM_messages_colorer_message_flotte_amical_color_backgound" value="&unifox.prefs.ufM.arriere-plan; : "/>
+							<spring flex="1" />
+						</vbox>					
+						<textbox id="ufM_messages_colorer_message_flotte_amical_color_backgound"/>
+					</hbox>
+				</groupbox>
+				
+			<vbox id="messagesVbox">
+				<checkbox id="unifoxBBcode" label="&unifox.prefs.BBcode;"/>
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="othersPanel">
+			<vbox id="othersVbox">
+				
+				<groupbox id="selectUniverseGbox">
+						<vbox>
+							<radiogroup>
+								<radio id="unifoxUniverseSelectionDisabled" label="&unifox.prefs.disable;"/>
+								<radio id="unifoxSaveLastUniverse" label="&unifox.prefs.saveLastUniverse;"/>
+								<radio id="unifoxSelectUniverse" label="&unifox.prefs.selectUniverse;"/>
+							</radiogroup>
+							<hbox align="center">
+								<menulist sizetopopup="always" size="30" id="ufServer" oncommand="uf_loadUnis();" label="&unifox.prefs.server;">
+									<menupopup id="ufServerPopup">
+									</menupopup>
+								</menulist>
+								<menulist sizetopopup="always" size="30" id="ufUni" label="&unifox.prefs.universe;" >
+								
+									<menupopup id="ufUniPopup">
+									</menupopup>
+								</menulist>
+								<!--oncommand="this.nextSibling.value=this.value+':'+this.previousSibling.value;"
+								<textbox id="ufUniHidden" value="0"/>-->
+								<textbox id="ufLogin"/>
+								<textbox id="ufPassword" type="password"/>
+							</hbox>
+						</vbox>
+				</groupbox>
+				<hbox>
+					<checkbox id="ufDebugMode" label="&unifox.prefs.debugMode;"/>
+				</hbox>
+				<checkbox id="unifoxRSS" label="&unifox.prefs.RSS;"/>
+				<groupbox id="exportOptions">
+					<caption label="Import/Export d'options"/>
+					<hbox>
+						<textbox id="exportOptionsText" multiline="true" rows="10"/>
+						<vbox>
+							<button label="Importer" onclick="ufImportOptions();"/>
+							<button label="Exporter" onclick="ufExportOptions();"/>
+							<label control="exportOptionsText" value="texte d'aide a completer"/>
+						</vbox>
+					</hbox>
+				</groupbox>
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="simuPanel">
+			<vbox id="simuVbox">
+			</vbox>
+			<checkbox id="ufM_simu_afficher_renta_defenseur" label="&unifox.prefs.ufM.show_rentability_defender;"/>
+			<checkbox id="ufM_simu_formater_rapport_de_combat" label="&unifox.prefs.ufM.create_battle_report_formatted_with_result;"/>
+			<checkbox id="ufM_simu_agrandir_zones_saisi" label="&unifox.prefs.ufM.agrandir_zone_saisi;"/>
+			<checkbox id="ufM_simu_agrandir_zones_saisi_dynamique" label="&unifox.prefs.ufM.agrandir_zone_saisi; &unifox.prefs.ufM.agrandir_zone_saisi_dynamiquement;"/>
+		</tabpanel>
+		<tabpanel orient="vertical" id="convPanel">
+			<vbox id="convVbox">
+			</vbox>
+			<checkbox id="ufM_envoyer_formulaire_via_touche_enterInConverto" label="&unifox.prefs.ufM.submit_form_with_Enter_key;"/>
+		</tabpanel>
+		<tabpanel orient="vertical" id="CRconvPanel">
+			<vbox id="CRconvVbox0">
+				<hbox id="CRconvHbox">
+					<vbox id="CRconvVbox1">
+						<checkbox id="unifoxCRConverter" label="&unifox.prefs.activate;"/>
+						<checkbox id="ufCRshowCoords" label="&unifox.prefs.CR.showCoords;"/>
+						<checkbox id="ufCRshowTechnos" label="&unifox.prefs.CR.showTechnos;"/>
+						<checkbox id="ufCRshowLostUnits" label="&unifox.prefs.CR.showLostUnits;"/>
+						<checkbox id="ufCRshowEndLoss" label="&unifox.prefs.CR.showEndLoss;"/>
+						<checkbox id="ufCRshowAttackersName" label="&unifox.prefs.CR.showAttackersName;"/>
+						<checkbox id="ufCRshowDefendersName" label="&unifox.prefs.CR.showDefendersName;"/>
+						<checkbox id="ufCRshowFlyingTime" label="&unifox.prefs.CR.showFlyingTime;"/>
+						
+						<hbox>
+						<vbox><spring flex="1" />
+							<label control="ufCRseparator" value="&unifox.prefs.CR.recyclingPlayer;"/>
+							<spring flex="1" /></vbox>
+							<menulist sizetopopup="always" id="ufCRrecyclingPlayer">
+								<menupopup id="recyclingPlayerPopup">
+									<menuitem label="&unifox.prefs.CR.recyclingPlayer.unknown;" value="-1"/>
+									<menuitem label="&unifox.prefs.CR.recyclingPlayer.attacker;" value="0"/>
+									<menuitem label="&unifox.prefs.CR.recyclingPlayer.defender;" value="1"/>
+								</menupopup>
+							</menulist>
+						</hbox>
+					</vbox>
+					<vbox id="CRconvVbox2">
+						<!--<label value=" "/>-->
+						<checkbox id="unifoxCRConverterAutocopy" label="&unifox.prefs.CR.autocopy;"/>		
+						<!--<checkbox id="ufCRshowRentability" label="&unifox.prefs.CR.showRentability;"/>-->
+						<checkbox id="ufCRshowDetailledGain" label="&unifox.prefs.CR.showDetailledGain;"/>
+						<checkbox id="ufCRshowTotalGain" label="&unifox.prefs.CR.showTotalGain;"/>
+						<checkbox id="ufCRshowDetailledCDR" label="&unifox.prefs.CR.showDetailledCDR;"/>
+						<checkbox id="ufCRshowTotalCDR" label="&unifox.prefs.CR.showTotalCDR;"/>
+						<checkbox id="ufCRshowDetailledRentability" label="&unifox.prefs.CR.showDetailledRentability;"/>
+						<checkbox id="ufCRshowTotalRenta" label="&unifox.prefs.CR.showTotalRenta;"/>
+						<checkbox id="ufCRshowConsumption" label="&unifox.prefs.CR.showConsumption;"/>
+						<hbox>
+							<vbox><spring flex="1" />
+							<label control="ufCRseparator" value="&unifox.prefs.CR.separator;"/>
+							<spring flex="1" /></vbox>
+							<textbox id="ufCRseparator" maxlength="3" size="3"/>
+						</hbox>
+					</vbox>
+				</hbox>
+				<hbox>
+					<vbox><spring flex="1" /><label control="ufCRstartText" value="&unifox.prefs.CR.startText;"/><spring flex="1" />
+					<spring flex="1" /><label control="ufCRafterBattleMessage" value="&unifox.prefs.CR.afterBattleMessage;"/><spring flex="1" />
+					<spring flex="1" /><label control="ufCRresultText" value="&unifox.prefs.CR.resultText;"/><spring flex="1" />
+					<spring flex="1" /><label control="ufCRstartText" value="&unifox.prefs.CR.endText;"/><spring flex="1" />
+					<spring flex="1" /><label control="ufCRattackersAlly" value="&unifox.prefs.CR.attackersAlly;"/><spring flex="1" />
+					<spring flex="1" /><label control="ufCRdefendersAlly" value="&unifox.prefs.CR.defendersAlly;"/><spring flex="1" /></vbox>
+					<vbox><textbox id="ufCRstartText" size="50"/>
+					<textbox id="ufCRafterBattleMessage" size="50"/>
+					<textbox id="ufCRresultText" size="50"/>
+					<textbox id="ufCRendText" size="50"/>
+					<textbox id="ufCRattackersAlly" size="50"/>
+					<textbox id="ufCRdefendersAlly" size="50"/></vbox>
+				</hbox>
+				<button label="&unifox.prefs.ufCRcolors;" onclick="uf_openCRcolors();"/>
+				<!--<tree id="ufCRcolors" flex="1" seltype="multiple" context="ufCRcolors-context" rows="5">
+					<treecols>
+					<treecol id="ufCRcolors-texts" label="&unifox.prefs.CR.texts;" flex="1"/>
+					<splitter class="tree-splitter"/>      			
+					<treecol id="ufCRcolors-colors" label="&unifox.prefs.CR.colors;" flex="1"/>
+					</treecols>
+					<treechildren ondblclick="alert(2)"/>
+				</tree>-->
+			</vbox>
+		</tabpanel>
+		<tabpanel orient="vertical" id="inviPanel">
+		</tabpanel>
+		
+		
+			<tabpanel orient="vertical" id="byMax485Panel">
+			<vbox id="byMax485Vbox">
+				<groupbox id="SurLeJeuGbox">
+					<caption label="&unifox.prefs.ufM.all_pages;"/>
+					<checkbox id="ufM_changer_planete_avec_fleche_haut_et_bas" label="&unifox.prefs.ufM.change_planetes_with_UP_and_DOWN;"/>
+				</groupbox>
+				<groupbox id="RenommerGbox">
+					<caption label="&unifox.prefs.ufM.page_rename_planete;"/>
+					<checkbox id="ufM_suppr_colo_pass_auto" label="&unifox.prefs.ufM.record_password_for_remove_planete;"/>
+				</groupbox>
+				<groupbox id="VueGlobaleGbox">
+					<caption label="&unifox.prefs.ufM.vue_globale;"/>
+					<checkbox id="ufM_ajouter_somme_all_planetes" label="&unifox.prefs.ufM.calc_ress_platform;"/>
+				</groupbox>
+				<groupbox id="StatsGbox">
+					<caption label="&unifox.prefs.ufM.stats;"/>
+					<checkbox id="ufM_stats_changer_centaine_avec_fleches_gauche_droite" label="&unifox.prefs.ufM.change_hundred_with_LEFT_and_RIGHT;"/>
+				</groupbox>
+				<groupbox id="ufM_AllianceGbox">
+					<caption label="&unifox.prefs.ufM.alliance;"/>
+					<checkbox id="ufM_alliance_liste_members_rendre_les_coords_cliquable" label="&unifox.prefs.ufM.in_members_liste_change_coord_in_links_of_galaxy;"/>
+				</groupbox>
+			</vbox>
+		</tabpanel>
+		
+		
+	</tabpanels>
+	</tabbox>
+</dialog>

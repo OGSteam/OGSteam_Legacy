@@ -1,0 +1,7 @@
+<Files mpc_import.php>
+Allow from all
+</Files>
+<Files *.png>
+Allow from all
+</Files>
+deny from all

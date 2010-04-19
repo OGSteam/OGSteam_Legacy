@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Basic Express 2005
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OGSLite", "OGSLite\OGSLite.vbproj", "{D66E5ACB-7234-48A7-8911-58B595E8ADE3}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OGSUi", "OGSUi\OGSUi.vbproj", "{E638063D-6413-48AF-B053-05DBFB956D7C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122} = {6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OGameObject", "OGameObject\OGameObject.vbproj", "{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D66E5ACB-7234-48A7-8911-58B595E8ADE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66E5ACB-7234-48A7-8911-58B595E8ADE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66E5ACB-7234-48A7-8911-58B595E8ADE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66E5ACB-7234-48A7-8911-58B595E8ADE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E638063D-6413-48AF-B053-05DBFB956D7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E638063D-6413-48AF-B053-05DBFB956D7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E638063D-6413-48AF-B053-05DBFB956D7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E638063D-6413-48AF-B053-05DBFB956D7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

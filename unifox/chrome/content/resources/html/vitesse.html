@@ -1,0 +1,388 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<META NAME="description" CONTENT="">
+<META NAME="keywords" CONTENT="">
+<META NAME="version" CONTENT="13/03/08">
+<title>Calculateur de temps de vol pour e-univers</title>
+<!--<link rel="stylesheet" type="text/css" href="javascript/style.css">-->
+</head>
+<style>
+#tool input
+{
+background-color: #1F273C;
+	color: #7B90B8;
+	font-size: 10px;
+	font-family: Tahoma;
+	font-weight: bold;
+	border: 1px ridge white;
+	padding-left: 3px;
+}
+table
+{
+text-align:center;
+}
+th
+{
+	font-size: 10px;
+	font-family: Verdana;
+	font-weight:normal;
+	color: #B0C0DE;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:5px;
+}
+td
+{
+	font-size: 10px;
+	font-family: Verdana;
+	font-weight:normal;
+	color: #B0C0DE;
+	padding-top:5px;
+}
+body, #content, #content td{
+	font-family: Tahoma;
+	font-size: 12px;
+	color: #1F273C;
+	padding: 0;
+	margin: 0;
+}
+#content {
+	background:#ffffff;
+	padding: 10px;
+	vertical-align: top;
+}
+#content h1 {
+	font-family: Tahoma;
+	font-size: 15px;
+	color: #990000;
+	font-weight: bold;
+}
+#content a:link, #content a:visited {
+	color: #6066BB;
+	text-decoration: none;
+}
+
+#content a:hover {
+	color: #990000;
+	text-decoration: underline;
+}
+#calc td, #tool td {
+	font-size: 10px;
+	font-family: Verdana;
+	color: #B0C0DE;
+}
+
+#calc td, #tool td {
+	font-size: 10px;
+	font-family: Verdana;
+	color: #B0C0DE;
+	padding-top: 3px;
+}
+
+#tool {
+    background-color: #121C28;
+	/*height: 535px;*/
+}
+
+#calc textarea, #tool textarea,  #calc .inp, .inp, #colorTextArea {
+	background-color: #1F273C;
+	color: #7B90B8;
+	font-size: 10px;
+	font-family: Tahoma;
+	font-weight: bold;
+	border: 1px ridge white;
+	padding-left: 3px;
+}
+
+#calc a:link, #calc a:visited, #tool a:link, #tool a:visited {
+	font-size: 11px;
+	font-family: Tahoma;
+	font-weight: bold;
+	color: #33FFFF;
+	text-decoration: none;
+}
+
+#calc td {
+	padding-left: 5px;
+}
+
+#calc a:hover, #tool a:hover {
+	color: #FF9900;
+}
+
+#calc .button, #tool .button, #bugs .button, #colortt .button{
+	background:#efefef;
+	border-bottom:1px solid #999999;
+	border-left:1px solid #ffffff;
+	border-right:1px solid #999999;
+	border-top:1px solid #ffffff;
+	color:#1F273C;
+	margin:6px 0px;
+	padding:1px 5px;
+	width: 80px;
+	font-family: tahoma;
+	font-size: 11px;
+	text-decoration:none;
+	cursor: hand;
+	cursor: pointer;
+}
+</style>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3352604-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<body>
+
+<div id="content">
+<table>
+<tbody>
+<tr><td id="taka"><h1 id="titre">Calculateur de temps de vol pour E-Univers</h1><a name="#titre">&nbsp;</a></td></tr>
+<tr><td><div id="tool">
+<form id="crform">
+<table width="100%">
+<tbody>
+<tr>
+	<th> Vaisseau </th>
+	<th>Technologie</th>
+
+	<th>Vitesse</th>
+	<td colspan=3>Départ</td>
+	<td colspan=3>Arrivée</td>
+	<td>Distance</td>
+	<td>Vitesse de l'univers</td>
+	<td>&nbsp;Vitesse du vol en %&nbsp;</td>
+
+	<td>Temps de vol</td>
+</tr>
+<tr>
+	<td><select class="inp" name="ship"  onchange="calc_after(0);">
+						<!--<option value="0">Navette-PT</option>
+						<option value="1">Navette-GT</option>-->	
+					</select></td>
+	<td>-<input class="inp" type="text" name="techno" value="0" size="3" onchange="calc_after(1);"/>-</td>
+	<td>-<input class="inp" type="text" name="speed" value="6500"  size="10"  onchange="calc_after(2);"/>-</td>
+
+	<td>-<input class="inp" type="text" name="g_start" value="1"  size="2"  onchange="calc_after(3);"/></td>
+	<td><input class="inp" type="text" name="ss_start" value="1" size="2" onchange="calc_after(3);"/></td>
+	<td><input class="inp" type="text" name="p_start" value="1"size="2" onchange="calc_after(3);"/>-</td>
+	<td>-<input class="inp" type="text" name="g_end" value="1"size="2" onchange="calc_after(3);"/></td>
+	<td><input class="inp" type="text" name="ss_end" value="11"size="2" onchange="calc_after(3);"/></td>
+	<td><input class="inp" type="text" name="p_end" value="1"size="2" onchange="calc_after(3);"/>-</td>
+	<td>-<input class="inp" type="text" name="dist" value="3650"size="10" onchange="calc_after(4);"/>-</td>
+
+	<td>-<input class="inp" type="text" name="uni" value="10"size="3" onchange="calc_after(5);"/>-</td>
+	<td>-<input class="inp" type="text" name="vit" value="100" size="3" onchange="calc_after(5);"/>-</td>
+	<td>-<input class="inp" readonly="readonly" name="result" value="0:00:00 h"/></td>
+</tr>
+
+
+</tr>
+	<!--<input name="tech" onclick="closeMessage()" type="checkbox"> Montrer les technologies.
+	<input class="button" onclick="convert(); closeMessage(); window.location='#titre';" value="Convertir" type="button">-->
+
+		
+</tbody>		
+</table>
+</form>
+</div></td></tr>
+</tbody>
+</table>
+</div>
+<p><font size=2>Pour <a href="http://login.e-univers.org/"><nobr>E-Univers</nobr></a>, par Jormund</font><br><br></p>
+<span id="test"></span>
+</body>
+<script>
+
+var ships = new Array("Navette PT-5" ,"Navette GT-50" ,"Chasseur" ,"Chasseur Lance" ,
+"Fr\u00E9gate" ,"Destroyer" ,"Overlord" ,"Forteresse Noire" ,"Hyperion" ,
+"Collecteur" ,	"Sonde" ,"Colonisateur" ,"Vaisseau Extracteur" );
+var base_speed=new Array(5000,8000,12500,10000,
+15000,10000,3500,5000,100,
+3000,100000000,2500,500);
+var base_techno=new Array(3,6,2,3,
+5,6,7,9,12,
+6,4,4,7);
+var sel=document.getElementsByName("ship")[0];
+var option;
+for(i=0;i<ships.length;i++)
+{
+option=document.createElement("option");
+option.value=i;
+option.innerHTML=ships[i];
+sel.appendChild(option);
+}
+
+function calc_after(modification)
+{
+switch(modification)
+{
+case -1:calc_techno();
+		calc_speed();
+		calc_dist();
+		calc_result();
+		break;
+//si on modifie le vaisseau
+case 0: calc_techno();
+		calc_speed();
+		calc_result();
+		break;
+//si on modifie la techno
+case 1: calc_speed();
+		calc_result();
+		break;
+//si on modifie la vitesse
+case 2: calc_ship_and_techno();
+		calc_result();
+		break;
+//si on modifie une coordonnée
+case 3: calc_dist();
+		calc_result();
+		break;
+//si on modifie la distance
+case 4: calc_coord();
+		calc_result();
+		break;
+//si on modifie la vitesse de l'uni
+case 5: calc_result();
+		break;
+default:calc_dist();
+		calc_result();
+}
+}
+
+function calc_ship_and_techno()
+{
+}
+
+/*function calc_ship()
+{
+}*/
+
+function calc_techno()
+{
+var sh=document.getElementsByName("ship")[0].value;
+document.getElementsByName("techno")[0].value=base_techno[sh];
+}
+
+function calc_speed()
+{
+var sh=document.getElementsByName("ship")[0].value;
+document.getElementsByName("speed")[0].value=Math.floor(base_speed[sh]*(10+parseInt(document.getElementsByName("techno")[0].value))/10);
+}
+
+function calc_coord()
+{
+maxg=13;
+maxss=250;
+maxp=15;
+dist=document.getElementsByName("dist")[0].value;
+var g=parseInt(document.getElementsByName("g_start")[0].value);
+var s=parseInt(document.getElementsByName("ss_start")[0].value);
+var p=parseInt(document.getElementsByName("p_start")[0].value);
+var ecartt=0;
+var ecartg=0;
+var ecarts=0;
+var ecartp=0;
+if(dist>95*maxss+2700)//si la distance est très grande, on l'arrondi a la galaxie pres
+{
+ecartt=Math.round(dist/20000);
+if(ecartt+g<maxg)
+	{
+	ecartg=ecartt;
+	}
+else if(g-ecartt>0)
+	{
+	ecartg=-ecartt;
+	}
+else ecartg=0;
+}
+if(dist>2700 && dist<=95*maxss+2700)//si elle est plus grande que quelque planetes, elle se compte en systemes
+	{
+	
+	}
+
+if(dist>1000 && dist<=5*maxp+1000)//sinon elle se compte en planetes
+	{
+	var ecart=Math.round((dist-1000)/5);
+	
+	}
+if(dist<1000)//en cas de probleme
+	{
+	dist=1000;
+	document.getElementsByName("dist")[0].value=dist;
+	}
+	
+document.getElementsByName("g_end")[0].value=g+ecartg;
+document.getElementsByName("ss_end")[0].value=s+ecarts;
+document.getElementsByName("p_end")[0].value=p+ecartp;
+}
+
+function calc_dist()
+{
+document.getElementsByName("dist")[0].value=distance();
+}
+
+function calc_result()
+{
+//getElementsByName("");
+var coef=document.getElementsByName("uni")[0].value;
+var speed=document.getElementsByName("speed")[0].value;
+var length=document.getElementsByName("dist")[0].value;
+var pourcent = document.getElementsByName("vit")[0].value;
+var result=Math.ceil(((3500*100/pourcent * Math.sqrt(length * 10 / speed) + 10)/ coef));//temps de vol en secondes
+//var result=Math.ceil(((3500 * Math.sqrt(length * 10 / speed) + 10) * 100/pourcent/ coef));//temps de vol en secondes
+var h=Math.floor(result/3600);
+var m=Math.floor((result-3600*h)/60);
+var s=result-3600*h-60*m;
+if(h<10)var hh="0"+h;
+else var hh=h+"";
+if(m<10)var mm="0"+m;
+else var mm=m+"";
+if(s<10)var ss="0"+s;
+else var ss=s+"";
+document.getElementsByName("result")[0].value=hh+":"+mm+":"+ss+" h";
+//alert(result);
+}
+
+//fonction récupérée sur e-univers.com
+function distance() {
+  var galaxie_dep;
+  var systeme_dep;
+  var planete_dep;
+  var galaxie_arr;
+  var systeme_arr;
+  var planete_arr;
+  var dist;
+
+  galaxie_dep = document.getElementsByName("g_start")[0].value;
+  systeme_dep = document.getElementsByName("ss_start")[0].value;
+  planete_dep = document.getElementsByName("p_start")[0].value;
+  galaxie_arr = document.getElementsByName("g_end")[0].value;
+  systeme_arr = document.getElementsByName("ss_end")[0].value;
+  planete_arr = document.getElementsByName("p_end")[0].value;
+
+  dist = 0;
+  if ((galaxie_arr - galaxie_dep) != 0) {
+    dist = Math.abs(galaxie_arr - galaxie_dep) * 20000;
+  } else if ((systeme_arr - systeme_dep) != 0) {
+    dist = Math.abs(systeme_arr - systeme_dep) * 95 + 2700;
+  } else if ((planete_arr - planete_dep) != 0) {
+    dist = Math.abs(planete_arr - planete_dep) * 5 + 1000;
+  } else {
+    dist = 5;
+  }
+
+  return(dist);
+}
+
+
+calc_after(-1);
+</script>
+
+</html>

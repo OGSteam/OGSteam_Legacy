@@ -1,0 +1,38 @@
+<!-- IF not S_USER_LOGGED_IN -->
+<br clear="all" />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+
+				<dl>
+					<dt>{L_LOGIN_LOGOUT}</dt>
+				</dl>
+
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+				<dl>
+					<dd class="posts_portal">
+<table class="tablebg" width="100%" cellpadding="0" cellspacing="0" border="0" >
+	<td class="cat"><div align="left"></div></td>
+	<tr>
+		<td >
+			<form method="post" action="{S_LOGIN_ACTION}">
+				<table class="tablebg" width="100%" cellspacing="1">
+					<tr>
+						<td class="row1" align="center"><span class="genmed">{L_USERNAME}:</span> <input class="post" type="text" name="username" size="10" />&nbsp; <span class="genmed">{L_PASSWORD}:</span> <input class="post" type="password" name="password" size="10" />&nbsp; <span class="gensmall">{L_LOG_ME_IN}</span> <input type="checkbox" class="radio" name="autologin" />&nbsp; <input type="submit" class="btnmain" name="login" value="{L_LOGIN}" /></td>
+					</tr>
+				</table>
+			</form>				
+		</td>
+	</tr>
+</table>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->

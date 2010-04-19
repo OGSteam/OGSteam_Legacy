@@ -1,0 +1,4 @@
+<Files *.swf>
+Allow from all
+</Files>
+deny from All

@@ -1,0 +1,43 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{L_RND_MEMBER}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" align="center" class="row1">				
+				<tr>
+					<td>
+					<center>
+	<tr align="left">
+			<td>
+				<!-- BEGIN random_member -->
+					<center>
+					<!-- IF random_member.USER_FLAG -->
+					<img src="./images/flags/{random_member.USER_FLAG}.gif" border="0" width="15" alt="{random_member.USER_FLAG}" title="{random_member.USER_FLAG}">&nbsp;
+					<!-- ENDIF -->
+					<a href="{random_member.U_USERNAME}">
+					<span class="gensmall"><font color="#{random_member.USERNAME_COLOR}">
+					{random_member.USERNAME}</a></font></span> <span style="float:right;"></span>
+					<br /><br />
+					<!-- IF random_member.USER_AVATAR -->						
+						{random_member.USER_AVATAR}
+					<!-- ELSE -->
+						<img src="./images/portal/no_avatar.gif"/></center><br />
+					<!-- ENDIF --> 
+						<span class="gensmall">{L_RND_JOIN}:&nbsp;&nbsp;{random_member.JOINED}</span><br />
+						<span class="gensmall">{L_RND_POSTS}:&nbsp;&nbsp;{random_member.USER_POSTS}</span><br />
+					<!-- IF random_member.USER_OCC -->
+						<span class="gensmall">{L_RND_OCC}:&nbsp;&nbsp;{random_member.USER_OCC}</span><br />
+					<!-- ENDIF -->
+					<!-- IF random_member.USER_FROM -->
+						<span class="gensmall">{L_RND_FROM}:&nbsp;&nbsp;{random_member.USER_FROM}</span><br />
+					<!-- ENDIF -->
+					<!-- IF random_member.U_WWW -->
+						<span class="gensmall"><a href="{random_member.U_WWW}" title="{random_member.U_WWW}" target="_blank">{L_RND_WWW}</a></span><span style="float:right;"></span><br />
+					<!-- ENDIF -->
+				<!-- END random_member -->
+					</center>
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>

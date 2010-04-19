@@ -1,0 +1,113 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT_TITRE -->
+
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_quote" method="post" action="{U_ACTION_2}">
+	<dl>
+		<label for="quote_titre">{L_QUOTE_TITRE}:<br>{L_QUOTE_TITRE_EXPLAIN}</label><br><br>
+		<input name="quote_titre" type="text" id="quote_titre" value="{QUOTE_TITRE}"  size="60" /><br>
+	</dl>
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save2" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_QUOTE}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ENDIF -->
+<!-- IF S_EDIT -->
+
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_quote" method="post" action="{U_ACTION}">
+	<dl>
+		<label for="title">{L_QUOTE}</label><br><br>
+        		<input name="quote" type="text" id="quote" value="{QUOTE}" size="99" />
+	</dl>
+	<dl>
+		<label for="title">{L_AUTHOR}</label><br><br>
+        		<input name="author" type="text" id="author" value="{AUTHOR}" size="39" />
+	</dl>
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_QUOTE}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+
+	<h1><center>{L_ACP_QUOTE_EXPLAIN}</center></h1>
+	<br>
+	<center>{L_QUOTE_TITRE_EXPLAIN}</center><br>
+
+	<form id="acp_quote" method="post" action="{U_ACTION_2}">
+	<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th>{L_QUOTE_TITRE_INFOS}</th>
+		<th>{L_QUOTE_TITRE}</th>
+		<th>{L_QUOTE_TITRE_EDITER}</th>
+	</tr>
+	</thead >
+	<tbody>
+		<tr>
+		<td><label for="quote_titre">{L_QUOTE_TITRE}:<br>{L_QUOTE_TITRE_EXPLAIN_BLOC}</label></td>
+		<!-- BEGIN quote_titre -->
+		<td><center>{quote_titre.QUOTE_TITRE}</center><br>
+		<td style="text-align: center;" rowspan="2"><a href="{quote_titre.U_EDIT_TITRE}">{ICON_EDIT}</a></td>
+		</dl>
+		<!-- END quote_titre -->
+	</form>
+	</p></td>
+	</td>
+	</tbody>
+	</table>
+	<br>
+
+	<p><center>{L_ACP_QUOTE__EXPLAIN}</center></p>
+
+	<form id="acp_quote" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+	<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+
+		<th>{L_QUOTE}</th>
+		<th>{L_AUTHOR}</th>
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN quote -->
+		<!-- IF quote.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;">{quote.QUOTE}</td>
+		<td style="text-align: center;">{quote.AUTHOR}</td>
+		<td style="text-align: center;"><a href="{quote.U_EDIT}">{ICON_EDIT}</a> <a href="{quote.U_DELETE}">{ICON_DELETE}</a></td>
+	</tr>
+	<!-- END quote -->
+	</tbody>
+	</table>
+
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_QUOTE}" />
+	</p>
+	</fieldset>
+
+	</form>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,1164 @@
+/**
+ * @author Unibozu
+ * @license GNU/GPL
+ */
+
+var XnewOgame = {
+	//on déclare les varibles generales
+	locales: {},
+	doc : null,
+	url : null,
+	Tab : null,
+	universe : null,
+	lang: null,
+	sandbox: null,	
+	callback : [],
+	params : [],
+	messagesCache: {},
+	lastAction: null,
+		
+	l: function(name) {
+		if (!this.locales[this.lang][name]) {
+			throw new Error('Unknow locale "'+name+'" for lang'+this.lang);
+		}
+		
+		var locale = this.locales[this.lang][name];
+		for (var i = 1, len = arguments.length; i < len; i++) {
+			locale = locale.replace('$'+i, arguments[i]);
+		}
+		
+		return locale;
+	},
+
+	newRequest: function() {
+		return new Request(this.Tab, this.handleResponse, this);
+	},
+
+	manual_send : function () {
+		$('xtense-send').setAttribute('disabled', 'true');
+		this.callback[0].apply(this, this.callback[1]);
+	},
+	
+	parseIntWithMultiplier : function(str) {
+		var st = str;
+		var m = st.match(/\d+.?\d*[kmg]?/i);
+		if(m) {
+			st = m[0].toLowerCase();
+			var num = parseFloat(st.replace(/[kmg]/,''));
+			switch(st[st.length-1]) {
+				case 'k':
+						num = num*1000;
+						break;
+				case 'm':
+						num = num*1000000;
+						break;
+				case 'g':
+						num = num*1000000000;
+						break;
+				default:break;
+			}
+			return Math.round(num);
+		} else return 0;
+	},
+	
+	onPageLoad: function(doc, url, Tab,window) {
+		try {
+			this.doc = doc;
+			this.url = url;
+			this.Tab = Tab;
+            this.win = window;
+            //Xconsole("sandbox:"+sandbox);
+			
+			//Xconsole(url);
+			if (!(this.universe = this.getUniverse(url))) return false;
+			
+			if (!Xservers.check(this.universe)) {
+				Tab.setStatus(Xl('no server'), XLOG_NORMAL, {url: url});
+				return true;
+			} else this.servers = Xservers.list;
+			
+			this.lang = this.getLang(this.universe);
+
+			if (!this.locales[this.lang]) {
+				Tab.setStatus(Xl('unavailable parser lang', this.lang), XLOG_ERROR, {url: url});
+				return true;
+			}
+			
+			var page = this.getPage(url);
+			Xconsole("page:"+page);
+			if (page == 'rc') 
+				Xtoolbar.show();
+		} catch(e) {
+			throw_error(e);
+		}
+		
+		try {
+			// Ne pas mettre d'erreur pour la page de login
+			//Xconsole('Xtense.active'+Xtense.active);
+			if (!Xtense.active || !page) 
+				return false;
+			
+			if (Xprefs.isset('handle-'+page) && !Xprefs.getBool('handle-'+page)) {
+				Tab.setSendAction(this.manualSend, this, [page, url, doc, Tab, this.lang, this.universe,this.params,window,this.servers]);
+				Tab.setStatus(Xl('wait send'), XLOG_NORMAL, {url: url});
+				return true;
+			}
+			if(this.win.resourceTickerMetal || page == 'messages')
+				this.sendPage(page);
+			return true;
+		} catch (e) {
+			Xtense.CurrentTab.setStatus(Xl('parsing error'), XLOG_ERROR, {url: url, page: page});
+			if (Xprefs.getBool('debug'))
+				show_backtrace(e);
+		}
+	},
+	
+	manualSend: function (type, page, url, doc, Tab, lang, universe,params,window,servers) {
+		// Oblige de restaurer le contexte
+		this.page = page;
+		this.doc = doc;
+		this.Tab = Tab;
+		this.universe = universe;
+		this.params = params;
+		this.win = window;
+		this.lang = lang;
+		this.servers = servers;
+		
+		try {
+			if (type == 'command') this.sendPage(page);
+		} catch (e) {
+			Xtense.CurrentTab.setStatus(Xl('parsing error'), XLOG_ERROR, {url: url, page: page});
+			if (Xprefs.getBool('debug'))
+				show_backtrace(e);
+		}
+	},
+	
+	sendPage: function (page) {
+		var Request = null;
+		
+		if (page == 'overview') 		Request = this.parseOverview();
+		else if (page == 'buildings') 	Request = this.parseBuildings();
+		else if (page == 'station') 	Request = this.parseStation();
+		else if (page == 'researchs') 	Request = this.parseResearchs();
+		else if (page == 'defense') 	Request = this.parseDefense();
+		else if (page == 'fleet') 		Request = this.parseShipyard();
+		else if (page == 'system') 		Request = this.parseSystem();
+		else if (page == 'ranking')		Request = this.parseRanking();
+		else if (page == 'ally_list') 	Request = this.parseAlly_list();
+		else if (page == 'rc') 			Request = this.parseRc();
+		else if (page == 'messages') 	Request = this.parseMessage();
+		else if (page == 'trader') 		Request = this.parseTrader();
+		else this.Tab.setStatus('invalid page type: "'+page+'"', XLOG_ERROR, {url: this.url});
+		
+		if (Request) {
+			Request.set('lang',this.lang);
+		    Xdump(Request.data);
+		    Request.send(this.servers);
+		}
+	},
+
+	getUniverse: function (url) {
+		//Xconsole(url);
+		var universe = url.match(/^http:\/\/[a-z]{5,10}\.ogame\.[a-z]{2,4}/gi);
+		if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi)) {
+			return universe[0];
+		} else if(url.match(/^http:\/\/uni42\.ogame\.org/gi)) {
+			return "http://uni42.ogame.org";
+		} else return false;
+	},
+	
+	getLang: function (url) {
+		var tab = url.split('.');
+		switch(tab[tab.length-1])
+		{
+			case 'fr': return 'fr';
+			case 'us': return 'en';
+			case 'org': return 'en';//TODO add other languages
+			case 'de': return 'de';
+			default: return tab[tab.length-1];
+		}
+	},
+
+	setParams: function (url){
+		this.params = [];
+		if(url.indexOf('?')>=0) {
+			url = url.split('?')[1];
+			url = url.split('#')[0];
+			url = url.split('&');
+			for(var i=0;i<url.length;i++) {
+				this.params[url[i].split('=')[0]]=url[i].split('=')[1];
+			}
+		}
+	},
+	
+	getPage: function(url) {
+		try {
+			this.setParams(url);
+			// Nettoyage de la chaine, on ne prend que ce qu'il y a apr�s index.php?page(>>)
+			if((url.indexOf('page=')<0 || typeof this.params['page']=='undefined') && url.match(/\/$/)) //si pas de parametre, on n'est pas sur le jeu
+				return false;
+			switch(this.params['page']) {
+				case 'overview':	return 'overview';
+				case 'resources':	return 'buildings';
+				case 'station':		return 'station';
+				case 'research':	return 'researchs';
+				case 'galaxy':		return 'system';
+				case 'statistics':	return 'ranking';
+				case 'defense':		return 'defense';
+				case 'shipyard':	return 'fleet';
+				//case 'fleet1':	return 'fleet';
+				case 'network':		return 'ally_list';
+				case 'showmessage':	return 'messages';
+				case 'combatreport':return 'rc';
+				case 'trader': 		return 'trader';
+				default: 			return false;
+			}
+		} catch (e) {
+			throw_error(e);
+		}
+	},
+
+	handleResponse: function (Request, Server, Response) {
+		Xdump(Response.content);
+		if (Server.cached()) var message_start = '"'+Server.name+'" : ';
+		else var message_start = Xl('response start', Server.n+1);
+		
+		var extra = {Request: Request, Server: Server, Response: Response, page: Request.data.type};
+		
+		if (Response.status != 200) {
+			if (Response.status == 404) 		Request.Tab.setStatus(message_start + Xl('http status 404'), XLOG_ERROR, extra);
+			else if (Response.status == 403) 	Request.Tab.setStatus(message_start + Xl('http status 404'), XLOG_ERROR, extra);
+			else if (Response.status == 500) 	Request.Tab.setStatus(message_start + Xl('http status 404'), XLOG_ERROR, extra);
+			else if (Response.status == 0)		Request.Tab.setStatus(message_start + Xl('http timeout'), XLOG_ERROR, extra);
+			else 								Request.Tab.setStatus(message_start + Xl('http status unknow',Response.status), XLOG_ERROR, extra);
+		} else {
+			var type = XLOG_SUCCESS;
+			
+			if (Response.content == '') {
+				Request.Tab.setStatus(message_start + Xl('empty response'), XLOG_ERROR, extra);
+				return;
+			}
+			
+			if (Response.content == 'hack') {
+				Request.Tab.setStatus(message_start + Xl('response hack'), XLOG_ERROR, extra);
+				return;
+			}
+			
+			var data = {};
+			if (Response.content.match(/^\(\{.*\}\)$/g)) data = eval(Response.content);
+			else {
+				var match = null;
+				if ((match = Response.content.match(/\(\{.*\}\)/))) {
+					//Xconsole("data: "+match[1]);
+					data = eval(match[0]);
+					// Message d'avertissement
+					type = XLOG_WARNING;
+					Xconsole("full response:"+escape(Response.content));
+				} else {
+					// Message d'erreur
+					Request.Tab.setStatus(message_start + Xl('invalid response'), XLOG_ERROR, extra);
+					if (Xprefs.getBool('debug')) {
+						throw_plugin_error(Response, Server);
+					}
+					return;
+				}
+			}
+			
+			var message = '';
+			var code = data.type;
+			
+			if (data.status == 0) {
+				type = XLOG_ERROR;
+				if (code == 'wrong version') {
+					if (data.target == 'plugin') 			message = Xl('error wrong version plugin', Xtense.PLUGIN_REQUIRED, data.version); 
+					else if (data.target == 'xtense.php') 	message = Xl('error wrong version xtense.php');
+					else 									message = Xl('error wrong version toolbar', data.version, Xtense.VERSION);
+				}
+				else if (code == 'php version')			message = Xl('error php version', data.version);
+				else if (code == 'server active') 		message = Xl('error server active', data.reason);
+				else if (code == 'username') 			message = Xl('error username');
+				else if (code == 'password') 			message = Xl('error password');
+				else if (code == 'user active') 		message = Xl('error user active');
+				else if (code == 'home full')			message = Xl('error home full');
+				else if (code == 'plugin connections')	message = Xl('error plugin connections');
+				else if (code == 'plugin config')		message = Xl('error plugin config');
+				else if (code == 'plugin univers')		message = Xl('error plugin univers');
+				else if (code == 'grant') 				message = Xl('error grant start') + Xl('error grant '+ data.access);
+				else 									message = Xl('unknow response', code, Response.content);
+			} else {
+				if (code == 'home updated') 			message = Xl('success home updated', Xl('page '+data.page));
+				else if (code == 'system')				message = Xl('success system', data.galaxy, data.system);
+				else if (code == 'ranking') 			message = Xl('success ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);
+				else if (code == 'rc')					message = Xl('success rc');
+				else if (code == 'ally_list')			message = Xl('success ally_list', data.tag);
+				else if (code == 'messages')			message = Xl('success messages');
+				else if (code == 'spy') 				message = Xl('success spy');
+				else if (code == 'fleetSending')		message = Xl('success fleetSending');
+				else 									message = Xl('unknow response', code, Response.content);
+			}
+			
+			if (Xprefs.getBool('display-execution-time') && data.execution) message = '['+data.execution+' ms] '+ message_start + message;
+			if (Xprefs.getBool('display-new-messages') && typeof data.new_messages!='undefined') Request.Tab.setNewPMStatus (data.new_messages, Server);
+			
+			if (data.calls) {
+				// Merge the both objects
+				var calls = extra.calls = data.calls;
+				calls.status = 'success';
+				
+				if (calls.warning.length > 0) calls.status = 'warning';
+				if (calls.error.length > 0) calls.status = 'error';
+				
+				// Calls messages
+				if (data.call_messages) {
+					calls.messages = {success: [], warning: [], error: []};
+					
+					// Affichage des messages dans l'ordre : success, warning, error
+					for (var i = 0, len = data.call_messages.length; i < len; i++) {
+						calls.messages[data.call_messages[i].type].push(data.call_messages[i].mod + ' : ' +data.call_messages[i].message);
+					}
+				}
+			}
+			
+			Request.Tab.setStatus(message, type, extra);
+		}
+	},
+
+	//------ PARSING
+
+	// Recuperation des coords actuelles + type de planete + nom
+	getPlanetData : function () {
+		var paths = this.Xpaths.planetData;
+
+		if(this.win.resourceTickerMetal.production == '0' && this.win.resourceTickerCrystal.production == '0') { //si le coeficient de ressour est a 0 c'est une lune
+			this.planet_type = '1';
+		} else this.planet_type = '0';
+		
+		var name = Xpath.getStringValue(this.doc,paths.name);
+		var coords = Xpath.getStringValue(this.doc,paths.coords).match(new RegExp(this.regexps.planetCoords))[1];
+		
+		return {planet_name: name, coords : coords, planet_type : this.planet_type};
+	},
+	
+	getResources : function () {
+		var res = this.doc.getElementById("resources");
+		var metal = res.getElementsByClassName("metal")[0].getAttribute('title').getInts()[0];
+	    var cristal = res.getElementsByClassName("crystal")[0].getAttribute('title').getInts()[0];
+	    var deut = res.getElementsByClassName("deuterium")[0].getAttribute('title').getInts()[0];
+		var antimater = res.getElementsByClassName("darkmatter")[0].getAttribute('title').getInts()[0];
+	    var energy = res.getElementsByClassName("energy")[0].getAttribute('title').getInts()[2];
+		
+		return Array(metal,cristal,deut,antimater,energy);
+	},
+	
+	parseOverview : function () {
+		var paths = this.Xpaths.overview;
+		var cases = this.win.textContent[1].getInts()[2];
+		var temp = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+				
+		var planetData = this.getPlanetData();
+		if(planetData.coords == "unknown") {
+			Xconsole("planète unique");
+			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
+			planetData.coords = coords;
+		}
+		
+		var Request = this.newRequest();
+		Request.set(
+			{
+				type: 'overview',
+				fields: cases,
+				temp: temp,
+				ressources: this.getResources()
+			},
+			planetData
+		);
+		
+		return Request;
+	},
+
+    parseStation : function () {		
+		var paths = XnewOgame.Xpaths.levels;
+		this.Tab.setStatus(Xl('installations detected'), XLOG_NORMAL, {url: this.url});
+		var Request = this.newRequest();
+		Request.set('type', 'buildings');
+		
+		// Get the lesvels of researchs
+		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
+		var tabLevel = new Array();
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		
+		
+		// Set the planet data AND the levels of researchs
+		Request.set(this.getPlanetData());
+		if(this.planet_type == '0'){
+			var send = {
+				"UdR": tabLevel[0],
+				"CSp": tabLevel[1],
+				"Lab": tabLevel[2],
+				"DdR": tabLevel[3],
+				"Silo": tabLevel[4],
+				"UdN": tabLevel[5],
+				"Ter": tabLevel[6]
+			};
+		} else {
+			var send = {
+				"UdR": tabLevel[0],
+				"CSp": tabLevel[1],
+				"BaLu": tabLevel[2],
+				"Pha": tabLevel[3],
+				"PoSa": tabLevel[4]
+			};
+		}
+		Request.set(send);
+		
+		return Request;
+	},
+	
+	parseResearchs : function () {
+		var paths = XnewOgame.Xpaths.levels;		
+		this.Tab.setStatus(Xl('researchs detected'), XLOG_NORMAL, {url: this.url});
+		// New request type=researchs
+		var Request = this.newRequest();
+		Request.set('type', 'researchs');
+		// Get the lesvels of researchs
+		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		// Set the planet data AND the levels of researchs
+		Request.set(this.getPlanetData());
+		Request.set(
+			{
+				"NRJ": tabLevel[0],
+				"Laser": tabLevel[1],
+				"Ions": tabLevel[2],
+				"Hyp": tabLevel[3],
+				"Plasma": tabLevel[4],
+				"RC": tabLevel[5],
+				"RI": tabLevel[6],
+				"PH": tabLevel[7],
+				"Esp": tabLevel[8], 
+				"Ordi": tabLevel[9],
+				"Expeditions": tabLevel[10],
+				"RRI": tabLevel[11],
+				"Graviton": tabLevel[12],
+				"Protection": tabLevel[13],
+				"Armes": tabLevel[14],
+				"Bouclier": tabLevel[15]
+			}
+		);
+		
+		return Request;
+	},
+
+	parseBuildings : function () {
+		var paths = XnewOgame.Xpaths.levels;
+		this.Tab.setStatus(Xl('buildings detected'), XLOG_NORMAL, {url: this.url});
+		var Request = this.newRequest();
+		Request.set('type', 'buildings');
+		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		// Set the planet data AND the levels of buildings
+		Request.set(this.getPlanetData());
+		Request.set(
+			{
+				"M": tabLevel[0],
+				"C": tabLevel[1],
+				"D": tabLevel[2],
+				"CES": tabLevel[3],
+				"CEF": tabLevel[4],
+				"SAT": tabLevel[5],
+				"HM": tabLevel[6],
+				"HC": tabLevel[7],
+				"HD": tabLevel[8]
+			}
+		);
+		
+		return Request;
+	},
+
+	getDbFieldName : function(id) {
+		for(var i in this.database) {
+				if(typeof this.database[i][id] != 'undefined')
+					return this.database[i][id];
+			}
+		return false;
+	},
+	
+	parseTableStruct : function() {
+		//methode RegExp
+		var reg = new RegExp(this.regexps.parseTableStruct,'g');
+		var reg2 = new RegExp(this.regexps.parseTableStruct);
+		var input = this.doc.body.innerHTML;
+		var m = input.match(reg);
+		var m2 = null;
+		
+		//Xconsole(reg.toString()+' | '+m);
+		if(!m)return false;
+		//Xdump(m.length);
+		var Request = this.newRequest();
+		for (var i = 0 ; i < m.length; i++ ) {
+			m2 = m[i].match(reg2);
+			var id = m2[1].trimInt();
+			var fieldName = this.getDbFieldName(id);
+			//Xconsole(this.page+' '+i+": "+m2[1].trimInt() +","+ m2[2].trimInt()+" "+fieldName);
+			Request.set(fieldName, this.parseIntWithMultiplier(m2[2]));
+			//Xdump(m2);
+			Xconsole(this.page+' '+m[i][1]+' '+m[i][2]+' '+this.database[this.page][parseInt(m[i][1])]);
+		}
+		
+		Request.set(this.getPlanetData());
+		//Xdump(this.data);
+		
+		return Request;
+	},
+
+	parseDefense : function () {		
+		var paths = XnewOgame.Xpaths.levels;
+		this.Tab.setStatus(Xl('defense detected'), XLOG_NORMAL, {url: this.url});
+		var Request = this.newRequest();
+		Request.set('type', 'defense');
+		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim().replace(".", "");
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		// Set the planet data AND the levels of defense
+		Request.set(this.getPlanetData());
+		Request.set(
+			{
+				"LM": tabLevel[0],
+				"LLE": tabLevel[1],
+				"LLO": tabLevel[2],
+				"CG": tabLevel[3],
+				"AI": tabLevel[4],
+				"LP": tabLevel[5],
+				"PB": tabLevel[6],
+				"GB": tabLevel[7],
+				"MIC": tabLevel[8],
+				"MIP": tabLevel[9]
+			}
+		);
+		
+		return Request;
+	},
+	
+	parseShipyard : function () {		
+		var paths = XnewOgame.Xpaths.levels;
+		this.Tab.setStatus(Xl('fleet detected'), XLOG_NORMAL, {url: this.url});
+		var Request = this.newRequest();
+		Request.set('type', 'fleet');
+		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim().replace(".", "");
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		// Set the planet data AND the levels of researchs
+		Request.set(this.getPlanetData());
+		Request.set(
+			{
+				"CLE": tabLevel[0],
+				"CLO": tabLevel[1],
+				"CR": tabLevel[2],
+				"VB": tabLevel[3],
+				"TRA": tabLevel[4],
+				"BMD": tabLevel[5],
+				"DST": tabLevel[6],
+				"EDLM": tabLevel[7],
+				"PT": tabLevel[8],
+				"GT": tabLevel[9],
+				"VC": tabLevel[10],
+				"REC": tabLevel[11],
+				"SE": tabLevel[12],
+				"SAT": tabLevel[13]
+			}
+		);
+		
+		return Request;
+	},
+
+	parseSystem : function() {
+		var target = this.doc.getElementById('galaxyContent');
+		target.win = this.win;
+		target.addEventListener("DOMNodeInserted", this.parseSystem_Inserted, false); 
+		//Xconsole(target.win);
+	},
+		
+	parseSystem_Inserted : function (event) {
+		var doc = event.target.ownerDocument;
+		var win = doc.getElementById('galaxyContent').win;
+		var paths = XnewOgame.Xpaths.galaxy;
+		var galaxy = win.galaxy;
+		var system = win.system;
+		
+		if (this.lastAction != 's:'+galaxy+':'+system){
+			var coords = [galaxy, system];
+			if (isNaN(coords[0]) || isNaN(coords[1])) {
+				Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
+				return;
+			}
+			Xconsole(Xl('system detected', coords[0], coords[1]));
+			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
+			Xconsole(paths.rows+' '+rows.snapshotLength);
+			if(rows.snapshotLength > 0) {
+				var Request = XnewOgame.newRequest();
+				Xconsole(rows.snapshotLength+' rows found');
+				var rowsData = [];
+				for (var i = 0; i < rows.snapshotLength ; i++) {
+					var row = rows.snapshotItem(i);
+					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'t');
+					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'t');
+					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
+					
+					//Xconsole(i+' '+name+' '+player);
+					if (player == '') {
+						Xconsole('row '+i+' has no player name');
+						continue;
+					}
+					if (name == '') {
+						if (name_l == '') {
+							Xconsole('row '+i+' has no planet name');
+							continue;
+						} else
+							name = name_l;
+					}
+					var position = Xpath.getNumberValue(doc,paths.position,row);
+					if(isNaN(position)) {
+						Xconsole('position '+position+' is not a number');
+						continue;
+					}
+
+					var moon = Xpath.getUnorderedSnapshotNodes(doc,paths.moon,row);
+					moon = moon.snapshotLength > 0 ? 1 : 0;
+					var status = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
+					if(status.snapshotLength>0){
+						status = status.snapshotItem(0);
+						status = status.textContent;
+						//Xconsole(status);
+						status = status.match(/\((.*)\)/);
+						status = status ? status[1] : "";
+						status = status.trimAll();
+					}
+					else status = "";
+					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
+					activity = activity.match(/: (.*)/);
+					if(activity)
+						activity = activity[1];
+					else activity = '';
+					var allytag = Xpath.getStringValue(doc,paths.allytag,row).trim();
+					var debris = [];
+					for(var j = 0; j < 2; j++) {
+						debris[XnewOgame.database['resources'][601+j]] = 0;
+					}
+					var debrisCells = Xpath.getUnorderedSnapshotNodes(doc,paths.debris,row);
+					for (var j = 0; j < debrisCells.snapshotLength ; j++) {
+						debris[XnewOgame.database['resources'][601+j]] = debrisCells.snapshotItem(j).innerHTML.trimInt();
+					}
+					
+					var player_id = Xpath.getStringValue(doc,paths.player_id,row).trim();
+					if (player_id != '' ) {
+						player_id = player_id.match(/\&to\=(.*)\&ajax/);
+						player_id = player_id[1];
+					}
+					else if(doc.cookie.match(/login_(.*)=U_/))
+						player_id = doc.cookie.match(/login_(.*)=U_/)[1]; 
+					
+					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
+					if (ally_id != '' ) {
+						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id[1];
+					}
+					else if (allytag)
+						ally_id = '-1';
+					
+					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
+					rowsData[position]=r;
+				}
+				Request.set(
+					{
+						row : rowsData,
+						galaxy : coords[0],
+						system : coords[1],
+						type : 'system'
+					}
+				);
+
+				Request.set('lang',XnewOgame.lang);
+				Xdump(Request.data);
+				//Xdump(Request.Tab.Status);
+				Request.send(XnewOgame.servers);
+				this.lastAction = 's:'+coords[0]+':'+coords[1];
+			}
+		}
+	},
+
+	parseRanking : function() {
+		var target = this.doc.getElementById('statisticsContent');
+		target.win = this.win;
+		target.addEventListener("DOMNodeInserted", this.parseRanking_Inserted, true);		
+	},
+
+	parseRanking_Inserted : function (event) {		
+		try {
+			var doc = event.target.ownerDocument;
+			var win = doc.getElementById('statisticsContent').win;
+			
+			var paths = XnewOgame.Xpaths.ranking;
+			
+			var timeText = Xpath.getStringValue(doc,paths.time).trim();//e.g. Statistiques (MAJ : 12.10.2009 13:12:40)
+			timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
+
+			var time = new Date();
+			time.setHours((Math.floor(time.getHours())/8)*8);
+			time.setMinutes(0);
+			time.setSeconds(0);
+			if(timeText) {
+				time.setYear(timeText[3]);
+				time.setMonth(parseInt(timeText[2].trimZeros())-1);
+				time.setDate(timeText[1]);
+				time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
+			}
+			//Xconsole(timeText+' | '+time);
+			time =  Math.floor(time.getTime()/1000);
+	
+			var type = new Array();
+			type[0] = Xpath.getStringValue(doc,paths.who);
+			type[1] = Xpath.getStringValue(doc,paths.type);
+			type[0] = type[0] != '' ? type[0] : 'player';
+			type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
+	
+			var length = 0;
+			var rows = Xpath.getOrderedSnapshotNodes(doc,paths.rows,null);
+			var offset = 0;
+			
+			var Request = XnewOgame.newRequest();
+			//Xconsole(rows.snapshotLength);
+			if(rows.snapshotLength > 0){
+				var rowsData = [];
+				for (var i = 1; i < rows.snapshotLength; i++) {
+					var row = rows.snapshotItem(i);
+					//Xconsole("xp: "+Xpath.getStringValue(this.doc,paths.position,row));
+					var n = null;
+					if (type[0] == 'player') {
+						n = Xpath.getStringValue(doc,paths.position,row).trimInt();
+					} else if(type[0] == 'ally') {
+						n = Xpath.getStringValue(doc,paths.ally.position_ally,row).trimInt();
+					}
+					if (i == 1) {
+						offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile � la centaine et OGSpy toujours � 101,201...
+					}
+					if (type[0] == 'player') {
+						var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
+						var ally = Xpath.getStringValue(doc,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
+						var points = Xpath.getStringValue(doc,paths.player.points,row).trimInt();
+						var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
+						var ally_id = Xpath.getStringValue(doc,paths.player.ally_id,row).trim();
+						
+						if (player_id != '' ) {
+							player_id = player_id.match(/\&to\=(.*)\&ajax/);
+							player_id = player_id[1];
+						}
+						else if(doc.cookie.match(/login_(.*)=U_/))
+							player_id = doc.cookie.match(/login_(.*)=U_/)[1];
+						
+						if (ally_id != '' ) {
+							ally_id = ally_id.match(/allyid\=(.*)/);
+							ally_id = ally_id[1];
+						}
+						else if (ally)
+							ally_id = '-1';
+						
+						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+						rowsData[n]=r;
+						length ++;
+					} else if(type[0] == 'ally') {
+						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim();
+						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
+						moy = members[1];
+						members = members[0];
+						var points = Xpath.getStringValue(doc,paths.ally.points,row).trimInt();
+						var ally_id = Xpath.getStringValue(doc,paths.ally.ally_id,row).trim();
+						
+						if (ally_id != '' ) {
+							ally_id = ally_id.match(/allyid\=(.*)/);
+							ally_id = ally_id[1];
+						}
+						else if (ally)
+							ally_id = '-1';
+						
+						var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
+						rowsData[n]=r;
+						length ++;
+					}
+				}
+				
+				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){
+					XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
+					if (offset != 0 && length != 0) {
+						Request.set(
+							{
+								n : rowsData,
+								type : 'ranking',
+								offset : offset,
+								type1 : type[0],
+								type2 : type[1],
+								time: time
+							}
+						);
+						
+						Request.set('lang',XnewOgame.lang);
+						//Xdump(Request.data);
+						//Xdump(Request.Tab.Status);
+						Request.send(XnewOgame.servers);
+					}
+					this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
+				}
+			}
+		} catch (e) {
+			throw_error(e);
+		}
+	},
+
+	parseAlly_list : function () {
+		var paths = this.Xpaths.ally_members_list;
+		var rows = Xpath.getOrderedSnapshotNodes(this.doc,paths.rows);
+		var rowsData = [];
+		var Request = this.newRequest();
+		
+		for (var i = 1; i < (rows.snapshotLength); i++) {
+			var row = rows.snapshotItem(i);
+			var player = Xpath.getStringValue(this.doc,paths.player,row).trim();
+			var points = Xpath.getStringValue(this.doc,paths.points,row).trimInt();
+			var rank = Xpath.getStringValue(this.doc,paths.rank,row).trimInt();
+			var coords = Xpath.getStringValue(this.doc,paths.coords,row).trim();
+			coords = coords.match(new RegExp(this.regexps.coords))[1];
+			
+			var r = {player:player,points:points,coords:coords,rank:rank};
+			rowsData[i]=r;
+		}
+
+		if(rowsData != ""){
+			var tag = Xpath.getStringValue(this.doc,paths.tag);
+			Request.set(
+				{
+					n : rowsData,
+					type : 'ally_list',
+					tag : tag
+				}
+			);
+			
+			return Request;
+		}
+	},
+
+	parseRc : function () { //TODO PARSING
+		// Contact perdu//impossible dans la nouvelle version d'Ogame
+		/*if (this.doc.getElementsByTagName('tr').length == 1) {
+			this.Tab.setStatus(Xl('invalid rc'));
+			return false;
+		}*/
+
+		// RC
+		//this.Tab.setStatus(l('rc detected'));
+
+		var Request = this.newRequest();
+		Request.set(
+			{
+				type: 'rc',
+				content: this.doc.body.innerHTML
+			}
+		);
+		
+		return Request;
+	},
+	
+	parseTrader : function () {
+		var Request = this.newRequest();
+		Request.set(
+			{
+				type: 'trader',
+			}
+		);
+		
+		return Request;
+	},
+	
+	parseMessage : function () {
+		var paths = this.Xpaths.messages;
+		var data = {};		
+		var from = Xpath.getStringValue(this.doc,paths.from).trim();
+		var to = Xpath.getStringValue(this.doc,paths.to).trim();
+		var subject = Xpath.getStringValue(this.doc,paths.subject).trim();
+		var date = Xpath.getStringValue(this.doc,paths.date).trim();
+		var handled = false;
+		var locales = this.l('messages');
+		
+		//Xconsole("Message from "+from+" to "+to+" about "+subject+" on "+date);
+
+		//var checked_only = Xprefs.getBool('msg-only_checked');
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		//mise en cache-------------------------------------------------------------------------------------------------------------------------------------
+		var prefMessagesCache = Xprefs.getBool('messages-cache');	
+		if (prefMessagesCache) {
+				if(this.params['msg_id'])
+					var messageId = this.params['msg_id'].trimInt();
+				else if(this.params['planetId'])
+					var messageId = this.params['planetId'].trimInt();
+				Xdump(messageId);
+				
+				if (typeof this.messagesCache[this.universe] == 'undefined') 
+					this.messagesCache[this.universe] = [];
+				else if (this.messagesCache[this.universe].indexOf(messageId) != -1) {
+					Xdump('Message sent before.');
+				}
+			}
+		if (prefMessagesCache) this.messagesCache[this.universe].push(messageId);
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		//spy report------------------------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-spy')) {
+			var m = subject.match(new RegExp(locales['espionage of']+this.regexps.planetNameAndCoords));
+			if(m){
+				Xconsole('spy detected');
+				Xconsole("subject:"+subject);
+				
+				handled = true;
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['spy']);
+				var content = contentNode.innerHTML;
+				data.planetName = m[1];
+				data.coords = m[2];
+				
+				//Xconsole('withregexp');
+				//Xconsole("report: "+content);
+				m = content.match(new RegExp(locales['espionage prob']+this.regexps.probability));
+				if(m) {
+					data.proba = m[1];
+				}
+				else handled = false;
+				if(handled) {
+					Ximplements(data, this.parseSpyReport(content));		
+					data.type = 'spy';
+				}
+				//Xdump(contentData);
+			} else Xconsole('The message is not a spy report');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		// Messages de joueurs---------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-msg')) {
+			if (this.doc.getElementById('melden')) { // si bouton "reporter", c'est un mp
+				handled = true;
+				var m = from.match(new RegExp(this.regexps.userNameAndCoords));
+				if(m) {
+					var userName = m[1];
+					var coords = m[2];
+				}
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['msg']);
+				var message = contentNode.getElementsByTagName('p')[0].innerHTML.trim();
+				
+				data = {type:'msg', from: userName, coords: coords, subject: subject, message: message};
+			} else Xconsole('The message is not a private message');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		// Messages d'alliance-----------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-ally_msg')) {
+			var reg = new RegExp(this.regexps.ally);
+			Xconsole(from.match(reg));
+			Xconsole(subject.match(reg));
+			
+			if (from.match(reg)) { // si  il y a des []  dans le from et le sujet, c'est un nom d'alliance, donc un message d'alliance
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ally_msg']);
+				var message = Xpath.getStringValue(this.doc,paths.contents['msg']).trim();
+				var m = from.match(new RegExp(this.regexps.ally));
+				if(m) {
+					from = m[1];
+					data = {type: 'ally_msg', from: from, tag: from, message: message};
+					handled = true;
+				}
+			} else Xconsole('The message is not an ally message');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		// Expeditions-----------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-expeditions')) {
+			var m = subject.match(new RegExp(locales['expedition result']));
+			var m2 = from.match(new RegExp(locales['fleet command']));
+			//Xconsole(m+'|'+m2);
+			if (m2!=null && m!=null) {
+				
+				var coords = m[1];
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['expedition']);
+				var message = Xpath.getStringValue(this.doc,paths.contents['expedition']).trim();//Xpath.getSingleNode(this.doc,paths.content).innerHTML.trim();
+				data = {type: 'expedition', coords: coords, content: message};
+				handled = true;
+				//Xconsole('data:'+data);
+			} else Xconsole('The message is not an expedition report');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		// Recyclages-----------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-rc')) {
+			//var m = ;
+			if(from.match(new RegExp(locales['fleet'])) 
+						&& subject.match(new RegExp(locales['harvesting']))) {
+			 	var m = subject.match(new RegExp(this.regexps.coords));
+				if(m) {
+					var coords = m[1];
+					var contentNode = Xpath.getSingleNode(this.doc,paths.contents['rc_cdr']);
+					var message = Xpath.getStringValue(this.doc,paths.contents['rc_cdr']).trim();
+					var nums = message.getInts();
+					handled = true;
+					data = {
+							type:'rc_cdr',
+							coords: coords,
+							nombre: nums[0],
+							M_recovered: nums[4],
+							C_recovered: nums[5],
+							M_total: nums[2],
+							C_total: nums[3]
+						};
+				}
+			} else Xconsole('The message is not a harvesting report');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------		
+		
+		// Espionnages ennemis-----------------------------------------------------------------------------------------------------------------------------
+		if(Xprefs.getBool('msg-ennemy_spy')) {
+			//Xconsole('msg-ennemy_spy|'+from+'|'+subject);
+			if(subject.match(new RegExp(locales['espionnage action']))) {/*from.match(new RegExp(locales['space monitoring'])) && */
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ennemy_spy']);
+				var rawdata = contentNode.textContent.trim();
+				//Xdump(rawdata,new RegExp(this.regexps.messages.ennemy_spy).toString());
+				var m = rawdata.match(new RegExp(this.regexps.messages.ennemy_spy));
+				//Xdump(m);
+				if(m) {
+					handled = true;
+					from = m[1];
+					to = m[2];
+					proba = m[3];
+					data = {type: 'ennemy_spy', from: from, to: to, proba: proba, rawdata: rawdata};
+				}				
+			} else Xconsole('The message is not an ennemy spy');
+		}
+		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+		if (!handled) {
+			this.Tab.setStatus(Xl('no messages'), XLOG_NORMAL, {url: this.url});
+			return false;
+		}
+		else {
+			data.date = XparseDate(date,this.l('dates')['messages']);
+		}
+		
+		var Request = this.newRequest();
+		for (var i in data) {
+				Request.set('data[0]['+i+']', data[i]);
+			}
+		
+		Request.set('type', 'messages');
+		
+		return Request;
+	},
+	
+	getElementInSpyReport : function (RE,elem) {
+		var num = -1;
+		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//r�cup�re le nombre le plus proche apr�s le texte
+		//Xconsole("elem: "+reg.toString());
+		var m = reg.exec(RE);
+		
+		if(m)
+			num = m[1].trimInt();
+
+		return num;
+	},
+	
+	parseSpyReport: function(RE) {
+		var paths = this.Xpaths.messages.spy;
+		var spyStrings = this.l('spy reports');
+		var data = {};
+		var typs = [];
+		var res = new Array();
+		
+		var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.fleetdefbuildings);
+		if(types.snapshotLength > 0){
+		   	for(var table=0;table<types.snapshotLength;table++){
+				var type = types.snapshotItem(table).textContent.trim();
+		   		if(type)
+					typs.push(type);
+		   	}
+		}
+
+		for (var i in spyStrings['units']) {
+			for(var k=0; k<typs.length; k++){
+				if(typs[k].match(new RegExp(spyStrings['groups'][i], 'gi'))){
+					for (var j in spyStrings['units'][i]) {
+						var m = this.getElementInSpyReport(RE,spyStrings['units'][i][j]);
+						if(m != -1)
+							data[this.database[i][j]] = m;
+						else
+							data[this.database[i][j]] = 0;
+					}
+				}
+			}
+		}
+
+		var isMoon = false;
+		if(data['BaLu'] > 0) isMoon = true;//si il y a une base lunaire, alors c'est une lune
+		
+		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
+		
+		var parsedData = [];
+		for (var i in data) 
+			parsedData.push(i+':'+data[i]);
+		parsedData = parsedData.join(':');
+		
+		return {
+			content: parsedData,
+			playerName: playerName,
+			moon: isMoon
+		};
+	}
+}
+
+
+// Enregistrements
+if (typeof Xoptions == 'undefined') { // Ne pas enregistrer plusieurs fois
+	Xtense.registerPageLoad(XnewOgame.onPageLoad, XnewOgame);
+	Xtense.registerPageDetect(XnewOgame.getUniverse, XnewOgame);
+}

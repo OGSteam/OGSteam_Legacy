@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="galaxy.js"></script>
+	<script type="application/x-javascript" src="spyreport.js"></script>
+	<script type="application/x-javascript" src="protocol.js"></script>
+	<script type="application/x-javascript" src="OGSFox.js"></script>
+
+	<popup id="contentAreaContextMenu">
+		<menuitem id="context-ogspy" label="Ajouter à OGSpy"
+		insertafter="context-stop" oncommand="OGSFox();"/>
+	</popup>
+
+	<keyset id="mainKeyset">
+		<key id="key_ogsfox" key="A" modifiers="shift" oncommand="OGSFox();"/>
+	</keyset>
+
+</overlay>

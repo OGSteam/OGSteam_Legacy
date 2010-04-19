@@ -1,0 +1,20 @@
+# pour autoriser l'accès à la signature
+<Files *.png>
+Allow from all
+</Files>
+<Files urlrewriting.php>
+Allow from all
+</Files>
+<Files testgd.php>
+Allow from all
+</Files>
+
+# pas nécessaire (juste pour debug)
+<Files sign*.php>
+Allow from all
+</Files>
+
+# les règles de réécriture
+Options +FollowSymlinks
+RewriteEngine on
+RewriteRule ^([a-zA-Z0-9_-\s]+)\.?([SPA]?)\.png$ sign.php?player=$1&typesign=$2
