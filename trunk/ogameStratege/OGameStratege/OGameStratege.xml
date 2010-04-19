@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>OGameStratege</name>
+    <version>1.0.2308.41734</version>
+    <fullname>OGameStratege, Version=1.0.2308.41734, Culture=neutral, PublicKeyToken=null</fullname>
+  </assembly>
+  <members>
+    <member name="T:OGameStratege.Config">
+      <summary>
+  Interface sur le fichier de configuration d'OGS 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	27/04/2006	Created 
+ </history></member>
+    <member name="T:OGameStratege.OGSCheckUpdate">
+      <summary>
+  Verification de la présence de mise a jour d'OGS 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	27/04/2006	Created 
+ </history></member>
+    <member name="T:OGameStratege.RedirectConsoleStream">
+      <summary>
+  Utilitaire pour une seconde redirection des consoles.write(blahblah) 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	27/04/2006	Created 
+ </history></member>
+    <member name="T:OGameStratege.Functions">
+      <summary>
+ Quelques fonctions utiles un peu partout 
+ </summary>
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	27/04/2006	Created 
+ </history></member>
+    <member name="M:OGameStratege.Functions.ColorSpyingReport(System.Windows.Forms.RichTextBox)">
+      <summary>
+ Coloration des rapports d'espionnages 
+ </summary>
+ <param name="rtb" />
+ <remarks>
+ </remarks>
+ <history>
+ 	[eric]	27/04/2006	Created 
+ </history></member>
+  </members>
+</doc>

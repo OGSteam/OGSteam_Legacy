@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension engine="1.0">
+	<id>private_messaging</id>
+	<title>Private messaging</title>
+	<version>0.1</version>
+	<description>This extension allows users to send private messages.</description>
+	<author>FluxBB Development Team</author>
+	<minversion>1.3 Beta</minversion>
+	<maxtestedon>1.3 Beta</maxtestedon>
+	
+	<install><![CDATA[
+		if (!$forum_db->field_exists('groups', 'g_pm'))
+			$forum_db->add_field('groups', 'g_pm', 'TINYINT(1)', false, 1);
+
+		if (!$forum_db->table_exists('messages'))
+		{
+			$schema = array(
+				'FIELDS'			=> array(
+					'id'			=> array(
+						'datatype'		=> 'SERIAL',
+						'allow_null'	=> false
+					),
+					'to_id'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'from_id'		=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'reply_to'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'first_message'	=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'subject'		=> array(
+						'datatype'		=> 'VARCHAR(255)',
+						'allow_null'	=> false,
+						'default'		=> '""'
+					),
+					'message'		=> array(
+						'datatype'		=> 'TEXT',
+						'allow_null'	=> true
+					),
+					'hide_smilies'	=> array(
+						'datatype'		=> 'TINYINT(1)',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'sent'			=> array(
+						'datatype'		=> 'INT(10) UNSIGNED',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'marked_read'	=> array(
+						'datatype'		=> 'TINYINT(1)',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+					'deleted'		=> array(
+						'datatype'		=> 'TINYINT(1)',
+						'allow_null'	=> false,
+						'default'		=> '0'
+					),
+				),
+				'PRIMARY KEY'	=> array('id'),
+			);
+
+			$forum_db->create_table('messages', $schema);
+		}
+		else
+		{
+			if ($forum_db->field_exists('messages', 'showed'))
+			{
+				// Rename old table
+				$forum_db->query('ALTER TABLE '.$forum_db->prefix.'messages RENAME TO '.$forum_db->prefix.'messages_old');
+
+				// Create new table
+				$schema = array(
+					'FIELDS'			=> array(
+						'id'			=> array(
+							'datatype'		=> 'SERIAL',
+							'allow_null'	=> false
+						),
+						'to_id'			=> array(
+							'datatype'		=> 'INT(10) UNSIGNED',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'from_id'		=> array(
+							'datatype'		=> 'INT(10) UNSIGNED',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'reply_to'			=> array(
+							'datatype'		=> 'INT(10) UNSIGNED',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'first_message'	=> array(
+							'datatype'		=> 'INT(10) UNSIGNED',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'subject'		=> array(
+							'datatype'		=> 'VARCHAR(255)',
+							'allow_null'	=> false,
+							'default'		=> '""'
+						),
+						'message'		=> array(
+							'datatype'		=> 'TEXT',
+							'allow_null'	=> true
+						),
+						'hide_smilies'	=> array(
+							'datatype'		=> 'TINYINT(1)',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'sent'			=> array(
+							'datatype'		=> 'INT(10) UNSIGNED',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'marked_read'	=> array(
+							'datatype'		=> 'TINYINT(1)',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+						'deleted'		=> array(
+							'datatype'		=> 'TINYINT(1)',
+							'allow_null'	=> false,
+							'default'		=> '0'
+						),
+					),
+					'PRIMARY KEY'	=> array('id'),
+				);
+
+				$forum_db->create_table('messages', $schema);
+
+				// Insert old messages
+				$forum_db->query('INSERT INTO '.$forum_db->prefix.'messages SELECT m.owner as to_id, m.message, m.subject, m.sender_id as from_id, (m.smileys=0) as hide_smilies, m.posted as sent, m.showed as marked_read, ((m2.id IS NULL)*2) AS deleted from '.$forum_db->prefix.'messages_old AS m LEFT JOIN '.$forum_db->prefix.'messages_old AS m2 ON m.posted=m2.posted AND m.sender_id=m2.owner WHERE m.status=0');
+				$forum_db->query('INSERT INTO '.$forum_db->prefix.'messages SELECT m.owner as from_id, m.message, m.subject, m.sender_id as to_id, (m.smileys=0) as hide_smilies, m.posted as sent, 1 as marked_read, 1 as deleted FROM '.$forum_db->prefix.'messages_old AS m LEFT JOIN '.$forum_db->prefix.'messages_old AS m2 ON m.posted=m2.posted AND m.owner=m2.sender_id WHERE m.status=1 and m2.id IS NULL');
+				
+				$forum_db->drop_table('messages_old');
+				
+				$query = array(
+					'UPDATE'	=> 'messages',
+					'SET'		=> 'first_message=id',
+					'WHERE'		=> 'first_message=0',
+				);
+
+				$forum_db->query_build($query) or error(__FILE__, __LINE__);
+			}
+		}
+	]]></install>
+	
+	<uninstall><![CDATA[
+		$forum_db->drop_field('groups', 'g_pm');
+		$forum_db->drop_table('messages');
+	]]></uninstall>
+
+	<hooks>
+	<hook id="hd_visitlinks_pre_visit_msg"><![CDATA[
+		if (!$forum_user['is_guest'] && $forum_user['g_pm'] == '1')
+		{
+			if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'.php'))
+				require $ext_info['path'].'/lang/'.$forum_user['language'].'.php';
+			else
+				require $ext_info['path'].'/lang/English.php';
+			
+			$query = array(
+				'SELECT'	=> 'COUNT(m.id)',
+				'FROM'		=> 'messages AS m',
+				'WHERE'		=> 'm.to_id = '.$forum_user['id'].' AND m.marked_read = 0',
+			);
+
+			$result_header = $forum_db->query_build($query) or error(__FILE__, __LINE__);
+
+			if ($num_messages = $forum_db->result($result_header))
+				array_insert($visit_links, 'newposts', '<span id="visitlinks-pm"><a href="'.forum_link($forum_url['pm']).'">'.$lang_private_messaging['New messages'].' ('.$num_messages.')</a></span>', 'pm');
+			else
+				array_insert($visit_links, 'newposts', '<span id="visitlinks-pm"><a href="'.forum_link($forum_url['pm']).'">'.$lang_private_messaging['Messages'].'</a></span>', 'pm');
+		}
+	]]></hook>
+	<hook id="pf_qr_get_user_info,vt_qr_get_posts"><![CDATA[
+		$query['SELECT'] .= ', g.g_pm';
+	]]></hook>
+	<hook id="pf_change_details_about_pre_header_load"><![CDATA[
+		if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'.php'))
+			require $ext_info['path'].'/lang/'.$forum_user['language'].'.php';
+		else
+			require $ext_info['path'].'/lang/English.php';
+
+		if (!$forum_user['is_guest'] && $forum_user['g_pm'] == '1' && $user['g_pm'] == 1)
+			$forum_page['main_options']['pm'] = '<span'.(empty($forum_page['main_options']) ? ' class="item1"' : '').'><a href="'.forum_link($forum_url['pm_send_to'], $user['id']).'">'.$lang_private_messaging['Send private message'].'</a></span>';
+	]]></hook>
+	<hook id="vt_row_pre_display"><![CDATA[
+		if (file_exists($ext_info['path'].'/lang/'.$forum_user['language'].'.php'))
+			require $ext_info['path'].'/lang/'.$forum_user['language'].'.php';
+		else
+			require $ext_info['path'].'/lang/English.php';
+
+		if (!$forum_user['is_guest'] && $forum_user['g_pm'] == '1' && $cur_post['g_pm'] == 1 && $cur_post['poster_id'] > 1)
+			$forum_page['post_contacts']['pm'] = '<a href="'.forum_link($forum_url['pm_send_to'], $cur_post['poster_id']).'"><span>'.$lang_private_messaging['PM'].'<span>&#160;'.forum_htmlencode($cur_post['username']).'</span></span></a>';
+	]]></hook>
+	<hook id="co_modify_url_scheme"><![CDATA[
+		// Include URL scheme
+		if (file_exists($ext_info['path'].'/url/'.$forum_config['o_sef'].'.php'))
+			require $ext_info['path'].'/url/'.$forum_config['o_sef'].'.php';
+		else
+			require $ext_info['path'].'/url/Default.php';
+	]]></hook>
+	<hook id="re_rewrite_rules"><![CDATA[
+		$forum_rewrite_rules['/^pm(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/index.php';
+		$forum_rewrite_rules['/^pm[\/_-]?([0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/view.php?id=$1';
+		$forum_rewrite_rules['/^send_pm(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/send.php';
+		$forum_rewrite_rules['/^send_pm_to[\/_-]?([0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/send.php?to=$1';
+		$forum_rewrite_rules['/^reply_pm[\/_-]?([0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/send.php?id=$1';
+		$forum_rewrite_rules['/^quote_pm[\/_-]?([0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/send.php?quote=$1';
+		$forum_rewrite_rules['/^pm[\/_-]?(inbox|sent|settings)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/index.php?view=$1';
+		$forum_rewrite_rules['/^mark[\/_-]pm[\/_-]?read[\/_-]?([a-z0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/index.php?view=inbox&action=read&csrf_token=$1';
+		$forum_rewrite_rules['/^delete_pm[\/_-]?([0-9]+)[\/_-]([a-z0-9]+)(\.html?|\/)?$/i'] = 'extensions/'.$ext_info['id'].'/index.php?view=inbox&action=delete&id=$1&csrf_token=$2';
+	]]></hook>
+	</hooks>
+</extension>

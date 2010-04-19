@@ -1,0 +1,200 @@
+---------------------------------------------------------------------------------------------------
+---------------------------------------Changelog pour AdvSpy---------------------------------------
+---------------------------------------------------------------------------------------------------
+(+) = Ajout de fonction/option
+(*) = Modification de comportement/sécurisation/optimisation
+(-) = Bug corrigé
+(!) = Bug non corrigé
+
+
+
+
+-AdvSpy- v0.94
+
+(+) Option : Afficher le contenu des RE en colonnes (maintenant par défaut)
+(+) Internationalisation : Création de "AdvSpy_Lang_fra.php" et transfert des variables en cours.
+(+) Harmonisations graphique : Utilisation des class de skin 'style OGSpy'
+(+) Amélioration du menu : Tabulation active surlignée.
+(+) Remise en page de la partie "Recherche Plus" pour une meilleure lisibilité.
+(+) Simulateur en javascript : calcul instantané de la PATATE avec beaucoup plus de détails.
+
+(*) Quelques petites corrections orthographiques
+
+(-) (#460) Correction du bug empechant l'envois des flottes d'un RE vers le simulateur si les techno sont absentes.
+
+
+-AdvSpy- v0.93c
+
+(+) Critère de recherche : Afficher uniquement mes RE
+(+) Ordre de tris : Champ de ruines (>) & (<)
+(*) Numéro de version corrigé
+
+
+-AdvSpy- v0.93b
+
+(-) Bug forçant la recherche de sans défense.
+
+
+-AdvSpy- v0.93a
+
+(*) Optimisation des recherches sur les "sans défenses" (patate maxi = 0)
+(-) Bug ne prennant pas en compte le métal/cristal/deut minimum
+
+
+-AdvSpy- v0.93
+
+(+) Ajout de l'onglet "Options" gérable par l'administrateur et les utilisateurs.
+    Séparateur de milliers
+    Nombre max de résultat par page
+    Défenses dans débris (Uni40)
+    Désactiver le message d`erreur de copie presse-papier
+    Copie express des RE dans le Presse-Papier
+    Afficher le nombre de Petits Transporteurs pour les raids
+    Opacité du fond grisé (de 0 à 100)
+    Cacher l'avertissement dans le simulateur de combat
+(+) Ajout du calcul du champ de ruine et du nombre de recycleurs nécessaires.
+(*) Optimisation de la vitesse d'affichage : moins de $out, plus de print
+(*) Optimisation : Correction d'un gros calcul en double
+(*) Ajout du nom du joueur dans les RE pour la compatibilité avec speedsim
+
+
+-AdvSpy- v0.92
+
+(+) Ajout d'un fond grisé pour la lisibilité (made in ericc)
+(*) Compatibilité avec OGSpy 3.05 (rétro-compatible 3.04 mais déconseillé)
+
+
+-AdvSpy- v0.91c
+
+(+) Ogame V0.78 : Ajout de la technologie Expéditions
+
+
+-AdvSpy- v0.91b
+
+(+) ajouts divers pour préparer les 'Options' (je commit pour sauvegarder car mon système es en train de flancher …)
+(*) Ticket #263 : Autoconfiguration pour nombre de systèmes/galaxies (uni50)
+(*) Ticket #277 : Erreur de prise en compte du simulateur lors du chargement d'une sauvegarde de flotte (corrigé)
+(*) Ticket #258 : Prendre en compte "Le scanner des sondes", affiché en haut à droite + nouveau critère de tris.
+(*) Ticket #254 : Peaufiner l'affichage par pages (Afficher les résultats de … à …) 
+(-) Correction du lancement de la fonction AdvSpy_Config_GetSqlOfDefaultSaves dans la partie install et update < merci lothadith ;)
+(-) Correction d'un bug pour l'affichage des alliances amies/protégées
+
+
+-AdvSpy- v0.91a
+
+(+) Ajout d'une icone (HasMoon.png/IsMoon.png) pour signaler qu'une planète possède une lune ou bien que c'est une lune. (merci AlexComputer pour l'idée)
+(+) Ajout d'un critère de recherche : Afficher uniquement les lunes.
+(+) Ajout d'un critère de recherche : N'afficher que les RE raidés (alternatif à 'Cacher les RE raidés')
+(+) Ajout d'un critère de tris : PATATE Totale (<) & (>)
+(+) Ajout d'un critère de tris : PATATE- Vaisseaux (<) & (>)
+(+) Ajout d'un critère de tris : PATATE- Défenses (<) & (>)
+(+) Ajout d'un critère de tris : Taux de Patate (>)
+(+) Ajout d'un critère de tris : Nb de PT / GT (>)
+(+) Ajout d'un critère de tris : Coordonées (<) & (>)
+(+) Ajout de la prise en charge de simulateurs en ligne : (merci ericc)
+	WebSim.SpeedSim.net : La version en ligne du simulateur du meme nom 
+	Drago Sim 2 ( http://drago-sim.com/ )
+    > Copie rapide d'un RE vers un Web-Simulateur (Coté défenseur)
+    > Copie des flottes du simulateur integré vers un Web-Simulateur
+(+) Calcul des gains cumulés pour 1, 2 et 3 raids à la suite.
+    > y compris dans les statistiques
+(+) Réduction à la volée des Flottes/Défenses/Batiments/Recherches quand on coche/décoche l'option dans le menu
+(+) Ajout de l'option de selection rapide du secteur de recherche autour d'une des planètes que l'on possède (merci bcp à Razmataz)
+(+) Dans "Administration", Ajout de l'option "Forcer le chargement des sauvegardes par défaut"
+
+(*) Détection 'intélligente' de lune
+    $AdvSpyConfig['options']['SmartMoonDetection']=TRUE/FALSE (defaut : TRUE)
+    Neanmoin, c'est impossible d'etre sur à 100% si le rapport est incomplet (si il manque les batiments)
+(*) Le graphique affiche maintenant le joueur cible en bleu, et sois-meme en gris pour comparer.
+(*) Le bouton "Copier ce rapport dans le presse papier" possède maintenant un sous-menu. (relooking)
+(*) Modification des sauvegardes par défaut, plusieurs recherches 'types' disponibles, par ex:
+	Les "Super Free Raids" sont les raids gratuits sur inactifs (sans défenses, inactifs)
+    Les "Free Raids" sont les raids gratuits (sans défenses, >anciens "Easy Raids"<)
+    Les "Easy Raids" Sont les raids faciles (1 à 50 Vb, ou equivalent : de 0.001 à 3 Patate)
+    Les "Light Raids" Sont les raids légers (50 à 500 Vb - de 3 à 30 Patate)
+    Les "Medium Raids" Sont les raids Moyens (500 à 2000 Vb - de 30 à 150 Patate)
+    Les "Heavy Raids" Sont les raids Lourds (2000 à 5000 Vb - de 150 à 300 Patate)
+    Les "HoF Raids" Sont les gros raids genre TOP100 (5000 à 10000 Vb - de 300 à 600 Patate)
+    Les "Hell Raids" Sont les raids de l'enfer (de 10'000 à 50'000 Vb - de 600 à 3000 Patate)
+    Les "Armageddon Raids" Sont les raids de l'apocalypse (de 50'000 à 100'000 Vb - de 3000 à 6000 Patate)
+    Les "Raids de la fin de temps" (plus de 100'000 Vb - 6000 et+ Patate)
+(*) Compatibilité Uni50FR des racourcis rapides pour séléctionner une des 50 galaxies (par plage de 5)
+(*) Le menu "Options" qui etais toujours vide disparait, mais pour mieux revenir bientot :}
+
+(-) Bug avec Patate Min/Max corrigé (Points de Patate = PATATE / 1'000'000)
+(-) La fonction "Copier cette flotte dans le simulateur" marche à nouveau ! (+relooking)
+(-) Tentative de correction du bug des faux alliés/protégés (à confirmer donc)
+
+
+-AdvSpy- v0.90b
+
+(+) Ajout de update.php > mise à jour du mod avec vérifications pour rétro-compatibilité (toutes versions).
+(+) $AdvSpyConfig['Restrictions']['Save_AllowPublic'] (défaut: TRUE)
+    TRUE = Les utilisateurs non-admin peuvent enregistrer une sauvegarde publique.
+    FALSE = Seul les admin/co-admin peuvent enregistrer une sauvegarde publique.
+(+) Loging/Debuging : Ajout de messages au journal OGSpy + $AdvSpyConfig['Settings']['EnableLog']
+(+) $AdvSpyConfig['Settings']['EnableDebug']
+    TRUE = Affiche les messages supplémentaires de débug visibles dans la parte 'Administration' (donc reservé aux admins).
+    FALSE = (défaut) Désactivé car inutile sauf si vous etes développeurs/curieux.
+(+) Description du contenu des sauvegardes en ToolTip
+(+) Ajout de racourcis pour sélectionner une galaxie ([*][1][2][3][4][5][6][7][8][9])
+(+) Option de recherche: Limite pour l'affichage des résultats : mini/maxi (défaut: 50)
+(+) Compatiblité uni 50 FR : lifting de la bdd + 3 nouvelles variables dans la config :
+   $AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max']=9; ou 50
+   $AdvSpyConfig['Settings']['OgameUniverse_System_Max']=499; ou 100
+   $AdvSpyConfig['Settings']['OgameUniverse_Row_Max']=15;
+(+) Verification de mise à jour du mod dans la partie "Administration"
+
+(*) Une Sauvegarde 'générale' appartien à -AdvSpy- (plus son créateur)
+(*) L'affichage des résultats de la recheche ne passe plus par un buffer, réduis énormement la consomation de mémoire.
+(*) La variable $BlockRecherche est maintenant globale et non plus passée de fonctions en fonctions (optimisation de la memoire)
+
+(-) Correction de plusieurs bugs empechant de prendre en compte certains critères lors du chargement d'une sauvegarde.
+(-) 'Bug' de lenteur et d'utilisation excessive de la memoire corrigé (autant que possible).
+(-) Correction d'un bug empechant dans certaines conditions de confirmer une suppression de sauvegarde.
+
+(!) "Copier cette flotte dans le simulateur." ne marche toujours pas ... désolé -_-
+
+
+-AdvSpy- v0.90a
+
+Ré-ecriture complète du code, refonte totale des methodes de traitement.
+TOUT à ete effacé puis refais, en mieux
+Nouveautés trop longues à lister, téléchargez plutot le mod.
+
+---------------------------------------------------------------------------------------------------
+----------------------------------------------Historique :-----------------------------------------
+---------------------------------------------------------------------------------------------------
+
+MISE A JOUR v0.7
+merci aux contributeurs pour la correction du bug des points dans les nombres et l'ajout du traqueur.
+
+MISE A JOUR v0.6
+
+Correction du bug avec les images (merci Neric)
+Nouveau systeme de suppression des R.E. beaucoup plus réactif et rapide (javascript+php)
+Correction des bugs avec les R.E. envoyés avec OGS (le client windows)
+Ajout de l'option "Pas de doublons." pour voir uniquement le dernier R.E. par planete.
++Tres leger lifting graphique
+
+
+MISE A JOUR v0.5
+
+WAAAoouu plein de nouveautés : cacher, copier, flottes/def min/max, ressources mini, amelioration de l'interface graphique...
+faite vous une idée avec la demo
+
+
+MISE A JOUR v0.4
+Option 'Grand Nombre' pour afficher en rouge les ressources dépassant cette limite.
+Option "rapports complets" divisée en 4 options pour chaques types.
+  Par exemple si vous cochez "Flotte sondée ?" alors seulement les R.E. ayant sondé la flotte seront visibles, ca ne veux pas dire qu'une flotte existe, il peut y avoir 0 vaisseaux, mais si une flotte existe alors elle est sondée.
+  Si vous avez trop de rapports incomplets : envoyer plus de sondes lors de vos scan et developpez votre espionnage.
++Léger lifting des couleurs
+
+MISE A JOUR v0.3
+l'option "rapports complets" permet de l'afficher que les rapports où les sondes ont pu récuperer les informations à propos des Flottes des Défenses de Bâtiments et des Recherches, qu'il y en ais de présent ou non.
+
+MISE A JOUR v0.2
+Réecriture complette, interface graphique ameliorée, option "Age du RE".
+
+v0.1 : AdvSpy 1ere version très moche. "proof of concept"

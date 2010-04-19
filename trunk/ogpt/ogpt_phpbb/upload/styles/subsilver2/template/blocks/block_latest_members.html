@@ -1,0 +1,31 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{RECENT_LAST_MEMBERS_TITRE}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" align="center" class="row2"  colspan="3">				
+				<tr>	
+	<td align="left" nowrap="nowrap" class="row2"><span class="gensmall"><b>{L_LATEST_USERNAME}</b></span></td>
+	<td align="center" nowrap="nowrap" class="row2"><span class="gensmall"><b>{L_LATEST_JOINED}</b></span></td>	
+	<td align="right" nowrap="nowrap" class="row2"><span class="gensmall"><b></b></span></td>
+			</span>
+	</tr>
+	<!-- BEGIN latest_members -->
+	<!-- IF latest_members.S_ROW_COUNT is even -->
+	<tr class="row1">
+	<!-- ELSE -->	
+	<tr class="row2">
+	<!-- ENDIF -->	
+			<td align="left" valign="middle"><img src="./images/portal/user.png" /><a href="{latest_members.U_USERNAME}"><span class="genmed2">&nbsp;<span class="genmed2"><strong><font color="#{latest_members.USERNAME_COLOR}">{latest_members.USERNAME}</font></strong></span></a><br /></td>
+			<td align="center" nowrap="nowrap" valign="middle"><span class="genmed2">{latest_members.JOINED}</td>			
+			<td align="right" nowrap="nowrap" valign="middle">
+		<!-- IF latest_members.USER_FLAG -->			
+		<img src="./images/flags/{latest_members.USER_FLAG}.gif" border="0" width="15" alt="{latest_members.USER_FLAG}" title="{latest_members.USER_FLAG}">&nbsp;
+		<!-- ENDIF -->		
+		</td>		
+	<!-- END latest_members -->	
+					</center>
+				</tr>					
+			</table>
+		</td>
+</table> 

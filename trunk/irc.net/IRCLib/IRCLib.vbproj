@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3B1ECAF5-CA33-4A70-8640-10215EB7060C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>IRCLib</RootNamespace>
+    <AssemblyName>IRCLib</AssemblyName>
+    <MyType>Windows</MyType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>IRCLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>IRCLib.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\ChannelCtrl.Designer.vb">
+      <DependentUpon>ChannelCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChannelCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ChannelMessagesCtrl.Designer.vb">
+      <DependentUpon>ChannelMessagesCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChannelMessagesCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ChannelUserList.Designer.vb">
+      <DependentUpon>ChannelUserList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChannelUserList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WebChannelMessageCtrl.Designer.vb">
+      <DependentUpon>WebChannelMessageCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WebChannelMessageCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IRC.vb" />
+    <Compile Include="IRCChannel.vb" />
+    <Compile Include="IrcRawMsg.vb" />
+    <Compile Include="IRCServer.vb" />
+    <Compile Include="IRCUser.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UI\IRCChannelForm.Designer.vb">
+      <DependentUpon>IRCChannelForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\IRCChannelForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\IRCWebChannelForm.Designer.vb">
+      <DependentUpon>IRCWebChannelForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\IRCWebChannelForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IRC_code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ChannelCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChannelCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ChannelMessagesCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChannelMessagesCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ChannelUserList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChannelUserList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WebChannelMessageCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WebChannelMessageCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IRC_messages.txt" />
+    <EmbeddedResource Include="UI\IRCChannelForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IRCChannelForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\IRCWebChannelForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IRCWebChannelForm.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

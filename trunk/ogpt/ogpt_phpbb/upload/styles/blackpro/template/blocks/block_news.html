@@ -1,0 +1,51 @@
+<!-- BEGIN news_row -->
+<!-- IF news_row.S_NO_TOPICS -->
+<!-- ELSE -->	
+	<br>
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{TITLE_BLOCK}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+				<dl>
+					<dd class="posts_portal">	
+<table class="row2" width="100%" cellpadding="0" cellspacing="0" border="0" >			
+	<td class="bg2">
+					{news_row.ATTACH_ICON_IMG}<!-- IF news_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a>
+					<span class="gensmall">{L_POSTED_BY}: 
+					<img src="./images/portal/{news_row.IMG_USER}" />&nbsp;
+					<strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong>		
+			<!-- IF news_row.FLAGS -->&nbsp;
+			<img src="./images/flags/{news_row.FLAGS}.gif" border="0" width="15" alt="{news_row.FLAGS}" title="{news_row.FLAGS}">
+			<!-- ENDIF --></span><br />
+	</td>
+	<tr>
+	<tr/>	
+	<td class="bg1"><br />					
+					{news_row.TEXT}<br /><br />
+	</td>
+	<tr>
+	<tr/>	
+	<td class="bg2">
+					<span style="float: left;">{news_row.MINI_POST_IMG}{news_row.TIME}</span>	
+					<span style="float: right;">
+					<a href="{news_row.U_VIEW_COMMENTS}">{news_row.L_READ_FULL}</a>&nbsp;&bull;&nbsp;
+					<a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a>&nbsp;</span>
+	<tr/>						
+	</td>
+</table>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+<!-- END news_row -->

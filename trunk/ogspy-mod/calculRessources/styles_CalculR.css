@@ -1,0 +1,26 @@
+input.menu_on {
+	border:1px solid #2F4F4F;
+	font-size: 8pt;
+	vertical-align: middle;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	color:'#000000';
+	background-color:#000000;}
+
+input.obj {
+	font-family: Arial;
+	font-size: 12pt;
+	font-weight: bold;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	color:'white';}
+
+th.titre_obj {
+	font-family: Arial;
+	font-size:10pt;
+	font-weight:bold;
+	vertical-align: left;
+	text-align: center;
+	color:'white';}

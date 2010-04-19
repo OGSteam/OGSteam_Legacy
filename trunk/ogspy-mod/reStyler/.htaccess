@@ -1,0 +1,17 @@
+# pour autoriser l'accès aux éléments de ColorPicker
+<Files color.gif>
+Allow from all
+</Files>
+<Files ColorPicker.css>
+Allow from all
+</Files>
+
+# pour autoriser l'accès au changelog de modREstyler
+<Files changelog.php>
+Allow from all
+</Files>
+
+# et pour les fonctions (ColorPicker & modREstyler)
+<Files *.js>
+Allow from all
+</Files>

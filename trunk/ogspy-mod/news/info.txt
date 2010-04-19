@@ -1,0 +1,3 @@
+Module d'Annonce par l'<b>OGSteam</b>
+<a href='http://www.ogsteam.fr/forums/sujet-2117-mod-news'>Information</a>
+Libre d'etre modifi&eacute; directement sur le SVN

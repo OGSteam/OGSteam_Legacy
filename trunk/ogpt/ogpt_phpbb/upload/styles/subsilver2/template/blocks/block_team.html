@@ -1,0 +1,25 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%"></th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+					<td>
+					<center>
+<!-- IF S_USER_LOGGED_IN -->		
+	<!-- BEGIN team -->	
+{L_TEAM_USER}&nbsp;{team.USERNAME_FULL}&nbsp;			
+<!-- IF team.USER_FLAG --><img src="./images/flags/{team.USER_FLAG}.gif" border="0" width="15" alt="{team.USER_FLAG}" title="{team.USER_FLAG}"><!-- ENDIF -->&nbsp; - &nbsp;{L_TEAM_DATE}&nbsp;<b>{team.JOUR}&nbsp;-&nbsp;{team.DATE}</b>
+	<!-- END team -->
+<!-- ENDIF -->
+
+<!-- IF not S_USER_LOGGED_IN -->
+{L_TEAM}&nbsp;<b>{SITENAME}</b>.&nbsp;{L_TEAM2}
+<!-- ENDIF -->
+					</center>
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>

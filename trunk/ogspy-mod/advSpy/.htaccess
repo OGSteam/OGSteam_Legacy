@@ -1,0 +1,10 @@
+<Files *.gif>
+Allow from all
+</Files>
+<Files *.png>
+Allow from all
+</Files>
+<Files *.jpg>
+Allow from all
+</Files>
+deny from all

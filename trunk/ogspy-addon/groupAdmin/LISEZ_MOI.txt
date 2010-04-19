@@ -1,0 +1,24 @@
+Addon pour OGSpy 3.02c : GroupAdmin
+-----------------------------------
+
+
+ ¤  Informations:
+???????????????????????????????????????
+Cet addon permet de modifier l'administration des groupes de OGSpy, mettant une nouvelle interface beaucoup plus intuitive et simple que l'ancienne. Le Javascript et AJAX sont utilisés pour.
+Vous pouvez facilement installer/désinstaller l'addons depuis le fichier d'installation.
+
+
+ ¤  Installation:
+???????????????????????????????????????
+- Décompresser les fichiers contenus dans l'archive WinZip a la racine de votre OGSpy [Le répertoire où se trouve votre OGSpy]. 
+- Lancer dans votre navigateur le fichier install.php contenu a la racine de votre OGSpy [Si l'url de votre OGSpy est : www.mondomaine.net/ogspy/ alors l'url du fichier install.php est : www.mondomaine.net/ogspy/install.php].
+
+
+ ¤  Problèmes possibles:
+???????????????????????????????????????
+Si vous rencontrez un problème lors de l'installation ou de la désinstallation, contactez moi.
+Les fichiers modifiés de OGSpy sont renommés sous la forme : backup_LeFichier.php
+Vous pouvez donc remettre vos fichiers originaux à tout moment si des problèmes ont survenus.
+
+------------------------------------
+     Add-on créé par Unibozu

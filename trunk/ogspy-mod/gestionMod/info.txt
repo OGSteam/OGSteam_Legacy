@@ -1,0 +1,2 @@
+Module de gestion des mods (renommage, changement de position, groupes), par <b>Kal Nightmare</b>
+<a href='http://www.ogsteam.fr/forums/sujet-1217'>Informations</a>

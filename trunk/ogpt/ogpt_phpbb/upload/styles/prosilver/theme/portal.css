@@ -1,0 +1,36 @@
+/* proSilver Style Portal
+By sjpphpbb.net
+These style definitions are mainly IE specific 
+tweaks required due to its poor CSS support.
+-------------------------------------------------*/
+
+ul.block dt {
+	color: #4DFFFF;
+	font-size: 1.4em;
+	display: block;
+	width: 100%;
+	height: 20;
+	font-size: 1.5em;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left: 1px;
+	padding-right: 1px;
+	padding-top: 2px;
+	padding-bottom: 2px;	
+}
+li.block dt, li.block dd {
+	color: #4DFFFF;
+	font-size: 1.4em;
+	line-height: 1.8em;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	border-left-width: 0px;
+	margin: -15px 0 2px 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+h6 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 2em;
+}

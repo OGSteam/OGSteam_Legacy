@@ -1,0 +1,2 @@
+Module de calcul de port&eacute;e des MIP, par <b>badwha</b> et repris par <b>zhym</b>
+<a href='http://www.ogsteam.fr/forums/sujet-1325'>Informations</a>

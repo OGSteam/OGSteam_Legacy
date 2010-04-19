@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://galaxyplugin/locale/galaxyplugin.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+ title="&dialog.title;"
+ id="GTPlugin-config"
+ buttons="accept, cancel"
+ ondialogaccept="return GTPlugin_SaveValues();"
+ onload="GTPlugin_initWindow();"
+ orient="vertical"
+ width="650"
+ height="300"
+ flex="1">
+ 
+<script type="application/x-javascript" src="chrome://galaxyplugin/content/galaxyoptions.js"/>
+
+<stringbundleset id="localeStrings">
+	<stringbundle id="gtStrings" src="chrome://galaxyplugin/locale/galaxyplugin.properties"/>
+</stringbundleset>
+
+<groupbox>
+<caption label="&dialog.caption;"/>
+<vbox>
+    <hbox>
+        <label value="" style="width: 14px;"/>
+        <label value="&dialog.ogameurl;" style="width: 199px;"/>
+        <label value="&dialog.galaxytoolurl;" style="width: 197px;"/>
+        <label value="&dialog.username;" style="width: 72px;"/>
+        <label value="&dialog.password;" style="width: 48px;"/>
+    </hbox>
+    <hbox>
+        <label value="1:" style="font-size:12pt;"/>
+        <textbox id="GTPlugin-ogameurl1" style="width: 200px;"/>
+        <textbox id="GTPlugin-url1" style="width: 200px;"/>
+        <textbox id="GTPlugin-username1" maxlength="20" style="width: 75px;"/>
+        <textbox id="GTPlugin-password1" type="password" maxlength="32" style="width: 50px;"/>
+    </hbox>
+    <hbox>
+        <label value="2:" style="font-size:12pt;"/>
+        <textbox id="GTPlugin-ogameurl2" style="width: 200px;"/>
+        <textbox id="GTPlugin-url2" style="width: 200px;"/>
+        <textbox id="GTPlugin-username2" maxlength="20" style="width: 75px;"/>
+        <textbox id="GTPlugin-password2" type="password" maxlength="32" style="width: 50px;"/>
+    </hbox>
+    <hbox>
+        <label value="3:" style="font-size:12pt;"/>
+        <textbox id="GTPlugin-ogameurl3" style="width: 200px;"/>
+        <textbox id="GTPlugin-url3" style="width: 200px;"/>
+        <textbox id="GTPlugin-username3" maxlength="20" style="width: 75px;"/>
+        <textbox id="GTPlugin-password3" type="password" maxlength="32" style="width: 50px;"/>
+    </hbox>
+    <hbox>
+        <label value="4:" style="font-size:12pt;"/>
+        <textbox id="GTPlugin-ogameurl4" style="width: 200px;"/>
+        <textbox id="GTPlugin-url4" style="width: 200px;"/>
+        <textbox id="GTPlugin-username4" maxlength="20" style="width: 75px;"/>
+        <textbox id="GTPlugin-password4" type="password" maxlength="32" style="width: 50px;"/>
+    </hbox>
+    <hbox>
+        <label value="5:" style="font-size:12pt;"/>
+        <textbox id="GTPlugin-ogameurl5" style="width: 200px;"/>
+        <textbox id="GTPlugin-url5" style="width: 200px;"/>
+        <textbox id="GTPlugin-username5" maxlength="20" style="width: 75px;"/>
+        <textbox id="GTPlugin-password5" type="password" maxlength="32" style="width: 50px;"/>
+    </hbox>
+    <hbox>
+    <checkbox id="GTPlugin-autostart" label="&toolbar.reloadLabel;" checked="false"/>
+    </hbox>
+</vbox>
+</groupbox> 
+
+</dialog>

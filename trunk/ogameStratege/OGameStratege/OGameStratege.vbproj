@@ -1,0 +1,546 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E29F55C6-3A39-4EDE-905D-E8AFFA74B96A}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>Media\Secretpassage.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>OGameStratege</AssemblyName>
+    <AssemblyOriginatorKeyFile>OGameStratege_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>OGameStratege</RootNamespace>
+    <StartupObject>OGameStratege.MainForm</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <ManifestCertificateThumbprint>B51903B070B4FC47D19A340945E6FC275975301C</ManifestCertificateThumbprint>
+    <ManifestKeyFile>OGameStratege_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SignAssembly>false</SignAssembly>
+    <TargetZone>LocalIntranet</TargetZone>
+    <PublishUrl>d:\OGS20\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ProductName>OGS 2.0</ProductName>
+    <PublisherName>OGSTeam</PublisherName>
+    <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationVersion>2.0.0.0</ApplicationVersion>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>OGameStratege.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>OGameStratege.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>false</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>none</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="ZedGraph, Version=4.3.5.1214, Culture=neutral, PublicKeyToken=02a83cbd123fcd60">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="changelog.txt" />
+    <None Include="gpl.txt" />
+    <BaseApplicationManifest Include="My Project\app.manifest" />
+    <None Include="OGameStratege_TemporaryKey.pfx" />
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\config.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\OGSCheckUpdate.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\RedirectConsoleStream.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\AlliancePlayerCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CleanDatabaseCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DBStuffCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmpireCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LabelBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LastAttacksCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LastSpyingCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Map.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\NamedTextbox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OGSPlayerStatsGraph.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PartialMapCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlanetCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlanetInfoControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayerAllianceSubPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayerInfoCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PlayersStatsCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RankingCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RankVariation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RemoteDBCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ServerPlayerStatsInfoCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Universes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ZoneSelectCtrl.Designer.vb">
+      <DependentUpon>ZoneSelectCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ZoneSelectCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ChooseStatDateFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChooseStatsFromServer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateUniverseDBForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelectRankType.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MiniLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OGSpyInterface.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OGSUpdateForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlayerFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowStructureFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Splash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UniversesDatabaseForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Functions.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\AlliancePlayerCtrl.resx">
+      <DependentUpon>AlliancePlayerCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CleanDatabaseCtrl.resx">
+      <DependentUpon>CleanDatabaseCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DBStuffCtrl.en.resx">
+      <DependentUpon>DBStuffCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DBStuffCtrl.fr-FR.resx">
+      <DependentUpon>DBStuffCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DBStuffCtrl.fr.resx">
+      <DependentUpon>DBStuffCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DBStuffCtrl.resx">
+      <DependentUpon>DBStuffCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EmpireCtrl.resx">
+      <DependentUpon>EmpireCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LabelBox.resx">
+      <DependentUpon>LabelBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LastAttacksCtrl.resx">
+      <DependentUpon>LastAttacksCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LastSpyingCtrl.resx">
+      <DependentUpon>LastSpyingCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Map.resx">
+      <DependentUpon>Map.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NamedTextbox.resx">
+      <DependentUpon>NamedTextbox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OGSPlayerStatsGraph.resx">
+      <DependentUpon>OGSPlayerStatsGraph.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PartialMapCtrl.resx">
+      <DependentUpon>PartialMapCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlanetCtrl.resx">
+      <DependentUpon>PlanetCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlanetInfoControl.resx">
+      <DependentUpon>PlanetInfoControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlayerAllianceSubPanel.fr.resx">
+      <DependentUpon>PlayerAllianceSubPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlayerAllianceSubPanel.resx">
+      <DependentUpon>PlayerAllianceSubPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlayerInfoCtrl.fr.resx">
+      <DependentUpon>PlayerInfoCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlayerInfoCtrl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PlayersStatsCtrl.resx">
+      <DependentUpon>PlayersStatsCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RankingCtrl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RankVariation.resx">
+      <DependentUpon>RankVariation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoteDBCtrl.en.resx">
+      <DependentUpon>RemoteDBCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoteDBCtrl.fr-FR.resx">
+      <DependentUpon>RemoteDBCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoteDBCtrl.fr.resx">
+      <DependentUpon>RemoteDBCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoteDBCtrl.resx">
+      <DependentUpon>RemoteDBCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ServerPlayerStatsInfoCtrl.resx">
+      <DependentUpon>ServerPlayerStatsInfoCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Universes.en.resx">
+      <DependentUpon>Universes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Universes.fr-FR.resx">
+      <DependentUpon>Universes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Universes.fr.resx">
+      <DependentUpon>Universes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Universes.resx">
+      <DependentUpon>Universes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ZoneSelectCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ZoneSelectCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChooseStatDateFrm.en.resx">
+      <DependentUpon>ChooseStatDateFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChooseStatDateFrm.fr-FR.resx">
+      <DependentUpon>ChooseStatDateFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChooseStatDateFrm.fr.resx">
+      <DependentUpon>ChooseStatDateFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChooseStatDateFrm.resx">
+      <DependentUpon>ChooseStatDateFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChooseStatsFromServer.resx">
+      <DependentUpon>ChooseStatsFromServer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateUniverseDBForm.en.resx">
+      <DependentUpon>CreateUniverseDBForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateUniverseDBForm.fr-FR.resx">
+      <DependentUpon>CreateUniverseDBForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateUniverseDBForm.fr.resx">
+      <DependentUpon>CreateUniverseDBForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateUniverseDBForm.resx">
+      <DependentUpon>CreateUniverseDBForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.en.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.fr-FR.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.fr.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelectRankType.en.resx">
+      <DependentUpon>frmSelectRankType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelectRankType.fr-FR.resx">
+      <DependentUpon>frmSelectRankType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelectRankType.fr.resx">
+      <DependentUpon>frmSelectRankType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelectRankType.resx">
+      <DependentUpon>frmSelectRankType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MiniLog.en.resx">
+      <DependentUpon>MiniLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MiniLog.fr-FR.resx">
+      <DependentUpon>MiniLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MiniLog.fr.resx">
+      <DependentUpon>MiniLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MiniLog.resx">
+      <DependentUpon>MiniLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OGSpyInterface.resx">
+      <DependentUpon>OGSpyInterface.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OGSUpdateForm.fr.resx">
+      <DependentUpon>OGSUpdateForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OGSUpdateForm.resx">
+      <DependentUpon>OGSUpdateForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlayerFrm.en.resx">
+      <DependentUpon>PlayerFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlayerFrm.fr-FR.resx">
+      <DependentUpon>PlayerFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlayerFrm.fr.resx">
+      <DependentUpon>PlayerFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PlayerFrm.resx">
+      <DependentUpon>PlayerFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowStructureFrm.en.resx">
+      <DependentUpon>ShowStructureFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowStructureFrm.fr-FR.resx">
+      <DependentUpon>ShowStructureFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowStructureFrm.fr.resx">
+      <DependentUpon>ShowStructureFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowStructureFrm.resx">
+      <DependentUpon>ShowStructureFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splash.en.resx">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splash.fr-FR.resx">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splash.fr.resx">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splash.resx">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UniversesDatabaseForm.en.resx">
+      <DependentUpon>UniversesDatabaseForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UniversesDatabaseForm.fr-FR.resx">
+      <DependentUpon>UniversesDatabaseForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UniversesDatabaseForm.fr.resx">
+      <DependentUpon>UniversesDatabaseForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UniversesDatabaseForm.resx">
+      <DependentUpon>UniversesDatabaseForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Media\bells002.wav" />
+    <EmbeddedResource Include="Media\bullets_diamonds_green_004.gif" />
+    <EmbeddedResource Include="Media\bullets_diamonds_red_003.gif" />
+    <EmbeddedResource Include="Media\clipart_misc_001.gif" />
+    <EmbeddedResource Include="Media\clipart_misc_317.gif" />
+    <EmbeddedResource Include="Media\letnum_info_001.gif" />
+    <EmbeddedResource Include="Media\letnum_question_002.gif" />
+    <EmbeddedResource Include="Media\ogsmoon.gif" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Media\Secretpassage.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OGameObject\OGameObject.vbproj">
+      <Project>{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}</Project>
+      <Name>OGameObject</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="FirebirdSql.Data.FirebirdClient">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="OGameObject">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="ZedGraph">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

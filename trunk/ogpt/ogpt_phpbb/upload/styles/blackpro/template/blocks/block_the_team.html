@@ -1,0 +1,72 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+
+				<dl>
+					<dt>{L_THE_TEAM}</dt>
+				</dl>
+
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+				<dl>
+					<dd class="posts_portal">
+<table class="tablebg" width="100%" cellpadding="2" cellspacing="2" border="0" >
+<td class="cat" colspan="4"></td>
+<tr class="row2">
+	<td class="class="row2" colspan="4"><font color"{which_row.GROUP_COLOR}"><b class="gensmall">{L_ADMINISTRATORS}</b></td>
+</tr>
+<!-- BEGIN admin -->
+	<tr class="row1">
+	<tr class="<!-- IF admin.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+	<td class="gensmall" align="left" width="20"><img src="./images/portal/founder.png" /></td>
+	<td class="gensmall" align="center"> &nbsp;<strong>{admin.USERNAME_FULL}</strong></td>
+	<td class="gensmall" align="center">
+	<!-- IF admin.URL -->
+	<a target="_blank" href="{admin.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+	<!-- ENDIF -->
+	</td>
+<td class="gensmall" align="right">
+	<!-- IF admin.USER_FLAG -->
+	<img src="./images/flags/{admin.USER_FLAG}.gif" border="0" width="15" alt="{admin.USER_FLAG}">&nbsp;</center><!-- ENDIF --></td>
+
+</tr>
+<!-- BEGINELSE -->
+	<tr>
+		<td class="row1" colspan="4" align="center"><span class="gensmall">{L_NO_ADMINS}</span></td>
+	</tr>
+<!-- END admin -->
+<tr class="row3">
+	<td colspan="4" class="row2"><b class="gensmall">{L_MODERATORS}</b></td>
+</tr>
+<!-- BEGIN mod -->
+	<tr class="row1">
+	<tr class="<!-- IF mod.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">
+	<td class="gensmall" align="left" width="20"><img src="./images/portal/mod.png" /></td>
+	<td class="gensmall" align="center"> &nbsp;<strong>{mod.USERNAME_FULL}</strong></td>
+	<td class="gensmall" align="center">
+	<!-- IF mod.URL -->
+	<a target="_blank" href="{mod.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+	<!-- ENDIF -->
+	</td>
+	<td class="gensmall" align="right">	
+	<!-- IF mod.USER_FLAG -->
+	<img src="./images/flags/{mod.USER_FLAG}.gif" border="0" width="15" alt="{mod.USER_FLAG}">&nbsp;</center>
+	<!-- ENDIF -->
+	</td>
+</tr>
+<!-- BEGINELSE -->
+	<tr>
+		<td class="row1" colspan="4" align="center"><span class="gensmall">{L_NO_MODS}</span></td>
+	</tr>
+<!-- END mod -->
+</table>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

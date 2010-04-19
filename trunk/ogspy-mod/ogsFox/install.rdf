@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+	<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<!-- propriétés -->
+	
+		<em:id>{47219593-a837-b8a6-41e6-d29abf51291e}</em:id>
+		<em:version>0.2.3</em:version>
+		<em:type>2</em:type>
+		
+		 <!-- L'application cible de votre extension, avec les versions minimums et maximums supportées. --> 
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>1.0+</em:minVersion>
+				<em:maxVersion>1.5.0.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		
+		<!-- Méta-données visibles -->
+		<em:name>OGSFox</em:name>
+		<em:description>Une extension pour exporter les données directement vers OGSpy</em:description>
+		<em:creator>tsyr2ko</em:creator>
+		<em:homepageURL>http://ogs.servebbs.net/devteam/wiki/OgsFox</em:homepageURL>
+		<em:optionsURL>chrome://ogsfox/content/options.xul</em:optionsURL>
+	</Description>      
+</RDF>

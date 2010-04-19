@@ -1,0 +1,1 @@
+<table width='100%'><tbody><tr><td align='center'><b>Energy</b></td></tr><tr><td>Module calculating the most cost-effective means of producing energy.</td></tr><tr><td><a href='http://ogsteam.fr/sujet-3964'>Forum</a></td></tr><tr><td align='right'>Module by Scaler</td></tr></tbody></table>

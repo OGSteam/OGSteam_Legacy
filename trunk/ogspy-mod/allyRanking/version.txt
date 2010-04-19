@@ -1,0 +1,2 @@
+allyRanking
+0.4f

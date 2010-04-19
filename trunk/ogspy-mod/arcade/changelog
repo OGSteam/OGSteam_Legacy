@@ -1,0 +1,28 @@
+Changelog du Module Arcade
+
+v2.1
++ Ajout d'un lien pour avoir la liste des jeux dont un joueur est le top 1
++ Ajout en option du nombre de minutes pendant lesquelles un joueur doit etre
+considéré online (mis par défaut à 10 minutes)
+* Augmentation de la taille du champ image à 50 (pour les long noms de
+fichiers gifs...)
++ Ajout d'une option "joueurs arcade" seulement, pour interdire l'accés
+à ces joueurs aux autres parties du serveur
+* Seul les scores soumis etaient pris en compte dans le playcount, maintenant
+les accés aux page de jeux sont comptabilisés
++ Mode plein ecran optionnel
++ Logo par Erreur32
+
+v2.0
++ Ajout compatibilité des Jeux de type IBPro (des centaines de jeux)
+- Suppression des autres jeux (Neaves)
++ Restructuration des repertoires sur le serveur SVN
++ Documentation dans le fichier arcade_lisez-moi.txt
+* Seul le jeu Pacman est installé par défaut
+
+v1.1
+* Si le nom entrée pour le highscore est blanc, remplacement par le nom de
+l'utilisateur OGSpy
+* Rendu compatible avec Internet Explorer (Pas d'affichage du jeu)
++ Ajout d'un ChangeLog
++ Ajout du fichier update.php

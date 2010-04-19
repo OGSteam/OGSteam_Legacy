@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+    <Description about="urn:mozilla:install-manifest">
+	
+	<em:creator>Christian Lehmann</em:creator>
+	<em:description>A Firefox toolbar for the Ogame Galaxytool.</em:description>
+	<em:homepageURL>http://www.galaxytool.eu</em:homepageURL>
+	<em:updateURL>http://www.galaxytool.eu/update.rdf</em:updateURL>
+	<em:id>{71bfcce7-421d-4042-95d4-a585a821cbca}</em:id>
+	<em:name>Galaxytoolbar</em:name>
+	<em:version>1.4.2</em:version>
+	<em:file>
+		<Description about="urn:mozilla:extension:file:galaxyplugin.jar">
+			<em:package>content/</em:package>
+			<em:locale>locale/en-US/</em:locale>
+			<em:locale>locale/de-DE/</em:locale>
+			<em:locale>locale/pl-PL/</em:locale>
+			<em:locale>locale/fr-FR/</em:locale>
+			<em:locale>locale/es-ES/</em:locale>
+			<em:skin>skin/classic/</em:skin>
+		</Description>
+	</em:file>
+	
+	<em:targetApplication>
+		<Description>
+			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+			<em:minVersion>1.0</em:minVersion>
+			<em:maxVersion>2.9</em:maxVersion>
+		</Description>
+	</em:targetApplication>
+
+	</Description>
+
+</RDF>

@@ -1,0 +1,16 @@
+<!-- aucun accent ici -->
+<univlist>
+	<uni>
+		<name>univers1</name>
+		<univserver>uni1.projet42.org</univserver>
+	</uni>
+	<uni>
+		<name>univers2</name>
+		<univserver>uni2.projet42.org</univserver>
+	</uni>
+	<uni>
+		<name>univers libra</name>
+		<univserver>libra.projet42.org</univserver>
+	</uni>
+</univlist>	
+

@@ -1,0 +1,64 @@
+
+.panel {
+	margin-bottom: 1em !important;
+}
+
+.panel .panel-content {
+	padding: 1em !important;
+}
+
+
+#center {
+	/* display: table replaced because firefox 3 incorrectly displays it*/
+	display: inline-block;
+}
+
+#leftside {
+	float: left;
+}
+
+#rightside {
+	float: right;
+}
+
+
+
+div.panel-input {
+	margin-bottom: 8px !important;
+}
+
+div.panel-input input {
+	width: 95%;
+}
+
+.news .avatar-left {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.main-content.panel strong {
+	font-weight: bold;
+}
+
+.portal font {
+	line-height: normal
+}
+
+#rightside .panel {
+	margin-right: 0px !important
+}
+
+.panel ul {
+	list-style: none !important;
+	padding: 0px;
+}
+
+ul.recent-post li.by, ul.recent-post li.posted {
+	font-size: 0.9em;
+}
+
+/* needed by Firefox 3*/
+.brd .frm-newform .frm-textarea textarea {
+	width: 100% !important;
+}

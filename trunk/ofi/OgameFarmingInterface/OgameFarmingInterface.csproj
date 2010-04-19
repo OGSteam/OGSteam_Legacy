@@ -1,0 +1,218 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81A1269D-4F7E-4934-A627-573C47AA2E89}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OgameFarmingInterface</RootNamespace>
+    <AssemblyName>OgameFarmingInterface</AssemblyName>
+    <ApplicationIcon>Resources\IconePigeon.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <TargetZone>Internet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <StartupObject>OgameFarmingInterface.Program</StartupObject>
+    <DelaySign>false</DelaySign>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClipboardSpy.cs" />
+    <Compile Include="FormAPropos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAPropos.Designer.cs">
+      <DependentUpon>FormAPropos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionComptesOGSpy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionComptesOGSpy.Designer.cs">
+      <DependentUpon>FormGestionComptesOGSpy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrincipale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrincipale.Designer.cs">
+      <DependentUpon>FormPrincipale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAffichageRapport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAffichageRapport.Designer.cs">
+      <DependentUpon>FormAffichageRapport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProgressionExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProgressionExport.Designer.cs">
+      <DependentUpon>FormProgressionExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProgressionImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProgressionImport.Designer.cs">
+      <DependentUpon>FormProgressionImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProgressionSimulationDeMasse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProgressionSimulationDeMasse.Designer.cs">
+      <DependentUpon>FormProgressionSimulationDeMasse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRapportDErreur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRapportDErreur.Designer.cs">
+      <DependentUpon>FormRapportDErreur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSimulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSimulation.Designer.cs">
+      <DependentUpon>FormSimulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ogame.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAPropos.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAPropos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionComptesOGSpy.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormGestionComptesOGSpy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPrincipale.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPrincipale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAffichageRapport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAffichageRapport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProgressionExport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormProgressionExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProgressionImport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormProgressionImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProgressionSimulationDeMasse.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormProgressionSimulationDeMasse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRapportDErreur.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormRapportDErreur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSimulation.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSimulation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Ogame.Defense.datasource" />
+    <None Include="Properties\DataSources\Ogame.Flotte.datasource" />
+    <None Include="Properties\DataSources\Ogame.RapportDEspionnage.datasource" />
+    <None Include="Properties\DataSources\Ogame.Technologie.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Ogame.Ressources.datasource" />
+    <None Include="Resources\LogoPigeon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Engrenage.bmp" />
+    <None Include="Resources\Exporter.bmp" />
+    <None Include="Resources\ExporterVersBDD.bmp" />
+    <None Include="Resources\Checked.png" />
+    <None Include="Resources\Copier.png" />
+    <None Include="Resources\CopierIE.png" />
+    <None Include="Resources\Cadenas.png" />
+    <None Include="Resources\Cadenas32.png" />
+    <None Include="Resources\Cadenas48.png" />
+    <None Include="Resources\EngrenageMultiple16.png" />
+    <None Include="Resources\Engrenage16.png" />
+    <None Include="Resources\Erreur48.png" />
+    <None Include="Resources\Actualiser.png" />
+    <None Include="Resources\Arreter.png" />
+    <Content Include="Resources\FichierOGR.ico" />
+    <None Include="Resources\Galaxie16.png" />
+    <None Include="Resources\Galaxie24.png" />
+    <None Include="Resources\Galaxie32.png" />
+    <None Include="Resources\Galaxie48.png" />
+    <None Include="Resources\GO.png" />
+    <None Include="Resources\Home.png" />
+    <None Include="Resources\Home.htm" />
+    <Content Include="Resources\IconePigeon.ico" />
+    <None Include="Resources\Importer.bmp" />
+    <None Include="Resources\ImporterDepuisBDD.bmp" />
+    <None Include="Resources\Loupe.png" />
+    <None Include="Resources\Rapport32.png" />
+    <None Include="Resources\Rapport48.png" />
+    <None Include="Resources\Precedant.png" />
+    <Content Include="Resources\RienAAfficher.bmp" />
+    <None Include="Resources\Suivant.png" />
+    <None Include="Resources\Supprimer.bmp" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="app.config" />
+    <None Include="Resources\InformationsDisponibles.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

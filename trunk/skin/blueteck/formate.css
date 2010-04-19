@@ -1,0 +1,173 @@
+body
+{
+	overflow							: auto !important;
+	font-family						: Verdana, Tahoma, Helvetica, sans-serif;
+	font-size							: 10px;
+	color									: #6291B5;
+	background-color			: #151515;
+	background-image			: url(img/background.jpg);
+	background-attachment	: fixed;
+	background-position 	: center left;
+	background-repeat			: no-repeat;
+}
+
+div.style
+{
+	background-color		: #393939;
+	width								: 130px;
+	-moz-opacity				: 0.6;
+	filter							: alpha(opacity=60);
+}
+
+fieldset
+{
+	background-color		: #393939;
+	-moz-opacity				: 0.6;
+	filter							: alpha(opacity=60);
+}
+
+td, th {font-weight			: normal;}
+
+a
+{
+	color								: #82B1D5;
+	text-decoration			: none;
+	font-weight					: normal;
+}
+
+a u
+{
+	font-weight					: bold;
+	color								: #B6C6E5;
+}
+
+a:hover
+{
+	color								: #CEFF68;
+	text-decoration			: none;
+}
+
+input, select, textarea
+{
+	font-family					: Verdana, Tahoma, Helvetica, sans-serif;
+	color								: #6291B5;
+	background-color		: #393939;
+	border							: 0px #151515 solid;
+}
+
+input
+{
+	text-align					: center;
+	margin							: 2px;
+	font-size						: 10px;
+}
+
+textarea {width					: 100%;}
+
+table table td{font-size		: 10px;}
+
+img, p table, table table 
+{border								: 0px;}
+
+fieldset table td a input, fieldset table td input
+{background-color			: transparent !important;}
+
+th {text-align					: center;}
+
+th, td.b, td.c, td.f, select, td.k, td.l, textarea, p td, body table td p, table table td.l
+{
+	border							: 1px transparent solid;
+	font-size						: 11px;
+	vertical-align			: middle;
+	padding							: 2px;
+	background-color		: transparent;
+}
+
+td.f, input, select, textarea
+{
+	border							: 0px;
+	background-color		: #393939;
+	font-weight					: normal;
+	-moz-opacity				: 0.9;
+	filter							: alpha(opacity=90);
+}
+
+th
+{
+	border							: 1px solid #333333;
+	background-color		: #273234;
+	-moz-opacity				: 0.9;
+	filter							: alpha(opacity=90);
+}
+
+td.a
+{
+	height							: 37px;
+	text-align					: center;
+	background-color		: #273234 !important;
+	-moz-opacity				: 0.9;
+	filter							: alpha(opacity=90);
+}
+
+td.b, td.k
+{
+	background-color		: #393939 !important;
+	-moz-opacity				: 0.9;
+	filter							: alpha(opacity=90);
+}
+
+td.c
+{
+	background-image		: url("img/balkengala.png");
+	color								: #999999;
+	padding-left				: 3px;
+	line-height					: 18px;
+	height							: 22px;
+}
+
+td.f
+{
+	background-color		: #273234 !important;
+	-moz-opacity				: 0.9;
+	filter							: alpha(opacity=90);
+}
+
+td.l
+{
+	background-color		: #000000 !important;
+	background-image		: url("img/grandebarre.png");
+	-moz-opacity				: 0.8;
+	filter							: alpha(opacity=80);
+	background-repeat		: no-repeat;
+}
+
+.blue, font[color="blue"], font[color="#0000FF"],
+a[style="color: blue;"], a[style="color: #0000FF;"]
+{color								: #0000CF !important;}
+
+.lime, font[color="lime"], font[color="#00FF00"], font[color="#00FE00"],
+a[style="color: lime;"], a[style="color: #00FF00;"], a[style="color: #00FE00;"]
+{color								: #00CF00 !important;}
+
+.red, font[color="red"], font[color="#FF0000"],
+a[style="color: red;"], a[style="color: #FF0000;"]
+{color								: #CF0000 !important;}
+
+.yellow, font[color="yellow"], font[color="#FFFF00"],
+a[style="color: yellow;"], a[style="color: #FFFF00;"]
+{color								: #FF9F00 !important;}
+
+.white, font[color="white"], font[color="#FFFFFF"],
+a[style="color: white;"], a[style="color: #FFFFFF;"]
+{color								: #9F9F9F !important;}
+
+.magenta, font[color="magenta"], font[color="#FF00FF"],
+a[style="color: magenta;"], a[style="color: #FF00FF;"]
+{color								: #9F00FF !important;}
+
+.orange, .darkorange,
+font[color="orange"], font[color="#FFA500"],
+font[color="darkorange"], font[color="#FF8C00"],
+a[style="color: orange;"], a[style="color: #FFA500;"],
+a[style="color: darkorange;"], a[style="color: #FF8C00;"]
+{color								: #DF9000 !important;}

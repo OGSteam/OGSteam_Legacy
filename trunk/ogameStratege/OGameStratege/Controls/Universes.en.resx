@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 1.3
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">1.3</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1">this is my long string</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        [base64 mime encoded serialized .NET Framework object]
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        [base64 mime encoded string representing a byte array form of the .NET Framework object]
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used forserialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnApplyFilter.Text">
+    <value>Apply Filter</value>
+  </data>
+  <data name="btnAttackShow.Text">
+    <value>Show</value>
+  </data>
+  <data name="btnBrowseExport.Text">
+    <value>Browse</value>
+  </data>
+  <data name="btnBrowseImport.Text">
+    <value>Browse</value>
+  </data>
+  <data name="btnChangeView.Text">
+    <value>Toggle</value>
+  </data>
+  <data name="btnDeleteRank.Text">
+    <value>Delete Rank</value>
+  </data>
+  <data name="btnExportFile.Text">
+    <value>Export </value>
+  </data>
+  <data name="btnExportSendStat.Text">
+    <value>Send Statistics</value>
+  </data>
+  <data name="btnExportToServer.Text">
+    <value>Export to Server</value>
+  </data>
+  <data name="btnFleetCommandsShow.Text">
+    <value>Show / Refresh</value>
+  </data>
+  <data name="btnGalSearch.Text">
+    <value>Search</value>
+  </data>
+  <data name="btnGoToOGSHomeSite.Text">
+    <value>Go to OGame Stratege Boards</value>
+  </data>
+  <data name="btnImportFile.Text">
+    <value>Import</value>
+  </data>
+  <data name="btnImportFromServer.Text">
+    <value>Import From Server</value>
+  </data>
+  <data name="btnQueryDatabase.Text">
+    <value>Query Database</value>
+  </data>
+  <data name="btnSearch.Text">
+    <value>Search</value>
+  </data>
+  <data name="btnShowSpy.Text">
+    <value>Show</value>
+  </data>
+  <data name="Button1.Text">
+    <value>Universes Databases</value>
+  </data>
+  <data name="Button3.Text">
+    <value>Button3</value>
+  </data>
+  <data name="cbGalSearch.Text">
+    <value>Search</value>
+  </data>
+  <data name="chkExportSpyReport.Text">
+    <value>Export Spy Report</value>
+  </data>
+  <data name="chkExportStatFlotte.Text">
+    <value>Flotte</value>
+  </data>
+  <data name="chkExportStatPoints.Text">
+    <value>Points</value>
+  </data>
+  <data name="chkExportStatResearh.Text">
+    <value>Research</value>
+  </data>
+  <data name="chklbExportGalaxy.ToolTip">
+    <value>Select Galaxy (s) to export</value>
+  </data>
+  <data name="chklbExportImportGalaxy.ToolTip">
+    <value>Select Galaxy (s) to export</value>
+  </data>
+  <data name="ComboBox1.Text">
+    <value>Favorites</value>
+  </data>
+  <data name="DataGridTextBoxColumn5.MappingName">
+    <value>ATTACKERNAME</value>
+  </data>
+  <data name="DataGridTextBoxColumn5.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn6.MappingName">
+    <value>ATTACKERPLANET</value>
+  </data>
+  <data name="DataGridTextBoxColumn6.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn7.MappingName">
+    <value>DEFENDERNAME</value>
+  </data>
+  <data name="DataGridTextBoxColumn7.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn8.MappingName">
+    <value>DEFENDERPLANET</value>
+  </data>
+  <data name="DataGridTextBoxColumn8.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn9.MappingName">
+    <value>RAWREPORT</value>
+  </data>
+  <data name="DataGridTextBoxColumn9.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn10.MappingName">
+    <value>DATADATE</value>
+  </data>
+  <data name="DataGridTextBoxColumn10.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn11.MappingName">
+    <value>DATASENDER</value>
+  </data>
+  <data name="DataGridTextBoxColumn11.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="dgtbcFleetCommandDate.HeaderText">
+    <value>Date</value>
+  </data>
+  <data name="dgtbcFleetCommandDate.MappingName">
+    <value>DATADATE</value>
+  </data>
+  <data name="dgtbcFleetCommandDate.NullText">
+    <value>??</value>
+  </data>
+  <data name="dgtbcFleetCommandData.MappingName">
+    <value>DATA</value>
+  </data>
+  <data name="dgtbcFleetCommandData.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn1.HeaderText">
+    <value>Date</value>
+  </data>
+  <data name="DataGridTextBoxColumn1.MappingName">
+    <value>DATADATE</value>
+  </data>
+  <data name="DataGridTextBoxColumn1.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn2.HeaderText">
+    <value>Planet</value>
+  </data>
+  <data name="DataGridTextBoxColumn2.MappingName">
+    <value>NAME</value>
+  </data>
+  <data name="DataGridTextBoxColumn2.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn3.HeaderText">
+    <value>Coords</value>
+  </data>
+  <data name="DataGridTextBoxColumn3.MappingName">
+    <value>COORDS</value>
+  </data>
+  <data name="DataGridTextBoxColumn3.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="DataGridTextBoxColumn4.HeaderText">
+    <value>Report</value>
+  </data>
+  <data name="DataGridTextBoxColumn4.MappingName">
+    <value>RAWREPORT</value>
+  </data>
+  <data name="DataGridTextBoxColumn4.NullText">
+    <value>(null)</value>
+  </data>
+  <data name="gbRankType.Text">
+    <value>Ranks Type</value>
+  </data>
+  <data name="gbSearch.Text">
+    <value>Research Options</value>
+  </data>
+  <data name="GroupBox1.Text">
+    <value>Export Planets and Galaxy informations ...</value>
+  </data>
+  <data name="GroupBox2.Text">
+    <value>Limits</value>
+  </data>
+  <data name="GroupBox3.Text">
+    <value>Import Planets and Galaxy informations ...</value>
+  </data>
+  <data name="labAttackTitle.Text">
+    <value>Attack</value>
+  </data>
+  <data name="Label1.Text">
+    <value>Filter</value>
+  </data>
+  <data name="Label10.Text">
+    <value>Flotte</value>
+  </data>
+  <data name="Label11.Text">
+    <value>Research</value>
+  </data>
+  <data name="Label12.Text">
+    <value>Name</value>
+  </data>
+  <data name="Label13.Text">
+    <value>Player Information</value>
+  </data>
+  <data name="Label14.Text">
+    <value>Ally</value>
+  </data>
+  <data name="Label2.Text">
+    <value>Thanks to the following testers and helpers  :  Bisounours, Corwin, Kyser and Erreur32</value>
+  </data>
+  <data name="Label3.Text">
+    <value>Remote Accounts</value>
+  </data>
+  <data name="Label4.Text">
+    <value>Attack and Spying Reports</value>
+  </data>
+  <data name="Label5.Text">
+    <value>Limit</value>
+  </data>
+  <data name="Label6.Text">
+    <value>Last Export Date</value>
+  </data>
+  <data name="Label7.Text">
+    <value>Last import Date</value>
+  </data>
+  <data name="Label8.Text">
+    <value>Player statistic</value>
+  </data>
+  <data name="Label9.Text">
+    <value>Points</value>
+  </data>
+  <data name="labGalaxyDataInfo.Text">
+    <value>By Rica On MM-dd HH:mm:ss</value>
+  </data>
+  <data name="labGalaxyNum.Text">
+    <value>Galaxy</value>
+  </data>
+  <data name="labGalaxySystemTitle.Text">
+    <value>Galaxy:System</value>
+  </data>
+  <data name="labHelp.Text">
+    <value>You have to choose an universe database. Click Database Button and create one if needed.</value>
+  </data>
+  <data name="labReport.Text">
+    <value>Report</value>
+  </data>
+  <data name="labSystemNum.Text">
+    <value>System</value>
+  </data>
+  <data name="lbGalPlayerAlly.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerFlotte.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerFlotte2.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerName.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerPoint.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerPoint2.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerResearch.Text">
+    <value>??</value>
+  </data>
+  <data name="lbGalPlayerResearch2.Text">
+    <value>??</value>
+  </data>
+  <data name="lblTitle.Text">
+    <value>No Database Selected</value>
+  </data>
+  <data name="LinkLabel1.Text">
+    <value>http://www.ogame.org</value>
+  </data>
+  <data name="LinkLabel2.Text">
+    <value>http://www.ogame.it</value>
+  </data>
+  <data name="LinkLabel3.Text">
+    <value>http://www.ogame.de</value>
+  </data>
+  <data name="MenuItem1.Text">
+    <value>-</value>
+  </data>
+  <data name="miGalEditPlayer.Text">
+    <value>Player Window</value>
+  </data>
+  <data name="miGalImportSpyRep.Text">
+    <value>Imports Spying Report</value>
+  </data>
+  <data name="nudAttackLimit.Text">
+    <value>10</value>
+  </data>
+  <data name="nudGalaxy.Text">
+    <value>1</value>
+  </data>
+  <data name="nudSpyLimit.Text">
+    <value>10</value>
+  </data>
+  <data name="nudSystem.Text">
+    <value>1</value>
+  </data>
+  <data name="ogamelinkfr.Text">
+    <value>http://www.ogame.fr</value>
+  </data>
+  <data name="OpenFileDialog1.Filter">
+    <value>Export Dat|*.dat</value>
+  </data>
+  <data name="rbExportImportAllData.Text">
+    <value>All known Data</value>
+  </data>
+  <data name="rbExportLimitsAll.Text">
+    <value>All</value>
+  </data>
+  <data name="rbExportLimitsAll.ToolTip">
+    <value>Export All data</value>
+  </data>
+  <data name="rbExportSinceDate.Text">
+    <value>Since</value>
+  </data>
+  <data name="rbExportSinceDate.ToolTip">
+    <value>Export data newer than date below</value>
+  </data>
+  <data name="rbFlotte.Text">
+    <value>Flotte</value>
+  </data>
+  <data name="rbPoints.Text">
+    <value>Points</value>
+  </data>
+  <data name="rbResearch.Text">
+    <value>Research</value>
+  </data>
+  <data name="sbGalaxy.Text">
+    <value>Nothing Selected</value>
+  </data>
+  <data name="sfdExport.Filter">
+    <value>Export Dat|*.dat</value>
+  </data>
+  <data name="sfdExport.Title">
+    <value>Choose Exporting File name and location </value>
+  </data>
+  <data name="tbExportImportSincedate.Text">
+    <value>Since</value>
+  </data>
+  <data name="tbExportImportSincedate.ToolTip">
+    <value>Export data newer than date below</value>
+  </data>
+  <data name="tpAttacks.Text">
+    <value>Attacks</value>
+  </data>
+  <data name="tpDBStuff.Text">
+    <value>Bouge ta base</value>
+  </data>
+  <data name="tpExport.Text">
+    <value>Export / Import</value>
+  </data>
+  <data name="tpGalaxy.Text">
+    <value>Galaxy</value>
+  </data>
+  <data name="tpLastMessage.Text">
+    <value>Last Messages</value>
+  </data>
+  <data name="tpMap.Text">
+    <value>Map</value>
+  </data>
+  <data name="tpMessageAlliance.Text">
+    <value>Alliance</value>
+  </data>
+  <data name="tpMessageFleetReturn.Text">
+    <value>Other</value>
+  </data>
+  <data name="tpMessagePlayer.Text">
+    <value>Private</value>
+  </data>
+  <data name="tpMessages.Text">
+    <value>Messages</value>
+  </data>
+  <data name="tpRanking.Text">
+    <value>Ranking</value>
+  </data>
+  <data name="tpRemoteDB.Text">
+    <value>Remote DB</value>
+  </data>
+  <data name="tpSearch.Text">
+    <value>Search</value>
+  </data>
+  <data name="tpSpy.Text">
+    <value>Spying</value>
+  </data>
+  <data name="tbImportFile.Text">
+    <value />
+  </data>
+  <data name="panAttackUpper.ToolTip">
+    <value />
+  </data>
+  <data name="Label3.ToolTip">
+    <value />
+  </data>
+  <data name="rtbAttackReport.Text">
+    <value />
+  </data>
+  <data name="Label7.ToolTip">
+    <value />
+  </data>
+  <data name="dtpExportLastImportDateA.ToolTip">
+    <value />
+  </data>
+  <data name="tpMap.ToolTipText">
+    <value />
+  </data>
+  <data name="panGalaxyDownRight.Text">
+    <value />
+  </data>
+  <data name="dgFleetCommands.ToolTip">
+    <value />
+  </data>
+  <data name="cbSearchIn.Text">
+    <value />
+  </data>
+  <data name="rbFlotte.ToolTip">
+    <value />
+  </data>
+  <data name="tcMessages.Text">
+    <value />
+  </data>
+  <data name="tpRanking.ToolTipText">
+    <value />
+  </data>
+  <data name="lbGalaxyPlanets.ToolTip">
+    <value />
+  </data>
+  <data name="panGalaxyPlanetInfo.ToolTip">
+    <value />
+  </data>
+  <data name="btnImportFile.ToolTip">
+    <value />
+  </data>
+  <data name="nudAttackLimit.ToolTip">
+    <value />
+  </data>
+  <data name="rtbSpyReport.Text">
+    <value />
+  </data>
+  <data name="rtbExportImportLog.ToolTip">
+    <value />
+  </data>
+  <data name="gbRankType.ToolTip">
+    <value />
+  </data>
+  <data name="tpSearch.ToolTipText">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn9.HeaderText">
+    <value />
+  </data>
+  <data name="tpLastMessage.ToolTipText">
+    <value />
+  </data>
+  <data name="Panel2.ToolTip">
+    <value />
+  </data>
+  <data name="tpMap.ToolTip">
+    <value />
+  </data>
+  <data name="Panel8.ToolTip">
+    <value />
+  </data>
+  <data name="GroupBox1.ToolTip">
+    <value />
+  </data>
+  <data name="btnBrowseImport.ToolTip">
+    <value />
+  </data>
+  <data name="tpGalaxy.ToolTipText">
+    <value />
+  </data>
+  <data name="GroupBox4.ToolTip">
+    <value />
+  </data>
+  <data name="dgtbcFleetCommandData.HeaderText">
+    <value />
+  </data>
+  <data name="tpExport.ToolTipText">
+    <value />
+  </data>
+  <data name="rbExportImportAllData.ToolTip">
+    <value />
+  </data>
+  <data name="tpAttacks.ToolTip">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn10.HeaderText">
+    <value />
+  </data>
+  <data name="TabControl1.Text">
+    <value />
+  </data>
+  <data name="Panel7.ToolTip">
+    <value />
+  </data>
+  <data name="PictureBox1.ToolTip">
+    <value />
+  </data>
+  <data name="tpSearch.ToolTip">
+    <value />
+  </data>
+  <data name="tbExportFile.ToolTip">
+    <value />
+  </data>
+  <data name="rtbGalaxyReport.ToolTip">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn6.HeaderText">
+    <value />
+  </data>
+  <data name="lbGalaxyPlanetAttacks.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackDownLeft.Text">
+    <value />
+  </data>
+  <data name="Button3.ToolTip">
+    <value />
+  </data>
+  <data name="rtbGalReport2.Text">
+    <value />
+  </data>
+  <data name="tpMessageAlliance.ToolTipText">
+    <value />
+  </data>
+  <data name="LinkLabel2.ToolTip">
+    <value />
+  </data>
+  <data name="tbSearchPattern.Text">
+    <value />
+  </data>
+  <data name="lbGalPlayerName.ToolTip">
+    <value />
+  </data>
+  <data name="Splitter2.ToolTip">
+    <value />
+  </data>
+  <data name="ComboBox1.ToolTip">
+    <value />
+  </data>
+  <data name="cbExportImportRemoteAccounts.Text">
+    <value />
+  </data>
+  <data name="btnBrowseExport.ToolTip">
+    <value />
+  </data>
+  <data name="dgSpy.ToolTip">
+    <value />
+  </data>
+  <data name="tpDBStuff.ToolTipText">
+    <value />
+  </data>
+  <data name="panExportDownRight.Text">
+    <value />
+  </data>
+  <data name="btnGalSearch.ToolTip">
+    <value />
+  </data>
+  <data name="panRank.ToolTip">
+    <value />
+  </data>
+  <data name="chkExportSpyReport.ToolTip">
+    <value />
+  </data>
+  <data name="tcMessages.ToolTip">
+    <value />
+  </data>
+  <data name="tbImportFile.ToolTip">
+    <value />
+  </data>
+  <data name="PictureBox3.ToolTip">
+    <value />
+  </data>
+  <data name="tbExportFile.Text">
+    <value />
+  </data>
+  <data name="TextBox1.ToolTip">
+    <value />
+  </data>
+  <data name="Label11.ToolTip">
+    <value />
+  </data>
+  <data name="btnChangeView.ToolTip">
+    <value />
+  </data>
+  <data name="panGalaxyMiddleright.Text">
+    <value />
+  </data>
+  <data name="tpMessageFleetReturn.ToolTipText">
+    <value />
+  </data>
+  <data name="RemoteDBCtrl1.ToolTip">
+    <value />
+  </data>
+  <data name="DbStuffCtrl1.ToolTip">
+    <value />
+  </data>
+  <data name="Panel3.Text">
+    <value />
+  </data>
+  <data name="dgPlayerRanking.CaptionText">
+    <value />
+  </data>
+  <data name="PictureBox1.Text">
+    <value />
+  </data>
+  <data name="GroupBox2.ToolTip">
+    <value />
+  </data>
+  <data name="dgPlayerRanking.ToolTip">
+    <value />
+  </data>
+  <data name="PanGalaxyUpper.Text">
+    <value />
+  </data>
+  <data name="PanExportDownLeft.Text">
+    <value />
+  </data>
+  <data name="Splitter3.ToolTip">
+    <value />
+  </data>
+  <data name="LinkLabel1.ToolTip">
+    <value />
+  </data>
+  <data name="panSpyDown.Text">
+    <value />
+  </data>
+  <data name="btnFleetCommandsShow.ToolTip">
+    <value />
+  </data>
+  <data name="chkExportStatFlotte.ToolTip">
+    <value />
+  </data>
+  <data name="OpenFileDialog1.Title">
+    <value />
+  </data>
+  <data name="Label9.ToolTip">
+    <value />
+  </data>
+  <data name="tpSpy.ToolTip">
+    <value />
+  </data>
+  <data name="Label14.ToolTip">
+    <value />
+  </data>
+  <data name="tpMessagePlayer.ToolTip">
+    <value />
+  </data>
+  <data name="labSystemNum.ToolTip">
+    <value />
+  </data>
+  <data name="labAttackTitle.ToolTip">
+    <value />
+  </data>
+  <data name="dtpExportLastExportDateA.ToolTip">
+    <value />
+  </data>
+  <data name="tpMessages.ToolTipText">
+    <value />
+  </data>
+  <data name="lbGalPlayerResearch2.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackDownLeft.ToolTip">
+    <value />
+  </data>
+  <data name="tpGalaxy.ToolTip">
+    <value />
+  </data>
+  <data name="panSpyDown.ToolTip">
+    <value />
+  </data>
+  <data name="splitGalaxyDownLeftRight.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackMiddle.ToolTip">
+    <value />
+  </data>
+  <data name="splitAttackUpDown.ToolTip">
+    <value />
+  </data>
+  <data name="MapCtrl1.ToolTip">
+    <value />
+  </data>
+  <data name="PanRankFilter.Text">
+    <value />
+  </data>
+  <data name="Panel2.Text">
+    <value />
+  </data>
+  <data name="rtbExportImportLog.Text">
+    <value />
+  </data>
+  <data name="Splitter5.ToolTip">
+    <value />
+  </data>
+  <data name="nudSpyLimit.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackDown.ToolTip">
+    <value />
+  </data>
+  <data name="tpMessageFleetReturn.ToolTip">
+    <value />
+  </data>
+  <data name="Splitter1.ToolTip">
+    <value />
+  </data>
+  <data name="btnImportFromServer.ToolTip">
+    <value />
+  </data>
+  <data name="Button1.ToolTip">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn11.HeaderText">
+    <value />
+  </data>
+  <data name="Panel9.Text">
+    <value />
+  </data>
+  <data name="Label5.ToolTip">
+    <value />
+  </data>
+  <data name="Label1.ToolTip">
+    <value />
+  </data>
+  <data name="chkExportStatResearh.ToolTip">
+    <value />
+  </data>
+  <data name="btnAttackShow.ToolTip">
+    <value />
+  </data>
+  <data name="panGalaxyDownLeft.ToolTip">
+    <value />
+  </data>
+  <data name="Panel7.Text">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn5.HeaderText">
+    <value />
+  </data>
+  <data name="tpRemoteDB.ToolTip">
+    <value />
+  </data>
+  <data name="chkExportStatPoints.ToolTip">
+    <value />
+  </data>
+  <data name="gbSearch.ToolTip">
+    <value />
+  </data>
+  <data name="PictureBox3.Text">
+    <value />
+  </data>
+  <data name="Label4.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerResearch.ToolTip">
+    <value />
+  </data>
+  <data name="rtbGalaxyReport.Text">
+    <value />
+  </data>
+  <data name="TabControl1.ToolTip">
+    <value />
+  </data>
+  <data name="Label12.ToolTip">
+    <value />
+  </data>
+  <data name="labGalaxySystemTitle.ToolTip">
+    <value />
+  </data>
+  <data name="labGalaxyNum.ToolTip">
+    <value />
+  </data>
+  <data name="ogamelinkfr.ToolTip">
+    <value />
+  </data>
+  <data name="Panel3.ToolTip">
+    <value />
+  </data>
+  <data name="PanGalaxyUpper.ToolTip">
+    <value />
+  </data>
+  <data name="Panel8.Text">
+    <value />
+  </data>
+  <data name="PanRankFilter.ToolTip">
+    <value />
+  </data>
+  <data name="rtbGalPlayerNote.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackUpper.Text">
+    <value />
+  </data>
+  <data name="rtbAttackReport.ToolTip">
+    <value />
+  </data>
+  <data name="tpMessagePlayer.ToolTipText">
+    <value />
+  </data>
+  <data name="sbGalaxy.ToolTip">
+    <value />
+  </data>
+  <data name="labGalaxyDataInfo.ToolTip">
+    <value />
+  </data>
+  <data name="GroupBox3.ToolTip">
+    <value />
+  </data>
+  <data name="tpRemoteDB.ToolTipText">
+    <value />
+  </data>
+  <data name="tpExport.ToolTip">
+    <value />
+  </data>
+  <data name="rbPoints.ToolTip">
+    <value />
+  </data>
+  <data name="dtpExportSinceDate.ToolTip">
+    <value />
+  </data>
+  <data name="PanGalaxyUp.ToolTip">
+    <value />
+  </data>
+  <data name="panSpyUpper.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalaxyPlanetSpy.ToolTip">
+    <value />
+  </data>
+  <data name="dgAttack.ToolTip">
+    <value />
+  </data>
+  <data name="panExportDownRight.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerAlly.ToolTip">
+    <value />
+  </data>
+  <data name="PanExportDownLeft.ToolTip">
+    <value />
+  </data>
+  <data name="cbSearchOrderBy.ToolTip">
+    <value />
+  </data>
+  <data name="tpLastMessage.ToolTip">
+    <value />
+  </data>
+  <data name="tpDBStuff.ToolTip">
+    <value />
+  </data>
+  <data name="cbGalSearch.ToolTip">
+    <value />
+  </data>
+  <data name="dgFleetCommands.CaptionText">
+    <value />
+  </data>
+  <data name="cbExportImportRemoteAccounts.ToolTip">
+    <value />
+  </data>
+  <data name="Label2.ToolTip">
+    <value />
+  </data>
+  <data name="Label6.ToolTip">
+    <value />
+  </data>
+  <data name="PictureBox2.Text">
+    <value />
+  </data>
+  <data name="cbSearchOrderBy.Text">
+    <value />
+  </data>
+  <data name="dgAttack.CaptionText">
+    <value />
+  </data>
+  <data name="tpRanking.ToolTip">
+    <value />
+  </data>
+  <data name="Panel9.ToolTip">
+    <value />
+  </data>
+  <data name="Panel4.Text">
+    <value />
+  </data>
+  <data name="labReport.ToolTip">
+    <value />
+  </data>
+  <data name="btnExportFile.ToolTip">
+    <value />
+  </data>
+  <data name="labHelp.ToolTip">
+    <value />
+  </data>
+  <data name="btnGoToOGSHomeSite.ToolTip">
+    <value />
+  </data>
+  <data name="panGalaxyPlanetInfo.Text">
+    <value />
+  </data>
+  <data name="rbResearch.ToolTip">
+    <value />
+  </data>
+  <data name="dgSpy.CaptionText">
+    <value />
+  </data>
+  <data name="btnShowSpy.ToolTip">
+    <value />
+  </data>
+  <data name="Label8.ToolTip">
+    <value />
+  </data>
+  <data name="panRank.Text">
+    <value />
+  </data>
+  <data name="rtbGalReport2.ToolTip">
+    <value />
+  </data>
+  <data name="dgSearchResult.CaptionText">
+    <value />
+  </data>
+  <data name="btnSearch.ToolTip">
+    <value />
+  </data>
+  <data name="nudSystem.ToolTip">
+    <value />
+  </data>
+  <data name="nudGalaxy.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerPoint2.ToolTip">
+    <value />
+  </data>
+  <data name="TextBox1.Text">
+    <value />
+  </data>
+  <data name="panGalaxyMiddleright.ToolTip">
+    <value />
+  </data>
+  <data name="PictureBox2.ToolTip">
+    <value />
+  </data>
+  <data name="btnDeleteRank.ToolTip">
+    <value />
+  </data>
+  <data name="Label10.ToolTip">
+    <value />
+  </data>
+  <data name="dtImportSinceDate.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerFlotte2.ToolTip">
+    <value />
+  </data>
+  <data name="panSpyUpper.Text">
+    <value />
+  </data>
+  <data name="Panel5.ToolTip">
+    <value />
+  </data>
+  <data name="tbSearchPattern.ToolTip">
+    <value />
+  </data>
+  <data name="PanGalaxyUp.Text">
+    <value />
+  </data>
+  <data name="Panel4.ToolTip">
+    <value />
+  </data>
+  <data name="btnExportSendStat.ToolTip">
+    <value />
+  </data>
+  <data name="cbSearchIn.ToolTip">
+    <value />
+  </data>
+  <data name="tpMessages.ToolTip">
+    <value />
+  </data>
+  <data name="dgSearchResult.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackDown.Text">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn8.HeaderText">
+    <value />
+  </data>
+  <data name="splitSearch.ToolTip">
+    <value />
+  </data>
+  <data name="rtbSpyReport.ToolTip">
+    <value />
+  </data>
+  <data name="tpSpy.ToolTipText">
+    <value />
+  </data>
+  <data name="tpMessageAlliance.ToolTip">
+    <value />
+  </data>
+  <data name="panGalaxyDownLeft.Text">
+    <value />
+  </data>
+  <data name="lblTitle.ToolTip">
+    <value />
+  </data>
+  <data name="btnApplyFilter.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerFlotte.ToolTip">
+    <value />
+  </data>
+  <data name="panAttackMiddle.Text">
+    <value />
+  </data>
+  <data name="LinkLabel3.ToolTip">
+    <value />
+  </data>
+  <data name="lbGalPlayerPoint.ToolTip">
+    <value />
+  </data>
+  <data name="tpAttacks.ToolTipText">
+    <value />
+  </data>
+  <data name="btnExportToServer.ToolTip">
+    <value />
+  </data>
+  <data name="lbSearchResult.ToolTip">
+    <value />
+  </data>
+  <data name="DataGridTextBoxColumn7.HeaderText">
+    <value />
+  </data>
+  <data name="rtbGalPlayerNote.Text">
+    <value />
+  </data>
+  <data name="panGalaxyDownRight.ToolTip">
+    <value />
+  </data>
+  <data name="btnQueryDatabase.ToolTip">
+    <value />
+  </data>
+  <data name="Panel5.Text">
+    <value />
+  </data>
+  <data name="GroupBox4.Text">
+    <value />
+  </data>
+</root>

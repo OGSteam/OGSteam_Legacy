@@ -1,0 +1,562 @@
+*
+{
+	font-family : "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+	font-size : 11px;
+}
+
+body
+{
+	color : #E4E4E4;
+	background : #000;
+	background-image : url(img/si-bg.jpg);
+	background-position : top center;
+	background-attachment : fixed;
+	background-repeat : no-repeat;
+	text-align : left;
+	margin : 20px;
+}
+
+table
+{
+	margin : auto;
+}
+
+.status
+{
+	background : #000;
+}
+
+a
+{
+	color : #E6EBFB;
+}
+
+.titre
+{
+	color : #B4FF00;
+	font-weight : bold;
+	padding-left : 10px;
+	background-image : url(img/tab2_bg.gif);
+}
+
+.mp
+{
+	background : #324B67;
+}
+
+.mp2
+{
+	color : #628ABD;
+}
+
+table table td
+{
+	color : #00FF0D;
+}
+
+body form table th table input
+{
+	width : 60px;
+}
+
+td.a, td.b, td.c, td.f, input, select, td.g, td.h, td.i, td.j, td.k, td.l, td.m, td.n, td.o, td.q, td.r, td.v, #menu td, textarea, p td, table.s th img
+{
+	border : 1px #757575 solid;
+}
+
+th, td.a, td.c, td.f, input, select, td.g, td.h, td.i, td.j, td.k, td.m, td.o, td.q, td.r, td.v, td.s, #menu td, p td
+{
+	background-color : #232E30;
+}
+
+td.b
+{
+	background-color : #232E30;
+	padding : 3px;
+}
+
+th
+{
+	border : hidden;
+	text-align : center;
+	padding-left : 3px;
+	padding-right : 3px;
+	background-color : #04111F;
+}
+
+td.a
+{
+	height : 37px;
+	text-align : center;
+}
+
+td.c
+{
+	color : #fff;
+	padding-left : 3px;
+	height : 22px;
+	background-image : url(img/tab2_bg.gif);
+}
+
+td.f, input, select, textarea
+{
+	border : 1px solid #606060;
+	color : #fff;
+	background-color : #232425;
+}
+
+textarea
+{
+	width : 95%;
+}
+
+td.i
+{
+	text-align : center;
+	color : #000;
+}
+
+td.k, td.k input
+{
+	background-image : url(img/barredroite.PNG);
+	background-color : transparent;
+	text-align : center;
+	color : #FFF;
+	background-repeat : no-repeat;
+}
+
+td.l
+{
+	background-color : #000;
+	color : #FFF;
+	vertical-align : top;
+	background-image : url(img/grandebarre.PNG);
+	background-repeat : no-repeat;
+	padding : 0;
+}
+
+td.m
+{
+	text-align : right;
+	width : 86px;
+	color : #B6C6E5;
+}
+
+td.n
+{
+	width : 88px;
+	text-align : center;
+	color : #B6C6E5;
+}
+
+td.q
+{
+	text-align : center;
+	vertical-align : middle;
+	color : #B6C6E5;
+}
+
+td.s
+{
+	color : #B6C6E5;
+}
+
+table.s th img
+{
+	width : 60px;
+	height : 60px;
+}
+
+div.z
+{
+	color : #FF6F3C;
+}
+
+a:hover
+{
+	color : #A8FF66;
+	text-decoration : underline;
+}
+
+#menu td:hover
+{
+	background-image : url(img/Mod01.jpg);
+}
+
+h1
+{
+	font-size : 12px;
+	border-bottom : 0 #2C2C2C solid;
+	width : 98%;
+	text-align : right;
+	color : #C00;
+}
+
+center
+{
+	color : #ECFF00;
+}
+
+.ownmissile
+{
+	color : #0FF;
+	font-size : 12px;
+	font-weight : bold;
+	text-decoration : blink;
+}
+
+.missile
+{
+	color : #FF0080;
+	font-size : 12px;
+	font-weight : bold;
+	text-decoration : blink;
+}
+
+.espionage
+{
+	color : red;
+	font-weight : bold;
+	font-size : 13px;
+	text-decoration : blink;
+}
+
+.return .ownespionage
+{
+	color : #B1B1B1;
+	font-size : 11px;
+	font-style : italic;
+	font-weight : normal;
+}
+
+.transport
+{
+	color : #00B3FF;
+	font-size : 12px;
+	text-decoration : blink;
+}
+
+.flight .owntransport
+{
+	color : #00A600;
+	font-size : 12px;
+}
+
+.return .owntransport
+{
+	color : #B1B1B1;
+	font-size : 11px;
+	font-style : italic;
+	font-weight : normal;
+}
+
+.attack
+{
+	color : #C80000;
+	font-weight : bold;
+	font-size : 13px;
+	text-decoration : blink;
+}
+
+.flight .ownattack
+{
+	color : #FF9200;
+	font-size : 12px;
+	font-weight : bold;
+}
+
+.flight .ownharvest
+{
+	color : #268EFF;
+	font-size : 12px;
+}
+
+.return .ownharvest a:link
+{
+	color : #268EFF;
+}
+
+.flight .owndeploy
+{
+	color : #ff0;
+	font-weight : normal;
+}
+
+.return .owndeploy
+{
+	color : #969696;
+}
+
+.flight .owncolony
+{
+	color : #8000FF;
+	font-size : 12px;
+	font-weight : normal;
+}
+
+#menu table
+{
+	border : 0;
+	border-collapse : collapse;
+	width : 125px;
+	margin : auto auto 20px;
+}
+
+#menu td
+{
+	text-align : center;
+	padding : 2px;
+}
+
+#menu .time-1
+{
+	color : #08A4FF;
+	border-bottom : none;
+}
+
+#menu .time-2
+{
+	color : #08A4FF;
+	border-top : none;
+}
+
+#menu .time-1:hover, #menu .time-2:hover
+{
+	background-image : none;
+}
+
+#menu .separator, #menu .separator:hover, #menu .end, #menu .end:hover
+{
+	background-image : url(gfx/user-menu.jpg);
+	height : 19px;
+}
+
+#menu .ogspy-logo, #menu .ogspy-logo:hover
+{
+	background-image : url(gfx/ogame-produktion.jpg);
+	height : 40px;
+}
+
+#menu .end, #menu .end:hover
+{
+	height : 35px;
+}
+
+#menu a
+{
+	text-decoration : none;
+}
+
+#menu img[alt=end]
+{
+	width : 110px;
+	height : 35px;
+}
+
+.strong
+{
+	font-weight : bold;
+}
+
+.about_name
+{
+	float : left;
+	text-align : left;
+	margin-left : 15px;
+}
+
+.about_info
+{
+	float : right;
+	text-align : right;
+	margin-right : 15px;
+}
+
+.about_sign
+{
+	float : left;
+	text-align : left;
+	margin-left : 5px;
+}
+
+.select_list
+{
+	text-align : center;
+	width : 50px;
+}
+
+.list
+{
+	text-align : center;
+	text-decoration : none;
+}
+
+.list_over
+{
+	cursor : pointer;
+	text-decoration : underline;
+	color : lime;
+}
+
+#header, #content, #footer
+{
+	margin-left : 200px;
+	margin-top : 20px;
+}
+
+#header-no-menu, #content-no-menu, #footer-no-menu
+{
+	margin-left : 0;
+	margin-bottom : 20px;
+	text-align : center;
+}
+
+#menu
+{
+	float : left;
+	width : 180px;
+}
+
+#content table
+{
+	margin : auto;
+}
+
+#footer
+{
+	font-style : italic;
+}
+
+#footer .version
+{
+	font-style : normal;
+}
+
+#enu
+{
+	border : 2px red solid;
+}
+
+#f, .f
+{
+	color : #ffa0a0;
+}
+
+#d, .d
+{
+	color : #a0ffa0;
+}
+
+#v, #iv, .v, .iv
+{
+	color : #87ceeb;
+}
+
+#i, .i, .I
+{
+	color : #999;
+}
+
+#bv, #b, .bv
+{
+	text-decoration : line-through;
+}
+
+td, th, textarea, body, p td, #header, #footer
+{
+	text-align : center;
+}
+
+img, p table, table table, table.s th
+{
+	border : 0;
+}
+
+td.g, td.r, td.v
+{
+	text-align : right;
+	color : #B6C6E5;
+}
+
+td.h, td.j, td.o
+{
+	text-align : center;
+	color : #B6C6E5;
+}
+
+a.s, a.t
+{
+	color : #FFF;
+}
+
+.flight .destroy a:link, .flight .destroy a:visited, .flight .espionage a:link, .flight .espionage a:visited
+{
+	color : #C80000;
+}
+
+.flight .owndestroy a:link, .flight .owndestroy a:visited
+{
+	color : #C6FFFF;
+}
+
+.return .owndestroy a:link, .return .owndestroy a:visited
+{
+	color : #fff;
+}
+
+.return .ownespionage a:link, .return .ownespionage a:visited
+{
+	color : #FF9200;
+}
+
+.flight .ownespionage a:link, .flight .ownespionage a:visited
+{
+	color : #FF7600;
+}
+
+.flight .owntransport a:link, .flight .owntransport a:visited, .return .owntransport a:link, .return .owntransport a:visited
+{
+	color : #0f0;
+}
+
+.flight .attack a:link, .flight .attack a:visited
+{
+	color : #B40000;
+}
+
+.return .ownattack, .return .ownharvest
+{
+	color : #B1B1B1;
+	font-style : italic;
+	font-weight : normal;
+}
+
+.return .ownattack a:link, .return .ownattack a:visited, .flight .ownattack a:link, .flight .ownattack a:visited, .red
+{
+	color : red;
+}
+
+.flight .ownharvest a:link, .flight .ownharvest a:visited
+{
+	color : #0032FF;
+}
+
+.return .owndeploy a:link, .return .owndeploy a:visited, .flight .owndeploy a:link, .flight .owndeploy a:visited
+{
+	color : #ff0;
+}
+
+#eader, #eader-no-menu
+{
+	border : 2px green solid;
+}
+
+#ontent, #ontent-no-menu
+{
+	border : 2px blue solid;
+}
+
+#ooter, #ooter-no-menu
+{
+	border : 2px #FFF solid;
+}

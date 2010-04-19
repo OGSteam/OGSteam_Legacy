@@ -1,0 +1,22 @@
+# pour autoriser l'accès à la signature
+<Files *.png>
+Allow from all
+</Files>
+<Files urlrewriting.php>
+Allow from all
+</Files>
+<Files testgd.php>
+Allow from all
+</Files>
+
+# pas nécessaire (juste pour debug)
+<Files sign*.php>
+Allow from all
+</Files>
+
+# chemin complet depuis la racine !
+# ce n'est PAS à partir de "http"...
+# ne pas oublier le "/" au début du chemin
+# un exemple, si votre serveur est à l'adresse http://hébergeur.fr/login/OGSpy/
+# la ligne sera de la forme : ErrorDocument 404 /OGSpy/mod/OGSign/urlrewriting.php
+# ELLE DOIT ABSOLUMENT ETRE INSCRITE CI-DESSOUS !!!

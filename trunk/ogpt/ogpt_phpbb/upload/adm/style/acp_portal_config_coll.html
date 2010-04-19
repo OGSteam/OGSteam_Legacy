@@ -1,0 +1,89 @@
+<!-- INCLUDE overall_header.html -->
+<link href="style/portal.css" rel="stylesheet" type="text/css" media="screen" />
+<a name="maincontent"></a>
+<!-- IF S_EDIT_COLL -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl><br>
+	<fieldset>
+	<form id="acp_portal_config_coll" method="post" action="{U_ACTION}">
+	
+	<dl>
+		<dt><label for="config_coll_pacing">{L_PACING}:</label>
+		<br>{L_PACING_BLOC_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_coll_pacing" type="text" id="config_coll_pacing" value="{PACING}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="config_g_w">{L_GAUCHE}:</label>
+		<br>{L_NOM_GAUCHE_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_g_w" type="text" id="config_g_w" value="{GAUCHE_W}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="config_d_w">{L_DROITE}:</label>
+		<br>{L_NOM_DROITE_EXPLAIN}<br /><span></dt>
+		<dd><input name="config_d_w" type="text" id="config_d_w" value="{DROITE_W}" size="10" />
+		</dd>
+	</dl>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_CONFIG}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+	<!-- IF S_VERSION_CHECK -->
+	<!-- IF S_UP_TO_DATE -->
+	<!-- ELSE -->
+		<div id="acp1">
+		<div class="panel5">
+			<span class="corners-top"><span></span></span></span>
+				<div id="content2">
+				<center>{L_VERSION_NOT_UP_TO_DATE_ACP}</center>
+				<br>&nbsp;&nbsp;{L_CURRENT_VERSION}	{CURRENT_VERSION}
+				<br>&nbsp;&nbsp;{L_LATEST_VERSION}	{LATEST_VERSION} 
+				<br><br><center><a target="_blank" href="{VERSION_DONLOAD}">{L_VERSION_DONLOAD}</a></center></dd>
+				</div>
+		<span class="corners-bottom"><span></span></span>					
+		</div>
+		</div>	
+	<!-- ENDIF -->
+	<!-- ENDIF -->
+	<br>
+				<center>{L_CURRENT_VERSION}	{CURRENT_VERSION}</center>	
+	<br>		
+	<h1><center>{L_ACP_PORTAL_CONFIG_EXPLAIN}</center></h1>
+	<p><center>{L_ACP_PORTAL_CONFIG_PACING3}</center></p>
+
+	<fieldset class="tabulated">
+		<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th><center>{L_GAUCHE}</center></th>
+		<th><center>{L_PACING}</center></th>		
+		<th><center>{L_DROITE}</center></th>		
+		<th><center>{L_ACTION}</center></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN portal_config_coll -->
+		<td style="text-align: center;">{portal_config_coll.GAUCHE_W}</td>
+		<td style="text-align: center;">{portal_config_coll.PACING}</td>		
+		<td style="text-align: center;">{portal_config_coll.DROITE_W}</td>	
+		<td style="text-align: center;"><a href="{portal_config_coll.U_EDIT}">{ICON_EDIT}</a></td>
+	</tr>
+	<!-- END portal_config -->
+	</tbody>
+	</table>
+	</fieldset>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/skin/pref/pref.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://unifox/locale/unifox.dtd">
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&unifox.prefs.symbolPicker;"
+	id="unifox-colorPicker"
+	buttons="accept, cancel"
+	ondialogaccept="return uf_saveSymbol();"
+	onload="uf_initSymbol(); window.sizeToContent();"
+	orient="vertical"
+	autostretch="always"
+	persist="screenX screenY"
+	flex="1">
+
+    <script type="application/x-javascript" src="chrome://unifox/content/unifoxCommon.js" />
+    <script type="application/x-javascript" src="chrome://unifox/content/unifoxOptions.js" />
+
+
+<groupbox>
+	<caption label="&unifox.prefs.symbolPicker2;"/>
+			<vbox>
+			<button label="&unifox.prefs.default;"
+			oncommand=" uf_defaultSymbol();"/>
+				<groupbox>
+				<caption label="&unifox.prefs.symbol1;" />
+				<textbox id="unifoxProdTimeSymbol1" width="600"/>
+				</groupbox>
+				<groupbox>
+				<caption label="&unifox.prefs.symbol2;" />
+				<textbox id="unifoxProdTimeSymbol2"/>
+				</groupbox>
+			<checkbox id="unifoxShowProdTimeLikeOgame" label="&unifox.prefs.SPTLO;" hidden="false"/>
+			</vbox>
+
+</groupbox>
+</dialog>
+

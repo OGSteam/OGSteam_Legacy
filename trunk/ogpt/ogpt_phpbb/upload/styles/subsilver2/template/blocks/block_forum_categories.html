@@ -1,0 +1,23 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{L_FORUM_CATEGORIES}</th>
+  <tr>
+    <td >
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">
+				<td>
+					<table class="" cellspacing="1" width="100%">
+						<!-- section 0 -->						
+						<!-- BEGIN forumrow -->
+						<!-- IF forumrow.S_IS_CAT -->
+						<h4><a href="{forumrow.U_VIEWFORUM}"><font color="{forumrow.FORUM_NAME_COLOR}"><center>&#8226;&nbsp;{forumrow.FORUM_NAME}&nbsp;&#8226;</center></font></a></h4>
+						<!-- ELSEIF forumrow.S_IS_LINK -->
+						<h4><a class="forumlink" href="{forumrow.U_VIEWFORUM}"><font color="{forumrow.FORUM_NAME_COLOR}">{forumrow.FORUM_NAME}</a></h4>
+						<!-- ELSE -->
+						<h4><a class="forumlink" href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></h4>		
+						<!-- ENDIF -->
+						<!-- END forumrow -->					
+					</table>
+				</td>
+			</table>
+		</td>	
+</table>

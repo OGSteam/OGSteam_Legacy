@@ -1,0 +1,59 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+<!-- IF S_EDIT_ATTACH -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl><br>
+	<fieldset>
+	<form id="acp_portal_attachments" method="post" action="{U_ACTION}">
+	
+	<dl>
+		<dt><label for="attachments_number">{L_ATTACH_NOMBER}:</label>
+		<br>{L_ATTACH_NOMBER_EXPLAIN}<br /><span></dt>
+		<dd><input name="attachments_number" type="text" id="attachments_number" value="{ATTACH_NOMBER}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="attachments_title_block">{L_ATTACH_TITLE}:</label>
+		<br>{L_ATTACH_TITLE_EXPLAIN}<br /><span></dt>
+		<dd><input name="attachments_title_block" type="text" id="attachments_title_block" value="{ATTACH_TITLE_BLOC}" size="20" />
+		</dd>
+	</dl>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_CONFIG}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+	<h1><center>{L_ACP_PORTAL_CONFIG_ATTACH}</center></h1>
+	<p><center>{L_ACP_PORTAL_CONFIG_ATTACH_EXPLAIN}</center></p>
+
+	<fieldset class="tabulated">
+		<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th><center>{L_ATTACH_NOMBER}</center></th>
+		<th><center>{L_ATTACH_TITLE}</center></th>		
+		<th><center>{L_ACTION}</center></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN portal_config_attachments -->
+		<td style="text-align: center;">{portal_config_attachments.ATTACH_NOMBER}</td>
+		<td style="text-align: center;">{portal_config_attachments.ATTACH_TITLE_BLOC}</td>		
+		<td style="text-align: center;"><a href="{portal_config_attachments.U_EDIT}">{ICON_EDIT}</a></td>
+	</tr>
+	<!-- END portal_config_attachments -->
+	</tbody>
+	</table>
+	</fieldset>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

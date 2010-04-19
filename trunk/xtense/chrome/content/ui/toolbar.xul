@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://xtense2/skin/xtense.css" type="text/css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://xtense2/locale/toolbar.dtd">
+
+<overlay id="xtense-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Prefs.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Xtense.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/Ogame.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/OgameConstants.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/OgameLocales.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgame.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameLocales.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameConstants.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-Univers.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-UniversLocales.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-UniversConstants.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Servers.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/ServerItem.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/Request.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/scripts/galaxy.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/content/ui/toolbar.js"/>
+	<script type="application/x-javascript" src="chrome://xtense2/locale/toolbar.js"/>
+	<commandset id="mainCommandSet">
+	<command id="restartFirefoxByXtense" oncommand="Xreload_firefox();" />
+	<command id="configXtense" oncommand="Xopen_prefs(false);" />
+	</commandset>	
+	<keyset id="mainKeyset">
+		<key id="key_restartFirefoxByXtense" 
+				 key="k" 
+				 modifiers="alt,accel" 
+				 command="restartFirefoxByXtense"/>
+	</keyset>
+	<toolbox id="navigator-toolbox">
+		<toolbar id="xtense-toolbar" toolbarname="&toolbar.name;" class="chromeclass-toolbar" hidden="false" persist="hidden">
+			<toolbaritem flex="1">
+				<toolbarbutton id="xtense-ogspy-button" type="menu" tooltiptext="&toolbar.name.t;" image="chrome://xtense2/skin/images/logo.png">
+					<menupopup id="xtense-ogspy-menu" position="after_start"></menupopup>
+				</toolbarbutton>
+				
+				<toolbarbutton id="xtense-activate" class="enable" label="&toolbar.activate;"/>
+				<toolbarbutton id="xtense-options" tooltiptext="&toolbar.options.t;" label="&toolbar.options;" context="menu-options"/>
+				<toolbarbutton id="xtense-log" tooltiptext="&toolbar.log.t;" label="&toolbar.log;"/>
+				<toolbarbutton id="xtense-send" tooltiptext="&toolbar.send.t;" label="&toolbar.send;" disabled="true"/>
+				<toolbarseparator/>
+				<hbox id="xtense-new-messages-hbox" class="no-new-message" tooltiptext="&toolbar.new-messages.display;" flex="0">
+					<!--<vbox>
+						<spacer flex="1"/>
+						<image id="xtense-new-messages-icon" class="icon"></image>
+						<spacer flex="1"/>
+					</vbox>-->
+					<toolbarbutton id="xtense-new-messages-icon" /><!--image="chrome://xtense2/skin/images/no-new-message.jpg"-->
+					
+					<vbox flex="1">
+						<spacer flex="1"/>
+						<label id="xtense-new-messages-status" value="0" crop="end" flex="1"/><!--value="&toolbar.new-messages.no;"-->
+						<spacer flex="1"/>
+					</vbox>
+				</hbox>
+				<toolbarseparator/>
+				<hbox class="status" tooltip="xtense-calls-tooltip" flex="1">
+					<vbox>
+						<spacer flex="1"/>
+						<image id="xtense-status-icon" class="icon info"></image>
+						<spacer flex="1"/>
+					</vbox>
+					
+					<vbox flex="1">
+						<spacer flex="1"/>
+						<label id="xtense-status" value="&toolbar.status;" crop="end" flex="1"/>
+						<spacer flex="1"/>
+					</vbox>
+				</hbox>
+				
+				<tooltip id="xtense-calls-tooltip" class="log" style="display: none;" noautohide="true" orient="vertical">
+					<description class="bold">&toolbar.tooltip.header;</description>
+					<hbox id="xtense-calls-success">
+						<label value="&toolbar.tooltip.status.success;"/>
+						<hbox id="xtense-calls-list-success" style="display:block;" class="callsList" flex="1"></hbox>
+					</hbox>
+					<hbox id="xtense-calls-warning">
+						<label value="&toolbar.tooltip.status.warning;"/>
+						<hbox id="xtense-calls-list-warning" style="display:block;" class="callsList" flex="1"></hbox>
+					</hbox>
+					<hbox id="xtense-calls-error">
+						<label value="&toolbar.tooltip.status.error;"/>
+						<hbox id="xtense-calls-list-error" style="display:block;" class="callsList" flex="1"></hbox>
+					</hbox>
+					<description class="comment">&toolbar.tooltip.footer;</description>
+				</tooltip>
+				
+				<hbox id="xtense-dev-utils" style="display:none;">
+					<!--<toolbarbutton id="xtense-dev-actions" label="Utils" type="menu">
+						<menupopup>
+							<menuitem label="Eval JS" />
+						</menupopup>
+					</toolbarbutton>-->
+					<toolbarbutton id="xtense-reload-chrome" label="Reload Chrome" oncommand="Xreload_chrome();"/>
+					<toolbarbutton id="xtense-reload-firefox" label="Reload Firefox" oncommand="Xreload_firefox();"/>
+				</hbox>
+			</toolbaritem>
+		</toolbar>
+	</toolbox>
+	
+	<popup id="contentAreaContextMenu">
+		<menuseparator id="xtense-menu-separator"/>
+		<menuitem id="xtense-menu-options" label="&menu.options;" accesskey="X" iconic="menuitem-iconic ietab-icon-viewpage" command="configXtense"/>
+	</popup>
+	
+</overlay>

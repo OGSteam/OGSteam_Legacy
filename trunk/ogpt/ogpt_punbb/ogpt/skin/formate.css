@@ -1,0 +1,489 @@
+	/************************************************************************************
+	***
+	***   0000     0000 000000000 000000000 0000 000000000 0000000000  0000000   0000000   00000000  0000     0000 000000000 0000
+	***   000000 000000 0000      0000           0000         0000    000000000 000   000 0000  0000 000000 000000 0000      0000
+	***   0000000000000 0000      0000      0000 0000         0000    000   000 000       0000  0000 0000000000000 0000      0000
+	***   0000 000 0000 0000000   0000000   0000 000000000    0000    000   000 000 00000 0000000000 0000 000 0000 0000000   0000
+	***   0000  0  0000 0000      0000      0000      0000    0000    000   000 000   000 0000  0000 0000  0  0000 0000      0000
+	***   0000     0000 0000      0000      0000      0000    0000    000000000 000   000 0000  0000 0000     0000 0000      
+	***   0000     0000 000000000 0000      0000 000000000    0000     0000000   0000000  0000  0000 0000     0000 000000000 0000
+	***
+
+	*** Cette création est mise à disposition par Mefistoguep,
+	*** Joueur d'ogame et Fondateur de la Corporation des Mefisto
+	*** France disponible en ligne http://mefistogame.free.fr/skin/mefistoguep/
+	
+
+	*** Nom du skin    : Mefisto
+	*** Auteur         : Mefistoguep
+	*** Description    : Skin pour Ogame sur le thème de l'alliance Mefisto et ses Alliances Filles (toutes version)
+	
+	*** 18/01/2006 : - changement des défenses
+	*** 05/02/2006 : - changement de la puce d'espionnage
+	*** 04/02/2006 : - changement des technologies
+	*** 30/01/2006 : - changement des couleurs des flottes
+	*** 27/01/2006 : - changement de 7 images dans laboratoire et des mouvements de flottes ainsi que des codes couleurs du menu galaxies
+        *** 22/01/2006 : - Première version du skin avec quelques images (tous les bâtiments)
+        ***              
+        
+
+	*** Modifications à venir
+	***    - Changement de quelques (voire toutes selon les ressources) image de planète
+        ***    - changement du css des tableau pour faire du semi transparent ou pour mettre des images de fonds sympas
+        ***    - chnagement des puces pour mettre des puces propres Mefisto
+
+	**************************************************************************************/
+
+   body {   /* Format général */
+      color                : #9febfb;
+      margin-top           : 1px;
+      margin-left          : 1px;
+      font-family          : Tahoma, sans-serif;
+      font-size            : 11px;
+      font-weight          : bold;
+      background-color     : #000000;
+      background-image     : url(img/bg.jpg);
+      background-attachment: fixed;
+      background-position  : left top;
+   }
+
+   input,
+   textarea {              /* Champs de saisie */
+      color                : #E6EBFB;
+      font-size            : 11px;
+      font-weight          : bold;
+      font-family          : Tahoma, sans-serif;
+      background-color     : transparent;
+      background-image     : url (img/etoiles.gif);
+      border               : 1px black solid;
+   }
+   input:hover,
+   textarea:hover {        /* Survol des Champs de saisie */
+      color                : #E6EBFB;
+      background-color     : transparent;
+      background-image     : url (img/etoiles.gif);
+   }
+
+   table {empty-cells      : show;} /* Pour afficher les cellules vides des tables */
+
+/*************************************************************/
+/***                   FORMATAGE DU MENU                   ***/
+   body.style,
+   body.style img {            /* Format général */
+      margin-top           : 0px;
+      margin-left          : 0px;
+      background-color     : transparent;
+      background-image     : url(img/menu.jpg);
+      background-repeat    : no-repeat;
+      background-position  : left top;
+      font-family          : Tahoma, sans-serif;
+      font-size            : 11px;
+      text-align           : left;
+      width                : 100%;
+  }
+
+   body.style center p,    /* Texte "Univers 00 (vx.xx) */
+   body.style center p a {
+      color                : #CC9966;
+      font-size            : 10px;
+      font-weight          : bold;
+      text-decoration      : none;
+      background-color     : transparent;
+   }
+
+   body.style table {      /* Cadre du tableau */
+      border               : 3px white double;
+      background-image     : url(img/bkd_cells.png);
+   }
+   body.style table div {  /* Format du texte des liens */
+	   text-align           : left;
+	   font-size            : 11px;
+	   font-weight          : bold;
+	   margin-top           : 2px;
+	   margin-bottom        : 2px;
+	   white-space          : nowrap;
+   }
+
+   body.style table div a, /* Liens du menu */
+   body.style table div a:visited,
+   body.style table div a:link {
+      color                : #E6EBFB;
+      background-image     : url(img/linkoff.png);
+      background-repeat    : no-repeat;
+      padding-left         : 17px;
+      text-decoration      : none;
+   }
+
+   body.style table div a:hover,   /* Liens du menu */
+   body.style table div a:active {
+      color                : #B4C8F7;
+      background-image     : url(img/linkon.png);
+      background-repeat    : no-repeat;
+      padding-left         : 17px;
+      text-decoration      : none;
+   }
+
+   body.style table center a { /* Lien Infos Commandant */
+	   font-size            : 10px; /* 0px; /* Supprime le lien */
+	   text-decoration      : none;
+   }
+
+/***                 FIN FORMATAGE DU MENU                 ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                  BARRE DE RESSOURCES                  ***/
+
+   table table select {    /* Liste de sélection des planètes */
+      border               : 1px black solid;
+      color                : #00ff00;
+      font-size            : 11px;
+      background-color     : black;
+      background-image     : url(img/etoiles.gif);
+   }
+
+   table table td {        /* Ressources */
+      color                : #E6EBFB;
+      font-size            : 12px;
+      
+   }
+/***                FIN BARRE DE RESSOURCES                ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                        TABLEAUX                       ***/
+/***     VUE GENERALE, RESSOURCES, GALAXIE, FLOTTES        ***/
+/***              ENTETE de MESSAGE, ALLIANCE              ***/
+
+/* Ici on formatera les tableaux de ces écrans, une modif    */
+/*   sur un de ces formats les impactera tous                */
+
+   table              {border-spacing : 0px;}            /* On enlève l'espace entre les cellules */
+
+   /* le [width] permet de ne pas impacter les tableaux des autres écrans */
+   table[width]       {border         : 1px black solid;}/* Bordure noire des tableaux */
+   table table[width] {border         : 0px black none;} /* Pas de bordures pour les sous tableaux */
+
+	td.c,
+	td.c a {                /* Entête de colonne (utilisé aussi dans technologie) */
+      color                : #ffffff;
+      border               : 1px black solid;
+      font-size            : 11px;
+      font-family          : Tahoma, sans-serif;
+      font-weight          : bold;
+      text-decoration      : none;
+      background-image     : url(img/bkd_title.gif);
+   }
+   td.c a:hover {          /* Passages de la souris sur les liens */
+      color                : #B6C6E5;
+      text-decoration      : underline;
+   }
+
+   th {                    /* Intérieur des cellules */
+      color                : #ffffff;
+      font-size            : 11px;
+      font-family          : Tahoma, sans-serif;
+      text-decoration      : none;
+      background-image     : url(img/bkd_cells.png);
+   }
+   th a {                    /* Liens à l'Intérieur des cellules */
+      color                : #ffffff;
+      font-size            : 11px;
+      font-family          : Tahoma, sans-serif;
+      text-decoration      : none;
+   }
+   th a:hover {            /* Liens survolés à l'Intérieur des cellules */
+      color                : #B6C6E5;
+      text-decoration      : underline;
+   }
+
+   th img {                /* Images à l'Intérieur des cellules */
+      border               : 0px black none;
+   }
+/***                      FIN TABLEAUX                     ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                     VUE GENERALE                      ***/
+   table table.s {         /* Cadre contenant les images de planètes */
+      border               : 1px black solid;
+   }
+   table table.s th img {  /* Miniatures des planètes */
+      height               : 88px;
+      width                : 88px;
+      text-align           : center;
+   }
+
+   table th[colspan] img[width] {   /* Image de la planète courrante */
+      height               : 230px; /* Les 30px de plus c'est pour l'ombre */
+      width                : 230px;
+   }
+   table th[colspan] table td img[width] { /* Pour ne pas impacter l'image d'info sur défence & vaisseau */
+      height               : 120px;        /* peu être enlevé pour agrandir l'image */
+      width                : 120px;
+   }
+
+   noscript + script + table[width],
+   noscript + script + table tr td p {  /* Traitement du cadre Commandant */
+      background-color     : transparent;
+/*    visibility           : hidden;   /* Décommenté pour enlever le cadre commander */
+/*    height               : 0px;      /* Décommenté pour enlever le cadre commander */
+/*    width                : 0px;      /* Décommenté pour enlever le cadre commander */
+      font-family          : Tahoma, sans-serif;
+      font-size            : 10px;
+      font-weight          : normal;
+      border               : 0px black none;
+   }
+
+/***                   FIN VUE GENERALE                    ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                      RESSOURCES                       ***/
+
+   td.k {                  /* Intérieur des cellules */
+      color                : #E6EBFB;
+      font-size            : 12px;
+      font-weight          : bold;
+      font-family          : Tahoma, sans-serif;
+      text-align           : center;
+      background-image     : url(img/bkd_cells.png);
+      border-top           : 2px black solid;
+      border-bottom        : 2px black solid;
+   }
+
+   th select {            /* Bouton calculer */
+      color                : #E6EBFB;
+      font-size            : 11px;
+      font-weight          : bold;
+      font-family          : Tahoma, sans-serif;
+      background-color     : #343434;
+      border               : 1px black solid;
+   }
+/***                    FIN RESSOURCES                     ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                       TABLEAUX                        ***/
+/***       BATIMENTS, LABORATOIRE, CHANTIER, DEFENSE       ***/
+
+   /** Deux premières colonnes de ces tableaux **/
+   table table td.l {      /* Deux première colonnes de ces tableaux */
+      font-size            : 11px;
+      font-family          : Tahoma, sans-serif;
+      font-weight          : normal;
+      vertical-align       : top;
+      border               : 1px black solid;
+      background-image     : url(img/rouge.png);
+      background-position  : right bottom;
+      background-repeat    : no-repeat;
+   }
+
+   table table td.l a,     /* Titre du batiment et */
+   table table td.l b {    /* Montant de la fabrication */
+      color                : #E6EBFB;
+      font-weight          : bold;
+      font-style           : italic;
+      text-decoration      : none;
+   }
+   table table td.l a:hover { /* Survol du Titre du batiment */
+      color                : #B6C6E5;
+      text-decoration      : underline;
+   }
+
+   /** Troisième colonne des tableaux **/
+   table table td.l + td.k,         /* Cellules demandant la quantité à produire & */
+   table table td.l + td.l + td.l { /* Troisième colonne des batiments */
+      text-align           : center;
+      font-size            : 11px;
+      font-weight          : normal;
+      font-family          : Tahoma, sans-serif;
+      vertical-align       : top;
+      border               : 1px black solid;
+      background-image     : url(img/clad.png);
+      background-position  : left bottom;
+      background-repeat    : no-repeat;
+   }
+   table table td.l + td.k a {  /* Liens "Interrompre" & "Continuer" */
+      color                : #E6EBFB;
+      font-weight          : bold;
+      text-decoration      : none;
+   }
+   table table td.l + td.k a:hover { /* Survol des Liens "Interrompre" & "Continuer" */
+      color                : #B6C6E5;
+      text-decoration      : underline;
+   }
+
+   table table td.l + td.k input { /* Zone de saisie de quantité à produire */
+      text-align           : center;
+   }
+
+/***                     FIN TABLEAUX                      ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                     TECHNOLOGIES                      ***/
+
+   table td.l {           /* Technologie */
+      color                : #E6EBFB;
+      font-size            : 11px;
+      font-weight          : bold;
+      font-family          : Tahoma, sans-serif;
+      background-image     : url(img/bkd_cells.png);
+      border-top           : 2px black solid;
+   }
+   table td.l a {         /* Nom de la technologie */
+      color                : #E6EBFB;
+      font-weight          : bold;
+      font-style           : italic;
+      font-family          : Tahoma, sans-serif;
+      text-decoration      : none;
+   }
+   table td.l a:hover {  /* Survol du Nom de la technologie */
+      color                : #B6C6E5;
+      text-decoration      : underline;
+   }
+
+/***                   FIN TECHNOLOGIES                    ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                       MESSAGES                        ***/
+
+   table table td.b {      /* Corps de message */
+      background-image     : url(img/bkd_cells.png);
+   }
+   table table td.b[colspan] { /* Texte du message */
+      color                : #E6EBFB;
+      font-size            : 11px;
+      font-weight          : normal;
+      font-family          : Tahoma, sans-serif;
+      border               : 1px black solid;
+      background-color     : #343434;
+   }
+   textarea {              /* Zone d'écriture d'un nouveau message */
+      font-weight          : normal;
+      width                : 100%;
+   }
+
+/***                     FIN MESSAGES                      ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                 RAPPORTS DE BATAILLES                 ***/
+
+   table[width="99%"] {    /* Cadre principale du rapport */
+      font-size            : 12px;
+      font-weight          : normal;
+      font-family          : Tahoma, sans-serif;
+      border               : 1px black solid;
+      background-image     : url(img/bkd_cells.png);
+   }
+
+   table[width="99%"] table[border],     /* Cadre d'assaut */
+   table[width="99%"] table[border] th { /* Cellules du cadre d'assaut */
+      border               : 0px black none;
+      background-image     : none;
+   }
+   table[width="99%"] table[border] table[border] { /* Cadre listant les forces */
+      border               : 1px black solid;
+      background-image     : url(img/bkd_cells.png);
+   }
+
+   table[width="99%"] p {  /* Résultat de la bataille */
+      font-weight          : bold;
+      font-style           : italic;
+   }
+
+/***               FIN RAPPORTS DE BATAILLES               ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                  MESSAGES DE FLOTTES                  ***/
+
+/** Liste des classes disponibles pour les mouvements de flottes
+ **    .owntransport = vos transports (transporter)
+ **    .ownattack = vos attaques (attaquer)
+ **    .ownespionage = vos espionnages (espionner)
+ **    .ownharvest = vos recyclages (recycler)
+ **    .owndeploy = vos stationnements (baser)
+ **    .owncolony = vos colonisations (coloniser)
+
+ **    .transport = transports alliés
+ **    .attack = Attaques ennemies
+ **    .espionage = Espionnages ennemies
+ *************************************************************/
+
+   .return {               /* Tous les messages de retour de flotte */
+      font-style           : italic;
+      font-weight          : normal;
+   }
+
+   .ownharvest {           /* Recyclage */
+      color                : #CC9966; /* marron */
+   }
+
+   .transport {            /* Transports Alliés */
+      color                : #93D2ED; /* bleu */
+   }
+   .owntransport {         /* nos propres transport*/
+	color		   :#ff00ff; /* rose foncé */
+   }
+   .owndeploy {		   /* nos stationnement */
+	color		   :#ff80ff; /* rose clair */
+   }
+   .ownattack {		   /* nos attaques */
+	color 		   :#ff9800; /* orange */
+   }
+   .ownespionage {	   /* nos espionnage */
+	color 		   :#ffff00; /* jaune */
+   }
+   .owncolony {		   /* nos colonisation */
+	color		   :#00ffff; /* bleu pale */
+   }
+   .attack {		   /* attaque ennemi */
+	color		   :#ff0000; /* rouge */
+   }
+   .espionage {		   /* espionnage ennemi */
+	color              :#ff4700; /* rouge plus clair */
+   }
+
+/***                FIN MESSAGES DE FLOTTES                ***/
+/*************************************************************/
+
+/*************************************************************/
+/***                   COULEURS GALAXIE                    ***/
+
+/** Liste des classes disponibles pour le menu galaxie
+ **    .inactive = Joueur inactif de puis 7 jours
+ **    .longinactive = Joueur inactif depuis 28 jours
+ **    .banned = Joueur banni
+ **    .vacation = Joueur en Vacance
+ **    .allymember = Membre de l'alliance
+ **    .noob = Joueur Faible
+ **    .strong = Joueur Fort
+**************************************************************/
+    .inactive {            /*les inactifs de 7 jours */
+	color	  	   :#ff80ff; /* rose pale*/
+    }
+    .longinactive {        /* les grands inactifs 28 jours */
+	color		   :#ff00ff; /* rose flash */
+    }
+    .vacation {		   /* joueur en vacances  */
+	color		   :#0086dd; /*bleu mer */
+    }
+    .allymember {	   /* membres de l'alliance */
+	color		   :#00ff00; /*vert flash*/
+    }
+    .banned {		   /* membres bannis */
+	color		   :#ffff00; /* jaune */
+    }
+    .noob {		   /* joueur faible */
+	color		   :#ffbf8f; /* saumon */
+    }
+    .strong {		   /* joueur fort  */
+	color		   :#ff0000; /* rouge */
+    }
+
+/***                 FIN COULEURS GALAXIE                  ***/
+/*************************************************************/

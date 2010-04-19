@@ -1,0 +1,48 @@
+		PathAndQuery	"/game/overview.php?session=becc03a0bdf3"	String
+Vue Generale
+
+		PathAndQuery	"/game/b_building.php?session=becc03a0bdf3"	String
+Batiments
+
+		PathAndQuery	"/game/resources.php?session=becc03a0bdf3"	String
+Ressources
+
+		PathAndQuery	"/game/buildings.php?session=becc03a0bdf3&mode=Forschung"	String
+
+Laboratoires
+
+		PathAndQuery	"/game/buildings.php?session=becc03a0bdf3&mode=Flotte"	String
+Chantier spatial
+
+		PathAndQuery	"/game/flotten1.php?session=becc03a0bdf3&mode=Flotte"	String
+Flottes 1
+
+		PathAndQuery	"/game/techtree.php?session=becc03a0bdf3"	String
+Technologies
+
+		PathAndQuery	"/game/galaxy.php?session=becc03a0bdf3"	String
+Galaxies
+
+		PathAndQuery	"/game/buildings.php?session=becc03a0bdf3&mode=Verteidigung"	String
+Defenses
+
+		PathAndQuery	"/game/allianzen.php?session=becc03a0bdf3"	String
+Alliances
+
+		PathAndQuery	"/game/stat.php?session=becc03a0bdf3&start=301"	String
+Statistiques
+
+		PathAndQuery	"/game/suche.php?session=becc03a0bdf3"	String
+Recherche 
+
+		PathAndQuery	"/game/messages.php?session=becc03a0bdf3"	String
+Messages
+
+		PathAndQuery	"/game/buddy.php?session=becc03a0bdf3"	String
+Liste des amis
+
+		PathAndQuery	"/game/options.php?session=becc03a0bdf3"	String
+Options
+
+
+

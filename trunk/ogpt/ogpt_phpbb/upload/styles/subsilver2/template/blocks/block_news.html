@@ -1,0 +1,36 @@
+<!-- BEGIN news_row -->
+<!-- IF news_row.S_NO_TOPICS -->
+<!-- ELSE -->	
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{TITLE_BLOCK}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" class="row2">				
+				<tr>
+				<td class="row1"><center>
+					{news_row.ATTACH_ICON_IMG}<!-- IF news_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{news_row.U_VIEW_COMMENTS}"><strong>{news_row.TITLE}</strong></a>
+					<span class="gensmall">{L_POSTED_BY}: 
+					<img src="./images/portal/{news_row.IMG_USER}" />&nbsp;
+					<strong><a href="{news_row.U_USER_PROFILE}">{news_row.POSTER}</a></strong>		
+				<!-- IF news_row.FLAGS -->&nbsp;
+				<img src="./images/flags/{news_row.FLAGS}.gif" border="0" width="15" alt="{news_row.FLAGS}" title="{news_row.FLAGS}">
+				<!-- ENDIF --></center></span><br />			
+				</td>
+	<tr/>
+			<td class="row2"><span class="genmed2">{news_row.TEXT}<br />
+			</td>
+			<tr/>	
+			<td class="row1">
+					<span style="float: left;">{news_row.MINI_POST_IMG}{news_row.TIME}</span>	
+					<span style="float: right;">
+					<a href="{news_row.U_VIEW_COMMENTS}">{news_row.L_READ_FULL}</a>&nbsp;&bull;&nbsp;
+					<a href="{news_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {news_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{news_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>	
+			</td>
+				</tr>					
+			</table>
+		</td>
+</table>
+<!-- ENDIF -->
+<!-- IF news_row.S_NOT_LAST --><br /><!-- ENDIF -->
+<!-- END news_row -->

@@ -1,0 +1,18 @@
+1.1
+- Modification des apparences (formulaire)
+- Ajout menu en haut avec une administration
+- Ajout d'un mod permettant l'ajout des phalanges aussi ;)
+- Modification du code du fichier recycleurs.php, plus rapide plus efficace ;)
+
+
+1.0a
+- Modification des apparences (tableau + formulaire)
+- Le formulaire n'a plus besoin d'être remplit avec le nom ig, celui de l'ogspy est inséré autamatiquement
+- Ajout de la date à laquel l'envoie a été fait
+- Modification du numéro de version ( ce sont les bons cette fois ci :p)
+- Modification du fichier install : ATTENTION nouvelles tables smile
+- Ajout fichier uninstall.php
+- Petite modification bénine smile
+
+1.0
+- Version initiale

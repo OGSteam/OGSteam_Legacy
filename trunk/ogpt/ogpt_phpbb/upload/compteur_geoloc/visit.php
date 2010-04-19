@@ -1,0 +1,36 @@
+<?php
+ include('config.php');
+ $timeoutsecondes = (60*$min);$time = time();
+ $timeout  = $time - $timeoutsecondes;$dom=$_GET['dom'];
+ $description=$_GET['description'];
+ include('mysql_connect.php');
+ $req=mysql_query(" DELETE FROM `".$table_prefix."geo2` WHERE time<'$timeout' ");
+ mysql_close($link);
+ if (!$fp = fopen("domaines.csv","r")){echo "Echec de l'ouverture du fichier";
+ exit;}else{while(!feof($fp)){$Ligne = fgets($fp,255);$cut = explode ("\"", $Ligne);
+ if ($dom==$cut[1]){$abs=$cut[5];$ord=$cut[7];$nom=addslashes($cut[3]);
+ $name=addslashes($cut[9]);}}fclose($fp);include('mysql_connect.php');
+ $result=mysql_query("select * from ".$table_prefix."geo where pays='$dom'");$row=mysql_fetch_array($result);
+ mysql_free_result($result);
+ if (addslashes($row['pays'])<>""){mysql_query("UPDATE ".$table_prefix."geo SET visit=visit+1 , time=$time  WHERE `pays` = '".addslashes($row['pays'])."'");}else{if($nom!="" || !empty($nom)){mysql_query("INSERT INTO ".$table_prefix."geo ( `pays` , `abs` , `ord` , `name` , `nom` , `visit`, `time` )VALUES ('$dom', '$abs','$ord', '$name', '$nom' , '1', '$time')");}}mysql_close($link);}include("mysql_connect.php");
+ $result1 =  mysql_query("SELECT * FROM ".$table_prefix."geo WHERE time>='$timeout'  ");$nombre1 = mysql_num_rows($result1);echo "&num=$nombre1";
+ $result2 = mysql_query("SELECT DISTINCT ip  FROM `".$table_prefix."geo2` ");
+ $nombre2 = mysql_num_rows($result2);
+ mysql_free_result($result2);
+ if ($nombre2==0){ $nombre2==1;}echo "&live=$nombre2";
+ $i=1;while($row=mysql_fetch_array($result1)){$abs=$row['abs'];$ord=$row['ord'];
+ $nom=stripslashes($row[$description]);if($abs!=0 && $ord!=0){$x="x";$array1 = array($x, $i);$xnum = implode($array1);echo "&" . $xnum . "=" . urlencode(utf8_encode($abs));
+ $y="y";$array1 = array($y, $i);$ynum = implode($array1);
+ echo "&" . $ynum . "=" . urlencode(utf8_encode($ord));
+ $titre="titre";$array1 = array($titre, $i);
+ $titre = implode($array1);
+ echo "&" . $titre . "=" . urlencode(utf8_encode($nom));$i++;}}mysql_free_result($result1);
+ $result = mysql_query("SELECT * FROM ".$table_prefix."geo where time<'$timeout'  ");
+ $nombre = mysql_num_rows($result);echo "&num2=$nombre";
+ $i=1;while ($row=mysql_fetch_array($result)){$abs=$row['abs'];
+ $ord=$row['ord'];if($abs!=0 && $ord!=0){$x="a";$array1 = array($x, $i);
+ $xnum = implode($array1);echo "&" . $xnum . "=" . urlencode(utf8_encode($abs));$y="o";$array1 = array($y, $i);
+ $ynum = implode($array1);echo "&" . $ynum . "=" . urlencode(utf8_encode($ord));$i++;}}mysql_free_result($result);
+ mysql_close($link);
+ echo'&done=1&';
+ ?>

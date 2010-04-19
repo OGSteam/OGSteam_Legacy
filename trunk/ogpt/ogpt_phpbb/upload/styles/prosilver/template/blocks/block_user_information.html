@@ -1,0 +1,88 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+
+				<dl>
+					<dt>{L_USER_INFO}</dt>
+				</dl>
+
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+				<dl>
+					<dd class="posts_portal">
+<table class="tablebg" width="100%" cellpadding="0" cellspacing="0" border="0" >
+<td class="cat"></td>
+  <tr>
+    <td >
+
+		<!-- IF not S_USER_LOGGED_IN -->
+				<form method="post" action="{S_LOGIN_ACTION}">
+					<table class="tablebg" width="100%" cellpadding="0" cellspacing="0" border="0" >
+					<tr>
+							<td align="center"><span class="gen">{L_USERNAME}: <br /><input class="post" type="text" name="username" size="15" /></span></td>
+						</tr>
+						<tr>
+							<td  align="center"><span class="gen">{L_PASSWORD}: <br /><input class="post" type="password" name="password" size="15" /></span></td>
+						</tr>
+						<tr>
+							<td  align="center" ><span class="genmed">{L_LOG_ME_IN_SHORT}</span><input class="text" type="checkbox" name="autologin" /></td>
+						</tr>
+						<tr>
+							<td  align="center" ><span class="genbig"><input type="submit" class="btnmain" name="login" value="{L_LOGIN}" /></td>
+						</tr>
+						<tr>
+							<td  align="center" ><p class="gensmall"><a href="ucp.php?cid=&mode=register">{L_REGISTER}</a></p></td>
+						</tr>
+					</table>
+				</form>		
+		<!-- ENDIF -->
+		<!-- IF S_USER_LOGGED_IN -->
+		<table class="tablebg" width="100%" cellpadding="0" cellspacing="0" border="0" >
+			<tr>
+				<td align="center" class="row2">
+							<!-- IF AVATAR_IMAGE -->
+							{AVATAR_IMAGE}
+							<!-- ELSE -->
+							<img src="./images/portal/no_avatar.gif"/>
+							<!-- ENDIF -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center" class="row2"><br /><span class="gen"> {USERNAME_FULL}
+				<!-- IF USER_FLAG -->&nbsp;
+			<img src="./images/flags/{USER_FLAG}.gif" border="0" width="15" alt="{USER_FLAG}">
+				<!-- ENDIF -->
+				</span></td>
+			<tr/>
+			<tr>
+				<td align="center"  class="row2">
+					{L_IMG_SPACER}
+					<p class="gensmall">
+					<a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a><br />
+					<a href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a><br />
+					<a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a><br />
+					</p>
+					{L_IMG_SPACER}
+				<td/>
+			<tr/>
+			<tr>
+				<td align="center" class="row2"><span class="gensmall">
+					<a href="{U_LOGIN_LOGOUT}"><img src="./images/portal/icon_mini_login.gif" width="12" height="13" border="0" alt="{L_LOGIN_LOGOUT}" /> {L_LOGIN_LOGOUT}</a>
+				</td><br /></span>
+			</tr>
+		</table>
+		<!-- ENDIF -->
+
+</td>
+</tr>
+</table> 
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

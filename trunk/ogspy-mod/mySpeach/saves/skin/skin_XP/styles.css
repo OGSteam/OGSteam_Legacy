@@ -1,0 +1,43 @@
+.MYtout { font-size:10px; background:#0024a6; font-family:Verdana; width:600px;} /* Style qui defini la structure du chat */
+#MYtout {position:relative; left:0; top:0px; width:250px;background-color:#efecdb;}
+.MSli { list-style-type:none; margin:2px; background-color:#ffffff; padding:0; border-left:1px solid #0024a6;border-right:1px solid #0024a6; } /* Style cellule du chat */
+.MStitre, .barre { font-size:14px; font-weight:bold; font-variant:small-caps; color:#fff; background:transparent url('skin/skin_XP/barre-g.gif') no-repeat top left; text-align:center; padding:2px; margin:0;cursor:move } /* Taille du titre du chat */
+.MStxtAutre { font-size:10px; color:#000000; } /* autres textes */
+.MSpseudo { font-size:10px; color:grey; font-weight:bold; } /* Pseudos normaux */ 
+.MSmodo { font-size:10px; color:orange; font-weight:bold; } /* Pseudo Moderateur */ 
+.MStexte { font-size:10px; color:#000000; } /* Texte du chat */
+.MSdate { font-size:8px; color:#888888; } /* Style des dates */ 
+.My_Tail { font-size:10px; } /* Style du texte en pied du chat */ 
+.My_Root { font-size:10px; color:#ff0000; font-weight:bold; } /* Pseudos administrateur */ 
+.My_altern1 { padding:2px; } /* Couleur qui alterne n 1*/ 
+.My_altern2 { padding:2px; } /* Couleur qui alterne n 2*/ 
+#count big { color:red; } /* Quand on ecrit, le pseudo change de couleur, ceci change la couleur. */ 
+.My_historique { font-size:10px; font-family:Verdana; color:#333333; } /* Taille du texte historique */ 
+#popupAddressbook { display:none; position:absolute; left:160px; top:10px; width:350px; height:355px; background:#0024a6 url('skin/skin_XP/barre-d.gif') no-repeat top right;  } /* !! Les CSS qui suivent sont a modifier que si vous savez ce que vous faite !! */
+.barre { text-align:right; height:1.4em; }
+.barre a {padding:0;margin:2px; text-decoration:none; } /* contient les images fermer/reduire popup */
+#pop_titre { float:left; font-weight:bold; color:#fff; margin-left:40px; }
+#pop { height:322px;background-color:#efecdb;  overflow:auto;  margin:3px; }
+#pop table { background-color:transparent; }  
+#contextMenu { position:absolute; left:0; top:0; padding:5px; z-index:2; background-color:#efecdb; width:130px; visibility:hidden; border:1px outset #efecdb; }
+#slct_ip { font-size:0.6em; }  
+#contextMenu a { text-decoration:none; color:#000; font-size:0.8em; }
+#contextMenu a div { width:125px; cursor:default; }  
+#contextMenu a div img { border:none; }
+#contextMenu a:hover div { color:#fff; background-color:#309; }
+.My_basduchat { padding:2px; text-align:center; background-color:#efecdb;margin-left:3px;margin-right:3px;border-bottom:3px solid #0024a6;} /* Style qui defini le bas du chat */
+#pal { text-align:center; margin:auto; }
+#temoin { height:1em; border:0;background-color:#efecdb;margin-left:3px;margin-right:3px;} /* temoin de mise en forme du texte */
+.My_basduchat input { background-color:#F1F5FA;border-color:#efecdb;color:#000000 }
+.go { border:outset #efecdb 1px; }
+.go:active {border:inset #efecdb 1px;}
+.petit_boutton { display:inline; background-color:#efecdb; border:outset #efecdb 1px; font-family:monospace; font-size:1em;padding:1px;} /* plus les styles suivants */
+#chr_b {background-image:url('skin/skin_XP/bold.gif');background-position:60% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_i {background-image:url('skin/skin_XP/italic.gif');background-position:60% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_s {background-image:url('skin/skin_XP/strike.gif');background-position:0% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_u {background-image:url('skin/skin_XP/underline.gif');background-position:50% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_sup {background-image:url('skin/skin_XP/super.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_big {background-image:url('skin/skin_XP/big.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+#chr_small {background-image:url('skin/skin_XP/small.gif');background-position:55% 50%;background-repeat: no-repeat} /* background-position: horisontal(%) vertical(%)*/
+.pop_dring {background-color:#F1F5FA;text-align:center;}
+.pop_dring span {font-size:10px; color:#000000; }

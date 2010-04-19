@@ -1,0 +1,2 @@
+^(?<Place>\d+)\s+[+–*]\s+(?<Name>.*?)\s+Envoyer\sun\smessage\s+
+(?<Alliance>.*?)?\s+(?<Points>\d+)

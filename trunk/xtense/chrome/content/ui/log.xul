@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://xtense2/skin/xtense.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://xtense2/locale/log.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+title="&title;" id="xtense" orient="vertical" class="log" 
+centerscreen="yes" flex="1" persist="width height">
+
+<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/Prefs.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/content/ui/log.js"/>
+<script type="application/x-javascript" src="chrome://xtense2/locale/log.js" />
+
+	<menupopup id="left-menu">
+		<menuitem label="&copy;" disabled="true" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
+		<menuseparator />
+		<menuitem label="&copy-all;" id="left-menu-copy-all" />
+		<menuitem label="&copy-selected;" id="left-menu-copy-selected" />
+	</menupopup>
+	
+	<menupopup id="right-menu">
+		<menuitem label="&copy;" disabled="true" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
+		<menuseparator />
+		<menuitem label="&copy-all;" id="right-menu-copy-all"/>
+		<menuitem label="&copy-hovered;" id="right-menu-copy-hovered"/>
+	</menupopup>
+
+
+	<hbox flex="1">
+		
+		<vbox flex="1" id="left-panel">
+			<vbox id="content" flex="1" context="left-menu"></vbox>
+			<hbox>
+				<spacer flex="1" />
+				<button id="flush" label="&flush;" />
+				<button id="close" label="&close;" />
+			</hbox>
+		</vbox>
+		
+		<splitter collapse="after" resizeafter="farthest">
+			<grippy />
+		</splitter>
+		
+		<vbox flex="3" id="right-panel">
+			<groupbox flex="1">
+				<caption id="right-panel-caption" />
+				
+				<vbox flex="1" style="overflow-y: auto;">
+					<grid flex="1" context="right-menu">
+						<columns>
+							<column />
+							<column flex="1" />
+						</columns>
+						
+						<rows id="extra" flex="1"></rows>
+					</grid>
+				</vbox>
+			</groupbox>
+			<hbox>
+				<checkbox label="&display-debug;" id="display-debug" />
+			</hbox>
+		</vbox>
+		
+	</hbox>
+
+</window>

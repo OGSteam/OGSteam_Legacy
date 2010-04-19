@@ -1,0 +1,135 @@
+2.2.0b: _correction 2 par sylar.
+
+2.2.0: _correction d'un bug pour les RE pour qui MSonde et QuiM'Observe (merci Sylar ^^)
+
+2.1.9: _correction d'un bug pour les RE E-Univers (merci LoloThib)
+
+2.1.8: _Ajout de la version automatique de la barre
+
+2.1.7: _Reprise des modifications apporté par Naruto
+
+2.1.6: _ Prise en compte du module qui me sonde. l'envoi des rapports d'espionnage ennemies se fait
+		en semi automatique. (supprimer un par un chaque rapport pour qu'il soit envoyé vers le serveur.
+	   _ Mise à jour des serveurs d'univers (unixx.ogame.fr)
+	   _ Diverses modif
+	   
+2.1.4: _ Modif diverse
+	   
+2.1.1: _ mise à jour du code pour le traitement de la vue globale empire(e-univers)
+       _ la zone de paramètres surbrillance a été retirée pour E-Univers
+       _ ajustement des intervales horaires pour les stats E-Univers.
+       _ ajout de créneau horaire pour les statistiques afin de limiter les mises à jour Ogame et E-Univers.
+       _ différenciation du message(journal) de mise à jour de Vue Globale/Empire
+       _ corrections mineures sur la page admin
+
+
+2.1:   _ correction de code pour l'insertion des rapports d'espionnage(comptabilité)
+       _ correction de bug pour la mise à jour des champs de ruine.
+       _ mise à jour de noms de serveur Ogame
+       _ ajout des commandes en prévision du codage des données supplémentaires E-Univers
+       _ correction du lien de tutoriel  / info utilisateur(menu OGS Plugin)
+
+2.0.2: _ correction du code de copie du script ogsplugin.php: les permissions seront adaptées automatiquement
+       _ correction du formulaire de la page du module OGS Plugin
+       _ correction mineure de la page "Autres modules"
+       _ correction de la détection de version pour UniSpy 1.0beta
+       _ filtrage des lignes de rapport d'espionnage(espaces début et fin)
+
+2.0.1: _ correction dans l'insertion des classements alliance
+
+2.0:   _ correction du module pour la prise en charge de données E-Univers
+         sur OGSPY 3.02c, 3.03, 3.1 et UniSpy 3.1
+         (galaxies, rapports d'espionnage, classements)
+       _ réagencement des options de la page administration du module et
+         ajout d'options pour le jeu E-Univers
+       _ mise à jour des chaînes pour l'interface anglaise
+       _ ajout de code pour la vérification du dossier /debug et de ses droits lors de l'appel depuis l'extension.
+       _ ajout de l'univers 52 à la liste des univers Ogame français.
+
+1.6.1: _ correction du code de séparation des rapports reçus
+       _ correction du code de retour de traitement des rapports de recyclage
+       _ mise à jour des TAGS alliances et status pour les joueurs(vue galaxie)
+       _ ajout de la purge automatique des classements
+       _ amélioration du traitement pour les lunes renommées
+       _ traitement du nombre de satellites, nombre de cases et température pour l'espace personnel
+       _ affichage des infos de configuration pour l'utilisateur
+       _ ajout d'une option de recopie du script de liaison en cas de différence
+
+1.6:   _ ajout de commandes pour la barre d'outils
+       _ ajout d'avertissement en cas de problèmes à l'installation
+       _ ajout d'avertissement à la suppression du module
+       _ correction de code pour l'importation de modules tiers
+       _ correction de la reconnaissance de la page empire: les noms de planète
+         à mots multiples sont reconnus quelque soit le nombre de planètes
+       _ corrections suite à la restructuration:;
+         -> rétablissement de la journalisation
+         -> mise à jour des stats de mise à jour
+
+1.5.2: _ ajout de code pour la prise en compte des rapports de recyclage et espionnage ennemi
+       _ ajout de commande pour l'extension firefox v1.2.2: afficher les droits utilisateur du serveur
+
+1.5.1: _ correction de bug dans la gestion des droits suite à la restructuration
+       _ correction de bug dans la prise en compte des champs de ruine
+
+1.5.0: _ correction des messages de journaux pour l'espace personnel
+       _ les rapports envoyés avec la barre firefox sont désormais comptabilisé en rapports OGS
+       _ correction de la vérification de version de la barre cliente
+       _ ajout de code pour la mise à jour des champs de ruine(Module Champ de Ruine)
+       _ restructuration du module
+
+1.3.2: _ version du module développée en parallèle de la barre d'outils v1.1
+       _ mise en option du blocage de version de la barre d'outils si obsolète!
+         (attention à l'absence de mise à jour réciproque barre/module->disfonctions
+         éventuelles)
+       _ ajout de code pour demander une mise à jour le barre malgré un traitement de la barre(recommandation)  
+       _ ajout d'une option pour la génération d'un journal de débogage (infos choisies
+         par l'auteur lors du développement, n'a pas la prétention de convenir à tout le monde)
+       _ vérification de l'état activé du module ou pas, sinon abandon
+       _ correction du code de gestion des rapports
+       _ ajout d'un sous menu pour l'accès rapide à la page administration de gestion des groupes(droits)    
+
+1.3.1: _ restructuration du module pour l'internationalisation du module OGS Plugin
+       _ prise en charge du module flotte si installé sur le serveur       
+
+1.3.0: _ ajout d'un lien d'accès rapide au journal OGSPY
+       _ externalisation xml locale de la liste des univers      
+
+1.2.9: _ prise en charge des rapports de combat avec le module Attaques installé
+       _ ajout d'une option de message de redirection dans le cas d'une migration de serveur 
+
+1.2.8: _ bug de premier rapport d'espionnage non traité corrigé.
+       _ seul les rapports d'espionnages sont reçus sur le serveur(faille corrigée).
+       _ ajout d'une page de téléchargement d'autres modules du même auteur
+
+1.2.7: correction de delimiteur(le seul) manquant dans une fonction de recherche
+       provoquant des lignes en nombre dans les journaux Apache
+
+1.2.6.1: correction de structure(mineur)
+
+1.2.6: _ ajout de lentrée pour l'univers 47(fr)
+       _ correction d'un bug d'insertion des planètes et lunes (nom de planète ne devrait pas être lune cependant)
+       _ correction d'un bug effaçant les températures, nombre de cases et nombre de satellites
+
+1.2.5: ajout de lentrée pour l'univers 46(fr)
+        blocage de la version en deça 1.0.966 du plugin firefox
+        dernière version du module compatible 0.301 
+
+1.2.3 ajout de champ de saisie pour la mise en surbrillance d'alliance ennemies, amies, commerçante
+      suppression d'options inutiles
+      définition d'options par défaut à l'installation
+
+1.2.2->1.2.3
+
+1.2.1 correction de bugs
+
+1.2 ajout d'options de traitement spécifique par page(global hors droits)
+    mise à jour de la même version 1.2, correction de la valeur de
+    version plancher de la barre d'outils 1.0.95b -> 1.0.952
+    ajout d'une option de verrouillage de l'univers source de données
+    ajout d'une option  pour la gestion des options de surbrillance de la barre d'outils
+
+
+
+1.03 tolérance améliorée pendant la lecture des pages avec boutons de base données de foxgame
+     amélioration de la gestion des statistiques de compte
+1.02 amélioration de la lecture des caractères accentués

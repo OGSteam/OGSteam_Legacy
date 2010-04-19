@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>
+24/06/2007 :
+- Corrections du format des rapports (copie et export vers OGSpy) ;
+
+23/06/2007 :
+- Possibilité de trier les résultats de recherche ;
+
+21/06/2007 :
+- Ajout d'une fenêtre de gestion des comptes OGSpy ;
+- Ajout d'une colonne lune dans les résultats de recherche ;
+
+20/06/2007 :
+- Possibilité de copier le résultat de recherche ;
+- La vérification de mise à jour se fait en tache de fond (non bloquant si serveur non joignable) ;
+- La fenêtre principale garde sa position d'un lancement sur l'autre ;
+
+19/06/2007 :
+- Ajout d'un module pour la mise à jour automatique ;
+- Ajout d'une colonne présence de lune ;
+- Les systèmes contenant au moins une lune sont marqués M dans la vue de l'univers ;
+
+10/06/2007 :
+- Ajout d'un onglet Navigateur pour accès aux outils en ligne ;
+- Ajout de colonnes Gain attaquant (avec/sans RC). Ces colonnes en comptent pas la consommation ;
+- Ajout de colonnes nombre de recycleurs effectifs (moyen et max) ;
+- Description des colonnes dans l'onglet paramètres améliorée ;
+- Préparation à l'ajout de la gestion des classements ;
+- Correction des cases à cocher pour l'importation/exportation des galaxies en univers 50 ;
+- Ajout d'une fenêtre d'affichage des erreurs lors des simulations (j'espère que personne ne la verra ;) ) ;
+
+08/06/2007 :
+- Double-cliquer sur un résultat de recherche affiche le rapport le plus récent ;
+- Double-cliquer sur une planète affiche le rapport le plus récent ;
+
+05/06/2007 :
+- Ajouts cosmétiques (icones) ;
+- Importation et exportations des rapports entre fichiers ;
+
+31/05/2007 :
+- Possibilité de choisir le % de vitesse de la flotte ;
+- Le calcul de consommation est maintenant opérationnel ;
+- Mise à jour du calcul du nombre de vaisseaux pour le pillage maximal ;
+- Correction du nombre de galaxies/systèmes pour l'univers 50 ;
+
+28/05/2007 :
+- Ajout d'espaces après les milliers dans l'affichage des rapports d'espionnage ;
+- L'affichage d'un rapport d'espionnage copie les coordonnées du rapport dans le presse-papier ;
+
+25/05/2007 :
+- Modification du code pour permettre de changer le nombre de galaxies et de systèmes ;
+- Ajout d'identification de version (en bas à gauche de cette fenêtre) ;
+
+24/05/2007 :
+- Ajout d'une liste de flottes d'attaque ;
+
+20/05/2007 :
+- Ajout des traqueurs dans la partie empire et flotte attaquante ;
+- Correction de la formule de pillage ;
+
+18/05/2007 :
+- Commentaires possibles sur une sélection multiple ;
+- Ajout d'une colonne nombre de lanceurs de plasmas ;
+- Amélioration de la fenêtre d'affichage de rapport ;
+
+17/05/2007 :
+- Corrections au moteur de simulation (résultats beaucoup plus proches de speedsim maintenant) (Merci Silvio) ;
+
+04/03/2007 :
+- Prise en compte correcte des noms de lune ;
+- Champs commentaire sur les rapports d'espionnage ;
+- Optimisation des fonctions d'export ;
+- Raccourcis claviers sur la liste des rapports : Ctrl+A, Ctrl+C ;
+
+30/01/2007 :
+- Ogame v0.75 : Battlecruiser, prix des VBs, ajustement RF du croiseur ;
+
+24/01/2007 :
+- Récupération des rapports d'espionnage sur un serveur OGS ;
+
+20/01/2007 :
+- Gestion d'import/export de la cartographie vers un serveur OGS ;
+
+08/01/2007 :
+- Gestion de vagues pour les simulations ;
+- Affichage de l'efficacité du pillage (pourcentage de pillage) dans la fenêtre de simulation ;
+
+07/01/2007 :
+- Conversion des rapports d'espionnage pour mise en forme sur le forum ;
+
+06/01/2007 :
+- Correction du *$µ%$ de bug qui m'a couté 6 EDLM (détection du nombre d'EDLM dans les rapports) ;
+
+04/01/2007 :
+- La simulation de masse prend en compte la sélection si 2 ou plus rapports sont sélectionnés ;
+- Début de code pour le partage des informations à travers un serveur ;
+
+21/12/2006 :
+- Recherche alliance / joueur dans l'univers ;
+
+20/12/2006 :
+- Calculs du temps de trajet et de la consommation ;
+
+19/12/2006 :
+- Simulation de masse ;
+
+18/12/2006 :
+- Ajout de la gestion des colonnes personnalisée ;
+- Ajout des colonnes : Nom du joueur, alliance, nombre de VBs pour pillage complet ;
+- Ajout du support de listes d'amis : Alliances, joueurs et coordonnees ;
+- Enregistrement des listes d'amis au format texte ;
+
+17/12/2006 :
+- Correction du bug qui empêchait de lire le nom d'une planète si il contenait des lettres avec accents ;
+
+13/12/2006 :
+- Installeur ;
+- Conservation des paramètres : taille des colonnes et de la fenetre ;
+- Les colonnes des rapports d'espionnage sont redimensionnables et réorganisables ;
+
+06/12/2006 :
+- Lecture des galaxies (firefox obligatoire) ;
+- Affichage du mapping de l'univers ;
+
+05/12/2006 :
+- Enregistrement des paramètres utilisés par défaut pour les simulations ;
+- Début de code pour la gestion du mapping de l'univers ;
+
+02/12/2006 :
+- Affichage des pires et meilleurs cas pour chaque type d'unité ;
+- Affichage des tours maximum et minimum pour la simulation ;
+
+29/12/2006 :
+- Correction d'un bug sur la valeur de coque des chasseurs légers ;
+- Correction d'un bug à la lecture de l'empire ;
+
+23/11/2006 :
+- Selection multiple ;
+- Tri sur sélection (attention : la sélection doit être continue) ;
+- Boite de dialogue pour simulation et début de code de simulation ;
+
+22/11/2006 :
+- Adaptation de la taille des colonnes en fonction du paramètre dpi de l'affichage ;
+- Permet de charger les flottes à quai de l'empire (vue d'ensemble seulement) ;
+- La sauvegarde contient maintenant les données d'empire (compatible avec les anciennes sauvegardes) ;
+
+21/11/2006 :
+- Coloration en fonction de l'ancienneté du rapport ;
+- Séparation colonnes ruines possibles M / C et ajout d'une colonne nombre de recycleurs ;
+- Le tri est stable (on peut trier selon plusieurs critères en triant plusieurs colonnes) ;
+- Sauvegarde/chargement des listes de rapports (format ogr, à priori incompatible entre versions différentes) ;
+- Barre d'outils ;
+
+20/11/2006 :
+- Affichage des rapports complets dans une fenêtre annexe ;
+- Plus de colonnes, tri par colonnes ;
+- Suppression d'un rapport sélectionné en appuyant sur [Suppr] ;
+
+19/11/2006 et avant :
+- Version initiale pour test ;
+- Début de développement de la bibliothèque d'outils Ogame ;
+
+
+
+
+&lt;&lt;&lt; WIL Mackila, ogame.fr - U21 &gt;&gt;&gt;
+
+Visitez http://mackila.com/phpBB2/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Celui qui lit ceci gagne 50KM. (offre valable une seule fois, m'envoyer un MP ingame)
+
+
+</value>
+  </data>
+</root>

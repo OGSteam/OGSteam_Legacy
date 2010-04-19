@@ -1,0 +1,43 @@
+<br />
+<table class="tablebg" width="100%" cellspacing="1">
+<th class="cat_block" width="100%">{RECENT_POSTER_TITRE}</th>
+	<tr align="left">
+		<td>
+			<table width="100%" cellspacing="2" cellpadding="0" border="0" align="center" class="row1">				
+				<tr>
+					<td>
+					<center>
+	<tr>
+		<td  align="left" nowrap="nowrap"><span class="gensmall"><b>Pseudo</b></span></td>
+		<td  align="right" nowrap="nowrap"><span class="gensmall"><b>{L_POSTE}</b></span></td>
+		<td  align="right" nowrap="nowrap"><span class="gensmall"><b></b></span></td>
+		<td  align="right" nowrap="nowrap"><span class="gensmall"><b></b></span></td>		
+	</span></tr>
+<!-- BEGIN top_posters -->
+	<!-- IF top_posters.S_ROW_COUNT is even -->
+	<tr class="row2">
+	<!-- ELSE -->	
+	<tr class="row1">
+	<!-- ENDIF -->
+		<td class="gensmall" align="left" valign="middle">
+			<img src="./images/portal/{top_posters.IMG_USER}" />&nbsp;<strong><a href="{top_posters.U_USERNAME}"><span class="genmed2"><font color="#{top_posters.USERNAME_COLOR}">{top_posters.USERNAME}
+</font></span></a></strong><br />
+		</td>
+		<td class="gensmall" align="right" nowrap="nowrap" valign="middle"><center><span class="genmed2"><a href="{top_posters.S_SEARCH_ACTION}">{top_posters.POSTER_POSTS}</a></center></td>	
+		<td class="gensmall" align="right" nowrap="nowrap" valign="middle">
+		<!-- IF top_posters.URL -->			
+		<a target="_blank" href="{top_posters.URL}"><img border="0" src="./images/portal/web.gif" width="16" height="16"></a>
+		<!-- ENDIF -->		
+		</td>		
+		<td class="gensmall" align="right" nowrap="nowrap" valign="middle">
+		<!-- IF top_posters.USER_FLAG -->
+			<img src="./images/flags/{top_posters.USER_FLAG}.gif" border="0" width="15" alt="{top_posters.USER_FLAG}" title="{top_posters.USER_FLAG}">&nbsp;
+		<!-- ENDIF -->	
+		</td>		
+<!-- END top_posters --> 
+					</center>
+					</td>
+				</tr>					
+			</table>
+		</td>
+</table>

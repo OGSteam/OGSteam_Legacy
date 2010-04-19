@@ -1,0 +1,644 @@
+<ui version="4.0" >
+ <class>DialogPrefs</class>
+ <widget class="QDialog" name="DialogPrefs" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>521</width>
+    <height>257</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Préférences</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <layout class="QVBoxLayout" >
+     <item>
+      <widget class="QSplitter" name="splitter" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QListWidget" name="listWidgetMenu" >
+        <property name="maximumSize" >
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font" >
+         <font>
+          <pointsize>9</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <item>
+         <property name="text" >
+          <string>Général</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Infos perso.</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Apparence</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QStackedWidget" name="stackedWidget" >
+        <property name="minimumSize" >
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="currentIndex" >
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page" >
+         <widget class="QCheckBox" name="checkBoxAuto" >
+          <property name="geometry" >
+           <rect>
+            <x>24</x>
+            <y>16</y>
+            <width>345</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text" >
+           <string>Ouvrir un onglet avec ses technologies remplies</string>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBoxPond" >
+          <property name="geometry" >
+           <rect>
+            <x>16</x>
+            <y>44</y>
+            <width>353</width>
+            <height>57</height>
+           </rect>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="title" >
+           <string>Ponderer les gain avec le coût de consommation</string>
+          </property>
+          <property name="checkable" >
+           <bool>true</bool>
+          </property>
+          <widget class="QLabel" name="label" >
+           <property name="geometry" >
+            <rect>
+             <x>16</x>
+             <y>24</y>
+             <width>81</width>
+             <height>16</height>
+            </rect>
+           </property>
+           <property name="text" >
+            <string>Pondération :</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEditPm" >
+           <property name="geometry" >
+            <rect>
+             <x>112</x>
+             <y>20</y>
+             <width>49</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="focusPolicy" >
+            <enum>Qt::NoFocus</enum>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QCheckBox" name="checkBoxEngeener" >
+          <property name="geometry" >
+           <rect>
+            <x>24</x>
+            <y>108</y>
+            <width>345</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text" >
+           <string>Officier ingénieur par défaut pour les vagues suivantes</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_2" >
+         <widget class="QLabel" name="label_6" >
+          <property name="geometry" >
+           <rect>
+            <x>168</x>
+            <y>16</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Combustion</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditC" >
+          <property name="geometry" >
+           <rect>
+            <x>264</x>
+            <y>12</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_7" >
+          <property name="geometry" >
+           <rect>
+            <x>168</x>
+            <y>44</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Impulsion</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_8" >
+          <property name="geometry" >
+           <rect>
+            <x>168</x>
+            <y>72</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Hyperespace</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditI" >
+          <property name="geometry" >
+           <rect>
+            <x>264</x>
+            <y>40</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditH" >
+          <property name="geometry" >
+           <rect>
+            <x>264</x>
+            <y>68</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="Line" name="line" >
+          <property name="geometry" >
+           <rect>
+            <x>8</x>
+            <y>92</y>
+            <width>309</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP1" >
+          <property name="geometry" >
+           <rect>
+            <x>40</x>
+            <y>120</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP4" >
+          <property name="geometry" >
+           <rect>
+            <x>40</x>
+            <y>148</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP7" >
+          <property name="geometry" >
+           <rect>
+            <x>40</x>
+            <y>176</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP2" >
+          <property name="geometry" >
+           <rect>
+            <x>144</x>
+            <y>120</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP5" >
+          <property name="geometry" >
+           <rect>
+            <x>144</x>
+            <y>148</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP8" >
+          <property name="geometry" >
+           <rect>
+            <x>144</x>
+            <y>176</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP6" >
+          <property name="geometry" >
+           <rect>
+            <x>248</x>
+            <y>148</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP9" >
+          <property name="geometry" >
+           <rect>
+            <x>248</x>
+            <y>176</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP3" >
+          <property name="geometry" >
+           <rect>
+            <x>248</x>
+            <y>120</y>
+            <width>65</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_9" >
+          <property name="geometry" >
+           <rect>
+            <x>16</x>
+            <y>124</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P1</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_10" >
+          <property name="geometry" >
+           <rect>
+            <x>16</x>
+            <y>152</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P4</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_11" >
+          <property name="geometry" >
+           <rect>
+            <x>16</x>
+            <y>180</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P7</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_12" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>152</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P5</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_13" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>124</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P2</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_14" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>180</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P8</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_15" >
+          <property name="geometry" >
+           <rect>
+            <x>224</x>
+            <y>180</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P9</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_16" >
+          <property name="geometry" >
+           <rect>
+            <x>224</x>
+            <y>152</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P6</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_17" >
+          <property name="geometry" >
+           <rect>
+            <x>224</x>
+            <y>124</y>
+            <width>20</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>P3</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_18" >
+          <property name="geometry" >
+           <rect>
+            <x>124</x>
+            <y>100</y>
+            <width>89</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Positions</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_19" >
+          <property name="geometry" >
+           <rect>
+            <x>24</x>
+            <y>16</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Arme</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_20" >
+          <property name="geometry" >
+           <rect>
+            <x>24</x>
+            <y>44</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Bouclier</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_21" >
+          <property name="geometry" >
+           <rect>
+            <x>24</x>
+            <y>72</y>
+            <width>93</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>T. Protection</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditB" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>40</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditA" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>12</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEditP" >
+          <property name="geometry" >
+           <rect>
+            <x>120</x>
+            <y>68</y>
+            <width>29</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_3" >
+         <widget class="QComboBox" name="comboBoxStyle" >
+          <property name="geometry" >
+           <rect>
+            <x>205</x>
+            <y>24</y>
+            <width>129</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBoxForceStyle" >
+          <property name="geometry" >
+           <rect>
+            <x>25</x>
+            <y>24</y>
+            <width>173</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="focusPolicy" >
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text" >
+           <string>Forcer un style Qt</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5" >
+          <property name="geometry" >
+           <rect>
+            <x>25</x>
+            <y>60</y>
+            <width>169</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text" >
+           <string>Utiliser la feuille de style :</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="comboBoxCss" >
+          <property name="geometry" >
+           <rect>
+            <x>204</x>
+            <y>56</y>
+            <width>129</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons" >
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditA</tabstop>
+  <tabstop>lineEditB</tabstop>
+  <tabstop>lineEditP</tabstop>
+  <tabstop>lineEditC</tabstop>
+  <tabstop>lineEditI</tabstop>
+  <tabstop>lineEditH</tabstop>
+  <tabstop>lineEditP1</tabstop>
+  <tabstop>lineEditP2</tabstop>
+  <tabstop>lineEditP3</tabstop>
+  <tabstop>lineEditP4</tabstop>
+  <tabstop>lineEditP5</tabstop>
+  <tabstop>lineEditP6</tabstop>
+  <tabstop>lineEditP7</tabstop>
+  <tabstop>lineEditP8</tabstop>
+  <tabstop>lineEditP9</tabstop>
+  <tabstop>comboBoxStyle</tabstop>
+  <tabstop>comboBoxCss</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>listWidgetMenu</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DialogPrefs</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogPrefs</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

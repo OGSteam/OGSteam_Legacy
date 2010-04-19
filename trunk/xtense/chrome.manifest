@@ -1,0 +1,6 @@
+content xtense2 chrome/content/
+content xtense2 chrome/content/ contentaccessible=yes
+overlay chrome://browser/content/browser.xul chrome://xtense2/content/ui/toolbar.xul
+locale xtense2 fr-FR chrome/locale/fr-FR/
+locale xtense2 en-EN chrome/locale/en-EN/
+skin xtense2 classic chrome/skin/classic/

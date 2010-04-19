@@ -1,0 +1,134 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+<!-- IF S_EDIT_TITRE -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_sow_images" method="post" action="{U_ACTION_2}">
+	<dl>
+		<label for="sow_titre">{L_SOW_TITRE}:<br>{L_SOW_TITRE_EXPLAIN}</label><br><br>
+		<input name="sow_titre" type="text" id="sow_titre" value="{SOW_TITRE}"  size="60" /><br>
+	</dl>
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save2" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_SOW}" /></center>
+	</p>
+	</form>
+	</fieldset>
+<!-- ENDIF -->
+<!-- IF S_EDIT -->
+	<h1>{L_ACP_SOW_EXPLAIN}</h1>
+	<form id="acp_sow_images" method="post" action="{U_ACTION}">	
+	<fieldset>
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="titre">{L_TITRE}:<br>{L_TITRE_EXPLAIN}</label></dt>
+		<dd><input name="titre" type="text" id="titre" value="{TITRE}" size="30" /></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="image">{L_IMAGE}: <br>{L_IMAGE_EXPLAIN} </label></dt>
+		<dd><input name="image" type="text" id="image" value="{IMAGE}" size="50" /></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="info">{L_INFO}: <br>{L_INFO_EXPLAIN}</label></dt>
+		<dd><input name="info" type="text" id="info" value="{INFO}" size="50" /></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="info3">{L_INFO3}:<br>{L_INFO3_EXPLAIN}</label></dt>
+		<dd><textarea rows="5" name="info3" id="info3">{INFO3}</textarea></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="width">{L_WIDTH}:<br>{L_WIDTH_EXPLAIN}</label></dt>
+		<dd><input name="width" type="text" id="width" value="{WIDTH}" size="10" /></dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="height">{L_HEIGHT}:<br>{L_HEIGHT_EXPLAIN}</label></dt>
+		<dd><input name="height" type="text" id="height" value="{HEIGHT}" size="10" /></dd>
+	</dl>
+		<input name="no" type="hidden" id="no" value="{NO}" size="10" />
+	</div>
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	</p>
+	</fieldset>
+	</form>
+<!-- ELSE -->
+	<h1><center>{L_ACP_SOW_EXPLAIN}</center></h1>
+	<br>
+	<center>{L_SOW_TITRE_EXPLAIN}</center><br>
+	<form id="acp_sow_images" method="post" action="{U_ACTION_2}">
+	<table cellspacing="1" border='1'>
+	<thead>
+	<tr>
+		<th>{L_SOW_TITRE_INFOS}</th>
+		<th>{L_SOW_TITRE}</th>
+		<th>{L_SOW_TITRE_EDITER}</th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr>
+		<td><label for="sow_titre">{L_SOW_TITRE}:<br>{L_SOW_TITRE_EXPLAIN_BLOC}</label></td>
+		<td>
+	<dl>
+		<!-- BEGIN sow_titre -->
+		<dd><center>{sow_titre.SOW_TITRE}</center></dd>
+        </dl>
+        <p>&nbsp;<td style="text-align: center;" rowspan="2"><a href="{sow_titre.U_EDIT_TITRE}">{ICON_EDIT}</a></td>
+	    </tr>
+	</dl>
+		<!-- END sow_titre -->
+	</form>
+	</p></td>
+
+	</td>
+	</table>
+	<br>
+	<center>{L_ACP_SOW2__EXPLAIN}</center><br>
+	<fieldset class="tabulated">
+	<form id="acp_portal_sow_images" method="post" action="{U_ACTION}">
+	<table cellspacing="1">
+	<thead>
+	<tr>
+		<th><center>{L_IMAGE}</center></th>
+		<th><center>{L_TITRE}</center></th>
+		<th><center>{L_INFO3} & {L_INFO}</center></th>
+		<th><center>{L_ACTION}</center></th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN sow -->
+		<!-- IF sow.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;"><img src="{sow.IMAGE}" alt="{sow.TITRE}" title="{sow.TITRE}" width="120" /></td>
+		<td style="text-align: center;">{sow.TITRE}</td>
+		<td style="text-align: center;">{sow.INFO3}<br><br>Lien : <a target="_blank" href="{sow.INFO}">{sow.INFO}</a></td>
+		<td style="text-align: center;"  width="100px">
+		<!-- IF sow.S_FIRST_ROW -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{sow.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;&nbsp;
+		<!-- IF sow.S_LAST_ROW -->{ICON_MOVE_DOWN_DISABLED}<!-- ELSE --><a href="{sow.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a><!-- ENDIF --><br><br>
+		<a href="{sow.U_EDIT}">{ICON_EDIT}</a>
+		&nbsp;&nbsp;<a href="{sow.U_DELETE}">{ICON_DELETE}</a>
+		</td>
+	</tr>
+	<!-- END sow -->
+	</tbody>
+	</table>
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_SOW}" />
+	</p>
+	</fieldset>
+	</form>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->

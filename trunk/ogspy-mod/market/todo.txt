@@ -1,0 +1,7 @@
+* Affichage erreur lorsque accès refusé
+* Ajout d'offres directement depuis le mod
+* Checks qualitatifs des données (regexp)
+* Gestion d'erreur (ex: serveur down)
+
+----
+Edition de ce fichier pour tutorial disponible ici: http://www.ogsteam.fr/devteam/wiki/ssh/svn 

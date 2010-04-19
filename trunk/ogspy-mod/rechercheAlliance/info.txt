@@ -1,0 +1,4 @@
+<table><tr><th>Module de recherche d'alliance/Coordonn&eacute;es/Joueur avec BBcode</b></th></tr>
+<tr><th>Modifi&eacute; enti&egrave;rement par Kazylax</th></tr>
+<tr><th><a href='http://ogsteam.fr/forums/sujet-3893-mod-recherche-alliance-bbcode'>Informations</a></th></tr>
+<tr><th><a href='http://trac.ogsteam.fr/browser/modules_ogspy/recherche_alliance'>Trunk et Tags</a></th></tr></table>

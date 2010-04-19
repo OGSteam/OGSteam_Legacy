@@ -1,0 +1,73 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT -->
+
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl>
+	<fieldset>
+	<form id="acp_partenaires" method="post" action="{U_ACTION}">
+	<dl>
+		<label for="partenaires_url">{L_PARTENAIRES_URL_EXPLAIN}</label><br><br>
+        		<input name="partenaires_url" type="text" id="partenaires_url" value="{PARTENAIRES_URL}" size="40" />
+	</dl>
+	<dl>
+		<label for="partenaires_img">{L_PARTENAIRES_IMG_EXPLAIN}</label><br><br>
+        		<input name="partenaires_img" type="text" id="partenaires_img" value="{PARTENAIRES_IMG}" size="40" />
+	</dl>
+	<dl>
+		<label for="partenaires_flag">{L_PARTENAIRES_FLAG_EXPLAIN}</label><br><br>
+        		<input name="partenaires_flag" type="text" id="partenaires_flag" value="{PARTENAIRES_FLAG}" size="40" />
+	</dl>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_PARTENAIRES}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+
+	<h1><center>{L_ACP_PARTENAIRES}</center></h1>
+	<br>
+	<p><center>{L_ACP_PARTENAIRES_EXPLAIN}</center></p>
+
+	<form id="partenaires_id" method="post" action="{U_ACTION}">
+	<fieldset class="tabulated">
+	<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+
+		<th>{L_PARTENAIRES_URL}</th>
+		<th>{L_PARTENAIRES_LOGO}</th>
+		<th>{L_PARTENAIRES_FLAG}</th>		
+		<th>{L_ACTION}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN partenaires -->
+		<!-- IF partenaires.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+		<td style="text-align: center;">{partenaires.PARTENAIRES_URL}</td>
+		<td style="text-align: center;"><img border="0" src="../{partenaires.PARTENAIRES_IMG}" ></td>
+		<td style="text-align: center;"><img border="0" src="../{partenaires.PARTENAIRES_FLAG}" ></td>		
+		<td style="text-align: center;"><a href="{partenaires.U_EDIT}">{ICON_EDIT}</a> <a href="{partenaires.U_DELETE}">{ICON_DELETE}</a></td>
+	</tr>
+	<!-- END partenaires -->
+	</tbody>
+	</table>
+
+	<p class="quick">
+		<input class="button2" name="add" type="submit" value="{L_ADD_PATENAIRES}" />
+	</p>
+	</fieldset>
+
+	</form>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

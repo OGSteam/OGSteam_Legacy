@@ -1,0 +1,19 @@
+<!-- Toolbar buttons and labels -->
+<!ENTITY toolbar.name "Galaxytool Toolbar">
+<!ENTITY toolbar.activate "Activate GTP">
+<!ENTITY toolbar.activate.t "Activate Galaxytool Plugin">
+<!ENTITY toolbar.options "GTP Options">
+<!ENTITY toolbar.options.t "Galaxytool Plugin Options">
+<!ENTITY toolbar.reports "Get Reports">
+<!ENTITY toolbar.reports.t "Read Spy Reports from page">
+<!ENTITY toolbar.statusLabel "Status:">
+<!ENTITY toolbar.statusInfo "nothing">
+<!ENTITY toolbar.reloadLabel "Activate Toolbar at startup">
+
+<!-- Options dialog labels -->
+<!ENTITY dialog.title "Galaxyplugin Options">
+<!ENTITY dialog.caption "Galaxytool Options">
+<!ENTITY dialog.ogameurl "OGame Universe Servername">
+<!ENTITY dialog.galaxytoolurl "Galaxytool URL">
+<!ENTITY dialog.username "Username">
+<!ENTITY dialog.password "Password">

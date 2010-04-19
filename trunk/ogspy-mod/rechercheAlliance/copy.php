@@ -1,0 +1,1 @@
+<p align="center"><font size=2>Recherche d'alliance développée Par <a href=mailto:aeris.ogsteam@gmail.com>Aéris</a> et modifier entièrement Par <a href=mailto:kazylax-fr@hotmail.fr>Kazylax</a></font></p>

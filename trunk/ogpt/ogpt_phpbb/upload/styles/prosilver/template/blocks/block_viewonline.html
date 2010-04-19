@@ -1,0 +1,33 @@
+<br />
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{L_MEMBRES_LOC}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+<table  width="100%" cellpadding="2" cellspacing="2" border="0" >
+	<tr>
+	<td nowrap="nowrap" width="5%"><span class="gensmall">{L_FLAGS}</span></td>
+	<td nowrap="nowrap" width="35%"><span class="gensmall">{L_USERNAME}</span></td>
+	<td nowrap="nowrap" width="60%"><span class="gensmall">{L_FORUM_LOCATION}</span></td>
+	</tr>
+<!-- BEGIN user_row -->
+<tr class="<!-- IF user_row.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF -->">	
+		<td ><span class="genmed2">	
+			<!-- IF user_row.USER_FLAG -->
+			<img src="./images/flags/{user_row.USER_FLAG}.gif" border="0" width="15" alt="{user_row.USER_FLAG}" title="{user_row.USER_FLAG}"></td>
+			<!-- ENDIF -->	
+		<td ><span class="genmed2"><!-- IF user_row.U_USER_PROFILE --><a href="{user_row.U_USER_PROFILE}"><!-- ENDIF -->{user_row.USERNAME}<!-- IF user_row.U_USER_PROFILE --></a><!-- ENDIF --></p></td>
+		<td ><span class="genmed2"><a href="{user_row.U_FORUM_LOCATION}">{user_row.FORUM_LOCATION}</a></p></td>
+	</tr>
+<!-- END user_row -->
+					</td>
+				</tr>					
+			</table>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div> 

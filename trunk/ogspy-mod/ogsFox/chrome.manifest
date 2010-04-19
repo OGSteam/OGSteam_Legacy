@@ -1,0 +1,2 @@
+content     ogsfox    jar:chrome/ogsfox.jar!/content/
+overlay chrome://browser/content/browser.xul chrome://ogsfox/content/OGSFox.xul

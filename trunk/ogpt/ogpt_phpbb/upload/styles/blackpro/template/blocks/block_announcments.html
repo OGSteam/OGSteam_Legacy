@@ -1,0 +1,43 @@
+<!-- BEGIN announcments_row -->
+<br>
+<div class="forabg">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<ul class="block">
+				<dl>
+					<dt>{L_ANNOUNCMENTS}</dt>
+				</dl>
+		</ul>
+		<ul class="topiclist forums">
+			<li>
+				<dl>
+					<dd class="posts_portal">
+<table class="bg2" width="100%" cellpadding="0" cellspacing="0" border="0" >
+   <td class="bg2">	{announcments_row.ATTACH_ICON_IMG}<!-- IF announcments_row.S_POLL --> <strong>{L_POLL}: </strong><!-- ENDIF --><a href="{announcments_row.U_VIEW_COMMENTS}"><strong>{announcments_row.TITLE}</strong></a>&nbsp;
+				<span class="gensmall">{L_POSTED_BY}: <strong><a href="{announcments_row.U_USER_PROFILE}">{announcments_row.POSTER}</a>
+			<!-- IF announcments_row.FLAGS -->&nbsp;
+			<img src="./images/flags/{announcments_row.FLAGS}.gif" border="0" width="15" alt="{announcments_row.FLAGS}" title="{announcments_row.FLAGS}">
+			<!-- ENDIF -->				
+				</strong></span> 
+				<span class="gensmall"><a href="{announcments_row.U_LAST_COMMENTS}" title="{L_VIEW_COMMENTS}">{announcments_row.MINI_POST_IMG}</a>{announcments_row.TIME}</span>	
+		<br />
+			<div>{announcments_row.TEXT}</div>
+		<br />		
+	</div>
+
+    <div class="portlet_content">
+		<span style="float: left;">{announcments_row.OPEN}<a href="{announcments_row.U_READ_FULL}">{announcments_row.L_READ_FULL}</a>{announcments_row.CLOSE}</span>&nbsp;<a href="{announcments_row.U_VIEW_COMMENTS}" title="{L_VIEW_COMMENTS}">{L_COMMENTS}: {announcments_row.REPLIES}</a> &nbsp;&bull;&nbsp; <a href="{announcments_row.U_POST_COMMENT}">{L_POST_REPLY}</a></span>	
+	</div>
+	</td>
+</tr>
+</table>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<hr class="divider" />
+<!-- END announcments_row -->
+

@@ -1,0 +1,373 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6D1D8B6A-4771-48A0-BAB9-5B25FF05B122}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>OGameObject</AssemblyName>
+    <AssemblyOriginatorKeyFile>ogskey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>OGameObject</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>Windows</MyType>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>OGameObject.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\bin\</OutputPath>
+    <DocumentationFile>OGameObject.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>
+    </DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <DebugType>none</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\Ally.vb" />
+    <Compile Include="Class\AllyCol.vb" />
+    <Compile Include="Class\AllyRank.vb" />
+    <Compile Include="Class\AllyRankCol.vb" />
+    <Compile Include="Class\AttackReport.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\AttackReportCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\AttackReportRegex.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\AttackResult.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\DBConfigEntry.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\DBConfigEntryCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\FleetCommand.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\FleetCommandCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\FleetCommandRegx.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\Galaxy.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\GalaxyCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\GalaxyRegx.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\OGameAccountInfo.vb" />
+    <Compile Include="Class\OGameAccountInfoCol.vb" />
+    <Compile Include="Class\OGameDBEngine.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\OGameLanguage.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\OGSpy.vb" />
+    <Compile Include="Class\OGSpyException.vb" />
+    <Compile Include="Class\OGSpyInfo.vb" />
+    <Compile Include="Class\OGSpyProtocol.vb" />
+    <Compile Include="Class\OGSpyStat.vb" />
+    <Compile Include="Class\OGSpyStatCol.vb" />
+    <Compile Include="Class\Planet.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\PlanetActivity.vb" />
+    <Compile Include="Class\PlanetCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\PlanetRegx.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\Player.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\PlayerRank.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\PlayerRankCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\Ranktype.vb" />
+    <Compile Include="Class\RemoteAccount.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\RemoteAccountCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\SharingDB.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\SpyData.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\SpyRegX.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\SpyReport.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\SpyReportCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\UniverseDB.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Class\UniversesDBCol.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConstantsVersion.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Class\OGSTeamCrypt.vb" />
+    <Compile Include="OG_regex_pattern.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sound.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\BrowserWindow.Designer.vb">
+      <DependentUpon>BrowserWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\BrowserWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ExtendedWebBrowser.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\ImportExportCtrl.Designer.vb">
+      <DependentUpon>ImportExportCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ImportExportCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\ImportExportForm.Designer.vb">
+      <DependentUpon>ImportExportForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ImportExportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OgameBrowserCtrl.Designer.vb">
+      <DependentUpon>OgameBrowserCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OgameBrowserCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\OgspyAccountsForm.Designer.vb">
+      <DependentUpon>OgspyAccountsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OgspyAccountsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\OGSpyInfoForm.Designer.vb">
+      <DependentUpon>OGSpyInfoForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OGSpyInfoForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RegexPatternsCtrl.Designer.vb">
+      <DependentUpon>RegexPatternsCtrl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RegexPatternsCtrl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <EmbeddedResource Include="fr.galcoord.regx" />
+    <EmbeddedResource Include="fr.ranklist.regx" />
+    <EmbeddedResource Include="Media\battle025.wav" />
+    <EmbeddedResource Include="Media\misc003.wav" />
+    <EmbeddedResource Include="Media\scifi011.wav" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\dbinit.old.sql" />
+    <EmbeddedResource Include="SQL\dbinit.sql" />
+    <EmbeddedResource Include="SQL\dbinitorig.sql" />
+    <EmbeddedResource Include="SQL\PROC_IMPORT.SQL" />
+    <EmbeddedResource Include="SQL\table_ennemyspy.sql" />
+    <EmbeddedResource Include="SQL\table_spydata.sql" />
+    <EmbeddedResource Include="SQL\T_EXTERNAL.TPL.SQL" />
+    <EmbeddedResource Include="SQL\upgradefrom060119.sql" />
+    <EmbeddedResource Include="UI\BrowserWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BrowserWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportExportCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportExportCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ImportExportForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ImportExportForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OgameBrowserCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OgameBrowserCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OgspyAccountsForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OgspyAccountsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\OGSpyInfoForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>OGSpyInfoForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="gpl.txt" />
+    <None Include="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="ogskey.snk" />
+    <None Include="Resources\arrow-forward_24.gif" />
+    <None Include="Resources\redo_24.gif" />
+    <None Include="Resources\ogsteam_small.PNG" />
+    <None Include="Resources\ADD_24.PNG" />
+    <None Include="Resources\delete_24.png" />
+    <None Include="Resources\SAVE_24.PNG" />
+    <None Include="Resources\COPY_24.PNG" />
+    <None Include="Resources\computer_24.png" />
+    <None Include="Resources\run_left_32.png" />
+    <None Include="Resources\run_right_32.png" />
+    <None Include="Resources\download1glaze_f.png" />
+    <None Include="Resources\upload1-glaze_f.png" />
+    <None Include="Resources\radiation-nila_f.png" />
+    <None Include="Resources\mail-glaze_f.png" />
+    <None Include="Resources\settings-nila_f.png" />
+    <None Include="Resources\applications_24.png" />
+    <None Include="Resources\arrow-back_24.png" />
+    <None Include="Resources\arrow-down_24.png" />
+    <None Include="Resources\arrow-up_24.png" />
+    <None Include="Resources\undo_24.png" />
+    <EmbeddedResource Include="SQL\PROC_IMPORT2.SQL" />
+    <EmbeddedResource Include="SQL\T_EXTERNAL2.TPL.SQL" />
+    <EmbeddedResource Include="SQL\PROC_EXPORT.SQL" />
+    <EmbeddedResource Include="UI\RegexPatternsCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RegexPatternsCtrl.vb</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\41_ico_1.ico" />
+    <None Include="Resources\forbid.png" />
+    <None Include="..\info_urlogames.txt">
+      <Link>info_urlogames.txt</Link>
+    </None>
+    <None Include="Resources\update_sql_3_to_4.txt" />
+    <Content Include="SQL\importsqlstructure.txt" />
+    <Content Include="SQL\servermysql.sql" />
+    <Content Include="UI\UnsafeNativeMethods.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

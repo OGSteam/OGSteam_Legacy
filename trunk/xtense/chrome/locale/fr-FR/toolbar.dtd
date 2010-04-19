@@ -1,0 +1,24 @@
+<!-- fr-FR -->
+
+<!ENTITY toolbar.name "Barre Xtense">
+<!ENTITY toolbar.name.t "Acceder à vos OGSpy">
+<!ENTITY toolbar.activate "Activer">
+<!ENTITY toolbar.activate.t "Activer Xtense">
+<!ENTITY toolbar.options "Options">
+<!ENTITY toolbar.options.t "Options d'Xtense">
+<!ENTITY toolbar.status "En veille">
+<!ENTITY toolbar.infos.t "Informations">
+<!ENTITY toolbar.log "Journal">
+<!ENTITY toolbar.log.t "Journal des messages">
+<!ENTITY toolbar.send "Envoyer">
+<!ENTITY toolbar.send.t "Envoyer les données de la page">
+<!ENTITY toolbar.new-messages.display "Affichage des messages non lus sur OGSpy">
+<!ENTITY toolbar.new-messages.no "0 MP">
+
+<!ENTITY toolbar.tooltip.header "Mods éxécutés">
+<!ENTITY toolbar.tooltip.footer "Repportez-vous au journal pour plus d'informations">
+<!ENTITY toolbar.tooltip.status.error "Erreur critique : ">
+<!ENTITY toolbar.tooltip.status.warning "Avertissement : ">
+<!ENTITY toolbar.tooltip.status.success "Correctement : ">
+
+<!ENTITY menu.options "Configurer Xtense">

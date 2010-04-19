@@ -1,0 +1,77 @@
+<!-- INCLUDE overall_header.html -->
+<a name="maincontent"></a>
+<!-- IF S_EDIT_ANNOUNCMENT -->
+	<dl>
+		<th><a href="{U_BACK}" style="float: right">&laquo; {L_BACK}</a></th>
+	</dl><br>
+	<fieldset>
+	<form id="acp_portal_announcments" method="post" action="{U_ACTION}">
+	
+	<dl>
+		<dt><label for="announcments_number">{L_A_NOMBER}:</label>
+		<br>{L_A_NOMBER_EXPLAIN}<br /><span></dt>
+		<dd><input name="announcments_number" type="text" id="announcments_number" value="{A_NOMBER}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="announcments_day">{L_A_DAY}:</label>
+		<br>{L_A_DAY_EXPLAIN}<br /><span></dt>
+		<dd><input name="announcments_day" type="text" id="announcments_day" value="{A_DAY}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="announcments_length">{L_A_LENGTH}:</label>
+		<br>{L_A_LENGTH_EXPLAIN}<br /><span></dt>
+		<dd><input name="announcments_length" type="text" id="announcments_length" value="{A_LENGTH}" size="10" />
+		</dd>
+	</dl>
+<hr>
+	<dl>
+		<dt><label for="announcments_forum">{L_A_FORUM}:</label>
+		<br>{L_A_FORUM_EXPLAIN}<br /><span></dt>
+		<dd><input name="announcments_forum" type="text" id="announcments_forum" value="{A_FORUM}" size="10" />
+		</dd>
+	</dl>	
+	<p class="submit-buttons">
+		<input type="hidden" name="action" value="save" /><center>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET_CONFIG}" /></center>
+	</p>
+	</form>
+	</fieldset>
+
+<!-- ELSE -->
+	<h1><center>{L_ACP_PORTAL_CONFIG_ANNOUNCMENT}</center></h1>
+	<p><center>{L_ACP_PORTAL_CONFIG_ANNOUNCMENT_EXPLAIN}</center></p>
+
+	<fieldset class="tabulated">
+		<table cellspacing="1" border="1">
+	<thead>
+	<tr>
+		<th><center>{L_A_NOMBER}</center></th>
+		<th><center>{L_A_DAY}</center></th>		
+		<th><center>{L_A_LENGTH}</center></th>
+		<th><center>{L_A_FORUM}</center></th>			
+		<th><center>{L_ACTION}</center></th>		
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN portal_config_announcment -->
+		<td style="text-align: center;">{portal_config_announcment.A_NOMBER}</td>
+		<td style="text-align: center;">{portal_config_announcment.A_DAY}</td>		
+		<td style="text-align: center;">{portal_config_announcment.A_LENGTH}</td>
+		<td style="text-align: center;">{portal_config_announcment.A_FORUM}</td>		
+		<td style="text-align: center;"><a href="{portal_config_announcment.U_EDIT}">{ICON_EDIT}</a></td>
+	</tr>
+	<!-- END portal_config_announcment -->
+	</tbody>
+	</table>
+	</fieldset>
+	<br>
+	<center><a href="http://sjpphpb.net">{L_COOPYRIGHT}</a></center>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

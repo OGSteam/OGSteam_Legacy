@@ -1,0 +1,67 @@
+/*  Admin blocks portal sjpphpbb
+	------------------------------------------------------------------------
+	Original author:	sjpphpbb
+	Copyright  ( http://sjpphpbb.net/phpbb3/)
+	------------------------------------------------------------------------
+*/
+
+.row5 { 
+	background-color: #ECECFF; 
+	border: 0;
+	margin: 0;	
+}
+
+#acp1 {
+	color: #767676;
+	margin: 10px 0;
+	padding: 3px 1px;
+	min-width: 550px;
+	background-color: #ECECFF;
+	border: 1px #999999 solid;
+}
+
+#acp2 {
+	color: #FFFFFF;
+	margin: 10px 0;
+	padding: 3px 1px;
+	min-width: 90%;
+	background-color: #FFFFFF;
+	border: 1px #999999 solid;
+}
+
+.panel2 {
+	background:  url("../images/innerbox_bg1.gif") repeat-x top;
+	padding: 0;
+}
+
+.panel3 {
+	background:  url("../images/innerbox_bg2.gif") repeat-x top;
+	padding: 0;
+}
+
+.panel4 {
+	color: #5C5C5C;
+	background:  url("../images/innerbox_bg3.gif") repeat-x top;
+	background-color: #ECECFF;	
+	padding: 0;
+}
+
+.panel5 {
+	color: #000000;
+	background:  url("../images/innerbox_bg4.gif") repeat-x top;
+	background-color: #F59C9C;	
+	padding: 0;
+}
+
+#content2 {
+	padding: 2px 2px 2px;
+	position: relative;
+}
+
+.cachediv {
+	visibility: hidden;
+	overflow: hidden;
+	height: 1px;
+	margin-top: -1px;
+	position: absolute;
+}

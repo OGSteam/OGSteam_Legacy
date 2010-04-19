@@ -1,0 +1,31 @@
+<?php
+
+// Language definitions
+$lang_private_messaging = array(
+'Private messaging' => 'Private messaging',
+'Compose message' => 'Compose message',
+'Inbox' => 'Inbox',
+'Sent messages' => 'Sent messages',
+'Message pages' => 'Messages %1$s to %2$s of %3$s',
+'Subject' => 'Subject',
+'Sent' => 'Sent',
+'Select' => 'Select',
+'to' => 'to',
+'Delete selected' => 'Delete selected',
+'Mark selected as read' => 'Mark selected as read',
+'Mark all as read' => 'Mark all as read',
+'No messages' => 'No messages',
+'User does not exist' => 'User does not exist',
+'Message sent' => 'Message sent',
+'private message' => 'private message',
+'To:' => 'To:',
+'Message subject:' => 'Message subject:',
+'View message' => 'View message',
+'PM' => 'PM',
+'Reply' => 'Reply',
+'This message is a reply to' => 'This message is a reply to',
+'This message has a reply:' => 'This message has a reply:',
+'New messages' => 'New messages',
+'Messages' => 'Messages',
+'Send private message' => 'Send private message',
+);

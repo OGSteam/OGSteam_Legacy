@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog id="OGSFox-Settings"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="Paramètres de OGSFox"
+	buttons="accept, cancel"
+	onload="OGSFox_initOptions();"
+	ondialogaccept="OGSFox_saveOptions();"
+	>
+
+	<script type="application/x-javascript" src="chrome://ogsfox/content/options.js"/>
+	<script type="application/x-javascript">
+		<![CDATA[
+		
+		function verif_url()
+		{
+			var url = document.getElementById("ogspy_url").value;
+			var len = url.length;
+			var pos = url.lastIndexOf("/");
+			if (pos != (len - 1)) alert("Votre adresse url doit se terminer par le signe /");
+		}
+		]]>
+	</script>
+
+	<label control="ogspy_url" value="Entrer l'adresse url de votre serveur OGSpy :"/>
+	<label control="ogspy_url" flex="2" value=" (exemple : http://mapageperso.free.fr/ogspy/ )"/>
+	<textbox id="ogspy_url" value="http://" onchange="verif_url();"/>
+	<hbox>
+		<vbox>
+			<label control="ogspy_user" value="Utilisateur :"/>
+			<textbox id="ogspy_user"/>
+		</vbox>
+		<vbox>
+			<label control="ogspy_pass" value="Mot de passe :"/>
+			<textbox id="ogspy_pass" type="password" maxlength="8"/>
+		</vbox>
+	</hbox>
+</dialog>
