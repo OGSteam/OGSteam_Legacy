@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E3D2E832-9C63-4F5D-BB35-E5CA411EA095}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>OGS_mod_creator.My.MyApplication</StartupObject>
+    <RootNamespace>OGS_mod_creator</RootNamespace>
+    <AssemblyName>OGS mod creator</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>OGS mod creator.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>OGS mod creator.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frm_Alerte.Designer.vb">
+      <DependentUpon>frm_Alerte.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Alerte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Contributeur.Designer.vb">
+      <DependentUpon>frm_Contributeur.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Contributeur.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Editeur.Designer.vb">
+      <DependentUpon>frm_Editeur.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Editeur.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Historique.Designer.vb">
+      <DependentUpon>frm_Historique.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Historique.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Licence.Designer.vb">
+      <DependentUpon>frm_Licence.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Licence.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="frm_Nouveauprojet.Designer.vb">
+      <DependentUpon>frm_Nouveauprojet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Nouveauprojet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="projet.vb" />
+    <Compile Include="UserControl2.Designer.vb">
+      <DependentUpon>UserControl2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frm_Alerte.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Alerte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Contributeur.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Contributeur.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Editeur.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Editeur.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Historique.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Historique.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Licence.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Licence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Nouveauprojet.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frm_Nouveauprojet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl2.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UserControl2.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
