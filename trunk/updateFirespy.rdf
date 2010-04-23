@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<RDF:RDF
+		xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+		>
+	<RDF:Description about="urn:mozilla:extension:{B2DA00A7-44EC-4EE0-BCAF-202DF33AB878}">
+		<em:updates>
+			<RDF:Seq>
+				<RDF:li resource="urn:mozilla:extension:{B2DA00A7-44EC-4EE0-BCAF-202DF33AB878}:2.2.6"/>
+			</RDF:Seq>
+		</em:updates>
+		<em:version>2.2.8</em:version>
+		<em:updateLink>http://ogsteam.fr/firespy/firespy228.xpi</em:updateLink> -->
+	</RDF:Description>
+	<RDF:Description about="urn:mozilla:extension:{B2DA00A7-44EC-4EE0-BCAF-202DF33AB878}:2.2.6">
+		<em:version>2.2.8</em:version>
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id><!-- Firefox -->
+				<em:minVersion>1.4</em:minVersion>
+				<em:maxVersion>3.0+</em:maxVersion>
+				<em:updateLink>http://ogsteam.fr/firespy/firespy228.xpi</em:updateLink> -->
+			</Description>
+		</em:targetApplication>
+		<em:targetApplication>
+			<Description>
+				<em:id>{86c18b42-e466-45a9-ae7a-9b95ba6f5640}</em:id> <!-- Mozilla -->
+				<em:minVersion>1.5+</em:minVersion>
+				<em:maxVersion>1.7+</em:maxVersion>
+				<em:updateLink>http://ogsteam.fr/firespy/firespy228.xpi</em:updateLink> -->
+			</Description>
+		</em:targetApplication>	
+       <em:targetApplication><!-- Netscape -->
+           <Description>
+               <em:id>{3db10fab-e461-4c80-8b97-957ad5f8ea47}</em:id>
+               <em:minVersion>8.0</em:minVersion>
+               <em:maxVersion>8.1</em:maxVersion>
+               <em:updateLink>http://ogsteam.fr/firespy/firespy228.xpi</em:updateLink> -->
+           </Description>
+       </em:targetApplication>    	
+	</RDF:Description>
+</RDF:RDF>
