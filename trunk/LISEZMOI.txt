@@ -1,0 +1,19 @@
+OGSpy Xtense de l'OGSteam
+-------------------------
+
+- Barre d'extension Firefox pour la communication des données entre OGame et 
+un serveur OGSpy
+- Necessite Firefox 1.5+
+- Basé sur les Barres preexistantes (Foxgame,Galaxytool,"Barre à Naqdazar par 
+Naqdazar de Naqdazar pour Naqdazar")
+- Pour l'instant le protocole de communication est identique avec la "Barre à 
+Naqdazar par Naqdazar de Naqdazar pour Naqdazar" mais devrait en differer trés
+prochainement
+- Les contributions de developpements sont ouvertes aux gens qui en ont les
+compétences (Graphisme, Design, codage), il vous suffit d'etre actif dans la
+communauté et de commiter sur le SVN vos modifications aprés la demande de
+création de compte
+
+- La liste des bugs et améliorations peut etre trouvés sur notre TRAC
+http://trac.ogsteam.fr/query?component=OgspyXtense&order=priority
+

@@ -1,0 +1,4 @@
+version = 2.2.6106
+url = http://svn.ogsteam.fr/xtense/versions beta/Xtense2.2.6106.xpi
+date = mercredi 14 avril 2010
+hash = sha1:337744C078A9BDC0D7797B9919908DB106EF5F3C
