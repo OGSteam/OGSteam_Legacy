@@ -4,19 +4,13 @@
  */
 
 XnewOgame.Xpaths = {
-	overview : {
-		name : "id('planet')/h2" //dans le corps de page, e.g. "Overview - Homeworld"
-	},
-	
-	planetData : {
-		name: "id('selectedPlanetName')",
-		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']"
-	},
-	
-	parseTableStruct : {
-		units : "id('buttonz')//ul/li/div/div",
-		id : "a[starts-with(@id,'details')]",
-		number : "a/span"
+	ally_members_list : {
+		rows : '//table[@class="members zebra bborder"]/tbody/tr',
+		player : 'td[1]',
+		rank : 'td[4]/span',
+		points : 'td[4]/span/@title',
+		coords : 'td[5]/a',
+		tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
 	},
 	
 	galaxy : { 
@@ -32,6 +26,39 @@ XnewOgame.Xpaths = {
 		activity : 'descendant::div[@id="TTPlanet"]/descendant::span[@class="spacing"]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 		ally_id : 'descendant::a[@target="_ally"]/@href'
+	},
+	
+	levels : {
+		level : '//span[@class="level"]/text()'
+	},
+	
+	messages : {
+		from : '//tr[1]/td',
+		to : '//tr[2]/td',
+		subject : '//tr[3]/td',
+		date : '//tr[4]/td',
+		contents : {
+			'spy' : '//div[@class="note"]',
+			'msg': '//div[@class="note"]',
+			'ally_msg': '//div[@class="note"]',
+			'expedition': '//div[@class="note"]',
+			'rc_cdr': '//div[@class="note"]',
+			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+		},
+		spy : {
+			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]'
+		}
+	},
+	
+	parseTableStruct : {
+		units : "id('buttonz')//ul/li/div/div",
+		id : "a[starts-with(@id,'details')]",
+		number : "a/span"
+	},
+	
+	planetData : {
+		name: "id('selectedPlanetName')",
+		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']"
 	},
 	
 	ranking : { 
@@ -58,22 +85,16 @@ XnewOgame.Xpaths = {
 		}
 	},
 	
-	messages : {
-		from : '//tr[1]/td',
-		to : '//tr[2]/td',
-		subject : '//tr[3]/td',
-		date : '//tr[4]/td',
-		contents : {
-			'spy' : '//div[@class="note"]',
-			'msg': '//div[@class="note"]',
-			'ally_msg': '//div[@class="note"]',
-			'expedition': '//div[@class="note"]',
-			'rc_cdr': '//div[@class="note"]',
-			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+	rc : {
+		list_infos : '//td[@class="newBack"]/center',
+		list_rounds : '//div[@class="round_info"]',
+		infos: {
+			player : 'span[contains(@class, "name")]',
+			weapons : 'span[contains(@class, "weapons")]'
 		},
-		spy : {
-			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]'
-		}
+		list_types : 'table/tbody/tr[1]/th',
+		list_values : 'table/tbody/tr[2]/td',
+		result : '//div[@id="combat_result"]'
 	},
 	
 	writemessage : {
@@ -83,19 +104,6 @@ XnewOgame.Xpaths = {
 		subject : 'id("wrapper")/form/div[1]/table/tbody/tr[3]/td/input',
 		date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
 		content : 'id("wrapper")/form/div[2]/div/textarea'
-	},
-	
-	ally_members_list : {
-		rows : '//table[@class="members zebra bborder"]/tbody/tr',
-		player : 'td[1]',
-		rank : 'td[4]/span',
-		points : 'td[4]/span/@title',
-		coords : 'td[5]/a',
-		tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
-	},
-	
-	levels : {
-		level : '//span[@class="level"]/text()'
 	}
 }
 

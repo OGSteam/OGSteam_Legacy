@@ -103,7 +103,7 @@ var XnewOgame = {
 				Tab.setStatus(Xl('wait send'), XLOG_NORMAL, {url: url});
 				return true;
 			}
-			if(this.win.resourceTickerMetal || page == 'messages')
+			if(this.win.resourceTickerMetal || page == 'messages' || page == 'rc')
 				this.sendPage(page);
 			return true;
 		} catch (e) {
@@ -164,6 +164,8 @@ var XnewOgame = {
 			return universe[0];
 		} else if(url.match(/^http:\/\/uni42\.ogame\.org/gi)) {
 			return "http://uni42.ogame.org";
+		} else if(url.match(/^http:\/\/localhost\/ogame\//gi)) {
+			return "http://andromeda.ogame.fr";
 		} else return false;
 	},
 	
@@ -207,9 +209,9 @@ var XnewOgame = {
 				case 'defense':		return 'defense';
 				case 'shipyard':	return 'fleet';
 				//case 'fleet1':	return 'fleet';
-				case 'network':		return 'ally_list';
+				case 'alliance':	return 'ally_list';
 				case 'showmessage':	return 'messages';
-				case 'combatreport':return 'rc';
+				case 'combatreport': return 'rc';
 				case 'trader': 		return 'trader';
 				default: 			return false;
 			}
@@ -351,7 +353,6 @@ var XnewOgame = {
 	},
 	
 	parseOverview : function () {
-		var paths = this.Xpaths.overview;
 		var cases = this.win.textContent[1].getInts()[2];
 		var temp = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 				
@@ -842,8 +843,6 @@ var XnewOgame = {
 						);
 						
 						Request.set('lang',XnewOgame.lang);
-						//Xdump(Request.data);
-						//Xdump(Request.Tab.Status);
 						Request.send(XnewOgame.servers);
 					}
 					this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
@@ -855,56 +854,238 @@ var XnewOgame = {
 	},
 
 	parseAlly_list : function () {
-		var paths = this.Xpaths.ally_members_list;
-		var rows = Xpath.getOrderedSnapshotNodes(this.doc,paths.rows);
-		var rowsData = [];
-		var Request = this.newRequest();
-		
-		for (var i = 1; i < (rows.snapshotLength); i++) {
-			var row = rows.snapshotItem(i);
-			var player = Xpath.getStringValue(this.doc,paths.player,row).trim();
-			var points = Xpath.getStringValue(this.doc,paths.points,row).trimInt();
-			var rank = Xpath.getStringValue(this.doc,paths.rank,row).trimInt();
-			var coords = Xpath.getStringValue(this.doc,paths.coords,row).trim();
-			coords = coords.match(new RegExp(this.regexps.coords))[1];
+		var target = this.doc.getElementById('eins');
+		target.win = this.win;
+		target.addEventListener("DOMNodeInserted", this.parseAlly_Inserted, true);
+	},
+	
+	parseAlly_Inserted : function (event) {
+		try {
+			var doc = event.target.ownerDocument;
+			var paths = XnewOgame.Xpaths.ally_members_list;
+			var rows = Xpath.getOrderedSnapshotNodes(doc,paths.rows,null);
+			var rowsData = [];
+			var Request = XnewOgame.newRequest();
 			
-			var r = {player:player,points:points,coords:coords,rank:rank};
-			rowsData[i]=r;
-		}
+			for (var i = 0; i < (rows.snapshotLength); i++) {
+				var row = rows.snapshotItem(i);
+				var player = Xpath.getStringValue(doc,paths.player,row).trim();
+				var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
+				var rank = Xpath.getStringValue(doc,paths.rank,row).trimInt();
+				var coords = Xpath.getStringValue(doc,paths.coords,row).trim();
+				coords = coords.match(new RegExp(XnewOgame.regexps.coords))[1];
+				
+				var r = {player:player,points:points,coords:coords,rank:rank};
+				rowsData[i]=r;
+			}
 
-		if(rowsData != ""){
-			var tag = Xpath.getStringValue(this.doc,paths.tag);
+			if(this.lastAction != 'ally_list' && rowsData != ""){
+				XnewOgame.Tab.setStatus(Xl('ally_list detected'), XLOG_NORMAL, {url: this.url});
+				var tag = Xpath.getStringValue(doc,paths.tag);
+				Request.set(
+					{
+						n : rowsData,
+						type : 'ally_list',
+						tag : tag
+					}
+				);
+				Request.set('lang',XnewOgame.lang);
+				Request.send(XnewOgame.servers);
+			}
+			this.lastAction = 'ally_list';
+		} catch (e) {
+			throw_error(e);
+		}
+	},
+
+	parseRc : function () {
+		this.Tab.setStatus(Xl('rc detected'), XLOG_NORMAL, {url: this.url});
+		var paths = this.Xpaths.rc;
+		var rcStrings = this.l('combat report');
+		var data = {};
+		var rnds = {};
+		var rslt = {};
+
+		var infos = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_infos);
+		if(infos.snapshotLength > 0){
+		   	for(var table=0;table<infos.snapshotLength;table++){
+				var dat = {};
+				var val = {};
+				var weap = {};
+				var info = infos.snapshotItem(table);
+				
+				var values = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_values, info);
+				if(values.snapshotLength > 0){
+					for(var td=1;td<values.snapshotLength;td++){
+						var value = values.snapshotItem(td).textContent.trim();
+						if(value){
+							val[td] = value;
+						}
+					}
+				}
+				
+				var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_types, info);
+				if(types.snapshotLength > 0){
+					for(var th=1;th<types.snapshotLength;th++){
+						var type = types.snapshotItem(th).textContent.trim();
+						if(type){
+							for (var i in rcStrings['units']) {
+								for (var j in rcStrings['units'][i]) {
+									var typ = type.match(new RegExp(rcStrings['units'][i][j]));
+									if (typ)
+										dat[this.database[i][j]] = val[th];
+								}
+							}
+						}
+					}
+				}
+				
+				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim();
+				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+				if(m){
+					var player = m[1];
+					var coords = m[2];
+					var type = "A";
+				} else {
+					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+					if(m){
+						var player = m[1];
+						var coords = m[2].split(':');
+					} else {
+						var player = "";
+						var coords = "";
+						
+					}
+					var type = "D";
+				}
+				
+				var weapons = Xpath.getStringValue(this.doc,paths.infos.weapons,info).trim();
+				for (var i in rcStrings['regxps']['weapons']) {
+					var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
+					if(m)
+						weap[i] = m[1].replace(/\./g, '');
+				}
+				
+				data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
+			}
+			
+			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_rounds);
+			if(rounds.snapshotLength > 0){
+				for(var div=0;div<rounds.snapshotLength;div++){
+					var round = rounds.snapshotItem(div).textContent.trim();
+					
+					if(div == 0){
+						var m = round.match(new RegExp(rcStrings['regxps']['time']));
+						if(m)
+							var date = (Date.UTC(m[3], (m[2]-1), m[1], m[4], [5], m[6]))/1000;
+						else
+							var date = Math.ceil((new Date().getTime())/1000);
+					} else {
+						var rnd = {};
+						for (var i in rcStrings['regxps']['round']) {
+							var m = round.match(new RegExp(rcStrings['regxps']['round'][i]));
+							if(m)
+								rnd[i] = m[1].replace(/\./g, '');
+						}
+						rnds[div] = rnd;
+					}
+				}
+			}
+			
+			var result = Xpath.getStringValue(this.doc,paths.result).trim();
+			var m = result.match(new RegExp(rcStrings['regxps']['attack'], 'gi'));
+			if(m)
+				var win = "A";
+			else
+				var win = "D";
+			
+			var m = result.match(new RegExp(rcStrings['regxps']['moon'], 'gi'));
+			if(m)
+				var moon = 1;
+			else
+				var moon = 0;
+			
+			for (var i in rcStrings['regxps']['result']) {
+				var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
+				if(m)
+					rslt[i] = m[1].replace(/\./g, '');
+			}
+			
+			
+			var rounds = rounds.snapshotLength;
+			
+			var Request = this.newRequest();
 			Request.set(
 				{
-					n : rowsData,
-					type : 'ally_list',
-					tag : tag
+					type: 'rc',
+					id : this.params['nID'],
+					date: date,
+					win: win,
+					count: (rounds-1),
+					result: rslt,
+					moon: moon,
+					rounds: rnds,
+					n: data
 				}
 			);
 			
 			return Request;
 		}
 	},
-
-	parseRc : function () { //TODO PARSING
-		// Contact perdu//impossible dans la nouvelle version d'Ogame
-		/*if (this.doc.getElementsByTagName('tr').length == 1) {
-			this.Tab.setStatus(Xl('invalid rc'));
-			return false;
-		}*/
-
-		// RC
-		//this.Tab.setStatus(l('rc detected'));
-
-		var Request = this.newRequest();
-		Request.set(
-			{
-				type: 'rc',
-				content: this.doc.body.innerHTML
-			}
-		);
+	
+	parseSpyReport: function(RE) {
+		var paths = this.Xpaths.messages.spy;
+		var spyStrings = this.l('spy reports');
+		var data = {};
+		var typs = [];
+		var parsedData = [];
+		var res = new Array();
 		
-		return Request;
+		var isMoon = false;
+		if(data['BaLu'] > 0) isMoon = true;//si il y a une base lunaire, alors c'est une lune
+		
+		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
+		
+		var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.fleetdefbuildings);
+		if(types.snapshotLength > 0){
+		   	for(var table=0;table<types.snapshotLength;table++){
+				var type = types.snapshotItem(table).textContent.trim();
+		   		if(type)
+					typs.push(type);
+		   	}
+		}
+
+		for (var i in spyStrings['units']) {
+			for(var k=0; k<typs.length; k++){
+				if(typs[k].match(new RegExp(spyStrings['groups'][i], 'gi'))){
+					for (var j in spyStrings['units'][i]) {
+						var m = this.getElementInSpyReport(RE,spyStrings['units'][i][j]);
+						if(m != -1)
+							data[this.database[i][j]] = m;
+						else
+							data[this.database[i][j]] = 0;
+					}
+				}
+			}
+		}
+		
+		return {
+			content: data,
+			playerName: playerName,
+			moon: isMoon
+		};
+	},
+	
+	getElementInSpyReport : function (RE,elem) {
+		var num = -1;
+		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//r�cup�re le nombre le plus proche apr�s le texte
+		//Xconsole("elem: "+reg.toString());
+		var m = reg.exec(RE);
+		
+		if(m)
+			num = m[1].trimInt();
+
+		return num;
 	},
 	
 	parseTrader : function () {
@@ -1094,65 +1275,6 @@ var XnewOgame = {
 		Request.set('type', 'messages');
 		
 		return Request;
-	},
-	
-	getElementInSpyReport : function (RE,elem) {
-		var num = -1;
-		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//r�cup�re le nombre le plus proche apr�s le texte
-		//Xconsole("elem: "+reg.toString());
-		var m = reg.exec(RE);
-		
-		if(m)
-			num = m[1].trimInt();
-
-		return num;
-	},
-	
-	parseSpyReport: function(RE) {
-		var paths = this.Xpaths.messages.spy;
-		var spyStrings = this.l('spy reports');
-		var data = {};
-		var typs = [];
-		var res = new Array();
-		
-		var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.fleetdefbuildings);
-		if(types.snapshotLength > 0){
-		   	for(var table=0;table<types.snapshotLength;table++){
-				var type = types.snapshotItem(table).textContent.trim();
-		   		if(type)
-					typs.push(type);
-		   	}
-		}
-
-		for (var i in spyStrings['units']) {
-			for(var k=0; k<typs.length; k++){
-				if(typs[k].match(new RegExp(spyStrings['groups'][i], 'gi'))){
-					for (var j in spyStrings['units'][i]) {
-						var m = this.getElementInSpyReport(RE,spyStrings['units'][i][j]);
-						if(m != -1)
-							data[this.database[i][j]] = m;
-						else
-							data[this.database[i][j]] = 0;
-					}
-				}
-			}
-		}
-
-		var isMoon = false;
-		if(data['BaLu'] > 0) isMoon = true;//si il y a une base lunaire, alors c'est une lune
-		
-		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
-		
-		var parsedData = [];
-		for (var i in data) 
-			parsedData.push(i+':'+data[i]);
-		parsedData = parsedData.join(':');
-		
-		return {
-			content: parsedData,
-			playerName: playerName,
-			moon: isMoon
-		};
 	}
 }
 

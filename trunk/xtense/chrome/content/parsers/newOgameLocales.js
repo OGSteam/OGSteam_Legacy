@@ -19,7 +19,7 @@ XnewOgame.locales = {
 					602:'Cristal',
 					603:'Deutérium',
 					604:'Energie'
-					},
+				},
 				'buildings' : { 
 					1 : 'Mine de métal',						
 					2 : 'Mine de cristal', 
@@ -39,7 +39,7 @@ XnewOgame.locales = {
 					41 : 'Base lunaire', 		
 					42 : 'Phalange de capteur', 
 					43 : 'Porte de saut spatial'
-					},
+				},
 				'researchs' :  { 
 					106 : 'Technologie Espionnage', 
 					108 : 'Technologie Ordinateur', 
@@ -57,7 +57,7 @@ XnewOgame.locales = {
 					123 : 'Réseau de recherche intergalactique', 		
 					124 : 'Astrophysique',
 					199 : 'Technologie Graviton'
-					},
+				},
 				'fleet' :  { 		
 					202 : 'Petit transporteur', 
 					203 : 'Grand transporteur', 
@@ -73,7 +73,7 @@ XnewOgame.locales = {
 					213 : 'Destructeur', 		
 					214 : 'Étoile de la mort', 
 					215 : 'Traqueur',
-					},	
+				},	
 				'defense' :  { 	
 					401 : 'Lanceur de missiles', 
 					402 : 'Artillerie laser légère', 
@@ -85,34 +85,91 @@ XnewOgame.locales = {
 					408 : 'Grand bouclier', 			
 					502 : 'Missile d`interception', 
 					503 : 'Missile Interplanétaire'
-					}
+				}
 			}
 		},
 		
+		'combat report' : {
+			'units' : {
+				'fleet' :  { 		
+					202 : 'P.transp.', 
+					203 : 'G.transp.', 
+					204 : 'Ch.léger', 
+					205 : 'Ch.lourd',		
+					206 : 'Croiseur', 
+					207 : 'V.bataille', 
+					208 : 'Vaisseau de colonisation', 
+					209 : 'Recycleur', 				
+					210 : 'Sonde', 
+					211 : 'Bombardier', 
+					212 : 'Sat.sol.', 
+					213 : 'Destr.', 		
+					214 : 'Étoile de la mort', 
+					215 : 'Traqueur',
+				},	
+				'defense' :  { 	
+					401 : 'Missile', 
+					402 : 'L.léger.', 
+					403 : 'L.lourd', 
+					404 : 'Can.Gauss',			
+					405 : 'Art.ions', 
+					406 : 'Lanc.plasma', 
+					407 : 'P.bouclier', 
+					408 : 'G.bouclier'
+				}
+			},
+			'regxps' : {
+				'time' : 'Les flottes suivantes s\'affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
+				'round' : {
+					'a_nb' : 'La flotte attaquante tire (.*) fois ',
+					'a_shoot' : 'avec une force totale de (.*) sur le défenseur.',
+					'd_bcl' : 'Les boucliers du défenseur absorbent (.*) points de dommage.',
+					'd_nb' : 'La flotte de défense tire (.*) fois',
+					'd_shoot' : 'sur l\'attaquant avec une force de (.*). Les boucliers',
+					'a_bcl' : ' de l\'attaquant absorbent (.*) points de dommage.'
+				},
+				'result' : {
+					'win_metal' : 'Il emporte (.*) unités de métal',
+					'win_crisal' : ', (.*) unités de cristal',
+					'win_deut' : 'et (.*) unités de deutérium.',
+					'a_lost' : 'L\'attaquant a perdu au total (.*) unités.',
+					'd_lost' : 'Le défenseur a perdu au total (.*) unités.',
+					'deb_metal' : 'Un champ de débris contenant (.*) de métal',
+					'deb_cristal' : ' et (.*) de cristal se forme dans l\'orbite de la planète.'
+				},
+				'weapons' : {
+					'arm' : 'Armes: (\\d+)%',
+					'bcl' : 'Bouclier: (\\d+)%',
+					'coq' : 'Coques: (\\d+)%'
+				},
+				'moon' : 'lune',
+				'attack' : 'Attaquant',
+				'defense' : 'Défenseur'
+			}
+			
+		},
 		
 		'messages' : {
-			//'ally msg from' : 'Player (.*) tells you the following:<br>',
 			'espionage of': 'Rapport d`espionnage de',
 			'espionage prob': 'Probabilité de contre-espionnage ',
 			'fleet command' : 'Tour de contrôle',
 			'expedition result' : 'Résultat de l`expédition \\[(\\d+:\\d+:\\d+)\\]',
-			//'space monitoring' : 'Space monitoring',
 			'espionnage action' : 'Activité d\`espionnage',
 			'fleet': 'Flotte',
-			'harvesting': 'Rapport d&#x27;exploitation du champ de débris'
+			'harvesting': 'Rapport d\'exploitation du champ de débris'
 		},
 		
 		'dates' : {
 			'messages' : {
-					regexp: '(\\d+).(\\d+).(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
-					fields: { 
-							year: 3,
-							month:2,
-							day:1,
-							hour:4,
-							min:5,
-							sec:6 
-							}
+				regexp: '(\\d+).(\\d+).(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
+				fields: { 
+					year: 3,
+					month:2,
+					day:1,
+					hour:4,
+					min:5,
+					sec:6 
+				}
 			}
 		}
 	},
@@ -132,7 +189,7 @@ XnewOgame.locales = {
 					602:'Crystal',
 					603:'Deuterium',
 					604:'Energy'
-					},
+				},
 				'buildings' : { 
 					1 : 'Metal Mine',						
 					2 : 'Crystal Mine', 
@@ -152,7 +209,7 @@ XnewOgame.locales = {
 					41 : 'Lunar Base', 		
 					42 : 'Sensor Phalanx', 
 					43 : 'Jump Gate'
-					},
+				},
 				'researchs' :  { 
 					106 : 'Espionage Technology', 
 					108 : 'Computer Technology', 
@@ -170,7 +227,7 @@ XnewOgame.locales = {
 					123 : 'Intergalactic Research Network', 		
 					124 : 'Expedition Technology',
 					199 : 'Graviton Technology'
-					},
+				},
 				'fleet' :  { 		
 					202 : 'Small Cargo', 
 					203 : 'Large Cargo', 
@@ -186,7 +243,7 @@ XnewOgame.locales = {
 					213 : 'Destroyer', 		
 					214 : 'Deathstar', 
 					215 : 'Battlecruiser',
-					},	
+				},	
 				'defense' :  { 	
 					401 : 'Rocket Launcher', 
 					402 : 'Light Laser', 
@@ -198,31 +255,30 @@ XnewOgame.locales = {
 					408 : 'Large Shield Dome', 			
 					502 : 'Anti-Ballistic Missiles', 
 					503 : 'Interplanetary Missiles'
-					}
+				}
 			}
 		},
 		
 		
 		'dates' : {
 			'messages' : {
-					regexp: '(\\d+)-(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
-					fields: { 
-							year: -1,
-							month:1,
-							day:2,
-							hour:3,
-							min:4,
-							sec:5 }
+				regexp: '(\\d+)-(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
+				fields: { 
+					year: -1,
+					month:1,
+					day:2,
+					hour:3,
+					min:4,
+					sec:5 
+				}
 			}
 		},
 		
 		'messages' : {
-			//'ally msg from' : 'Player (.*) tells you the following:<br>',
 			'espionage of': 'Espionage report of',
 			'espionage prob': 'Chance of counter-espionage',
 			'fleet command' : 'Fleet Command',
 			'expedition result' : 'Expedition Result \\[(\\d+:\\d+:\\d+)\\]',
-			//'space monitoring' : 'Space monitoring',
 			'espionnage action' : 'Espionage action',
 			'fleet': 'Fleet',
 			'harvesting': 'Harvesting report from DF'
