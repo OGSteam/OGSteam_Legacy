@@ -457,8 +457,8 @@ var XnewOgame = {
 				"Expeditions": tabLevel[10],
 				"RRI": tabLevel[11],
 				"Graviton": tabLevel[12],
-				"Protection": tabLevel[13],
-				"Armes": tabLevel[14],
+				"Armes": tabLevel[13],
+				"Protection": tabLevel[14],
 				"Bouclier": tabLevel[15]
 			}
 		);
