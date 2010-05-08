@@ -1102,27 +1102,10 @@ if ($TYPE == 'messages') {
 				$moon = $l['moon'];
 				$matches = array();
 				$data = array();
-				preg_match_all('!([A-Z]+):(-?[0-9]+)(:?:|$)!Usi', $l['content'], $matches);
 				
-				$values = $fields = '';
-				if(CARTO == 'OGSpy') {
-					$fields .= 'planet_name,coordinates,sender_id, proba, dateRE';
-					$values .= '"'.trim($l['planet_name']).'", "'.$coords.'", '.$user['id'].', '.$l['proba'].', '.$l['time'].' ';
-				}
-				if(CARTO == 'UniSpy') {
-					$fields .= 'sender_id, dateRE';
-					$values .= $user['id'].', '.$l['time'].' ';
-				}
-				for ($i = 0, $len = count($matches[0]); $i < $len; $i++) {
-					$name = $matches[1][$i];
-					$v = (int)$matches[2][$i];
-					$v = ($v < -1 ? -1 : $v);
-					
-					if (!isset($spyDB[$name])) continue;
-					
-					$data[$name] = $v;
-					$values .= ', '.$v;
-					$fields .= ', `'.$name.'`';
+				foreach ($l['content'] as $field => $value){
+					$fields .= ', `'.$field.'`';
+					$values .= ', '.$value;
 				}
 				if(version_compare($config['version'], '3.6', '>') || CARTO == 'UniSpy') {//si on est en version 4 ou sur Unispy, on sépare les coordonnées
 					$fields .= ', galaxy, system, row';
