@@ -600,6 +600,7 @@ if ($TYPE == 'system') {
 		$rows 		= (isset($get_row) ? $get_row : array());
 		$data 		= array();
 		$delete		= array();
+		$update		= array();
 		
 		$check = $sql->assoc('SELECT row FROM '.TABLE_UNIVERSE.' WHERE galaxy = '.$galaxy.' AND system = '.$system.'');
 		foreach ($check as $key => $value)
