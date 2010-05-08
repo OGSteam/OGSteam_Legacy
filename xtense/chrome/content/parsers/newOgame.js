@@ -458,8 +458,8 @@ var XnewOgame = {
 				"RRI": tabLevel[11],
 				"Graviton": tabLevel[12],
 				"Armes": tabLevel[13],
-				"Protection": tabLevel[14],
-				"Bouclier": tabLevel[15]
+				"Bouclier": tabLevel[14],
+				"Protection": tabLevel[15]
 			}
 		);
 		
@@ -1038,7 +1038,6 @@ var XnewOgame = {
 		var spyStrings = this.l('spy reports');
 		var data = {};
 		var typs = [];
-		var parsedData = [];
 		var res = new Array();
 		
 		var isMoon = false;

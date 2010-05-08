@@ -983,12 +983,8 @@ var Xogame = {
 		
 		Xdump(data);
 		
-		var parsedData = [];
-		for (var i in data) parsedData.push(i+':'+data[i]);
-		parsedData = parsedData.join(':');
-		
 		return {
-			content: parsedData,
+			content: data,
 			planetName: header[1],
 			playerName: header[3],
 			coords: header[2],
