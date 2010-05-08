@@ -1102,11 +1102,22 @@ if ($TYPE == 'messages') {
 				$moon = $l['moon'];
 				$matches = array();
 				$data = array();
+				$values = $fields = '';
+				
+				if(CARTO == 'OGSpy') {
+					$fields .= 'planet_name,coordinates,sender_id, proba, dateRE';
+					$values .= '"'.trim($l['planet_name']).'", "'.$coords.'", '.$user['id'].', '.$l['proba'].', '.$l['time'].' ';
+				}
+				if(CARTO == 'UniSpy') {
+					$fields .= 'sender_id, dateRE';
+					$values .= $user['id'].', '.$l['time'].' ';
+				}
 				
 				foreach ($l['content'] as $field => $value){
 					$fields .= ', `'.$field.'`';
 					$values .= ', '.$value;
 				}
+				
 				if(version_compare($config['version'], '3.6', '>') || CARTO == 'UniSpy') {//si on est en version 4 ou sur Unispy, on sépare les coordonnées
 					$fields .= ', galaxy, system, row';
 					$values .= ', '.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2];
