@@ -189,10 +189,10 @@ if ($validForm && $mysqlVersionOk && $ogspyVersionOk && $checksumOk) {
 	if(version_compare($server_config['version'], '3.99', '<'))
 		$db->sql_query('REPLACE INTO '.TABLE_MOD.' (title, menu, action, root, link, version, active, admin_only) VALUES ("Xtense", '
 			.'"<span onclick=\\"window.open(this.parentNode.href, \'Xtense\', \'width=720, height=500, menubar=no, resizable=yes, '
-			.'scrollbars=yes, status=no, toolbar=no\'); return false;\\">Xtense</span>", "xtense", "Xtense", "index.php", "'
+			.'scrollbars=yes, status=no, toolbar=no\'); return false;\\">Xtense</span>", "xtense", "xtense", "index.php", "'
 			.$mod_version.'", "1", " ")');
 	else
-		$db->sql_query('REPLACE INTO '.TABLE_MOD.' (action, root, link, version, active, admin_only) VALUES ("xtense", "Xtense", "index.php", "'.$mod_version.'", "1", "1")');
+		$db->sql_query('REPLACE INTO '.TABLE_MOD.' (action, root, link, version, active, admin_only) VALUES ("xtense", "xtense", "index.php", "'.$mod_version.'", "1", "1")');
 	
 	list($newPos) = mysql_fetch_row($db->sql_query('SELECT MAX(position)+1 FROM '.TABLE_MOD));
 	
