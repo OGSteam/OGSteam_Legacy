@@ -16,17 +16,17 @@ extract($_POST,EXTR_PREFIX_ALL,'post');
 
 global $db,$table_prefix;//pour UniSpy (mais pourquoi pas besoin pour $server_config ???)
 
-//list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/Xtense/version.txt');
-require_once('mod/Xtense/includes/config.php');
-require_once('mod/Xtense/includes/functions.php');
-require_once('mod/Xtense/class/tpl.php');
-require_once('mod/Xtense/class/Check.php');
+//list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/xtense/version.txt');
+require_once('mod/xtense/includes/config.php');
+require_once('mod/xtense/includes/functions.php');
+require_once('mod/xtense/class/tpl.php');
+require_once('mod/xtense/class/Check.php');
 
 if(version_compare($server_config['version'], '3.99', '<')) lang_module_page('index');
 global $lang_loaded;
 
 error_reporting(E_ALL);
-$tpl = new tpl('mod/Xtense/tpl/');
+$tpl = new tpl('mod/xtense/tpl/');
 $tpl->gzip(false);
 $tpl->assign('time', get_microtime());
 
@@ -34,7 +34,7 @@ $config = &$server_config;
 $tpl->assignRef('user', $user_data);
 $tpl->assignRef('config', $config);
 
-$log_dir = 'mod/Xtense/log/';
+$log_dir = 'mod/xtense/log/';
 
 $page = 'infos';
 if (isset($get_page)) {
@@ -49,7 +49,7 @@ if (isset($get_page)) {
 
 if ($page == 'infos') {
 	$plugin_url = 'http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')+1).
-	($config['xtense_plugin_root'] == 1 ? '' : 'mod/Xtense/') .'xtense.php';
+	($config['xtense_plugin_root'] == 1 ? '' : 'mod/xtense/') .'xtense.php';
 	
 	if (isset($get_toolbar)) {
 		$content = @file_get_contents('http://svn.ogsteam.fr/xtense/toolbar_info.txt');

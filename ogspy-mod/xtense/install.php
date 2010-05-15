@@ -21,8 +21,8 @@ if (version_compare(phpversion(), '5.1') == -1) {
 	exit;
 }
 global $server_config, $table_prefix;
-///list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/Xtense/version.txt');
-require_once('mod/Xtense/includes/config.php');
+///list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/xtense/version.txt');
+require_once('mod/xtense/includes/config.php');
 if(CARTO == 'OGSpy') {
 	$universe_regexp = '/^http:\/\/[a-z0-9]+\.ogame\.[a-z.]+$/gi';
 	$action_parameter = 'mod_install';
@@ -34,12 +34,12 @@ else if(CARTO == 'UniSpy') {
 	$mod_parameter = 'root';
 }
 
-require_once('mod/Xtense/class/tpl.php');
-require_once('mod/Xtense/class/Md5checksum.php');
-require_once('mod/Xtense/class/Callback.php');
-require_once('mod/Xtense/includes/functions.php');
+require_once('mod/xtense/class/tpl.php');
+require_once('mod/xtense/class/Md5checksum.php');
+require_once('mod/xtense/class/Callback.php');
+require_once('mod/xtense/includes/functions.php');
 
-require_once('mod/Xtense/class/Check.php');
+require_once('mod/xtense/class/Check.php');
 
 lang_module_page('install');
 global $lang_loaded;
@@ -47,23 +47,23 @@ global $lang_loaded;
 $mysqlVersion = mysql_get_client_info();
 $ogspyVersion = $server_config['version'];
 $phpVersion = phpversion();
-$logWritable = is_writable('mod/Xtense/log/');
+$logWritable = is_writable('mod/xtense/log/');
 
 $mysqlVersionOk = version_compare(str_replace('mysqlnd ', '', $mysqlVersion), '4.1', '>=');
 $phpVersionOk = true; // puisque testé plus haut
 $ogspyVersionOk = version_compare($ogspyVersion, CARTO_MIN_VERSION, '>=');
 
-$cs = new Md5checksum('mod/Xtense/');
+$cs = new Md5checksum('mod/xtense/');
 $checksumFiles = $cs->check('checksum.md5');
 $checksumOk = $checksumFiles === true;
 
 // Verification d'erreurs HTTP pour le plugin (500, 403...)
-//$pluginOk = !!@file_get_contents('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/mod/Xtense/xtense.php');//TODO trouver une autre solution, plus efficace
+//$pluginOk = !!@file_get_contents('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/mod/xtense/xtense.php');//TODO trouver une autre solution, plus efficace
 $pluginOk = false;
 
 $pluginMoveable = file_exists('xtense.php') ? is_writable('./') && is_writable('xtense.php') : is_writable('./');
 
-$directoryOld = file_exists('mod/Xtense/xtense_plugin.php');
+$directoryOld = file_exists('mod/xtense/xtense_plugin.php');
 
 $OldXtenseFolder = file_exists('mod/Xtense2/version.txt');
 if($OldXtenseFolder) list($useless,$OldXtenseVersion) = file('mod/Xtense2/version.txt');
@@ -71,7 +71,7 @@ $request = "select id from ".TABLE_MOD." where root = 'Xtense2'";
 $result = $db->sql_query($request);		
 list($OldXtenseID) = $db->sql_fetch_row($result);
 
-$tpl = new tpl('mod/Xtense/tpl/');
+$tpl = new tpl('mod/xtense/tpl/');
 
 $tpl->assign(array(
 	'mysqlVersion' => $mysqlVersion,
@@ -105,7 +105,7 @@ if ($validForm && $mysqlVersionOk && $ogspyVersionOk && $checksumOk) {
 	
 	if ($pluginMoveable && isset($_GET['copy_plugin'])) {
 		if (file_exists('xtense.php')) unlink('xtense.php');
-		if (copy('mod/Xtense/xtense.php', 'xtense.php')) $pluginCopy = true;
+		if (copy('mod/xtense/xtense.php', 'xtense.php')) $pluginCopy = true;
 	}
 	
 	if($OldXtenseID && isset($_GET['uninstall_old_xtense2'])) {
@@ -199,7 +199,7 @@ if ($validForm && $mysqlVersionOk && $ogspyVersionOk && $checksumOk) {
 	$db->sql_query('UPDATE '.TABLE_MOD.' SET position = '.$newPos.' WHERE action = "xtense"');
 	
 	// Passage en revue des appels à installer
-	require_once('mod/Xtense/includes/check_callbacks.php');
+	require_once('mod/xtense/includes/check_callbacks.php');
 	if(CARTO == 'OGSpy')
 		$returnLink = '?action=administration&subaction=mod';
 	else if(CARTO == 'UniSpy')

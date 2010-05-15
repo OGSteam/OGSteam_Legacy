@@ -13,16 +13,16 @@ else if(defined('UNISPY_INSTALLED'))
 	
 //if(!defined('IN_XTENSE')) {
 if(!function_exists('lang_init_module') || !function_exists('lang_module_page') )
-	require_once('mod/Xtense/includes/lang.php');
+	require_once('mod/xtense/includes/lang.php');
 
-lang_init_module('Xtense','mod/Xtense/lang/');
+lang_init_module('Xtense','mod/xtense/lang/');
 lang_module_page('common');
 //}
 
 if (!defined('TABLE_XTENSE_CALLBACKS')) define('TABLE_XTENSE_CALLBACKS', $table_prefix.'xtense_callbacks');
 define('TABLE_XTENSE_GROUPS', $table_prefix.'xtense_groups');
 
-list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/Xtense/version.txt');
+list($mod_name, $mod_version, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file('mod/xtense/version.txt');
 define('PLUGIN_VERSION', trim($mod_version));
 define('TOOLBAR_MIN_VERSION', trim($toolbar_min_version));
 if(CARTO == 'OGSpy')

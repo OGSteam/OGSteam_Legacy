@@ -45,18 +45,18 @@ h2 {
 	margin-left: -28px;
 	padding-left: 28px;
 	min-height: 16px;
-	background: no-repeat 2px center url(mod/Xtense/tpl/icons/go.png);
+	background: no-repeat 2px center url(mod/xtense/tpl/icons/go.png);
 	color: #000;
 }
 
 h2.error {
 	color: #900;
-	background-image: url(mod/Xtense/tpl/icons/alert.png);
+	background-image: url(mod/xtense/tpl/icons/alert.png);
 }
 
 h2.info {
 	color: #05A;
-	background-image: url(mod/Xtense/tpl/icons/infos.png);
+	background-image: url(mod/xtense/tpl/icons/infos.png);
 }
 
 h2.warn {
@@ -65,7 +65,7 @@ h2.warn {
 
 h2.success {
 	color: crimson;
-	background-image: url(mod/Xtense/tpl/icons/valid.png);
+	background-image: url(mod/xtense/tpl/icons/valid.png);
 }
 
 input {
@@ -77,7 +77,7 @@ input {
 input.error {
 	color: #A00;
 	padding-left: 20px;
-	background: no-repeat 2px center url(mod/Xtense/tpl/icons/alert.png);
+	background: no-repeat 2px center url(mod/xtense/tpl/icons/alert.png);
 }
 
 #requirements .ok {
@@ -212,7 +212,7 @@ input.error {
 			<p><?php echo __('install checksum error'); ?></p>
 			<ul>	
 			<?php foreach ($checksumFiles as $file) { ?>
-				<li>mod/Xtense/<?php echo $file; ?></li>
+				<li>mod/xtense/<?php echo $file; ?></li>
 			<?php } ?>
 			</ul>
 		<?php } ?>
