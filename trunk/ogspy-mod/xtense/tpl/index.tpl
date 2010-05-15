@@ -29,11 +29,11 @@ function toggle_callback_info() {
 <head>
 	<title>Xtense <?php echo $version; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" media="all" type="text/css" href="mod/Xtense/tpl/style.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="mod/xtense/tpl/style.css" />
 </head>
 <body>
 <h1><?php ___('admin h1'); ?></h1>
-<script language="Javascript" type="text/javascript" src="mod/Xtense/js/config.js"></script>
+<script language="Javascript" type="text/javascript" src="mod/xtense/js/config.js"></script>
 
 <div id="wrapper">
 	<ul id="menu">
@@ -335,10 +335,10 @@ function toggle_callback_info() {
 	<br/>
 	
 <?php } elseif ($page == 'log') { ?>
-<style type="text/css">@import url(mod/Xtense/js/calendar/theme.css);</style>
-<script type="text/javascript" src="mod/Xtense/js/calendar/calendar.js" /></script>
-<script type="text/javascript" src="mod/Xtense/js/calendar/calendar-fr.js" /></script>
-<script type="text/javascript" src="mod/Xtense/js/calendar/calendar-setup.js" /></script>
+<style type="text/css">@import url(mod/xtense/js/calendar/theme.css);</style>
+<script type="text/javascript" src="mod/xtense/js/calendar/calendar.js" /></script>
+<script type="text/javascript" src="mod/xtense/js/calendar/calendar-fr.js" /></script>
+<script type="text/javascript" src="mod/xtense/js/calendar/calendar-setup.js" /></script>
 	
 	<?php if (isset($unwritable)) { ?>
 		<p class="error"><?php ___('log write error'); ?></p>

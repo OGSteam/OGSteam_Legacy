@@ -1,5 +1,5 @@
 <?php
-	require_once('mod/Xtense/class/Callback.php');
+	require_once('mod/xtense/class/Callback.php');
 
 	// Vidange de la table
 	$db->sql_query('TRUNCATE TABLE `'.TABLE_XTENSE_CALLBACKS.'`');

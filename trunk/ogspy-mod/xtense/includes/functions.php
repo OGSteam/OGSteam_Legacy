@@ -80,7 +80,7 @@ function move_plugin () {
 		$tpl->assign('move_error', 'file_unlink'); return false;
 	}
 	
-	@copy('mod/Xtense/xtense.php', './xtense.php');
+	@copy('mod/xtense/xtense.php', './xtense.php');
 	if (!file_exists('./xtense.php')) {
 		$tpl->assign('move_error', 'copy'); return false;
 	}
@@ -175,7 +175,7 @@ function check_coords($coords, $exp = 0) {
 }
 
 function icon($name) {
-	echo '<img src="mod/Xtense/tpl/icons/'.$name.'.png" class="icon" align="absmiddle" />';
+	echo '<img src="mod/xtense/tpl/icons/'.$name.'.png" class="icon" align="absmiddle" />';
 }
 
 function get_microtime() {
@@ -187,14 +187,14 @@ function loadLocales($requiredLang, $page) {
 /*	global $Xlocales, $config, $user, $user_data;
 	if(!isset($Xlocales)) $Xlocales = array('loaded' => array(), 'data' => array());
 	
-	require_once('mod/Xtense/lang/lang_FR/'.$page.'.php');
+	require_once('mod/xtense/lang/lang_FR/'.$page.'.php');
 	$Xlocales['data'] = array_merge($Xlocales['data'], $lang);
 	$Xlocales['loaded'][] = 'fr';
 	unset($lang);
 	
 	if ($requiredLang !== null && strtolower($requiredLang != 'fr')){
 		// Parade anti erreur de case
-		$path = opendir($link='mod/Xtense/lang/');
+		$path = opendir($link='mod/xtense/lang/');
 		while (($file = readdir($path)) !== false) 
 			if(preg_match('/lang_([a-zA-Z0-9]{1,5})/',$file,$out)) $langs[strtolower($out[1])]=$out[1];
 		if($i=array_keys($langs,strtolower($requiredLang))) $requiredLang=$langs[$i];
@@ -299,11 +299,11 @@ function add_log($type, $data = null) {
 			}
 		} else {
 			$file = date('ymd').'log';
-			$fp = @fopen('mod/Xtense/log/'.$file, 'a+');
+			$fp = @fopen('mod/xtense/log/'.$file, 'a+');
 			if ($fp) {
 				fwrite($fp, date('H:i:s').' | '.$user['pseudo'].' '.$message."\n");
 				fclose($fp);
-				@chmod('mod/Xtense/log/'.$file, 0777);
+				@chmod('mod/xtense/log/'.$file, 0777);
 			}
 		}
 	}
@@ -312,10 +312,10 @@ function add_log($type, $data = null) {
 	if ($config['xtense_keep_log'] == 0 || $config['xtense_log_ogspy']) return;
 	
 	$since = strtotime('-'.$config['xtense_keep_log'].' days');
-	$fp = @opendir('mod/Xtense/log/');
+	$fp = @opendir('mod/xtense/log/');
 	while (($file = @readdir($fp)) !== false) {
 		if ($file != '.' && $file != '..' && preg_match('!^([0-9]{2})([0-9]{2})([0-9]{2})\.log$!', $file, $matches)) {
-			if (mktime(0, 0, 1, $matches[3], $matches[2], $matches[1]) < $since) @unlink('mod/Xtense/log/'.$file);
+			if (mktime(0, 0, 1, $matches[3], $matches[2], $matches[1]) < $since) @unlink('mod/xtense/log/'.$file);
 		}
 	}
 }

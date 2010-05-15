@@ -22,14 +22,14 @@ if (DEBUG) header('Content-type: text/plain');
 global $server_config;
 
 require_once('parameters/id.php');
-require_once('mod/Xtense/includes/config.php');
-require_once('mod/Xtense/includes/functions.php');
-require_once('mod/Xtense/class/Mysql.php');
-require_once('mod/Xtense/class/CallbackHandler.php');
-require_once('mod/Xtense/class/Callback.php');
-require_once('mod/Xtense/class/Io.php');
-require_once('mod/Xtense/class/Check.php'); 
-if(CARTO == "OGSpy") require_once('mod/Xtense/includes/ogame_id.php');
+require_once('mod/xtense/includes/config.php');
+require_once('mod/xtense/includes/functions.php');
+require_once('mod/xtense/class/Mysql.php');
+require_once('mod/xtense/class/CallbackHandler.php');
+require_once('mod/xtense/class/Callback.php');
+require_once('mod/xtense/class/Io.php');
+require_once('mod/xtense/class/Check.php'); 
+if(CARTO == "OGSpy") require_once('mod/xtense/includes/ogame_id.php');
 
 set_error_handler('error_handler');
 $start_time = get_microtime();
@@ -1102,7 +1102,6 @@ if ($TYPE == 'messages') {
 				$coords = $l['coords'][0].':'.$l['coords'][1].':'.$l['coords'][2];
 				$moon = $l['moon'];
 				$matches = array();
-				$data = array();
 				$values = $fields = '';
 				
 				if(CARTO == 'OGSpy') {
@@ -1124,7 +1123,7 @@ if ($TYPE == 'messages') {
 					$values .= ', '.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2];
 				}
 				
-				$spy[$k]['data'] = $data;
+				$spy[$k]['data'] = $l['content'];
 				if(CARTO == 'OGSpy')
 					$test = $sql->check('SELECT id_spy FROM '.TABLE_PARSEDSPY.' WHERE coordinates = "'.$coords.'" AND dateRE = '.$l['time']);
 				else if(CARTO == 'UniSpy')
@@ -1139,12 +1138,12 @@ if ($TYPE == 'messages') {
 							if ($assoc[0]['last_update'.($moon ? '_moon' : '')] < $l['time']) {
 								if(version_compare($config['version'], '3.99', '<')){
 									if ($moon)
-										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($data['Pha'] > 0 ? $data['Pha'] : 0).', gate = "'.($data['PoSa'] > 0 ? 1 : 0).'",'.' player = "'.$l['player_name'].'", last_update_moon = '.$time.', last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
+										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($l['content']['Pha'] > 0 ? $l['content']['Pha'] : 0).', gate = "'.($l['content']['PoSa'] > 0 ? 1 : 0).'",'.' player = "'.$l['player_name'].'", last_update_moon = '.$time.', last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
 									else//we do nothing if buildings are not in the report
 										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET player = "'.$l['player_name'].'", name = "'.$l['planet_name'].'", last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
 								} else {
 									if ($moon)
-										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($data['Pha'] > 0 ? $data['Pha'] : 0).', gate = "'.($data['PoSa'] > 0 ? 1 : 0).'", last_update_moon = '.$time.', last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
+										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($l['content']['Pha'] > 0 ? $l['content']['Pha'] : 0).', gate = "'.($l['content']['PoSa'] > 0 ? 1 : 0).'", last_update_moon = '.$time.', last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
 									else//we do nothing if buildings are not in the report
 										$sql->query('UPDATE '.TABLE_UNIVERSE.' SET name = "'.$l['planet_name'].'", last_update_user_id = '.$user['id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
 								}
@@ -1154,12 +1153,12 @@ if ($TYPE == 'messages') {
 						{
 							if(version_compare($config['version'], '3.99', '<')){
 								if ($moon) 
-									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, moon, phalanx, gate, player, name, status, last_update_moon, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "1", '.($data['Pha'] > 0 ? $data['Pha'] : 0).', "'.($data['PoSa'] > 0 ? 1 : 0).'", "'.$l['player_name'].'", "", "", '.$time.', '.$user['id'].')'); 
+									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, moon, phalanx, gate, player, name, status, last_update_moon, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "1", '.($l['content']['Pha'] > 0 ? $l['content']['Pha'] : 0).', "'.($l['content']['PoSa'] > 0 ? 1 : 0).'", "'.$l['player_name'].'", "", "", '.$time.', '.$user['id'].')'); 
 								else 
 									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, player, name, status, last_update, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "'.$l['player_name'].'", "'.$l['planet_name'].'", "", '.$time.', '.$user['id'].')'); 
 							} else {
 								if ($moon)
-									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, moon, phalanx, gate, id_player, name, status, last_update_moon, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "1", '.($data['Pha'] > 0 ? $data['Pha'] : 0).', "'.($data['PoSa'] > 0 ? 1 : 0).'", "'.$l['player_id'].'", "", "", '.$time.', '.$user['id'].')');
+									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, moon, phalanx, gate, id_player, name, status, last_update_moon, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "1", '.($l['content']['Pha'] > 0 ? $l['content']['Pha'] : 0).', "'.($l['content']['PoSa'] > 0 ? 1 : 0).'", "'.$l['player_id'].'", "", "", '.$time.', '.$user['id'].')');
 								else
 									$sql->query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, id_player, name, status, last_update, last_update_user_id) VALUES ('.$l['coords'][0].', '.$l['coords'][1].', '.$l['coords'][2].', "'.$l['player_id'].'", "'.$l['planet_name'].'", "", '.$time.', '.$user['id'].')');
 							}
