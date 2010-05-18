@@ -1,9 +1,9 @@
 <?php
-/** $Id:$ **/
+/** $Id$ **/
 /**
 *  Panneau d'affichage: A propos de l'OGsteam et des contributeurs à OGSpy
 * @package OGSpy
-* @version 3.04b ($Rev:$)
+* @version 3.04b ($Rev$)
 * @subpackage views
 * @author Kyser
 * @created 17/01/2006

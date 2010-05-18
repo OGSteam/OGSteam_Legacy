@@ -134,7 +134,7 @@ function mod_install () {
 	if (file_exists("mod/".$pub_directory."/install.php")) {
 		require_once("mod/".$pub_directory."/install.php");
 
-		$request = "select id from ".TABLE_MOD." where root = '$pub_directory'";
+		$request = "select id from ".TABLE_MOD." where root = '{$pub_directory}'";
 		$result = $db->sql_query($request);
 		list($mod_id) = $db->sql_fetch_row($result);
 
@@ -142,10 +142,10 @@ function mod_install () {
 		$result = $db->sql_query($request);
 		list($position) = $db->sql_fetch_row($result);
 
-		$request = "update ".TABLE_MOD." set position = ".($position+1)." where root = '".$pub_directory."'";
+		$request = "update ".TABLE_MOD." set position = ".($position+1)." where root = '{$pub_directory}'";
 		$db->sql_query($request);
 
-		$request = "select title from ".TABLE_MOD." where id = ".$mod_id;
+		$request = "select title from ".TABLE_MOD." where id = '{$mod_id}'";
 		$result = $db->sql_query($request);
 		list($title) = $db->sql_fetch_row($result);
 		log_("mod_install", $title);
@@ -161,14 +161,14 @@ function mod_update () {
 
 	mod_check("mod_id");
 
-	$request = "select root from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($root) = $db->sql_fetch_row($result);
 
 	if (file_exists("mod/".$root."/update.php")) {
 		require_once("mod/".$root."/update.php");
 
-		$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+		$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 		$result = $db->sql_query($request);
 		list($title) = $db->sql_fetch_row($result);
 		log_("mod_update", $title);
@@ -186,18 +186,18 @@ function mod_uninstall () {
 
 	mod_check("mod_id");
 
-	$request = "select root from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($root) = $db->sql_fetch_row($result);
 	if (file_exists("mod/".$root."/uninstall.php")) {
 		require_once("mod/".$root."/uninstall.php");
 	}
 
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 
-	$request = "delete from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "delete from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$db->sql_query($request);
 
 	log_("mod_uninstall", $title);
@@ -213,10 +213,10 @@ function mod_active () {
 
 	mod_check("mod_id");
 
-	$request = "update ".TABLE_MOD." set active='1' where id = ".$pub_mod_id;
+	$request = "update ".TABLE_MOD." set active='1' where id = '{$pub_mod_id}'";
 	$db->sql_query($request);
 
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_active", $title);
@@ -233,10 +233,10 @@ function mod_disable () {
 
 	mod_check("mod_id");
 
-	$request = "update ".TABLE_MOD." set active='0' where id = ".$pub_mod_id;
+	$request = "update ".TABLE_MOD." set active='0' where id = '{$pub_mod_id}'";
 	$db->sql_query($request);
 
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_disable", $title);
@@ -253,10 +253,10 @@ function mod_admin () {
 
 	mod_check("mod_id");
 
-	$request = "update ".TABLE_MOD." set admin_only='1' where id = ".$pub_mod_id;
+	$request = "update ".TABLE_MOD." set admin_only='1' where id = '{$pub_mod_id}'";
 	$db->sql_query($request);
 
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 
@@ -272,10 +272,10 @@ function mod_normal () {
 
 	mod_check("mod_id");
 
-	$request = "update ".TABLE_MOD." set admin_only='0' where id = ".$pub_mod_id;
+	$request = "update ".TABLE_MOD." set admin_only='0' where id = '{$pub_mod_id}'";
 	$db->sql_query($request);
 
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 
@@ -319,7 +319,7 @@ function mod_sort ($order) {
 		next($mods);
 	}
 	
-	$request = "select title from ".TABLE_MOD." where id = ".$pub_mod_id;
+	$request = "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_order", $title);
@@ -336,13 +336,13 @@ function mod_version () {
 	global $pub_action;
 
 
-	$request = "select `version` from ".TABLE_MOD." where root = '".$pub_action."'";
+	$request = "select `version` from ".TABLE_MOD." where root = '{$pub_action}'";
 	$result = $db->sql_query($request);
 	if ($result) {
 		list($version) = $db->sql_fetch_row($result);
 		return $version;
 	}
-	return "(ModInconnu:'$pub_action')";
+	return "(ModInconnu:'{$pub_action}')";
 }
 /**
 * Permet d'ajouter un paramétre de configuration et sa valeur pour un mod donné

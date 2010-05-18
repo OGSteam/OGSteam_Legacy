@@ -1,9 +1,9 @@
 <?php
-/** $Id:$ **/
+/** $Id$ **/
 /**
 * Fonctions d'administrations 
 * @package OGSpy
-* @version 3.04b ($Rev:$)
+* @version 3.04b ($Rev$)
 * @subpackage admin
 * @author Kyser
 * @created 16/12/2005
