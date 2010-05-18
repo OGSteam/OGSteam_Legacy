@@ -945,18 +945,18 @@ function benchmark() {
 
 function check_getvalue($secvalue) {
     if ( ! is_array ( $secvalue ) ) {
-    	if ((eregi("<[^>]*script*\"?[^>]*>", $secvalue)) ||
-	    (eregi("<[^>]*object*\"?[^>]*>", $secvalue)) ||
-    	(eregi("<[^>]*iframe*\"?[^>]*>", $secvalue)) ||
-	    (eregi("<[^>]*applet*\"?[^>]*>", $secvalue)) ||
-    	(eregi("<[^>]*meta*\"?[^>]*>", $secvalue)) ||
-	    (eregi("<[^>]*style*\"?[^>]*>", $secvalue)) ||
-    	(eregi("<[^>]*form*\"?[^>]*>", $secvalue)) ||
-	    (eregi("<[^>]*img*\"?[^>]*>", $secvalue)) ||
-    	(eregi("\([^>]*\"?[^)]*\)", $secvalue)) ||
-	    (eregi("\"", $secvalue))) {
-		    return false;
-    	}
+        if ((preg_match("/<[^>]*script*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*object*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*iframe*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*applet*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*meta*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*style*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*form*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/<[^>]*img*\"?[^>]*>/i", $secvalue)) ||
+        (preg_match("/\([^>]*\"?[^)]*\)/i", $secvalue)) ||
+        (preg_match("/\"/i", $secvalue))) {
+            return false;
+        }
     }
     else {
         foreach ( $secvalue as $subsecvalue ) {

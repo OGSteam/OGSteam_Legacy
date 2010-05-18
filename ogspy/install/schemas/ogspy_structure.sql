@@ -466,7 +466,7 @@ INSERT INTO `ogspy_config` VALUES ('url_forum', 'http://ogsteam.fr/index.php');
 INSERT INTO `ogspy_config` VALUES ('log_phperror', '0');
 INSERT INTO `ogspy_config` VALUES ('block_ratio', '0');
 INSERT INTO `ogspy_config` VALUES ('ratio_limit', '0');
-INSERT INTO `ogspy_config` VALUES ('version', '3.05beta');
+INSERT INTO `ogspy_config` VALUES ('version', '3.05');
 
 ## Partie affichage
 

@@ -690,6 +690,9 @@ function user_delete() {
 
 	$request = "delete from ".TABLE_USER_FAVORITE." where user_id = ".$pub_user_id;
 	$db->sql_query($request);
+     
+	$request = "delete from ".TABLE_USER_DEFENCE." where user_id = ".$pub_user_id;
+	$db->sql_query($request);
 
 	$request = "delete from ".TABLE_USER_SPY." where user_id = ".$pub_user_id;
 	$db->sql_query($request);
