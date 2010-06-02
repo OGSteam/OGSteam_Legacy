@@ -157,7 +157,7 @@ var XnewOgame = {
 		}
 	},
 
-	getUniverse: function (url) {
+/*	getUniverse: function (url) {
 		//Xconsole(url);
 		var universe = url.match(/^http:\/\/[a-z]{5,10}\.ogame\.[a-z]{2,4}/gi);
 		if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi)) {
@@ -167,7 +167,21 @@ var XnewOgame = {
 		} else if(url.match(/^http:\/\/localhost\/ogame\//gi)) {
 			return "http://andromeda.ogame.fr";
 		} else return false;
-	},
+	},*/
+	
+	getUniverse: function (url) {
+  //Xconsole(url);
+  var universe = url.match(/^http:\/\/[a-z]{5,10}\.ogame\.[a-z]{2,4}/gi);
+  var olduniverse = url.match(/^http:\/\/uni[0-9]{1,2}\.ogame\.[a-z]{2,4}/gi);
+  if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi)) {
+    return universe[0];
+  } else if(url.match(/^http:\/\/uni42\.ogame\.org/gi)) {
+    return "http://uni42.ogame.org";
+  } else if(olduniverse) {
+    return olduniverse[0];
+  } else return false;
+},
+
 	
 	getLang: function (url) {
 		var tab = url.split('.');

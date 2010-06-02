@@ -160,12 +160,21 @@ var Xogame = {
 		}
 	},
 	
-	getUniverse: function (url) {
+/*	getUniverse: function (url) {
 		var universe = url.match(/^http:\/\/uni[0-9]{1,2}\.ogame\.[a-z]{2,4}/gi);
 		if(universe && !url.match(/^http:\/\/uni42\.ogame\.org/gi))
 			return universe[0];
 		else return false;
-	},
+	},*/
+	
+	getUniverse: function (url) {
+  return false;
+  /*var universe = url.match(/^http:\/\/uni[0-9]{1,2}\.ogame\.[a-z]{2,4}/gi);
+  if(universe && !url.match(/^http:\/\/uni42\.ogame\.org/gi))
+    return universe[0];
+  else return false;*/
+},
+
 
 	getPage: function(url) {
 		try {
