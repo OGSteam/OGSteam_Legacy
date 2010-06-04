@@ -161,6 +161,8 @@ var XnewOgame = {
 		var universe = url.match(/^http:\/\/[a-z]{4,10}\.ogame\.[a-z]{2,4}/gi);
 		if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi))
 			return universe[0];
+		else if (url.match(/^http:\/\/localhost\/ogameV1\//gi))
+			return "http://andromeda.ogame.fr";
 		else 
 			return false;
 	},
@@ -208,7 +210,7 @@ var XnewOgame = {
 				case 'alliance':	return 'ally_list';
 				case 'showmessage':	return 'messages';
 				case 'combatreport': return 'rc';
-				case 'trader': 		return 'trader';
+				//case 'trader': 		return 'trader';
 				default: 			return false;
 			}
 		} catch (e) {
@@ -946,7 +948,7 @@ var XnewOgame = {
 					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
 					if(m){
 						var player = m[1];
-						var coords = m[2].split(':');
+						var coords = m[2];
 					} else {
 						var player = "";
 						var coords = "";
@@ -960,9 +962,12 @@ var XnewOgame = {
 					var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
 					if(m)
 						weap[i] = m[1].replace(/\./g, '');
+					else
+						weap[i] = "";
 				}
 				
-				data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
+				if(coords != "")
+					data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
 			}
 			
 			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_rounds);
@@ -1014,7 +1019,6 @@ var XnewOgame = {
 			Request.set(
 				{
 					type: 'rc',
-					id : this.params['nID'],
 					date: date,
 					win: win,
 					count: (rounds-1),
