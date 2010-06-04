@@ -7,9 +7,6 @@
 	<script type="application/x-javascript" src="chrome://xtense2/content/functions.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/Prefs.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/Xtense.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/Ogame.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/OgameConstants.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/OgameLocales.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgame.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameLocales.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameConstants.js"/>

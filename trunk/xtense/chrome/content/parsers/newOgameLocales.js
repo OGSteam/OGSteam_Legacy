@@ -156,7 +156,7 @@ XnewOgame.locales = {
 			'expedition result' : 'Résultat de l`expédition \\[(\\d+:\\d+:\\d+)\\]',
 			'espionnage action' : 'Activité d\`espionnage',
 			'fleet': 'Flotte',
-			'harvesting': 'Rapport d\'exploitation du champ de débris'
+			'harvesting': 'exploitation du champ de débris'
 		},
 		
 		'dates' : {
