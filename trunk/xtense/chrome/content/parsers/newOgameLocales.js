@@ -130,7 +130,7 @@ XnewOgame.locales = {
 				},
 				'result' : {
 					'win_metal' : 'Il emporte (.*) unités de métal',
-					'win_crisal' : ', (.*) unités de cristal',
+					'win_cristal' : ', (.*) unités de cristal',
 					'win_deut' : 'et (.*) unités de deutérium.',
 					'a_lost' : 'L\'attaquant a perdu au total (.*) unités.',
 					'd_lost' : 'Le défenseur a perdu au total (.*) unités.',
