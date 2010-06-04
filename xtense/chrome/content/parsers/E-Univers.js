@@ -994,6 +994,10 @@ var XEUnivers = {
 		
 		//Xdump(data);
 		
+		var parsedData = [];
+		for (var i in data) parsedData.push(i+':'+data[i]);
+		parsedData = parsedData.join(':');
+		
 		return {
 			content: parsedData,
 			planetName: header[1],

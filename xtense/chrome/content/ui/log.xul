@@ -14,14 +14,14 @@ centerscreen="yes" flex="1" persist="width height">
 <script type="application/x-javascript" src="chrome://xtense2/locale/log.js" />
 
 	<menupopup id="left-menu">
-		<menuitem label="&copy;" disabled="true" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
+		<menuitem label="&copy;" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
 		<menuseparator />
 		<menuitem label="&copy-all;" id="left-menu-copy-all" />
 		<menuitem label="&copy-selected;" id="left-menu-copy-selected" />
 	</menupopup>
 	
 	<menupopup id="right-menu">
-		<menuitem label="&copy;" disabled="true" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
+		<menuitem label="&copy;" image="chrome://xtense2/skin/images/cut.png" class="menuitem-iconic"/>
 		<menuseparator />
 		<menuitem label="&copy-all;" id="right-menu-copy-all"/>
 		<menuitem label="&copy-hovered;" id="right-menu-copy-hovered"/>
