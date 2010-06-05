@@ -9,7 +9,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="xtense2@ogsteam.fr"
                    em:name="Xtense"
-                   em:version="2.3.5"
+                   em:version="2.3.6"
                    em:description="Barre d'outils permettant d'envoyer vos données automatiquement vers vos serveurs OGSpy"
                    em:creator="http://www.ogsteam.fr"
                    em:homepageURL="http://www.ogsteam.fr"

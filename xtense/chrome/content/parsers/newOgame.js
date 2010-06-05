@@ -158,7 +158,7 @@ var XnewOgame = {
 	},
 
 	getUniverse: function (url) {
-		var universe = url.match(/^http:\/\/[a-z]{4,10}\.ogame\.[a-z]{2,4}/gi);
+		var universe = url.match(/^http:\/\/[a-z0-9]{4,10}\.ogame\.[a-z]{2,4}/gi);
 		if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi))
 			return universe[0];
 		else if (url.match(/^http:\/\/localhost\/ogameV1\//gi))
