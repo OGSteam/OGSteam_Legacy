@@ -2,21 +2,21 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$8hmXj"
-                   em:version="2.2.6106">
-    <em:targetApplication RDF:resource="rdf:#$bhmXj"/>
-  </RDF:Description>
   <RDF:Description RDF:about="rdf:#$bhmXj"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0"
                    em:maxVersion="3.*"
-                   em:updateLink="http://svn.ogsteam.fr/xtense/versions beta/Xtense2.2.6106.xpi"
-                   em:updateHash="sha1:337744C078A9BDC0D7797B9919908DB106EF5F3C" />
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.3.5"
+                   em:updateHash="sha1:38ba751a8c7a5b8114e161d9716baa9ff356e8cd" />
+  <RDF:Description RDF:about="rdf:#$8hmXj"
+                   em:version="2.3.5">
+    <em:targetApplication RDF:resource="rdf:#$bhmXj"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBADuypbWz9SkM0PdBBjyYyLPNoG17lfRgRKmTEKCka/Vfy/DT2zbkFOTCKjx09DCqWs4LrWp2q4uYxkiS8xKMXB/DjpkI62aSQRh1kpxBdNtcb44depnyGFclpGZyt4bjFBxgqTyOKS2cnoU7zXOjjj5ejyoFQHtZw271l5MxGCj1">
+    <em:updates RDF:resource="rdf:#$7hmXj"/>
+  </RDF:Description>
   <RDF:Seq RDF:about="rdf:#$7hmXj">
     <RDF:li RDF:resource="rdf:#$8hmXj"/>
   </RDF:Seq>
-  <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBALYGX5kKIG+/KnEwd/C+PLVnccaxL2GAhm4DMouuY70k9B1dHA2uZ7gNAS1vt9t6WAdw/jdmzzy5sXMMr+ryZLKNHPK5YWTipzpaPEhjuhDc+pOXyI9i+1vFE555nlefdgyZdOKCXJluKpdXPFKZXgTRzy+vTSUdU34YNqsMi3EG">
-    <em:updates RDF:resource="rdf:#$7hmXj"/>
-  </RDF:Description>
 </RDF:RDF>
