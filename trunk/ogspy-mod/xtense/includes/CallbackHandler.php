@@ -33,15 +33,13 @@ class CallbackHandler {
 	 * @param array $params
 	 */
 	public function apply() {
-		global $io, $sql, $get_dev, $config;
+		global $io, $db, $get_dev, $server_config;
 		if (empty($this->calls)) return;
 		$success = array();
 		$errors = array();
 		
-		if(version_compare($config['version'], '3.99', '<')) $query = $sql->query('SELECT c.id, c.function, c.type, c.mod_id, m.root, m.title FROM '.TABLE_XTENSE_CALLBACKS.' c LEFT JOIN '.TABLE_MOD.' m ON c.mod_id = m.id WHERE c.active = 1 AND m.active = 1 AND c.type IN ("'.implode('", "', $this->types).'")'); 
-		else $query = $sql->query('SELECT c.id, c.function, c.type, c.mod_id, m.root FROM '.TABLE_XTENSE_CALLBACKS.' c LEFT JOIN '.TABLE_MOD.' m ON c.mod_id = m.id WHERE c.active = 1 AND m.active = 1 AND c.type IN ("'.implode('", "', $this->types).'")');
-		while ($call = mysql_fetch_assoc($query)) {
-			if(!version_compare($config['version'], '3.99', '<')) $call['title'] = mod_info_title($call['root']);
+		$query = $db->sql_query('SELECT c.id, c.function, c.type, c.mod_id, m.root, m.title FROM '.TABLE_XTENSE_CALLBACKS.' c LEFT JOIN '.TABLE_MOD.' m ON c.mod_id = m.id WHERE c.active = 1 AND m.active = 1 AND c.type IN ("'.implode('", "', $this->types).'")'); 
+		while ($call = $db->sql_fetch_assoc($query)) {
 			foreach ($this->calls[$call['type']] as $params) {
 				$this->currentCallback = $call;
 				
@@ -67,13 +65,13 @@ class CallbackHandler {
 	
 	/*
 	public function apply() {
-		global $io, $sql, $get_dev;
+		global $io, $db, $get_dev;
 		if (empty($this->calls)) return;
 		$success = array();
 		$errors = array();
 		
-		$query = $sql->query('SELECT c.id, c.function, c.type, c.mod_id, m.root, m.title FROM '.TABLE_XTENSE_CALLBACKS.' c LEFT JOIN '.TABLE_MOD.' m ON c.mod_id = m.id WHERE c.active = 1 AND m.active = 1 AND c.type IN ("'.implode('", "', $this->types).'")');
-		while ($call = mysql_fetch_assoc($query)) {
+		$query = $db->sql_query('SELECT c.id, c.function, c.type, c.mod_id, m.root, m.title FROM '.TABLE_XTENSE_CALLBACKS.' c LEFT JOIN '.TABLE_MOD.' m ON c.mod_id = m.id WHERE c.active = 1 AND m.active = 1 AND c.type IN ("'.implode('", "', $this->types).'")');
+		while ($call = $db->sql_fetch_assoc($query)) {
 			foreach ($this->calls[$call['type']] as $params) {
 				if (isset($this->included[$call['mod_id']])) {
 					if (function_exists($call['function'])) {

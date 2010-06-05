@@ -233,9 +233,9 @@ pre {color:#666; font-family:"Courier New";}
 			Il faut savoir que Xtense est maintenant totalement dissocié de OGSpy, aucun fichier de OGSpy n'est inclus (si ce n'est id.php). Donc toutes les fonctions, classes, constantes disponibles sont celles de Xtense. A noter que vos fichiers sont inclus depuis une fonction de Xtense (comme les mods). Voici une liste des variables globales utiles aux mods :
 		</p>
 		<ul>
-			<li><span class="php-var">$config</span> : Contient toutes les directives de configuration de l'OGSpy contenues dans la table <em>ogspy_config</em></li>
+			<li><span class="php-var">$server_config</span> : Contient toutes les directives de configuration de l'OGSpy contenues dans la table <em>ogspy_config</em></li>
 			<li><span class="php-var">$user</span> : Tableau avec les informations sur l'utilisateur actuellement connecté (pseudo, id, grand [tableau des droits pour Xtense (valeur 0 ou 1), index: system, ranking, empire, messages])</li>
-			<li><span class="php-var">$sql</span> : Instance de la classe MySQL utilisée dans Xtense</li>
+			<li><span class="php-var">$db</span> : Instance de la classe MySQL utilisée dans Xtense</li>
 			<li><span class="php-var">$database</span> : Tableau contenant les codes MySQL de l'espace personnel des joueurs<br /><em>Structure</em>
 <pre><span class="php-var">$database</span> = <span class="php-keyword2"><span class="php-keyword1">array</span></span>(
     <span class="php-quote">'buildings'</span> =&gt; <span class="php-keyword2"><span class="php-keyword1">array</span></span>(<span class="php-quote">'M'</span>, <span class="php-quote">'C'</span>, <span class="php-quote">'D'</span>, <span class="php-quote">'CES'</span>, <span class="php-quote">'CEF'</span>, <span class="php-quote">'UdR'</span>, <span class="php-quote">'UdN'</span>, <span class="php-quote">'CSp'</span>, <span class="php-quote">'HM'</span>, <span class="php-quote">'HC'</span>, <span class="php-quote">'HD'</span>, <span class="php-quote">'Lab'</span>, <span class="php-quote">'Ter'</span>, 
@@ -328,8 +328,8 @@ pre {color:#666; font-family:"Courier New";}
 </span><span class="php-var">$pseudo</span> = <span class="php-quote">'Unibozu'</span>;
 <span class="php-var">$pass</span> = <span class="php-quote">'Prout'</span>;
 
-<span class="php-keyword1">if</span> (<span class="php-var">$sql</span>-&gt;check(<span class="php-quote">'SELECT password, user_id FROM '</span>.TABLE_USER.<span class="php-quote">' WHERE pseudo = "'</span>.quote(<span class="php-var">$pseudo</span>).<span class="php-quote">'"'</span>)) {
-	<span class="php-keyword2">list</span>(<span class="php-var">$data</span>) = <span class="php-var">$sql</span>-&gt;assoc();
+<span class="php-keyword1">if</span> (<span class="php-var">$db</span>-&gt;check(<span class="php-quote">'SELECT password, user_id FROM '</span>.TABLE_USER.<span class="php-quote">' WHERE pseudo = "'</span>.quote(<span class="php-var">$pseudo</span>).<span class="php-quote">'"'</span>)) {
+	<span class="php-keyword2">list</span>(<span class="php-var">$data</span>) = <span class="php-var">$db</span>-&gt;assoc();
 	
 	<span class="php-keyword1">if</span> (<span class="php-var">$data</span>[<span class="php-quote">'password'</span>] != <span class="php-keyword2">md5</span>(sha1(<span class="php-var">$pass</span>))) {
 		<span class="php-keyword1">echo</span> <span class="php-quote">'Mauvais mot de passe'</span>;

@@ -65,7 +65,7 @@ input.infos {
 p.c { text-align: center; }
 
 p.error {
-	background: url(icons/alert.png) no-repeat 5px 5px;
+	background: url(img/icons/alert.png) no-repeat 5px 5px;
 	color: #A00;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -76,7 +76,7 @@ p.error {
 }
 
 p.success {
-	background: url(icons/valid.png) no-repeat 5px 5px;
+	background: url(img/icons/valid.png) no-repeat 5px 5px;
 	color: #11A98E;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -87,7 +87,7 @@ p.success {
 }
 
 p.info {
-	background: url(icons/infos.png) no-repeat 5px 5px;
+	background: url(img/icons/infos.png) no-repeat 5px 5px;
 	color: #066;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -109,12 +109,12 @@ button {
 
 button.submit {
 	padding-left: 22px;
-	background-image: url(icons/valid.png);
+	background-image: url(img/icons/valid.png);
 }
 
 button.reset {
 	padding-left: 22px;
-	background-image: url(icons/reset.png);
+	background-image: url(img/icons/reset.png);
 }
 
 
@@ -188,7 +188,7 @@ dl.changelog dd div.version {
 	color: #000;
 	padding: 3px 2px 2px 24px;
 	cursor: pointer;
-	background: url(icons/calendar.png) no-repeat 2px center;
+	background: url(img/icons/calendar.png) no-repeat 2px center;
 }
 
 #log {
@@ -250,27 +250,27 @@ dl.changelog dd div.version {
 /** Icones **/
 
 #menu .config div {
-	background-image : url(icons/config.png);
+	background-image : url(img/icons/config.png);
 }
 
 #menu .user div {
-	background-image : url(icons/user.png);
+	background-image : url(img/icons/user.png);
 }
 
 #menu .mods div {
-	background-image : url(icons/mods.png);
+	background-image : url(img/icons/mods.png);
 }
 
 #menu .log div {
-	background-image : url(icons/log.png);
+	background-image : url(img/icons/log.png);
 }
 
 #menu .infos div {
-	background-image : url(icons/infos.png);
+	background-image : url(img/icons/infos.png);
 }
 
 #menu .about div {
-	background-image : url(icons/help.png);
+	background-image : url(img/icons/help.png);
 }
 
 /***********************************
@@ -311,7 +311,7 @@ dl.changelog dd div.version {
 	padding: 0px 4px;
 	width: 16px;
 	text-decoration: none;
-	background: url(icons/go.png) no-repeat center center;
+	background: url(img/icons/go.png) no-repeat center center;
 }
 
 #foot {

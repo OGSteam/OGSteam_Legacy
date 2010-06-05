@@ -39,13 +39,13 @@ abstract class Check {
 	}
 	
 	static function galaxy($n) {
-		global $config;
-		return !($n == 0 || $n > $config['num_of_galaxies']);
+		global $server_config;
+		return !($n == 0 || $n > $server_config['num_of_galaxies']);
 	}
 	
 	static function system($n) {
-		global $config;
-		return !($n == 0 || $n > $config['num_of_systems']);
+		global $server_config;
+		return !($n == 0 || $n > $server_config['num_of_systems']);
 	}
 	
 	static function stats_type1($string) {
@@ -61,10 +61,10 @@ abstract class Check {
 	}
 	
 	static function coords($string, $exp = 0) {
-		global $config;
+		global $server_config;
 		if ($string == "unknown") return true; //cas avec une seule planète
 		if (!preg_match('!^([0-9]{1,2}):([0-9]{1,3}):([0-9]{1,2})$!Usi', $string, $match)) return false;
-		return !($match[1] < 1 || $match[2] < 1 || $match[3] < 1 || $match[1] > $config['num_of_galaxies'] || $match[2] > $config['num_of_systems'] || ($exp ? ($match[3] != 16) : ($match[3] > 15))) ;
+		return !($match[1] < 1 || $match[2] < 1 || $match[3] < 1 || $match[1] > $server_config['num_of_galaxies'] || $match[2] > $server_config['num_of_systems'] || ($exp ? ($match[3] != 16) : ($match[3] > 15))) ;
 	}
 	
 	static function date($d) {
@@ -89,20 +89,8 @@ abstract class Check {
 	
 	static function universe($str) {
 		$universe = false;//'http://uni0.ogame.fr';
-		if(!defined('CARTO')) {
-			if (preg_match('!(uni[0-9]+\\.ogame\\.[A-Z.]+)(\\/|$)!Ui', $str, $matches)) 
+		if (preg_match('!([a-z0-9]+.ogame\\.[A-Z.]+)(\\/|$)!Ui', $str, $matches)) 
 				$universe = 'http://'.strtolower($matches[1]);
-		}
-		else if(CARTO == 'OGSpy') {
-			if (preg_match('!([a-z0-9]+.ogame\\.[A-Z.]+)(\\/|$)!Ui', $str, $matches)) 
-				$universe = 'http://'.strtolower($matches[1]);
-		}
-		else if(CARTO == 'UniSpy') {
-			//echo '$universe'.$str;
-			if (preg_match('!((bt|testing|(beta[0-9]+)|b1)\\.e-univers\\.[A-Z.]+)(\\/|$)!Ui', $str, $matches)) 
-				$universe = 'http://'.strtolower($matches[1]);
-			//echo '|'.$universe;
-		}
 		return $universe;
 	}
 	
