@@ -13,18 +13,18 @@ abstract class Callback {
 	
 	public static function load($root) {
 		if (isset(self::$instances[$root])) return self::$instances[$root];
-		if (!file_exists('mod/'.$root.'/_xtense.php')) throw new Exception(__('callback file exists'));
+		if (!file_exists('mod/'.$root.'/_xtense.php')) throw new Exception('Le fichier de lien n&#039;existe pas');
 		
 		require_once('mod/'.$root.'/_xtense.php');
 		$class = $root.'_Callback';
 		
-		if (!class_exists($class)) throw new Exception(__('callback class exists', $class));
+		if (!class_exists($class)) throw new Exception('La classe "%s" n&#039;existe pas dans le fichier de lien');
 		
 		$call = new $class();
 		$call->setRoot($root);
 		
-		if (!$call instanceof Callback) throw new Exception(__('callback class abstract', $class));
-		if (!$call->validVersion()) throw new Exception(__('callback version',$call->version));
+		if (!$call instanceof Callback) throw new Exception('La classe "%s" doit h&eacute;riter de la classe abstraite "Callback"');
+		if (!$call->validVersion()) throw new Exception('Le mod requiert une version de Xtense plus recente ('.$call->version.')');
 		
 		self::$instances[$root] = $call;
 		
