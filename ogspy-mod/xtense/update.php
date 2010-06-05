@@ -13,4 +13,7 @@ list($version, $root) = $db->sql_fetch_row($db->sql_query("SELECT version, root 
 
 require_once("mod/{$root}/includes/config.php");
 
+$query = "UPDATE ".TABLE_MOD." SET `version`='{$mod_version}' WHERE `action`='xtense'";
+$db->sql_query($query);
+
 ?>
