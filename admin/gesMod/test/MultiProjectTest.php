@@ -1,6 +1,6 @@
 <?php
 require_once 'PHPUnit/Framework.php';
-require_once 'inc/common.php';
+require_once 'common.php';
 
 class MultiProjectTest extends PHPUnit_Framework_TestCase {
 	public function testMultiProject() {
