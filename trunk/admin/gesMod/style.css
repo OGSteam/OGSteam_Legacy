@@ -1,0 +1,33 @@
+li > a {
+	color: inherit;
+}
+
+.stable {
+	color: #008000;
+	font-weight: bold;
+}
+
+.rc {
+	color: #d4a017;
+}
+
+.beta {
+	color: #ff8041;
+}
+
+.alpha {
+	color: #800000;
+}
+
+.rev {
+	color: #808080;
+	font-style: italic;
+}
+
+table.bordered, table.bordered td {
+	border: 1px solid #000;
+}
+
+table.bordered td {
+	padding: 2px 5px;
+}

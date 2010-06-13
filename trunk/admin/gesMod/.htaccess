@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^xtense/$ http://update.ogsteam.fr/xtense/latest.php [L]
+RewriteRule ^firespy/$ http://update.ogsteam.fr/firespy/latest.php [L]
