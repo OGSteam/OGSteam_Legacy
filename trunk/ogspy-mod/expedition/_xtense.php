@@ -4,13 +4,13 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 class eXpedition_Callback extends Callback {
-        public $version = '2.0b8';
+        public $version = '2.3.0';
         public function eXpedition_xtense2_integration($expedition){
-			global $io,$user;
+			global $io,$user_data;
 			// Si vous avez des questions sur cet algorithme de vérification à 2F30 adressez-vous à unibozu sur le forum
 			$checksomme = 0;
 			foreach ($expedition as $exp)
-				if(eXpedition_analyse_moi_ce_rapport($user['id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
+				if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
 					$checksomme++;
 			if($checksomme>0)
 				$io->append_call_message("Un total de {$checksomme} rapports d'expéditions ont été enregistrés", Io::SUCCESS);
@@ -31,7 +31,7 @@ class eXpedition_Callback extends Callback {
 
 
 global $xtense_version,$table_prefix;
-$xtense_version = "2.0b2";
+$xtense_version = "2.3.0";
 
 define("TABLE_EXPEDITION",	  $table_prefix."eXpedition");
 define("TABLE_EXPEDITION_TYPE_0", $table_prefix."eXpedition_Type_0");
@@ -41,12 +41,12 @@ define("TABLE_EXPEDITION_TYPE_3", $table_prefix."eXpedition_Type_3");
 
 function eXpedition_xtense2_integration($expedition)
 {
-	global $user;
+	global $user_data;
 	// Si vous avez des questions sur cet algorithme de vérification à 2F30 adressez-vous à unibozu sur le forum
 	$checksomme = 0;
 	foreach ($expedition as $exp)
 	{
-		if(eXpedition_analyse_moi_ce_rapport($user['id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
+		if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
 		{
 			$checksomme++;
 		}
@@ -60,7 +60,7 @@ function eXpedition_xtense2_integration($expedition)
 // analyser les rapports ajoutés
 function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $content)
 {
-	global $sql;
+	global $db;
 	$eXpXtense2Debug = false;
 	// Tout d'abord si il a été soumis un RExp :
 	$regExVaiss =     "#Votre\sflotte\ss'est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss'y\ssont\sjoints\s:(.+)#";
@@ -177,19 +177,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_sys = $systeme 
 			and type = 2";
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");		
-		if(!$sql->check($query))
+		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
 				values ('', $uid, $timestmp, $galaxy, $systeme, 2)";
-			$sql->query($query);
-			$idInsert = $sql->insert_id();
+			$db->sql_query($query);
+			$idInsert = $db->sql_insertid();
 			$query = 
 				"Insert into ".TABLE_EXPEDITION_TYPE_2." 
 				(id, id_eXpedition, pt, gt, cle, clo, cr, vb, vc, rec, se, bmb, dst, tra, units)
 				values ('', $idInsert, $pt, $gt, $cle, $clo, $cr, $vb, $vc, $rec, $se, $bmb, $dst, $tra, $units)";
-			$sql->query($query);
+			$db->sql_query($query);
 		}	
 		else
 		{
@@ -256,19 +256,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_sys = $systeme 
 			and type = 1";
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
-		if(!$sql->check($query))
+		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
 				values ('', $uid, $timestmp, $galaxy, $systeme, 1)";
-			$sql->query($query);
-			$idInsert = $sql->insert_id();
+			$db->sql_query($query);
+			$idInsert = $db->sql_insertid();
 			$query = 
 				"Insert into ".TABLE_EXPEDITION_TYPE_1." 
 				(id, id_eXpedition, typeRessource, metal, cristal, deuterium, antimatiere) 
 				values ('', $idInsert, $typeRess, $met, $cri, $deut, $antimat)";
-			$sql->query($query);
+			$db->sql_query($query);
 		}		
 		else
 		{
@@ -297,19 +297,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_galaxie = $galaxy 
 			and pos_sys = $systeme and type = 3";
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
-		if(!$sql->check($query))
+		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
 				values ('', $uid, $timestmp, $galaxy, $systeme, 3)";
-			$sql->query($query);
-			$idInsert = $sql->insert_id();
+			$db->sql_query($query);
+			$idInsert = $db->sql_insertid();
 			$query = 
 				"Insert into ".TABLE_EXPEDITION_TYPE_3." 
 				(id, id_eXpedition, typeRessource)
 				 values ('', $idInsert, 0)";
-			$sql->query($query);
+			$db->sql_query($query);
 		}
 		else
 		{
@@ -338,19 +338,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_galaxie = $galaxy 
 			and pos_sys = $systeme and type = 3";
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
-		if(!$sql->check($query))
+		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
 				values ('', $uid, $timestmp, $galaxy, $systeme, 3)";
-			$sql->query($query);
-			$idInsert = $sql->insert_id();
+			$db->sql_query($query);
+			$idInsert = $db->sql_insertid();
 			$query = 
 				"Insert into ".TABLE_EXPEDITION_TYPE_3." 
 				(id, id_eXpedition, typeRessource)
 				 values ('', $idInsert, 0)";
-			$sql->query($query);
+			$db->sql_query($query);
 		}
 		else
 		{
@@ -379,19 +379,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_sys = $systeme 
 			and type = 0";
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
-		if(!$sql->check($query))
+		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
 				values ('', $uid, $timestmp, $galaxy, $systeme, 0)";
-			$sql->query($query);
-			$idInsert = $sql->insert_id();
+			$db->sql_query($query);
+			$idInsert = $db->sql_insertid();
 			$query = 
 				"Insert into ".TABLE_EXPEDITION_TYPE_0." 
 				(id, id_eXpedition, typeVitesse) 
 				values ('', $idInsert, 0)"; //TODO : Choisir le type !
-			$sql->query($query);
+			$db->sql_query($query);
 		}
 		else
 		{

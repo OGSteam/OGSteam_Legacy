@@ -1,5 +1,5 @@
 <?php
-	require_once('mod/Xtense/class/Callback.php');
+	require_once("mod/{$root}/includes/Callback.php");
 
 	// Vidange de la table
 	$db->sql_query('TRUNCATE TABLE `'.TABLE_XTENSE_CALLBACKS.'`');
@@ -22,7 +22,7 @@
 	        foreach ($call->getCallbacks() as $k => $c) { 
 	                try { 
 	                        if (empty($c)) continue; 
-	                        if (!isset($c['function'], $c['type'])) throw new Exception('Donn&eacute;es sur le lien invalides : '.$k)); 
+	                        if (!isset($c['function'], $c['type'])) throw new Exception('Donn&eacute;es sur le lien invalides : '.$k); 
 	                        if (!in_array($c['type'], $callbackTypesNames)) throw new Exception('Type de lien ('.$c['type'].') invalide'); 
 	                        if (!isset($c['active'])) $c['active'] = 1; 
 	                        if (!method_exists($call, $c['function'])) throw new Exception('La m&eacute;thode "'.$c['function'].'" n&#039;existe pas'); 
@@ -38,4 +38,4 @@
 	        $db->sql_query('REPLACE INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES '.implode(', ', $insert)); 
 	} 
 	return $callInstall; 
-	?>
+?>

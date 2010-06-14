@@ -21,7 +21,7 @@ function install_callbacks ($action, $data, $version = null) {
 	define('XTENSE_LITE_CONFIG', 1);
 	require_once('mod/Xtense2/includes/config.php');
 	
-	if ($version != null && version_compare($version, MOD_VERSION) == 1) return false;
+	if ($version != null && version_compare($version, MOD_VERSION, '<=')) return false;
 	
 	$query = $db->sql_query('SELECT id FROM '.TABLE_MOD.' WHERE action = "'.$action.'"');
 	list($mod_id) = mysql_fetch_row($query);
@@ -79,6 +79,7 @@ function dump() {
 }
 
 function move_plugin () {	
+	global $root;
 	if (file_exists('./xtense.php') && !is_writable('./xtense.php'))
 		return false;
 	
@@ -89,7 +90,7 @@ function move_plugin () {
 	if (file_exists('./xtense.php'))
 		return false;
 	
-	@copy('mod/Xtense/xtense.php', './xtense.php');
+	@copy("mod/{$root}/xtense.php", './xtense.php');
 	if (!file_exists('./xtense.php'))
 		return false;
 	
