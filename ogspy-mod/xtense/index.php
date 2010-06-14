@@ -168,7 +168,6 @@ if ($page == 'mods') {
 	);
 	
 	while ($data = $db->sql_fetch_assoc($query)) {
-		if(!version_compare($server_config['version'], '3.99', '<')) $data['title'] = mod_info_title($data['root']);
 		$data['type'] = $data_names[$data['type']];
 		$callbacks[] = $data;
 		$calls_id[] = $data['id'];

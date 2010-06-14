@@ -11,7 +11,7 @@ if(class_exists("Callback")){
 	class Ressources_Callback extends Callback {
 		
 		// version minimale de la barre.
-		public $version = '2.0b9';
+		public $version = '2.3.0';
 		
 		// Définition (utilisé à l'installation de xtense)
 		public function getCallbacks() {return array(array('function' => 'get_overview', 'type' => 'overview'));}
@@ -20,7 +20,7 @@ if(class_exists("Callback")){
 		public function get_overview($data) {
 			
 			// Globals nécessaire (base de donnée, InputOuput vers la barre, utilisateur, et préfixe de la table
-			global $sql,$io,$user,$table_prefix;
+			global $db,$io,$user_data,$table_prefix;
 			
 			// Définition du nom de la table (à importer d'un autre fichier pour ne pas l'avoir en multiple dans le dossier?)
 			define("TABLE_USER_RESSOURCES",$table_prefix."user_ressources");
@@ -30,15 +30,15 @@ if(class_exists("Callback")){
 			
 			// Test si on a trouvé un ID et si les ressources sont présente (sécurité contre les plus anciennes barre d'outils qui ne renvoient pas les ressources);
 			if (isset($home['id']) && isset($data['ressources'][1])) {
-				$request = "SELECT metal FROM ".TABLE_USER_RESSOURCES." WHERE user_id = ".$user['id']." and planet_id = ".$home['id'];
-				if ($sql->check($request) == 0) {
+				$request = "SELECT metal FROM ".TABLE_USER_RESSOURCES." WHERE user_id = ".$user_data['user_id']." and planet_id = ".$home['id'];
+				if ($db->sql_numrows($db->sql_query($request)) == 0) {
 					//nouvel enregistrement
-					$request = "INSERT INTO ".TABLE_USER_RESSOURCES." (user_id, planet_id, timestamp, metal, crystal, deuterium) VALUES (".$user['id'].", ".$home['id'].", ".time().", ".$data['ressources'][0].", ".$data['ressources'][1].", ".$data['ressources'][2].")";
-					$sql->query($request);
+					$request = "INSERT INTO ".TABLE_USER_RESSOURCES." (user_id, planet_id, timestamp, metal, crystal, deuterium) VALUES (".$user_data['user_id'].", ".$home['id'].", ".time().", ".$data['ressources'][0].", ".$data['ressources'][1].", ".$data['ressources'][2].")";
+					$db->sql_query($request);
 				} else {
 					// enregistrement existant
-					$request = "UPDATE ".TABLE_USER_RESSOURCES." set timestamp = ".time().", metal = ".$data['ressources'][0].", crystal = ".$data['ressources'][1].", deuterium = ".$data['ressources'][2]." WHERE user_id = ".$user['id']." and planet_id = ".$home['id'];
-					$sql->query($request);
+					$request = "UPDATE ".TABLE_USER_RESSOURCES." set timestamp = ".time().", metal = ".$data['ressources'][0].", crystal = ".$data['ressources'][1].", deuterium = ".$data['ressources'][2]." WHERE user_id = ".$user_data['user_id']." and planet_id = ".$home['id'];
+					$db->sql_query($request);
 				}
 			}
 			return Io::SUCCESS;
