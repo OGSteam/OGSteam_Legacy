@@ -137,7 +137,6 @@ if ($lang->CurrentAction == "gridadd") {
 ?>
 <p><span class="phpmaker" style="white-space: nowrap;"><?php echo $Language->Phrase("TblTypeTABLE") ?><?php echo $lang->TableCaption() ?>
 </span></p>
-<?php if ($Security->IsLoggedIn()) { ?>
 <?php if ($lang->Export == "" && $lang->CurrentAction == "") { ?>
 <a href="javascript:ew_ToggleSearchPanel(lang_list);" style="text-decoration: none;"><img id="lang_list_SearchImage" src="images/collapse.gif" alt="" width="9" height="9" border="0"></a><span class="phpmaker">&nbsp;<?php echo $Language->Phrase("Search") ?></span><br>
 <div id="lang_list_SearchPanel">
@@ -157,7 +156,6 @@ if ($lang->CurrentAction == "gridadd") {
 </table>
 </form>
 </div>
-<?php } ?>
 <?php } ?>
 <?php
 if (EW_DEBUG_ENABLED)
@@ -438,20 +436,14 @@ if ($rs)
 <?php //if ($lang_list->lTotalRecs > 0) { ?>
 <span class="phpmaker">
 <?php if ($lang->CurrentAction <> "gridadd" && $lang->CurrentAction <> "gridedit") { // Not grid add/edit mode ?>
-<?php if ($Security->IsLoggedIn()) { ?>
 <a href="<?php echo $lang_list->AddUrl ?>"><?php echo $Language->Phrase("AddLink") ?></a>&nbsp;&nbsp;
 <a href="<?php echo $lang_list->InlineAddUrl ?>"><?php echo $Language->Phrase("InlineAddLink") ?></a>&nbsp;&nbsp;
 <a href="<?php echo $lang_list->GridAddUrl ?>"><?php echo $Language->Phrase("GridAddLink") ?></a>&nbsp;&nbsp;
-<?php } ?>
-<?php if ($Security->IsLoggedIn()) { ?>
 <?php if ($lang_list->lTotalRecs > 0) { ?>
 <a href="<?php echo $lang_list->GridEditUrl ?>"><?php echo $Language->Phrase("GridEditLink") ?></a>&nbsp;&nbsp;
 <?php } ?>
-<?php } ?>
 <?php if ($lang_list->lTotalRecs > 0) { ?>
-<?php if ($Security->IsLoggedIn()) { ?>
 <a href="" onclick="ew_SubmitSelected(document.flanglist, '<?php echo $lang_list->MultiDeleteUrl ?>');return false;"><?php echo $Language->Phrase("DeleteSelectedLink") ?></a>&nbsp;&nbsp;
-<?php } ?>
 <?php } ?>
 <?php } else { // Grid add/edit mode ?>
 <?php if ($lang->CurrentAction == "gridadd") { ?>
@@ -624,14 +616,6 @@ class clang_list {
 	function Page_Init() {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $lang;
-
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
 
 		// Create form object
 		$objForm = new cFormObj();
@@ -1290,21 +1274,21 @@ class clang_list {
 		$this->ListOptions->Add("edit");
 		$item =& $this->ListOptions->Items["edit"];
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->IsLoggedIn();
+		$item->Visible = TRUE;
 		$item->OnLeft = FALSE;
 
 		// "copy"
 		$this->ListOptions->Add("copy");
 		$item =& $this->ListOptions->Items["copy"];
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->IsLoggedIn();
+		$item->Visible = TRUE;
 		$item->OnLeft = FALSE;
 
 		// "checkbox"
 		$this->ListOptions->Add("checkbox");
 		$item =& $this->ListOptions->Items["checkbox"];
 		$item->CssStyle = "white-space: nowrap;";
-		$item->Visible = $Security->IsLoggedIn();
+		$item->Visible = True;
 		$item->OnLeft = FALSE;
 		$item->Header = "<input type=\"checkbox\" name=\"key\" id=\"key\" class=\"phpmaker\" onclick=\"lang_list.SelectAllKey(this);\">";
 
@@ -1348,7 +1332,7 @@ class clang_list {
 
 		// "edit"
 		$oListOpt =& $this->ListOptions->Items["edit"];
-		if ($Security->IsLoggedIn() && $oListOpt->Visible) {
+		if ($oListOpt->Visible) {
 			$oListOpt->Body = "<a href=\"" . $this->EditUrl . "\">" . $Language->Phrase("EditLink") . "</a>";
 			$oListOpt->Body .= "<span class=\"ewSeparator\">&nbsp;|&nbsp;</span>";
 			$oListOpt->Body .= "<a class=\"ewInlineLink\" href=\"" . $this->InlineEditUrl . "#" . $this->PageObjName . "_row_" . $this->lRowCnt . "\">" . $Language->Phrase("InlineEditLink") . "</a>";
@@ -1356,7 +1340,7 @@ class clang_list {
 
 		// "copy"
 		$oListOpt =& $this->ListOptions->Items["copy"];
-		if ($Security->IsLoggedIn() && $oListOpt->Visible) {
+		if ($oListOpt->Visible) {
 			$oListOpt->Body = "<a href=\"" . $this->CopyUrl . "\">" . $Language->Phrase("CopyLink") . "</a>";
 			$oListOpt->Body .= "<span class=\"ewSeparator\">&nbsp;|&nbsp;</span>";
 			$oListOpt->Body .= "<a href=\"" . $this->InlineCopyUrl . "\">" . $Language->Phrase("InlineCopyLink") . "</a>";
@@ -1364,7 +1348,7 @@ class clang_list {
 
 		// "checkbox"
 		$oListOpt =& $this->ListOptions->Items["checkbox"];
-		if ($Security->IsLoggedIn() && $oListOpt->Visible)
+		if ($oListOpt->Visible)
 			$oListOpt->Body = "<input type=\"checkbox\" name=\"key_m[]\" id=\"key_m[]\" value=\"" . ew_HtmlEncode($lang->id_lang->CurrentValue) . "\" class=\"phpmaker\" onclick='ew_ClickMultiCheckbox(this);'>";
 		if ($lang->CurrentAction == "gridedit")
 			$this->sMultiSelectKey .= "<input type=\"hidden\" name=\"k" . $this->lRowIndex . "_key\" id=\"k" . $this->lRowIndex . "_key\" value=\"" . $lang->id_lang->CurrentValue . "\">";

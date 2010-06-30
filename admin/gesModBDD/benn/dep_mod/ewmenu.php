@@ -22,13 +22,11 @@ function MenuItem_Adding(&$Item) {
 // Generate all menu items
 $RootMenu = new cMenu("RootMenu");
 $RootMenu->IsRoot = TRUE;
-$RootMenu->AddMenuItem(1, $Language->MenuPhrase("1", "MenuText"), "langlist.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(2, $Language->MenuPhrase("2", "MenuText"), "mod_langlist.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(3, $Language->MenuPhrase("3", "MenuText"), "mod_versionlist.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(4, $Language->MenuPhrase("4", "MenuText"), "modulelist.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(5, $Language->MenuPhrase("5", "MenuText"), "ogspy_versionlist.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(-1, $Language->Phrase("Logout"), "logout.php", -1, "", IsLoggedIn());
-$RootMenu->AddMenuItem(-1, $Language->Phrase("Login"), "login.php", -1, "", !IsLoggedIn() && substr(@$_SERVER["URL"], -1 * strlen("login.php")) <> "login.php");
+$RootMenu->AddMenuItem(1, $Language->MenuPhrase("1", "MenuText"), "langlist.php", -1, "", TRUE);
+$RootMenu->AddMenuItem(2, $Language->MenuPhrase("2", "MenuText"), "mod_langlist.php", -1, "", TRUE);
+$RootMenu->AddMenuItem(3, $Language->MenuPhrase("3", "MenuText"), "mod_versionlist.php", -1, "", TRUE);
+$RootMenu->AddMenuItem(4, $Language->MenuPhrase("4", "MenuText"), "modulelist.php", -1, "", TRUE);
+$RootMenu->AddMenuItem(5, $Language->MenuPhrase("5", "MenuText"), "ogspy_versionlist.php", -1, "", TRUE);
 $RootMenu->Render();
 ?>
 </div>

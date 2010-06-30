@@ -259,14 +259,6 @@ class cmodule_edit {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $module;
 
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-
 		// Create form object
 		$objForm = new cFormObj();
 
