@@ -217,18 +217,18 @@ class clang {
 			case "add":
 			case "register":
 			case "addopt":
-				return FALSE;
+				return ;
 			case "edit":
 			case "update":
-				return FALSE;
+				return ;
 			case "delete":
-				return FALSE;
+				return ;
 			case "view":
-				return FALSE;
+				return ;
 			case "search":
-				return FALSE;
+				return ;
 			default:
-				return FALSE;
+				return ;
 		}
 	}
 

@@ -342,14 +342,6 @@ class cmod_lang_add {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $mod_lang;
 
-		// Security
-		$Security = new cAdvancedSecurity();
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if (!$Security->IsLoggedIn()) {
-			$Security->SaveLastUrl();
-			$this->Page_Terminate("login.php");
-		}
-
 		// Create form object
 		$objForm = new cFormObj();
 

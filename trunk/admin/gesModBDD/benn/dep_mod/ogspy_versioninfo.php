@@ -240,18 +240,18 @@ class cogspy_version {
 			case "add":
 			case "register":
 			case "addopt":
-				return FALSE;
+				return ;
 			case "edit":
 			case "update":
-				return FALSE;
+				return ;
 			case "delete":
-				return FALSE;
+				return ;
 			case "view":
-				return FALSE;
+				return ;
 			case "search":
-				return FALSE;
+				return ;
 			default:
-				return FALSE;
+				return ;
 		}
 	}
 
@@ -710,14 +710,12 @@ class cogspy_version {
 	}
 
 		// Row Inserting event
-	function Row_Inserting(&$rs) {
-
-	    // Enter your code here
-	    // To cancel, set return value to FALSE     
-
-	    $rs["v"] = $rs["version"]   .".".   $rs["major"]  .".".  $rs["minor"];
-	    return $rs;
-	}
+function Row_Inserting(&$rs) {
+    // Enter your code here
+    // To cancel, set return value to FALSE     
+    $rs["v"] = $rs["version"]   .".".   $rs["major"]  .".".  $rs["minor"];
+    return $rs;
+}
 
 	// Row Inserted event
 	function Row_Inserted(&$rs) {
@@ -726,14 +724,12 @@ class cogspy_version {
 	}
 
 		// Row Updating event
-	function Row_Updating(&$rsold, &$rsnew) {
-
-	    // Enter your code here
-	    // To cancel, set return value to FALSE
-
-	    $rsnew["v"] = $rsnew["version"]   .".".   $rsnew["major"]  .".".  $rsnew["minor"];
-	    return $rsnew;
-	}         
+function Row_Updating(&$rsold, &$rsnew) {
+    // Enter your code here
+    // To cancel, set return value to FALSE
+    $rsnew["v"] = $rsnew["version"]   .".".   $rsnew["major"]  .".".  $rsnew["minor"];
+    return $rsnew;
+}         
 
 	// Row Updated event
 	function Row_Updated(&$rsold, &$rsnew) {

@@ -16,7 +16,7 @@ define("EW_DEFAULT_DATE_FORMAT", "dd/mm/yyyy", TRUE); // Default date format
 define("EW_DEFAULT_DATE_FORMAT_ID", "7", TRUE); // Default date format
 define("EW_DATE_SEPARATOR", "/", TRUE); // Date separator
 define("EW_PROJECT_NAME", "project1", TRUE); // Project name
-define("EW_RANDOM_KEY", 'Apm372QXu0DqwtlX', TRUE); // Random key for encryption
+define("EW_RANDOM_KEY", '13Kht7Z7qLN2t7V7', TRUE); // Random key for encryption
 define("EW_PROJECT_STYLESHEET_FILENAME", "project1.css", TRUE); // Project stylesheet file name
 define("EW_EMAIL_CHARSET", "utf-8", TRUE); // Email charset
 define("EW_EMAIL_KEYWORD_SEPARATOR", "", TRUE); // Email keyword separator

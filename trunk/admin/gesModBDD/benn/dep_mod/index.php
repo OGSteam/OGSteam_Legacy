@@ -132,9 +132,6 @@ class cdefault {
 		global $gsExport, $gsExportFile, $UserProfile, $Language, $Security, $objForm;
 		global $mod_version;
 
-		// Security
-		$Security = new cAdvancedSecurity();
-
 		// Global Page Loading event (in userfn*.php)
 		Page_Loading();
 
@@ -172,23 +169,7 @@ class cdefault {
 	//
 	function Page_Main() {
 		global $Security, $Language;
-		if (!$Security->IsLoggedIn()) $Security->AutoLogin();
-		if ($Security->IsLoggedIn())
 		$this->Page_Terminate("ogspy_versionlist.php"); // Exit and go to default page
-		if ($Security->IsLoggedIn())
-			$this->Page_Terminate("modulelist.php");
-		if ($Security->IsLoggedIn())
-			$this->Page_Terminate("langlist.php");
-		if ($Security->IsLoggedIn())
-			$this->Page_Terminate("mod_langlist.php");
-		if ($Security->IsLoggedIn())
-			$this->Page_Terminate("mod_versionlist.php");
-		if ($Security->IsLoggedIn()) {
-			echo $Language->Phrase("NoPermission");
-			echo "<br><a href=\"logout.php\">" . $Language->Phrase("BackToLogin") . "</a>";
-		} else {
-			$this->Page_Terminate("login.php"); // Exit and go to login page
-		}
 	}
 
 	// Page Load event

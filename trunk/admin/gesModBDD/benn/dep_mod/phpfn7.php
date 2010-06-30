@@ -1352,19 +1352,6 @@ class cAdvancedSecurity {
 	function ValidateUser($usr, $pwd, $autologin) {
 		global $conn, $Language;
 		$ValidateUser = FALSE;
-
-		// Check hard coded admin first
-		if (EW_CASE_SENSITIVE_PASSWORD) {
-			$ValidateUser = (EW_ADMIN_USER_NAME == $usr && EW_ADMIN_PASSWORD == $pwd);
-		} else {
-			$ValidateUser = (strtolower(EW_ADMIN_USER_NAME) == strtolower($usr) &&
-				strtolower(EW_ADMIN_PASSWORD) == strtolower($pwd));
-		}
-		if ($ValidateUser) {
-			$_SESSION[EW_SESSION_STATUS] = "login";
-			$_SESSION[EW_SESSION_SYS_ADMIN] = 1; // System Administrator
-			$this->setCurrentUserName("Administrator"); // Load user name
-		}
 		if (!$ValidateUser)
 			$_SESSION[EW_SESSION_STATUS] = ""; // Clear login status
 		return $ValidateUser;
