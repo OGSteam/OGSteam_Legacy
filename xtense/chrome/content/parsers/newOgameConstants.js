@@ -70,7 +70,7 @@ XnewOgame.Xpaths = {
 		position : 'td[@class="position"]/text()',
 		player : {
 			playername : 'td[@class="name"]//a[contains(@href,"galaxy") and contains(@href,"system") and contains(@href,"position")]/text()',
-			allytag : 'td[@class="name"]//a[contains(@href,"network") or contains(@target,"_ally")]/text()',
+			allytag : 'td[@class="name"]//a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
 			points :  'td[@class="score"]/text()',
 			player_id : 'td[@class="sendmsg"]//a[contains(@href,"writemessage")]/@href',
 			ally_id : 'td[@class="name"]//a[contains(@target,"_ally")]/@href'
@@ -78,7 +78,7 @@ XnewOgame.Xpaths = {
 		
 		ally : {
 			position_ally : 'td[1]/text()',
-			allytag : 'td[2]/a[contains(@href,"network") or contains(@target,"_ally")]/text()',
+			allytag : 'td[2]/a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
 			points :  'td[4]/text()',
 			members : 'td[5]/text()',
 			ally_id : 'td[2]/a[contains(@target,"_ally")]/@href'
