@@ -356,7 +356,7 @@ var XnewOgame = {
 				
 		var planetData = this.getPlanetData();
 		if(planetData.coords == "unknown") {
-			Xconsole("planÃ¨te unique");
+			Xconsole("planète unique");
 			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
 			planetData.coords = coords;
 		}
@@ -978,7 +978,7 @@ var XnewOgame = {
 					if(div == 0){
 						var m = round.match(new RegExp(rcStrings['regxps']['time']));
 						if(m)
-							var date = (Date.UTC(m[3], (m[2]-1), m[1], m[4], [5], m[6]))/1000;
+							var date = (Date.UTC(m[3], (m[2]-1), m[1], m[4], m[5], m[6]))/1000;
 						else
 							var date = Math.ceil((new Date().getTime())/1000);
 					} else {
