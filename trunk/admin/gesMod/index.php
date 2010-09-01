@@ -24,6 +24,12 @@
 					<li><a href="xtense/latest.php">Derni&egrave;res versions</a></li>
 				</ul>
 			</li>
+			<li>Spacspy
+				<ul>
+					<li><a href="spacspy/download.php">T&eacute;l&eacute;chargements</a></li>
+					<li><a href="spacspy/latest.php">Derni&egrave;res versions</a></li>
+				</ul>
+			</li>
 		</ul>
 	</body>
 </html>
