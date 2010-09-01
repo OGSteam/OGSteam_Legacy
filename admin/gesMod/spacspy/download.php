@@ -28,13 +28,13 @@ if ( isset($_GET['download']) ) {
 	die;
 }
 
-$ogspy = new Project(REPO, 'ogspy', false);
+$ogspy = new Project(REPO, 'spacspy', false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-		<title>T&eacute;l&eacute;chargement d'OGSPy</title>
+		<title>T&eacute;l&eacute;chargement de SpacSpy</title>
 		<link href="/style.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
