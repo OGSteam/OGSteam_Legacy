@@ -102,16 +102,13 @@ persist="screenX screenY width" buttons="">
           <preference id="handle-defense-pref" name="Xtense.handle-defense" type="bool" />
           <preference id="handle-ranking-pref" name="Xtense.handle-ranking" type="bool" />
           <preference id="handle-messages-pref" name="Xtense.handle-messages" type="bool" />
-          <preference id="handle-rc-pref" name="Xtense.handle-rc" type="bool" />
           <preference id="handle-ally_list-pref" name="Xtense.handle-ally_list" type="bool" />
           <preference id="handle-overview-pref" name="Xtense.handle-overview" type="bool" />
-          <!--<preference id="handle-resources-pref" name="Xtense.handle-resources" type="bool" />-->
-          <preference id="handle-fleetSending-pref" name="Xtense.handle-fleetSending" type="bool" />
-			 
-          <preference id="msg-only_checked-pref" name="Xtense.msg-only_checked" type="bool" />
+		
           <preference id="msg-spy-pref" name="Xtense.msg-spy" type="bool" />
           <preference id="msg-ennemy_spy-pref" name="Xtense.msg-ennemy_spy" type="bool" />
           <preference id="msg-rc-pref" name="Xtense.msg-rc" type="bool" />
+		  <preference id="msg-rc_cdr-pref" name="Xtense.msg-rc_cdr" type="bool" />
           <preference id="msg-msg-pref" name="Xtense.msg-msg" type="bool" />
           <preference id="msg-ally_msg-pref" name="Xtense.msg-ally_msg" type="bool" />
           <preference id="msg-expeditions-pref" name="Xtense.msg-expeditions" type="bool" />
@@ -128,23 +125,23 @@ persist="screenX screenY width" buttons="">
 				
 				<rows>
 					<row flex="1">
-    					<checkbox id="handle-system" preference="handle-system-pref" label="&opt.handle.system;"  />
+    					
     					<checkbox id="handle-buildings" preference="handle-buildings-pref" label="&opt.handle.building;"  />
 						<checkbox id="handle-researchs" preference="handle-researchs-pref" label="&opt.handle.researchs;" />
 						<checkbox id="handle-fleet" preference="handle-fleet-pref" label="&opt.handle.fleet;"  />
 					</row>
 					<row flex="1">
-    					<checkbox id="handle-defense" preference="handle-defense-pref" label="&opt.handle.defense;"  />
-    					<checkbox id="handle-ranking" preference="handle-ranking-pref" label="&opt.handle.ranking;" />
+    					<checkbox id="handle-overview" preference="handle-overview-pref" label="&opt.handle.overview;" />
+						<checkbox id="handle-defense" preference="handle-defense-pref" label="&opt.handle.defense;"  />
 						<checkbox id="handle-messages" preference="handle-messages-pref" label="&opt.handle.messages;"  />
-						<checkbox id="handle-rc" preference="handle-rc-pref" label="&opt.handle.rc;"  />
 					</row>
 					<row flex="1">
     					<checkbox id="handle-ally_list" preference="handle-ally_list-pref" label="&opt.handle.ally_list;"  />
-    					<checkbox id="handle-overview" preference="handle-overview-pref" label="&opt.handle.overview;" />
-						<!--<checkbox id="handle-resources" preference="handle-resources-pref" label="&opt.handle.resources;" />-->
-						<checkbox id="handle-fleetSending" preference="handle-fleetSending-pref" label="&opt.handle.fleetSending;" />
+						<checkbox id="handle-system" preference="handle-system-pref" label="&opt.handle.system;"  />
+						<checkbox id="handle-ranking" preference="handle-ranking-pref" label="&opt.handle.ranking;" />
+						
 					</row>
+					
 				</rows>
 			</grid>
 		</groupbox>
@@ -159,17 +156,15 @@ persist="screenX screenY width" buttons="">
 				</columns>
 				<rows>
 					<row flex="1">
-    					<checkbox id="msg-only_checked" preference="msg-only_checked-pref" label="&opt.msg.only_checked;" flex="1" />
-    					<checkbox id="msg-spy" preference="msg-spy-pref" label="&opt.msg.spy;" flex="1" />
-						<checkbox id="msg-ennemy_spy" preference="msg-ennemy_spy-pref" label="&opt.msg.ennemy_spy;" flex="1" />
+    					<checkbox id="msg-rc_cdr" preference="msg-rc_cdr-pref" label="&opt.msg.rc_cdr;" flex="1" />
+						<checkbox id="msg-spy" preference="msg-spy-pref" label="&opt.msg.spy;" flex="1" />
+						<checkbox id="msg-msg" preference="msg-msg-pref" label="&opt.msg.msg;" flex="1" />
+						<checkbox id="msg-expeditions" preference="msg-expeditions-pref" label="&opt.msg.expeditions;" flex="1" />
 					</row>
 					<row flex="1">
 						<checkbox id="msg-rc" preference="msg-rc-pref" label="&opt.msg.rc;" flex="1" />
-    					<checkbox id="msg-msg" preference="msg-msg-pref" label="&opt.msg.msg;" flex="1" />
+						<checkbox id="msg-ennemy_spy" preference="msg-ennemy_spy-pref" label="&opt.msg.ennemy_spy;" flex="1" />
     					<checkbox id="msg-ally_msg" preference="msg-ally_msg-pref" label="&opt.msg.ally_msg;" flex="1" />
-					</row>
-					<row flex="1">
-						<checkbox id="msg-expeditions" preference="msg-expeditions-pref" label="&opt.msg.expeditions;" flex="1" />
 					</row>
 				</rows>
 			</grid>
@@ -182,8 +177,8 @@ persist="screenX screenY width" buttons="">
           <preference id="fixpopups-pref" name="Xtense.fixpopups" type="bool" />
           <preference id="autohide-pref" name="Xtense.autohide" type="bool" />
           <preference id="context-menu-pref" name="Xtense.context-menu" type="bool" />
-          <preference id="messages-cache-pref" name="Xtense.messages-cache" type="bool" />
           <preference id="log-display-time-pref" name="Xtense.log-display-time" type="bool" />
+		  <preference id="log-hide_psw-pref" name="Xtense.log-hide_psw" type="bool" />
           <preference id="display-execution-time-pref" name="Xtense.display-execution-time" type="bool" />
           <preference id="display-new-messages-pref" name="Xtense.display-new-messages" type="bool" />
           <preference id="debug-pref" name="Xtense.debug" type="bool" />
@@ -208,9 +203,6 @@ persist="screenX screenY width" buttons="">
 						<checkbox id="autohide" preference="autohide-pref" label="&opt.autohide;" />
 						<checkbox id="context-menu" preference="context-menu-pref" label="&opt.context-menu;" />
 					</row>
-					<row>
-						<checkbox id="messages-cache" preference="messages-cache-pref" label="&opt.messages-cache;" />
-					</row>
 				</rows>
 			</grid>
 		</groupbox>
@@ -220,7 +212,7 @@ persist="screenX screenY width" buttons="">
 			<hbox flex="1" align="center">
 				<checkbox id="log-display-time" preference="log-display-time-pref" label="&opt.log-display-time;" />
 				<checkbox id="display-execution-time" preference="display-execution-time-pref" label="&opt.display-execution-time;" />
-				<checkbox id="display-new-messages" preference="display-new-messages-pref" label="&opt.display-new-messages;" />
+				<checkbox id="log-hide_psw" preference="log-hide_psw-pref" label="&opt.log-hide_psw;" />
 			</hbox>
 			<hbox flex="1" align="center">
 				<label value="&opt.log-time-format;" control="log-time-format" />
@@ -235,6 +227,9 @@ persist="screenX screenY width" buttons="">
 			<hbox flex="1" align="center">
 				<label value="&opt.log-max-size;" control="log-max-size" />
 				<textbox label="&opt.log-max-size;" id="log-max-size" maxlength="3" style="width: 40px;" preference="log-max-size-pref"/>
+			</hbox>
+			<hbox flex="1" align="center">
+				<checkbox id="display-new-messages" preference="display-new-messages-pref" label="&opt.display-new-messages;" />
 			</hbox>
 		</groupbox>
 		

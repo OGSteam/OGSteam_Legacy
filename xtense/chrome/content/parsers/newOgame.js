@@ -67,9 +67,7 @@ var XnewOgame = {
 			this.url = url;
 			this.Tab = Tab;
             this.win = window;
-            //Xconsole("sandbox:"+sandbox);
-			
-			//Xconsole(url);
+
 			if (!(this.universe = this.getUniverse(url))) return false;
 			
 			if (!Xservers.check(this.universe)) {
@@ -94,7 +92,6 @@ var XnewOgame = {
 		
 		try {
 			// Ne pas mettre d'erreur pour la page de login
-			//Xconsole('Xtense.active'+Xtense.active);
 			if (!Xtense.active || !page) 
 				return false;
 			
@@ -161,8 +158,8 @@ var XnewOgame = {
 		var universe = url.match(/^http:\/\/[a-z0-9]{4,10}\.ogame\.[a-z]{2,4}/gi);
 		if(universe && !url.match(/^http:\/\/board\.ogame\.[a-z]{2,4}/gi))
 			return universe[0];
-		else if (url.match(/^http:\/\/localhost\/ogameV1\//gi))
-			return "http://andromeda.ogame.fr";
+		else if (url.match(/^http:\/\/localhost\/ogame\//gi))
+			return "http://uni101.ogame.fr";
 		else 
 			return false;
 	},
@@ -194,7 +191,7 @@ var XnewOgame = {
 	getPage: function(url) {
 		try {
 			this.setParams(url);
-			// Nettoyage de la chaine, on ne prend que ce qu'il y a aprï¿½s index.php?page(>>)
+			// Nettoyage de la chaine, on ne prend que ce qu'il y a apras index.php?page(>>)
 			if((url.indexOf('page=')<0 || typeof this.params['page']=='undefined') && url.match(/\/$/)) //si pas de parametre, on n'est pas sur le jeu
 				return false;
 			switch(this.params['page']) {
@@ -249,7 +246,6 @@ var XnewOgame = {
 			else {
 				var match = null;
 				if ((match = Response.content.match(/\(\{.*\}\)/))) {
-					//Xconsole("data: "+match[1]);
 					data = eval(match[0]);
 					// Message d'avertissement
 					type = XLOG_WARNING;
@@ -323,9 +319,6 @@ var XnewOgame = {
 		}
 	},
 
-	//------ PARSING
-
-	// Recuperation des coords actuelles + type de planete + nom
 	getPlanetData : function () {
 		var paths = this.Xpaths.planetData;
 
@@ -356,7 +349,7 @@ var XnewOgame = {
 				
 		var planetData = this.getPlanetData();
 		if(planetData.coords == "unknown") {
-			Xconsole("planète unique");
+			Xconsole("planÃ¨te unique");
 			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
 			planetData.coords = coords;
 		}
@@ -381,7 +374,6 @@ var XnewOgame = {
 		var Request = this.newRequest();
 		Request.set('type', 'buildings');
 		
-		// Get the lesvels of researchs
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
 		var tabLevel = new Array();
 		if(levels.snapshotLength > 0){
@@ -393,8 +385,6 @@ var XnewOgame = {
 		   	}
 		}
 		
-		
-		// Set the planet data AND the levels of researchs
 		Request.set(this.getPlanetData());
 		if(this.planet_type == '0'){
 			var send = {
@@ -423,10 +413,8 @@ var XnewOgame = {
 	parseResearchs : function () {
 		var paths = XnewOgame.Xpaths.levels;		
 		this.Tab.setStatus(Xl('researchs detected'), XLOG_NORMAL, {url: this.url});
-		// New request type=researchs
 		var Request = this.newRequest();
 		Request.set('type', 'researchs');
-		// Get the lesvels of researchs
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
 		var tabLevel = new Array();
 		
@@ -438,7 +426,7 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		// Set the planet data AND the levels of researchs
+		
 		Request.set(this.getPlanetData());
 		Request.set(
 			{
@@ -480,7 +468,7 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		// Set the planet data AND the levels of buildings
+		
 		Request.set(this.getPlanetData());
 		Request.set(
 			{
@@ -508,29 +496,25 @@ var XnewOgame = {
 	},
 	
 	parseTableStruct : function() {
-		//methode RegExp
 		var reg = new RegExp(this.regexps.parseTableStruct,'g');
 		var reg2 = new RegExp(this.regexps.parseTableStruct);
 		var input = this.doc.body.innerHTML;
 		var m = input.match(reg);
 		var m2 = null;
 		
-		//Xconsole(reg.toString()+' | '+m);
-		if(!m)return false;
-		//Xdump(m.length);
+		if(!m)
+			return false;
 		var Request = this.newRequest();
 		for (var i = 0 ; i < m.length; i++ ) {
 			m2 = m[i].match(reg2);
 			var id = m2[1].trimInt();
 			var fieldName = this.getDbFieldName(id);
-			//Xconsole(this.page+' '+i+": "+m2[1].trimInt() +","+ m2[2].trimInt()+" "+fieldName);
+			
 			Request.set(fieldName, this.parseIntWithMultiplier(m2[2]));
-			//Xdump(m2);
 			Xconsole(this.page+' '+m[i][1]+' '+m[i][2]+' '+this.database[this.page][parseInt(m[i][1])]);
 		}
 		
 		Request.set(this.getPlanetData());
-		//Xdump(this.data);
 		
 		return Request;
 	},
@@ -551,7 +535,7 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		// Set the planet data AND the levels of defense
+		
 		Request.set(this.getPlanetData());
 		Request.set(
 			{
@@ -587,7 +571,7 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		// Set the planet data AND the levels of researchs
+		
 		Request.set(this.getPlanetData());
 		Request.set(
 			{
@@ -614,8 +598,7 @@ var XnewOgame = {
 	parseSystem : function() {
 		var target = this.doc.getElementById('galaxyContent');
 		target.win = this.win;
-		target.addEventListener("DOMNodeInserted", this.parseSystem_Inserted, false); 
-		//Xconsole(target.win);
+		target.addEventListener("DOMNodeInserted", this.parseSystem_Inserted, false);
 	},
 		
 	parseSystem_Inserted : function (event) {
@@ -644,7 +627,6 @@ var XnewOgame = {
 					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'t');
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
 					
-					//Xconsole(i+' '+name+' '+player);
 					if (player == '') {
 						Xconsole('row '+i+' has no player name');
 						continue;
@@ -668,7 +650,6 @@ var XnewOgame = {
 					if(status.snapshotLength>0){
 						status = status.snapshotItem(0);
 						status = status.textContent;
-						//Xconsole(status);
 						status = status.match(/\((.*)\)/);
 						status = status ? status[1] : "";
 						status = status.trimAll();
@@ -719,7 +700,6 @@ var XnewOgame = {
 
 				Request.set('lang',XnewOgame.lang);
 				Xdump(Request.data);
-				//Xdump(Request.Tab.Status);
 				Request.send(XnewOgame.servers);
 				this.lastAction = 's:'+coords[0]+':'+coords[1];
 			}
@@ -739,7 +719,7 @@ var XnewOgame = {
 			
 			var paths = XnewOgame.Xpaths.ranking;
 			
-			var timeText = Xpath.getStringValue(doc,paths.time).trim();//e.g. Statistiques (MAJ : 12.10.2009 13:12:40)
+			var timeText = Xpath.getStringValue(doc,paths.time).trim();
 			timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
 
 			var time = new Date();
@@ -752,9 +732,8 @@ var XnewOgame = {
 				time.setDate(timeText[1]);
 				time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
 			}
-			//Xconsole(timeText+' | '+time);
+			
 			time =  Math.floor(time.getTime()/1000);
-	
 			var type = new Array();
 			type[0] = Xpath.getStringValue(doc,paths.who);
 			type[1] = Xpath.getStringValue(doc,paths.type);
@@ -766,12 +745,10 @@ var XnewOgame = {
 			var offset = 0;
 			
 			var Request = XnewOgame.newRequest();
-			//Xconsole(rows.snapshotLength);
 			if(rows.snapshotLength > 0){
 				var rowsData = [];
 				for (var i = 1; i < rows.snapshotLength; i++) {
 					var row = rows.snapshotItem(i);
-					//Xconsole("xp: "+Xpath.getStringValue(this.doc,paths.position,row));
 					var n = null;
 					if (type[0] == 'player') {
 						n = Xpath.getStringValue(doc,paths.position,row).trimInt();
@@ -779,7 +756,7 @@ var XnewOgame = {
 						n = Xpath.getStringValue(doc,paths.ally.position_ally,row).trimInt();
 					}
 					if (i == 1) {
-						offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile ï¿½ la centaine et OGSpy toujours ï¿½ 101,201...
+						offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
 					}
 					if (type[0] == 'player') {
 						var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
@@ -868,7 +845,7 @@ var XnewOgame = {
 			for (var i = 0; i < (rows.snapshotLength); i++) {
 				var row = rows.snapshotItem(i);
 				var player = Xpath.getStringValue(doc,paths.player,row).trim();
-				var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
+				var points = Math.ceil(Xpath.getStringValue(doc,paths.points,row).trimInt()/1000);
 				var rank = Xpath.getStringValue(doc,paths.rank,row).trimInt();
 				var coords = Xpath.getStringValue(doc,paths.coords,row).trim();
 				coords = coords.match(new RegExp(XnewOgame.regexps.coords))[1];
@@ -970,6 +947,11 @@ var XnewOgame = {
 					data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
 			}
 			
+			var temp = eval(Xprefs.getChar('rc-temp'));
+			if(table == 2 && temp.name && temp.coords && !data[1])
+				data[1] = {player : temp.name, coords : temp.coords, type : 'D', weapons : {arm : '0', bcl : '0', coq : '0'}, content : {}};
+			Xprefs.setChar('rc-temp', '');
+			
 			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_rounds);
 			if(rounds.snapshotLength > 0){
 				for(var div=0;div<rounds.snapshotLength;div++){
@@ -978,7 +960,7 @@ var XnewOgame = {
 					if(div == 0){
 						var m = round.match(new RegExp(rcStrings['regxps']['time']));
 						if(m){
-							// Calcul heure d'été => offset = -120 & heure d'hiver  => offset = -60
+							// Calcul heure d'Ã©tÃ© => offset = -120 & heure d'hiver  => offset = -60
 							var diff = new Date(Date.UTC(m[3],(m[2]-1),m[1],m[4],m[5],m[6])).getTimezoneOffset();
 							var correction = 0;
 							if(diff==-120){
@@ -1004,24 +986,18 @@ var XnewOgame = {
 			}
 			
 			var result = Xpath.getStringValue(this.doc,paths.result).trim();
-			var m = result.match(new RegExp(rcStrings['regxps']['attack'], 'gi'));
-			if(m)
+			if (result.match(new RegExp(rcStrings['regxps']['nul'], 'gi')))
+				var win = "N";
+			else if (result.match(new RegExp(rcStrings['regxps']['attack'], 'gi')))
 				var win = "A";
 			else
 				var win = "D";
-			
-			var m = result.match(new RegExp(rcStrings['regxps']['moon'], 'gi'));
-			if(m)
-				var moon = 1;
-			else
-				var moon = 0;
 			
 			for (var i in rcStrings['regxps']['result']) {
 				var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
 				if(m)
 					rslt[i] = m[1].replace(/\./g, '');
 			}
-			
 			
 			var rounds = rounds.snapshotLength;
 			
@@ -1051,7 +1027,7 @@ var XnewOgame = {
 		var res = new Array();
 		
 		var isMoon = false;
-		if(data['BaLu'] > 0) isMoon = true;//si il y a une base lunaire, alors c'est une lune
+		if(data['BaLu'] > 0) isMoon = true; //si il y a une base lunaire, alors c'est une lune
 		
 		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
 		
@@ -1087,8 +1063,7 @@ var XnewOgame = {
 	
 	getElementInSpyReport : function (RE,elem) {
 		var num = -1;
-		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//rï¿½cupï¿½re le nombre le plus proche aprï¿½s le texte
-		//Xconsole("elem: "+reg.toString());
+		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//recupere le nombre le plus proche apres le texte
 		var m = reg.exec(RE);
 		
 		if(m)
@@ -1115,64 +1090,50 @@ var XnewOgame = {
 		var to = Xpath.getStringValue(this.doc,paths.to).trim();
 		var subject = Xpath.getStringValue(this.doc,paths.subject).trim();
 		var date = Xpath.getStringValue(this.doc,paths.date).trim();
-		var handled = false;
 		var locales = this.l('messages');
 		
-		//Xconsole("Message from "+from+" to "+to+" about "+subject+" on "+date);
-
-		//var checked_only = Xprefs.getBool('msg-only_checked');
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
-		//mise en cache-------------------------------------------------------------------------------------------------------------------------------------
-		var prefMessagesCache = Xprefs.getBool('messages-cache');	
-		if (prefMessagesCache) {
-				if(this.params['msg_id'])
-					var messageId = this.params['msg_id'].trimInt();
-				else if(this.params['planetId'])
-					var messageId = this.params['planetId'].trimInt();
-				Xdump(messageId);
-				
-				if (typeof this.messagesCache[this.universe] == 'undefined') 
-					this.messagesCache[this.universe] = [];
-				else if (this.messagesCache[this.universe].indexOf(messageId) != -1) {
-					Xdump('Message sent before.');
-				}
-			}
-		if (prefMessagesCache) this.messagesCache[this.universe].push(messageId);
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
+		data.date = XparseDate(date,this.l('dates')['messages']);
 		
-		//spy report------------------------------------------------------------------------------------------------------------------------------------------
+		// Espionnages perso
 		if(Xprefs.getBool('msg-spy')) {
 			var m = subject.match(new RegExp(locales['espionage of']+this.regexps.planetNameAndCoords));
 			if(m){
 				Xconsole('spy detected');
 				Xconsole("subject:"+subject);
 				
-				handled = true;
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['spy']);
 				var content = contentNode.innerHTML;
 				data.planetName = m[1];
 				data.coords = m[2];
 				
-				//Xconsole('withregexp');
-				//Xconsole("report: "+content);
-				m = content.match(new RegExp(locales['espionage prob']+this.regexps.probability));
-				if(m) {
+				m = content.match(new RegExp(locales['unespionage prob']+this.regexps.probability));
+				if(m)
 					data.proba = m[1];
-				}
-				else handled = false;
-				if(handled) {
-					Ximplements(data, this.parseSpyReport(content));		
-					data.type = 'spy';
-				}
-				//Xdump(contentData);
+				
+				Ximplements(data, this.parseSpyReport(content));		
+				data.type = 'spy';
 			} else Xconsole('The message is not a spy report');
 		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		// Messages de joueurs---------------------------------------------------------------------------------------------------------------------------
+		// Espionnages ennemis
+		 if(Xprefs.getBool('msg-ennemy_spy')) {
+			if(subject.match(new RegExp(locales['espionnage action']))) {
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ennemy_spy']);
+				var rawdata = contentNode.textContent.trim();
+				var m = rawdata.match(new RegExp(this.regexps.messages.ennemy_spy));
+
+				if(m){
+					data.type = 'ennemy_spy';
+					data.from = m[1];
+					data.to = m[2];
+					data.proba = m[3];
+				}
+			} else Xconsole('The message is not an ennemy spy');
+		}
+		
+		// Messages de joueurs
 		if(Xprefs.getBool('msg-msg')) {
 			if (this.doc.getElementById('melden')) { // si bouton "reporter", c'est un mp
-				handled = true;
 				var m = from.match(new RegExp(this.regexps.userNameAndCoords));
 				if(m) {
 					var userName = m[1];
@@ -1184,9 +1145,8 @@ var XnewOgame = {
 				data = {type:'msg', from: userName, coords: coords, subject: subject, message: message};
 			} else Xconsole('The message is not a private message');
 		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		// Messages d'alliance-----------------------------------------------------------------------------------------------------------------------------
+		// Messages d'alliance
 		if(Xprefs.getBool('msg-ally_msg')) {
 			var reg = new RegExp(this.regexps.ally);
 			Xconsole(from.match(reg));
@@ -1197,34 +1157,41 @@ var XnewOgame = {
 				var message = Xpath.getStringValue(this.doc,paths.contents['msg']).trim();
 				var m = from.match(new RegExp(this.regexps.ally));
 				if(m) {
-					from = m[1];
-					data = {type: 'ally_msg', from: from, tag: from, message: message};
-					handled = true;
+					data.type = 'ally_msg';
+					data.from = m[1];
+					data.tag = m[1]; 
+					data.message = message;
 				}
 			} else Xconsole('The message is not an ally message');
 		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		// Expeditions-----------------------------------------------------------------------------------------------------------------------------
+		// Expeditions
 		if(Xprefs.getBool('msg-expeditions')) {
-			var m = subject.match(new RegExp(locales['expedition result']));
+			var m = subject.match(new RegExp(locales['expedition result']+this.regexps.planetCoords));
 			var m2 = from.match(new RegExp(locales['fleet command']));
-			//Xconsole(m+'|'+m2);
+			
 			if (m2!=null && m!=null) {
-				
 				var coords = m[1];
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['expedition']);
-				var message = Xpath.getStringValue(this.doc,paths.contents['expedition']).trim();//Xpath.getSingleNode(this.doc,paths.content).innerHTML.trim();
-				data = {type: 'expedition', coords: coords, content: message};
-				handled = true;
-				//Xconsole('data:'+data);
+				var message = Xpath.getStringValue(this.doc,paths.contents['expedition']).trim();
+				data.type = 'expedition';
+				data.coords = coords;
+				data.content = message;
 			} else Xconsole('The message is not an expedition report');
 		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		// Recyclages-----------------------------------------------------------------------------------------------------------------------------
+		//RC
 		if(Xprefs.getBool('msg-rc')) {
-			//var m = ;
+			var m = subject.match(new RegExp(locales['combat of']));
+			if (m!=null){
+				var rapport = Xpath.getStringValue(this.doc,paths.contents['rc']).trim();
+				var m2 = rapport.match(new RegExp(locales['combat defence']+this.regexps.planetNameAndCoords));
+				Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+			}
+		}
+		
+		// Recyclages
+		if(Xprefs.getBool('msg-rc_cdr')) {
 			if(from.match(new RegExp(locales['fleet'])) 
 						&& subject.match(new RegExp(locales['harvesting']))) {
 			 	var m = subject.match(new RegExp(this.regexps.coords));
@@ -1233,57 +1200,27 @@ var XnewOgame = {
 					var contentNode = Xpath.getSingleNode(this.doc,paths.contents['rc_cdr']);
 					var message = Xpath.getStringValue(this.doc,paths.contents['rc_cdr']).trim();
 					var nums = message.getInts();
-					handled = true;
-					data = {
-							type:'rc_cdr',
-							coords: coords,
-							nombre: nums[0],
-							M_recovered: nums[4],
-							C_recovered: nums[5],
-							M_total: nums[2],
-							C_total: nums[3]
-						};
+					data.type ='rc_cdr';
+					data.coords = coords;
+					data.nombre = nums[0];
+					data.M_recovered = nums[4];
+					data.C_recovered = nums[5];
+					data.M_total = nums[2];
+					data.C_total = nums[3];
 				}
 			} else Xconsole('The message is not a harvesting report');
 		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------		
-		
-		// Espionnages ennemis-----------------------------------------------------------------------------------------------------------------------------
-		if(Xprefs.getBool('msg-ennemy_spy')) {
-			//Xconsole('msg-ennemy_spy|'+from+'|'+subject);
-			if(subject.match(new RegExp(locales['espionnage action']))) {/*from.match(new RegExp(locales['space monitoring'])) && */
-				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ennemy_spy']);
-				var rawdata = contentNode.textContent.trim();
-				//Xdump(rawdata,new RegExp(this.regexps.messages.ennemy_spy).toString());
-				var m = rawdata.match(new RegExp(this.regexps.messages.ennemy_spy));
-				//Xdump(m);
-				if(m) {
-					handled = true;
-					from = m[1];
-					to = m[2];
-					proba = m[3];
-					data = {type: 'ennemy_spy', from: from, to: to, proba: proba, rawdata: rawdata};
-				}				
-			} else Xconsole('The message is not an ennemy spy');
-		}
-		//-------------------------------------------------------------------------------------------------------------------------------------------------------
-		
-		if (!handled) {
+
+		// Aucun message
+		if(data.type == ''){
 			this.Tab.setStatus(Xl('no messages'), XLOG_NORMAL, {url: this.url});
 			return false;
+		} else {
+			var Request = this.newRequest();
+			Request.set('data', data);
+			Request.set('type', 'messages');
+			return Request;
 		}
-		else {
-			data.date = XparseDate(date,this.l('dates')['messages']);
-		}
-		
-		var Request = this.newRequest();
-		for (var i in data) {
-				Request.set('data[0]['+i+']', data[i]);
-			}
-		
-		Request.set('type', 'messages');
-		
-		return Request;
 	}
 }
 

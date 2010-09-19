@@ -42,6 +42,7 @@ XnewOgame.Xpaths = {
 			'msg': '//div[@class="note"]',
 			'ally_msg': '//div[@class="note"]',
 			'expedition': '//div[@class="note"]',
+			'rc': '//div[@id="battlereport"]',
 			'rc_cdr': '//div[@class="note"]',
 			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
 		},

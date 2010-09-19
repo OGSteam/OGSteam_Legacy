@@ -104,7 +104,7 @@ XnewOgame.locales = {
 					211 : 'Bombardier', 
 					212 : 'Sat.sol.', 
 					213 : 'Destr.', 		
-					214 : 'Étoile de la mort', 
+					214 : 'RIP', 
 					215 : 'Traqueur',
 				},	
 				'defense' :  { 	
@@ -144,19 +144,22 @@ XnewOgame.locales = {
 				},
 				'moon' : 'lune',
 				'attack' : 'Attaquant',
-				'defense' : 'Défenseur'
+				'defense' : 'Défenseur',
+				'nul' : 'match nul'
 			}
 			
 		},
 		
 		'messages' : {
 			'espionage of': 'Rapport d`espionnage de',
-			'espionage prob': 'Probabilité de contre-espionnage ',
-			'fleet command' : 'Tour de contrôle',
-			'expedition result' : 'Résultat de l`expédition \\[(\\d+:\\d+:\\d+)\\]',
+			'unespionage prob': 'Probabilité de contre-espionnage ',
 			'espionnage action' : 'Activité d\`espionnage',
+			'fleet command' : 'Tour de contrôle',
+			'expedition result' : 'Résultat de l`expédition ',
 			'fleet': 'Flotte',
-			'harvesting': 'exploitation du champ de débris'
+			'harvesting': 'exploitation du champ de débris',
+			'combat of': 'Rapport de combat',
+			'combat defence' : 'Bataille de'
 		},
 		
 		'dates' : {
