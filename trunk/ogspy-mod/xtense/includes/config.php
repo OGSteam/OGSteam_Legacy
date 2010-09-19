@@ -11,6 +11,8 @@ global $table_prefix;
 
 define('TABLE_XTENSE_GROUPS', $table_prefix.'xtense_groups');
 define('TABLE_XTENSE_CALLBACKS', $table_prefix.'xtense_callbacks');
+define('TABLE_PARSEDREC', $table_prefix.'parsedRec');
+define('TABLE_PARSEDSPYEN', $table_prefix.'parsedSpyEn');
 
 define('TYPE_PLANET', 0);
 define('TYPE_MOON', 1);

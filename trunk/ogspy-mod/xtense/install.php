@@ -10,6 +10,30 @@ $root = $pub_directory;
 
 require_once('mod/'.$root.'/includes/config.php');
 	
+//---- Creation de la table des recyclages
+$db->sql_query("CREATE TABLE ".TABLE_PARSEDREC." (
+	`id_rec` INT( 255 ) NOT NULL AUTO_INCREMENT ,
+	`dateRec` INT( 11 ) NOT NULL ,
+	`coordinates` VARCHAR( 9 ) NOT NULL ,
+	`nbRec` INT( 11 ) NOT NULL ,
+	`M_total` INT( 11 ) NOT NULL ,
+	`C_total` INT( 11 ) NOT NULL ,
+	`M_recovered` INT( 11 ) NOT NULL ,
+	`C_recovered` INT( 11 ) NOT NULL ,
+	`sender_id` INT( 11 ) NOT NULL ,
+	PRIMARY KEY ( `id_rec` )
+)");
+
+$db->sql_query("CREATE TABLE ".TABLE_PARSEDSPYEN." (
+	`spy_id` INT( 255 ) NOT NULL AUTO_INCREMENT ,
+	`dateSpy` INT( 11 ) NOT NULL ,
+	`from` VARCHAR( 9 ) NOT NULL ,
+	`to` VARCHAR( 9 ) NOT NULL ,
+	`proba` INT( 3 ) NOT NULL ,
+	`sender_id` INT( 11 ) NOT NULL ,
+	PRIMARY KEY ( `spy_id` )
+)");	
+
 //---- Creation de la table des Callbacks
 $db->sql_query("CREATE TABLE IF NOT EXISTS `".TABLE_XTENSE_CALLBACKS."` (
   `id` int(3) NOT NULL auto_increment,

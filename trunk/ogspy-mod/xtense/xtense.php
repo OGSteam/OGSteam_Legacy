@@ -111,9 +111,8 @@ if (!$db->sql_numrows($query)) {
 
 // Verification des droits de l'user
 $query = $db->sql_query("SELECT system, ranking, empire, messages FROM ".TABLE_USER_GROUP." u LEFT JOIN ".TABLE_GROUP." g ON g.group_id = u.group_id LEFT JOIN ".TABLE_XTENSE_GROUPS." x ON x.group_id = g.group_id WHERE u.user_id = '".$user_data['user_id']."'");
-$data = $db->sql_fetch_assoc($query);
-foreach ($data as $type => $v)
-	$user_data['grant'][$type] = $v;
+$user_data['grant'] = $db->sql_fetch_assoc($query);
+ 
 
 // Si Xtense demande la verification du serveur, renvoi des droits de l'utilisateur
 if (isset($pub_server_check)) {
@@ -452,20 +451,6 @@ switch ($pub_type){
 		}
 	break;
 
-	case 'fleetSending': //PAGE ENVOIS FLOTTE
-		$cb_send = Array();
-		if(isset($pub_row)){
-			foreach($pub_row as $row){
-				list($i,$d) = explode('|',$row);
-				$cb_send[$i] = $d;
-			}
-			$call->add('fleetSending', $cb_send);
-		}
-		$io->set(array(
-			'type' => 'fleetSending'
-		));
-	break;
-
 	case 'system': //PAGE SYSTEME SOLAIRE
 		Check::data(isset($pub_galaxy, $pub_system));
 		if (!$user_data['grant']['system']) {
@@ -672,7 +657,14 @@ switch ($pub_type){
 	case 'rc': //PAGE RC
 		Check::data(isset($pub_date, $pub_win, $pub_count, $pub_result, $pub_moon, $pub_n));
 		
-		if(!isset($pub_rounds)) $pub_rounds = Array();
+		if(!isset($pub_rounds)) $pub_rounds = Array(1 => Array(
+				'a_nb' => 0,
+				'a_shoot' => 0,
+				'd_bcl' => 0,
+				'a_bcl' => 0,
+				'd_nb' => 0,
+				'd_shoot' => 0
+			));
 	
 		if (!$user_data['grant']['messages']) {
 			$io->set(array(
@@ -811,187 +803,137 @@ switch ($pub_type){
 			));
 			$io->status(0);
 		} else {
-			$data = array_reverse((array)$pub_data); // Les plus vieux en premier
-			
-			$logCounts = array('msg' => 0, 'ally_msg' => 0, 'added_spy' => 0, 'added_spy_coords' => array(), 'ignored_spy' => 0, 'ennemy_spy' => 0, 'rc_cdr' => 0, 'expedition' => 0);
-			$ally_msg = array();
-			$msg = array();
-			$spy = array();
-			$ennemy_spy = array();
-			$rc_cdr = array();
-			$expedition = array();
-			
-			foreach ($data as $line) {
-				
-				Check::data(isset($line['type'], $line['date']));
-				$time = $line['date'];// la barre envoie désormais le timestamp
-				
-				if ($line['type'] == 'msg') {
-					Check::data(
-						isset($line['coords'], $line['from'], $line['subject'], $line['message']),
-						Check::coords($line['coords']),
-						Check::planet_name($line['from'])
-					);
+			$line = $pub_data;
+			switch($line['type']){
+				case 'msg': //MESSAGE PERSO
+					Check::data(isset($line['coords'], $line['from'], $line['subject'], $line['message']), Check::coords($line['coords']), Check::planet_name($line['from']));
 					
-					$msg[] = array(
+					$msg = array(
 							'coords' => explode(':', $line['coords']),
 							'from' => $line['from'],
 							'subject' => $line['subject'],
 							'message' => $line['message'],
-							'time' => $time
+							'time' => $line['date']
 					);
-					$logCounts['msg'] ++;
-				}
-				if ($line['type'] == 'ally_msg') {
-					Check::data(
-						isset($line['from'], $line['tag'], $line['message']),
-						Check::player_name($line['from'])
-					);
+					$call->add('msg', $msg);
+				break;
+				
+				case 'ally_msg': //MESSAGE ALLIANCE
+					Check::data(isset($line['from'], $line['tag'], $line['message']), Check::player_name($line['from']));
 					
-					$ally_msg[] = array(
+					$ally_msg = array(
 							'from' => $line['from'],
 							'tag' => $line['tag'],
 							'message' => utf8_decode($line['message']),
-							'time' => $time
+							'time' => $line['date']
 					);
-					$logCounts['ally_msg'] ++;
-				}
-				if ($line['type'] == 'spy') {
-					Check::data(
-						isset($line['coords'], $line['content'], $line['playerName'], $line['planetName'], $line['moon'], $line['proba'])
-					);
-					
-					Check::data(
-						Check::planet_name($line['planetName']),
-						Check::player_name($line['playerName']),
-						Check::coords($line['coords'])
-					);
+					$call->add('ally_msg', $ally_msg);
+				break;
+				
+				case 'spy': //RAPPORT ESPIONNAGE
+					Check::data(isset($line['coords'], $line['content'], $line['playerName'], $line['planetName'], $line['proba']));
+					Check::data(Check::planet_name($line['planetName']), Check::player_name($line['playerName']), Check::coords($line['coords']));
 					
 					$proba = (int)$line['proba'];
 					$proba = $proba > 100 ? 100 : $proba;
-					$spy[] = array(
-							'moon' => ($line['moon'] == "true" || $line['moon'] == 1)  ? 1 : 0,
+					$spy = array(
 							'proba' => $proba,
 							'coords' => explode(':', $line['coords']),
 							'content' => $line['content'],
-							'time' => $time,
+							'time' => $line['date'],
 							'player_name' => $line['playerName'],
 							'planet_name' => $line['planetName']
 					);
-				}
-				if ($line['type'] == 'ennemy_spy') {
-					Check::data(
-						isset($line['from'], $line['to'], $line['proba']),
-						Check::coords($line['from']),
-						Check::coords($line['to'])
-					);
+					$call->add('spy', $spy);
 					
-					$ennemy_spy[] = array(
+					$spyDB = array();
+					foreach ($database as $arr) {
+						foreach ($arr as $v) $spyDB[$v] = 1;
+					}
+					
+					$coords = $spy['coords'][0].':'.$spy['coords'][1].':'.$spy['coords'][2];
+					$moon = ($spy['content']['BaLu'] > 0 ? 1 : 0);
+					$matches = array();
+					$data = array();
+					$values = $fields = '';
+					
+						$fields .= 'planet_name,coordinates,sender_id, proba, dateRE';
+						$values .= '"'.trim($spy['planet_name']).'", "'.$coords.'", '.$user_data['user_id'].', '.$spy['proba'].', '.$spy['time'].' ';
+					
+					foreach($spy['content'] as $field => $value){
+						$fields .= ', `'.$field.'`';
+						$values .= ', '.$value;
+					}
+					
+					$test = $db->sql_numrows($db->sql_query('SELECT id_spy FROM '.TABLE_PARSEDSPY.' WHERE coordinates = "'.$coords.'" AND dateRE = '.$spy['time']));
+					if (!$test) {
+						$db->sql_query('INSERT INTO '.TABLE_PARSEDSPY.' ( '.$fields.') VALUES ('.$values.')');					
+						$query = $db->sql_query('SELECT last_update'.($moon ? '_moon' : '').' FROM '.TABLE_UNIVERSE.' WHERE galaxy = '.$spy['coords'][0].' AND system = '.$spy['coords'][1].' AND row = '.$spy['coords'][2]);
+						if ($db->sql_numrows($query)) {
+							$assoc = $db->sql_fetch_assoc($query);
+							if ($assoc['last_update'.($moon ? '_moon' : '')] < $spy['time']) {
+								if ($moon)
+									$db->sql_query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($spy['content']['Pha'] > 0 ? $spy['content']['Pha'] : 0).', gate = "'.($spy['content']['PoSa'] > 0 ? 1 : 0).'", last_update_moon = '.$line['date'].', last_update_user_id = '.$user_data['user_id'].' WHERE galaxy = '.$spy['coords'][0].' AND system = '.$spy['coords'][1].' AND row = '.$spy['coords'][2]);
+								else//we do nothing if buildings are not in the report
+									$db->sql_query('UPDATE '.TABLE_UNIVERSE.' SET name = "'.$spy['planet_name'].'", last_update_user_id = '.$user_data['user_id'].' WHERE galaxy = '.$spy['coords'][0].' AND system = '.$spy['coords'][1].' AND row = '.$spy['coords'][2]);
+							}
+						}
+						$db->sql_query('UPDATE '.TABLE_USER.' SET spy_added_ogs = spy_added_ogs + 1 WHERE user_id = '.$user_data['user_id']);
+						update_statistic('spyimport_ogs', '1');
+					}
+				break;
+				
+				case 'ennemy_spy': //RAPPORT ESPIONNAGE ENNEMIS
+					Check::data(isset($line['from'], $line['to'], $line['proba']), Check::coords($line['from']), Check::coords($line['to']));
+					
+					$query = "SELECT spy_id FROM ".TABLE_PARSEDSPYEN." WHERE sender_id = '".$user_data['user_id']."' AND dateSpy = '{$line['date']}'";
+					if($db->sql_numrows($db->sql_query($query)) == 0)
+						$db->sql_query("INSERT INTO ".TABLE_PARSEDSPYEN." (`dateSpy`, `from`, `to`, `proba`, `sender_id`) VALUES ('".$line['date']."', '".$line['from']."', '".$line['to']."', '".$line['proba']."', '".$user_data['user_id']."')");
+					
+					$ennemy_spy = array(
 							'from' => explode(':', $line['from']),
 							'to' => explode(':', $line['to']),
-							'data' => isset($line['rawdata'])?$line['rawdata']:"",
 							'proba' => (int)$line['proba'],
-							'time' => $time
+							'time' => $line['date']
 					);
-					$logCounts['ennemy_spy'] ++;
-				}
-				if ($line['type'] == 'rc_cdr') {
+					$call->add('ennemy_spy', $ennemy_spy);
+				break;
+				
+				case 'rc_cdr': //RAPPORT RECYCLAGE
 					Check::data(isset($line['nombre'], $line['coords'], $line['M_recovered'], $line['C_recovered'], $line['M_total'], $line['C_total']));
 					Check::data(Check::coords($line['coords']));
 					
-					$rc_cdr[] = array(
+					$query = "SELECT id_rec FROM ".TABLE_PARSEDREC." WHERE sender_id = '".$user_data['user_id']."' AND dateRec = '{$line['date']}'";
+					if($db->sql_numrows($db->sql_query($query)) == 0)
+						$db->sql_query("INSERT INTO ".TABLE_PARSEDREC." (`dateRec`, `coordinates`, `nbRec`, `M_total`, `C_total`, `M_recovered`, `C_recovered`, `sender_id`) VALUES ('".$line['date']."', '".$line['coords']."', '".$line['nombre']."', '".$line['M_total']."', '".$line['C_total']."', '".$line['M_recovered']."', '".$line['C_recovered']."', '".$user_data['user_id']."')");
+					
+					$rc_cdr = array(
 							'nombre' => (int)$line['nombre'],
 							'coords' => explode(':', $line['coords']),
 							'M_reco' => (int)$line['M_recovered'],
 							'C_reco' => (int)$line['C_recovered'],
 							'M_total' => (int)$line['M_total'],
 							'C_total' => (int)$line['C_total'],
-							'time' => $time
+							'time' => $line['date']
 					);
-					$logCounts['rc_cdr'] ++;
-				}
-				if ($line['type'] == 'expedition') {
+					$call->add('rc_cdr', $rc_cdr);
+				break;
+				
+				case 'expedition': //RAPPORT EXPEDITION
+					Check::data(isset($line['coords'], $line['content']), Check::coords($line['coords'], 1));
 					
-					Check::data(
-						isset($line['coords'], $line['content']),
-						Check::coords($line['coords'], 1)
-					);
-					
-					$expedition[] = array(
-							'time' => $time,
+					$expedition = array(
+							'time' => $line['date'],
 							'coords' => explode(':', $line['coords']),
 							'content' => utf8_decode($line['content'])
 					);
-					$logCounts['expedition'] ++;
-				}
+					$call->add('expedition', $expedition);
+				break;
 			}
-			
-			if (!empty($spy)) {
-				$nb = 0;
-				
-				$spyDB = array();
-				foreach ($database as $arr) {
-					foreach ($arr as $v) $spyDB[$v] = 1;
-				}
-				
-				$inserted = 0;
-				foreach ($spy as $k => $l) {
-					$coords = $l['coords'][0].':'.$l['coords'][1].':'.$l['coords'][2];
-					$moon = $l['moon'];
-					$matches = array();
-					$data = array();
-					$values = $fields = '';
-					
-						$fields .= 'planet_name,coordinates,sender_id, proba, dateRE';
-						$values .= '"'.trim($l['planet_name']).'", "'.$coords.'", '.$user_data['user_id'].', '.$l['proba'].', '.$l['time'].' ';
-					
-					foreach($l['content'] as $field => $value){
-						$fields .= ', `'.$field.'`';
-						$values .= ', '.$value;
-					}
-					
-					$spy[$k]['data'] = $l['content'];
-					
-					$test = $db->sql_numrows($db->sql_query('SELECT id_spy FROM '.TABLE_PARSEDSPY.' WHERE coordinates = "'.$coords.'" AND dateRE = '.$l['time']));
-					if (!$test) {
-						$db->sql_query('INSERT INTO '.TABLE_PARSEDSPY.' ( '.$fields.') VALUES ('.$values.')');					
-						$logCounts['added_spy'] ++;
-						$logCounts['added_spy_coords'][] = $coords;
-						$query = $db->sql_query('SELECT last_update'.($moon ? '_moon' : '').' FROM '.TABLE_UNIVERSE.' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
-						if ($db->sql_numrows($query)) {
-							$assoc = $db->sql_fetch_assoc($query);
-							if ($assoc['last_update'.($moon ? '_moon' : '')] < $l['time']) {
-								if ($moon)
-									$db->sql_query('UPDATE '.TABLE_UNIVERSE.' SET moon = "1", phalanx = '.($l['content']['Pha'] > 0 ? $l['content']['Pha'] : 0).', gate = "'.($l['content']['PoSa'] > 0 ? 1 : 0).'", last_update_moon = '.$time.', last_update_user_id = '.$user_data['user_id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
-								else//we do nothing if buildings are not in the report
-									$db->sql_query('UPDATE '.TABLE_UNIVERSE.' SET name = "'.$l['planet_name'].'", last_update_user_id = '.$user_data['user_id'].' WHERE galaxy = '.$l['coords'][0].' AND system = '.$l['coords'][1].' AND row = '.$l['coords'][2]);
-							}
-						}
-					} else {
-						$logCounts['ignored_spy'] ++;
-					}
-				} // foreach spy
-				$inserted = count($spy) - $logCounts['ignored_spy'];
-				$db->sql_query('UPDATE '.TABLE_USER.' SET spy_added_ogs = spy_added_ogs + '.$inserted.' WHERE user_id = '.$user_data['user_id']);
-				update_statistic('spyimport_ogs',$inserted);
-
-				if ($server_config['xtense_spy_autodelete']) {
-					$db->sql_query('DELETE FROM '.TABLE_PARSEDSPY.' WHERE dateRE < '.strtotime('-'.$server_config['max_keepspyreport'].'days'));
-				}
-			} // empty spy
-			
-			if (!empty($msg))			$call->add('msg', $msg);
-			if (!empty($ally_msg)) 		$call->add('ally_msg', $ally_msg);
-			if (!empty($rc_cdr)) 		$call->add('rc_cdr', $rc_cdr);
-			if (!empty($spy)) 			$call->add('spy', $spy);
-			if (!empty($ennemy_spy)) 	$call->add('ennemy_spy', $ennemy_spy);
-			if (!empty($expedition)) 	$call->add('expedition', $expedition);
 			
 			$io->set(array(
 					'type' => (isset($pub_returnAs) && $pub_returnAs == 'spy' ? 'spy' : 'messages')
 			));
-			
-			add_log('messages', $logCounts);
 		}
 	break;
 
