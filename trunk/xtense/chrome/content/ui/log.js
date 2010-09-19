@@ -16,7 +16,6 @@ window.on('load', function() {
 	$('extra').on('click', function(e){ if (e.button == 2) Log.extraContextMenu(e); });
 	
 	// Left panel (content) menu
-	//$('left-menu').on('popupshowing', function(e) { Log.contentContextMenu(); });
 	$('left-menu-copy-all').on('command', function(e){ Log.contentCopy(1); } );
 	$('left-menu-copy-selected').on('command', function(e){ Log.contentCopy(0); } );
 	
@@ -50,7 +49,6 @@ var Log = {
 	
 	init : function() {
 		try {
-			//this.shift = false;
 			this.control = false;
 			
 			this.timeFormat = Xprefs.getInt('log-time-format');
@@ -96,7 +94,6 @@ var Log = {
 				if (this.currentExtra != -1) {
 					if (this.currentExtra > (log.length-1)) this.currentExtra = 0;
 					
-					//this.oneSelected = true;
 					this.lastSelected = this.currentExtra;
 					
 					$('row-'+this.currentExtra).addClass('selected');
@@ -161,19 +158,14 @@ var Log = {
 					
 					for (var t = 0, len = extra.calls.messages[type].length; t < len; t++) {
 						label = new Xel('label').addClass(type, 'message').setText(extra.calls.messages[type][t]);
-						label.innerHTML = 
-						panel.add(
-							//new Xel('row').add(
-								label
-							//)
-						);
+						label.innerHTML = panel.add(label);
 					}
 				}
 			}
 		}
 		
 		if (this.debug) {
-			if (extra.url || extra.Request || extra.Response) {
+			if (extra.url || extra.Request || extra.Response) {			
 				
 				hasEntries = true;
 				panel.add(new Xel('label').set('value', Xl('title debug data')).setText('- ' + Xl('title debug data')).addClass('title', 'debug'));
@@ -182,7 +174,7 @@ var Log = {
 					panel.add(
 						new Xel('row').add(
 							new Xel('label').set('value', Xl('sent data')).setText(Xl('sent data') + ' : '),
-							new Xel('label').setText(extra.Request.postedData[extra.Server.n]).set('flex', '1')
+							new Xel('label').setText(extra.Request.postedData[extra.Server.n].replace(extra.Server.hash, "PSWD")).set('flex', '1')
 						),
 						
 						new Xel('row').add(
@@ -192,7 +184,7 @@ var Log = {
 						
 						new Xel('row').add(
 							new Xel('label').set('value', Xl('complete url')).setText(Xl('complete url') + ' : '),
-							new Xel('label').setText(extra.Server.url+'?'+extra.Request.postedData[extra.Server.n]).set('crop', 'end')
+							new Xel('label').setText(extra.Server.url+'?'+extra.Request.postedData[extra.Server.n].replace(extra.Server.hash, "PSWD")).set('crop', 'end')
 						)
 					);
 				}

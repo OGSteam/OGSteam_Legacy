@@ -9,11 +9,8 @@ function Request(Tab, callback, scope) {
 		
 		for (var i = 0, len = servers.length; i < len; i++) {
 			var server = servers[i];
-			
 			var postData = 'toolbar_version=' + Xtense.VERSION + '&mod_min_version=' + Xtense.PLUGIN_REQUIRED + '&user=' + server.user
-							//+ '&password=' + server.hash + '&univers=' + server.univers + this.serializeData2();
 							+ '&password=' + server.hash + '&univers=' + server.univers +this.serializeData();
-			 //this.serializeData2();
 			
 			if (Xprefs.getBool('spy-debug')) postData += '&spy_debug=1';
 			if (Xprefs.getBool('dev')) postData += '&dev=1';
@@ -33,7 +30,6 @@ function Request(Tab, callback, scope) {
 	
 	this.call = function (Server, Response) {
 		this.loading[Server.n] = false;
-		//Xservers.handleResponse(this, Server, Eesponse);
 		this.callback.apply(this.scope, [this, Server, Response]);
 	}
 	
@@ -48,7 +44,6 @@ function Request(Tab, callback, scope) {
 	
 	this.serializeObject = function(obj,parent,tab) {
 		var retour = '';
-		//var str = parent;
 		var type = typeof obj;
 		if (type == 'object') {
 			for (var i in obj) {
@@ -73,28 +68,11 @@ function Request(Tab, callback, scope) {
 	
 	this.serializeData = function () {
 		var uri = '';
-		/*for (var i in this.data) {
-			uri += '&'+i+this.serializeObject(this.data[i]);
-		}*/
 		var tab = [];
 		this.serializeObject(this.data,'',tab);
-		/*for(var i in tab) {
-			tab[i]=encodeURIComponent(tab[i]);
-		}*/
 		uri = '&'+tab.join('&');
-		//Xconsole('data1: '+unescape(uri));
-		//Xdump(tab);
 		return uri;
 	}
-	
-	/*this.serializeData2 = function () {
-		var uri = '';
-		for (var i in this.data) {
-			uri += '&'+i+'='+encodeURIComponent(this.data[i]);
-		}
-		//Xconsole('data2: '+unescape(uri));
-		return uri;
-	}*/
 	
 	this.postedData = [];
 	this.callback = callback;

@@ -7,7 +7,6 @@
 function ServerItem (n) {
 	this.save = function () {
 		Xprefs.setChar('server'+this.n, '({univers: "'+this.univers+'", url: "'+this.url+'", user: "'+this.user+'", password: "'+this.password+'", hash: "'+MD5(SHA1(this.password))+'", active: '+this.active+'})');
-		Xprefs.setChar('server-cache', '({name: "'+this.name+'", version: "'+this.version+'"})');
 		Xprefs.setChar('server-cache'+this.n, '({name: "'+this.name+'", version: "'+this.version+'"})');
 	}
 	

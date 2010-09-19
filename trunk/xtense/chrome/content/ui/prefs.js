@@ -4,21 +4,12 @@
  */
 
 var boolPrefs = ['autostart', 'debug', 'dev', 'handle-overview', 'handle-system', 'handle-buildings', 'handle-researchs', 'handle-defense',
-'handle-fleet', 'handle-ranking', 'handle-messages', 'handle-rc', 'handle-ally_list',
-'handle-fleetSending','msg-only_checked', 'msg-spy', 'msg-expeditions',
-'msg-ennemy_spy', 'msg-rc', 'msg-msg', 'msg-ally_msg','log-display-time', 'fixpopups', 'autohide', 'context-menu', 'display-execution-time',
- 'messages-cache'];  /*'handle-resources', */
+'handle-fleet', 'handle-ranking', 'handle-messages', 'handle-ally_list', 'msg-spy', 'msg-expeditions','msg-ennemy_spy', 'msg-rc_cdr','msg-rc',
+'msg-msg', 'msg-ally_msg', 'log-display-time', 'log-hide_psw', 'fixpopups', 'autohide', 'context-menu', 'display-execution-time'];
 
 var Xtense = XgetMainInstance();
 
-window.on('load', function() {
-	$('msg-only_checked').onclick = function () {
-		if ($('handle-messages').checked && this.checked && !confirm(Xl('onclick msg-only_checked'))) this.checked = false;
-	}
-	$('handle-messages').onclick = function () {
-		if ($('msg-only_checked').checked && this.checked && !confirm(Xl('onclick handle-messages'))) this.checked = false;
-	}
-	
+window.on('load', function() {	
 	$('dev').onclick = function () {
 			if (this.checked && !confirm(Xl('onclick dev'))) this.checked = false;
 	}
