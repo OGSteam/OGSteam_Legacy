@@ -7,16 +7,16 @@
                    em:minVersion="2.0"
                    em:maxVersion="3.*"
                    em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.3.7"
-                   em:updateHash="sha1:B8FDBCA478BCA38FEB7BE7BD48A24E1D488633CD" />
-  <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAAcpWMIRNjSK030VhEosZkmLTDX4dNjZEJ1qlFMQTdaK6qnW/ENZYYdgfKGlsO+8TaOfrE9iOju9fIPHjFZDkUQowmKrk68bc+/t6AkcD5ylQXR36EccnH1MOAamZZTTrZmHnHUkdBGsyHtv2lMGSR3+GNZ/4623sweGBQ73gx4z">
-    <em:updates RDF:resource="rdf:#$7hmXj"/>
-  </RDF:Description>
+                   em:updateHash="sha1:F327E6498A48ECDF42110C6277578A0730684B41" />
+  <RDF:Seq RDF:about="rdf:#$7hmXj">
+    <RDF:li RDF:resource="rdf:#$8hmXj"/>
+  </RDF:Seq>
   <RDF:Description RDF:about="rdf:#$8hmXj"
                    em:version="2.3.7">
     <em:targetApplication RDF:resource="rdf:#$bhmXj"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$7hmXj">
-    <RDF:li RDF:resource="rdf:#$8hmXj"/>
-  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBADjvEIbLOMuQQd2WaNtIGQcGNhzpgPZEsAzeF6kUCYaXFNxaXUb0EGH1Sht+EgKI0HNCH6hukfAeHnghJZ6nHSL8VG6FNgmhiYjBerxvyuyhR9J1+yPbvNLMxssa/5XXrv2TGWNupPF6fYACVzHNegyfGvLkuKglPgKHVdy/hlko">
+    <em:updates RDF:resource="rdf:#$7hmXj"/>
+  </RDF:Description>
 </RDF:RDF>
