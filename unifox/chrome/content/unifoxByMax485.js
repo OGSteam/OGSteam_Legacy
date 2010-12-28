@@ -757,7 +757,8 @@ function MESSAGES_afficher_form_pour_envoye_message_alli_et_lien_sur_chaque_mess
 function MESSAGES_modifier_lien_ajouter_historique(document) // Permet d'ajouter l'historique a l'URL des messages de joueurs, ou d'alliance
 {
 	var objetLien = ufEval("id('divpage')/form[3]/table/tbody/tr/td[2]/a", document); // Recupere tous les messages qui ont un URL dedans (Messages de joueurs, ou d'alliance)
-
+	if(objetLien.snapshotLength == 0)
+		var objetLien = ufEval("id('divpage')/form[2]/table/tbody/tr/td[2]/a", document);
 	for(var i=0; i < objetLien.snapshotLength; i++) // Passe la boucle pour tous les messages trouvé
 	{
 		var lien = objetLien.snapshotItem(i); // Recupere les infos sur la balise de l'URL
@@ -773,9 +774,13 @@ function MESSAGES_modifier_lien_ajouter_historique(document) // Permet d'ajouter
 		msg = msg.replace(/&/g, '%tzrezrrer'); // On remplace aussi les & car sinon il termine le $_GET['historique']
 		msg = msg.replace(/#/g, '%fefefeqfqd');
 		
-		lienHref += '&historique='+encodeURI(msg); // On encore le message pour qu'il puisse etre envoyé par URL
+		/*lienHref += '&historique='+encodeURI(msg); // On encore le message pour qu'il puisse etre envoyé par URL
 		
-		lien.setAttribute('href', encodeURI(lienHref)); // On change le lien (En le ré-encodant encore une fois, sinon ca deconne)
+		lien.setAttribute('href', encodeURI(lienHref)); // On change le lien (En le ré-encodant encore une fois, sinon ca deconne)*/
+		var histo = encodeURI(encodeURI(msg)).substring(0,500);
+		
+		lienHref += '&historique='+histo;
+		lien.setAttribute('href', lienHref);
 	}
 }
 
