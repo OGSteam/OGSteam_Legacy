@@ -1,0 +1,22 @@
+<!-- en-EN -->
+
+<!ENTITY toolbar.name "Xtense toolbar">
+<!ENTITY toolbar.name.t "Your OGSpy servers">
+<!ENTITY toolbar.activate "Activate">
+<!ENTITY toolbar.activate.t "Activate Xtense">
+<!ENTITY toolbar.options "Options">
+<!ENTITY toolbar.options.t "Xtense Options">
+<!ENTITY toolbar.status "Standby">
+<!ENTITY toolbar.infos.t "Informations">
+<!ENTITY toolbar.log "Log">
+<!ENTITY toolbar.log.t "Messages log">
+<!ENTITY toolbar.send "Send">
+<!ENTITY toolbar.send.t "Send data of this page">
+
+<!ENTITY toolbar.tooltip.header "Launched modules">
+<!ENTITY toolbar.tooltip.footer "See log for more informations">
+<!ENTITY toolbar.tooltip.status.error "Critical error : ">
+<!ENTITY toolbar.tooltip.status.warning "Warning : ">
+<!ENTITY toolbar.tooltip.status.success "Success : ">
+
+<!ENTITY menu.options "Configure Xtense">

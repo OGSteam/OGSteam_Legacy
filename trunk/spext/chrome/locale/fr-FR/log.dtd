@@ -1,0 +1,11 @@
+
+<!ENTITY title "Journal SP²Gbd">
+	
+<!ENTITY copy "Copier dans le presse papier">		
+<!ENTITY copy-selected "Les lignes selectionnées">
+<!ENTITY copy-all "Toutes les lignes">
+<!ENTITY copy-hovered "La ligne survolée">
+
+<!ENTITY flush "Vider"> 
+<!ENTITY close "Fermer"> 
+<!ENTITY display-debug "Afficher les informations de débogage">
