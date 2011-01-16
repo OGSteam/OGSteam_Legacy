@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://spgdbtoolajax/skin/overlay.css" type="text/css"?>
+<overlay id="SPGdbAJAX-Overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script type="application/x-javascript" src="chrome://spgdbtoolajax/content/spgdbtoolajax.js" />
+    <toolbox id="navigator-toolbox">
+        <toolbar id="SPGdbAJAX-Toolbar" toolbarname="spext" accesskey="S" class="chromeclass-toolbar" context="toolbar-context-menu" hidden="false" persist="hidden">
+            <toolbaritem flex="0">
+                <toolbarbutton id="SPGdbAJAX-button-getgalaxy" tooltiptext="Envoi des donn?es de la Galaxie." label=" Galaxie" oncommand="SPGdbAJAX_getGalaxy()" />
+                <toolbarbutton id="SPGdbAJAX-button-getranking" tooltiptext="Envoi du classement." label=" Classement" oncommand="SPGdbAJAX_getRanking()" />
+                <toolbarbutton id="SPGdbAJAX-button-options" tooltiptext="Configuration du plugin SPGala." label=" Options" oncommand="SPGdbAJAX_openOptions()" />
+            </toolbaritem>
+            <toolbarspring />
+        </toolbar>
+    </toolbox>
+</overlay>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+    <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+    <dialog
+	title="SP²Gbd - Options"
+	orient="vertical"
+	autostretch="always"
+	buttons="accept, cancel"
+        buttonlabelcancel="Annuler"
+        buttonlabelaccept="OK"
+        ondialogaccept="SPGdbAJAX_setPref()"
+        ondialogcancel="self.close()"
+	onload="SPGdbAJAX_options_init()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+      <script type="application/x-javascript" src="chrome://spgdbtoolajax/content/spgdbtoolajax.js" />
+	  
+      <tabbox id="tabbox" flex="1">
+        <tabs>
+          <tab label="Serveur"/>
+          <tab label="Pages"/>
+          <tab label="Options"/>
+          <tab label="A propos"/>
+
+        </tabs>
+<!-- Onglet Server -->
+        <tabpanels>
+          <tabpanel>
+            <vbox>
+              <groupbox>
+                <caption label="Informations sur la Base" />
+                <vbox>
+                  <caption label="URL de SPGala ( Ex.: http://host.com/SPGala/ ):" />
+                  <textbox id="SPGdbAJAX-options-root" multiline="false" />
+                </vbox>
+                <hbox>
+                  <vbox>
+                    <caption label="Login :" />
+                    <textbox id="SPGdbAJAX-options-username" multiline="false" maxlength="20" />
+                  </vbox>
+                  <vbox>
+                    <caption label="Password :" />
+                    <textbox id="SPGdbAJAX-options-password" multiline="false" maxlength="64" type="password" />
+                  </vbox>
+                </hbox>
+                <vbox>
+                  <caption label="" />
+                  <caption label="Galaxie:" />
+                  <radiogroup id="SPGdbAJAX-options-galaxy-server">
+                    <hbox>
+                      <vbox>
+                        <radio id="SPGdbAJAX-options-galaxy-fr" label="SP2 fr" value="fr" />
+                        <radio id="SPGdbAJAX-options-galaxy-de" label="SP2 de" value="de" />
+                        <radio id="SPGdbAJAX-options-galaxy-uk" label="SP2 uk" value="uk" />
+                      </vbox>
+                    </hbox>
+                  </radiogroup>
+                </vbox>
+              </groupbox>
+            </vbox>
+          </tabpanel>
+<!-- Onglet pages -->
+          <tabpanel  disabled="true">
+            <vbox>
+              <groupbox>
+				<caption label="Envois automatique" />
+			  </groupbox>
+            </vbox>
+          </tabpanel>
+<!-- Onglet Options -->
+         <tabpanel>
+            <vbox>
+              <groupbox>
+                <caption label="Options" />
+              </groupbox>
+            </vbox>
+          </tabpanel>
+<!-- Onglet A propos -->
+          <tabpanel>
+            <vbox>
+			<caption label="Information sur l'extension"/>
+
+            </vbox>
+          </tabpanel>
+        </tabpanels>
+      </tabbox>
+    </dialog>

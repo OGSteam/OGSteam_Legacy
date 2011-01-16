@@ -1,0 +1,11 @@
+<!--	-->
+<!ENTITY title "Xtense log">
+	
+<!ENTITY copy "Copy to clipboard">		
+<!ENTITY copy-selected "Selected lines only">
+<!ENTITY copy-all "All the lines">
+<!ENTITY copy-hovered "Curent line">
+
+<!ENTITY flush "Erase"> 
+<!ENTITY close "Close"> 
+<!ENTITY display-debug "Display debug informations">
