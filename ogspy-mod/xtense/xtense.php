@@ -487,8 +487,8 @@ switch ($pub_type){
 								Check::player_name($line['player_name']),
 								Check::player_status($line['status']),
 								Check::ally_tag($line['ally_tag'])))
-						continue;	
-					
+						continue;
+
 					$data[$i] = $line;
 				} 
 				else {
@@ -506,9 +506,9 @@ switch ($pub_type){
 			}
 		
 			foreach ($data as $row => $v) {
-				if(!isset($update[$row])) 
+				if(!isset($update[$row]))
 					$db->sql_query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, name, player, ally, status, last_update, last_update_user_id, moon)
-						VALUES ('.$galaxy.', '.$system.', '.$row.', "'.quote($v['planet_name']).'", "'.quote($v['player_name']).'", "'.quote($v['ally_tag']).'", "'.quote($v['status']).'", '.$time.', '.$user_data['user_id'].', '.$v['moon'].')');
+						VALUES ('.$galaxy.', '.$system.', '.$row.', "'.quote($v['planet_name']).'", "'.quote($v['player_name']).'", "'.quote($v['ally_tag']).'", "'.quote($v['status']).'", '.$time.', '.$user_data['user_id'].', "'.quote($v['moon']).'")');
 				else {
 					$db->sql_query(
 						'UPDATE '.TABLE_UNIVERSE.' SET name = "'.quote($v['planet_name']).'", player = "'.quote($v['player_name']).'", ally = "'.quote($v['ally_tag']).'", status = "'.quote($v['status']).'", moon = "'.$v['moon'].'", last_update = '.$time.', last_update_user_id = '.$user_data['user_id']
