@@ -1,8 +1,12 @@
 var SPGdbprefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 
-function SPGdbAJAX_trim(text){
+function trim(text){
 	var text = text.replace(/^\s+/, '');
 	return text.replace(/\s+$/, '');
+}
+
+function RemovePoint(texte) { 
+return texte.replace(/\./g, ''); 
 }
 
 function RemoveHTMLTags(texte){
@@ -15,22 +19,16 @@ function RemoveIGU(texte){
   return texte.replace(exp1,"");
 }
 
-//---------------------- Suppression des points -------------------------//
-function RemovePoint(texte) { 
-return texte.replace(/\./g, ''); 
-}
-
-function SPGdbAJAX_encode(text){
+function Encode(text){
 	var text = encodeURIComponent(text);
 	text = text.replace(/%C3%A8/gi,"%E8");
 	text = text.replace(/%C3%A9/gi,"%E9");
 	text = text.replace(/%C2%A0/gi,"%20");
 	text = text.replace(/%C2/gi,"");
-	
 	return text;
 }
 
-function SPGdbAJAX_getSPserver(id) {
+function GetSPserver(id) {
 	if ( id == 1 ) id = '';
 
 	var galaxyserver = SPGdbprefs.getCharPref("spgdbtoolajax.galaxy.server");
@@ -51,16 +49,17 @@ function SPGdbAJAX_getSPserver(id) {
 	return hoststring;
 }
 
-function SPGdbAJAX_sendData(what, data, id){
+//---------------------- Envois des données -------------------------//
+function SendData(what, data, id){
 	var root = SPGdbprefs.getCharPref("spgdbtoolajax.root");
 	
-	data[0] = SPGdbAJAX_encode(data[0]);
+	data[0] = encode(data[0]);
 	
 	var user = SPGdbprefs.getCharPref("spgdbtoolajax.username");
-	user = SPGdbAJAX_encode(user);
+	user = encode(user);
 	
 	var pass = SPGdbprefs.getCharPref("spgdbtoolajax.password");
-	pass = SPGdbAJAX_encode(pass);
+	pass = encode(pass);
 	
 	var con = new XMLHttpRequest();
 	
@@ -107,16 +106,16 @@ function SPGdbAJAX_sendData(what, data, id){
 		
 }
 
-function greload()
+function Greload()
 { 
-status_timer = setInterval("SPGdbAJAX_getGalaxy()", 100);
+status_timer = setInterval("GetGalaxy()", 100);
 }
 
 //---------------------- Récuperation de la galaxie -------------------------//
-function SPGdbAJAX_getGalaxy(){
+function GetGalaxy(){
 	for (var z = 1; z <= 3; z++)
 	{
-		var hoststring = SPGdbAJAX_getSPserver(z);
+		var hoststring = getSPserver(z);
 		var doc =  window.content.document;
 
 		if ( doc.location.host == hoststring )
@@ -126,24 +125,23 @@ function SPGdbAJAX_getGalaxy(){
 			{
 					var x = doc.getElementById("tpl_system_ppx").value;
 					var y = doc.getElementById("tpl_system_ppy").value;
-					var r = sys.getElementsByTagName("table");
 					var galaxy = "";
-alert(x + ':' + y);
-		// jusque là ca fonctionne
+					var r = sys.getElementsByTagName("table");
+					var lines = r[0].getElementsByTagName("tr");
+
 					for (var i = 1; i <= 16; i++)
 					{
-						var c = r[i].getElementsByTagName("table");
-						var cel = c.getElementsByTagName("td"); 
-						var pos = cel[0].textContent;
-						var ally = c[2].textContent;
-						var planet = c[3].textContent;
-						var player = c[4].textContent;
-		alert(pos);
+						var line = lines[i];
+						var cells = line.getElementsByTagName("td");
+						var pos = RemovePoint(cells[2].textContent);
+						var playerSpans = cells[2].getElementsByTagName("span");
+						var ally = playerSpans[1].textContent;
+						var player = trim(playerSpans[0].textContent);
+						var planet = cells[1].innerHTML;
+						planet= trim(planet.substring(0,planet.indexOf('<')));
+
 						galaxy += pos+"\t"+ally+"\t"+planet+"\t"+player+"\t";
-						if ( oldname = c[4].innerHTML.match(/previous ([\x20-\x7e\x81-\xff]+), place/) )
-							galaxy += oldname[1];
-						else
-							galaxy += player;
+						galaxy += player;//le oldname n'existe plus, ligne à retirer une fois le php corrigé
 			
 						galaxy += "\n";
 					}
@@ -151,21 +149,20 @@ alert(x + ':' + y);
 					data[0] = galaxy;
 					data[1] = x;
 					data[2] = y;
-alert(data);
-//					SPGdbAJAX_sendData('galaxy', data, id);
+
+//					SendData('galaxy', data, id);
 			}
 			else
 				break;
 		}
 	}
 }
-		
 
 //---------------------- Récuperation du classement -------------------------//
-function SPGdbAJAX_getRanking(){
+function GetRanking(){
 	for (var z = 1; z <= 3; z++)
 	{
-		var hoststring = SPGdbAJAX_getSPserver(z);
+		var hoststring = getSPserver(z);
 	
 		if ( window.content.location.host == hoststring )
 		{
@@ -193,9 +190,9 @@ function SPGdbAJAX_getRanking(){
 						
 						ranking += ally+"\t"+player+"\t"+type+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef+"\t";
 						
-						if ( oldname = c[3].innerHTML.match(/Également connu sous le nom de: ([\x20-\x7e\x81-\xff]+)" color="/) )
+						/*if ( oldname = c[3].innerHTML.match(/Également connu sous le nom de: ([\x20-\x7e\x81-\xff]+)" color="/) )
 							ranking += oldname[1];
-						else
+						else*/
 							ranking += player;
 			
 						ranking += "\n";
@@ -205,7 +202,7 @@ function SPGdbAJAX_getRanking(){
 					
 					data[0] = ranking;
 					
-					SPGdbAJAX_sendData('ranking', data, id);
+//					SendData('ranking', data, id);
 //				}
 				break;
 			}
@@ -216,10 +213,10 @@ function SPGdbAJAX_getRanking(){
 }
 
 //---------------------- Récuperation du rapport d'espionnage -------------------------//
-function SPGdbAJAX_getSpy(){
+function GetSpy(){
 	for (var z = 1; z <= 3; z++)
 	{
-		var hoststring = SPGdbAJAX_getSPserver(z);
+		var hoststring = getSPserver(z);
 	
 		if ( window.content.location.host == hoststring )
 		{
@@ -242,7 +239,7 @@ function SPGdbAJAX_getSpy(){
 
 }}}}}}
 
-function SPGdbAJAX_options_init(){
+function Options_init(){
 		var root = SPGdbprefs.getCharPref("spgdbtoolajax.root");
 		document.getElementById("SPGdbAJAX-options-root").value = root;
 		var username = SPGdbprefs.getCharPref("spgdbtoolajax.username");
@@ -253,22 +250,63 @@ function SPGdbAJAX_options_init(){
 		document.getElementById("SPGdbAJAX-options-galaxy-server").value = galaxyserver;
 }
 
-function SPGdbAJAX_setPref(){
-		var root = SPGdbAJAX_trim(document.getElementById("SPGdbAJAX-options-root").value);
-		SPGdbprefs.setCharPref("spgdbtoolajax.root", SPGdbAJAX_trim(root));
-		var username = SPGdbAJAX_trim(document.getElementById("SPGdbAJAX-options-username").value);
-		SPGdbprefs.setCharPref("spgdbtoolajax.username", SPGdbAJAX_trim(username));
-		var password = SPGdbAJAX_trim(document.getElementById("SPGdbAJAX-options-password").value);
-		SPGdbprefs.setCharPref("spgdbtoolajax.password", SPGdbAJAX_trim(password));
+function SetPref(){
+		var root = trim(document.getElementById("SPGdbAJAX-options-root").value);
+		SPGdbprefs.setCharPref("spgdbtoolajax.root", trim(root));
+		var username = trim(document.getElementById("SPGdbAJAX-options-username").value);
+		SPGdbprefs.setCharPref("spgdbtoolajax.username", trim(username));
+		var password = trim(document.getElementById("SPGdbAJAX-options-password").value);
+		SPGdbprefs.setCharPref("spgdbtoolajax.password", trim(password));
 		var galaxyserver = document.getElementById("SPGdbAJAX-options-galaxy-server").value;	
 		SPGdbprefs.setCharPref("spgdbtoolajax.galaxy.server", galaxyserver);
 }
 
-function SPGdbAJAX_openOptions() {
+function OpenOptions() {
 	window.openDialog("chrome://spgdbtoolajax/content/options.xul", "spgdb-options", "chrome,centerscreen");
 }
 
-function SPGdbAJAX_openlog() {
+function Openlog() {
 	window.openDialog("chrome://spgdbtoolajax/content/log.xul", "spgdb-log", "chrome,centerscreen");
+}
+
+function Xreload_chrome() {
+	Components.classes["@mozilla.org/chrome/chrome-registry;1"]
+	.getService(Components.interfaces.nsIXULChromeRegistry)
+	.reloadChrome();
+}
+
+function Xreload_firefox() {
+	if (Xprefs.getBool('debug')) {
+	try{
+ const nsIAppStartup = Components.interfaces.nsIAppStartup;
+
+  // Notify all windows that an application quit has been requested.
+  var os = Components.classes["@mozilla.org/observer-service;1"]
+                     .getService(Components.interfaces.nsIObserverService);
+  var cancelQuit = Components.classes["@mozilla.org/supports-PRBool;1"]
+                             .createInstance(Components.interfaces.nsISupportsPRBool);
+  os.notifyObservers(cancelQuit, "quit-application-requested", null);
+
+  // Something aborted the quit process. 
+  if (cancelQuit.data)
+    return;
+
+  // Notify all windows that an application quit has been granted.
+  os.notifyObservers(null, "quit-application-granted", null);
+
+  // Enumerate all windows and call shutdown handlers
+  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                     .getService(Components.interfaces.nsIWindowMediator);
+  var windows = wm.getEnumerator(null);
+  while (windows.hasMoreElements()) {
+    var win = windows.getNext();
+    if (("tryToClose" in win) && !win.tryToClose())
+      return;
+  }
+  Components.classes["@mozilla.org/toolkit/app-startup;1"].getService(nsIAppStartup)
+            .quit(nsIAppStartup.eRestart | nsIAppStartup.eAttemptQuit);
+				}catch(e){ufLog(e.name+": "+e.message+"line "+e.lineNumber);}
+	}
+	else {Xconsole('debug mode off, restart aborted');}
 }
 

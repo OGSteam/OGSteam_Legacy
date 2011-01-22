@@ -7,8 +7,8 @@
 
         <!-- Required Items -->
         <em:id>spgdbtoolajax@madanddorks.com</em:id>
-        <em:name>SPExt2</em:name>
-        <em:version>1.6</em:version>
+        <em:name>SP²Ext</em:name>
+        <em:version>2.0</em:version>
 
         <em:targetApplication>
             <Description>
@@ -21,8 +21,8 @@
         <!-- Optional Items -->
         <em:creator>Cosmo</em:creator>
 		<em:developer>capi</em:developer>
-        <em:description>Extension FireFox pour le jeu SpacePioneer 2.</em:description>
-        <em:homepageURL>http://board.ogsteam.fr/viewforum.php?id=129</em:homepageURL>
+        <em:description>Extension pour SP²Gala.</em:description>
+        <em:homepageURL>http://www.ogsteam.fr/</em:homepageURL>
 
     </Description>
 </RDF>
