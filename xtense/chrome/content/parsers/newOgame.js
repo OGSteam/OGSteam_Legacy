@@ -992,6 +992,11 @@ var XnewOgame = {
 				var win = "A";
 			else
 				var win = "D";
+
+			if(result.match(new RegExp(rcStrings['regxps']['moon'], 'gi')))
+				var moon = 1;
+			else
+				var moon = 0;
 			
 			for (var i in rcStrings['regxps']['result']) {
 				var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
