@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
     <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
     <dialog
-	title="SP²Gbd - Options"
-	orient="vertical"
-	autostretch="always"
-	buttons="accept, cancel"
+    title="SP²Ext - Options"
+    orient="vertical"
+    autostretch="always"
+    buttons="accept, cancel"
         buttonlabelcancel="Annuler"
         buttonlabelaccept="OK"
-        ondialogaccept="SPGdbAJAX_setPref()"
+        ondialogaccept="SetPref()"
         ondialogcancel="self.close()"
-	onload="SPGdbAJAX_options_init()"
-	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+    onload="Options_init()"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    
       <script type="application/x-javascript" src="chrome://spgdbtoolajax/content/spgdbtoolajax.js" />
-	  
+       
       <tabbox id="tabbox" flex="1">
         <tabs>
           <tab label="Serveur"/>
-          <tab label="Pages"/>
-          <tab label="Options"/>
+          <tab label="Pages" disabled="true"/>
+          <tab label="Options" disabled="true"/>
           <tab label="A propos"/>
-
+ 
         </tabs>
 <!-- Onglet Server -->
         <tabpanels>
@@ -29,7 +29,7 @@
               <groupbox>
                 <caption label="Informations sur la Base" />
                 <vbox>
-                  <caption label="URL de SPGala ( Ex.: http://host.com/SPGala/ ):" />
+                  <caption label="URL de SP²Gala ( Ex.: http://host.com/SP²Gala/ ):" />
                   <textbox id="SPGdbAJAX-options-root" multiline="false" />
                 </vbox>
                 <hbox>
@@ -48,9 +48,9 @@
                   <radiogroup id="SPGdbAJAX-options-galaxy-server">
                     <hbox>
                       <vbox>
-                        <radio id="SPGdbAJAX-options-galaxy-fr" label="SP2 fr" value="fr" />
-                        <radio id="SPGdbAJAX-options-galaxy-de" label="SP2 de" value="de" />
-                        <radio id="SPGdbAJAX-options-galaxy-uk" label="SP2 uk" value="uk" />
+                        <radio id="SPGdbAJAX-options-galaxy-fr" label="Serveur Français" value="fr" />
+                        <radio id="SPGdbAJAX-options-galaxy-de" label="Deutsch-Server" value="de" />
+                        <radio id="SPGdbAJAX-options-galaxy-uk" label="English Server" value="uk" />
                       </vbox>
                     </hbox>
                   </radiogroup>
@@ -62,8 +62,8 @@
           <tabpanel  disabled="true">
             <vbox>
               <groupbox>
-				<caption label="Envois automatique" />
-			  </groupbox>
+                <caption label="Envois automatique" />
+              </groupbox>
             </vbox>
           </tabpanel>
 <!-- Onglet Options -->
@@ -77,7 +77,36 @@
 <!-- Onglet A propos -->
           <tabpanel>
             <vbox>
-			<caption label="Information sur l'extension"/>
+<groupbox>
+        <caption label="Information sur l'extension" style="font-weight: bold;" />
+             <grid flex="1">
+                <columns>
+                    <column flex="1" />
+                    <column flex="1" />
+                </columns>
+                <rows>
+                    <row>
+                        <label>SP²Ext a été créé par Cosmo et a été adapté pour SP2 par Capi : </label>
+                        <label onclick="open_link('http://');" class="text-link"> </label>
+                    </row>
+                    <row>
+                        <label>License</label>
+                        <label onclick="open_link('http://www.gnu.org/licenses/gpl-3.0.txt');" class="text-link">GNU/GPL.v3</label>
+                    </row>
+                </rows>
+            </grid>
+</groupbox>
+        <groupbox>
+            <caption label="Liens utiles" style="font-weight: bold;" />
+            <label onclick="open_link('http://board.ogsteam.fr/viewforum.php?id=129');" class="text-link">Forum</label>
+        </groupbox>
+       
+        <groupbox>
+            <caption label="Contributeurs" style="font-weight: bold;" />
+           
+            <!--<label value="Contributeurs" style="font-weight: bold;" />-->
+            <label value="Jormund" />
+        </groupbox>
 
             </vbox>
           </tabpanel>

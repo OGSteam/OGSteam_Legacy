@@ -4,10 +4,17 @@
     <script type="application/x-javascript" src="chrome://spgdbtoolajax/content/spgdbtoolajax.js" />
     <toolbox id="navigator-toolbox">
         <toolbar id="SPGdbAJAX-Toolbar" toolbarname="spext" accesskey="S" class="chromeclass-toolbar" context="toolbar-context-menu" hidden="false" persist="hidden">
-            <toolbaritem flex="0">
-                <toolbarbutton id="SPGdbAJAX-button-getgalaxy" tooltiptext="Envoi des donn?es de la Galaxie." label=" Galaxie" oncommand="SPGdbAJAX_getGalaxy()" />
-                <toolbarbutton id="SPGdbAJAX-button-getranking" tooltiptext="Envoi du classement." label=" Classement" oncommand="SPGdbAJAX_getRanking()" />
-                <toolbarbutton id="SPGdbAJAX-button-options" tooltiptext="Configuration du plugin SPGala." label=" Options" oncommand="SPGdbAJAX_openOptions()" />
+            <toolbaritem flex="1">
+                <toolbarbutton id="SPGdbAJAX-button-getgalaxy" accesskey="G" tooltiptext="Envoi de la Galaxie." label=" Galaxy" oncommand="GetGalaxy()" />
+                <toolbarbutton id="SPGdbAJAX-button-getSpy" accesskey="Y" tooltiptext="Envoi du Rapport d'espionnage." label=" Spy" oncommand="GetSpy()" disabled="true"/>
+                <toolbarbutton id="SPGdbAJAX-button-getranking" accesskey="R" tooltiptext="Envoi du classement." label=" Rank" oncommand="GetRanking()" disabled="true"/>
+				<toolbarseparator/>
+                <toolbarbutton id="SPGdbAJAX-button-options" tooltiptext="Configuration du plugin SPGala." label=" Options" oncommand="OpenOptions()" />
+                <toolbarbutton id="SPGdbAJAX-button-log" tooltiptext="Journal." label=" Options" oncommand="Openlog()" disabled="true"/>
+				<toolbarseparator/>
+			<hbox>
+				<toolbarbutton id="SPGdbAJAX-reload-firefox" label="Reload Firefox" oncommand="Xreload_firefox();"/>
+			</hbox>
             </toolbaritem>
             <toolbarspring />
         </toolbar>

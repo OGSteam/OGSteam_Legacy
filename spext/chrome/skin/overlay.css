@@ -7,9 +7,13 @@
 }
 
 #SPGdbAJAX-button-options {
-    list-style-image: url("chrome://spgdbtoolajax/skin/page_white_wrench.png");
+    list-style-image: url("chrome://spgdbtoolajax/skin/wrench_orange.png");
 }
 
 #SPGdbAJAX-button-getSpy {
     list-style-image: url("chrome://spgdbtoolajax/skin/page_white_magnify.png");
+}
+
+#SPGdbAJAX-button-log {
+    list-style-image: url("chrome://spgdbtoolajax/skin/log.png");
 }
