@@ -72,18 +72,29 @@ for ($i=1 ; $i<=9 ; $i++) {
 	<td></td>
 </tr>
 <tr>
-	<th><a>Température</a></th>
+	<th><a>Température Min.</a></th>
 <?php
 for ($i=1 ; $i<=9 ; $i++) {
-	$temperature = $user_building[$i]["temperature"];
-	if ($temperature == "") $temperature = "&nbsp;";
+	$temperature_min = $user_building[$i]["temperature_min"];
+	if ($temperature_min == "") $temperature_min = "&nbsp;";
 
-	echo "\t"."<th colspan='2'>".$temperature."<input id='Temp_".$i."' type='hidden' value='".$temperature."'></th>"."\n";
+	echo "\t"."<th colspan='2'>".$temperature_min."<input id='temperature_min_".$i."' type='hidden' value='".$temperature_min."'></th>"."\n";
 }
 ?>
 	<td></td>
 </tr>
+<tr>
+	<th><a>Température Max.</a></th>
+<?php
+for ($i=1 ; $i<=9 ; $i++) {
+	$temperature_max = $user_building[$i]["temperature_max"];
+	if ($temperature_max == "") $temperature_max = "&nbsp;";
 
+	echo "\t"."<th colspan='2'>".$temperature_max."<input id='temperature_max_".$i."' type='hidden' value='".$temperature_max."'></th>"."\n";
+}
+?>
+	<td></td>
+</tr>
 <!--
 Energie
 -->
@@ -304,7 +315,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <?php
 $lab_max = 0;
 for ($i=1 ; $i<=9 ; $i++) {
-	echo "\t<input type='hidden' id='building_".$i."' value='".implode(array_slice($user_building[$i],11,-2), "<>")."' />";
+	echo "\t<input type='hidden' id='building_".$i."' value='".implode(array_slice($user_building[$i],12,-2), "<>")."' />";
 	echo "\t"."<th colspan='2'><font color='lime'><div id='building_pts_".$i."'>-</div></font></th>"."\n";
 	if($lab_max < $user_building[$i]["Lab"]) $lab_max = $user_building[$i]["Lab"];
 }
@@ -325,7 +336,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <th><a>Lunes</a></th>
 <?php
 for ($i=10 ; $i<=18 ; $i++) {
-	if ($user_building[$i]) echo "\t<input type='hidden' id='lune_b_".$i."' value='".implode(array_slice($user_building[$i],11,-2,true), "<>")."' />";
+	if ($user_building[$i]) echo "\t<input type='hidden' id='lune_b_".$i."' value='".implode(array_slice($user_building[$i],12,-2,true), "<>")."' />";
 	else echo "\t<input type='hidden' id='lune_b_".$i."' value='0' />";
 	echo "\t<input type='hidden' id='lune_d_".$i."' value='".implode($user_defence[$i], "<>")."' />";
 	echo "\t<th colspan='2'><font color='lime'><div id='lune_pts_".$i."'>-</div></font></th>"."\n";

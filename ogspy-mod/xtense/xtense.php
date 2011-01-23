@@ -132,7 +132,7 @@ $io->set(array('new_messages' => 0));
 
 switch ($pub_type){
 	case 'overview': //PAGE OVERVIEW
-		Check::data(isset($pub_coords, $pub_planet_name, $pub_planet_type, $pub_fields, $pub_temp, $pub_ressources));
+		Check::data(isset($pub_coords, $pub_planet_name, $pub_planet_type, $pub_fields, $pub_temperature_min, $pub_temperature_max, $pub_ressources));
 
 		if (!$user_data['grant']['empire']) {
 			$io->set(array(
@@ -145,11 +145,12 @@ switch ($pub_type){
 			$planet_name = Check::filterSpecialChars($pub_planet_name);
 			Check::data(Check::planet_name($planet_name));
 			
-			$coords 		= $pub_coords;
-			$planet_type 	= ((int)$pub_planet_type == TYPE_PLANET ? TYPE_PLANET : TYPE_MOON);
-			$fields			= (int)$pub_fields;
-			$temp			= (int)$pub_temp;
-			$ressources		= $pub_ressources;
+			$coords 			= $pub_coords;
+			$planet_type 		= ((int)$pub_planet_type == TYPE_PLANET ? TYPE_PLANET : TYPE_MOON);
+			$fields				= (int)$pub_fields;
+			$temperature_min	= (int)$pub_temperature_min;
+			$temperature_max	= (int)$pub_temperature_max;
+			$ressources			= $pub_ressources;
 			
 			
 			$home = home_check($planet_type, $coords);
@@ -161,9 +162,9 @@ switch ($pub_type){
 				$io->status(0);
 			} else {
 				if ($home[0] == 'update') {
-					$db->sql_query('UPDATE '.TABLE_USER_BUILDING.' SET planet_name = "'.$planet_name.'", `fields` = '.$fields.', temperature = '.$temp.'  WHERE planet_id = '.$home['id'].' AND user_id = '.$user_data['user_id']);
+					$db->sql_query('UPDATE '.TABLE_USER_BUILDING.' SET planet_name = "'.$planet_name.'", `fields` = '.$fields.', temperature_min = '.$temperature_min.', temperature_max = '.$temperature_max.'  WHERE planet_id = '.$home['id'].' AND user_id = '.$user_data['user_id']);
 				} else {
-					$db->sql_query('INSERT INTO '.TABLE_USER_BUILDING.' (user_id, planet_id, coordinates, planet_name, `fields`, temperature) VALUES ('.$user_data['user_id'].', '.$home['id'].', "'.$coords.'", "'.$planet_name.'", '.$fields.', '.$pub_temp.')');
+					$db->sql_query('INSERT INTO '.TABLE_USER_BUILDING.' (user_id, planet_id, coordinates, planet_name, `fields`, temperature_min, temperature_max) VALUES ('.$user_data['user_id'].', '.$home['id'].', "'.$coords.'", "'.$planet_name.'", '.$fields.', '.$pub_temperature_min.', '.$pub_temperature_max.')');
 				}
 				
 				$io->set(array(
@@ -178,7 +179,8 @@ switch ($pub_type){
 						'planet_type' => $planet_type,
 						'planet_name' => $planet_name,
 						'fields' => $fields,
-						'temp' => $temp,
+						'temperature_min' => $temperature_min,
+						'temperature_max' => $temperature_max,
 						'ressources' => $ressources
 			));
 			

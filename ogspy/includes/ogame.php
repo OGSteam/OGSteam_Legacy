@@ -17,7 +17,7 @@ if (!isset($server_config['speed_uni'])) {
 }
 
 //Production par heure
-function production ($building, $level, $temperature = 0) {
+function production ($building, $level, $temperature_max = 0) {
 	global $server_config, $user_technology;
 	switch ($building) {
 		case "M":
@@ -29,7 +29,7 @@ function production ($building, $level, $temperature = 0) {
 		break;
 
 		case "D":
-		$result = $server_config['speed_uni']*(10 * $level * pow(1.1, $level) * (-0.002 * $temperature + 1.28));
+		$result = $server_config['speed_uni']*floor(10 * $level * pow(1.1, $level) * (1.44 - 0.004 * $temperature_max));
 		break;
 
 		case "CES":
@@ -49,8 +49,8 @@ function production ($building, $level, $temperature = 0) {
 }
 
 //Production des satellites
-function production_sat ($temperature) {
-	return floor(($temperature / 4) + 20);
+function production_sat ($temperature_min, $temperature_max) {
+	return floor(((($temperature_min + $temperature_max) / 2) + 160) / 6);
 }
 
 //Consommation d'énergie

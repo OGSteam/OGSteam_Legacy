@@ -1061,16 +1061,16 @@ elseif (isset($pub_typ) && $pub_typ=="buildings" && isset($pub_content) && !empt
 	if ($target_planet_id!=0) 
 	{
 		// fields entre `` et pas '' sinon ça marche pas
-        $query = "SELECT planet_id, `fields`, temperature, Sat FROM ".TABLE_USER_BUILDING." WHERE user_id=".$user_id." and planet_id=".$target_planet_id.";";
+        $query = "SELECT planet_id, `fields`, temperature_min, temperature_max, Sat FROM ".TABLE_USER_BUILDING." WHERE user_id=".$user_id." and planet_id=".$target_planet_id.";";
         if (defined("XTENSE_PLUGIN_DEBUG")) fwrite($fp,"\nrequète recherche valeur à récupérer : ".$query."\n");
         $res = $db->sql_query($query, true, $log_sql_errors);
-        list($prev_planetid, $prev_fields, $prev_temperature, $prev_satellite) = $db->sql_fetch_row($res);
+        list($prev_planetid, $prev_fields, $prev_temperature_min, $prev_temperature_max, $prev_satellite) = $db->sql_fetch_row($res);
 		
 		if ($ogspy_server_version==OGSPY_0302_VERCONST) $res_set_building=plg_set_user_building($buildings_content, $target_planet_id,$user_planetsource_vars[1], 
-		$prev_fields,  $user_planetsource_vars[2], $prev_temperature, $prev_satellite);
+		$prev_fields,  $user_planetsource_vars[2], $prev_temperature_min, $prev_temperature_max, $prev_satellite);
 
 		elseif($ogspy_server_version==OGSPY_031_VERCONST) $res_set_building=user_set_building($buildings_content, $target_planet_id,$user_planetsource_vars[1], 
-		$prev_fields,  $user_planetsource_vars[2], $prev_temperature, $prev_satellite, true);
+		$prev_fields,  $user_planetsource_vars[2], $prev_temperature_min, $prev_temperature_max, $prev_satellite, true);
                      
         if ($res_set_building==true) 
 		{
@@ -1266,13 +1266,13 @@ elseif (isset($pub_typ) && $pub_typ=="defence" && isset($pub_content) && !empty(
     if ($target_planet_id!=0) 
 	{
       	if (defined("XTENSE_PLUGIN_DEBUG")) fwrite($fp,"insertion defense en ".$target_planet_id."\n");
-      	$query = "SELECT planet_id, `fields`, temperature, Sat FROM ".TABLE_USER_BUILDING." WHERE user_id=".$user_id." and planet_id=".$target_planet_id.";";
+      	$query = "SELECT planet_id, `fields`, temperature_min, temperature_max, Sat FROM ".TABLE_USER_BUILDING." WHERE user_id=".$user_id." and planet_id=".$target_planet_id.";";
         if (defined("XTENSE_PLUGIN_DEBUG")) fwrite($fp,"\nrequète recherche valeur à récupérer : ".$query."\n");
         $res = $db->sql_query($query, true, $log_sql_errors);
-        list($prev_planetid, $prev_fields, $prev_temperature, $prev_satellite) = $db->sql_fetch_row($res);
-		if ($ogspy_server_version==OGSPY_0302_VERCONST) $res_user_defence=plg_user_set_defence($buildings_content, $target_planet_id,$user_planetsource_vars[1], $prev_fields,  $user_planetsource_vars[2], $prev_temperature, $prev_satellite);
+        list($prev_planetid, $prev_fields, $prev_temperature_min, $prev_temperature_max, $prev_satellite) = $db->sql_fetch_row($res);
+		if ($ogspy_server_version==OGSPY_0302_VERCONST) $res_user_defence=plg_user_set_defence($buildings_content, $target_planet_id,$user_planetsource_vars[1], $prev_fields,  $user_planetsource_vars[2], $prev_temperature_min, $prev_temperature_max, $prev_satellite);
         
-		elseif($ogspy_server_version==OGSPY_031_VERCONST) $res_user_defence=user_set_defence($buildings_content, $target_planet_id,$user_planetsource_vars[1], $prev_fields,  $user_planetsource_vars[2], $prev_temperature, $prev_satellite, true);                   
+		elseif($ogspy_server_version==OGSPY_031_VERCONST) $res_user_defence=user_set_defence($buildings_content, $target_planet_id,$user_planetsource_vars[1], $prev_fields,  $user_planetsource_vars[2], $prev_temperature_min, $prev_temperature_max, $prev_satellite, true);                   
           
         if ($res_user_defence==true) SendHttpStatusCode("765");
       	else SendHttpStatusCode("766");

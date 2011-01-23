@@ -345,8 +345,9 @@ var XnewOgame = {
 	
 	parseOverview : function () {
 		var cases = this.win.textContent[1].getInts()[2];
-		var temp = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
-				
+		var temperature_max = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
+
 		var planetData = this.getPlanetData();
 		if(planetData.coords == "unknown") {
 			Xconsole("planète unique");
@@ -359,7 +360,8 @@ var XnewOgame = {
 			{
 				type: 'overview',
 				fields: cases,
-				temp: temp,
+				temperature_min: temperature_min,
+				temperature_max: temperature_max,
 				ressources: this.getResources()
 			},
 			planetData
