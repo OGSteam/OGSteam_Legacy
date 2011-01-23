@@ -144,7 +144,7 @@ function update_page() {
 		if (Geo < 1){
 		D_1_prod[i] = Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100);
 		} else {
-		D_1_prod[i] = (Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100)) + (Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100))/10;
+		D_1_prod[i] = Math.round((Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100)) + (Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100))/10);
 		}
 		
 		document.getElementById("D_" + i + "_conso").innerHTML = D_1_conso[i];
