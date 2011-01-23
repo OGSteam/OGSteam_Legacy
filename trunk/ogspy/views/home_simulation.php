@@ -308,7 +308,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	<th><div id="D_prod">-</div></th>
 </tr>
 <tr>
-	<td class="c" colspan="20">Poids en points de chaque planète</th>
+	<td class="c" colspan="20">Poids en points de chaque planète</td>
 </tr>
 <tr>
 <th><a>Bâtiments</a></th>
@@ -320,7 +320,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	if($lab_max < $user_building[$i]["Lab"]) $lab_max = $user_building[$i]["Lab"];
 }
 ?>
-	<th><font color='white'><div id='total_b_pts'>-</div></font></th>
+	<th><font color='white'><span id='total_b_pts'>-</span></font></th>
 </tr>
 <tr>
 <th><a>Défenses</a></th>
@@ -330,7 +330,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	echo "\t<th colspan='2'><font color='lime'><div id='defence_pts_".$i."'>-</div></font></th>"."\n";
 }
 ?>
-	<th><font color='white'><div id='total_d_pts'>-</div></font></th>
+	<th><font color='white'><span id='total_d_pts'>-</span></font></th>
 </tr>
 <tr>
 <th><a>Lunes</a></th>
@@ -342,7 +342,7 @@ for ($i=10 ; $i<=18 ; $i++) {
 	echo "\t<th colspan='2'><font color='lime'><div id='lune_pts_".$i."'>-</div></font></th>"."\n";
 }
 ?>
-	<th><font color='white'><div id='total_lune_pts'>-</div></font></th>
+	<th><font color='white'><span id='total_lune_pts'>-</span></font></th>
 </tr>
 <tr>
 	<th><a>Satellites</a></th>
@@ -374,7 +374,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='white'><div id='total_pts_".$i."'>-</div></font></th>"."\n";
 }
 ?>
-<th><font color='white'><div id='total_pts'>-</div></font></th>
+<th><font color='white'><span id='total_pts'>-</span></font></th>
 </tr>
 <tr>
 	<td class="c">&nbsp;</td>
