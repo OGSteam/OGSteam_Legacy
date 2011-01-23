@@ -748,7 +748,7 @@ function user_statistic() {
 * Enregistrement des données Empires d'un utilisateur
 */
 function user_set_empire() {
-	global $pub_typedata, $pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature, $pub_satellite;
+	global $pub_typedata, $pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature_min, $pub_temperature_max, $pub_satellite;
 
 	if (!isset($pub_typedata) || !isset($pub_data)) {
 		redirection("index.php?action=message&id_message=errorfatal&info");
@@ -756,10 +756,10 @@ function user_set_empire() {
 
 	switch ($pub_typedata) {
 		case "B" :
-		if (!isset($pub_planet_name) || !isset($pub_fields) || !isset($pub_coordinates)|| !isset($pub_temperature) || !isset($pub_satellite)) {
+		if (!isset($pub_planet_name) || !isset($pub_fields) || !isset($pub_coordinates) || !isset($pub_temperature_min) || !isset($pub_temperature_max) || !isset($pub_satellite)) {
 			redirection("index.php?action=message&id_message=errorfatal&info");
 		}
-		user_set_building($pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature, $pub_satellite);
+		user_set_building($pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature_min, $pub_temperature_max, $pub_satellite);
 		break;
 
 		case "T" :
@@ -767,10 +767,10 @@ function user_set_empire() {
 		break;
 
 		case "D" :
-		if (!isset($pub_planet_name) || !isset($pub_fields) || !isset($pub_coordinates)|| !isset($pub_temperature) || !isset($pub_satellite)) {
+		if (!isset($pub_planet_name) || !isset($pub_fields) || !isset($pub_coordinates) || !isset($pub_temperature_min) || !isset($pub_temperature_max) || !isset($pub_satellite)) {
 			redirection("index.php?action=message&id_message=errorfatal&info");
 		}
-		user_set_defence($pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature, $pub_satellite);
+		user_set_defence($pub_data, $pub_planet_id, $pub_planet_name, $pub_fields, $pub_coordinates, $pub_temperature_min, $pub_temperature_max, $pub_satellite);
 		break;
 
 		case "E" :
@@ -950,7 +950,7 @@ function user_set_all_empire($data) {
 			$request .= " where user_id = ".$user_data["user_id"]." and planet_id = ".$planete_id;
 			$db->sql_query($request);
 			if ($db->sql_affectedrows() == 0) {
-				$request = "insert ignore into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
+				$request = "insert ignore into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
 				$request .= " values (".$user_data["user_id"].", ".$planete_id.", '".($pub_view == 'moons' ? 'Lune' : 'planete '.$planete_id)."', '".$coordonnees[$i]."', ".$case.", 0, ".$satellites[$i];
 				$request .= ", ".$buildings["M"][$i].", ".$buildings["C"][$i].", ".$buildings["D"][$i];
 				$request .= ", ".$buildings["CES"][$i].", ".$buildings["CEF"][$i].", ".$buildings["UdR"][$i];
@@ -1048,7 +1048,7 @@ function user_set_all_empire_resync() {
 	}
 }
 
-function user_set_building($data, $planet_id, $planet_name, $fields, $coordinates, $temperature, $satellite) {
+function user_set_building($data, $planet_id, $planet_name, $fields, $coordinates, $temperature_min, $temperature_max, $satellite) {
 	global $db, $user_data;
 	global $pub_view, $server_config;
 	require_once("parameters/lang_empire.php");
@@ -1057,7 +1057,8 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
 	if (!check_var($planet_name, "Galaxy")) $planet_name = "";
 
 	$fields = intval($fields);
-	$temperature = intval($temperature);
+	$temperature_min = intval($temperature_min);
+	$temperature_max = intval($temperature_max);
 	$satellite = intval($satellite);
 	$coordinates_ok = "";
 	if (sizeof(explode(":", $coordinates)) == 3 || sizeof(explode(".", $coordinates)) == 3) {
@@ -1118,17 +1119,17 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
 		$request = "delete from ".TABLE_USER_BUILDING." where user_id = ".$user_data["user_id"]." and planet_id= ".$planet_id;
 		$db->sql_query($request);
 
-		$request = "insert into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
-		$request .= " values (".$user_data["user_id"].", ".$planet_id.", '".mysql_real_escape_string($planet_name)."', '".$coordinates_ok."', ".$fields.", ".$temperature.", ".$satellite.", ".$buildings["M"].", ".$buildings["C"].",".$buildings["D"].", ".$buildings["CES"].", ".$buildings["CEF"].", ".$buildings["UdR"].", ".$buildings["UdN"].", ".$buildings["CSp"].", ".$buildings["HM"].", ".$buildings["HC"].", ".$buildings["HD"].", ".$buildings["Lab"].", ".$buildings["Ter"].", ".$buildings["Silo"].", ".$buildings["BaLu"].", ".$buildings["Pha"].", ".$buildings["PoSa"].")";
+		$request = "insert into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
+		$request .= " values (".$user_data["user_id"].", ".$planet_id.", '".mysql_real_escape_string($planet_name)."', '".$coordinates_ok."', ".$fields.", ".$temperature_min.", ".$satellite.", ".$buildings["M"].", ".$buildings["C"].",".$buildings["D"].", ".$buildings["CES"].", ".$buildings["CEF"].", ".$buildings["UdR"].", ".$buildings["UdN"].", ".$buildings["CSp"].", ".$buildings["HM"].", ".$buildings["HC"].", ".$buildings["HD"].", ".$buildings["Lab"].", ".$buildings["Ter"].", ".$buildings["Silo"].", ".$buildings["BaLu"].", ".$buildings["Pha"].", ".$buildings["PoSa"].")";
 		$db->sql_query($request);
 	}
 	elseif ( $planet_id > 9 ) {
-		$request = "insert into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
-		$request .= " values (".$user_data["user_id"].", ".$planet_id.", '".mysql_real_escape_string($planet_name)."', '".$coordinates_ok."', ".$fields.", ".$temperature.", ".$satellite.", ".$buildings["M"].", ".$buildings["C"].",".$buildings["D"].", ".$buildings["CES"].", ".$buildings["CEF"].", ".$buildings["UdR"].", ".$buildings["UdN"].", ".$buildings["CSp"].", ".$buildings["HM"].", ".$buildings["HC"].", ".$buildings["HD"].", ".$buildings["Lab"].", ".$buildings["Ter"].", ".$buildings["Silo"].", ".$buildings["BaLu"].", ".$buildings["Pha"].", ".$buildings["PoSa"].")";
+		$request = "insert into ".TABLE_USER_BUILDING." (user_id, planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
+		$request .= " values (".$user_data["user_id"].", ".$planet_id.", '".mysql_real_escape_string($planet_name)."', '".$coordinates_ok."', ".$fields.", ".$temperature_max.", ".$satellite.", ".$buildings["M"].", ".$buildings["C"].",".$buildings["D"].", ".$buildings["CES"].", ".$buildings["CEF"].", ".$buildings["UdR"].", ".$buildings["UdN"].", ".$buildings["CSp"].", ".$buildings["HM"].", ".$buildings["HC"].", ".$buildings["HD"].", ".$buildings["Lab"].", ".$buildings["Ter"].", ".$buildings["Silo"].", ".$buildings["BaLu"].", ".$buildings["Pha"].", ".$buildings["PoSa"].")";
 		$db->sql_query($request);
 	}
 	else {
-		$request = "update ".TABLE_USER_BUILDING." set planet_name = '".mysql_real_escape_string($planet_name)."', coordinates = '".$coordinates_ok."', `fields` = ".$fields.", temperature = ".$temperature.", Sat = ".$satellite." where user_id = ".$user_data["user_id"]." and planet_id = ".$planet_id;
+		$request = "update ".TABLE_USER_BUILDING." set planet_name = '".mysql_real_escape_string($planet_name)."', coordinates = '".$coordinates_ok."', `fields` = ".$fields.", temperature_min = ".$temperature_min.", temperature_max = ".$temperature_max.", Sat = ".$satellite." where user_id = ".$user_data["user_id"]." and planet_id = ".$planet_id;
 		$db->sql_query($request);
 	}
 
@@ -1188,7 +1189,7 @@ function user_set_technology($data) {
 /**
 * Enregistrement des défenses de l'utilisateurs
 */
-function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates, $temperature, $satellite) {
+function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates, $temperature_min, $temperature_max, $satellite) {
 	global $db, $user_data;
 	global $pub_view, $server_config;
 	require_once("parameters/lang_empire.php");
@@ -1196,7 +1197,8 @@ function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates
 	$planet_name = trim($planet_name) != "" ? trim($planet_name) : "Inconnu";
 	if (!check_var($planet_name, "Galaxy")) $planet_name = "";
 	$fields = intval($fields);
-	$temperature = intval($temperature);
+	$temperature_min = intval($temperature_min);
+	$temperature_max = intval($temperature_max);
 	$satellite = intval($satellite);
 	$coordinates_ok = "";
 	if (sizeof(explode(":", $coordinates)) == 3 || sizeof(explode(".", $coordinates)) == 3) {
@@ -1254,7 +1256,7 @@ function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates
 		$db->sql_query($request);
 	}
 	else {
-		$request = "update ".TABLE_USER_BUILDING." set planet_name = '".mysql_real_escape_string($planet_name)."', coordinates = '".$coordinates_ok."', `fields` = ".$fields.", temperature = ".$temperature.", Sat = ".$satellite." where user_id = ".$user_data["user_id"]." and planet_id = ".$planet_id;
+		$request = "update ".TABLE_USER_BUILDING." set planet_name = '".mysql_real_escape_string($planet_name)."', coordinates = '".$coordinates_ok."', `fields` = ".$fields.", temperature_min = ".$temperature_min.", temperature_max = ".$temperature_max.", Sat = ".$satellite." where user_id = ".$user_data["user_id"]." and planet_id = ".$planet_id;
 		$db->sql_query($request);
 	}
 
@@ -1269,7 +1271,7 @@ function user_get_empire() {
 	global $db, $user_data;
 
 	$planet = array(false, "user_id" => "", "planet_name" => "", "coordinates" => "",
-	"fields" => "", "fields_used" => "", "temperature" => "", "Sat" => "",
+	"fields" => "", "fields_used" => "", "temperature_min" => "", "temperature_max" => "", "Sat" => "",
 	"M" => 0, "C" => 0, "D" => 0,
 	"CES" => 0, "CEF" => 0,
 	"UdR" => 0, "UdN" => 0, "CSp" => 0,
@@ -1282,7 +1284,7 @@ function user_get_empire() {
 	"PB" => 0, "GB" => 0,
 	"MIC" => 0, "MIP" => 0);
 
-	$request = "select planet_id, planet_name, `coordinates`, `fields`, temperature, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
+	$request = "select planet_id, planet_name, `coordinates`, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
 	$request .= " from ".TABLE_USER_BUILDING;
 	$request .= " where user_id = ".$user_data["user_id"];
 	$request .= " order by planet_id";
@@ -1295,7 +1297,8 @@ function user_get_empire() {
 		unset($arr["planet_name"]);
 		unset($arr["coordinates"]);
 		unset($arr["fields"]);
-		unset($arr["temperature"]);
+		unset($arr["temperature_min"]);
+		unset($arr["temperature_max"]);
 		unset($arr["Sat"]);
 		$fields_used = array_sum(array_values($arr));
 

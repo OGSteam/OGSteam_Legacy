@@ -30,12 +30,13 @@ $start = $view=="planets" ? 1 : 10;
 <?php
 if(isset($pub_alert_empire) && $pub_alert_empire) echo 'message("Pensez à renseigner, si besoin est, les noms de planètes et les températures\nqui ne peuvent pas être récupérés par la page Empire d\'OGame.");';
 
-$name = $coordinates = $fields = $temperature = $satellite = "";
+$name = $coordinates = $fields = $temperature_min = $temperature_max = $satellite = "";
 for ($i=1 ; $i<=9 ; $i++) {
 	$name .= "'".$user_building[$i]["planet_name"]."', ";
 	$coordinates .= "'".$user_building[$i]["coordinates"]."', ";
 	$fields .= "'".$user_building[$i]["fields"]."', ";
-	$temperature .= "'".$user_building[$i]["temperature"]."', ";
+	$temperature_min .= "'".$user_building[$i]["temperature_min"]."', ";
+	$temperature_max .= "'".$user_building[$i]["temperature_max"]."', ";
 	$satellite .= "'".$user_building[$i]["Sat"]."', ";
 }
 
@@ -43,14 +44,16 @@ for ($i=10 ; $i<=18 ; $i++) {
 	$name .= "'Lune', ";
 	$coordinates .= "'', ";
 	$fields .= "'1', ";
-	$temperature .= "'".$user_building[$i]["temperature"]."', ";
+	$temperature_min .= "'".$user_building[$i]["temperature_min"]."', ";
+	$temperature_max .= "'".$user_building[$i]["temperature_max"]."', ";
 	$satellite .= "'".$user_building[$i]["Sat"]."', ";
 }
 
 echo "var name = new Array(".substr($name, 0, strlen($name)-2).");"."\n";
 echo "var coordinates = new Array(".substr($coordinates, 0, strlen($coordinates)-2).");"."\n";
 echo "var fields = new Array(".substr($fields, 0, strlen($fields)-2).");"."\n";
-echo "var temperature = new Array(".substr($temperature, 0, strlen($temperature)-2).");"."\n";
+echo "var temperature_min = new Array(".substr($temperature_min, 0, strlen($temperature_min)-2).");"."\n";
+echo "var temperature_max = new Array(".substr($temperature_max, 0, strlen($temperature_max)-2).");"."\n";
 echo "var satellite = new Array(".substr($satellite, 0, strlen($satellite)-2).");"."\n";
 ?>
 var select_planet = false;
@@ -65,9 +68,12 @@ function autofill(planet_id, planet_selected) {
 	document.getElementById('fields').style.visibility = 'visible';
 	document.getElementById('fields').disabled = false;
 
-	document.getElementById('temperature').style.visibility = 'visible';
-	document.getElementById('temperature').disabled = false;
+	document.getElementById('temperature_min').style.visibility = 'visible';
+	document.getElementById('temperature_min').disabled = false;
 
+	document.getElementById('temperature_max').style.visibility = 'visible';
+	document.getElementById('temperature_max').disabled = false;
+	
 	document.getElementById('satellite').style.visibility = 'visible';
 	document.getElementById('satellite').disabled = false;
 
@@ -78,7 +84,8 @@ function autofill(planet_id, planet_selected) {
 	document.getElementById('planet_name').value = name[(planet_id-1)];
 	document.getElementById('coordinates').value = coordinates[(planet_id-1)];
 	document.getElementById('fields').value = fields[(planet_id-1)];
-	document.getElementById('temperature').value = temperature[(planet_id-1)];
+	document.getElementById('temperature_min').value = temperature_min[(planet_id-1)];
+	document.getElementById('temperature_max').value = temperature_max[(planet_id-1)];
 	document.getElementById('satellite').value = satellite[(planet_id-1)];
 
 	var i = 1;
@@ -167,8 +174,8 @@ if($view == "planets") {
 	<th><input type="text" id="coordinates" name="coordinates" size="10" maxlength="10" disabled></th>
 	<th><a>Nombre de cases</a></th>
 	<th><input type="text" id="fields" name="fields" size="8" maxlength="3" disabled></th>
-	<th><a>Température Max</a></th>
-	<th><input type="text" id="temperature" name="temperature" size="8" maxlength="3" disabled></th>
+	<th><a>Temp. Min.</a><input type="text" id="temperature_min" name="temperature_min" size="8" maxlength="3" disabled></th>
+	<th><a>Temp. Max.</a><input type="text" id="temperature_min" name="temperature_max" size="8" maxlength="3" disabled></th>
 	<th><a>Nombre de satellites</a></th>
 	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
 <?php
@@ -179,8 +186,10 @@ else {
 	<input type="hidden" id="planet_name" name="planet_name" disabled>
 	<input type="hidden" id="fields" name="fields" disabled>
 	<input type="hidden" id="coordinates" name="coordinates" disabled>
+	<th colspan="2"><a>Température Min</a></th>
+	<th><input type="text" id="temperature_min" name="temperature_min" size="8" maxlength="3" disabled></th>
 	<th colspan="2"><a>Température Max</a></th>
-	<th><input type="text" id="temperature" name="temperature" size="8" maxlength="3" disabled></th>
+	<th><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
 	<th colspan="2"><a>Satellites</a></th>
 	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
 	<th></th>
@@ -195,7 +204,8 @@ else {
 document.getElementById('planet_name').style.visibility='hidden';
 document.getElementById('coordinates').style.visibility='hidden';
 document.getElementById('fields').style.visibility='hidden';
-document.getElementById('temperature').style.visibility='hidden';
+document.getElementById('temperature_min').style.visibility='hidden';
+document.getElementById('temperature_max').style.visibility='hidden';
 document.getElementById('satellite').style.visibility='hidden';
 </script>
 <!-- FIN DU SCRIPT -->
@@ -253,13 +263,24 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 ?>
 </tr>
 <tr>
-	<th><a>Température</a></th>
+	<th><a>Température Min.</a></th>
 <?php
 for ($i=$start ; $i<=$start+8 ; $i++) {
-	$temperature = $user_building[$i]["temperature"];
-	if ($temperature == "") $temperature = "&nbsp;";
+	$temperature_min = $user_building[$i]["temperature_min"];
+	if ($temperature_min == "") $temperature_min = "&nbsp;";
 
-	echo "\t"."<th>".$temperature."</th>"."\n";
+	echo "\t"."<th>".$temperature_min."</th>"."\n";
+}
+?>
+</tr>
+<tr>
+	<th><a>Température Max.</a></th>
+<?php
+for ($i=$start ; $i<=$start+8 ; $i++) {
+	$temperature_max = $user_building[$i]["temperature_max"];
+	if ($temperature_max == "") $temperature_max = "&nbsp;";
+
+	echo "\t"."<th>".$temperature_max."</th>"."\n";
 }
 
 if($view == "planets") {
@@ -297,10 +318,10 @@ for ($i=1 ; $i<=9 ; $i++) {
 <?php
 for ($i=1 ; $i<=9 ; $i++) {
 	$D = $user_building[$i]["D"];
-	$temperature = $user_building[$i]["temperature"];
+	$temperature_max = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i]["CEF"];
 	$CEF_consumption = consumption("CEF", $CEF);
-	if ($D != "") $production = production("D", $D, $temperature) - $CEF_consumption;
+	if ($D != "") $production = production("D", $D, $temperature_max) - $CEF_consumption;
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -314,12 +335,13 @@ for ($i=1 ; $i<=9 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	$CEF = $user_building[$i]["CEF"];
 	$Sat = $user_building[$i]["Sat"];
-	$temperature = $user_building[$i]["temperature"];
+	$temperature_min = $user_building[$i]["temperature_min"];
+	$temperature_max = $user_building[$i]["temperature_max"];
 
 	$production_CES = $production_CEF = $production_Sat = 0;
 	$production_CES = production("CES", $CES);
 	$production_CEF = production("CEF", $CEF);
-	$production_Sat = production_sat($temperature) * $Sat;
+	$production_Sat = production_sat($temperature_min, $temperature_max) * $Sat;
 
 	$production = $production_CES + $production_CEF + $production_Sat;
 	if ($production == 0) $production = "&nbsp";

@@ -586,6 +586,8 @@ switch ($ogsversion) {
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('portee_missil','1')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_user','')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_admin','')";
+		//$requests[] = "ALTER TABLE ".TABLE_USER_BUILDING." ADD temperature_min SMALLINT(2) NOT NULL default '0'";
+		$requests[] = "ALTER TABLE ".TABLE_USER_BUILDING." CHANGE temperature temperature_max SMALLINT(2)";
 		$ogsversion = '3.06';
 		$up_to_date = true;
 		break;
