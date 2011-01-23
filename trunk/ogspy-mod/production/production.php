@@ -403,8 +403,8 @@ window.onload = function () {Biper(); chargement();};
 	echo "<a>".$lang['prod_temperature_max']."</a></th>\n";
 	for ($i = 1; $i <= 9; $i++) {
 		$temperature_max[$i] = $user_building[$i]["temperature_max"];
-		if ($temperature[$i] == "") 
-			$temperature[$i] = "&nbsp;";
+		if ($temperature_max[$i] == "") 
+			$temperature_max[$i] = "&nbsp;";
 			
 		echo "\t<th>".$temperature_max[$i]."</th>\n";
 	}
