@@ -17,7 +17,7 @@ if (!isset($server_config['speed_uni'])) {
 }
 
 //Production par heure
-function production ($building, $level, $temperature_max = 0, $NRJ) {
+function production ($building, $level, $temperature_max = 0, $NRJ = 0) {
 	global $server_config;
 	switch ($building) {
 		case "M":
