@@ -17,8 +17,8 @@ if (!isset($server_config['speed_uni'])) {
 }
 
 //Production par heure
-function production ($building, $level, $temperature_max = 0) {
-	global $server_config, $user_technology;
+function production ($building, $level, $temperature_max = 0, $NRJ) {
+	global $server_config;
 	switch ($building) {
 		case "M":
 		$result = $server_config['speed_uni']*(30 * $level * pow(1.1, $level));
@@ -37,7 +37,7 @@ function production ($building, $level, $temperature_max = 0) {
 		break;
 
 		case "CEF":
-		$result = 30 * $level * pow((1.05 + 0.01 * $user_technology['NRJ']), $level);
+		$result = 30 * $level * pow((1.05 + 0.01 * $NRJ), $level);
 		break;
 
 		default:
