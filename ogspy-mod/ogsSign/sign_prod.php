@@ -13,6 +13,10 @@
 
 // vérification de sécurité
 if (!defined('OGSIGN')) die('Hacking attempt');
+require_once("../../includes/functions.php");
+init_serverconfig();
+require_once("../../includes/ogame.php");
+
 
 $user_id = $param_sign['user_id'];	// pour la sign_prod
 $nom_u = $param_sign['pseudo_ig'];
@@ -48,11 +52,11 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 	$alli_u = $result['ally']; // pour garder une certaine compatibilité avec la partie création image...
 
 	// Récupération des informations sur les mines
-	$planet = array(false, 'temperature' => '', 'Sat' => '',
+	$planet = array(false, 'temperature_min' => '', 'temperature_max' => '', 'Sat' => '',
 	'M' => 0, 'C' => 0, 'D' => 0, 'CES' => 0, 'CEF' => 0 ,
 	'M_percentage' => 0, 'C_percentage' => 0, 'D_percentage' => 0, 'CES_percentage' => 100, 'CEF_percentage' => 100, 'Sat_percentage' => 100);
 
-	$quet = mysql_query('SELECT planet_id, temperature, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
+	$quet = mysql_query('SELECT planet_id, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
 
 	$user_building = array_fill(1, 9, $planet);
 	while ($row = mysql_fetch_assoc($quet)) {
@@ -92,18 +96,21 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 			$CES_per = $user_building[$i]['CES_percentage'];
 			$CEF_per = $user_building[$i]['CEF_percentage'];
 			$SAT_per = $user_building[$i]['Sat_percentage'];
-			$temperature = $user_building[$i]['temperature'];
-
-			$prod_energie = round((round(($CES_per/100)*(floor(20 * $CES * pow(1.1, $CES)))) + round(($CEF_per/100)*(floor(30 * $CEF * pow(1.05 + 0.01 * $NRJ, $CEF)))) + floor(($SAT_per/100)* ($SAT * floor(($temperature / 4) + 20)))) * (1 + $ingenieur / 10)) ;
+			$temperature_min = $user_building[$i]['temperature_min'];
+			$temperature_max = $user_building[$i]['temperature_max'];
+				
+			$prod_energie = round((1 + $ingenieur / 10) * (production("CES", $CES, 0, $NRJ) * $CES_per / 100 + production("CEF", $CEF, $temperature_max, $NRJ) * $CEF_per / 100 + production_sat($temperature_min, $temperature_max) * $SAT * $SAT_per / 100));
+			//round((round(($CES_per/100)*(floor(20 * $CES * pow(1.1, $CES)))) + round(($CEF_per/100)*(floor(30 * $CEF * pow(1.05 + 0.01 * $NRJ, $CEF)))) + floor(($SAT_per/100)* ($SAT * floor(($temperature / 4) + 20)))) * (1 + $ingenieur / 10)) ;
 			$cons_enregie = ceil(($M_per/100)*(ceil(10 * $M * pow(1.1, $M)))) + ceil(($C_per/100)*(ceil(10 * $C * pow(1.1, $C)))) + ceil(($D_per/100)*(ceil(20 * $D * pow(1.1, $D)))) ;
 			if ($cons_enregie == 0) $cons_enregie = 1;
 			$ratio = floor(($prod_energie/$cons_enregie)*100)/100;
 			if ($ratio > 1) $ratio = 1;
 
 			// calcul de la production horaire
-			$metal_heure = $metal_heure + VITESSE_UNI * floor((20 + round(($M_per/100)*$ratio*floor(30 * $M * pow(1.1, $M)))) * (1 + $geologue / 10));
-			$cristal_heure = $cristal_heure + VITESSE_UNI * floor((10 + round(($C_per/100)*$ratio*floor(20 * $C * pow(1.1, $C)))) * (1 + $geologue / 10));
-			$deut_heure = $deut_heure + VITESSE_UNI * floor((round(($D_per/100)*$ratio*floor(10 * $D * pow(1.1, $D) * (-0.002 * $temperature + 1.28))) - round(($CEF_per/100) * 10 * $CEF * pow(1.1, $CEF))) * (1 + $geologue / 10));
+			$metal_heure = $metal_heure + VITESSE_UNI * $geologue * floor((20 + round(($M_per/100)*$ratio*floor(30 * $M * pow(1.1, $M)))) * (1 + $geologue / 10));
+			$cristal_heure = $cristal_heure + VITESSE_UNI * $geologue * floor((10 + round(($C_per/100)*$ratio*floor(20 * $C * pow(1.1, $C)))) * (1 + $geologue / 10));
+			$deut_heure = $deut_heure + VITESSE_UNI * (round(production("D", $D, $temperature_max, $NRJ) * ($D_per / 100) * $ratio * (1 + $geologue / 10)) - round(consumption("CEF", $CEF) * $CEF_per / 100));
+			//$deut_heure + VITESSE_UNI * floor((round(($D_per/100)*$ratio*floor(10 * $D * pow(1.1, $D) * (-0.002 * $temperature + 1.28))) - round(($CEF_per/100) * 10 * $CEF * pow(1.1, $CEF))) * (1 + $geologue / 10));
 		}
 	}
 

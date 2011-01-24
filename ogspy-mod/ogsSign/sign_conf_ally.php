@@ -139,11 +139,12 @@ function show_txtcolor() {
 	}
 }
 </script>
+<form method="POST" action="" name="ogsign">
 <table align="center" width="100%" cellpadding="0" cellspacing="1">
 
 <!-- INFO ALLY -->
 	<tr><td class="c" colspan="2">Information sur l'Alliance</td></tr>
-<form method="POST" action="" name="ogsign">
+
 	<?php echo '<input type="hidden" name="ally_id" value="',$ally_id,'" />','<input type="hidden" name="ally_l" value="',$pub_ally_l,'" />'; ?>
 		<tr><th width="50%">TAG alliance</th>
 			<th width="50%"><input type="text" disabled="disabled" size="15" maxlength="20" value="<?php echo $param_sign['TAG']; ?>"><br />
@@ -176,8 +177,8 @@ function show_txtcolor() {
 	<tr><th colspan="2" style="-moz-opacity: 1; filter: alpha(opacity=100); /*suppression de la transparence éventuelle*/">
 	<a href=<?php echo $full_url_sign; ?>>
 	<img src="<?php $img_size = @getimagesize($full_url_sign);
-	echo $url_sign,'" alt="signature de l\'alliance ',$param_sign['TAG'],'" title="signature de l\'alliance ',$param_sign['TAG'],'" id="sign_actuelle" ',$img_size[3];
-	?>></a></th></tr>
+	echo $url_sign.'" alt="signature de l\'alliance '.$param_sign['TAG'].'" title="signature de l\'alliance '.$param_sign['TAG'].'" id="sign_actuelle" '.$img_size[3];
+	?>"></img></a></th></tr>
 
 <!-- ADRESSE DE LA SIGNATURE -->
 	<tr><td class="c" colspan="2">Adresse de la signature</td></tr>
@@ -290,29 +291,29 @@ function show_txtcolor() {
 			document.write('<'+'table border="0" cellspacing="0" cellpadding="0" onMouseover="t(event)" onClick="p()">');
 			var H=W=63;
 			for (Y=0;Y<=H;Y++){
-				s='<'+'tr height="2">';j=Math.round(Y*(510/(H+1))-255)
+				s='<'+'tr height="2">';j=Math.round(Y*(510/(H+1))-255);
 				for (X=0;X<=W;X++){
-					i=Math.round(X*(total/W))
-					R=aR[i]-j;if(R<0)R=0;if(R>255||isNaN(R))R=255
-					G=aG[i]-j;if(G<0)G=0;if(G>255||isNaN(G))G=255
-					B=aB[i]-j;if(B<0)B=0;if(B>255||isNaN(B))B=255
-					s=s+'<'+'td width="2" bgcolor="#'+jl[R]+jl[G]+jl[B]+'"><'+'/td>'
+					i=Math.round(X*(total/W));
+					R=aR[i]-j;if(R<0)R=0;if(R>255||isNaN(R))R=255;
+					G=aG[i]-j;if(G<0)G=0;if(G>255||isNaN(G))G=255;
+					B=aB[i]-j;if(B<0)B=0;if(B>255||isNaN(B))B=255;
+					s=s+'<'+'td width="2" bgcolor="#'+jl[R]+jl[G]+jl[B]+'"><'+'/td>';
 				}
-				document.write(s+'<'+'/tr>\n')
+				document.write(s+'<'+'/tr>\n');
 			}
 			document.write('<'+'/table>');
-			var ns6=document.getElementById&&!document.all
-			var ie=document.all
-			var couleur_clic=''
+			var ns6=document.getElementById&&!document.all;
+			var ie=document.all;
+			var couleur_clic='';
 
 			// appelée au survol, affiche la couleur survolée dans la case témoin
 			function t(e){
-				source=ie?event.srcElement:e.target
+				source=ie?event.srcElement:e.target;
 				if(source.tagName=='TABLE') return
-				while(source.tagName!='TD' && source.tagName!='HTML')source=ns6?source.parentNode:source.parentElement
+				while(source.tagName!='TD' && source.tagName!='HTML')source=ns6?source.parentNode:source.parentElement;
 				// couleur dans la zone témoin
-				document.getElementById('temoin').style.backgroundColor=couleur_clic
-				couleur_clic=source.bgColor
+				document.getElementById('temoin').style.backgroundColor=couleur_clic;
+				couleur_clic=source.bgColor;
 			}
 
 			// fonction qui écrit la couleur choisie, etc...
@@ -377,8 +378,9 @@ echo "\t\twidth: ",$img_size[0],'px; /*taille complète*/'
 
 <!-- VALIDATION DES PARAMETRES -->
 	<tr><th colspan="2"><input type="submit" value="Valider"> <input type="reset" value="Réinitialiser"></th></tr>
-</form>
+
 </table>
+</form>
 <script language="JavaScript" type="text/javascript">
 // cela permet de rester compatible avec le javascript désactivé.
 document.getElementById('list_fonds_ogsign').style.display = 'none';
@@ -400,7 +402,7 @@ else {
 	<td class="c" colspan="3">Choix de l'alliance</td>
 </tr>
 <tr>
-	<th width="33%">TAG de l'alliance : <?php echo infobulle('Sensible à la casse<br />(majuscules / minuscules)','Attention'); ?></td>
+	<th width="33%">TAG de l'alliance : <?php echo infobulle('Sensible à la casse<br />(majuscules / minuscules)','Attention'); ?></th>
 	<th width="33%"><input type="text" name="select_ally_l" size="20" maxlength="30" onkeyup="autoComplete(this,this.form.elements['ally_l'],'text',false)"></th>
 	<th width="33%"><select name="ally_l"><?php echo $options_1; ?></select></th>
 </tr>
