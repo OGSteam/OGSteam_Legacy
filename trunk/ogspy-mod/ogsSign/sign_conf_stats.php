@@ -119,8 +119,8 @@ $param_sign = $db->sql_fetch_assoc($result);
 // création de l'adresse de la signature
 $url_sign = $full_url_sign = '';
 if (!empty($param_sign['pseudo_ig'])) {
-	$url_sign = 'mod/OGSign/'.$param_sign['pseudo_ig'].'.png';
-	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9) . $url_sign);
+	$url_sign = 'mod/OGSign/S.'.$param_sign['pseudo_ig'].'.png';
+	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9).$url_sign);
 }
 
 // dossier des fonds
@@ -152,11 +152,12 @@ function show_txtcolor() {
 	}
 }
 </script>
+<form method="POST" action="" name="ogsign">
 <table align="center" width="100%" cellpadding="0" cellspacing="1">
 
 <!-- PSEUDO IG -->
 <tr><td class="c" colspan="2">Choix du pseudo</td></tr>
-<form method="POST" action="" name="ogsign">
+
 	<tr><th width="50%">Pseudo Ingame
 		<?php echo infobulle('Attention, ce pseudo est le même que celui utilisé pour la signature avec les statistiques'); ?></th>
 		<th width="50%"><input type="text" name="pseudoIG" size="30" maxlength="50" value="<?php
@@ -189,8 +190,8 @@ function show_txtcolor() {
 	<tr><th colspan="2" style="-moz-opacity: 1; filter: alpha(opacity=100); /*suppression de la transparence éventuelle*/">
 	<a href=<?php echo $full_url_sign; ?>>
 	<img src="<?php $img_size = @getimagesize($full_url_sign); // avec un '@' car des hébergeurs ont du mal avec...
-	echo $url_sign,'" alt="signature &quot;statistiques&quot; de ',$param_sign['pseudo_ig'],'" title="signature &quot;statistiques&quot; de ',$param_sign['pseudo_ig'],'" id="sign_actuelle" ',$img_size[3];
-	?>></a></th></tr>
+	echo $url_sign.'" alt="signature &quot;statistiques&quot; de '.$param_sign['pseudo_ig'].'" title="signature &quot;statistiques&quot; de '.$param_sign['pseudo_ig'].'" id="sign_actuelle" '.$img_size[3];
+	?>"></img></a></th></tr>
 
 <!-- ADRESSE DE LA SIGNATURE -->
 	<tr><td class="c" colspan="2">Adresse de la signature</td></tr>
@@ -302,29 +303,29 @@ function show_txtcolor() {
 			document.write('<'+'table border="0" cellspacing="0" cellpadding="0" onMouseover="t(event)" onClick="p()">');
 			var H=W=63;
 			for (Y=0;Y<=H;Y++){
-				s='<'+'tr height="2">';j=Math.round(Y*(510/(H+1))-255)
+				s='<'+'tr height="2">';j=Math.round(Y*(510/(H+1))-255);
 				for (X=0;X<=W;X++){
-					i=Math.round(X*(total/W))
-					R=aR[i]-j;if(R<0)R=0;if(R>255||isNaN(R))R=255
-					G=aG[i]-j;if(G<0)G=0;if(G>255||isNaN(G))G=255
-					B=aB[i]-j;if(B<0)B=0;if(B>255||isNaN(B))B=255
-					s=s+'<'+'td width="2" bgcolor="#'+jl[R]+jl[G]+jl[B]+'"><'+'/td>'
+					i=Math.round(X*(total/W));
+					R=aR[i]-j;if(R<0)R=0;if(R>255||isNaN(R))R=255;
+					G=aG[i]-j;if(G<0)G=0;if(G>255||isNaN(G))G=255;
+					B=aB[i]-j;if(B<0)B=0;if(B>255||isNaN(B))B=255;
+					s=s+'<'+'td width="2" bgcolor="#'+jl[R]+jl[G]+jl[B]+'"><'+'/td>';
 				}
-				document.write(s+'<'+'/tr>\n')
+				document.write(s+'<'+'/tr>\n');
 			}
 			document.write('<'+'/table>');
-			var ns6=document.getElementById&&!document.all
-			var ie=document.all
-			var couleur_clic=''
+			var ns6=document.getElementById&&!document.all;
+			var ie=document.all;
+			var couleur_clic='';
 
 			// appelée au survol, affiche la couleur survolée dans la case témoin
 			function t(e){
-				source=ie?event.srcElement:e.target
+				source=ie?event.srcElement:e.target;
 				if(source.tagName=='TABLE') return
-				while(source.tagName!='TD' && source.tagName!='HTML')source=ns6?source.parentNode:source.parentElement
+				while(source.tagName!='TD' && source.tagName!='HTML')source=ns6?source.parentNode:source.parentElement;
 				// couleur dans la zone témoin
-				document.getElementById('temoin').style.backgroundColor=couleur_clic
-				couleur_clic=source.bgColor
+				document.getElementById('temoin').style.backgroundColor=couleur_clic;
+				couleur_clic=source.bgColor;
 			}
 
 			// fonction qui écrit la couleur choisie, etc...
@@ -389,8 +390,9 @@ echo "\t\twidth: ",$img_size[0],'px; /*taille complète*/'
 
 <!-- VALIDATION DES PARAMETRES -->
 	<tr><th colspan="2"><input type="submit" value="Valider"> <input type="reset" value="Réinitialiser"></th></tr>
-</form>
+
 </table>
+</form>
 <script language="JavaScript" type="text/javascript">
 // cela permet de rester compatible avec le javascript désactivé.
 document.getElementById('list_fonds_ogsign').style.display = 'none';
