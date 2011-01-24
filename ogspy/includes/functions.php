@@ -141,12 +141,12 @@ function password_generator() {
  * Initialisation du tableau de confifuration $server_config
  */
 function init_serverconfig() {
-	global $db, $server_config;
+	global $server_config;
 
 	$request = "select * from ".TABLE_CONFIG;
-	$result = $db->sql_query($request);
+	$result = mysql_query($request);
 
-	while (list($name, $value) = $db->sql_fetch_row($result)) {
+	while (list($name, $value) = mysql_fetch_row($result)) {
 		$server_config[$name] = stripslashes($value);
 	}
 }
