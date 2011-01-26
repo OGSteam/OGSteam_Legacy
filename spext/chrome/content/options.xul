@@ -106,6 +106,7 @@
            
             <!--<label value="Contributeurs" style="font-weight: bold;" />-->
             <label value="Jormund" />
+            <label value="Bob" />
         </groupbox>
 
             </vbox>

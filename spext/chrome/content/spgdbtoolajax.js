@@ -14,6 +14,10 @@ function RemoveHTMLTags(texte){
   return texte.replace(exp1,"");
 }
 
+function nbsp(text) {
+	return text.replace(/\&nbsp;/gi, '');
+}
+
 function RemoveIGU(texte){ 
   var exp1=new RegExp("\\(.*?\\)","g"); 
   return texte.replace(exp1,"");
@@ -112,7 +116,8 @@ status_timer = setInterval("GetGalaxy()", 100);
 }
 
 //---------------------- Récuperation de la galaxie -------------------------//
-function GetGalaxy(){
+function GetGalaxy()
+{
 	for (var z = 1; z <= 3; z++)
 	{
 		var hoststring = getSPserver(z);
@@ -123,43 +128,49 @@ function GetGalaxy(){
 			var id = ( z == 1 ) ? '' : z;
 			if ( sys = doc.getElementById('obj_systemviewer') )
 			{
-					var x = doc.getElementById("tpl_system_ppx").value;
-					var y = doc.getElementById("tpl_system_ppy").value;
-					var galaxy = "";
-					var r = sys.getElementsByTagName("table");
-					var lines = r[0].getElementsByTagName("tr");
+			    var x = doc.getElementById("tpl_system_ppx").value;
+			    var y = doc.getElementById("tpl_system_ppy").value;
+			    var galaxy = "";
+				var r = sys.getElementsByTagName("table");
+			    var lines = r[0].getElementsByTagName("tr");
 
-					for (var i = 1; i <= 16; i++)
+				for (var i = 1; i <= 16; i++)
+				{
+					var line = lines[i];
+					var cells = line.getElementsByTagName("td");
+					var pos = cells[0].textContent;
+     
+					var playerSpans = cells[2].getElementsByTagName("span");
+					var player = "";
+					if (playerSpans.length> 0)
 					{
-						var line = lines[i];
-						var cells = line.getElementsByTagName("td");
-						var pos = RemovePoint(cells[2].textContent);
-						var playerSpans = cells[2].getElementsByTagName("span");
-						var ally = playerSpans[1].textContent;
-						var player = trim(playerSpans[0].textContent);
-						var planet = cells[1].innerHTML;
-						planet= trim(planet.substring(0,planet.indexOf('<')));
-
-						galaxy += pos+"\t"+ally+"\t"+planet+"\t"+player+"\t";
-						galaxy += player;//le oldname n'existe plus, ligne à retirer une fois le php corrigé
-			
-						galaxy += "\n";
+						player = trim(playerSpans[0].textContent.replace("\n",""));
 					}
-					data = new Array();
-					data[0] = galaxy;
-					data[1] = x;
-					data[2] = y;
+					var ally = "";
+					if (playerSpans.length> 1)
+					{
+						ally = trim(playerSpans[1].textContent.replace("\n",""));   
+					}
+					var planet = cells[1].innerHTML;
+					planet= trim(planet.substring(0,planet.indexOf('<')));
 
-//					SendData('galaxy', data, id);
+					galaxy += pos+"\t"+player +"\t"+ally+"\t"+planet+"\t"; 
+					galaxy += "\n";					
+				}
+				
+				data = new Array();
+				data[0] = galaxy;
+				data[1] = x;
+				data[2] = y;
+
+					SendData('galaxy', data, id);
 			}
-			else
-				break;
 		}
 	}
 }
 
 //---------------------- Récuperation du classement -------------------------//
-function GetRanking(){
+function getRanking(){
 	for (var z = 1; z <= 3; z++)
 	{
 		var hoststring = getSPserver(z);
@@ -170,50 +181,39 @@ function GetRanking(){
 	
 			var doc = window.content.document;
 			var rank;
+
 			if ( rank = doc.getElementById('obj_hiscore_table') )
 			{			
-				if ( doc.location.href.match(/connect/) )
-				{
 					var r = rank.getElementsByTagName("tr");
 					var ranking = "";
 		
-//					for (var i = 2; i < r.length; i++)
-//					{
-						var c = r[i].getElementsByTagName("td");
-						var ally = c[2].textContent;
-						var player = c[3].textContent;
-						var type = c[4].textContent;
-						var tot = Number(RemovePoint(c[5].textContent));
-						var build = Number(RemovePoint(c[6].textContent));
-						var res = Number(RemovePoint(c[7].textContent));
-						var fleetdef = Number(RemovePoint(c[8].textContent));
-						
-						ranking += ally+"\t"+player+"\t"+type+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef+"\t";
-						
-						/*if ( oldname = c[3].innerHTML.match(/Également connu sous le nom de: ([\x20-\x7e\x81-\xff]+)" color="/) )
-							ranking += oldname[1];
-						else*/
-							ranking += player;
-			
-						ranking += "\n";
+					for (var i = 1; i < 100; i++)
+					{
+						var line = lines[i];
+						var cells = line.getElementsByTagName("td");
+						var rank1 = trim(cells[1].textContent);
+						var ally = trim(cells[3].textContent);
+						var player = trim(cells[2].textContent);
+
+						var tot = Number(RemovePoint(cells[4].getAttribute("title")));
+						var build = Number(RemovePoint(cells[5].getAttribute("title")));
+						var res = Number(RemovePoint(cells[6].getAttribute("title")));
+						var fleetdef = Number(RemovePoint(cells[7].getAttribute("title")));
+
+						ranking += rank1+"\t"+player+"\t"+ally+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef+"\n";
 					}
 					
 					data = new Array();
-					
 					data[0] = ranking;
 					
-//					SendData('ranking', data, id);
-//				}
-				break;
+					SendData('ranking', data, id);
 			}
-			else
-				break;
 		}
 	}
 }
 
 //---------------------- Récuperation du rapport d'espionnage -------------------------//
-function GetSpy(){
+function GetSpy() {
 	for (var z = 1; z <= 3; z++)
 	{
 		var hoststring = getSPserver(z);
@@ -227,17 +227,17 @@ function GetSpy(){
 			
 			if ( msg = doc.getElementById('obj_messages_messages') )
 			{			
-				if ( doc.location.href.match(/connect/) )
+				var r = msg.getElementsByTagName("tr");
+				var spy = "";
+	
+				for (var i = 2; i < r.length; i++)
 				{
-					var r = msg.getElementsByTagName("tr");
-					var spy = "";
-		
-					for (var i = 2; i < r.length; i++)
-					{
-						var c = r[i].getElementsByTagName("td");
-			
-
-}}}}}}
+					var c = r[i].getElementsByTagName("td");
+				}
+			}
+		}
+	}
+}
 
 function Options_init(){
 		var root = SPGdbprefs.getCharPref("spgdbtoolajax.root");
@@ -280,21 +280,17 @@ function Xreload_firefox() {
 	try{
  const nsIAppStartup = Components.interfaces.nsIAppStartup;
 
-  // Notify all windows that an application quit has been requested.
   var os = Components.classes["@mozilla.org/observer-service;1"]
                      .getService(Components.interfaces.nsIObserverService);
   var cancelQuit = Components.classes["@mozilla.org/supports-PRBool;1"]
                              .createInstance(Components.interfaces.nsISupportsPRBool);
   os.notifyObservers(cancelQuit, "quit-application-requested", null);
 
-  // Something aborted the quit process. 
   if (cancelQuit.data)
     return;
 
-  // Notify all windows that an application quit has been granted.
   os.notifyObservers(null, "quit-application-granted", null);
 
-  // Enumerate all windows and call shutdown handlers
   var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                      .getService(Components.interfaces.nsIWindowMediator);
   var windows = wm.getEnumerator(null);
