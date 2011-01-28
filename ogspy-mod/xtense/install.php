@@ -6,9 +6,17 @@
  */
 
 if (!defined('IN_SPYOGAME')) die("Hacking Attemp!");
-$root = $pub_directory;
 
-require_once('mod/'.$root.'/includes/config.php');
+$root = $pub_directory;
+$install_ogspy = false;
+
+if ( file_exists ("mod/'.$root.'/includes/config.php"))
+    	require_once('mod/'.$root.'/includes/config.php');
+
+if ( file_exists ("../mod/'.$root.'/includes/config.php")) {
+    	require_once('../mod/'.$root.'/includes/config.php');
+    	$install_ogspy = true;
+}
 	
 //---- Creation de la table des recyclages
 $db->sql_query("CREATE TABLE ".TABLE_PARSEDREC." (
@@ -78,5 +86,8 @@ $db->sql_query("REPLACE INTO ".TABLE_XTENSE_GROUPS." (`group_id`, `system`, `ran
 $db->sql_query("REPLACE INTO ".TABLE_MOD." (action, title, menu, root, link, version, active, admin_only) VALUES
 	('xtense', 'Xtense', '<span onclick=\"window.open(this.parentNode.href, \'Xtense\', \'width=750, height=550, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no\'); return false;\">Xtense</span>', '{$root}', 'index.php', '{$mod_version}', '1', '1')");
 	
-echo "<a onclick=\"window.open('index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\"><font color='red' size='9'>Autorisez la pop-up ou cliquez ici!</font></a><script type=\"text/javascript\"><!-- \nwindow.onload = window.open('index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\n--></script>";
+if ($install_ogspy)
+	echo "<a onclick=\"window.open('..\/index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\"><font color='red' size='9'>Autorisez la pop-up ou cliquez ici!</font></a><script type=\"text/javascript\"><!-- \nwindow.onload = window.open('..\/index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\n--></script>";
+else 
+	echo "<a onclick=\"window.open('index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\"><font color='red' size='9'>Autorisez la pop-up ou cliquez ici!</font></a><script type=\"text/javascript\"><!-- \nwindow.onload = window.open('index.php?action=Xtense', 'Xtense', 'width=720, height=500, menubar=no, resizable=yes, scrollbars=yes, status=no, toolbar=no');\n--></script>";
 ?>
