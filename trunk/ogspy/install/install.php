@@ -110,6 +110,7 @@ function error_sql($message) {
 * @var int $num_of_systems Nombre de systèmes dans l'univers OGame de cet OGSpy
 */
 function installation_db($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password, $sgbd_tableprefix, $admin_username, $admin_password, $admin_password2, $num_of_galaxies, $num_of_systems) {
+	global $pub_directory;
 	$db = new sql_db($sgbd_server, $sgbd_username, $sgbd_password, $sgbd_dbname);
 	if (!$db->db_connect_id) error_sql("Impossible de se connecter à la base de données");
 
@@ -162,8 +163,8 @@ function installation_db($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_passw
 	define ( 'TABLE_MOD_CFG', $sgbd_tableprefix . 'mod_config' );
 	define ( 'TABLE_MOD_CONFIG', $sgbd_tableprefix . 'mod_config' );
 	define ( 'TABLE_CONFIG', $sgbd_tableprefix . 'config' );
-	if ( file_exists ("../mod/Xtense/install.php"))
-    	require_once("../mod/Xtense/install.php");
+	if ( file_exists ("../mod/".$pub_directory."/install.php"))
+    	require_once("../mod/".$pub_directory."/install.php");
 	if ( file_exists ("../mod/autoupdate/install.php"))
     	require_once("../mod/autoupdate/install.php");
 		
@@ -251,8 +252,10 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 	$admin_password2 = $pub_admin_password2;
 	$num_of_galaxies = (isset($pub_num_of_galaxies) && !empty($pub_num_of_galaxies))?$pub_num_of_galaxies:9;
 	$num_of_systems = (isset($pub_num_of_systems) && !empty($pub_num_of_systems))?$pub_num_of_systems:9;
+	$directory = $pub_directory;
 }
 ?>
+<form method="POST" action="../install/install.php">
 <table width="100%" align="center" cellpadding="20">
 <tr>
 	<td height="70"><div align="center"><img src="../images/OgameSpy2.jpg"></div></td>
@@ -269,7 +272,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 		<tr>
 			<td colspan="2" align="center"><font color="Red"><b><?php echo isset($pub_error) ? $pub_error : "";?></b></font></td>
 		</tr>
-		<form method="POST" action="../install/install.php">
+		
 		<tr>
 			<td class="c" colspan="2">Configuration de la base de données</td>
 		</tr>
@@ -320,13 +323,17 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 			<th>Mot de passe [Confirmer]</th>
 			<th><input name="admin_password2" type="password"></th>
 		</tr>
+		<tr>
+			<th>Nom du répertoire du mod Xtense </th>
+			<th><input name="directory" type="text" value="<?php echo isset($pub_directory) ? $pub_directory : "Xtense";?>"></th>
+		</tr>
 		
 		
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
 			<th colspan="2"><input name="complete" type="submit" value="Démarrer l'installation complète">&nbsp;ou&nbsp;<input name="file" type="submit" value="Générer le fichier 'id.php'"></th>
 		</tr>
-		</form>
+		
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
 			<td colspan="2" align="center"><a target="_blank" href="http://ogsteam.fr/OGSpynstall/"><i><font color="orange">Besoin d'assistance ?</font></i></a></td>
@@ -340,6 +347,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 	</td>
 </tr>
 </table>
+</form>
 </body>
 <script language="JavaScript" src="../js/wz_tooltip.js"></script>
 </html>
