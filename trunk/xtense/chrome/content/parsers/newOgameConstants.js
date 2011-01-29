@@ -47,7 +47,8 @@ XnewOgame.Xpaths = {
 			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
 		},
 		spy : {
-			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]'
+			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
+			moon : '//a[@class="buttonSave"]'
 		}
 	},
 	
@@ -142,6 +143,7 @@ XnewOgame.regexps = {
 	planetNameAndCoords : ' (.*) \\[(\\d+:\\d+:\\d+)\\]',
 	planetCoords : '\\[(\\d+:\\d+:\\d+)\\]',
 	userNameAndCoords : '(.*) \\[(\\d+:\\d+:\\d+)\\]',
+	moon : '=(\\d+)*',
 	
 	messages : {
 		ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%'

@@ -153,6 +153,7 @@ XnewOgame.locales = {
 		'messages' : {
 			'espionage of': 'Rapport d`espionnage de',
 			'unespionage prob': 'Probabilité de contre-espionnage ',
+			'moon' : 'type',
 			'espionnage action' : 'Activité d\`espionnage',
 			'fleet command' : 'Tour de contrôle',
 			'expedition result' : 'Résultat de l`expédition ',
