@@ -119,7 +119,7 @@ $param_sign = $db->sql_fetch_assoc($result);
 // création de l'adresse de la signature
 $url_sign = $full_url_sign = '';
 if (!empty($param_sign['pseudo_ig'])) {
-	$url_sign = 'mod/OGSign/S.'.$param_sign['pseudo_ig'].'.png';
+	$url_sign = 'mod/OGSign/'.$param_sign['pseudo_ig'].'.S.png';
 	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9).$url_sign);
 }
 

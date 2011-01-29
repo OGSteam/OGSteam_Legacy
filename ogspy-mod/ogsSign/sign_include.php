@@ -50,7 +50,7 @@ function vide_sign_cache($typesign,$nom_fichier) {
 	unset($liste_purge);
 	if ($dhandle = opendir(DIR_SIGN_CACHE)) {
 		while (false !== ($file = readdir($dhandle))) {
-			if ($file == $typesign.'.'.$nom_fichier.'.png') {
+			if ($file == $nom_fichier.'.'.$typesign.'.png') {
 				// on efface directement le fichier
 				unlink(DIR_SIGN_CACHE.$file);
 			}
