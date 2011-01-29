@@ -3,12 +3,12 @@ Topic officiel pour AdvSpy :
 http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte
 
 
-Installation / Mise Ã  jour :
+Installation / Mise à jour :
 
-1) Uploadez AdvSpy (le dossier 'AdvSpy' du zip dans './mod/' sur votre OGSpy), Ã©crasez les fichiers existants.
-2) Installez ou mettez Ã  jour AdvSpy depuis l'administration des mods. (Vous devez etre administrateur)
+1) Uploadez AdvSpy (le dossier 'AdvSpy' du zip dans './mod/' sur votre OGSpy), écrasez les fichiers existants.
+2) Installez ou mettez à jour AdvSpy depuis l'administration des mods. (Vous devez etre administrateur)
 
-En cas de problÃ¨mes :
+En cas de problèmes :
 Desinstallez le mod, effacez './mod/AdvSpy/' , re-uploadez le contenu du zip au meme endroit et reinstallez le mod.
 
 ( !! Vous ne perdez PAS vos Rapports d'Espionnage en desinstallant le mod !! )
