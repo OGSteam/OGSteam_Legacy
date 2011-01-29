@@ -4,7 +4,7 @@
  */
 
 var XnewOgame = {
-	//on déclare les varibles generales
+	//on declare les varibles generales
 	locales: {},
 	doc : null,
 	url : null,
@@ -350,7 +350,7 @@ var XnewOgame = {
 
 		var planetData = this.getPlanetData();
 		if(planetData.coords == "unknown") {
-			Xconsole("planète unique");
+			Xconsole("plan&egrave;te unique");
 			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
 			planetData.coords = coords;
 		}
@@ -962,7 +962,7 @@ var XnewOgame = {
 					if(div == 0){
 						var m = round.match(new RegExp(rcStrings['regxps']['time']));
 						if(m){
-							// Calcul heure d'été => offset = -120 & heure d'hiver  => offset = -60
+							// Calcul heure d'ete => offset = -120 & heure d'hiver  => offset = -60
 							var diff = new Date(Date.UTC(m[3],(m[2]-1),m[1],m[4],m[5],m[6])).getTimezoneOffset();
 							var correction = 0;
 							if(diff==-120){
@@ -1029,13 +1029,16 @@ var XnewOgame = {
 	parseSpyReport: function(RE) {
 		var paths = this.Xpaths.messages.spy;
 		var spyStrings = this.l('spy reports');
+		var locales = this.l('messages');
 		var data = {};
 		var typs = [];
 		var res = new Array();
 		
 		var isMoon = false;
-		if(data['BaLu'] > 0) isMoon = true; //si il y a une base lunaire, alors c'est une lune
-		
+		//if(data['BaLu'] > 0) isMoon = true; //si il y a une base lunaire, alors c'est une lune
+		var moonNode = Xpath.getSingleNode(this.doc, paths.moon);
+
+		isMoon = (moonNode.href).match(new RegExp(locales['moon'] + this.regexps.moon))[1] == '3' ? true : false;
 		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
 		
 		var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.fleetdefbuildings);
@@ -1110,6 +1113,7 @@ var XnewOgame = {
 				
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['spy']);
 				var content = contentNode.innerHTML;
+				
 				data.planetName = m[1];
 				data.coords = m[2];
 				
