@@ -10,13 +10,12 @@ if (!defined('IN_SPYOGAME')) die("Hacking Attemp!");
 $root = $pub_directory;
 $install_ogspy = false;
 
-if ( file_exists ("mod/'.$root.'/includes/config.php"))
-    	require_once('mod/'.$root.'/includes/config.php');
-
-if ( file_exists ("../mod/'.$root.'/includes/config.php")) {
-    	require_once('../mod/'.$root.'/includes/config.php');
+if ( file_exists (str_replace('install', '', getcwd()).'mod/'.$root.'/includes/config.php')) {
+    	require_once(str_replace('install', '', getcwd()).'mod/'.$root.'/includes/config.php');
     	$install_ogspy = true;
 }
+else
+	require_once('mod/'.$root.'/includes/config.php');
 	
 //---- Creation de la table des recyclages
 $db->sql_query("CREATE TABLE ".TABLE_PARSEDREC." (
