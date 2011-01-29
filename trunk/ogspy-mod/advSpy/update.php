@@ -17,7 +17,7 @@ if (!$db->sql_numrows($db->sql_query($query))) {
 	$db->sql_query($query);
 }
 
-//mise Ã  jour de la version du mod
+//mise à jour de la version du mod
 $query = "UPDATE ".TABLE_MOD." SET version='".$AdvSpyConfig['version']['advspy']."' WHERE action='AdvSpy'";
 $db->sql_query($query);
 
@@ -55,7 +55,7 @@ $query = "CREATE TABLE IF NOT EXISTS `".$AdvSpyConfig['Settings']['AdvSpy_TableN
 $db->sql_query($query);
 
 
-//verification de rÃ©tro-compatibilitÃ© pour Galaxy sur 2 chiffres et non 1 seul (compatibilitÃ© uni 50 fr, galaxy = 50)
+//verification de rétro-compatibilité pour Galaxy sur 2 chiffres et non 1 seul (compatibilité uni 50 fr, galaxy = 50)
 $query = "SHOW COLUMNS FROM `".$AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert']."`";
 $result=$db->sql_query($query);
 $query = "";
@@ -69,7 +69,7 @@ while ($Columns=@mysql_fetch_assoc($result)) {
 	}
 }
 
-//verification: si aucune sauvegarde existe, on remet celles par dÃ©faut.
+//verification: si aucune sauvegarde existe, on remet celles par défaut.
 $query = 'SELECT `SaveId` FROM `'.$AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad'].'` WHERE 1 LIMIT 1';
 if (!$db->sql_numrows($db->sql_query($query))) {
 	include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_DefaultSaves.php";
