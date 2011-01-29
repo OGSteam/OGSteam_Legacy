@@ -19,7 +19,7 @@ else
 	$nom_fond = 'fonds/stats/'.$fond_defaut_stats;
 
 // les paramètres vérifiés permettent de trouver le fond 
-$fichier_stats = 'cache/S.'.$nom_player.'.png';
+$fichier_stats = 'cache/'.$nom_player.'.S.png';
 
 $nom_u = $nom_player; // pour garder une certaine compatibilité avec la partie création image...
 $alli_u = '';

@@ -28,7 +28,7 @@ else
 	$nom_fond = 'fonds/prod/'.$fond_defaut_prod;
 
 // les paramètres vérifiés permettent de trouver le fond 
-$fichier_stats = 'cache/P.'.$nom_player.'.png';
+$fichier_stats = 'cache/'.$nom_player.'.P.png';
 
 // aucun moyen de savoir si il y a eu MAJ des données dans Empire...
 // donc si filemtime($fichier_stats) + 48h > date actuelle, on va regénérer l'image
