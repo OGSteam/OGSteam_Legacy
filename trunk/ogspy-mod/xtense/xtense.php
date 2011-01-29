@@ -854,7 +854,8 @@ switch ($pub_type){
 					}
 					
 					$coords = $spy['coords'][0].':'.$spy['coords'][1].':'.$spy['coords'][2];
-					$moon = ($spy['content']['BaLu'] > 0 ? 1 : 0);
+					// TODO : Faire en sorte d'avoir un bon indicateur de lune
+					$moon = ($line['moon'] > 0 ? 1 : 0);
 					$matches = array();
 					$data = array();
 					$values = $fields = '';
