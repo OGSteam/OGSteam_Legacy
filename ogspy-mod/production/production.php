@@ -147,7 +147,7 @@ echo "vitesse = ".$vitesse.";\n";
 
 function chargement () {
 <?php
-	$temp = array('',8,9,10,11,12,13);
+	$temp = array('',9,10,11,12,13,14);
 	for ($i=1;$i<=9;$i++) {
 		for ($b=1;$b<=6;$b++) {
 			echo "document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
