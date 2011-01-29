@@ -18,7 +18,7 @@ else
 	require_once('mod/'.$root.'/includes/config.php');
 	
 //---- Creation de la table des recyclages
-$db->sql_query("CREATE TABLE ".TABLE_PARSEDREC." (
+$db->sql_query("CREATE TABLE IF NOT EXISTS ".TABLE_PARSEDREC." (
 	`id_rec` INT( 255 ) NOT NULL AUTO_INCREMENT ,
 	`dateRec` INT( 11 ) NOT NULL ,
 	`coordinates` VARCHAR( 9 ) NOT NULL ,
@@ -31,7 +31,7 @@ $db->sql_query("CREATE TABLE ".TABLE_PARSEDREC." (
 	PRIMARY KEY ( `id_rec` )
 )");
 
-$db->sql_query("CREATE TABLE ".TABLE_PARSEDSPYEN." (
+$db->sql_query("CREATE TABLE IF NOT EXISTS ".TABLE_PARSEDSPYEN." (
 	`spy_id` INT( 255 ) NOT NULL AUTO_INCREMENT ,
 	`dateSpy` INT( 11 ) NOT NULL ,
 	`from` VARCHAR( 9 ) NOT NULL ,
