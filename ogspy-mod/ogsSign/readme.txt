@@ -24,6 +24,7 @@ automatiquement ! L'étape 3#1 et 3#2 sont donc à ignorer dans ce cas
 ***********************
  NOTES D'INSTALLATION:
 ***********************
+0# mettre le dossier cache accessible en écriture (777).
 
 1# décompressez le zip dans le dossier des mod d'OGSpy et vérifiez le nom :
 "OGSign".
