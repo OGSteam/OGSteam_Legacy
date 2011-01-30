@@ -34,7 +34,7 @@ if($yesterday < 1) $yesterday = 1;
 if (isset($pub_rapport))
 {
 	$pub_rapport = mysql_real_escape_string($pub_rapport);
-	$pub_rapport = str_replace('.','',$pub_rapport);  // suppression des points, MAJ ogame 0.76 http://www.ogsteam.fr/forums/viewtopic.php?pid=27408#p27408
+//	$pub_rapport = str_replace('.','',$pub_rapport);  // suppression des points, MAJ ogame 0.76 http://www.ogsteam.fr/forums/viewtopic.php?pid=27408#p27408
 	
 	//On regarde si le rapport soumis est valide
 	if(stristr($pub_rapport, 'recycleurs ont une capacité totale de') === FALSE)
@@ -55,6 +55,7 @@ if (isset($pub_rapport))
 		
 		//On récupère les données pour le métal
 		$pre_recy = strstr($pub_rapport,'collecté');
+		$pre_recy = str_replace('.','',$pre_recy);
 		$pre_recy_metal = explode(" ",$pre_recy);
 		$recy_metal = floatval($pre_recy_metal[1]);
 		
@@ -64,27 +65,15 @@ if (isset($pub_rapport))
 		$recy_cristal = floatval($pre_recy_cristal2[1]);
 		
 		//On récupère les données pour la date
-		$date_attack = explode("-", $pub_rapport);
-		$date_attack = explode(" ", $date_attack[1]);
-		$date_attaque=$date_attack[0];
-		/*$temps = explode(":", $pub_rapport);
-		$hour = explode(" ", $temps[0]);
-		$hour = $hour[1];
-		$minute = $temps[1];
-		$second = explode(" ", $temps[2]);
-		$second = $second[0];*/
-		
-		preg_match('#(\d*)-(\d*)\s(\d*):(\d*):(\d*)#',$pub_rapport,$date);
+		preg_match('#(\d*)\.(\d*)\.(\d*)\s(\d*):(\d*):(\d*)#',$pub_rapport,$date);
 			
-		if( ($recy_coord == 0) || ($date_attaque == 0) )
+		if( ($recy_coord == 0) || !$date)
 		{
 			//On met le message de validation
-			echo"<blink><font color='#FF0000'><big>Votre rapport de recyclage n'est pas complet !!!</big></font></blink><br><br>";
+			echo"<blink><font color='#FF0000'><big>Votre rapport de recyclage n'est pas complet !!!</big></font></blink><br>heures = ".($date[4])."<br>minutes = ".($date[5])."<br>secondes = ".($date[6])."<br>mois = ".($date[2])."<br>jour = ".($date[1])."<br>jour = ".($date[3])."<br>";
 		}
-		else 
-			{
-			//$timestamp = mktime($hour, $minute, $second, $mois, $date_attaque, $annee);
-			$timestamp = mktime($date[3],$date[4],$date[5],$date[1],$date[2]);
+		else {
+			$timestamp = mktime($date[4],$date[5],$date[6],$date[2],$date[1],$date[3]);
 			//On vérifie que ce recyclage n'a pas déja été enregistrée
 			$query = "SELECT recy_id FROM ".TABLE_ATTAQUES_RECYCLAGES." WHERE recy_user_id=".$user_data['user_id']." AND recy_date=".$timestamp." AND recy_cristal=".$recy_cristal." AND recy_metal=".$recy_metal." AND recy_coord='$recy_coord' ";
 			$result = $db->sql_query($query);
