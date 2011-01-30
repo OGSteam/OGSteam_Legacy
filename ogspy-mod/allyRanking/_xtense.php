@@ -60,7 +60,7 @@ function ally_list($rapport){
 		return FALSE;
 	// On boucle dans la liste des résultats et on insert dans la DB
 	for ($i=0; $i < count($rapport['list']); $i++){
-	  $query = "INSERT INTO `".TABLE_RANK_MEMBERS."` VALUES (".$datadate.",'".$rapport['list'][$i]['pseudo']."',".$rapport['list'][$i]['points'].",'".$alliance."',".$user_data['user_id'].")";
+	  $query = "INSERT INTO `".TABLE_RANK_MEMBERS."` VALUES (".$datadate.",'".$rapport['list'][$i]['pseudo']."',".($rapport['list'][$i]['points'] * 1000).",'".$alliance."',".$user_data['user_id'].")";
 	  $db->sql_query($query);
 	}
 	return TRUE;
