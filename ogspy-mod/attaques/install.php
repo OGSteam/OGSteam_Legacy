@@ -72,7 +72,7 @@ $query = "CREATE TABLE ".TABLE_ATTAQUES_ARCHIVES." ("
 $db->sql_query($query);
 
 //on insère les données du mod, dans la table mod.
-$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active) VALUES ( 'Gestion des attaques', 'Gestion des<br>attaques', 'attaques', 'Attaques', 'index.php', '0.8j', '1')";
+$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('', 'Gestion des attaques', 'Gestion des<br>attaques', 'attaques', 'Attaques', 'index.php', '0.8j', '1')";
 $db->sql_query($query);
 
 //On vérifie que la table ogspy_mod_config
