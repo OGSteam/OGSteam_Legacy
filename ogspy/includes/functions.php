@@ -969,7 +969,7 @@ function check_getvalue($secvalue) {
 
 function check_postvalue($secvalue) {
     if ( ! is_array ( $secvalue ) ) {
-        if ((eregi("<[^>]*script*\"?[^>]*>", $secvalue)) ||    (eregi("<[^>]*style*\"?[^>]*>", $secvalue))) {
+        if ((preg_match("/<[^>]*script*\"?[^>]*>/", $secvalue)) ||    (preg_match("/<[^>]*style*\"?[^>]*>/", $secvalue))) {
 		    return false;
     	}
     }
