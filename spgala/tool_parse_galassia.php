@@ -5,10 +5,11 @@
 	require ( 'classes/mysql.class.php' );
 	require ( 'includes/commons.php' );
 
-	define ('GALAXY', '/([0-9]+)\t([\x20-\x7e\x81-\xffº¹²³¼½¾]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)/');
+//	define ('GALAXY', '/([0-9]+)\t([\x20-\x7e\x81-\xffº¹²³¼½¾]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)/');
+define ('GALAXY', '/([0-9]{1,2})\t(.+?)\t(.*?)\t(.+)/');
 	define ('STATUS', '/\((g|i|u|gu|iu|p|gp|ip|ig|up|gup|iup)\)/');
 	
-	$info = 0;
+	$info = 1;
 	
 	if ( isset($_POST['user'], $_POST['pass'], $_POST['galassia'], $_POST['x'], $_POST['y']) && preg_match(USER_MATCH, $_POST['user']) && preg_match(PASS_MATCH, $_POST['pass']) )
 	{
@@ -41,10 +42,10 @@
 				$date = time();
 				$fkplayerud = $query_result[0];
 				
-/*				$file = fopen(date("ymd").'.txt', "wb");
+				$file = fopen(date("ymd-h-i-s").'.txt', "wb");
 				fwrite($file, $data);
 				fclose($file);
-*/				
+				
 				$info = 2;
 
 				while ( $c < $n )
@@ -57,7 +58,7 @@
 						$player['ally'] = addslashes(trim($matches[2]));
 						$planet['name'] = addslashes(trim($matches[3]));
 						$player['name'] = addslashes(trim($matches[4]));
-						$player['old_name'] = addslashes(trim($matches[5]));
+//						$player['old_name'] = addslashes(trim($matches[5]));
 
 						if ( $player['name'] !== '' )
 						{
@@ -91,13 +92,13 @@
 										break;
 								}
 								
-								$player['name'] = preg_replace('/\s+&nbsp;\s+\(' . $matches[1] . '\)/', '', $player['name']);
-								$player['old_name'] = preg_replace('/\s+&nbsp;\s+\(' . $matches[1] . '\)/', '', $player['old_name']);
+								$player['name'] = preg_replace('/ \(' . $matches[1] . '\)/', '', $player['name']);
+//								$player['old_name'] = preg_replace('/ \(' . $matches[1] . '\)/', '', $player['old_name']);
 							}
 							else
 								$player['status'] = 0;
 								
-							if ( $player['name'] !== $player['old_name'] )
+/*							if ( $player['name'] !== $player['old_name'] )
 							{
 								$old = $db->first_result(
 									"SELECT nick
@@ -125,7 +126,7 @@
 										WHERE nick = '{$player['name']}'"
 									);
 							}
-							
+*/							
 							$player['id'] = $db->first_result(
 								"SELECT id
 								FROM " . DB_PLAYERS_TABLE . "

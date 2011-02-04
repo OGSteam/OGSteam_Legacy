@@ -6,11 +6,13 @@
 	require ( 'includes/commons.php' );
 
 
-	define ('RANKING', '/([\x20-\x7e\x81-\xffº¹²³¼½¾]+)[ \t]+([\x20-\x7e\x81-\xff]+)[ \t]+(' . CLASS_WARRIOR . '|Commer[\x00-\xff]+ant| )[ \t]+([0-9]+)[ \t]+([0-9]+)[ \t]+([0-9]+)[ \t]+([0-9]+)[ \t]+([\x20-\x7e\x81-\xff]+)/');
+	define ('RANKING', '/([0-9]+)\t(.+?)\t(.*?)\t([0-9]+)\t([0-9]+)\t([0-9]+)\t([0-9]+)/');
 	define ('STATUS', '/\((g|i|u|gu|iu|p|gp|ip|ig|up|gup|iup)\)/');
 
 
-	//$logFile = fopen("./logFile.txt","a");
+		$file = fopen(date("ymd-h-i-s").'.txt', "wb");
+		fwrite($file, $data);
+		fclose($file);
 
 	
 	$info = 0;
