@@ -23,7 +23,7 @@ function RemoveIGU(texte){
   return texte.replace(exp1,"");
 }
 
-function Encode(text){
+function encode(text){
 	var text = encodeURIComponent(text);
 	text = text.replace(/%C3%A8/gi,"%E8");
 	text = text.replace(/%C3%A9/gi,"%E9");
@@ -32,7 +32,7 @@ function Encode(text){
 	return text;
 }
 
-function GetSPserver(id) {
+function getSPserver(id) {
 	if ( id == 1 ) id = '';
 
 	var galaxyserver = SPGdbprefs.getCharPref("spgdbtoolajax.galaxy.server");
@@ -71,12 +71,16 @@ function SendData(what, data, id){
 		con.open("post", root+"tool_parse_galassia.php", true);
 	else if ( what == 'ranking' )
 		con.open("post", root+"tool_parse_classifica.php", true);
-		
+	
+	
 	con.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=ISO-8859-1");
 	
 	con.onreadystatechange = function()
 	{
-		if ( con.readyState === 4 )
+		if ( con.readyState == 3 )
+			document.getElementById("SPGdbAJAX-button-get"+what).style.listStyleImage = 'url("chrome://spgdbtoolajax/skin/working.gif")';
+
+			if ( con.readyState == 4 )
 		{
 			if ( con.status == 200 )
 			{
@@ -99,24 +103,16 @@ function SendData(what, data, id){
 				document.getElementById("SPGdbAJAX-button-get"+what).style.listStyleImage = 'url("chrome://spgdbtoolajax/skin/fail.gif")';
 		}
 		
-		if ( con.readyState === 1 )
-			document.getElementById("SPGdbAJAX-button-get"+what).style.listStyleImage = 'url("chrome://spgdbtoolajax/skin/working.gif")';
 	}
 	
 	if ( what == 'galaxy' )
 		con.send("x="+data[1]+"&y="+data[2]+"&galassia="+data[0]+"&user="+user+"&pass="+pass);
 	else if ( what == 'ranking' )
 		con.send("classifica="+data[0]+"&user="+user+"&pass="+pass);
-		
-}
-
-function Greload()
-{ 
-status_timer = setInterval("GetGalaxy()", 100);
 }
 
 //---------------------- Récuperation de la galaxie -------------------------//
-function GetGalaxy()
+function getGalaxy()
 {
 	for (var z = 1; z <= 3; z++)
 	{
@@ -138,23 +134,23 @@ function GetGalaxy()
 				{
 					var line = lines[i];
 					var cells = line.getElementsByTagName("td");
-					var pos = cells[0].textContent;
+					var pos = RemovePoint(cells[0].textContent);
      
 					var playerSpans = cells[2].getElementsByTagName("span");
 					var player = "";
 					if (playerSpans.length> 0)
 					{
-						player = trim(playerSpans[0].textContent.replace("\n",""));
+						player = trim(playerSpans[0].textContent.replace(/\n/g,""));
 					}
 					var ally = "";
 					if (playerSpans.length> 1)
 					{
-						ally = trim(playerSpans[1].textContent.replace("\n",""));   
+						ally = trim(playerSpans[1].textContent.replace(/\n/g,""));   
 					}
 					var planet = cells[1].innerHTML;
-					planet= trim(planet.substring(0,planet.indexOf('<')));
+					planet= nbsp(trim(planet.substring(0,planet.indexOf('<'))));
 
-					galaxy += pos+"\t"+player +"\t"+ally+"\t"+planet+"\t"; 
+					galaxy += pos+"\t"+player+"\t"+ally+"\t"+planet; 
 					galaxy += "\n";					
 				}
 				
@@ -163,23 +159,23 @@ function GetGalaxy()
 				data[1] = x;
 				data[2] = y;
 
-					SendData('galaxy', data, id);
+				SendData('galaxy', data, id);
 			}
 		}
 	}
 }
 
 //---------------------- Récuperation du classement -------------------------//
-function getRanking(){
+function getRanking()
+{
 	for (var z = 1; z <= 3; z++)
 	{
 		var hoststring = getSPserver(z);
+		var doc = window.content.document;
 	
-		if ( window.content.location.host == hoststring )
+		if ( doc.location.host == hoststring )
 		{
 			var id = ( z == 1 ) ? '' : z;
-	
-			var doc = window.content.document;
 			var rank;
 
 			if ( rank = doc.getElementById('obj_hiscore_table') )
@@ -200,12 +196,13 @@ function getRanking(){
 						var res = Number(RemovePoint(cells[6].getAttribute("title")));
 						var fleetdef = Number(RemovePoint(cells[7].getAttribute("title")));
 
-						ranking += rank1+"\t"+player+"\t"+ally+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef+"\n";
+						ranking += rank1+"\t"+player+"\t"+ally+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef;
+						ranking += "\n";
 					}
 					
 					data = new Array();
 					data[0] = ranking;
-					
+	alert(data[0]);				
 					SendData('ranking', data, id);
 			}
 		}
@@ -213,7 +210,7 @@ function getRanking(){
 }
 
 //---------------------- Récuperation du rapport d'espionnage -------------------------//
-function GetSpy() {
+function getSpy(){
 	for (var z = 1; z <= 3; z++)
 	{
 		var hoststring = getSPserver(z);
@@ -229,7 +226,7 @@ function GetSpy() {
 			{			
 				var r = msg.getElementsByTagName("tr");
 				var spy = "";
-	
+		
 				for (var i = 2; i < r.length; i++)
 				{
 					var c = r[i].getElementsByTagName("td");
@@ -261,18 +258,12 @@ function SetPref(){
 		SPGdbprefs.setCharPref("spgdbtoolajax.galaxy.server", galaxyserver);
 }
 
-function OpenOptions() {
+function openOptions() {
 	window.openDialog("chrome://spgdbtoolajax/content/options.xul", "spgdb-options", "chrome,centerscreen");
 }
 
-function Openlog() {
+function openlog() {
 	window.openDialog("chrome://spgdbtoolajax/content/log.xul", "spgdb-log", "chrome,centerscreen");
-}
-
-function Xreload_chrome() {
-	Components.classes["@mozilla.org/chrome/chrome-registry;1"]
-	.getService(Components.interfaces.nsIXULChromeRegistry)
-	.reloadChrome();
 }
 
 function Xreload_firefox() {
