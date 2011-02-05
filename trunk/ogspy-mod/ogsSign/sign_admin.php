@@ -28,7 +28,7 @@ $nb_sign_en_cache = 0;
 // @ pour éviter le E_WARNING si le cache n'existe pas.
 if ($dh = @opendir(DIR_SIGN_CACHE)) {
 	while (($nom_fichier = readdir($dh)) !== false) {
-		if (eregi('.png',$nom_fichier)) {
+		if (preg_match('/.png/',$nom_fichier)) {
 			$liste_fonds[] = $nom_fichier;
 			$nb_sign_en_cache++;
 		}

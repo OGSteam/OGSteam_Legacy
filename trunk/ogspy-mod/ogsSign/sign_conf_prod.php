@@ -227,7 +227,7 @@ function show_txtcolor() {
 	unset($liste_fonds);
 	if ($dh = opendir($dir_src_fonds)) {
 		while (($nom_fichier = readdir($dh)) !== false) {
-			if (eregi('.png',$nom_fichier))
+			if (preg_match('/.png/',$nom_fichier))
 				$liste_fonds[] = $nom_fichier;
 		}
 		closedir($dh);
