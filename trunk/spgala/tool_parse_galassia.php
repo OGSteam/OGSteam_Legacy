@@ -5,8 +5,7 @@
 	require ( 'classes/mysql.class.php' );
 	require ( 'includes/commons.php' );
 
-//	define ('GALAXY', '/([0-9]+)\t([\x20-\x7e\x81-\xffº¹²³¼½¾]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)\t([\x20-\x7e\x81-\xff]+)/');
-define ('GALAXY', '/([0-9]{1,2})\t(.+?)\t(.*?)\t(.+)/');
+	define ('GALAXY', '/([0-9]{1,2})\t(.+?)\t(.*?)\t(.+)/');
 	define ('STATUS', '/\((g|i|u|gu|iu|p|gp|ip|ig|up|gup|iup)\)/');
 	
 	$info = 1;
@@ -42,9 +41,9 @@ define ('GALAXY', '/([0-9]{1,2})\t(.+?)\t(.*?)\t(.+)/');
 				$date = time();
 				$fkplayerud = $query_result[0];
 				
-				$file = fopen(date("ymd-h-i-s").'.txt', "wb");
+/*				$file = fopen(date("ymd-h-i-s").'.txt', "wb");
 				fwrite($file, $data);
-				fclose($file);
+				fclose($file);*/
 				
 				$info = 2;
 

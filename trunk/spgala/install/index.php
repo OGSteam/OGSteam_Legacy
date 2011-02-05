@@ -31,10 +31,10 @@
 			$db->query(
 				"CREATE TABLE `spgdb_config` (
 				  `id` int(11) NOT NULL auto_increment,
-				  `name` varchar(20) collate latin1_general_ci NOT NULL default '',
-				  `value` varchar(100) collate latin1_general_ci NOT NULL default '',
+				  `name` varchar(20) collate utf8_bin NOT NULL default '',
+				  `value` varchar(100) collate utf8_bin NOT NULL default '',
 				  PRIMARY KEY  (`id`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -59,16 +59,16 @@
 				"CREATE TABLE `spgdb_planets` (
 				  `id` bigint(20) unsigned NOT NULL auto_increment,
 				  `fkplayer` int(10) unsigned NOT NULL default '0',
-				  `name` varchar(20) collate latin1_general_ci NOT NULL default '',
+				  `name` varchar(20) collate utf8_bin NOT NULL default '',
 				  `x` smallint(3) unsigned NOT NULL default '0',
 				  `y` smallint(3) unsigned NOT NULL default '0',
 				  `z` smallint(3) unsigned NOT NULL default '0',
-				  `build00` varchar(30) collate latin1_general_ci NOT NULL default '0',
-				  `build01` varchar(30) collate latin1_general_ci NOT NULL default '0',
-				  `build02` varchar(30) collate latin1_general_ci NOT NULL default '0',
-				  `build03` varchar(30) collate latin1_general_ci NOT NULL default '0',
-				  `build04` varchar(30) collate latin1_general_ci NOT NULL default '0',
-				  `build05` varchar(30) collate latin1_general_ci NOT NULL default '0',
+				  `build00` varchar(30) collate utf8_bin NOT NULL default '0',
+				  `build01` varchar(30) collate utf8_bin NOT NULL default '0',
+				  `build02` varchar(30) collate utf8_bin NOT NULL default '0',
+				  `build03` varchar(30) collate utf8_bin NOT NULL default '0',
+				  `build04` varchar(30) collate utf8_bin NOT NULL default '0',
+				  `build05` varchar(30) collate utf8_bin NOT NULL default '0',
 				  `build06` tinyint(3) unsigned NOT NULL default '0',
 				  `build07` tinyint(3) unsigned NOT NULL default '0',
 				  `build08` tinyint(3) unsigned NOT NULL default '0',
@@ -109,7 +109,7 @@
 				  `fkplayerud` int(10) unsigned NOT NULL default '0',
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `x_y_z` (`x`,`y`,`z`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -119,16 +119,16 @@
 			$db->query(
 				"CREATE TABLE `spgdb_players` (
 				  `id` int(11) NOT NULL auto_increment,
-				  `nick` varchar(20) collate latin1_general_ci NOT NULL default '',
-				  `ally` varchar(10) collate latin1_general_ci NOT NULL default '',
+				  `nick` varchar(20) collate utf8_bin NOT NULL default '',
+				  `ally` varchar(10) collate utf8_bin NOT NULL default '',
 				  `class` tinyint(4) NOT NULL default '0',
 				  `status` tinyint(4) NOT NULL default '0',
 				  `date` int(11) NOT NULL,
-				  `notes` text collate latin1_general_ci,
-				  `oldnick` varchar(20) collate latin1_general_ci NOT NULL default '',
+				  `notes` text collate utf8_bin,
+				  `oldnick` varchar(20) collate utf8_bin NOT NULL default '',
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `nick` (`nick`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -162,7 +162,7 @@
 				  `fkplayerud` int(11) NOT NULL,
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `fkplayer` (`fkplayer`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -173,16 +173,16 @@
 				"CREATE TABLE `spgdb_sessions` (
 				  `id` int(11) NOT NULL auto_increment,
 				  `fkuser` int(11) NOT NULL,
-				  `ip` varchar(32) collate latin1_general_ci NOT NULL default '',
-				  `browser` varchar(32) collate latin1_general_ci NOT NULL default '',
-				  `sessionid` varchar(32) collate latin1_general_ci NOT NULL default '',
+				  `ip` varchar(32) collate utf8_bin NOT NULL default '',
+				  `browser` varchar(32) collate utf8_bin NOT NULL default '',
+				  `sessionid` varchar(32) collate utf8_bin NOT NULL default '',
 				  `lastaction` int(11) NOT NULL,
 				  `td` int(11) NOT NULL,
-				  `lang` varchar(2) collate latin1_general_ci NOT NULL default '',
+				  `lang` varchar(2) collate utf8_bin NOT NULL default '',
 				  `permissions` smallint(6) NOT NULL,
-				  `nick` varchar(20) collate latin1_general_ci NOT NULL default '',
+				  `nick` varchar(20) collate utf8_bin NOT NULL default '',
 				  PRIMARY KEY  (`id`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -202,7 +202,7 @@
 				  `fkplayerud` int(11) NOT NULL,
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `fkplayer_n` (`fkplayer`,`n`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -212,20 +212,20 @@
 			$db->query(
 				"CREATE TABLE `spgdb_users` (
 				  `id` int(11) NOT NULL auto_increment,
-				  `nick` varchar(20) collate latin1_general_ci NOT NULL default '',
-				  `pass` varchar(64) collate latin1_general_ci NOT NULL default '',
-				  `email` varchar(50) collate latin1_general_ci NOT NULL default '',
+				  `nick` varchar(20) collate utf8_bin NOT NULL default '',
+				  `pass` varchar(64) collate utf8_bin NOT NULL default '',
+				  `email` varchar(50) collate utf8_bin NOT NULL default '',
 				  `credentials` smallint(6) NOT NULL default '0',
 				  `active` tinyint(4) NOT NULL default '0',
 				  `login` int(11) NOT NULL default '0',
-				  `ip` varchar(15) collate latin1_general_ci NOT NULL default '0.0.0.0',
+				  `ip` varchar(15) collate utf8_bin NOT NULL default '0.0.0.0',
 				  `gmt` int(11) NOT NULL,
-				  `gmtsign` char(1) collate latin1_general_ci NOT NULL default '',
+				  `gmtsign` char(1) collate utf8_bin NOT NULL default '',
 				  `dst` tinyint(4) NOT NULL,
-				  `lang` varchar(2) collate latin1_general_ci NOT NULL default '',
+				  `lang` varchar(2) collate utf8_bin NOT NULL default '',
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `nick` (`nick`)
-				) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci"
+				) DEFAULT CHARSET=UTF8 COLLATE=utf8_bin"
 			);
 			
 			$db->query(
@@ -248,7 +248,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>SPGala v.1.0  - Base de connaissance d'alliance pour Space Pioneers</title>
 <link href="../skins/default/css.css" rel="stylesheet" type="text/css" />
 </head>

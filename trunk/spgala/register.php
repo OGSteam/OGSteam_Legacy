@@ -78,7 +78,7 @@
 							echo '<tr><td>' . "\n";
 							
 							foreach ($response as $msg)
-								echo '<span class="label">• ' . $msg . '</span><br />';
+								echo '<span class="label">â€¢ ' . $msg . '</span><br />';
 		
 							echo '</td></tr>' . "\n";
 							echo '<tr><td><img src="images/spacer.gif" width="1" height="5" align="right" /></td></tr>' . "\n";
@@ -86,7 +86,7 @@
 						else if ( $response === false )
 						{
 							echo '<tr><td>' . "\n";
-							echo '<span class="label">• ' . ACC_CREATED . '</span><br />';
+							echo '<span class="label">â€¢ ' . ACC_CREATED . '</span><br />';
 							echo '</td></tr>' . "\n";
 							echo '<tr><td><img src="images/spacer.gif" width="1" height="5" align="right" /></td></tr>' . "\n";
 						}

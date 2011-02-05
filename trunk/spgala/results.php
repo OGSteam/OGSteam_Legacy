@@ -376,9 +376,9 @@
 						echo '<tr>' . "\n";
 					
 						if ( $search_rows_number == 0 )
-							echo '<td class="row1" colspan="13">La recherche n\'a donné aucun résultat.</td>' . "\n";
+							echo '<td class="row1" colspan="13">La recherche n\'a donnÃ© aucun rÃ©sultat.</td>' . "\n";
 						else
-							echo '<td class="row1" colspan="13">' . $search_rows_number . ' joueur(s) trouvé(s) dans la base.</td>' . "\n";
+							echo '<td class="row1" colspan="13">' . $search_rows_number . ' joueur(s) trouvÃ©(s) dans la base.</td>' . "\n";
 					
 						echo '</tr>' . "\n";
 					?>

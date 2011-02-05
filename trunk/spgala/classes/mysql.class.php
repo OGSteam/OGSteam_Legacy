@@ -14,7 +14,7 @@ define('DEBUG', true);
 				die('Database connection failed.');
 
 			@mysql_select_db($db_name, $this->connection);
-
+			$this->query('set names utf8');
 			return $this->connection;
 		}
 

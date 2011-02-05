@@ -27,7 +27,7 @@
 						if ( $response === false )
 						{
 							echo '<tr><td>' . "\n";
-							echo '<span class="label">• ' . LOGIN_INFO_ERROR . '</span><br />';
+							echo '<span class="label">â€¢ ' . LOGIN_INFO_ERROR . '</span><br />';
 							echo '</td></tr>' . "\n";
 							echo '<tr><td><img src="images/spacer.gif" width="1" height="5" align="right" /></td></tr>' . "\n";
 						}
