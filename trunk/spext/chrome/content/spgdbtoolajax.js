@@ -73,7 +73,7 @@ function SendData(what, data, id){
 		con.open("post", root+"tool_parse_classifica.php", true);
 	
 	
-	con.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=ISO-8859-1");
+	con.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
 	
 	con.onreadystatechange = function()
 	{
