@@ -5,12 +5,12 @@ function trim(text){
 	return text.replace(/\s+$/, '');
 }
 
-function RemovePoint(texte) { 
-return texte.replace(/\./g, ''); 
+function RemovePoint(texte) {
+return texte.replace(/\./g, '');
 }
 
 function RemoveHTMLTags(texte){
-  var exp1=new RegExp("\\<.*?\\>","g"); 
+  var exp1=new RegExp("\\<.*?\\>","g");
   return texte.replace(exp1,"");
 }
 
@@ -18,8 +18,8 @@ function nbsp(text) {
 	return text.replace(/\&nbsp;/gi, '');
 }
 
-function RemoveIGU(texte){ 
-  var exp1=new RegExp("\\(.*?\\)","g"); 
+function RemoveIGU(texte){
+  var exp1=new RegExp("\\(.*?\\)","g");
   return texte.replace(exp1,"");
 }
 
@@ -49,32 +49,30 @@ function getSPserver(id) {
 			var hoststring = 'sp2.looki.co.uk';
 			break;
 	}
-	
 	return hoststring;
 }
 
 //---------------------- Envois des données -------------------------//
 function SendData(what, data, id){
 	var root = SPGdbprefs.getCharPref("spgdbtoolajax.root");
-	
+
 	data[0] = encode(data[0]);
-	
+
 	var user = SPGdbprefs.getCharPref("spgdbtoolajax.username");
 	user = encode(user);
-	
+
 	var pass = SPGdbprefs.getCharPref("spgdbtoolajax.password");
 	pass = encode(pass);
-	
+
 	var con = new XMLHttpRequest();
-	
+
 	if ( what == 'galaxy' )
 		con.open("post", root+"tool_parse_galassia.php", true);
 	else if ( what == 'ranking' )
 		con.open("post", root+"tool_parse_classifica.php", true);
-	
-	
+
 	con.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=utf-8");
-	
+
 	con.onreadystatechange = function()
 	{
 		if ( con.readyState == 3 )
@@ -85,7 +83,7 @@ function SendData(what, data, id){
 			if ( con.status == 200 )
 			{
 				var info = con.responseXML.getElementsByTagName('info')[0].firstChild.data;
-				
+
 				switch ( info )
 				{
 					case '0':
@@ -102,9 +100,8 @@ function SendData(what, data, id){
 			else
 				document.getElementById("SPGdbAJAX-button-get"+what).style.listStyleImage = 'url("chrome://spgdbtoolajax/skin/fail.gif")';
 		}
-		
 	}
-	
+
 	if ( what == 'galaxy' )
 		con.send("x="+data[1]+"&y="+data[2]+"&galassia="+data[0]+"&user="+user+"&pass="+pass);
 	else if ( what == 'ranking' )
@@ -135,7 +132,7 @@ function getGalaxy()
 					var line = lines[i];
 					var cells = line.getElementsByTagName("td");
 					var pos = RemovePoint(cells[0].textContent);
-     
+
 					var playerSpans = cells[2].getElementsByTagName("span");
 					var player = "";
 					if (playerSpans.length> 0)
@@ -145,13 +142,13 @@ function getGalaxy()
 					var ally = "";
 					if (playerSpans.length> 1)
 					{
-						ally = trim(playerSpans[1].textContent.replace(/\n/g,""));   
+						ally = trim(playerSpans[1].textContent.replace(/\n/g,""));
 					}
 					var planet = cells[1].innerHTML;
 					planet= nbsp(trim(planet.substring(0,planet.indexOf('<'))));
 
-					galaxy += pos+"\t"+player+"\t"+ally+"\t"+planet; 
-					galaxy += "\n";					
+					galaxy += pos+"\t"+player+"\t"+ally+"\t"+planet;
+					galaxy += "\n";
 				}
 				
 				data = new Array();
@@ -178,57 +175,53 @@ function getRanking()
 			var id = ( z == 1 ) ? '' : z;
 			var rank;
 
-			if ( rank = doc.getElementById('obj_hiscore_table') )
-			{			
-					var r = rank.getElementsByTagName("tr");
-					var ranking = "";
-		
-					for (var i = 1; i < 100; i++)
-					{
-						var line = lines[i];
-						var cells = line.getElementsByTagName("td");
-						var rank1 = trim(cells[1].textContent);
-						var ally = trim(cells[3].textContent);
-						var player = trim(cells[2].textContent);
+			if ( rank = doc.getElementById('tpl_hiscore_subject') )
+			{
+				var ranking = "";
+				var r = rank.getElementsByTagName("table");
+				var lines = r[0].getElementsByTagName("tr");
 
-						var tot = Number(RemovePoint(cells[4].getAttribute("title")));
-						var build = Number(RemovePoint(cells[5].getAttribute("title")));
-						var res = Number(RemovePoint(cells[6].getAttribute("title")));
-						var fleetdef = Number(RemovePoint(cells[7].getAttribute("title")));
+				for (var i = 1; i < 101; i++)
+				{
+					var line = lines[i];
+					var cells = line.getElementsByTagName("td");
+					var rank1 = trim(cells[1].textContent);
+					var ally = trim(cells[3].textContent);
+					var player = trim(cells[2].textContent);
 
-						ranking += rank1+"\t"+player+"\t"+ally+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef;
-						ranking += "\n";
-					}
+					var tot = Number(RemovePoint(cells[4].getAttribute("title")));
+					var build = Number(RemovePoint(cells[5].getAttribute("title")));
+					var res = Number(RemovePoint(cells[6].getAttribute("title")));
+					fleetdef = Number(RemovePoint(cells[7].getAttribute("title")));
+
+					ranking += rank1+"\t"+player+"\t"+ally+"\t"+tot+"\t"+build+"\t"+res+"\t"+fleetdef+"\n";
+				}
 					
-					data = new Array();
-					data[0] = ranking;
-	alert(data[0]);				
-					SendData('ranking', data, id);
+				data = new Array();
+				data[0] = ranking;
+
+				SendData('ranking', data, id);
 			}
 		}
 	}
 }
 
 //---------------------- Récuperation du rapport d'espionnage -------------------------//
-function getSpy(){
-	for (var z = 1; z <= 3; z++)
-	{
+function getSpy() {
+	for (var z = 1; z <= 3; z++) {
 		var hoststring = getSPserver(z);
 	
-		if ( window.content.location.host == hoststring )
-		{
+		if ( window.content.location.host == hoststring ) {
 			var id = ( z == 1 ) ? '' : z;
 	
 			var doc = window.content.document;
 			var msg;
 			
-			if ( msg = doc.getElementById('obj_messages_messages') )
-			{			
+			if (msg = doc.getElementById('obj_messages_messages')) {
 				var r = msg.getElementsByTagName("tr");
 				var spy = "";
 		
-				for (var i = 2; i < r.length; i++)
-				{
+				for (var i = 2; i < r.length; i++) {
 					var c = r[i].getElementsByTagName("td");
 				}
 			}
@@ -254,7 +247,7 @@ function SetPref(){
 		SPGdbprefs.setCharPref("spgdbtoolajax.username", trim(username));
 		var password = trim(document.getElementById("SPGdbAJAX-options-password").value);
 		SPGdbprefs.setCharPref("spgdbtoolajax.password", trim(password));
-		var galaxyserver = document.getElementById("SPGdbAJAX-options-galaxy-server").value;	
+		var galaxyserver = document.getElementById("SPGdbAJAX-options-galaxy-server").value;
 		SPGdbprefs.setCharPref("spgdbtoolajax.galaxy.server", galaxyserver);
 }
 
@@ -268,31 +261,30 @@ function openlog() {
 
 function Xreload_firefox() {
 	if (Xprefs.getBool('debug')) {
-	try{
- const nsIAppStartup = Components.interfaces.nsIAppStartup;
+		try {
+			const nsIAppStartup = Components.interfaces.nsIAppStartup;
 
-  var os = Components.classes["@mozilla.org/observer-service;1"]
-                     .getService(Components.interfaces.nsIObserverService);
-  var cancelQuit = Components.classes["@mozilla.org/supports-PRBool;1"]
-                             .createInstance(Components.interfaces.nsISupportsPRBool);
-  os.notifyObservers(cancelQuit, "quit-application-requested", null);
+			var os = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+			var cancelQuit = Components.classes["@mozilla.org/supports-PRBool;1"].createInstance(Components.interfaces.nsISupportsPRBool);
+			os.notifyObservers(cancelQuit, "quit-application-requested", null);
 
-  if (cancelQuit.data)
-    return;
+			if (cancelQuit.data)
+				return;
+	
+			os.notifyObservers(null, "quit-application-granted", null);
 
-  os.notifyObservers(null, "quit-application-granted", null);
+			var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+			var windows = wm.getEnumerator(null);
 
-  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                     .getService(Components.interfaces.nsIWindowMediator);
-  var windows = wm.getEnumerator(null);
-  while (windows.hasMoreElements()) {
-    var win = windows.getNext();
-    if (("tryToClose" in win) && !win.tryToClose())
-      return;
-  }
-  Components.classes["@mozilla.org/toolkit/app-startup;1"].getService(nsIAppStartup)
-            .quit(nsIAppStartup.eRestart | nsIAppStartup.eAttemptQuit);
-				}catch(e){ufLog(e.name+": "+e.message+"line "+e.lineNumber);}
+			while (windows.hasMoreElements()) {
+				var win = windows.getNext();
+				
+				if (("tryToClose" in win) && !win.tryToClose())
+				return;
+			}
+			Components.classes["@mozilla.org/toolkit/app-startup;1"].getService(nsIAppStartup).quit(nsIAppStartup.eRestart | nsIAppStartup.eAttemptQuit);
+		}
+		catch(e){ufLog(e.name+": "+e.message+"line "+e.lineNumber);}
 	}
 	else {Xconsole('debug mode off, restart aborted');}
 }
