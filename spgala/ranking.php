@@ -256,7 +256,7 @@
 							echo '<tr>' . "\n";
 							echo '<td class="row' . $row_color . '">' . ($start + $count) . '</td>' . "\n";
 							echo '<td></td>' . "\n";
-							echo '<td class="row' . $row_color . '"><nobr><a class="name_links" href="index.php?section=player&id=' . $row[9] . '&si=' . $SESSION['SID'] . '">' .( ( $row[1] == $tag ) ? '<font color="#00ff00"><b>' . htmlentities($row[0]) . '</b></font>':htmlentities($row[0])). '</a> [' . ( ( $row[1] == $tag ) ? '<font color="#00ff00"><b>' . htmlentities($row[1]) . '</b></font>':htmlentities($row[1])) . ']</nobr></td>' . "\n";
+							echo '<td class="row' . $row_color . '"><nobr><a class="name_links" href="index.php?section=player&id=' . $row[9] . '&si=' . $SESSION['SID'] . '">' .( ( $row[1] == $tag ) ? '<font color="#00ff00"><b>' . $row[0]. '</b></font>':$row[0]). '</a> [' . ( ( $row[1] == $tag ) ? '<font color="#00ff00"><b>' . $row[1] . '</b></font>':$row[1]) . ']</nobr></td>' . "\n";
 							echo '<td></td>' . "\n";
 							echo '<td class="row' . $row_color . '">' . $PLAYER_CLASS[$row[2]] . '</td>' . "\n";
 							echo '<td></td>' . "\n";
@@ -282,7 +282,7 @@
 						}
 					}
 					else
-						echo '<td class="row1" colspan="21">Aucun joueur trouvé dans la Base.</td>' . "\n";
+						echo '<td class="row1" colspan="21">Aucun joueur trouvÃ© dans la Base.</td>' . "\n";
 				?>
 			</table>
 		</td>

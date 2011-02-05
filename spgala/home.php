@@ -66,7 +66,7 @@
           <td><span class="label"><?php echo SERVER_TIME ?>: <?php echo $server_time ?></span></td>
         </tr>
         <tr>
-          <td><span class="label"><br>connecté : <?php echo $sess_nb ?></span></td>
+          <td><span class="label"><br>connectÃ© : <?php echo $sess_nb ?></span></td>
         </tr>
       </table>
     </td>

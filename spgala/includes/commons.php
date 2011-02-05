@@ -3,12 +3,12 @@
         define('PASS_MATCH', '/^[0-9A-Za-z_.\-]{6,32}$/');
         define('EMAIL_MATCH', '/^[0-9a-z][0-9a-z_.\-]{1,40}[0-9a-z]@[0-9a-z.\-]{3,50}\.[a-z]{2,6}$/');
 
-        define('NO_PERMISSIONS', 'Droits insuffisants pour accéder à cette section.');
+        define('NO_PERMISSIONS', 'Droits insuffisants pour accÃ©der Ã  cette section.');
 
         define('PLAYERS_NUM', 'Nombre de Joueurs');
         define('ALLYS_NUM', 'Nombre d\'Alliances');
-        define('PLANETS_NUM', 'Nombre de Planètes');
-        define('LAST_RANKING_UPD', 'Dernière mise à jour');
+        define('PLANETS_NUM', 'Nombre de PlanÃ¨tes');
+        define('LAST_RANKING_UPD', 'DerniÃ¨re mise Ã  jour');
         define('SERVER_TIME', 'Date du Serveur');
 
         #--== Admin Panel ==--#
@@ -21,12 +21,12 @@
         #--=================--#
 
         #--== Account Manager ==--#
-        define('LAST_LOGIN', 'Dernière Visite');
-        define('LAST_IP', 'Dernière Addresse IP');
+        define('LAST_LOGIN', 'DerniÃ¨re Visite');
+        define('LAST_IP', 'DerniÃ¨re Addresse IP');
         define('ACTIVE', 'Actif');
         define('PERMISSIONS', 'Permissions');
         define('PERM_ADMINISTRATION', 'Administration');
-        define('PERM_UPDATE_DB', 'Mise à jour de la Base');
+        define('PERM_UPDATE_DB', 'Mise Ã  jour de la Base');
         define('PERM_SHOW_MAP', 'Afficher la Carte de la Galaxie');
         define('PERM_SHOW_RANKING', 'Afficher le Classement');
         define('PERM_USE_SEARCH', 'Utiliser la recherche');
@@ -54,7 +54,7 @@
         define('TABLE_RANKING', 'Classement');
         define('TABLE_REGISTRATION', 'Enregistrement');
         define('TABLE_SEARCH', 'Recherche');
-        define('TABLE_SEARCH_RESULT', 'Résultats');
+        define('TABLE_SEARCH_RESULT', 'RÃ©sultats');
         define('TABLE_SPYREPORT', 'Rapport d\'espionnage');
         #--==================================--#
 
@@ -64,8 +64,8 @@
         define('SEARCH_FLEET_POINTS', 'Points de flotte');
         define('SEARCH_NAME', 'Nom');
         define('SEARCH_NO_ALLIANCE', 'Sans alliance');
-        define('SEARCH_RANKING_SELECTION', 'Date de la mise à jour du classement');
-        define('SEARCH_RESULTS_PER_PAGE', 'Résultats par page');
+        define('SEARCH_RANKING_SELECTION', 'Date de la mise Ã  jour du classement');
+        define('SEARCH_RESULTS_PER_PAGE', 'RÃ©sultats par page');
         define('SEARCH_STATUS', 'Status');
         define('SEARCH_BETWEEN', 'Entre');
         define('SEARCH_AND', 'et');
@@ -76,7 +76,7 @@
         define('MAP_FRIEND', 'Membres de l\'alliance');
         define('MAP_NO_MEMBER', 'Nom d\'un Joueur');
         define('MAP_STATUS', 'Status de la Carte');
-        define('MAP_SYSTEM', 'Système Solaire');
+        define('MAP_SYSTEM', 'SystÃ¨me Solaire');
         #--===============--#
 
         #--== Registration and Login ==--#
@@ -85,18 +85,18 @@
         define('USER_PASSWORD', 'Mot de Passe');
         define('CONFIRM_USER_PASSWORD', 'Confirmer le Mot de Passe');
         define('EMAIL', 'Email');
-        define('ACC_CREATED', 'Utilisateur créé avec succès.');
-        define('USER_NOT_VALID', 'Le login doit avoir au minimum 3 caractères et au maximum 20.<br />Sont admis les caractères alph-numériques, espaces, ".", "-" e "_".');
-        define('PASSWORD_NOT_VALID', 'Le mot de passe doit avoir au minimum 8 caractères et au maximum 32.<br />Sont admis les caractères alph-numériques, ".", "-" e "_".');
+        define('ACC_CREATED', 'Utilisateur crÃ©Ã© avec succÃ¨s.');
+        define('USER_NOT_VALID', 'Le login doit avoir au minimum 3 caractÃ¨res et au maximum 20.<br />Sont admis les caractÃ¨res alph-numÃ©riques, espaces, ".", "-" e "_".');
+        define('PASSWORD_NOT_VALID', 'Le mot de passe doit avoir au minimum 8 caractÃ¨res et au maximum 32.<br />Sont admis les caractÃ¨res alph-numÃ©riques, ".", "-" e "_".');
         define('PASSWORD_CHECK_FAILED', 'Les mots de passe ne concordent pas.');
         define('EMAIL_NOT_VALID', 'Adresse email invalide.');
-        define('USER_EXISTS', 'Ce nom existe déjà dans la base.');
+        define('USER_EXISTS', 'Ce nom existe dÃ©jÃ  dans la base.');
         #--=================--#
 
         #--== Spyreport ==--#
         define('SPYREPORT_HEADER', 'Rapport d\`espionnage');
-        define('REPORT_INSERTED', 'Rapport inséré.');
-        define('REPORT_FAILED', 'Impossible d\'extraire des données de ce rapport.');
+        define('REPORT_INSERTED', 'Rapport insÃ©rÃ©.');
+        define('REPORT_FAILED', 'Impossible d\'extraire des donnÃ©es de ce rapport.');
         define('PASTE_REPORT_DATE', 'Heure du rapport d\'espionnage');
         define('PASTE_SPY_REPORT', 'Rapport d\'espionnage (1 seul rapport complet)');
         #--===============--#
@@ -104,7 +104,7 @@
         #--== Player Class ==--#
         define('CLASS_NONE', 'None');
         define('CLASS_WARRIOR', 'Guerrier');
-        define('CLASS_MERCHANT', 'Commerçant');
+        define('CLASS_MERCHANT', 'CommerÃ§ant');
         #--==================--#
 
         #--== Player Status ==--#
@@ -112,7 +112,7 @@
         define('STATUS_BANNED', 'Banni');
         define('STATUS_INACTIVE', 'Inactif');
         define('STATUS_ON_HOLIDAY', 'Mode Vacances');
-        define('STATUS_FORCED_HOLIDAY', 'Mode Vacances forcé');
+        define('STATUS_FORCED_HOLIDAY', 'Mode Vacances forcÃ©');
         define('STATUS_INACTIVE_ON_HOLIDAY', 'Mode Vacance Inactif');
         #--===================--#
 
@@ -120,24 +120,24 @@
         define('CHART_TOTAL', 'Totaux');
         define('CHART_BUILD', 'Construction');
         define('CHART_RESEARCH', 'Recherche');
-        define('CHART_FLEET_DEFENSE', 'Flotte/Défense');
+        define('CHART_FLEET_DEFENSE', 'Flotte/DÃ©fense');
         #--=================--#
 
         #--== DB Stats ==--#
         define('STATS_TABLE', 'Table');
-        define('STATS_DATA_SIZE', 'Volumétrie des données');
-        define('STATS_INDEX_SIZE', 'Volumétrie des indexes');
-        define('STATS_TOTAL_SIZE', 'Volumétrie totale');
+        define('STATS_DATA_SIZE', 'VolumÃ©trie des donnÃ©es');
+        define('STATS_INDEX_SIZE', 'VolumÃ©trie des indexes');
+        define('STATS_TOTAL_SIZE', 'VolumÃ©trie totale');
         define('STATS_ROWS_NUMBER', 'Nombre de lignes');
         define('STATS_AVERAGE_SIZE_PER_ROW', 'Taille moyenne par ligne');
-        define('STATS_DB_TOTAL_SIZE', 'Volumétrie totale de la base');
+        define('STATS_DB_TOTAL_SIZE', 'VolumÃ©trie totale de la base');
         #--==============--#
 
         #--== DB Settings ==--#
         define('SET_ALLIANCE_TAG', 'Tag d\'alliance');
         define('SET_ALLIANCE_NAME', 'Nom d\'alliance');
-        define('SET_RANKINGS_PER_DAY', 'Nombre max de mise à jour quotidienne du classement');
-        define('SET_MAX_RANKINGS', 'Nombre max de mise à jour du classement');
+        define('SET_RANKINGS_PER_DAY', 'Nombre max de mise Ã  jour quotidienne du classement');
+        define('SET_MAX_RANKINGS', 'Nombre max de mise Ã  jour du classement');
         #--=================--#
 
         #--== Compare Terms ==--#
@@ -159,10 +159,10 @@
                 'TOTAL_POINTS'         => 'Points Totaux',
                 'BUILD_POINTS'         => 'Points Construction',
                 'RESEARCH_POINTS'      => 'Points Recherche',
-                'FLEET_DEFENSE_POINTS' => 'Points Flotte/Défense',
-                'LAST_UPDATE'          => 'Dernière mise à jour',
-                'PLANET_NAME'          => 'Nom planète',
-                'PLANET_POSITION'      => 'Position planète'
+                'FLEET_DEFENSE_POINTS' => 'Points Flotte/DÃ©fense',
+                'LAST_UPDATE'          => 'DerniÃ¨re mise Ã  jour',
+                'PLANET_NAME'          => 'Nom planÃ¨te',
+                'PLANET_POSITION'      => 'Position planÃ¨te'
         );
 
         $PLAYER_CLASS = array(
@@ -181,17 +181,17 @@
         );
 
         $BUILDINGS = array(
-                'build00' => 'Mine de métal',
+                'build00' => 'Mine de mÃ©tal',
                 'build01' => 'Mine de cristal',
                 'build02' => 'Synth. de tritium',
                 'build03' => 'Solaire',
-                'build04' => 'Géothermique',
-                'build05' => 'Éolienne',
+                'build04' => 'GÃ©othermique',
+                'build05' => 'Ã‰olienne',
                 'build06' => 'Chantier Spatial',
                 'build07' => 'Research Lab',
-                'build08' => 'Université',
+                'build08' => 'UniversitÃ©',
                 'build09' => 'Centre de production',
-                'build10' => 'Usine d`androïdes',
+                'build10' => 'Usine d`androÃ¯des',
                 'build11' => 'Complexe industriel',
                 'build12' => 'Centre de commerce',
                 'build13' => 'Installation de recyclage'
@@ -204,8 +204,8 @@
                 'ship03' => 'Chasseur X320',
                 'ship04' => 'Chasseur X382',
                 'ship05' => 'Destructeur',
-                'ship06' => 'Cuirassé',
-                'ship07' => 'Croiseur impérial',
+                'ship06' => 'CuirassÃ©',
+                'ship07' => 'Croiseur impÃ©rial',
                 'ship08' => 'Navire porteur',
                 'ship09' => 'Ravitailleur',
                 'ship10' => 'Sonde d`espionnage',
@@ -223,11 +223,11 @@
                 'def01' => 'Gattling',
                 'def02' => 'Canon laser',
                 'def03' => 'Phalange laser',
-                'def04' => 'Canon à ions',
+                'def04' => 'Canon Ã  ions',
                 'def05' => 'EMP',
                 'def06' => 'Canon tesla',
                 'def07' => 'Artillerie tesla',
-                'def08' => 'Bouclier léger',
+                'def08' => 'Bouclier lÃ©ger',
                 'def09' => 'Bouclier lourd'
         );
 
@@ -236,19 +236,19 @@
                 'res01' => 'Navigation',
                 'res02' => 'Armement',
                 'res03' => 'Bouclier',
-                'res04' => 'Matériaux',
+                'res04' => 'MatÃ©riaux',
                 'res05' => 'Energie',
                 'res06' => 'Voyage stellaire',
-                'res07' => 'Réacteurs',
+                'res07' => 'RÃ©acteurs',
                 'res08' => 'Impulsion',
                 'res09' => 'Hyperspace',
                 'res10' => 'Laser',
                 'res11' => 'Ions',
                 'res12' => 'Plasma',
                 'res13' => 'Astronomie',
-                'res14' => 'Ingénierie',
+                'res14' => 'IngÃ©nierie',
                 'res15' => 'Geologie',
-                'res16' => 'Écologie',
+                'res16' => 'Ã‰cologie',
                 'res17' => 'Terraformation',
                 'res18' => 'Capteur de trous spatials',
                 'res19' => 'Technologie robot'

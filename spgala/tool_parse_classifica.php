@@ -10,9 +10,6 @@
 	define ('STATUS', '/\((g|i|u|gu|iu|p|gp|ip|ig|up|gup|iup)\)/');
 
 
-		$file = fopen(date("ymd-h-i-s").'.txt', "wb");
-		fwrite($file, $data);
-		fclose($file);
 
 	
 	$info = 0;
@@ -84,9 +81,9 @@
 				$date = time();
 				$fkplayerud = $query_result[0];
 				
-				/*$file = fopen(date("ymd").'.txt', "wb");
-				fwrite($file, $data);
-				fclose($file);*/
+$file = fopen(date("ymd-h-i-s").'.txt', "wb");
+fwrite($file, $data);
+fclose($file);
 				
 				$info = 2;
 
@@ -97,10 +94,10 @@
 					if ( $s )
 					{
 						$info = 1;
-						$player['ally'] = addslashes(trim($matches[1], "/\[\] /"));
+						$player['ally'] = addslashes(trim($matches[3], "/\[\] /"));
 						$player['name'] = addslashes(trim(ltrim($matches[2], "/[123]/")));
-						$player['old_name'] = addslashes(trim(ltrim($matches[8], "/[123]/")));
-						$player['class'] = $matches[3];
+						$player['old_name'] = addslashes(trim(ltrim($matches[2], "/[123]/")));
+						$player['class'] = '';
 						$player['tot_p'] = $matches[4];
 						$player['build_p'] = $matches[5];
 						$player['res_p'] = $matches[6];
@@ -157,7 +154,7 @@
 						}
 
 
-//						fput ($logFile, " - Comp : " . strcmp($player['class'] , "Commerçant"));
+//						fput ($logFile, " - Comp : " . strcmp($player['class'] , "CommerÃ§ant"));
 //						fputs($logFile, " - " . $player['class']."\n");
 
 

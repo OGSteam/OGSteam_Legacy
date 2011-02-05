@@ -90,7 +90,7 @@
 										);
 										
 										while ( $row = mysql_fetch_array($query_result) )
-											echo '<option value="' . htmlentities($row[0], ENT_QUOTES) . '">' . htmlentities($row[0]) . '</option>' . "\n";
+											echo '<option value="' . $row[0] . '">' . $row[0] . '</option>' . "\n";
 									?>
 								</select>
 							</blockquote>
