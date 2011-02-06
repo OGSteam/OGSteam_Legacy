@@ -16,11 +16,11 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if(class_exists("Callback")){
 class QuiMSonde_Callback extends Callback {
         public $version = '2.3.0';
-        public function qms_import_enemy_spy($ennemy_spy){
+        public function qms_import_enemy_spy($spy){
 			global $io,$user_data;
 			require_once('lang/lang_french.php');
 			$add = 0;
-			foreach($ennemy_spy as $spy){
+			//foreach($ennemy_spy as $spy){
 				if(!is_array($spy['from'])){
 					$pos_from = explode(':',$spy['from']); 
 					$pos_to = explode(':',$spy['to']); 
@@ -48,7 +48,7 @@ class QuiMSonde_Callback extends Callback {
 				else
 					$io->append_call_message("L'espionnage de {$coords_to} ({$to_name}) du {$date} a bien été enregistré.", Io::SUCCESS);
 				$add += $a;
-			}
+			//}
 			$io->append_call_message("Un total de {$add} espionnages ont été enregistrés", Io::SUCCESS);
 			return Io::SUCCESS;
 		}
@@ -171,8 +171,8 @@ function qms_get_user_info($coord){	// recupére le nom du joueur et l'alliance d
 	if( $coord[0] && $coord[1] && $coord[2] && $db->sql_numrows($db->sql_query($query)) != 0){
 		$result=$db->sql_query($query);		
 		$out = $db->sql_fetch_assoc($result);
-		$player = $out[0]['player'];
-		$ally = $out[0]['ally'];
+		$player = $out['player'];
+		$ally = $out['ally'];
 	}
 	return array($player,$ally);
 }
