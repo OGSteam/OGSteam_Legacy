@@ -61,8 +61,7 @@ else
 	  INDEX (  `joueur` ),
 	  INDEX ( `alliance` ) ,
 	  UNIQUE ( `id`)
-	)
-	TYPE = MYISAM ";
+	)";
 	$db->sql_query($query);
 }
 // Création de la table des configurations
@@ -73,8 +72,7 @@ $query = "CREATE TABLE `".TABLE_QMS_config."`
 	  `config` VARCHAR( 11 ) DEFAULT '' NOT NULL ,
 	  `valeur` VARCHAR( 255 ) DEFAULT '' NOT NULL ,
 	  INDEX ( `config` )
-	)
-	TYPE = MYISAM ";
+	)";
 $db->sql_query($query);
 
 // Génération des configuration par défault
