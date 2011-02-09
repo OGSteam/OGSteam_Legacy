@@ -25,13 +25,13 @@ if (isset($pub_data) && $pub_data<>'')
 	$data = str_replace(".",'',$data);
 	$data = str_replace("\'","'",$data);
 
-	if (!preg_match('#Les\sflottes\ssuivantes\sse\ssont\saffrontées\sle\s(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2}) :#',$data,$date))
+	if (!preg_match("#Les\sflottes\ssuivantes\ss.affrontent\s\((\d{2})(\d{2})(\d{4}) (\d{2}):(\d{2}):(\d{2})\):#",$data,$date))
 	{
 		echo 'Rapport de combat invalide';
 	} 
 	else 
 	{
-		preg_match('#Attaquant\s(.{3,50})\s\(#',$data,$attaquant);
+		preg_match('#Attaquant\s(.{3,50})\s\[#',$data,$attaquant);
 		//récupère les coordonnées de l'attaquant
         preg_match('#Attaquant\s.{3,110}\[(.{5,8})]#',$data,$coord_att);
 		//On regarde dans les coordonnées de l'espace personnel du joueur qui insère les données via le plugin si les coordonnées de l'attaquant correspondent à une de ses planètes
@@ -49,16 +49,16 @@ if (isset($pub_data) && $pub_data<>'')
     	}
     	else
     	{		 
-    		preg_match('#Défenseur\s(.{3,50})\s\(#',$data,$defenseur);
+    		preg_match('#Défenseur\s(.{3,50})\s\[#',$data,$defenseur);
 			//récupère les coordonnées du défenseur
 			preg_match('#Défenseur\s.{3,110}\[(.{5,8})]#',$data,$coord_def);
     		
 			preg_match('#L\'attaquant\sa\sperdu\sau\stotal\s(\d*)\sunités#',$data,$pertesA);
 			preg_match('#Le\sdéfenseur\sa\sperdu\sau\stotal\s(\d*)\sunités#',$data,$pertesD);
 			preg_match('#(\d*)\sunités\sde\smétal,\s(\d*)\sunités\sde\scristal\set\s(\d*)\sunités\sde\sdeutérium#',$data,$ressources);
-			if (!preg_match('#Un\schamp\sde\sdébris\scontenant\s(\d*)\sunités\sde\smétal\set\s(\d*)\sunités\sde\scristal\sse\sforme\sdans\sl\'orbite\sde\scette\splanète#',$data,$recyclage)) $recyclage[1]=$recyclage[2]=0; 
-			if (!preg_match('#La\sprobabilité\sde\scréation\sd\'une\slune\sest\sde\s(\d*)\s%#',$data,$plune)) $plune[1] = 0;
-			$lune = preg_match('#Les\squantités\sénormes\sde\smétal\set\sde\scristal\ss\'attirent,\sformant\sainsi\sune\slune\sdans\sl\'orbite\sde\scette\splanète#',$data);
+			if (!preg_match('#Un\schamp\sde\sdébris\scontenant\s(\d*)\sde\smétal\set\s(\d*)\sde\scristal\sse\sforme\sdans l.orbite\sde\sla\splanète#',$data,$recyclage)) $recyclage[1]=$recyclage[2]=0; 
+			if (!preg_match('#La\sprobabilité\sde\scréation\sd.une\slune\sest\sde\s(\d*)\s%#',$data,$plune)) $plune[1] = 0;
+			$lune = preg_match('#Les\squantités\sénormes\sde\smétal\set\sde\scristal\ss\'attirent,\sformant\sainsi\sune\slune\sdans\sl\'orbite\sde\scette\splanète.#',$data);
 			$date = mktime($date[3],$date[4],$date[5],$date[1],$date[2],date('Y'));
 			$points = ceil(($ressources[1]+$ressources[2]+$ressources[3])/100000*$config['pillage'] + $pertesA[1]/100000*$config['pertes'] + $pertesD[1]/100000*$config['degats'] + $lune*$config['clune']);
 			//On vérifie que cette attaque n'a pas déja été enregistrée
