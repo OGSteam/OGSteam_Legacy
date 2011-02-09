@@ -63,7 +63,7 @@ function Request(Tab, callback, scope) {
 		else if (type == 'boolean')
 			retour = (obj == true ? 1 : 0);
 		else retour = obj+'';
-			return parent+'='+encodeURIComponent(retour);
+			return parent+'='+encodeURIComponent(retour).replace(new RegExp("(%0A)+", "g"), '%20').replace(new RegExp("(%09)+", "g"), '%20').replace(new RegExp("(%20)+", "g"), '%20');
 	}
 	
 	this.serializeData = function () {

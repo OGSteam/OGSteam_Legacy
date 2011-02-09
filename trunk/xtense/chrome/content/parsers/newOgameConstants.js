@@ -96,7 +96,8 @@ XnewOgame.Xpaths = {
 		},
 		list_types : 'table/tbody/tr[1]/th',
 		list_values : 'table/tbody/tr[2]/td',
-		result : '//div[@id="combat_result"]'
+		result : '//div[@id="combat_result"]',
+		combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
 	},
 	
 	writemessage : {

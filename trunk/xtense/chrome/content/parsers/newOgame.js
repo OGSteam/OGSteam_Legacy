@@ -847,7 +847,7 @@ var XnewOgame = {
 			for (var i = 0; i < (rows.snapshotLength); i++) {
 				var row = rows.snapshotItem(i);
 				var player = Xpath.getStringValue(doc,paths.player,row).trim();
-				var points = Math.ceil(Xpath.getStringValue(doc,paths.points,row).trimInt()/1000);
+				var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
 				var rank = Xpath.getStringValue(doc,paths.rank,row).trimInt();
 				var coords = Xpath.getStringValue(doc,paths.coords,row).trim();
 				coords = coords.match(new RegExp(XnewOgame.regexps.coords))[1];
@@ -1000,25 +1000,35 @@ var XnewOgame = {
 			else
 				var moon = 0;
 			
+			if(result.match(new RegExp(rcStrings['regxps']['moonprob'], 'gi')))
+				var moonprob = result.match(new RegExp(rcStrings['regxps']['moonprob']))[1];
+			else
+				var moonprob = 0;
+			
 			for (var i in rcStrings['regxps']['result']) {
 				var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
 				if(m)
 					rslt[i] = m[1].replace(/\./g, '');
 			}
-			
-			var rounds = rounds.snapshotLength;
-			
+			var nbrounds = rounds.snapshotLength;
+			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.combat_round);
+			var round = -1;
+			if(rounds.snapshotLength > 0){
+				round = rounds.snapshotItem(0).textContent.trim();
+			}
 			var Request = this.newRequest();
 			Request.set(
 				{
 					type: 'rc',
 					date: date,
 					win: win,
-					count: (rounds-1),
+					count: (nbrounds-1),
 					result: rslt,
 					moon: moon,
+					moonprob : moonprob,
 					rounds: rnds,
-					n: data
+					n: data,
+					rawdata: round
 				}
 			);
 			
