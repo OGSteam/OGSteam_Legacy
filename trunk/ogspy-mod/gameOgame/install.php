@@ -5,7 +5,7 @@ global $table_prefix;
 
 $queries = array();
 
-$queries[]  = 'INSERT INTO '.TABLE_MOD.' (title,menu,action,root,link,version,active) VALUES (\'gameOgame\',\'gameOgame\',\'gameOgame\',\'gameOgame\',\'index.php\',\'2.1b\',\'1\')';
+$queries[]  = 'INSERT INTO '.TABLE_MOD.' (id,title,menu,action,root,link,version,active) VALUES (\'\',\'gameOgame\',\'gameOgame\',\'gameOgame\',\'gameOgame\',\'index.php\',\'2.1b\',\'1\')';
 
 //$queries[] = 'INSERT INTO '.TABLE_CONFIG.' (config_name,config_value) VALUES (\'gameOgame\',\'-1,1,3,4,10\')';
 
@@ -54,6 +54,110 @@ $queries[] = 'CREATE TABLE '.$table_prefix.'game_recyclage (
   PRIMARY KEY (id),
   KEY rc_id (rc))';
   
+
+        ////////////////////////////////////////////////////////
+        // DEBUT // Test enregistrement des rounds du combats //
+        ////////////////////////////////////////////////////////
+//// Structure de la table `'.$table_prefix.'game_parsedRC`
+//$queries[] = "CREATE TABLE `'.$table_prefix.'game_parsedRC` (
+//  `id_rc` int(11) NOT NULL auto_increment,
+//  `dateRC` int(11) NOT NULL default '0',
+//  `coordinates` varchar(9) NOT NULL default '',
+//  `nb_rounds` int(2) NOT NULL default '0',
+//  `victoire` char NOT NULL default 'A',
+//  `pertes_A` int(11) NOT NULL default '0',
+//  `pertes_D` int(11) NOT NULL default '0',
+//  `gain_M` int(11) NOT NULL default '-1',
+//  `gain_C` int(11) NOT NULL default '-1',
+//  `gain_D` int(11) NOT NULL default '-1',
+//  `debris_M` int(11) NOT NULL default '-1',
+//  `debris_C` int(11) NOT NULL default '-1',
+//  `lune` int(2) NOT NULL default '0',
+//  PRIMARY KEY  (`id_rc`),
+//  KEY `coordinatesrc` (`coordinates`)
+//)";
+//
+//// Structure de la table `'.$table_prefix.'game_parsedRCRound`
+//$queries[] = "CREATE TABLE `'.$table_prefix.'game_parsedRCRound` (
+//  `id_rcround` int(11) NOT NULL auto_increment,
+//  `id_rc` int(11) NOT NULL ,
+//  `numround` int(2) NOT NULL ,
+//  `attaque_tir` int(11) NOT NULL default '-1',
+//  `attaque_puissance` int(11) NOT NULL default '-1',
+//  `defense_bouclier` int(11) NOT NULL default '-1',
+//  `attaque_bouclier` int(11) NOT NULL default '-1',
+//  `defense_tir` int(11) NOT NULL default '-1',
+//  `defense_puissance` int(11) NOT NULL default '-1',
+//  PRIMARY KEY (id_rcround),
+//  KEY `rcround` (`id_rc`,`numround`),
+//  KEY `id_rc` (`id_rc`)
+//)";
+//
+//// Structure de la table `'.$table_prefix.'game_round_attack`
+//$queries[] = "CREATE TABLE `'.$table_prefix.'game_round_attack` (
+//  `id_roundattack` int(11) NOT NULL auto_increment,
+//  `id_rcround` int(11) NOT NULL ,
+//  `player` varchar(30) NOT NULL default '',
+//  `coordinates` varchar(9) NOT NULL default '',
+//  `Armes` smallint(2) NOT NULL default '-1',
+//  `Bouclier` smallint(2) NOT NULL default '-1',
+//  `Protection` smallint(2) NOT NULL default '-1',
+//  `PT` int(11) NOT NULL default '-1',
+//  `GT` int(11) NOT NULL default '-1',
+//  `CLE` int(11) NOT NULL default '-1',
+//  `CLO` int(11) NOT NULL default '-1',
+//  `CR` int(11) NOT NULL default '-1',
+//  `VB` int(11) NOT NULL default '-1',
+//  `VC` int(11) NOT NULL default '-1',
+//  `REC` int(11) NOT NULL default '-1',
+//  `SE` int(11) NOT NULL default '-1',
+//  `BMD` int(11) NOT NULL default '-1',
+//  `DST` int(11) NOT NULL default '-1',
+//  `EDLM` int(11) NOT NULL default '-1',
+//  `TRA` int(11) NOT NULL default '-1',
+//  PRIMARY KEY  (`id_roundattack`),
+//  KEY `id_rcround` (`id_rcround`),
+//  KEY `player` (`player`,`coordinates`)
+//)";
+//
+//// Structure de la table `'.$table_prefix.'game_round_defense`
+//$queries[] = "CREATE TABLE `'.$table_prefix.'game_round_defense` (
+//  `id_rounddefense` int(11) NOT NULL auto_increment,
+//  `id_rcround` int(11) NOT NULL ,
+//  `player` varchar(30) NOT NULL default '',
+//  `coordinates` varchar(9) NOT NULL default '',
+//  `Armes` smallint(2) NOT NULL default '-1',
+//  `Bouclier` smallint(2) NOT NULL default '-1',
+//  `Protection` smallint(2) NOT NULL default '-1',
+//  `PT` int(11) NOT NULL default '-1',
+//  `GT` int(11) NOT NULL default '-1',
+//  `CLE` int(11) NOT NULL default '-1',
+//  `CLO` int(11) NOT NULL default '-1',
+//  `CR` int(11) NOT NULL default '-1',
+//  `VB` int(11) NOT NULL default '-1',
+//  `VC` int(11) NOT NULL default '-1',
+//  `REC` int(11) NOT NULL default '-1',
+//  `SE` int(11) NOT NULL default '-1',
+//  `BMD` int(11) NOT NULL default '-1',
+//  `DST` int(11) NOT NULL default '-1',
+//  `EDLM` int(11) NOT NULL default '-1',
+//  `SAT` int(11) NOT NULL default '-1',
+//  `TRA` int(11) NOT NULL default '-1',
+//  `LM` int(11) NOT NULL default '-1',
+//  `LLE` int(11) NOT NULL default '-1',
+//  `LLO` int(11) NOT NULL default '-1',
+//  `CG` int(11) NOT NULL default '-1',
+//  `AI` int(11) NOT NULL default '-1',
+//  `LP` int(11) NOT NULL default '-1',
+//  `PB` smallint(1) NOT NULL default '-1',
+//  `GB` smallint(1) NOT NULL default '-1',
+//  PRIMARY KEY  (`id_rounddefense`),
+//  KEY `id_rcround` (`id_rcround`),
+//  KEY `player` (`player`,`coordinates`)
+//)";
+        //////////////////////////////////////////////////////
+        // FIN // Test enregistrement des rounds du combats //
+        //////////////////////////////////////////////////////
     $config['pertes'] = -1;
     $config['degats'] = 1;
     $config['pillage'] = 3;

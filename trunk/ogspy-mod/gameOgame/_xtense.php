@@ -50,123 +50,262 @@ $xtense_version="2.3.0";
 // Import des Rapports de combats
 function gog_rc($rapport)
 {
-    global $db, $table_prefix, $user_data;
+    global $db, $table_prefix, $user_data, $config;
     $xtense_version="2.3.0";
+    //$raw = stripslashes($rapport["content"]);
+    //$raw = str_replace("\'","'",$raw);
+    //Compatibilit√© UNIX/Windows
+    //$raw = str_replace("\r\n","\n",$raw);
+    //$raw = str_replace(" \n","\n",$raw);
+    //Compatibilit√© IE/Firefox
+    //$raw = str_replace("\t",' ',$raw);
+    // Mise en forme du rapport, nettoyage des codes html et autres 
+    //$rapport = remo_htm($raw);
+    /*$handle=fopen("gog.txt","w");
+    fwrite($handle,$raw);
+    fwrite($handle,"--------\n");
+	fwrite($handle,$rapport);
+   //fwrite($handle,"\r\n");
+   //fwrite($handle,$config[defenseur]);
+   //fwrite($handle,"\r\n");  */
+    
+//	foreach($rapport['n'] as $n){
+//		if ($n['type'] == "A"){
+//			$query = $db->sql_query("SELECT count(planet_id) FROM ".TABLE_USER_BUILDING." WHERE user_id = '".$user_data['user_id']."' AND coordinates = '".$n['coords']."'");
+//			list($check) = $db->sql_fetch_row($query);
+//			if($check != 0){
+//				$attaquant = $n['player'];
+//				$coord_att = $n['coords'];
+//				break;
+//			}
+//		}
+//	}
+//	
+//	foreach($rapport['n'] as $n){
+//		if ($n['type'] == "D"){
+//			$defenseur = $n['player'];
+//			$coord_def = $n['coords'];
+//			break;
+//		}
+//	}
     //Definition des tables de gOg
     define('TABLE_GAME',$table_prefix.'game');
-    //rÈcupÈration des paramËtres de config
+    //r√©cup√©ration des param√®tres de config
 	$query = "SELECT value FROM `".TABLE_MOD_CFG."` WHERE `mod`='gameOgame' and `config`='config'";
 	$result = $db->sql_query($query);
-	$config = $db->sql_fetch_row($result);
+	$config = mysql_fetch_row($result);
 	$gog_config = unserialize($config[0]);
 	
-	foreach($rapport['n'] as $n){
-		if ($n['type'] == "A"){
-			$query = $db->sql_query("SELECT count(planet_id) FROM ".TABLE_USER_BUILDING." WHERE user_id = '".$user_data['user_id']."' AND coordinates = '".$n['coords']."'");
-			list($check) = $db->sql_fetch_row($query);
-			if($check != 0){
-				$attaquant = $n['player'];
-				$coord_att = $n['coords'];
-				break;
-			}
+    // V√©rifie que c'est bien un RC valide
+    if (!$rapport['date'])
+    {
+        echo 'Rapport de combat invalide';
+        return FALSE;
+    }
+    else
+    {
+        //r√©cup√®re le pseudo de l'attaquant
+        $attaquant = $rapport['n']['0']['player'];
+        //preg_match('#Attaquant\s(.{3,50})\s\(#',$rapport,$attaquant);
+        //r√©cup√®re les coordonn√©es de l'attaquant
+        $coord_att = $rapport['n']['0']['coords'];
+        //preg_match('#Attaquant\s.{3,110}\[(.{5,8})]#',$rapport,$coord_att);
+        //On regarde dans les coordonn√©es de l'espace personnel du joueur qui ins√®re les donn√©es via le plugin si les coordonn√©es de l'attaquant correspondent √† une de ses plan√®tes
+    	$query = "SELECT coordinates FROM ".TABLE_USER_BUILDING." WHERE user_id='".$user_data['user_id']."'";
+    	$result = $db->sql_query($query);
+		$attaqu = 0;
+    	while(list($coordinates) = mysql_fetch_row($result))
+		{
+			if($coordinates == $coord_att) $attaqu = 1;
 		}
-	}
-	
-	foreach($rapport['n'] as $n){
-		if ($n['type'] == "D"){
-			$defenseur = $n['player'];
-			$coord_def = $n['coords'];
-			break;
+    	if ($attaqu == 0)
+    	{
+    		// Vous n'√™tes pas l'attaquant, je sors !!
+    		return FALSE;
+    	} 
+    	//r√©cup√®re le pseudo du d√©fenseur
+    	$defenseur = $rapport['n']['1']['player'];
+        //preg_match('#D√©fenseur\s(.{3,50})\s\(#',$rapport,$defenseur);
+        //r√©cup√®re les coordonn√©es du d√©fenseur
+        $coord_def = $rapport['n']['1']['coords'];
+        //preg_match('#D√©fenseur\s.{3,110}\[(.{5,8})]#',$rapport,$coord_def);
+        // R√©cup√®re les pertes de l'attaquant et du d√©fenseur
+        $pertesA = $rapport['result']['a_lost'];
+        $pertesD = $rapport['result']['d_lost'];
+        //preg_match('#attaquant\sa\sperdu\sau\stotal\s(\d*)\sunit√©s#',$rapport,$pertesA);
+        //preg_match('#Le\sd√©fenseur\sa\sperdu\sau\stotal\s(\d*)\sunit√©s#',$rapport,$pertesD);
+        //preg_match('#(\d*)\sunit√©s\sde\sm√©tal,\s(\d*)\sunit√©s\sde\scristal\set\s(\d*)\sunit√©s\sde\sdeut√©rium#',$rapport,$ressources);
+    	$ressources=Array(0,0,0,0);
+        if ($rapport['win'] == 'A') {
+			$winmetal=isset($rapport['result']['win_metal']) ? $rapport['result']['win_metal'] : 0;
+			$wincristal=isset($rapport['result']['win_cristal']) ? $rapport['result']['win_cristal'] : 0;
+			$windeut=isset($rapport['result']['win_deut']) ? $rapport['result']['win_deut'] : 0;
+			$ressources=Array(0,$winmetal,$wincristal,$windeut);
 		}
-	}
 
-	//Calcul des points en fonction des coeficients
-	$points = ceil(($rapport['result']['win_metal']+$rapport['result']['win_cristal']+$rapport['result']['win_deut'])/100000*$gog_config['pillage'] + $rapport['result']['a_lost']/100000*$gog_config['pertes'] + $rapport['result']['d_lost']/100000*$gog_config['degats'] + $rapport['moon']*$gog_config['clune']);
-	//On vÈrifie que cette attaque n'a pas dÈja ÈtÈ enregistrÈe
-	$query = "SELECT id FROM ".TABLE_GAME." WHERE sender='".$user_data['user_id']."' AND date='".$rapport['date']."' AND attaquant='".$attaquant."' ";
-	$result = $db->sql_query($query);
-	$nb = $db->sql_numrows($result);
-	// Si le RC existe dÈj‡ on sort
-	if ($nb == 0){
-		//Insert dans la base de donnÈes
-		$query = "INSERT INTO ".TABLE_GAME." 
-				(sender, date, attaquant, coord_att, defenseur, coord_def, pertesA, pertesD, lune, `%lune`, pillageM, pillageC, pillageD, recyclageM, recyclageC, recycleM, recycleC, points, rawdata) 
-			VALUES 
-				('".$user_data['user_id']."', '".$rapport['date']."', '".$attaquant."', '".$coord_att."', '".$defenseur."', '".$coord_def."', '".$rapport['result']['a_lost']."', '".$rapport['result']['d_lost']."', '".$rapport['moon']."', '".($rapport['moon']*100)."', '".$rapport['result']['win_metal']."', '".$rapport['result']['win_cristal']."', '".$rapport['result']['win_deut']."', '".$rapport['result']['deb_metal']."', '".$rapport['result']['deb_cristal']."', '0', '0', '".$points."', '".(string)$rapport."')";
-		$db->sql_query($query);
-	}	
+        //if (!preg_match('#(\d*)\sunit√©s\sde\sm√©tal,\s(\d*)\sunit√©s\sde\scristal\set\s(\d*)\sunit√©s\sde\sdeut√©rium#',$rapport,$ressources)) $ressources=Array(0,0,0,0);
+        // Debris
+        $debmetal=isset($rapport['result']['deb_metal']) ? $rapport['result']['deb_metal'] : 0;
+        $debcristal=isset($rapport['result']['deb_cristal']) ? $rapport['result']['deb_cristal'] : 0;
+        $recyclage = Array(0,$debmetal,$debcristal);
+        //if (!preg_match('#Un\schamp\sde\sd√©bris\scontenant\s(\d*)\sunit√©s\sde\sm√©tal\set\s(\d*)\sunit√©s\sde\scristal\sse\sforme\sdans\sl\'orbite\sde\scette\splan√®te#',$rapport,$recyclage)) $recyclage[1]=$recyclage[2]=0;
+        // Probabilite de lune
+        $plune[1] = isset($rapport['moonprob']) ? $rapport['moonprob'] : 0;
+        $lune = isset($rapport['moon']) ? $rapport['moon'] : 0;
+        // calcul la date et l'heure du rapport
+        $date = $rapport['date'];//mktime($date[3],$date[4],$date[5],$date[1],$date[2],date('Y'));
+        //Calcul des points en fonction des coeficients
+        $points = ceil(($ressources[1]+$ressources[2]+$ressources[3])/100000*$gog_config['pillage'] + $pertesA/100000*$gog_config['pertes'] + $pertesD/100000*$gog_config['degats'] + $lune*$gog_config['clune']);
+        //On v√©rifie que cette attaque n'a pas d√©ja √©t√© enregistr√©e
+        $query = "SELECT id FROM ".TABLE_GAME." WHERE sender='".$user_data['user_id']."' AND date='".$date."' AND attaquant='".$attaquant."' ";
+        $result = $db->sql_query($query);
+        $nb = mysql_num_rows($result);
+        // Si le RC existe d√©j√† on sort
+        if ($nb != 0) return FALSE;
+        //Insert dans la base de donn√©es
+        $query = 'INSERT INTO '.TABLE_GAME.' (id,sender,date,attaquant,coord_att,defenseur,coord_def,pertesA,pertesD,lune,`%lune`,pillageM,pillageC,pillageD,recyclageM,recyclageC,recycleM,recycleC,points,rawdata) VALUES (\'\',\''.$user_data['user_id'].'\',\''.$date.'\',\''.mysql_real_escape_string($attaquant).'\',\''.mysql_real_escape_string($coord_att).'\',\''.mysql_real_escape_string($defenseur).'\',\''.mysql_real_escape_string($coord_def).'\',\''.$pertesA.'\',\''.$pertesD.'\',\''.$lune.'\',\''.$plune[1].'\',\''.$ressources[1].'\',\''.$ressources[2].'\',\''.$ressources[3].'\',\''.$recyclage[1].'\',\''.$recyclage[2].'\',\'0\',\'0\',\''.$points.'\',\''.mysql_real_escape_string($rapport['rawdata']).'\')';//'.mysql_real_escape_string($rapport).'
+        $db->sql_query($query);
+        
+        
+        /////////////////////////////////////////////
+        // Test enregistrement des rounds du combats
+        /////////////////////////////////////////////
+//    		$exist = $db->sql_fetch_row($db->sql_query("SELECT id_rc FROM ".TABLE_GAME_PARSEDRC." WHERE dateRC = '".$pub_date."'"));
+//			if(!$exist[0]){
+//				$db->sql_query("INSERT INTO ".TABLE_GAME_PARSEDRC." (
+//						`dateRC`, `nb_rounds`, `victoire`, `pertes_A`, `pertes_D`, `gain_M`, `gain_C`, `gain_D`, `debris_M`, `debris_C`, `lune`
+//					) VALUES (
+//					 '{$rapport['date']}', '{$rapport['count']}', '{$rapport['win']}', '".$rapport['result']['a_lost']."', '".$rapport['result']['d_lost']."', '".$rapport['result']['win_metal']."', '".$rapport['result']['win_cristal']."', '".$rapport['result']['win_deut']."', '".$rapport['result']['deb_metal']."', '".$rapport['result']['deb_cristal']."', '{$rapport['moon']}'
+//					)"
+//				);
+//				$id_rc = $db->sql_insertid();
+//				
+//				foreach($rapport['rounds'] as $i => $round){
+//					$db->sql_query("INSERT INTO ".TABLE_GAME_PARSEDRCROUND." (
+//							`id_rc`, `numround`, `attaque_tir`, `attaque_puissance`, `defense_bouclier`, `attaque_bouclier`, `defense_tir`, `defense_puissance`
+//						) VALUE (
+//							'{$id_rc}', '{$i}', '".$round['a_nb']."', '".$round['a_shoot']."', '".$round['d_bcl']."', '".$round['a_bcl']."', '".$round['d_nb']."', '".$round['d_shoot']."'
+//						)"
+//					);
+//					$id_rcround[$i] = $db->sql_insertid();
+//				}
+//				
+//				foreach ($rapport['n'] as $i => $n){
+//					$fields = '';
+//					$values = '';
+//					$j = 1;
+//					
+//					foreach ($n['content'] as $field => $value){
+//						$fields .= ", `{$field}`";
+//						$values .= ", '{$value}'";
+//					}
+//					
+//					$db->sql_query("INSERT INTO ".(($n['type'] == "D") ? TABLE_GAME_ROUND_DEFENSE : TABLE_GAME_ROUND_ATTACK)." (
+//							`id_rcround`, `player`, `coordinates`, `Armes`, `Bouclier`, `Protection`".$fields."
+//						) VALUE (
+//							'".$id_rcround[$j]."', '".$n['player']."', '".$n['coords']."', '".$n['weapons']['arm']."', '".$n['weapons']['bcl']."', '".$n['weapons']['coq']."'".$values."
+//						)"
+//					);
+//					
+//					if($n['type'] == "D"){
+//						if(!isset($update))
+//							$update = $db->sql_query("UPDATE ".TABLE_GAME_PARSEDRC." SET coordinates = '".$n['coords']."' WHERE id_rc = '{$id_rc}'");
+//						$j++;
+//					}
+//				}
+//			}
+    }
     return TRUE;
 }
 
 function gog_rr($rapport)
 {
-    global $db, $table_prefix, $user_data;
+    global $db, $table_prefix, $user_data, $config;
     $xtense_version="2.3.0";
     //var_dump($rapport);
     //Definition des tables de gOg
     define('TABLE_GAME',$table_prefix.'game');
     define('TABLE_GAME_USERS',$table_prefix.'game_users');
     define('TABLE_GAME_RECYCLAGE',$table_prefix.'game_recyclage');
-    //rÈcupÈration des paramËtres de config
+    //r√©cup√©ration des param√®tres de config
     $query = "SELECT value FROM `".TABLE_MOD_CFG."` WHERE `mod`='gameOgame' and `config`='config'";
 	$result = $db->sql_query($query);
-	$gog_config = $db->sql_fetch_row($result);
+	$gog_config = mysql_fetch_row($result);
 	$gog_config = unserialize($gog_config[0]);
 	
-    // on boucle dans les RR envoyÈs
-    for($i=0; $i<count($rapport); $i++)
-    {
-    	//On vÈrifie si le rapport n'a pas dÈj‡ ÈtÈ entrÈ
-		$query = "SELECT id FROM `".TABLE_GAME_RECYCLAGE."` WHERE `timestamp`=".$rapport[$i]['time']." AND `recycleurs`=".$rapport[$i]['nombre']." AND `dispoM`=".$rapport[$i]['M_total']." AND `dispoC`=".$rapport[$i]['C_total']." AND `collecteM`=".$rapport[$i]['M_reco']." AND `collecteC`=".$rapport[$i]['C_reco'];
+    // on boucle dans les RR envoy√©s
+//    for($i=0; $i<count($rapport); $i++)
+//    {
+    	//On v√©rifie si le rapport n'a pas d√©j√† √©t√© entr√©
+		$query = "SELECT id FROM `".TABLE_GAME_RECYCLAGE."` WHERE `timestamp`=".$rapport['time']." AND `recycleurs`=".$rapport['nombre']." AND `dispoM`=".$rapport['M_total']." AND `dispoC`=".$rapport['C_total']." AND `collecteM`=".$rapport['M_reco']." AND `collecteC`=".$rapport['C_reco'];
 		//echo $query;
 		$result2 = $db->sql_query($query);
-		//On vÈrifie si on trouve qque chose
-        if ($db->sql_numrows($result2) != 0)
+		//On v√©rifie si on trouve qque chose
+        if (mysql_num_rows($result2) != 0)
         {
-            //echo "DÈj‡ existant<br />";
-            return;
+            echo "D√©j√† existant<br />";
+            return true;
         }
-    	//On reconstruit les coordonnÈes du recyclage
-        $coordonne = $rapport[$i]['coords'][0].":".$rapport[$i]['coords'][1].":".$rapport[$i]['coords'][2];
-        // on recherche dans les 24h prÈcÈdentes
-        $timestamp = $rapport[$i]['time'] - (24*60*60);
-        //On cherche dans la db un combat au mÍme coordonnÈes.
+    	//On reconstruit les coordonn√©es du recyclage
+        $coordonne = $rapport['coords'][0].":".$rapport['coords'][1].":".$rapport['coords'][2];
+        // on recherche dans les 24h pr√©c√©dentes
+        $timestamp = $rapport['time'] - (24*60*60);
+        //On cherche dans la db un combat au m√™me coordonn√©es.
         $query = "SELECT id,sender,recyclageM,recyclageC,recycleM,recycleC FROM `".TABLE_GAME."` WHERE `coord_def`='".$coordonne."' AND `date`>='".$timestamp."' ORDER BY date ASC";
 		//echo $query."<br />";
         $result = $db->sql_query($query);
-        //On vÈrifie si on trouve qque chose
-        if ($db->sql_numrows($result) == 0)
+        //On v√©rifie si on trouve qque chose
+        if (mysql_num_rows($result) == 0)
         {
-            //echo "rien trouvÈ<br />";
-            return;
+            echo "rien trouv√©<br />";
+            return true;
         }
 		// on boucle dans les RC au cas ou on en trouverais plusieurs
-       	while ($row = $db->sql_fetch_assoc($result))
+       	while ($row = mysql_fetch_array($result))
        	{
-            //On vÈrifie que celui qui envoi le RR Ètait l'attaquant
+            //On v√©rifie que celui qui envoi le RR √©tait l'attaquant
             if ($row['sender'] == $user_data['user_id'])
             {
-                //On vÈrifie que tout n'a pas dÈj‡ ÈtÈ rÈcoltÈ
+                //On v√©rifie que tout n'a pas d√©j√† √©t√© r√©colt√©
                 if (($row['recyclageM'] > $row['recycleM']) || ($row['recyclageC'] > $row['recycleC']))
                 {
-                    //On vÈrifie que ce qui est dispo dans le champs est au moins Ègal ‡ ce qu'a gÈnÈrÈ le RR
-                    if (($rapport[$i]['M_total'] >= ($row['recyclageM']-$row['recycleM'])) || ($rapport[$i]['C_total'] >= ($row['recyclageC']-$row['recycleC'])))
+                    //On v√©rifie que ce qui est dispo dans le champs est au moins √©gal √† ce qu'a g√©n√©r√© le RR
+                    if (($rapport['M_total'] >= ($row['recyclageM']-$row['recycleM'])) || ($rapport['C_total'] >= ($row['recyclageC']-$row['recycleC'])))
                     {
-                        //Ok, je ne vois plus quoi tester ! Inserons les donnÈes
-                        $query = "INSERT INTO ".TABLE_GAME_RECYCLAGE." (id,rc,recycleurs,capacite,dispoM,dispoC,collecteM,collecteC,timestamp) VALUES ('','".$row['id']."','".$rapport[$i]['nombre']."','".(int)floatval(($rapport[$i]['nombre']*20000))."','".(int)floatval($rapport[$i]['M_total'])."','".(int)floatval($rapport[$i]['C_total'])."','".(int)floatval($rapport[$i]['M_reco'])."','".(int)floatval($rapport[$i]['C_reco'])."','".(int)floatval($rapport[$i]['time'])."')";
+                        //Ok, je ne vois plus quoi tester ! Inserons les donn√©es
+                        $query = "INSERT INTO ".TABLE_GAME_RECYCLAGE." (id,rc,recycleurs,capacite,dispoM,dispoC,collecteM,collecteC,timestamp) VALUES ('','".$row['id']."','".$rapport['nombre']."','".(int)floatval(($rapport['nombre']*20000))."','".(int)floatval($rapport['M_total'])."','".(int)floatval($rapport['C_total'])."','".(int)floatval($rapport['M_reco'])."','".(int)floatval($rapport['C_reco'])."','".(int)floatval($rapport['time'])."')";
                         //echo $query."<br />";
                         $db->sql_query($query);
                     
-                        $query = 'UPDATE '.TABLE_GAME.' SET recycleM=recycleM+'.(int)floatval($rapport[$i]['M_reco']).', recycleC=recycleC+'.(int)floatval($rapport[$i]['C_reco']).', points=points+'.((int)floatval($rapport[$i]['M_reco'])+(int)floatval($rapport[$i]['C_reco']))/100000*$gog_config['recycl'].' WHERE id='.$row['id'];
+                        $query = 'UPDATE '.TABLE_GAME.' SET recycleM=recycleM+'.(int)floatval($rapport['M_reco']).', recycleC=recycleC+'.(int)floatval($rapport['C_reco']).', points=points+'.((int)floatval($rapport['M_reco'])+(int)floatval($rapport['C_reco']))/100000*$gog_config['recycl'].' WHERE id='.$row['id'];
                         $db->sql_query($query);
                         // On a fait l'insertion ...
                         //je veux pas risquer de trouver un autre rapport et recommencer l'insertion, donc je sort de la boucle While
-                        break 1;
+                        return true;
                     }
                 }
             }
         }
-    }
+//    }
+}
+
+function remo_htm($rapport)
+{
+    $rapport = str_replace("\n"," ",$rapport);
+	$rapport = stripslashes($rapport);
+    $rapport = html_entity_decode($rapport);
+    $rapport = str_replace("<br>"," ",$rapport);
+    $rapport = str_replace("<th>"," ",$rapport);
+    $rapport = strip_tags($rapport);
+    $rapport = str_replace(".","",$rapport);
+    //$rapport = str_replace("\n"," ",$rapport);
+    // remove double space
+	while (!(strpos($rapport,'  ')===FALSE))
+	{
+			$rapport = str_replace('  ',' ',$rapport);
+	}
+    
+    return $rapport;
 }
 
 ?>

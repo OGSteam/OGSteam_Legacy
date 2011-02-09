@@ -5,13 +5,14 @@ if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt');
 
 function affFlotte($data)
 {
+	$data = preg_replace('(\s+)', ' ', $data);
 	$array = split(' ',$data);
 	foreach ($array as $vaisseau)
 	{
 		if (is_int($vaisseau))
 		{
 			echo '<th>'.convNumber($vaisseau).'</th>';
-		} else {
+		} else if ($vaisseau != '') {
 			echo '<th>'.$vaisseau.'</th>';
 		}
 	}
@@ -36,6 +37,7 @@ function remo_htm($rapport)
 
 function nbVaisseaux($data)
 {
+	$data = preg_replace('(\s+)', ' ', $data);
 	return(count(split(' ',$data)));
 }
 
@@ -62,25 +64,31 @@ function displayRC($id)
 		echo '<center>Les flottes suivantes se sont affrontées le '.date('H:i:s d/m/Y',$val['date']).':<center><br>';
 
         // Si les coordonnées de l'attaquant ne sont pas dans la base de données, on va les chercher dans le rapport
-        if (($val['coord_att'] == "") || (!isset($val['coord_att'])))
-        {
-            preg_match('#Attaquant\s.{3,110}\[(.{5,8})]#',$val['rawdata'],$coord_att);
-            $val['coord_att'] = $coord_att[1];
-        }
+// Ne devrait pas arrive
+//        if (($val['coord_att'] == "") || (!isset($val['coord_att'])))
+//        {
+//            preg_match('#Attaquant\s.{3,110}\[(.{5,8})]#',$val['rawdata'],$coord_att);
+//            $val['coord_att'] = $coord_att[1];
+//        }
         // Si les coordonnées du défenseur ne sont pas dans la base de données, on va les chercher dans le rapport
-        if (($val['coord_def'] == "") || (!isset($val['coord_def'])))
-        {
-            preg_match('#Défenseur\s.{3,110}\[(.{5,8})]#',$val['rawdata'],$coord_def);
-            $val['coord_def'] = $coord_def[1];
-        }
+// Arrive uniquement lorsque le defenseur est detruit au premier tour, mais de tte on a plus le rapport.
+//        if (($val['coord_def'] == "") || (!isset($val['coord_def'])))
+//        {
+//            preg_match('#Défenseur\s.{3,110}\[(.{5,8})]#',$val['rawdata'],$coord_def);
+//            $val['coord_def'] = $coord_def[1];
+//        }
+		// Pour voir si il faut changer l'encoding
+		if (!preg_match('#Défenseur#',$val['rawdata'])) {
+			$val['rawdata'] = utf8_decode(urldecode($val['rawdata']));
+		}
 
         $nbRound['A'] = preg_match_all('#Attaquant\s.*?\sType\s(.*?)\sNombre\s(.*?)\sArmes.*?Défenseur#',$val['rawdata'],$attaquant,PREG_SET_ORDER);
-        preg_match('#Attaquant.*\s(Armes:\s\d{2,}%\sBouclier:\s\d{2,}%\sCoque:\s\d{2,}%)#',$val['rawdata'],$techno);
+        preg_match('#Attaquant.*?\s(Armes:\s\d{2,}%\sBouclier:\s\d{2,}%\sCoques:\s\d{2,}%)#',$val['rawdata'],$techno);
         if (isset($techno[1])) {$techn['A'] = $techno[1];} else {$techn['A']="";}
         //echo $techn['A'];
         $nbRound['D'] = preg_match_all('#Défenseur\s.*?\sType\s(.*?)\sNombre\s(.*?)\sArmes#',$val['rawdata'],$defenseur,PREG_SET_ORDER);
 
-        preg_match('#Défenseur.*\s(Armes:\s\d{2,}%\sBouclier:\s\d{2,}%\sCoque:\s\d{2,}%)#',$val['rawdata'],$techno);
+        preg_match('#Défenseur.*\s(Armes:\s\d{2,}%\sBouclier:\s\d{2,}%\sCoques:\s\d{2,}%)#',$val['rawdata'],$techno);
         if (isset($techno[1])) {$techn['D'] = $techno[1];} else {$techn['D']="";}
 
 		// Etat des flottes au 1er tour

@@ -16,6 +16,13 @@ define('TABLE_GAME_USERS',$table_prefix.'game_users');
 define('TABLE_GAME_RECYCLAGE',$table_prefix.'game_recyclage');
 define('TABLE_GAME_VIEW',$table_prefix.'game_view');
 define('TABLE_GAME_RECYCLAGE_VIEW',$table_prefix.'game_recyclage_view');
+        /////////////////////////////////////////////
+        // Test enregistrement des rounds du combats
+        /////////////////////////////////////////////
+//define('TABLE_GAME_PARSEDRC'.$table_prefix.'game_parsedRC');
+//define('TABLE_GAME_PARSEDRCROUND'.$table_prefix.'game_parsedRCRound');
+//define('TABLE_GAME_ROUND_ATTACK'.$table_prefix.'game_round_attack');
+//define('TABLE_GAME_ROUND_DEFENSE'.$table_prefix.'game_round_defense');
 
 //récupération des paramètres de config
 $query = "SELECT value FROM `".TABLE_MOD_CFG."` WHERE `mod`='gameOgame' and `config`='config'";
