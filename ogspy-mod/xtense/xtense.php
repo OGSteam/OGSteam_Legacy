@@ -657,7 +657,7 @@ switch ($pub_type){
 	break;
 
 	case 'rc': //PAGE RC
-		Check::data(isset($pub_date, $pub_win, $pub_count, $pub_result, $pub_moon, $pub_n));
+		Check::data(isset($pub_date, $pub_win, $pub_count, $pub_result, $pub_moon, $pub_n, $pub_rawdata));
 		
 		if(!isset($pub_rounds)) $pub_rounds = Array(1 => Array(
 				'a_nb' => 0,
@@ -681,8 +681,10 @@ switch ($pub_type){
 					'count' => $pub_count,
 					'result' => $pub_result,
 					'moon' => $pub_moon,
+					'moonprob' => $pub_moonprob,
 					'rounds' => $pub_rounds,
-					'n' => $pub_n
+					'n' => $pub_n,
+					'rawdata' => $pub_rawdata
 			));
 			
 			$id_rcround = Array();
