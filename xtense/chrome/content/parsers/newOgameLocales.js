@@ -142,7 +142,8 @@ XnewOgame.locales = {
 					'bcl' : 'Bouclier: (\\d+)%',
 					'coq' : 'Coques: (\\d+)%'
 				},
-				'moon' : 'lune',
+				'moon' : 'formant ainsi une lune',
+				'moonprob' : 'une lune est de (\\d+) %',
 				'attack' : 'Attaquant',
 				'defense' : 'Défenseur',
 				'nul' : 'match nul'
