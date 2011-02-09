@@ -17,10 +17,10 @@ if(class_exists("Callback")){
 class QuiMSonde_Callback extends Callback {
         public $version = '2.3.0';
         public function qms_import_enemy_spy($spy){
-			global $io,$user_data;
+			global $io,$user;
 			require_once('lang/lang_french.php');
 			$add = 0;
-			//foreach($ennemy_spy as $spy){
+//			foreach($ennemy_spy as $spy){
 				if(!is_array($spy['from'])){
 					$pos_from = explode(':',$spy['from']); 
 					$pos_to = explode(':',$spy['to']); 
@@ -34,22 +34,36 @@ class QuiMSonde_Callback extends Callback {
 				}
 				if(isset($spy['data'])){
 					$test = preg_match($lang['regex_xtense2_coord'],$spy['data'],$position);
-					$from_name = isset($position[1])?trim($position[1]):"";
-					$to_name = isset($position[2])?trim($position[2]):"";
+					if (isset($position[1])) {
+						$dPoint = strpos($position[1],"[");	
+						$from_name = substr ($position[1],0,$dPoint);
+						$from_name = trim($from_name);
+					}
+					else {
+						$from_name = "";
+					}
+					if (isset($position[2])) {
+						$dPoint = strpos($position[2],"[");	
+						$to_name = substr ($position[2],0,$dPoint);
+						$to_name = trim($to_name);
+					}
+					else {
+						$to_name = "";
+					}
 				}else{
 					$from_name = $to_name = "";
 				}
 				$distance = qms_get_distance($pos_from,$pos_to);
 				$user_info = qms_get_user_info($pos_from);
 				$date = date("m-d H:i:s",$spy['time']);
-				$a = qms_add_spy($user_data['user_id'], $coords_from, $user_info[0], $user_info[1], $distance,$coords_to, $spy['time'], $spy['proba'], $from_name, $to_name);
+				$a = qms_add_spy(get_real_sender_id($coords_to), $coords_from, $user_info[0], $user_info[1], $distance,$coords_to, $spy['time'], $spy['proba'], $from_name, $to_name);
 				if($a==0)
 					$io->append_call_message("L'espionnage de {$coords_to} ({$to_name}) du {$date} existe déjà.", Io::WARNING);
 				else
 					$io->append_call_message("L'espionnage de {$coords_to} ({$to_name}) du {$date} a bien été enregistré.", Io::SUCCESS);
 				$add += $a;
-			//}
-			$io->append_call_message("Un total de {$add} espionnages ont été enregistrés", Io::SUCCESS);
+//			}
+			$io->append_call_message("Un total de {$add} espionnages ont &ecute;t&ecute; enregistr&ecute;s", Io::SUCCESS);
 			return Io::SUCCESS;
 		}
         public function getCallbacks() {
@@ -105,7 +119,7 @@ if(!defined('TABLE_QMS')){
 
 // Importation d'un espionnage depuis xtense2
 function qms_import_enemy_spy($enemy_spy){
-	global $user_data;
+	global $user;
 	// Nombre d'espionnage renvoyé par la barre
 	$nb_spy = count($enemy_spy);
 	$add=0;
@@ -119,7 +133,7 @@ function qms_import_enemy_spy($enemy_spy){
 			$distance = qms_get_distance(array($from[1],$from[2],$from[3]),array($to[1],$to[2],$to[3]));
 			$user_info = qms_get_user_info(array($from[1],$from[2],$from[3]));
 			$add += qms_add_spy(
-				$user_data['user_id'], $enemy_spy[$i]['from'], $user_info[0], $user_info[1], $distance, 
+				get_real_sender_id($enemy_spy[$i]['to']), $enemy_spy[$i]['from'], $user_info[0], $user_info[1], $distance, 
 				$enemy_spy[$i]['to'], $enemy_spy[$i]['time'], $enemy_spy[$i]['proba']
 				);
 		}
@@ -130,7 +144,7 @@ function qms_import_enemy_spy($enemy_spy){
 			$from_name = isset($enemy_spy[$i]['from_name'])?$enemy_spy[$i]['from_name']:"";
 			$to_name = isset($enemy_spy[$i]['to_name'])?$enemy_spy[$i]['to_name']:"";
 			$add += qms_add_spy(
-				$user_data['user_id'], $enemy_spy[$i]['from'][0].":".$enemy_spy[$i]['from'][1].":".$enemy_spy[$i]['from'][2], 
+				get_real_sender_id($enemy_spy[$i]['to']), $enemy_spy[$i]['from'][0].":".$enemy_spy[$i]['from'][1].":".$enemy_spy[$i]['from'][2], 
 				$user_info[0], $user_info[1], $distance, $enemy_spy[$i]['to'][0].":".$enemy_spy[$i]['to'][1].":".$enemy_spy[$i]['to'][2],
 				$enemy_spy[$i]['time'], $enemy_spy[$i]['proba'], $from_name, $to_name
 				);
@@ -145,7 +159,8 @@ function qms_import_enemy_spy($enemy_spy){
 
 function qms_add_spy($sender,$from,$name,$alliance,$distance,$to,$time,$proba,$from_name="",$to_name=""){
 	global $db;
-	if ($db->sql_numrows($db->sql_query("SELECT id FROM ".TABLE_QMS." WHERE sender_id='$sender' AND datadate='$time' AND position='$from'")) == 0) 
+	
+	if (!$db->sql_numrows($db->sql_query("SELECT id FROM ".TABLE_QMS." WHERE sender_id='$sender' AND datadate='$time' AND position='$from'"))) 
 	{
 		$query = "INSERT INTO ".TABLE_QMS." ( `id`, `sender_id`, `position`, `position_name`, `joueur`, `alliance`, `distance`, `cible`, `cible_name`, `datadate`,  `pourcentage` ) ";
 		$query .= "VALUES ( NULL, '$sender', '$from', '$from_name', '$name', '$alliance', '$distance', '$to', '$to_name', '$time', '$proba' )";
@@ -168,7 +183,7 @@ function qms_get_user_info($coord){	// recupére le nom du joueur et l'alliance d
 	global $db;	
 	list($player,$ally) = Array ("?","");	
 	$query = "SELECT  `player` , `ally`  FROM `".TABLE_UNIVERSE."` WHERE `galaxy` = ".$coord[0]." and `system` = ".$coord[1]." and `row` = ".$coord[2];
-	if( $coord[0] && $coord[1] && $coord[2] && $db->sql_numrows($db->sql_query($query)) != 0){
+	if($coord[0]&&$coord[1]&&$coord[2]&&$db->sql_numrows($db->sql_query($query))){
 		$result=$db->sql_query($query);		
 		$out = $db->sql_fetch_assoc($result);
 		$player = $out['player'];
@@ -176,5 +191,20 @@ function qms_get_user_info($coord){	// recupére le nom du joueur et l'alliance d
 	}
 	return array($player,$ally);
 }
-
+function get_real_sender_id($position){		// Renvoi le vrai #id du joueur qui s'est fait espionné (dans le cas d'un sitting, c'est pas forcement le même qui est connecté)
+	global $db;
+	$query_limit = "SELECT  `user_id`  FROM `".TABLE_USER_BUILDING."` WHERE `coordinates` = '".$position."'";
+	$result=$db->sql_query($query_limit);
+	list($user_id)=$db->sql_fetch_row($result);
+	return $user_id;
+}
+function get_coord($position){						// Renvoi le rang de la planète par rapport à une position formatée GG:SS:RR
+	$dPoint = strpos($position,":");	
+	$galaxy = substr ($position,0,$dPoint);
+	$tmp = substr ($position,$dPoint+1);	
+	$dPoint2 = strpos($tmp,":");	
+	$system = substr($tmp,0,$dPoint2); 	
+	$row = substr ($tmp,$dPoint2+1);	
+	return array($galaxy,$system,$row); 
+}
 ?>

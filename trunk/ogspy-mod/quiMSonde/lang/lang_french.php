@@ -78,7 +78,7 @@ $lang['regex_import_spy'] =
 	"#((\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})\s+Contrôle\saérospatial(.*?)Probabilité\sde\sdestruction\sde\sla\sflotte\sd(.*?)espionnage\s:\s(\d+)\s%)#si";
 $lang['regex_xtense1_date_heure'] = "#((\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})\s+Contrôle\saérospatial(.*?)pionnage\s:\s(\d+)\s%)#si";
 $lang['regex_xtense1_coord'] = "`plan.te\s(.*?)\s\[(\d+\:\d+\:\d+)\]`";
-$lang['regex_xtense2_coord'] = "`Une flotte ennemie de la plan.+te (.*) a .+t.+ aper.+ue .+ proximit.+ de votre plan.+te (.*)`";//"`Une flot.*la plan.te (.*) a .t. aper.*re plan.te (.*)`";
+$lang['regex_xtense2_coord'] = "`Une flotte .+trang.+re de la plan.+te (.*) a .+t.+ rep.+r.+e .+ proximit.+ de votre plan.+te (.*)`";//"`Une flot.*la plan.te (.*) a .t. aper.*re plan.te (.*)`";
 //Une flotte ennemie de la planète the skyline   a été aperçue à proximité de votre planète Starlight (Lune)
 
 // Titre des menus :
