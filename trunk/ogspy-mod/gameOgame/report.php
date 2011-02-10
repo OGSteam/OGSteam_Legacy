@@ -59,7 +59,7 @@ if (isset($pub_data) && $pub_data<>'')
 			if (!preg_match('#Un\schamp\sde\sdébris\scontenant\s(\d*)\sde\smétal\set\s(\d*)\sde\scristal\sse\sforme\sdans l.orbite\sde\sla\splanète#',$data,$recyclage)) $recyclage[1]=$recyclage[2]=0; 
 			if (!preg_match('#La\sprobabilité\sde\scréation\sd.une\slune\sest\sde\s(\d*)\s%#',$data,$plune)) $plune[1] = 0;
 			$lune = preg_match('#Les\squantités\sénormes\sde\smétal\set\sde\scristal\ss\'attirent,\sformant\sainsi\sune\slune\sdans\sl\'orbite\sde\scette\splanète.#',$data);
-			$date = mktime($date[3],$date[4],$date[5],$date[1],$date[2],date('Y'));
+			$date = mktime($date[4],$date[5],$date[6],$date[2],$date[1],$date[3]);
 			$points = ceil(($ressources[1]+$ressources[2]+$ressources[3])/100000*$config['pillage'] + $pertesA[1]/100000*$config['pertes'] + $pertesD[1]/100000*$config['degats'] + $lune*$config['clune']);
 			//On vérifie que cette attaque n'a pas déja été enregistrée
         	$query = "SELECT id FROM ".TABLE_GAME." WHERE sender='".$user_data['user_id']."' AND date='".$date."' AND attaquant='".$attaquant[1]."' ";
