@@ -175,7 +175,7 @@ if($view == "planets") {
 	<th><a>Nombre de cases</a></th>
 	<th><input type="text" id="fields" name="fields" size="8" maxlength="3" disabled></th>
 	<th><a>Temp. Min.</a><input type="text" id="temperature_min" name="temperature_min" size="8" maxlength="3" disabled></th>
-	<th><a>Temp. Max.</a><input type="text" id="temperature_min" name="temperature_max" size="8" maxlength="3" disabled></th>
+	<th><a>Temp. Max.</a><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
 	<th><a>Nombre de satellites</a></th>
 	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
 <?php
