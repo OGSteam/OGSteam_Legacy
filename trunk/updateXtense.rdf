@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#" xmlns:NC="http://home.netscape.com/NC-rdf#" xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <RDF:Description RDF:about="rdf:#$bhmXj" em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}" em:minVersion="2.0" em:maxVersion="4.*" em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.3.9" em:updateHash="sha1:960dcc6d267b4983244cc6055637ff3a35b20941"/>
+    <RDF:Description RDF:about="rdf:#$bhmXj" em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}" em:minVersion="2.0" em:maxVersion="3.*" em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.3.7" em:updateHash="sha1:B8FDBCA478BCA38FEB7BE7BD48A24E1D488633CD"/>
+    <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr" em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAAcpWMIRNjSK030VhEosZkmLTDX4dNjZEJ1qlFMQTdaK6qnW/ENZYYdgfKGlsO+8TaOfrE9iOju9fIPHjFZDkUQowmKrk68bc+/t6AkcD5ylQXR36EccnH1MOAamZZTTrZmHnHUkdBGsyHtv2lMGSR3+GNZ/4623sweGBQ73gx4z">
+        <em:updates RDF:resource="rdf:#$7hmXj"/>
+    </RDF:Description>
+    <RDF:Description RDF:about="rdf:#$8hmXj" em:version="2.3.7">
+        <em:targetApplication RDF:resource="rdf:#$bhmXj"/>
+    </RDF:Description>
     <RDF:Seq RDF:about="rdf:#$7hmXj">
         <RDF:li RDF:resource="rdf:#$8hmXj"/>
     </RDF:Seq>
-    <RDF:Description RDF:about="rdf:#$8hmXj" em:version="2.3.9">
-        <em:targetApplication RDF:resource="rdf:#$bhmXj"/>
-    </RDF:Description>
-    <RDF:Description RDF:about="urn:mozilla:extension:xtense2@ogsteam.fr" em:signature="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSlIrZfzUzQzQLUHNmh4fBUzPcFrNNtFFy/o+PzE4LYmR+vWn3oIEsjItrNpTTU99MriNngafGnEs4ZvD6C1uCXhwTFih7srdc/34loH9wH2hi+6F58SFc0XEIEajnHB8ssxSzKMumvzQiG3wUGcBAkkfwAs0doFkuv9IOC+uW7wIDAQAB">
-        <em:updates RDF:resource="rdf:#$7hmXj"/>
-    </RDF:Description>
 </RDF:RDF>
