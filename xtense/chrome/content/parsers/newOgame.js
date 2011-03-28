@@ -1162,8 +1162,20 @@ var XnewOgame = {
 				}
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['msg']);
 				var message = contentNode.getElementsByTagName('p')[0].innerHTML.trim();
+				var ladate = data.date
 				
-				data = {type:'msg', from: userName, coords: coords, subject: subject, message: message};
+				//correctif : pas de date 
+				// si on procede comme suit : on redefini la variable data et on perd "date"
+				//data = {type:'msg', from: userName, coords: coords, subject: subject, message: message};
+					data.type = 'msg';
+					data.from = userName;
+					data.coords = coords;
+					data.subject = subject;
+					data.message = message;
+				// fin correctif	
+				
+				
+				
 			} else Xconsole('The message is not a private message');
 		}
 		
