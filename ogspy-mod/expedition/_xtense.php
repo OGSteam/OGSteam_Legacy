@@ -9,9 +9,13 @@ class eXpedition_Callback extends Callback {
 			global $io,$user_data;
 			// Si vous avez des questions sur cet algorithme de vérification à 2F30 adressez-vous à unibozu sur le forum
 			$checksomme = 0;
-			foreach ($expedition as $exp)
-				if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
-					$checksomme++;
+			//foreach ($expedition as $exp)
+				if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $expedition['coords'][0], $expedition['coords'][1], $expedition['time'], $expedition['content'])) 
+                {
+                    	$checksomme= 1;
+                    
+                }
+				
 			if($checksomme>0)
 				$io->append_call_message("Un total de {$checksomme} rapports d'expéditions ont été enregistrés", Io::SUCCESS);
 			else
@@ -44,13 +48,13 @@ function eXpedition_xtense2_integration($expedition)
 	global $user_data;
 	// Si vous avez des questions sur cet algorithme de vérification à 2F30 adressez-vous à unibozu sur le forum
 	$checksomme = 0;
-	foreach ($expedition as $exp)
-	{
-		if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $exp['coords'][0], $exp['coords'][1], $exp['time'], $exp['content']))
+//	foreach ($expedition as $exp)
+	//{
+		if(eXpedition_analyse_moi_ce_rapport($user_data['user_id'], $expedition['coords'][0], $expedition['coords'][1], $expedition['date'], $expedition['content']))
 		{
-			$checksomme++;
+			$checksomme=1;
 		}
-	}
+	//}
 	if($checksomme == 0) return FALSE;
 	return TRUE;
 
@@ -61,6 +65,7 @@ function eXpedition_xtense2_integration($expedition)
 function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $content)
 {
 	global $db;
+    $retour = false ;
 	$eXpXtense2Debug = false;
 	// Tout d'abord si il a été soumis un RExp :
 	$regExVaiss =     "#Votre\sflotte\ss'est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss'y\ssont\sjoints\s:(.+)#";
@@ -179,6 +184,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");		
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
+		  $retour = true;
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
@@ -258,6 +264,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
+		    $retour = true;
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
@@ -299,6 +306,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
+		    $retour = true;
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
@@ -340,6 +348,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
+		    $retour = true;
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
@@ -381,6 +390,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
+		    $retour = true;
 			$query = 
 				"Insert into ".TABLE_EXPEDITION." 
 				(id, user_id, date, pos_galaxie, pos_sys, type) 
@@ -402,7 +412,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			return false;
 		}
 	}
-	return true;
+	return $retour;
 }
 
 ?>
