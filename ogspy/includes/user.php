@@ -153,7 +153,7 @@ function user_ogs_login() {
 				echo "<!-- [Login=1] OGame Stratege SharingDB -->"."\n";
 				echo "<!-- Servername = OGSPY -->"."\n";
 				echo "<!-- ServerVersion = ".$server_config["version"]." -->"."\n";
-				echo "<!-- ServerInfo = By Kyser , http://ogsteam.fr -->"."\n\n";
+				echo "<!-- ServerInfo = By Kyser , http://www.ogsteam.fr -->"."\n\n";
 
 				if ($user_auth["ogs_set_system"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) echo "<!-- [ExportSysAuth=1] You are authorised to export Solar System -->"."\n";
 				else echo "<!-- [ExportSysAuth=0] You are not authorised to export Solar System -->"."\n";

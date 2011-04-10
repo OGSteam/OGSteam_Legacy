@@ -55,7 +55,7 @@ if (isset($pub_redirection)) {
 <li type="disc">Possibilités d'extensions quasi illimitées grâce aux mods.
 <li type="disc">Etc ...
 </ul></ul>
-<center>Si vous souhaitez plus d'informations, rendez-vous sur ce forum : <a href="ogsteam.fr/" target="_blank">http://ogsteam.fr/</a></center>
+<center>Si vous souhaitez plus d'informations, rendez-vous sur ce forum : <a href="http://board.ogsteam.fr/" target="_blank">http://board.ogsteam.fr/</a></center>
 </font>
 			</td>
 		</tr>
@@ -77,7 +77,7 @@ if (isset($pub_redirection)) {
 </tr>
 <tr align="center">
 	<td>
-		<center><font size="2"><i><b>OGSpy</b> is a <b>Kyser Software</b> (c) 2005-2007</i><br />v <?php echo $install_version ;?></font></center>
+		<center><font size="2"><i><b>OGSpy</b> is an <b>OGSteam Software</b> (c) 2005-2011</i><br />v <?php echo $install_version ;?></font></center>
 	</td>
 </tr>
 </table>

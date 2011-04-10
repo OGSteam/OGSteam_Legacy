@@ -20,7 +20,7 @@ if (!defined('IN_SPYOGAME')) {
 
 <table width="70%" align="center">
 <tr>
-	<td align="center" class="c" colspan="2"><font color="Yellow">Site internet :</font> <a href="http://ogsteam.fr" target="_blank">http://ogsteam.fr</a><br /><font color="Yellow">Channel IRC : </font><a href='irc://irc.ogamenet.net:6667/ogstratege'>irc://irc.ogamenet.net:6667/OGStratege</a></td>
+	<td align="center" class="c" colspan="2"><font color="Yellow">Notes de version</font></td>
 </tr>
 <tr>
 	<td class="c" width="50">Version</td>
