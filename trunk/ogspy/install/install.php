@@ -336,14 +336,14 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 		
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td colspan="2" align="center"><a target="_blank" href="http://ogsteam.fr/OGSpynstall/"><i><font color="orange">Besoin d'assistance ?</font></i></a></td>
+			<td colspan="2" align="center"><a target="_blank" href="http://board.ogsteam.fr/"><i><font color="orange">Besoin d'assistance ?</font></i></a></td>
 		</tr>
 		</table>
 	</td>
 </tr>
 <tr align="center">
 	<td>
-		<center><font size="2"><i><b>OGSpy</b> is a <b>Kyser Software</b> (c) 2005-2007</i><br />v <?php echo $install_version ;?></font></center>
+		<center><font size="2"><i><b>OGSpy</b> is an <b>OGSteam Software</b> (c) 2005-2011</i><br />v <?php echo $install_version ;?></font></center>
 	</td>
 </tr>
 </table>

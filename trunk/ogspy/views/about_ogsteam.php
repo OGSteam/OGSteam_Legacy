@@ -20,10 +20,10 @@ if (!defined('IN_SPYOGAME')) {
 
 <table width="70%" border="1" cellpadding="0" cellspacing="5" align="center">
 <tr>
-	<td align="center" class="c" colspan="2"><font color="Yellow" size="2">Site internet :</font> <a href="http://ogsteam.fr" target="_blank">http://ogsteam.fr</a><br /><font color="Yellow" size="2">Channel IRC : </font><a href='irc://irc.ogamenet.net:6667/OGStratege'>irc://irc.ogamenet.net:6667/ogstratege</a></td>
+	<td align="center" class="c" colspan="2"><font color="Yellow" size="2">Equipe Projet</font></td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/kyser.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/4.jpg"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Kyser</font></a><br />
 		<center><b>Concepteur du serveur d'alliance OGSpy</b><br /><br /></center>
@@ -32,7 +32,7 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogs.servebbs.net/ogsteam/rica.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/2.jpg"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Rica</font></a><br />
 		<center><b>Concepteur du client OGame Stratege (OGS)<br>
@@ -40,7 +40,7 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/ben_12.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/204.jpg"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Ben.12</font></a><br />
 		<center><b>Développeur sur le projet OGSpy</b><br /><br /></center>
@@ -48,7 +48,7 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/capi.png"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/24.png"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Capi</font></a><br />
 		<center><b>Testeur<br />
@@ -56,26 +56,23 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/corwin.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/17.png"></td>
 	<td class="l">
-		&nbsp;<a><font color="Yellow" size="2">Corwin alias "Le boucher"</font></a><br />
+		&nbsp;<a><font color="Yellow" size="2">Corwin(bleys) alias "Le boucher"</font></a><br />
 		<center><b>Testeur / "Profiteur de Service"</b></center><br />
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/erreur32.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/7.jpg"></td>
 	<td class="l">
 		&nbsp;<b><font color="Yellow" size="2">Erreur32</font></b><br />
 		<center><b>Testeur<br />
 		<font color="orange">Skinner de l'espace (-•O•-)</font></b></center><br />
-		<b>U21 => Erreur32 [MoD]</b><br />
-		<b>U6 => Erreur32 [S R ]</b><br />
 		<br />
-		<b>Skins OGame : </b><a href="http://skinmod.free.fr" target="_blank">http://skinmod.free.fr</a><br />
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/aeris.jpg"></td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/903.png"></td>
 	<td class="l">
 		&nbsp;<b><font color="Yellow" size="2">Aéris</font></b><br />
 		<center><b>Développeur</b></center><br />
@@ -90,11 +87,10 @@ if (!defined('IN_SPYOGAME')) {
 	</td> 
 </tr> 
 <tr> 
-	<td width="100" height="100" align="center" valign="middle"><img src="http://ogsteam.fr/ogsteam/oxidfox.gif"></td> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/227.gif"></td> 
 	<td class="l"> 
 		&nbsp;<b><font color="Yellow" size="2">oXid_FoX</font></b><br /> 
 		<center><b>Développeur - débuggueur</b></center><br /> 
-		<b>U4</b><br /> 
 	</td>
 </tr>
 <tr>
@@ -102,19 +98,12 @@ if (!defined('IN_SPYOGAME')) {
 	<td class="l">
 		&nbsp;<b><font color="Yellow" size="2">Jey</font></b><br />
 		<center><b>Développeur - débuggueur</b></center><br />
-		<b>U49 => puma-rc (Space Warriors)</b><br />
 	</td>
 </tr>
 <tr>
 	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
 	<td class="l"><br />
 		<center><b>Equipe de test OGSpy 3.02</b></center><br />
-		&nbsp;<b><font color="Yellow">Akryus</font> - U34 => Akryus [NEMESIS]</b><br />
-		&nbsp;<b><font color="Yellow">DAK</font> - U6 => DAK</a><br />
-		&nbsp;<b><font color="Yellow">Digiduck</font></a> - U7 => Digiduck [Pirates de la Liberté]<br />
-		&nbsp;<b><font color="Yellow">Jibus</font></a><br />
-		&nbsp;<b><font color="Yellow">lildadou</font></a><br />
-		&nbsp;<b><font color="Yellow">Tidus</font></a> - U28 => Tidus [Laurel et Hardy]<br /> 
 	</td>
 </tr>
 </table>
