@@ -78,7 +78,7 @@ $online = session_whois_online();
 
 
 //Vérification version installée et envoi de statistiques
-preg_match("#^(\d+).(\d+)([_a-z]*)?$#", $server_config["version"], $current_version);
+preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*)?#", $server_config["version"], $current_version);
 @list($current_version, $head_revision, $minor_revision, $extension_revision) = $current_version;
 
 $errno = 0;
@@ -98,7 +98,7 @@ $proxy_user = '';
 $proxy_pass = ''; 
 
 //Adresse du serveur a contacter 
-$url_server = "ogsteam.fr";
+$url_server = "update.ogsteam.fr";
 //port du serveur spécifié en hard dans le code 
 
 $fsock = FALSE; 
@@ -112,7 +112,7 @@ if($proxy_use){
 
 if ($fsock) { 
 	//paramètres de la requete
-	$link = "/updatecheck/latest.php";
+	$link = "/ogspy/latest.php";
 	$link .= "?version=".$server_config["version"];
 
 	$link .= "&connection_server=".$connection_server;
@@ -163,30 +163,29 @@ if ($fsock) {
 		}
 	}
 	@fclose($fsock);
-
-	if (preg_match("#¤(\d+\.\d+[_a-z]*)¤#m", $version_info, $version_info)) {
-		preg_match("#(\d+).(\d+)([_a-z]*)?#", $version_info[1], $version_info);
+	if (preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*){0,1}#", $version_info, $version_info)) {
 
 		@list($latest_version, $latest_head_revision, $latest_minor_revision, $latest_extension_revision) = $version_info;
 		$version_info = $latest_version;
 
-		if ( version_compare ( $latest_head_revision.'.'.$latest_minor_revision.'.'.$latest_extension_revision, $head_revision.'.'.$minor_revision.'.'.$extension_revision ) ) {
+		if ( version_compare ( $latest_head_revision.'.'.$latest_minor_revision.'.'.$latest_extension_revision, $head_revision.'.'.$minor_revision.'.'.$extension_revision , '<=') ) {
 			$version_info = "<font color='lime'><b>Votre serveur OGSpy est à jour.</b></font>";
+			/*$version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;*/
 		}
 		else {
 			$version_info = "<blink><b><font color='red'>Votre serveur OGSpy n'est pas à jour.</font></blink>";
-			$version_info .= "<br />Rendez vous sur le  <a href='http://ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>".$latest_version."</b>";
+			$version_info .= "<br />Rendez vous sur le  <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>".$latest_version."</b>";
 		}
 	}
 	else {
 		$version_info = "<blink><b><font color='orange'>Une incohérence a été rencontrée avec le serveur de contrôle de version.</font></blink>";
-		$version_info .= "<br />Consulter le <a href='http://ogsteam.fr/forums/index.php' target='_blank'>forum</a> dédié au support d'OGSpy pour en connaître la raison.</b>";
+		$version_info .= "<br />Consulter le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour en connaître la raison.</b>";
 	}
 }
 else {
 	$version_info = "<blink><b><font color='orange'>Impossible de récupérer le numéro de la dernière version car le lien n'a pas pu être établie avec le serveur de contrôle.</font></blink>";
 	$version_info .= "<br />Il se peut que ce soit votre hébergeur qui n'autorise pas cette action.";
-	$version_info .= "<br />Il vous faudra consulter régulièrement le <a href='http://ogsteam.fr/forums/index.php' target='_blank'>forum</a> dédié au support d'OGSpy pour prendre connaissance des nouvelles versions.</b>";
+	$version_info .= "<br />Il vous faudra consulter régulièrement le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour prendre connaissance des nouvelles versions.</b>";
 }
 ?>
 

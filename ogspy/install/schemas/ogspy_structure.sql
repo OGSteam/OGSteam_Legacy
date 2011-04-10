@@ -1,6 +1,6 @@
 #
-# OGSpy version 3.04
-# 26 Septembre 2007
+# OGSpy version 3.07
+# Avril 2011
 # 
 
 ## ########################################################
@@ -463,11 +463,11 @@ INSERT INTO `ogspy_config` VALUES ('reason', '');
 INSERT INTO `ogspy_config` VALUES ('servername', 'Cartographie');
 INSERT INTO `ogspy_config` VALUES ('server_active', '1');
 INSERT INTO `ogspy_config` VALUES ('session_time', '30');
-INSERT INTO `ogspy_config` VALUES ('url_forum', 'http://ogsteam.fr/index.php');
+INSERT INTO `ogspy_config` VALUES ('url_forum', 'http://board.ogsteam.fr/index.php');
 INSERT INTO `ogspy_config` VALUES ('log_phperror', '0');
 INSERT INTO `ogspy_config` VALUES ('block_ratio', '0');
 INSERT INTO `ogspy_config` VALUES ('ratio_limit', '0');
-INSERT INTO `ogspy_config` VALUES ('version', '3.05');
+INSERT INTO `ogspy_config` VALUES ('version', '3.0.7');
 
 ## Partie affichage
 
