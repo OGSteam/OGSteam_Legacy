@@ -588,7 +588,13 @@ switch ($ogsversion) {
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_admin','')";
 		$requests[] = "ALTER TABLE ".TABLE_USER_BUILDING." ADD temperature_min SMALLINT(2) NOT NULL default '0'";
 		$requests[] = "ALTER TABLE ".TABLE_USER_BUILDING." CHANGE temperature temperature_max SMALLINT(2)";
+		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.06' WHERE config_name = 'version'";
 		$ogsversion = '3.06';
+		$up_to_date = true;
+		break;
+	case '3.06':
+		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.0.7' WHERE config_name = 'version'";
+		$ogsversion = '3.0.7';
 		$up_to_date = true;
 		break;
 		
@@ -600,7 +606,7 @@ foreach ($requests as $request) {
 	$db->sql_query($request);
 }
 
-if ( $ogsversion == '3.05' && function_exists ( 'import_RE' ) )
+if ( $ogsversion == '3.07' && function_exists ( 'import_RE' ) )
   import_RE();
 ?>
 	<h3 align='center'><font color='yellow'>Mise à jour du serveur OGSpy vers la version <?php echo $ogsversion;?> effectuée avec succès</font></h3>
