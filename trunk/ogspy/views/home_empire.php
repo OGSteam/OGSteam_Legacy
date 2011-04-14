@@ -19,10 +19,18 @@ $user_building = $user_empire["building"];
 $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
 
+///debug
+//echo find_nb_planete_user();
+//var_dump($user_building);
+//var_dump($user_defence);
+//var_dump($user_technology);
+//fin debug
+
+
 if(!isset($pub_view) || $pub_view=="") $view = "planets";
 elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
-$start = $view=="planets" ? 1 : 10;
+$start = $view=="planets" ? 101 : 201;
 ?>
 
 <!-- DEBUT DU SCRIPT -->
@@ -30,8 +38,11 @@ $start = $view=="planets" ? 1 : 10;
 <?php
 if(isset($pub_alert_empire) && $pub_alert_empire) echo 'message("Pensez à renseigner, si besoin est, les noms de planètes et les températures\nqui ne peuvent pas être récupérés par la page Empire d\'OGame.");';
 
+$nb_planete = find_nb_planete_user();
+$nb_planete_lune = 2* find_nb_planete_user();
+
 $name = $coordinates = $fields = $temperature_min = $temperature_max = $satellite = "";
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$name .= "'".$user_building[$i]["planet_name"]."', ";
 	$coordinates .= "'".$user_building[$i]["coordinates"]."', ";
 	$fields .= "'".$user_building[$i]["fields"]."', ";
@@ -40,7 +51,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	$satellite .= "'".$user_building[$i]["Sat"]."', ";
 }
 
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=201 ; $i<=$nb_planete+200 ; $i++) {
 	$name .= "'Lune', ";
 	$coordinates .= "'', ";
 	$fields .= "'1', ";
@@ -154,15 +165,13 @@ else {
 </tr>
 <tr>
 	<th width="10%"><a>Sélectionnez une planète</a></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 1 : 1+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 1 : 1+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[1]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 2 : 2+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 2 : 2+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[2]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 3 : 3+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 3 : 3+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[3]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 4 : 4+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 4 : 4+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[4]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 5 : 5+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 5 : 5+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[5]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 6 : 6+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 6 : 6+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[6]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 7 : 7+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 7 : 7+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[7]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 8 : 8+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 8 : 8+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[8]["planet_name"]; ?></label></th>
-	<th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? 9 : 9+9; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? 9 : 9+9; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[9]["planet_name"]; ?></label></th>
+       <?php for ($i=$start ; $i<=$start+8 ; $i++) {
+        //TODO => revoir et reecrire l html !!!!!!
+        ?>
+        <th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? $start : $start + 100; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? $start : $start + 100; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[$i]["planet_name"]; ?></label></th>
+         <?php }
+        ?>
+
 </tr>
 <tr>
 <?php
@@ -241,9 +250,9 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Coordonnées</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$coordinates = $user_building[$i]["coordinates"];
-	if ($coordinates == "" || ($user_building[$i+9]["planet_name"] == "" && $view=="moons")) $coordinates = "&nbsp;";
+	if ($coordinates == "" || ($user_building[$i]["planet_name"] == "" && $view=="moons")) $coordinates = "&nbsp;";
 	else $coordinates = "[".$coordinates."]";
 
 	echo "\t"."<th>".$coordinates."</th>"."\n";
@@ -292,7 +301,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$M = $user_building[$i]["M"];
 	if ($M != "") $production = production("M", $M);
 	else $production = "&nbsp";
@@ -304,7 +313,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$C = $user_building[$i]["C"];
 	if ($C != "") $production = production("C", $C);
 	else $production = "&nbsp";
@@ -316,7 +325,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$D = $user_building[$i]["D"];
 	$temperature_max = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i]["CEF"];
@@ -331,7 +340,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Energie</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	$CEF = $user_building[$i]["CEF"];
 	$Sat = $user_building[$i]["Sat"];
@@ -356,7 +365,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Mine de métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$M = $user_building[$i]["M"];
 	if ($M == "") $M = "&nbsp;";
 
@@ -367,7 +376,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Mine de cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$C = $user_building[$i]["C"];
 	if ($C == "") $C = "&nbsp;";
 
@@ -378,7 +387,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Synthétiseur de deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$D = $user_building[$i]["D"];
 	if ($D == "") $D = "&nbsp;";
 
@@ -389,7 +398,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Centrale électrique solaire</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	if ($CES == "") $CES = "&nbsp;";
 
@@ -400,7 +409,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Centrale électrique de fusion</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$CEF = $user_building[$i]["CEF"];
 	if ($CEF == "") $CEF = "&nbsp;";
 
@@ -485,7 +494,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Laboratoire de recherche</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	if ($Lab == "") $Lab = "&nbsp;";
 
@@ -498,7 +507,7 @@ if ( $server_config['ddr'] == 1 )
 <tr>
 	<th><a>D&eacute;p&ocirc;t de ravitaillement</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$DdR = $user_building[$i]["DdR"];
 	if ($DdR == "") $DdR = "&nbsp;";
 
@@ -510,7 +519,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Terraformeur</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Ter = $user_building[$i]["Ter"];
 	if ($Ter == "") $Ter = "&nbsp;";
 
@@ -521,7 +530,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Silo de missiles</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Silo = $user_building[$i]["Silo"];
 	if ($Silo == "") $Silo = "&nbsp;";
 
@@ -535,7 +544,7 @@ else {
 <tr>
 	<th><a>Base lunaire</a></th>
 <?php
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$BaLu = $user_building[$i]["BaLu"];
 	if ($BaLu == "") $BaLu = "&nbsp;";
 
@@ -546,7 +555,7 @@ for ($i=10 ; $i<=18 ; $i++) {
 <tr>
 	<th><a>Phalange de capteur</a></th>
 <?php
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Pha = $user_building[$i]["Pha"];
 	if ($Pha == "") $Pha = "&nbsp;";
 
@@ -557,7 +566,7 @@ for ($i=10 ; $i<=18 ; $i++) {
 <tr>
 	<th><a>Porte de saut spatial</a></th>
 <?php
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$PoSa = $user_building[$i]["PoSa"];
 	if ($PoSa == "") $PoSa = "&nbsp;";
 
@@ -589,7 +598,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Technologie Espionnage</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Esp = "&nbsp;";
 
@@ -616,7 +625,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Ordinateur</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Ordi = "&nbsp;";
 
@@ -643,7 +652,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Armes</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Armes = "&nbsp;";
 
@@ -670,7 +679,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Bouclier</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Bouclier = "&nbsp;";
 
@@ -697,7 +706,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Protection des vaisseaux spatiaux</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Protection = "&nbsp;";
 
@@ -724,7 +733,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Energie</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$NRJ = "&nbsp;";
 
@@ -751,7 +760,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Hyperespace</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Hyp = "&nbsp;";
 
@@ -778,7 +787,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Réacteur à combustion</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RC = "&nbsp;";
 
@@ -805,7 +814,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Réacteur à impulsion</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RI = "&nbsp;";
 
@@ -832,7 +841,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Propulsion hyperespace</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$PH = "&nbsp;";
 
@@ -859,7 +868,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Laser</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Laser = "&nbsp;";
 
@@ -886,7 +895,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Ions</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Ions = "&nbsp;";
 
@@ -913,7 +922,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Plasma</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Plasma = "&nbsp;";
 	if ($user_building[$i][0] == true) {
@@ -938,7 +947,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Réseau de recherche intergalactique</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RRI = "&nbsp;";
 
@@ -965,7 +974,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Expéditions</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Expeditions = "&nbsp;";
 
@@ -992,7 +1001,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Technologie Graviton</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Graviton = "&nbsp;";
 
