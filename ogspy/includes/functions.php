@@ -40,7 +40,7 @@ function is__writable($path)
        
         return is__writable($path.uniqid(mt_rand()).'.tmp');
    
-    elseif ( ereg('.tmp', $path))
+    elseif ( @ereg('.tmp', $path))
     {
        
         if (!($f = @fopen($path, 'w+')))
@@ -772,7 +772,7 @@ function log_purge() {
 	$path = opendir("$root");
 	while($file = readdir($path)) {
 		if($file != "." && $file != "..") {
-			if (is_dir($root.$file) && intval($file) < $limit && ereg("[0-9]{6}", $file)) {
+			if (is_dir($root.$file) && intval($file) < $limit && @ereg("[0-9]{6}", $file)) {
 				$directories[] = $file;
 			}
 		}
