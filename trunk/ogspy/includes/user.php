@@ -844,11 +844,11 @@ function user_set_all_empire($data) {
 				$lang_technology["NRJ"] => "NRJ",
 				$lang_technology["Hyp"] => "Hyp", $lang_technology["RC"] => "RC", $lang_technology["RI"] => "RI", $lang_technology["PH"] => "PH",
 				$lang_technology["Laser"] => "Laser", $lang_technology["Ions"] => "Ions", $lang_technology["Plasma"] => "Plasma",
-				$lang_technology["RRI"] => "RRI", $lang_technology["Graviton"] => "Graviton", $lang_technology["Expeditions"] => "Expeditions");
+				$lang_technology["RRI"] => "RRI", $lang_technology["Graviton"] => "Graviton", $lang_technology["Astrophysique"] => "Astrophysique");
 
 				$technologies = array("Esp" => 0, "Ordi" => 0, "Armes" => 0, "Bouclier" => 0, "Protection" => 0,
 				"NRJ" => 0, "Hyp" => 0, "RC" => 0, "RI" => 0, "PH" => 0, "Laser" => 0, "Ions" => 0, "Plasma" => 0,
-				"RRI" => 0, "Graviton" => 0, "Expeditions" => 0);
+				"RRI" => 0, "Graviton" => 0, "Astrophysique" => 0);
 
 				$satellites = array_fill(0, $planetes_total_row, 0);
 				$cases = array_fill(0, $planetes_total_row, 0);
@@ -972,8 +972,8 @@ function user_set_all_empire($data) {
 			$request = "delete from ".TABLE_USER_TECHNOLOGY." where user_id = ".$user_data["user_id"];
 			$db->sql_query($request);
 
-			$request = "insert into ".TABLE_USER_TECHNOLOGY." (user_id, esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Expeditions)";
-			$request .= " values (".$user_data["user_id"].", ".$technologies["Esp"].", ".$technologies["Ordi"].",".$technologies["Armes"].", ".$technologies["Bouclier"].", ".$technologies["Protection"].", ".$technologies["NRJ"].", ".$technologies["Hyp"].", ".$technologies["RC"].", ".$technologies["RI"].", ".$technologies["PH"].", ".$technologies["Laser"].", ".$technologies["Ions"].", ".$technologies["Plasma"].", ".$technologies["RRI"].", ".$technologies["Graviton"].", ".$technologies["Expeditions"].");";
+			$request = "insert into ".TABLE_USER_TECHNOLOGY." (user_id, esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique)";
+			$request .= " values (".$user_data["user_id"].", ".$technologies["Esp"].", ".$technologies["Ordi"].",".$technologies["Armes"].", ".$technologies["Bouclier"].", ".$technologies["Protection"].", ".$technologies["NRJ"].", ".$technologies["Hyp"].", ".$technologies["RC"].", ".$technologies["RI"].", ".$technologies["PH"].", ".$technologies["Laser"].", ".$technologies["Ions"].", ".$technologies["Plasma"].", ".$technologies["RRI"].", ".$technologies["Graviton"].", ".$technologies["Astrophysique"].");";
 			$db->sql_query($request);
 		}
 
@@ -1145,14 +1145,14 @@ function user_set_technology($data) {
 	$lang_technology["NRJ"] => "NRJ",
 	$lang_technology["Hyp"] => "Hyp", $lang_technology["RC"] => "RC", $lang_technology["RI"] => "RI", $lang_technology["PH"] => "PH",
 	$lang_technology["Laser"] => "Laser", $lang_technology["Ions"] => "Ions", $lang_technology["Plasma"] => "Plasma",
-	$lang_technology["RRI"] => "RRI", $lang_technology["Graviton"] => "Graviton", $lang_technology["Expeditions"] => "Expeditions");
+	$lang_technology["RRI"] => "RRI", $lang_technology["Graviton"] => "Graviton", $lang_technology["Astrophysique"] => "Astrophysique");
 
 	$technologies = array("Esp" => 0, "Ordi" => 0,
 	"Armes" => 0, "Bouclier" => 0, "Protection" => 0,
 	"NRJ" => 0,
 	"Hyp" => 0, "RC" => 0, "RI" => 0, "PH" => 0,
 	"Laser" => 0, "Ions" => 0, "Plasma" => 0,
-	"RRI" => 0, "Graviton" => 0, "Expeditions" => 0);
+	"RRI" => 0, "Graviton" => 0, "Astrophysique" => 0);
 
 	$lines = explode(chr(10), $data);
 
@@ -1180,8 +1180,8 @@ function user_set_technology($data) {
 	$request = "delete from ".TABLE_USER_TECHNOLOGY." where user_id = ".$user_data["user_id"];
 	$db->sql_query($request);
 
-	$request = "insert into ".TABLE_USER_TECHNOLOGY." (user_id, esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Expeditions)";
-	$request .= " values (".$user_data["user_id"].", ".$technologies["Esp"].", ".$technologies["Ordi"].",".$technologies["Armes"].", ".$technologies["Bouclier"].", ".$technologies["Protection"].", ".$technologies["NRJ"].", ".$technologies["Hyp"].", ".$technologies["RC"].", ".$technologies["RI"].", ".$technologies["PH"].", ".$technologies["Laser"].", ".$technologies["Ions"].", ".$technologies["Plasma"].", ".$technologies["RRI"].", ".$technologies["Graviton"].", ".$technologies["Expeditions"].");";
+	$request = "insert into ".TABLE_USER_TECHNOLOGY." (user_id, esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique)";
+	$request .= " values (".$user_data["user_id"].", ".$technologies["Esp"].", ".$technologies["Ordi"].",".$technologies["Armes"].", ".$technologies["Bouclier"].", ".$technologies["Protection"].", ".$technologies["NRJ"].", ".$technologies["Hyp"].", ".$technologies["RC"].", ".$technologies["RI"].", ".$technologies["PH"].", ".$technologies["Laser"].", ".$technologies["Ions"].", ".$technologies["Plasma"].", ".$technologies["RRI"].", ".$technologies["Graviton"].", ".$technologies["Astrophysique"].");";
 	$db->sql_query($request);
 
 	redirection("index.php?action=home&subaction=empire");
@@ -1321,7 +1321,7 @@ function user_get_empire()
     }
 
 
-    $request = "select Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Expeditions";
+    $request = "select Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique";
     $request .= " from " . TABLE_USER_TECHNOLOGY;
     $request .= " where user_id = " . $user_data["user_id"];
     $result = $db->sql_query($request);

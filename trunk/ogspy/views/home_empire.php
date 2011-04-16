@@ -972,29 +972,29 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 ?>
 </tr>
 <tr>
-	<th><a>Technologie Expéditions</a></th>
+	<th><a>Technologie Astrophysique</a></th>
 <?php
 for ($i=$start ; $i<=$start+8 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
-	$Expeditions = "&nbsp;";
+	$Astrophysique = "&nbsp;";
 
 	if ($user_building[$i][0] == true) {
-		$Expeditions = $user_technology["Expeditions"] != "" ? $user_technology["Expeditions"] : "0";
-		$requirement = $technology_requirement["Expeditions"];
+		$Astrophysique = $user_technology["Astrophysique"] != "" ? $user_technology["Astrophysique"] : "0";
+		$requirement = $technology_requirement["Astrophysique"];
 
 		while ($value = current($requirement)) {
 			$key = key($requirement);
 			if ($key == 0) {
-				if ($Lab < $value) $Expeditions = "-";
+				if ($Lab < $value) $Astrophysique = "-";
 			}
 			elseif ($user_technology[$key] < $value) {
-				$Expeditions = "-";
+				$Astrophysique = "-";
 			}
 			next($requirement);
 		}
 	}
 
-	echo "\t"."<th><font color='lime' id='41".($i+1-$start)."'>".$Expeditions."</font></th>"."\n";
+	echo "\t"."<th><font color='lime' id='41".($i+1-$start)."'>".$Astrophysique."</font></th>"."\n";
 }
 ?>
 </tr>

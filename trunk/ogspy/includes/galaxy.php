@@ -2857,7 +2857,7 @@ function parseRE ( $rawRE )
 		'Plasma' => -1,
 		'RRI' => -1,
 		'Graviton' => -1,
-		'Expeditions' => -1,
+		'Astrophysique' => -1,
 		'metal' => -1,
 		'cristal' => -1,
 		'deuterium' => -1,
@@ -3090,9 +3090,9 @@ function parseRE ( $rawRE )
 			preg_match ( '/Technologie Graviton\s+(\d+)/', $total_search, $reg );
 			if ( isset ( $reg[1] ) ) $return['Graviton'] = $reg[1];
 			else $return['Graviton'] = 0;
-			preg_match ( '/Technologie Exp.ditions\s+(\d+)/', $total_search, $reg );
-			if ( isset ( $reg[1] ) ) $return['Expeditions'] = $reg[1];
-			else $return['Expeditions'] = 0;
+			preg_match ( '/Technologie Astrophysique\s+(\d+)/', $total_search, $reg );
+			if ( isset ( $reg[1] ) ) $return['Astrophysique'] = $reg[1];
+			else $return['Astrophysique'] = 0;
 		}
 		return ( $return );
 	}
@@ -3128,10 +3128,10 @@ function UNparseRE ( $id_RE )
 		'NRJ' => 'Technologie Energie', 'Hyp' => 'Technologie Hyperespace', 'RC' => 'Technologie Réacteur à combustion', 
 		'RI' => 'Technologie Réacteur à impulsion', 'PH' => 'Technologie Propulsion hyperespace', 'Laser' => 'Technologie Laser', 
 		'Ions' => 'Technologie Ions', 'Plasma' => 'Technologie Plasma', 'RRI' => 'Réseau de recherche intergalactique', 
-		'Graviton' => 'Technologie Graviton', 'Expeditions' => 'Technologie Expéditions' );
+		'Graviton' => 'Technologie Graviton', 'Astrophysique' => 'Technologie Astrophysique' );
 	$query = 'SELECT planet_name, coordinates, metal, cristal, deuterium, energie, activite, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, 
 		HD, Lab, Ter, Silo, DdR, BaLu, Pha, PoSa, LM, LLE, LLO, CG, AI, LP, PB, GB, MIC, MIP, PT, GT, CLE, CLO, CR, VB, VC, REC, SE, BMD, 
-		DST, EDLM, SAT, TRA, Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Expeditions, 
+		DST, EDLM, SAT, TRA, Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique, 
 		dateRE, proba FROM ' . TABLE_PARSEDSPY . ' WHERE id_spy=' . $id_RE;
 	$result = $db->sql_query ( $query );
 	$row = $db->sql_fetch_assoc ( $result );
@@ -3249,9 +3249,9 @@ function UNparseRE ( $id_RE )
 	if ( $show['recherche'] == 0 )
 	{
 		$query = 'SELECT Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, 
-			Expeditions FROM ' . TABLE_PARSEDSPY . ' WHERE (Esp <> -1 OR Ordi <> -1 OR Armes <> -1 OR Bouclier <> -1 OR 
+			Astrophysique FROM ' . TABLE_PARSEDSPY . ' WHERE (Esp <> -1 OR Ordi <> -1 OR Armes <> -1 OR Bouclier <> -1 OR 
 			Protection <> -1 OR NRJ <> -1 OR Hyp <> -1 OR RC <> -1 OR RI <> -1 OR PH <> -1 OR Laser <> -1 OR Ions <> -1 OR 
-			Plasma <> -1 OR RRI <> -1 OR Graviton <> -1 OR Expeditions <> -1) AND coordinates = "' . $row['coordinates'] . '" 
+			Plasma <> -1 OR RRI <> -1 OR Graviton <> -1 OR Astrophysique <> -1) AND coordinates = "' . $row['coordinates'] . '" 
 			AND planet_name' . ( ( $moon == 0 ) ? ' NOT ':'' ) . ' LIKE "%(Lune)%" ORDER BY dateRE DESC LIMIT 0,1';
 		$tmp_res = $db->sql_query ( $query );
 		if ( $db->sql_numrows ( $tmp_res ) > 0 )
@@ -3452,7 +3452,7 @@ function insert_RE ( $rawRE, $sender_id = -1 )
 				$fields = 'planet_name, coordinates, metal, cristal, deuterium, energie, activite, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, 
 					Lab, Ter, DdR, Silo, BaLu, Pha, PoSa, LM, LLE, LLO, CG, AI, LP, PB, GB, MIC, MIP, PT, GT, CLE, CLO, CR, VB, VC, REC, SE, BMD, 
 					DST, EDLM, SAT, TRA, Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, 
-					Expeditions, dateRE, proba, sender_id';
+					Astrophysique, dateRE, proba, sender_id';
 				$values = array ( $parsedRE['planet_name'], $parsedRE['coordinates'], $parsedRE['metal'], $parsedRE['cristal'], 
 					$parsedRE['deuterium'], $parsedRE['energie'], $parsedRE['activite'], $parsedRE['M'], $parsedRE['C'], $parsedRE['D'], 
 					$parsedRE['CES'], $parsedRE['CEF'], $parsedRE['UdR'], $parsedRE['UdN'], $parsedRE['CSp'], $parsedRE['HM'], $parsedRE['HC'], 
@@ -3463,7 +3463,7 @@ function insert_RE ( $rawRE, $sender_id = -1 )
 					$parsedRE['DST'], $parsedRE['EDLM'], $parsedRE['SAT'], $parsedRE['TRA'], $parsedRE['Esp'], $parsedRE['Ordi'], 
 					$parsedRE['Armes'], $parsedRE['Bouclier'], $parsedRE['Protection'], $parsedRE['NRJ'], $parsedRE['Hyp'], $parsedRE['RC'], 
 					$parsedRE['RI'], $parsedRE['PH'], $parsedRE['Laser'], $parsedRE['Ions'], $parsedRE['Plasma'], $parsedRE['RRI'], 
-					$parsedRE['Graviton'], $parsedRE['Expeditions'], $parsedRE['dateRE'], $parsedRE['proba'], $user_id );
+					$parsedRE['Graviton'], $parsedRE['Astrophysique'], $parsedRE['dateRE'], $parsedRE['proba'], $user_id );
 				break;
 		}
 		$query = 'SELECT id_spy FROM ' . TABLE_PARSEDSPY . ' WHERE coordinates = "' . $parsedRE['coordinates'] . '" AND dateRE = ' . $parsedRE['dateRE'];
