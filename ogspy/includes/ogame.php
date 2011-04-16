@@ -318,10 +318,10 @@ function building_upgrade ($building, $level) {
 		$NRJ = 300000 * pow(3, ($level-1));
 		break;
 
-		case "Expeditions":
-		$M = 4000 * pow(2, ($level-1));
-		$C = 8000 * pow(2, ($level-1));
-		$D = 4000 * pow(2, ($level-1));
+		case "Astrophysique":
+		$M = 4000 * pow(1.75, ($level-1));
+		$C = 8000 * pow(1.75, ($level-1));
+		$D = 4000 * pow(1.75, ($level-1));
 		$NRJ = 0;
 		break;
 
@@ -449,7 +449,7 @@ function all_technology_cumulate ($user_technology) {
 	$total = 0;
 	$init_t_prix = array("Esp" => 1400, "Ordi" => 1000, "Armes" => 1000, "Bouclier" => 800, "Protection" => 1000,
 	"NRJ" => 1200, "Hyp" => 6000, "RC" => 1000, "RI" => 6600, "PH" => 36000, "Laser" => 300, "Ions" => 1400,
-	"Plasma" => 7000, "RRI" => 800000, "Graviton" => 0, "Expeditions" => 16000);
+	"Plasma" => 7000, "RRI" => 800000, "Graviton" => 0, "Astrophysique" => 16000);
 	$keys = array_keys($init_t_prix);
 
 	if(sizeof($init_t_prix) != sizeof($user_technology)) return 0;

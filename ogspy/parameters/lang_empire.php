@@ -56,7 +56,7 @@ $lang_technology["Ions"] = "Technologie Ions";
 $lang_technology["Plasma"] = "Technologie Plasma";
 $lang_technology["RRI"] = "Réseau de recherche intergalactique";
 $lang_technology["Graviton"] = "Technologie Graviton";
-$lang_technology["Expeditions"] = "Technologie Expéditions";
+$lang_technology["Astrophysique"] = "Technologie Astrophysique";
 
 $lang_empire["Batiment"] = "Bâtiments";
 $lang_empire["Recherche"] = "Recherche";
@@ -78,5 +78,5 @@ $technology_requirement["Ions"] = array(4, "Laser" => 5, "NRJ" => 4);
 $technology_requirement["Plasma"] = array(4, "NRJ" => 8, "Laser" => 10, "Ions" => 5);
 $technology_requirement["RRI"] = array(10, "Ordi" => 8, "Hyp" => 8);
 $technology_requirement["Graviton"] = array(12);
-$technology_requirement["Expeditions"] = array(3, "Esp" => 4, "RI" => 3);
+$technology_requirement["Astrophysique"] = array(3, "Esp" => 4, "RI" => 3);
 ?>

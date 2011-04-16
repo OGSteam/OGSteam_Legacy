@@ -423,7 +423,7 @@ CREATE TABLE ogspy_user_technology (
   Plasma smallint(2) NOT NULL default '0',
   RRI smallint(2) NOT NULL default '0',
   Graviton smallint(2) NOT NULL default '0',
-  Expeditions smallint(2) NOT NULL default '0',
+  Astrophysique smallint(2) NOT NULL default '0',
   PRIMARY KEY  (user_id)
 ) ;
 
@@ -566,7 +566,7 @@ CREATE TABLE `ogspy_parsedspy` (
   `Plasma` smallint(2) NOT NULL default '-1',
   `RRI` smallint(2) NOT NULL default '-1',
   `Graviton` smallint(2) NOT NULL default '-1',
-  `Expeditions` smallint(2) NOT NULL default '-1',
+  `Astrophysique` smallint(2) NOT NULL default '-1',
   `dateRE` int(11) NOT NULL default '0',
   `proba` smallint (2) NOT NULL default '0',
   `active` enum('0','1') NOT NULL default '1',
