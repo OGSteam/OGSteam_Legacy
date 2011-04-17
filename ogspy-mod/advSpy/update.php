@@ -6,14 +6,14 @@ global $db;
 
 //includes advspy (environement de base)
 define("IN_MOD_ADVSPY",TRUE);
-$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/AdvSpy/";
+$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/advspy/";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 
 //verification pas indispensable mais on sais jamais commen une install peut se retrouver apres une mauvaise manip'...
 $query = 'SELECT `action` FROM `'.TABLE_MOD.'` WHERE `action`=\'AdvSpy\' LIMIT 1';
 if (!$db->sql_numrows($db->sql_query($query))) {
 	$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active)
-	VALUES ('','AdvSpy','- AdvSpy -','AdvSpy','AdvSpy','AdvSpy.php','".$AdvSpyConfig['version']['advspy']."','1')";
+	VALUES ('','AdvSpy','- AdvSpy -','AdvSpy','advspy','AdvSpy.php','".$AdvSpyConfig['version']['advspy']."','1')";
 	$db->sql_query($query);
 }
 
