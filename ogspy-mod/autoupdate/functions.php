@@ -26,7 +26,7 @@ function versionmod() {
 /**
 *Génère le fichier parameters.php
 */
-function generate_parameters($coadmin, $downxml, $cycle, $begind, $beginh, $multi, $auto) {
+function generate_parameters($coadmin, $downjson, $cycle, $begind, $beginh, $multi, $auto) {
 	global $lang;
 	
 	$id_php = '<?php'."\n";
@@ -42,7 +42,7 @@ function generate_parameters($coadmin, $downxml, $cycle, $begind, $beginh, $mult
 	$id_php .= "\n";
 	$id_php .= 'DEFINE("COADMIN", '.$coadmin.');'."\n";
 	$id_php .= 'DEFINE("AUTO_MAJ", '.$auto.');'."\n";
-	$id_php .= 'DEFINE("DOWNXML", '.$downxml.');'."\n";
+	$id_php .= 'DEFINE("DOWNJSON", '.$downjson.');'."\n";
 	$id_php .= 'DEFINE("CYCLE", '.$cycle.');'."\n";
 	$id_php .= 'DEFINE("BEGIND", '.$begind.');'."\n";
 	$id_php .= 'DEFINE("BEGINH", '.$beginh.');'."\n";
@@ -58,15 +58,12 @@ function generate_parameters($coadmin, $downxml, $cycle, $begind, $beginh, $mult
 		fclose($fp);
 		chmod("mod/autoupdate/parameters.php", 0777);
 		$generate = "yes";
-		if ($downxml == 0 AND file_exists("parameters/modupdate.xml")) {
-			unlink("parameters/modupdate.xml");
-		}
 	}
 	return $generate;
 }
 
 /**
-*Copie le fichier modupdate.xml dans mod/modupdate.xml
+*Copie le fichier modupdate.json dans mod/modupdate.json
 */
 function copymodupdate($param) {
 	global $lang;
@@ -75,7 +72,7 @@ function copymodupdate($param) {
 	} else {
 		$affiche1 = "";
 	}
-	if (!copy("http://ogsteam.fr/download/modxml2.xml", "parameters/modupdate.xml")) {
+	if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")) {
 		$affiche2 = "<br />\n".$lang['autoupdate_tableau_error2'];
 	} else {
 		$affiche2 = "<br />\n".$lang['autoupdate_tableau_ok'];
@@ -139,27 +136,27 @@ if (! function_exists("is__writable") ) {
 * @return boolean True si accés en écriture
 * @comment http://fr.php.net/manual/fr/function.is-writable.php#68598
 */
-function is__writable($path)
-{
-
-    if ($path{strlen($path)-1}=='/')
-       
-        return is__writable($path.uniqid(mt_rand()).'.tmp');
-   
-    elseif (ereg('.tmp', $path))
-    {
-       
-        if (!($f = @fopen($path, 'w+')))
-            return false;
-        fclose($f);
-        unlink($path);
-        return true;
-
-    }
-    else
-       
-        return 0; // Or return error - invalid path...
-
-}
+	function is__writable($path)
+	{
+	
+	    if ($path{strlen($path)-1}=='/')
+	       
+	        return is__writable($path.uniqid(mt_rand()).'.tmp');
+	   
+	    elseif (ereg('.tmp', $path))
+	    {
+	       
+	        if (!($f = @fopen($path, 'w+')))
+	            return false;
+	        fclose($f);
+	        unlink($path);
+	        return true;
+	
+	    }
+	    else
+	       
+	        return 0; // Or return error - invalid path...
+	
+	}
 }
 ?>

@@ -16,16 +16,26 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("views/page_header.php");
 require_once("mod/autoupdate/functions.php");
 
-if (empty($pub_sub) OR $pub_sub == 'tableau' OR $pub_sub == 'maj' OR $pub_sub == 'down') {
+if (empty($pub_sub) OR $pub_sub == 'tableau' OR $pub_sub == 'maj' OR $pub_sub == 'down' OR $pub_sub == 'admin') {
 	/**
 	*Récupère les paramètres de configuration
 	*/
 	if (file_exists("mod/autoupdate/parameters.php")) {
 		require_once("mod/autoupdate/parameters.php");
 	} else {
-		generate_parameters(0, 1, 1, date("d"), date("H"), 0, 0);		
+		$result = generate_parameters(0, 1, 1, date("d"), date("H"), 0, 0);
 	}
 }
+/**
+* Défini où se trouve le fichier qui contient les dernières versions des mods.
+* Différent suivant si allow_url_fopen est activé ou non. S'il n'est pas activé, on va chercher le fichier en local après téléchargement.
+*/
+if(DOWNJSON == 0) {
+	DEFINE("JSON_FILE","http://update.ogsteam.fr/update.json");
+} else {
+	DEFINE("JSON_FILE","parameters/modupdate.json");
+}
+
 
 /**
 *Récupère le fichier de langue pour la langue approprié
@@ -51,8 +61,6 @@ if (!file_exists($d."admin.php") AND !file_exists($d."functions.php") AND !file_
 	echo "Retélécharger le mod via : <a href='http://ogsteam.fr/downloadmod.php?mod=autoupdate'>Zip link</a><br />\n";
 	exit;
 }
-
-//require_once("mod/autoupdate/functions.php");
 
 if (!isset($pub_sub)) {
 	$sub = "tableau";

@@ -24,7 +24,7 @@ elseif (file_exists('../mod/'.$pub_modroot.'/version.txt')) {
 	$db->sql_query('UPDATE '.TABLE_MOD.' SET `version` = \''.trim($file[1]).'\' WHERE `id` = \''.$pub_mod_id.'\'');
 }
 
-if(file_exists("mod/autoupdate/modupdate.xml")) {
-	unlink("mod/autoupdate/modupdate.xml");
+if(file_exists("mod/autoupdate/modupdate.json")) {
+	unlink("mod/autoupdate/modupdate.json");
 }
 ?>

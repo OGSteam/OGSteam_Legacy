@@ -14,10 +14,10 @@ if (!defined('IN_SPYOGAME')) {
 
 $query = "DELETE FROM ".TABLE_MOD." WHERE title='autoupdate'";
 $db->sql_query($query);
-if(file_exists("mod/autoupdate/modupdate.xml")) {
-	unlink("mod/autoupdate/modupdate.xml");
+if(file_exists("mod/autoupdate/modupdate.json")) {
+	unlink("mod/autoupdate/modupdate.json");
 }
-if(file_exists("mod/modupdate.xml")) {
-	unlink("mod/modupdate.xml");
+if(file_exists("mod/modupdate.json")) {
+	unlink("mod/modupdate.json");
 }
 ?>

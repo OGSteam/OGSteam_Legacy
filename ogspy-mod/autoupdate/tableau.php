@@ -16,7 +16,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("views/page_header.php");
 
 if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
-	if (DOWNXML == 1) {
+	if (DOWNJSON == 1) {
 		if (!empty($pub_down) AND $pub_down == 'yes') {
 			$affiche = copymodupdate("yes");
 		} elseif (CYCLE == 0) {
@@ -30,12 +30,12 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$begind = BEGIND;
 					$multi = 1;
 				}
-/*die ("--".COADMIN."--".DOWNXML."--".CYCLE."--".$begind."--".BEGINH."--".$multi."--");*/
-				generate_parameters(COADMIN, DOWNXML, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
+/*die ("--".COADMIN."--".DOWNJSON."--".CYCLE."--".$begind."--".BEGINH."--".$multi."--");*/
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
 				$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 			} else {
 				$affiche = copymodupdate("yes");
-				generate_parameters(COADMIN, DOWNXML, CYCLE, date("d"), BEGINH, 1, AUTO_MAJ);
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, date("d"), BEGINH, 1, AUTO_MAJ);
 			}
 		} elseif (CYCLE > 1) {
 			if(MULTI == CYCLE) {
@@ -46,7 +46,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$begind = BEGIND;
 					$multi = MULTI;
 				}
-				generate_parameters(COADMIN, DOWNXML, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
 				$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 			} else {
 				$cycle1 = CYCLE - 1;
@@ -55,7 +55,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$multi = 1;
 					$beginh = date("H");
 					$affiche = copymodupdate("yes");
-					generate_parameters(COADMIN, DOWNXML, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
+					generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
 				} else {
 					$begind = BEGIND;
 					$calcul = (date("H") - BEGINH);
@@ -63,7 +63,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 						$multi = MULTI + 1;
 						$beginh = date("H");
 						$affiche = copymodupdate("yes");
-						generate_parameters(COADMIN, DOWNXML, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
+						generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
 					} else {
 						$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 					}
@@ -83,11 +83,6 @@ if (AUTO_MAJ == 1) {
 	$auto = "";
 }
 
-/**
-*Récupère les version du SVN
-*/
-require_once("mod/autoupdate/modUpdIncl.php");
-
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='autoupdate' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
@@ -103,26 +98,24 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		$installed_mods[$i++]['version'] 	= $modversion;
 	}
 	
-	// Récupérer la liste des dernières versions dans le fichier XML
-	$file = XML_FILE;
-	
-	$xml_mods = readXML($file);
-	$getxml_error = false;
-	if ($xml_mods == false)
-	{
-		$getxml_error = true;
-	}
+	// Récupérer la liste des dernières versions dans le fichier JSON
+  $getjson_error = false; // Réinitialidation Code Erreur
+  $contents = file_get_contents(JSON_FILE);
+  if($contents === false) $getjson_error=true; //Erreur de lecture
+  $results = utf8_encode($contents);
+  $data = json_decode($results, true);
+  $mod_names = array_keys($data); // Récupération des clés
 ?>
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
 <br />
 <table width='700'>
 <?php
-	if ($getxml_error == true)
+	if ($getjson_error == true)
 	{
 	
 ?>
 	<tr>
-		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".XML_FILE; ?><br />
+		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".JSON_FILE; ?><br />
 		<?php echo $lang['autoupdate_tableau_error1']; ?></font></td>
 	</tr>
 		
@@ -138,7 +131,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
 		<?php if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
-		<td class='c'><?php echo $lang['autoupdate_tableau_description']; ?></td>
+		
 	</tr>
 <?php	
 	
@@ -149,10 +142,9 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 			echo "\t\t<th>".$installed_mods[$i]['name']."</th>\n";
 			echo "\t\t<th>".$installed_mods[$i]['version']."</th>\n"; 
 			$found=0;
-			for ($j=0; $j<count($xml_mods);$j++) {
-				$cur_modname = $xml_mods[$j]->name;
-				$cur_version = $xml_mods[$j]->version;
-				$cur_description = $xml_mods[$j]->description;
+			for ($j=0; $j<count($mod_names);$j++) {
+				$cur_modname = $mod_names[$j];
+				$cur_version = $data[$mod_names[$j]];
 		
 				if ($installed_mods[$i]['root'] == $cur_modname) {
 					$found=1;
@@ -160,22 +152,22 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 					echo "\t\t<th>".$cur_version."</th>\n";
 					
 					if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
-						//if (version_compare($installed_mods[$i]['version'],$cur_version,"<"))
 						echo "\t\t<th>";
 						if (!is__writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
 						else {
-							if (mustUpdate($installed_mods[$i]['version'],$cur_version)) {
+							//if (mustUpdate($installed_mods[$i]['version'],$cur_version))
+							if (version_compare($installed_mods[$i]['version'],$cur_version,"<"))
+							{
 								// $ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>;
 								$ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
 								echo "<font color='lime'>".$ziplink."</font>";
 							} else {
-								echo "&nbsp;";
+								echo "Aucune";
 							}
 						}
 						echo "</th>\n";
 					}
 
-					echo "\t\t<th>".$cur_description."</th>\n";
 				}
 			}
 			if ($found==0) {
@@ -199,7 +191,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		<th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a></th>
 	</tr>
 	<tr>
-		<th colspan="100"><a href="http://ogsteam.fr">OGSteam.fr</a></th>
+		<th colspan="100"><a href="http://board.ogsteam.fr">OGSteam.fr</a></th>
 	</tr>
 		<?php
 	}
