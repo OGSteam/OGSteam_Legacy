@@ -1,2 +1,2 @@
-AutoUpdate
-1.0d
+autoupdate
+1.1
