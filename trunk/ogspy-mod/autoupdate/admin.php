@@ -28,10 +28,7 @@ if (isset($pub_valid)) {
 	$generated = generate_parameters($pub_coadmin, $pub_down, $pub_cycle, date("d"), date("H"), 0, $pub_autoMaJ);
 }
 
-/**
-*Récupère les paramètres de configuration
-*/
-require_once("mod/autoupdate/parameters.php");
+// Récupération des paramètres dans le fichier parameters.php
 
 $arr = get_defined_functions();
 
@@ -87,9 +84,9 @@ foreach($arr as $zeile){
 	</tr>
 	<tr>
 		<th><?php echo $lang['autoupdate_admin_down']; ?><br /><?php echo $lang['autoupdate_admin_down1']; ?></th>
-		<th><input type="radio" name="down" <?php echo (DOWNXML == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="down" <?php echo (DOWNXML == 0) ? 'checked' : ''; ?> value="0"/></th>
+		<th><input type="radio" name="down" <?php echo (DOWNJSON == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="down" <?php echo (DOWNJSON == 0) ? 'checked' : ''; ?> value="0"/></th>
 	</tr>
-	<?php if(DOWNXML == 1) { ?>
+	<?php if(DOWNJSON == 1) { ?>
 	<tr>
 		<th><?php echo $lang['autoupdate_admin_frequency']; ?></th>
 		<th><select size="1" name="cycle">

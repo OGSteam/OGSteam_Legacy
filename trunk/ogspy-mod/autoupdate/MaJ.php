@@ -25,13 +25,14 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 	if (empty($pub_type)) {
 		$modroot = mysql_real_escape_string($pub_mod);
 		$version = mysql_real_escape_string($pub_tag);
-		$modzip = "http://ogsteam.fr/downloadmod.php?mod=".$modroot."&tag=".$version;
+		$modzip = "http://update.ogsteam.fr/mods/download.php?download=".$modroot."-".$version;
+		
 		if (!is__writable("./mod/autoupdate/tmp/")) {
 			die("Erreur: Le repertoire /mod/autoupdate/tmp/ doit etre accessible en écriture (777) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
 		if(@copy($modzip , "./mod/autoupdate/tmp/".$modroot.".zip")) {
 			
-			if ($tab = $zip->Extract("./mod/autoupdate/tmp/".$modroot.".zip", "./mod/")) {
+			if ($tab = $zip->Extract("./mod/autoupdate/tmp/".$modroot.".zip", "./mod/".$modroot."/")) {
 				
 				echo '<table align="center" style="width : 400px">'."\n";
 				echo "\t".'<tr>'."\n";
@@ -48,11 +49,6 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		}
 	} else if (AUTO_MAJ == 1 AND $pub_type == "all") {
 		
-		/**
-		*Récupère les version du SVN
-		*/
-		require_once("./mod/autoupdate/modUpdIncl.php");
-		
 		
 		// Récupérer la liste des modules installés
 		$sql = "SELECT title,root,version from ".TABLE_MOD;
@@ -65,17 +61,16 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 			$installed_mods[$i++]['version'] 	= $modversion;
 		}
 		
-		// Récupérer la liste des dernières versions dans le fichier XML
-		$file = XML_FILE;
+	   // Récupérer la liste des dernières versions dans le fichier JSON
+	  $getjson_error = false; // Réinitialidation Code Erreur
+	  $contents = file_get_contents(JSON_FILE);
+	  if($contents === false) $getjson_error=true; //Erreur de lecture
+	  $results = utf8_encode($contents);
+	  $data = json_decode($results, true);
+	  $mod_names = array_keys($data); // Récupération des clés
 		
-		$xml_mods = readXML($file);
-		$getxml_error = false;
-		if ($xml_mods == false) {
-			$getxml_error = true;
-		}
-		
-		if ($getxml_error == true) {
-			die ('<font color="lime">'.$lang['autoupdate_tableau_error'].' '.XML_FILE.'<br />'."\n".$lang['autoupdate_tableau_error1'].'</font>');
+		if ($getjson_error == true) {
+			die ('<font color="lime">'.$lang['autoupdate_tableau_error'].' '.JSON_FILE.'<br />'."\n".$lang['autoupdate_tableau_error1'].'</font>');
 		}
 		
 		$tab = 0;
@@ -85,20 +80,20 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		for ($i = 0 ; $i<count($installed_mods) ; $i++) {
 			if (substr($installed_mods[$i]['name'], 0, 5) != "Group") {
 				$found = 0;
-				for ($j = 0; $j < count($xml_mods); $j++) {
-					$cur_modname = $xml_mods[$j]->name;
-					$cur_version = $xml_mods[$j]->version;
+				for ($j = 0; $j < count($mod_names); $j++) {
+					$cur_modname = $mod_names[$j];
+					$cur_version = $data[$mod_names[$j]];
 					
 					if ($installed_mods[$i]['root'] == $cur_modname) {
 						$found = 1;
 						
 						if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
 							//if (version_compare($installed_mods[$i]['version'],$cur_version,"<"))
-							if (mustUpdate($installed_mods[$i]['version'],$cur_version)) {
-								$modzip = "http://ogsteam.fr/downloadmod.php?mod=".$cur_modname."&tag=".$cur_version;
+							if (version_compare($installed_mods[$i]['version'],$cur_version,"<")) {
+								$modzip = "http://update.ogsteam.fr/mods/download.php?download=".$cur_modname."-".$cur_version;
 								
 								if(@copy($modzip , "./mod/autoupdate/tmp/".$cur_modname.".zip")) {
-									if ($table = $zip->extract("./mod/autoupdate/tmp/".$cur_modname.".zip", "./mod/")) {
+									if ($table = $zip->extract("./mod/autoupdate/tmp/".$cur_modname.".zip", "./mod/".$cur_modname."/")) {
 										$tab = $tab + count($table);
 										$num_mod++;
 									}
@@ -113,14 +108,14 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 	} else if ($pub_type == "down") {
 		$modroot = mysql_real_escape_string($pub_mod);
 		$version = mysql_real_escape_string($pub_tag);
-		$modzip = "http://ogsteam.fr/downloadmod.php?mod=".$modroot."&tag=".$version;
-		
+		$modzip = "http://update.ogsteam.fr/mods/download.php?download=".$modroot."-".$version;
+		//die($modzip);
 		if (!is__writable("./mod/autoupdate/tmp/")) {
 			die("Erreur: Le repertoire ./mod/autoupdate/tmp/ doit etre accessible en écriture (777)".__FILE__. "(Ligne: ".__LINE__.")");
 		}
 		if(@copy($modzip , "./mod/autoupdate/tmp/".$modroot.".zip")) {
 			
-			if ($tab = $zip->extract("./mod/autoupdate/tmp/".$modroot.".zip", "./mod/")) {
+			if ($tab = $zip->extract("./mod/autoupdate/tmp/".$modroot.".zip", "./mod/".$modroot."/")) {
 				
 				echo '<table align="center" style="width : 400px">'."\n";
 				echo "\t".'<tr>'."\n";

@@ -16,11 +16,6 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("views/page_header.php");
 
 if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
-	/**
-	*Récupère les version du SVN
-	*/
-	require_once("mod/autoupdate/modUpdIncl.php");
-	
 	
 	// Récupérer la liste des modules installés
 	$sql = "SELECT title,root,version from ".TABLE_MOD;
@@ -33,27 +28,27 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		$installed_mods[$a++]['version'] = $modversion;
 	}
 	
-	// Récupérer la liste des dernières versions dans le fichier XML
-	$file = XML_FILE;
-	
-	$xml_mods = readXML($file);
-	$getxml_error = false;
-	if ($xml_mods == false) {
-		$getxml_error = true;
-	}
+	// Récupérer la liste des dernières versions dans le fichier JSON
+  $getjson_error = false;
+  $contents = file_get_contents(JSON_FILE);
+  if($contents === false) $getjson_error=true; 
+  $results = utf8_encode($contents);
+  $data = json_decode($results, true);
+  $mod_names = array_keys($data);
+
 	?>
 <table width='600'>
 <?php
 	if (!is__writable("./mod/")) {
 	echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
 	}
-	if ($getxml_error == true) {
-?>
+	if ($getjson_error == true) { 
+?><!--
 	<tr>
-		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".XML_FILE; ?><br />
+		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".JSON_FILE; ?><br />
 			<?php echo $lang['autoupdate_tableau_error1']; ?></font>
 		</td>
-	</tr>
+	</tr>--> 
 <?php
 	}
 ?>
@@ -62,17 +57,16 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 	</tr>
 	<tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
-		<td class='c'><?php echo $lang['autoupdate_tableau_description']; ?></td>
 		<td class='c' width="150"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
 		<?php if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
 	</tr>
 	<?php	
 	//
-	for ($i = 0 ; $i < count($xml_mods) ; $i++) {
+	for ($i = 0 ; $i < count($mod_names) ; $i++) {
 		
-		$cur_modname = $xml_mods[$i]->name;
-		$cur_description = $xml_mods[$i]->description;
-		$cur_version = $xml_mods[$i]->version;
+		$cur_modname = $mod_names[$i];
+		$cur_description = "Aucune";
+		$cur_version = $data[$mod_names[$i]];
 		
 		$install = false;
 		for ($j = 0 ; $j < $a ; $j++) {
@@ -84,7 +78,6 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 			$link = "<a href=\"?action=autoupdate&sub=maj&type=down&mod=".$cur_modname."&tag=".$cur_version."\">Télécharger</a>";
 			echo "\t<tr>\n";
 			echo "\t\t<th>".$cur_modname."</th>\n";
-			echo "\t\t<th>".$cur_description."</th>\n";
 			echo "\t\t<th>".$cur_version."</th>\n";
 			echo "\t\t<th><font color='lime'>".$link."</font></th>\n";
 			echo "\t</tr>\n";
@@ -98,7 +91,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		<th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a></th>
 	</tr>
 	<tr>
-		<th colspan="100"><a href="http://ogsteam.fr">OGSteam.fr</a></th>
+		<th colspan="100"><a href="http://board.ogsteam.fr">OGSteam.fr</a></th>
 	</tr>
 </table><?php
 } else die($lang['autoupdate_MaJ_rights']);
