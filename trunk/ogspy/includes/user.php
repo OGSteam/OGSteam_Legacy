@@ -1281,8 +1281,17 @@ function user_get_empire()
     $defence = array("LM" => 0, "LLE" => 0, "LLO" => 0, "CG" => 0, "AI" => 0, "LP" =>
         0, "PB" => 0, "GB" => 0, "MIC" => 0, "MIP" => 0);
 
+    
+    // pour affichage on selectionne 9 planetes minis
+    
+    if (find_nb_planete_user()< 9) {
+      $nb_planete = 9  ;
+	} else {
+	     $nb_planete = find_nb_planete_user();
+}
+    
 
-    $nb_planete = find_nb_planete_user();
+    
 
     // on met les planete a 0
     for ($i = 101; $i <= ($nb_planete + 100); $i++) {
