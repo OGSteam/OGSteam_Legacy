@@ -16,23 +16,29 @@ $user_defence = $user_empire["defence"];
 if ($user_empire["technology"]) $user_technology = $user_empire["technology"];
 else $user_technology = '0';
 
+$nb_planete = find_nb_planete_user();
+$nb_planete_lune = 2* $nb_planete;
+
 // Recuperation des pourcentages
 $planet = array("planet_id" => "", "M_percentage" => 0, "C_percentage" => 0, "D_percentage" => 0, "CES_percentage" => 100, "CEF_percentage" => 100, "Sat_percentage" => 100);
-$quet = mysql_query("SELECT planet_id, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data["user_id"]." AND planet_id < 10 ORDER BY planet_id");
-$user_percentage = array_fill(1, 9, $planet);
+$quet = mysql_query("SELECT planet_id, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data["user_id"]." AND planet_id < 199 ORDER BY planet_id");
+$user_percentage = array_fill(101, $nb_planete, $planet);
 while ($row = mysql_fetch_assoc($quet)) {
 	$arr = $row;
 	unset($arr["planet_id"]);
 	$user_percentage[$row["planet_id"]] = $arr;
 }
+
+var_dump($user_percentage);
 ?>
+
 <SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
 
 <table width="1200">
 <tr>
 	<td class="c"></td>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") $name = "xxx";
 	
@@ -44,7 +50,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Coordonnées</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$coordinates = $user_building[$i]["coordinates"];
 	if ($coordinates == "") $coordinates = "&nbsp;";
 	else $coordinates = "[".$coordinates."]";
@@ -57,7 +63,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cases</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$fields = $user_building[$i]["fields"];
 	if ($fields == "0") $fields = "?";
 	$fields_used = $user_building[$i]["fields_used"];
@@ -74,7 +80,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Température Min.</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$temperature_min = $user_building[$i]["temperature_min"];
 	if ($temperature_min == "") $temperature_min = "&nbsp;";
 
@@ -86,7 +92,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Température Max.</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$temperature_max = $user_building[$i]["temperature_max"];
 	if ($temperature_max == "") $temperature_max = "&nbsp;";
 
@@ -107,7 +113,7 @@ Energie
 <tr>
 	<th><a>CES</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	echo "\t"."<th><input type='text' id='CES_".$i."' size='2' maxlength='2' value='".$CES."' onchange='update_page();'></th>"."\n";
 
@@ -126,7 +132,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>CEF</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$CEF = $user_building[$i]["CEF"];
 	echo "\t"."<th><input type='text' id='CEF_".$i."' size='2' maxlength='2' value='".$CEF."' onchange='update_page();'></th>"."\n";
 
@@ -145,7 +151,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Satellites</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$Sat = $user_building[$i]["Sat"];
 	echo "\t"."<th><input type='text' id='Sat_".$i."' size='2' maxlength='5' value='".$Sat."' onchange='update_page();'></th>"."\n";
 
@@ -165,7 +171,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 	<th><a>Energie</a></th>
 <?php
 echo "<input type='hidden' id='off_ingenieur' size='2' maxlength='5' value='".$user_data["off_ingenieur"]."'/>";
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='NRJ_".$i."'>-</div></font></th>"."\n";
 }
 ?>
@@ -183,7 +189,7 @@ Métal
 	<th><a>Niveau</a></th>
 <?php
 echo "<input type='hidden' id='off_geologue' size='2' maxlength='5' value='".$user_data["off_geologue"]."'/>";
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$M = $user_building[$i]["M"];
 	echo "\t"."<th><input type='text' id='M_".$i."' size='2' maxlength='2' value='".$M."' onchange='update_page();'></th>"."\n";
 
@@ -202,7 +208,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Consommation Energie</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='M_".$i."_conso'>-</div></font></th>"."\n";
 }
 ?>
@@ -211,7 +217,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Production</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='M_".$i."_prod'>-</div></font></th>"."\n";
 }
 ?>
@@ -228,7 +234,7 @@ Cristal
 <tr>
 	<th><a>Niveau</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$C = $user_building[$i]["C"];
 	echo "\t"."<th><input type='text' id='C_".$i."' size='2' maxlength='2' value='".$C."' onchange='update_page();'></th>"."\n";
 
@@ -247,7 +253,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Consommation Energie</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='C_".$i."_conso'>-</div></font></th>"."\n";
 }
 ?>
@@ -256,7 +262,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Production</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='C_".$i."_prod'>-</div></font></th>"."\n";
 }
 ?>
@@ -273,7 +279,7 @@ Deutérium
 <tr>
 	<th><a>Niveau</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$D = $user_building[$i]["D"];
 	echo "\t"."<th><input type='text' id='D_".$i."' size='2' maxlength='2' value='".$D."' onchange='update_page();'></th>"."\n";
 
@@ -292,7 +298,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Consommation Energie</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><font color='lime'><div id='D_".$i."_conso'>-</div></font></th>"."\n";
 }
 ?>
@@ -301,7 +307,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Production</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='D_".$i."_prod'>-</div></font></th>"."\n";
 }
 ?>
@@ -314,7 +320,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <th><a>Bâtiments</a></th>
 <?php
 $lab_max = 0;
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t<input type='hidden' id='building_".$i."' value='".implode(array_slice($user_building[$i],12,-2), "<>")."' />";
 	echo "\t"."<th colspan='2'><font color='lime'><div id='building_pts_".$i."'>-</div></font></th>"."\n";
 	if($lab_max < $user_building[$i]["Lab"]) $lab_max = $user_building[$i]["Lab"];
@@ -325,7 +331,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 <th><a>Défenses</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t<input type='hidden' id='defence_".$i."' value='".implode($user_defence[$i], "<>")."' />";
 	echo "\t<th colspan='2'><font color='lime'><div id='defence_pts_".$i."'>-</div></font></th>"."\n";
 }
@@ -335,7 +341,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 <th><a>Lunes</a></th>
 <?php
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=201 ; $i<=200 + $nb_planete ; $i++) {
 	if ($user_building[$i]) echo "\t<input type='hidden' id='lune_b_".$i."' value='".implode(array_slice($user_building[$i],12,-2,true), "<>")."' />";
 	else echo "\t<input type='hidden' id='lune_b_".$i."' value='0' />";
 	echo "\t<input type='hidden' id='lune_d_".$i."' value='".implode($user_defence[$i], "<>")."' />";
@@ -347,8 +353,8 @@ for ($i=10 ; $i<=18 ; $i++) {
 <tr>
 	<th><a>Satellites</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
-	echo "\t<input type='hidden' id='sat_lune_".$i."' value=".($user_building[$i+9]["Sat"]!="" ? $user_building[$i+9]["Sat"] : 0)." />";
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
+	echo "\t<input type='hidden' id='sat_lune_".$i."' value=".($user_building[$i+100]["Sat"]!="" ? $user_building[$i+100]["Sat"] : 0)." />";
 	echo "\t"."<th colspan='2'><font color='lime'><div id='sat_pts_".$i."'>-</div></font></th>"."\n";
 }
 ?>
@@ -357,7 +363,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 <th><a>Technologies</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	if($user_empire["technology"]!=NULL && $user_building[$i]["Lab"] == $lab_max) {
 	echo "\t<input type='hidden' id='techno' value='".implode($user_empire["technology"], "<>")."' />";
 	echo "\t"."<th colspan='2'><font color='lime'><div id='techno_pts'>-</div></font></th>"."\n";
@@ -370,7 +376,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 <th><a><font color='yellow'>Totaux</font></a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='white'><div id='total_pts_".$i."'>-</div></font></th>"."\n";
 }
 ?>
@@ -379,7 +385,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<td class="c">&nbsp;</td>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") $name = "xxx";
 	
