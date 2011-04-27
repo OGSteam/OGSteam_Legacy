@@ -39,7 +39,7 @@ $start = $view=="planets" ? 101 : 201;
 if(isset($pub_alert_empire) && $pub_alert_empire) echo 'message("Pensez à renseigner, si besoin est, les noms de planètes et les températures\nqui ne peuvent pas être récupérés par la page Empire d\'OGame.");';
 
 $nb_planete = find_nb_planete_user();
-$nb_planete_lune = 2* find_nb_planete_user();
+$nb_planete_lune = 2* $nb_planete;
 
 $name = $coordinates = $fields = $temperature_min = $temperature_max = $satellite = "";
 for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
@@ -102,7 +102,7 @@ function autofill(planet_id, planet_selected) {
 	var i = 1;
 	var lign = 0;
 	var id = 0;
-	var lim = <?php print ($server_config['ddr']==1)?'42':'41'?>;
+	var lim = <?php print ($server_config['ddr']==1)?'42':'41' ; ?>;
 	if(planet_id > 9) {
 		lim = 17;
 		planet_id -= 9;
@@ -136,22 +136,25 @@ function message(msg) {
 
 <table width="100%">
 <tr>
-	<td class="c" colspan="10">Collez les informations et sélectionnez une planète pour les y assigner</td>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':($nb_planete +1) ; ?>">Collez les informations et sélectionnez une planète pour les y assigner</td> ?>
 </tr>
 <tr>
 <?php
 if ($view == "planets") {
 	echo "<th colspan='5'><a>Planètes</a></th>";
 	echo "<td class='c' align='center' colspan='5' onClick=\"window.location = 'index.php?action=home&view=moons';\"><a style='cursor:pointer'><font color='lime'>Lunes</font></a></td>";
+    echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete);
 }
 else {
 	echo "<td class='c' align='center' colspan='5' onClick=\"window.location = 'index.php?action=home&view=planets';\"><a style='cursor:pointer'><font color='lime'>Planètes</font></a></td>";
 	echo "<th colspan='5'><a>Lunes</a></th>";
+      echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete);
+
 }
 ?>
 	<!--<th colspan="5" onClick="window.location = 'index.php?action=home&view=planets';"><center><a style='cursor:pointer'>Planètes</a></center></th>
 	<th colspan="5" onClick="window.location = 'index.php?action=home&view=moons';"><center><a style='cursor:pointer'>Lunes</a></center></th>-->
-	</tr>
+    </tr>
 <form method="POST" name="post2" enctype="multipart/form-data" action="index.php">
 <tr>
 	<input type="hidden" name="action" value="set_empire">
@@ -162,15 +165,17 @@ else {
 	<label><input name="typedata" id="building" value="B" type="radio" onclick="if(!select_planet) message('Vous devez sélectionner une planète');"> <a>Bâtiments</a></label><label><input name="typedata" value="D" type="radio" onclick="if(!select_planet) message('Vous devez selectionner une planete');"> <a>Défenses</a></label>
 	<?php if($view=="planets") echo '<label><input name="typedata" value="T" type="radio"> <a>Technologies</a></label>' ?></th>
 	<th><input type="submit" value="Envoyer"></th>
+    <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 </tr>
 <tr>
-	<th width="10%"><a>Sélectionnez une planète</a></th>
-       <?php for ($i=$start ; $i<=$start+8 ; $i++) {
+	<th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><a>Sélectionnez une planète</a></th>
+       <?php for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
         //TODO => revoir et reecrire l html !!!!!!
         ?>
-        <th width="10%"><label><input name="planet_id" value="<?php echo $view=="planets" ? $start : $start + 100; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? $start : $start + 100; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[$i]["planet_name"]; ?></label></th>
+        <th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><label><input name="planet_id" value="<?php echo $view=="planets" ? $start : $start + 100; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? $start : $start + 100; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[$i]["planet_name"]; ?></label></th>
          <?php }
         ?>
+      
 
 </tr>
 <tr>
@@ -187,6 +192,7 @@ if($view == "planets") {
 	<th><a>Temp. Max.</a><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
 	<th><a>Nombre de satellites</a></th>
 	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
+     <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 <?php
 } // fin de si view="planets"
 else {
@@ -204,6 +210,7 @@ else {
 	<th></th>
 	<th></th>
 	<th></th>
+    <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 <?php
 } // fin de sinon view="planets"
 ?>
@@ -220,12 +227,12 @@ document.getElementById('satellite').style.visibility='hidden';
 <!-- FIN DU SCRIPT -->
 </form>
 <tr>
-	<td class="c" colspan="10">Vue d'ensemble de votre empire</td>
-</tr>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Vue d'ensemble de votre empire</td>
+   </tr>
 <tr>
 	<th>&nbsp;</th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	echo "<th>";
 	if (!isset($pub_view) || $pub_view == "planets") {
 		echo "<input type='image' title='Déplacer la planète ".$user_building[$i]["planet_name"]." vers la gauche' src='images/previous.png' onclick=\"window.location = 'index.php?action=move_planet&planet_id=".$i."&view=".$view."&left';\">&nbsp;&nbsp";
@@ -239,7 +246,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Nom</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") $name = "&nbsp;";
 
@@ -250,7 +257,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Coordonnées</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$coordinates = $user_building[$i]["coordinates"];
 	if ($coordinates == "" || ($user_building[$i]["planet_name"] == "" && $view=="moons")) $coordinates = "&nbsp;";
 	else $coordinates = "[".$coordinates."]";
@@ -262,7 +269,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Cases</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$fields = $user_building[$i]["fields"];
 	if ($fields == "0") $fields = 0;
 	$fields_used = $user_building[$i]["fields_used"];
@@ -274,7 +281,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Température Min.</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$temperature_min = $user_building[$i]["temperature_min"];
 	if ($temperature_min == "") $temperature_min = "&nbsp;";
 
@@ -285,7 +292,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Température Max.</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$temperature_max = $user_building[$i]["temperature_max"];
 	if ($temperature_max == "") $temperature_max = "&nbsp;";
 
@@ -296,12 +303,12 @@ if($view == "planets") {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Production théorique</td>
-</tr>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Production théorique</td>
+  </tr>
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$M = $user_building[$i]["M"];
 	if ($M != "") $production = production("M", $M);
 	else $production = "&nbsp";
@@ -313,7 +320,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$C = $user_building[$i]["C"];
 	if ($C != "") $production = production("C", $C);
 	else $production = "&nbsp";
@@ -325,7 +332,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$D = $user_building[$i]["D"];
 	$temperature_max = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i]["CEF"];
@@ -340,7 +347,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Energie</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	$CEF = $user_building[$i]["CEF"];
 	$Sat = $user_building[$i]["Sat"];
@@ -360,12 +367,12 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Bâtiments</td>
-</tr>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Bâtiments</td>
+ </tr>
 <tr>
 	<th><a>Mine de métal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$M = $user_building[$i]["M"];
 	if ($M == "") $M = "&nbsp;";
 
@@ -376,7 +383,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Mine de cristal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$C = $user_building[$i]["C"];
 	if ($C == "") $C = "&nbsp;";
 
@@ -387,7 +394,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Synthétiseur de deutérium</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$D = $user_building[$i]["D"];
 	if ($D == "") $D = "&nbsp;";
 
@@ -398,7 +405,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Centrale électrique solaire</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$CES = $user_building[$i]["CES"];
 	if ($CES == "") $CES = "&nbsp;";
 
@@ -409,7 +416,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Centrale électrique de fusion</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$CEF = $user_building[$i]["CEF"];
 	if ($CEF == "") $CEF = "&nbsp;";
 
@@ -422,7 +429,7 @@ else echo '</tr><tr> <td class="c" colspan="10">Bâtiments</td>';
 </tr>
 <tr><th><a>Usine de robots</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$UdR = $user_building[$i]["UdR"];
 	if ($UdR == "") $UdR = "&nbsp;";
 
@@ -435,7 +442,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Usine de nanites</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$UdN = $user_building[$i]["UdN"];
 	if ($UdN == "") $UdN = "&nbsp;";
 
@@ -448,7 +455,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Chantier spatial</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$CSp = $user_building[$i]["CSp"];
 	if ($CSp == "") $CSp = "&nbsp;";
 
@@ -459,7 +466,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Hangar de métal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$HM = $user_building[$i]["HM"];
 	if ($HM == "") $HM = "&nbsp;";
 
@@ -470,7 +477,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Hangar de cristal</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$HC = $user_building[$i]["HC"];
 	if ($HC == "") $HC = "&nbsp;";
 
@@ -481,7 +488,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Réservoir de deutérium</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$HD = $user_building[$i]["HD"];
 	if ($HD == "") $HD = "&nbsp;";
 
@@ -494,7 +501,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Laboratoire de recherche</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	if ($Lab == "") $Lab = "&nbsp;";
 
@@ -507,7 +514,7 @@ if ( $server_config['ddr'] == 1 )
 <tr>
 	<th><a>D&eacute;p&ocirc;t de ravitaillement</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$DdR = $user_building[$i]["DdR"];
 	if ($DdR == "") $DdR = "&nbsp;";
 
@@ -519,7 +526,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Terraformeur</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Ter = $user_building[$i]["Ter"];
 	if ($Ter == "") $Ter = "&nbsp;";
 
@@ -530,7 +537,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Silo de missiles</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Silo = $user_building[$i]["Silo"];
 	if ($Silo == "") $Silo = "&nbsp;";
 
@@ -544,7 +551,7 @@ else {
 <tr>
 	<th><a>Base lunaire</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$BaLu = $user_building[$i]["BaLu"];
 	if ($BaLu == "") $BaLu = "&nbsp;";
 
@@ -555,7 +562,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Phalange de capteur</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Pha = $user_building[$i]["Pha"];
 	if ($Pha == "") $Pha = "&nbsp;";
 
@@ -566,7 +573,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Porte de saut spatial</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$PoSa = $user_building[$i]["PoSa"];
 	if ($PoSa == "") $PoSa = "&nbsp;";
 
@@ -578,11 +585,12 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 </tr>
 <tr>
 	<td class="c" colspan="10">Divers</td>
+    <?php echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete); ?>
 </tr>
 <tr>
 	<th><a>Satellites</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Sat = $user_building[$i]["Sat"];
 	if ($Sat == "") $Sat = "&nbsp;";
 
@@ -593,12 +601,12 @@ if($view == "planets") {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Technologies</td>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Technologies</td>
 </tr>
 <tr>
 	<th><a>Technologie Espionnage</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Esp = "&nbsp;";
 
@@ -625,7 +633,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Ordinateur</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Ordi = "&nbsp;";
 
@@ -652,7 +660,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Armes</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Armes = "&nbsp;";
 
@@ -679,7 +687,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Bouclier</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Bouclier = "&nbsp;";
 
@@ -706,7 +714,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Protection des vaisseaux spatiaux</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Protection = "&nbsp;";
 
@@ -733,7 +741,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Energie</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$NRJ = "&nbsp;";
 
@@ -760,7 +768,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Hyperespace</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Hyp = "&nbsp;";
 
@@ -787,7 +795,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Réacteur à combustion</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RC = "&nbsp;";
 
@@ -814,7 +822,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Réacteur à impulsion</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RI = "&nbsp;";
 
@@ -841,7 +849,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Propulsion hyperespace</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$PH = "&nbsp;";
 
@@ -868,7 +876,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Laser</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Laser = "&nbsp;";
 
@@ -895,7 +903,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Ions</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Ions = "&nbsp;";
 
@@ -922,7 +930,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Plasma</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Plasma = "&nbsp;";
 	if ($user_building[$i][0] == true) {
@@ -947,7 +955,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Réseau de recherche intergalactique</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$RRI = "&nbsp;";
 
@@ -974,7 +982,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Astrophysique</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Astrophysique = "&nbsp;";
 
@@ -1001,7 +1009,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Technologie Graviton</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$Lab = $user_building[$i]["Lab"];
 	$Graviton = "&nbsp;";
 
@@ -1028,12 +1036,13 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Défenses</td>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Défenses</td>
+  
 </tr>
 <tr>
 	<th><a>Lanceur de missiles</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$LM = $user_defence[$i]["LM"];
 	if ($LM == "") $LM = "&nbsp;";
 
@@ -1044,7 +1053,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Artillerie laser légère</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$LLE = $user_defence[$i]["LLE"];
 	if ($LLE == "") $LLE = "&nbsp;";
 
@@ -1055,7 +1064,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Artillerie laser lourde</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$LLO = $user_defence[$i]["LLO"];
 	if ($LLO == "") $LLO = "&nbsp;";
 
@@ -1066,7 +1075,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Canon de Gauss</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$CG = $user_defence[$i]["CG"];
 	if ($CG == "") $CG = "&nbsp;";
 
@@ -1077,7 +1086,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Artillerie à ions</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$AI = $user_defence[$i]["AI"];
 	if ($AI == "") $AI = "&nbsp;";
 
@@ -1088,7 +1097,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Lanceur de plasma</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$LP = $user_defence[$i]["LP"];
 	if ($LP == "") $LP = "&nbsp;";
 
@@ -1099,7 +1108,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Petit bouclier</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$PB = $user_defence[$i]["PB"];
 	if ($PB == "") $PB = "&nbsp;";
 
@@ -1110,7 +1119,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Grand bouclier</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$GB = $user_defence[$i]["GB"];
 	if ($GB == "") $GB = "&nbsp;";
 
@@ -1123,7 +1132,7 @@ if($view == "planets") {
 <tr>
 	<th><a>Missile Interception</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$MIC = $user_defence[$i]["MIC"];
 	if ($MIC == "") $MIC = "&nbsp;";
 
@@ -1134,7 +1143,7 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 <tr>
 	<th><a>Missile Interplanétaire</a></th>
 <?php
-for ($i=$start ; $i<=$start+8 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$MIP = $user_defence[$i]["MIP"];
 	if ($MIP == "") $MIP = "&nbsp;";
 
@@ -1145,3 +1154,16 @@ for ($i=$start ; $i<=$start+8 ; $i++) {
 ?>
 </tr>
 </table>
+
+<?php
+function read_th($txt,$nb_planete){
+    $retour = "";
+    if ($nb_planete > 9 )
+    {
+      for ($i=10 ; $i<=$nb_planete; $i++) {
+       $retour=$retour.$txt;
+              
+    }
+    }
+	return $retour;
+    }
