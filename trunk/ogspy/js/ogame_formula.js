@@ -86,9 +86,9 @@ function update_page() {
 	var CEF_1 = new Array();
 	var Sat_1 = new Array();
 	
-	var nombrePlanete = 9;
+	var nombrePlanete = parseInt(document.getElementById('simu').title); // on passe par le titre du tableau pour recuperer le nombre de planetes, la recuperation du nb de colonne ne marchant pas ...
 	
-	for(i=1; i <= nombrePlanete; i++) {
+	for(i=101; i <= nombrePlanete+100; i++) {
 		var temperature_min_1 = document.getElementById("temperature_min_" + i).value;
 		var temperature_max_1 = document.getElementById("temperature_max_" + i).value;
 	
@@ -188,7 +188,7 @@ function update_page() {
 	var D_prod = 0;
 	var NRJ = 0;
 	
-	for(i=1; i <= nombrePlanete; i++) {
+	for(i=101; i <= nombrePlanete+100; i++) {
 		M_conso = M_conso + M_1_conso[i];
 		M_prod = M_prod + M_1_prod[i];
 		C_conso = C_conso + C_1_conso[i];
@@ -227,7 +227,7 @@ function update_page() {
 	// Batiments planetes
 	var total_b_pts = 0;
 	var total_pts_1 = new Array();
-	for(i=1; i <= nombrePlanete; i++) {
+	for(i=101; i <= nombrePlanete+100; i++) {
 		var building_1 = document.getElementById("building_" + i).value;
 		building_1 = building_1.split('<>');
 		var b_pts_1 = Math.floor(((60 + 15) * (1 - Math.pow(1.5, M_1[i])) / (-0.5)) + ((48 + 24) * (1 - Math.pow(1.6, C_1[i])) / (-0.6)) + ((225 +75) * (1 - Math.pow(1.5, D_1[i])) / (-0.5)) + ((75 + 30) * (1 - Math.pow(1.5, CES_1[i])) / (-0.5)) + ((900 + 360 + 180) * (1 - Math.pow(1.8, CEF_1[i])) / (-0.8)));
@@ -245,7 +245,7 @@ function update_page() {
 
 	// Defences planetes
 	var total_d_pts = 0;
-	for(i=1; i <= nombrePlanete; i++) {
+	for(i=101; i <= nombrePlanete+100; i++) {
 		var defence_1 = document.getElementById("defence_" + i).value;
 		defence_1 = defence_1.split('<>');
 		var d_pts_1 = 0;
@@ -263,10 +263,10 @@ function update_page() {
 	// Lunes de planetes
 	var total_lune_pts = 0;
 	var lune_pts_1 = new Array();
-	for(i=1; i <= nombrePlanete; i++) {
-		var lune_b_1 = document.getElementById("lune_b_" + (i + nombrePlanete)).value;
+	for(i=201; i <= nombrePlanete+200; i++) {
+		var lune_b_1 = document.getElementById("lune_b_" + (i )).value;
 		lune_b_1 = lune_b_1.split('<>');
-		var lune_defence_1 = document.getElementById("lune_d_" + (i + nombrePlanete)).value;
+		var lune_defence_1 = document.getElementById("lune_d_" + (i )).value;
 		lune_defence_1 = lune_defence_1.split('<>');
 		lune_pts_1[i] = 0;
 		for(j=0; j<(lune_b_1.length-2); j++) {
@@ -276,7 +276,7 @@ function update_page() {
 			lune_pts_1[i] += init_d_prix[j] * lune_defence_1[j];
 		}
 		total_lune_pts += lune_pts_1[i];
-		document.getElementById("lune_pts_" + (i + nombrePlanete)).innerHTML = Math.round(lune_pts_1[i]/1000);
+		document.getElementById("lune_pts_" + (i )).innerHTML = Math.round(lune_pts_1[i]/1000);
 	}
 
 	document.getElementById("total_lune_pts").innerHTML = Math.round(total_lune_pts/1000);
@@ -285,7 +285,7 @@ function update_page() {
 	// Sat planetes
 	var total_sat_pts = 0;
 	var sat_pts_1 = new Array();
-	for(i=1; i <= nombrePlanete; i++) {
+	for(i=101; i <= nombrePlanete+100; i++) {
 		var sat_lune_1 = document.getElementById("sat_lune_" + i).value;
 		sat_pts_1[i] = Math.round(Sat_1[i]*2.5+sat_lune_1*2.5);
 		total_sat_pts += sat_pts_1[i];
@@ -294,8 +294,9 @@ function update_page() {
 	
 	document.getElementById("total_sat_pts").innerHTML = total_sat_pts;
 	
-	for(i=1; i <= nombrePlanete; i++) {
-		document.getElementById("total_pts_" + i).innerHTML = Math.round((total_pts_1[i] + lune_pts_1[i])/1000)+sat_pts_1[i];
+	for(i=101; i <= nombrePlanete+100; i++) {
+	    var j= i+100;
+		document.getElementById("total_pts_" + i).innerHTML = Math.round((total_pts_1[i] + lune_pts_1[j])/1000)+sat_pts_1[i];
 	}
 	
 	// Technologies planete avec le labo de plus au niveau
@@ -323,6 +324,8 @@ function update_page() {
 	techno_pts = techno_pts + techno_astro_pts;
 	// Cout Total Techno
 	document.getElementById("techno_pts").innerHTML = Math.round(techno_pts/1000);
+	
+
 	
 	// Cout Total
 	document.getElementById("total_pts").innerHTML = Math.round((total_b_pts + total_d_pts + total_lune_pts + techno_pts)/1000)+total_sat_pts;

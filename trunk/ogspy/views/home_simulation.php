@@ -29,12 +29,12 @@ while ($row = mysql_fetch_assoc($quet)) {
 	$user_percentage[$row["planet_id"]] = $arr;
 }
 
-var_dump($user_percentage);
+
 ?>
 
 <SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
 
-<table width="1200">
+<table id="simu" width="1200" title="<?php echo $nb_planete;?>" >
 <tr>
 	<td class="c"></td>
 <?php
@@ -343,7 +343,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 <?php
 for ($i=201 ; $i<=200 + $nb_planete ; $i++) {
 	if ($user_building[$i]) echo "\t<input type='hidden' id='lune_b_".$i."' value='".implode(array_slice($user_building[$i],12,-2,true), "<>")."' />";
-	else echo "\t<input type='hidden' id='lune_b_".$i."' value='0' />";
+	else echo "\t<input type='hidden' id='lune_b_".$i100."' value='0' />";
 	echo "\t<input type='hidden' id='lune_d_".$i."' value='".implode($user_defence[$i], "<>")."' />";
 	echo "\t<th colspan='2'><font color='lime'><div id='lune_pts_".$i."'>-</div></font></th>"."\n";
 }
