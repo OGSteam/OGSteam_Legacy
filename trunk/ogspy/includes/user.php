@@ -1383,8 +1383,8 @@ function find_nb_planete_user() {
 	    
 	$result = $db->sql_query($request);
     
-    //mini 1 pour eviter bug 
-    if ($db->sql_numrows($result) == 0) return 1;
+    //mini 9 pour eviter bug affichage
+    if ($db->sql_numrows($result) <= 9) return 9;
         
      return $db->sql_numrows($result);
 
@@ -1410,7 +1410,7 @@ function user_del_building() {
 	$request = "delete from ".TABLE_USER_DEFENCE." where user_id = ".$user_data["user_id"]." and planet_id = ".intval($pub_planet_id);
 	$db->sql_query($request);
 
-	$request = "select * from ".TABLE_USER_BUILDING." where planet_id <= 9";
+	$request = "select * from ".TABLE_USER_BUILDING." where planet_id <= 199";
 	$result = $db->sql_query($request);
 	if ($db->sql_numrows($result) == 0) {
 		$request = "delete from ".TABLE_USER_TECHNOLOGY." where user_id = ".$user_data["user_id"];
