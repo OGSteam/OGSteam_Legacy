@@ -412,9 +412,12 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 }
 
 } // fin de si view="planets"
-else echo '</tr><tr> <td class="c" colspan="';
+else 
+{
+echo '</tr><tr> <td class="c" colspan="';
 print ($nb_planete <10)?'10':$nb_planete +1 ;
 echo '">Bâtiments</td>';
+}
 ?>
 </tr>
 <tr><th><a>Usine de robots</a></th>
