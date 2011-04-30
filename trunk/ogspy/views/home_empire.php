@@ -198,10 +198,7 @@ else {
 	<th><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
 	<th colspan="2"><a>Satellites</a></th>
 	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
-	<th></th>
-	<th></th>
-	<th></th>
-    <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
+	<?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 <?php
 } // fin de sinon view="planets"
 ?>
@@ -415,7 +412,9 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 }
 
 } // fin de si view="planets"
-else echo '</tr><tr> <td class="c" colspan="10">Bâtiments</td>';
+else echo '</tr><tr> <td class="c" colspan="';
+print ($nb_planete <10)?'10':$nb_planete +1 ;
+echo '">Bâtiments</td>';
 ?>
 </tr>
 <tr><th><a>Usine de robots</a></th>
@@ -575,9 +574,8 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Divers</td>
-    <?php echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete); ?>
-</tr>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ;?>">Divers</td>
+   </tr>
 <tr>
 	<th><a>Satellites</a></th>
 <?php
