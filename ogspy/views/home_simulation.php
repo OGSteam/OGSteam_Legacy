@@ -17,7 +17,6 @@ if ($user_empire["technology"]) $user_technology = $user_empire["technology"];
 else $user_technology = '0';
 
 $nb_planete = find_nb_planete_user();
-$nb_planete_lune = 2* $nb_planete;
 
 // Recuperation des pourcentages
 $planet = array("planet_id" => "", "M_percentage" => 0, "C_percentage" => 0, "D_percentage" => 0, "CES_percentage" => 100, "CEF_percentage" => 100, "Sat_percentage" => 100);
