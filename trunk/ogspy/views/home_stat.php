@@ -186,6 +186,9 @@ $user_building = $user_empire["building"];
 $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
 
+$nb_planete = find_nb_planete_user();
+$nb_planete_lune = 2* $nb_planete;
+
 $b = round(all_building_cumulate(array_slice($user_building,0,9))/1000);
 $d = round(all_defence_cumulate(array_slice($user_defence,0,9))/1000);
 $l = round(all_lune_cumulate(array_slice($user_building,9,9), array_slice($user_defence,9,9))/1000);
@@ -194,21 +197,25 @@ $f = $last["general_pts"] - $b - $d - $l - $t;
 if($f < 0) $f = 0;
 
 if($b==0 && $d==0 && $l==0 && $t==0) echo "<tr><th align='center'>Pas de données dans l'empire</th>";
+
 elseif($last["general_pts"] == 0) echo "<tr><th align='center'>Pas de données sur le total de points</th>";
 else echo "<tr><td align='center' width='400'><img src='index.php?action=graphic_pie&values=".$b."_x_".$d."_x_".$l."_x_".$f."_x_".$t."&legend=Batiments_x_Défenses_x_Lunes_x_Flotte_x_Technologies&title=Dernière répartition des points connue' alt='pas de graphique disponible'/></td>\n";
 
 $planet = array();
 $planet_name = array();
-for($i=1; $i<=9; $i++)
+for($i=1; $i<=$nb_planete; $i++)
 {
 	$b = round(all_building_cumulate(array_slice($user_building,$i-1,1))/1000);
 	$d = round(all_defence_cumulate(array_slice($user_defence,$i-1,1))/1000);
 	$l = round(all_lune_cumulate(array_slice($user_building,$i+8,1), array_slice($user_defence,$i+8,1))/1000);
 	if($b!=0 || $d!=0 || $l!=0) {
 		$planet[] = $b + $d + $l;
-		$planet_name[] = $user_building[$i]['planet_name'];
+		$planet_name[] = $user_building[$i+100]['planet_name'];
 	}
 }
+var_dump($planet);
+var_dump($planet_name);
+var_dump($last["general_pts"]);
 
 if($b==0 && $d==0 && $l==0 && $t==0) echo "<th align='center'>Pas de données dans l'empire</th></tr></table>";
 else echo "<td align='center' width='400'><img src='index.php?action=graphic_pie&values=".implode($planet,"_x_")."&legend=".implode($planet_name,"_x_")."&title=Proportion des planètes - lunes comprises' alt='pas de graphique disponible'/></td></tr></table>\n";
