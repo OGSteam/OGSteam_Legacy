@@ -19,14 +19,6 @@ $user_building = $user_empire["building"];
 $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
 
-///debug
-//echo find_nb_planete_user();
-//var_dump($user_building);
-//var_dump($user_defence);
-//var_dump($user_technology);
-//fin debug
-
-
 if(!isset($pub_view) || $pub_view=="") $view = "planets";
 elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
@@ -39,7 +31,6 @@ $start = $view=="planets" ? 101 : 201;
 if(isset($pub_alert_empire) && $pub_alert_empire) echo 'message("Pensez à renseigner, si besoin est, les noms de planètes et les températures\nqui ne peuvent pas être récupérés par la page Empire d\'OGame.");';
 
 $nb_planete = find_nb_planete_user();
-$nb_planete_lune = 2* $nb_planete;
 
 $name = $coordinates = $fields = $temperature_min = $temperature_max = $satellite = "";
 for ($i=101 ; $i<=$nb_planete+100 ; $i++) {

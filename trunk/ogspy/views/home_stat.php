@@ -187,7 +187,6 @@ $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
 
 $nb_planete = find_nb_planete_user();
-$nb_planete_lune = 2* $nb_planete;
 
 $b = round(all_building_cumulate(array_slice($user_building,0,9))/1000);
 $d = round(all_defence_cumulate(array_slice($user_defence,0,9))/1000);
@@ -213,9 +212,7 @@ for($i=1; $i<=$nb_planete; $i++)
 		$planet_name[] = $user_building[$i+100]['planet_name'];
 	}
 }
-var_dump($planet);
-var_dump($planet_name);
-var_dump($last["general_pts"]);
+
 
 if($b==0 && $d==0 && $l==0 && $t==0) echo "<th align='center'>Pas de données dans l'empire</th></tr></table>";
 else echo "<td align='center' width='400'><img src='index.php?action=graphic_pie&values=".implode($planet,"_x_")."&legend=".implode($planet_name,"_x_")."&title=Proportion des planètes - lunes comprises' alt='pas de graphique disponible'/></td></tr></table>\n";
