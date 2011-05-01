@@ -10,11 +10,11 @@
 if (!defined("IN_SPYOGAME")) {
 	die("Hacking attempt");
 }
-
 $user_name = $user_data["user_name"];
 $user_galaxy = $user_data["user_galaxy"];
 $user_system = $user_data["user_system"];
 $user_skin = $user_data["user_skin"];
+$user_stat_name = $user_data["user_stat_name"];
 if ($server_config["disable_ip_check"] == 1) $disable_ip_check = $user_data["disable_ip_check"] == 1 ? "checked" : "";
 else $disable_ip_check = "disabled";
 $off_amiral = ( isset ( $user_data["off_amiral"] ) && $user_data["off_amiral"] == 1 ) ? "checked" : "";
@@ -86,6 +86,15 @@ function check_password(form) {
 	<th>
 		<input name="galaxy" type="text" size="3" maxlength="2" value="<?php echo $user_galaxy;?>">&nbsp;
 		<input name="system" type="text" size="3" maxlength="3" value="<?php echo $user_system;?>">
+	</th>
+</tr>
+<tr>
+	<td class="c" colspan="2">Pseudo ingame</td>
+</tr>
+<tr>
+	<th>Pseudo ingame&nbsp;<?php echo help("profile_pseudo_ingame");?></th>
+	<th>
+		<input name="pseudo_ingame" type="text" size="20" value="<?php echo $user_stat_name;?>">
 	</th>
 </tr>
 <tr>

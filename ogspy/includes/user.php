@@ -297,9 +297,9 @@ function admin_regeneratepwd() {
  */
 function member_user_set() {
 	global $db, $user_data, $user_technology;
-	global $pub_pseudo, $pub_old_password, $pub_new_password, $pub_new_password2, $pub_galaxy, $pub_system, $pub_skin, $pub_disable_ip_check, $pub_off_amiral, $pub_off_ingenieur, $pub_off_geologue, $pub_off_technocrate;
+	global $pub_pseudo, $pub_old_password, $pub_new_password, $pub_new_password2, $pub_galaxy, $pub_system, $pub_skin, $pub_disable_ip_check, $pub_off_amiral, $pub_off_ingenieur, $pub_off_geologue, $pub_off_technocrate, $pub_pseudo_ingame;
 
-	if (!check_var($pub_pseudo, "Text") || !check_var($pub_old_password, "Text") || !check_var($pub_new_password, "Text") || !check_var($pub_new_password2, "CharNum") || !check_var($pub_galaxy, "Num") || !check_var($pub_system, "Num") || !check_var($pub_skin, "URL") || !check_var($pub_disable_ip_check, "Num")) {
+	if (!check_var($pub_pseudo, "Text") || !check_var($pub_old_password, "Text") || !check_var($pub_new_password, "Text") || !check_var($pub_new_password2, "CharNum") || !check_var($pub_galaxy, "Num") || !check_var($pub_system, "Num") || !check_var($pub_skin, "URL") || !check_var($pub_disable_ip_check, "Num") || !check_var($pub_pseudo_ingame, "Text") ) {
 		redirection("index.php?action=message&id_message=errordata&info");
 	}
 
@@ -327,6 +327,12 @@ function member_user_set() {
 		redirection("index.php?action=message&id_message=member_modifyuser_failed_pseudo&info");
 	}
 	
+    //pseudo ingame
+    if ($user_data["user_stat_name"] !== $pub_pseudo_ingame ){
+	$db->sql_query("UPDATE ".TABLE_USER." SET `user_stat_name` = '".$pub_pseudo_ingame."' WHERE `user_id` = ".$user_id);
+	}
+	    
+    
 	//compte amiral
 	if ($user_data['off_amiral'] == "0" && $pub_off_amiral == 1){
 	$db->sql_query("UPDATE ".TABLE_USER." SET `off_amiral` = '1' WHERE `user_id` = ".$user_id);
