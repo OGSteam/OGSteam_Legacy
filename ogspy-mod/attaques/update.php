@@ -347,5 +347,13 @@ if ($version == "0.8d")
 	
 	$version = "0.8j";
   }
+  if ($version == "0.8j")
+  {
+  //Puis on change la version
+	$query  = "UPDATE ".TABLE_MOD." SET version='0.8.11' WHERE action='attaques' LIMIT 1";
+	$db->sql_query($query);
+	
+	$version = "0.8.11";
+  }
   
 ?>
