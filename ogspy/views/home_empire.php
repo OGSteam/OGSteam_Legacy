@@ -159,7 +159,7 @@ else {
 	<th><input type="submit" value="Envoyer"></th>
     <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 </tr>
--->
+
 <tr>
 	<th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><a>Sélectionnez une planète</a></th>
        <?php for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
@@ -170,7 +170,8 @@ else {
         ?>
       
 
-</tr> 
+</tr>
+
 <tr>
 <?php
 if($view == "planets") {
@@ -205,7 +206,7 @@ else {
 } // fin de sinon view="planets"
 ?>
 </tr>
-<!-- DEBUT DU SCRIPT -->
+
 <script language="JavaScript">
 document.getElementById('planet_name').style.visibility='hidden';
 document.getElementById('coordinates').style.visibility='hidden';
@@ -214,8 +215,8 @@ document.getElementById('temperature_min').style.visibility='hidden';
 document.getElementById('temperature_max').style.visibility='hidden';
 document.getElementById('satellite').style.visibility='hidden';
 </script>
-<!-- FIN DU SCRIPT -->
-</form>
+
+</form> --> 
 <tr>
 	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Vue d'ensemble de votre empire</td>
    </tr>
