@@ -6,7 +6,9 @@
 (-) = Bug corrigé
 (!) = Bug non corrigé
 
-
+-AdvSpy- v0.9.5
+(*) Mise à jour du Numéro de version suite au formalisme décidé. X.Y.Z
+(*) Quelques petites corrections orthographiques
 
 
 -AdvSpy- v0.94
