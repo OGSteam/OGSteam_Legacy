@@ -127,7 +127,7 @@ function message(msg) {
 
 <table width="100%">
 <tr>
-	<td class="c" colspan="<?php print ($nb_planete <10)?'10':($nb_planete +1) ; ?>">Collez les informations et sélectionnez une planète pour les y assigner</td> ?>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':($nb_planete +1) ; ?>">Collez les informations et sélectionnez une planète pour les y assigner</td>
 </tr>
 <tr>
 <?php
@@ -146,7 +146,8 @@ else {
 	<!--<th colspan="5" onClick="window.location = 'index.php?action=home&view=planets';"><center><a style='cursor:pointer'>Planètes</a></center></th>
 	<th colspan="5" onClick="window.location = 'index.php?action=home&view=moons';"><center><a style='cursor:pointer'>Lunes</a></center></th>-->
     </tr>
-<form method="POST" name="post2" enctype="multipart/form-data" action="index.php">
+    <?php //TODO =>Suppression de l'insertion Manuelle ?>
+<!-- <form method="POST" name="post2" enctype="multipart/form-data" action="index.php">
 <tr>
 	<input type="hidden" name="action" value="set_empire">
 	<input type="hidden" name="view" value="<?php echo $view; ?>">
@@ -158,6 +159,7 @@ else {
 	<th><input type="submit" value="Envoyer"></th>
     <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
 </tr>
+-->
 <tr>
 	<th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><a>Sélectionnez une planète</a></th>
        <?php for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
@@ -168,7 +170,7 @@ else {
         ?>
       
 
-</tr>
+</tr> 
 <tr>
 <?php
 if($view == "planets") {
