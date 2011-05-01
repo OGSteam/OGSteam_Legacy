@@ -171,7 +171,8 @@ if ($db->sql_numrows($result)) {
 </div>
 <br />
 <table>
-<form method="POST" name="post" enctype="multipart/form-data" action="index.php">
+<?php //TODO =>Suppression de l'insertion Manuelle ?>
+<!-- <form method="POST" name="post" enctype="multipart/form-data" action="index.php">
 <input type="hidden" name="action" value="get_data">
 <?php
 if (sizeof($items) > 0) {
@@ -198,5 +199,5 @@ if (sizeof($items) > 0) {
 	echo "</tr>"."\n";
 }
 ?>
-</form>
+</form> -->
 </table>
