@@ -329,7 +329,7 @@ function member_user_set() {
 	
     //pseudo ingame
     if ($user_data["user_stat_name"] !== $pub_pseudo_ingame ){
-	$db->sql_query("UPDATE ".TABLE_USER." SET `user_stat_name` = '".$pub_pseudo_ingame."' WHERE `user_id` = ".$user_id);
+	user_set_stat_name($pub_pseudo_ingame);
 	}
 	    
     
@@ -1895,6 +1895,7 @@ function usergroup_delmember() {
 
 /**
 * A quoi sert donc cette fonction ? :p
+* Reponse elle sert a mettre a jour le pseudo ingame afin d afficher les stats users dans son espace perso
 */
 function user_set_stat_name($user_stat_name) {
 	global $db, $user_data;
