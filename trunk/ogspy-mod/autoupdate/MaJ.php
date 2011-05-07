@@ -89,7 +89,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 						
 						if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
 							//if (version_compare($installed_mods[$i]['version'],$cur_version,"<"))
-							if (version_compare($installed_mods[$i]['version'],$cur_version,"<")) {
+							if (version_compare($installed_mods[$i]['version'],$cur_version,"<>")) {
 								$modzip = "http://update.ogsteam.fr/mods/download.php?download=".$cur_modname."-".$cur_version;
 								
 								if(@copy($modzip , "./mod/autoupdate/tmp/".$cur_modname.".zip")) {

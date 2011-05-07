@@ -156,7 +156,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 						if (!is__writable("./mod/".$installed_mods[$i]['root']."/")) echo "<a title='Pas de droit en écriture sur:./mod/".$installed_mods[$i]['root']."'><font color=red>(RO)</font></a>";
 						else {
 							//if (mustUpdate($installed_mods[$i]['version'],$cur_version))
-							if (version_compare($installed_mods[$i]['version'],$cur_version,"<"))
+							if (version_compare($installed_mods[$i]['version'],$cur_version,"<>"))
 							{
 								// $ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>;
 								$ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=".$cur_version."'>".$lang['autoupdate_tableau_uptodate']."</a>";
