@@ -1,2 +1,2 @@
 MOD Autonomie
-1.5b
+1.5.2

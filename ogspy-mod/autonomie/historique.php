@@ -101,4 +101,10 @@ note: Il faut modifier dans le code à la 18ème ligne le chiffre pour le faire. D
 <li>Correction du bug qui faisait que l'autonomie globale de la planète est recopiée depuis la planète précédente.</li>
 </ul></td>
 </tr>
+<tr>
+<th><font color="#FF0000">1.5.2</font></th>
+<td><ul>
+<li>Mise en conformité du numéro de version de mod.</li>
+</ul></td>
+</tr>
 </table>
