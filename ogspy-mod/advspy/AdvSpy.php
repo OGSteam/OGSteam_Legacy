@@ -38,8 +38,8 @@ if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt (ou alors mo
 define("IN_MOD_ADVSPY",TRUE);
 
 
-// dossier dans lequel est installé AdvSpy (avec un / a la fin) defaut : "./mod/AdvSpy/" )
-$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/AdvSpy/";
+// dossier dans lequel est installé AdvSpy (avec un / a la fin) defaut : "./mod/advspy/" )
+$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/advspy/";
 
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_menu.php";
@@ -50,9 +50,9 @@ include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_functions.php";
 //ancien fichier lang_fr
 //include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."AdvSpy_Lang_fra.php";
 // Récupération des chaines de langue
-require_once("mod/AdvSpy/lang/lang_FR/AdvSpy.php");
-if (file_exists("mod/AdvSpy/lang/lang_".$server_config['language']."/AdvSpy.php")) require_once("mod/AdvSpy/lang/lang_".$server_config['language']."/AdvSpy.php");
-if (file_exists("mod/AdvSpy/lang/lang_".$user_data['user_language']."/AdvSpy.php")) require("mod/AdvSpy/lang/lang_".$server_config['language']."/AdvSpy.php");
+require_once("mod/advspy/lang/lang_FR/AdvSpy.php");
+if (file_exists("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php")) require_once("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php");
+if (file_exists("mod/advspy/lang/lang_".$user_data['user_language']."/AdvSpy.php")) require("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php");
 
 //versions concomitantes
 $AdvSpyConfig['version']['ogspy']='4.0';
