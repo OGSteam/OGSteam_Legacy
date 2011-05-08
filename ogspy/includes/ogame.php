@@ -91,12 +91,29 @@ function depot_capacity($level)
     // capacité par défaut
     $capacity = 10000;
 
-    if ($level > 0) 
-        {
-            $capacity = 5000 * floor((2.5 * exp(20 * $level / 33)));
-        }
+    if ($level > 0) {
+        $capacity = 5000 * floor((2.5 * exp(20 * $level / 33)));
+    }
     $result = round($capacity);
-    
+
+    return $result;
+}
+
+//renvoit le nombre de planete max
+function astro_max_planete($level)
+{
+    global $server_config;
+
+    // nouvel uni
+    $result = 1; // la pm ...
+    if ($level > 0) {
+        $result = ceil($level / 2) + 1;
+    }
+
+    // anciens unis peuvent avoir 9 planetes sans la techno
+    if ($server_config['astro_strict'] == 1 || $level < 15) {
+       return 9;
+    }
     return $result;
 }
 
