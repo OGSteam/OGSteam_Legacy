@@ -38,9 +38,8 @@ var Xoptions = {
 				$('password'+server.n).value	= server.password;
 				$('active'+server.n).checked	= server.active ? true : false;
 			});
-			
-			var len = boolPrefs.length;
-			for (i = 0; i < len; i++) {
+	
+			for (i = 0; i < boolPrefs.length ; i++) {
 				$(boolPrefs[i]).checked = Xprefs.getBool(boolPrefs[i],true);
 			}
 			
@@ -50,7 +49,7 @@ var Xoptions = {
 			window.sizeToContent();
 		} catch(e) {
 			show_backtrace(e);
-			//Xconsole('erreur'+boolPrefs[i]+' '+i);
+			Xconsole('erreur'+boolPrefs[i]+' '+i);
 		}
 	},
 	
