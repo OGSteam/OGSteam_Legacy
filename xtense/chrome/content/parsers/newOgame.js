@@ -442,7 +442,7 @@ var XnewOgame = {
 				"PH": tabLevel[7],
 				"Esp": tabLevel[8], 
 				"Ordi": tabLevel[9],
-				"Expeditions": tabLevel[10],
+				"Astrophysique": tabLevel[10],
 				"RRI": tabLevel[11],
 				"Graviton": tabLevel[12],
 				"Armes": tabLevel[13],

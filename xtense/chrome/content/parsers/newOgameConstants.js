@@ -126,7 +126,7 @@ XnewOgame.database = {
 						113:'NRJ', 114:'Hyp', 115:'RC', 
 						117:'RI', 118:'PH', 120:'Laser', 
 						121:'Ions', 122:'Plasma', 123:'RRI', 
-						124: 'Expeditions', 199:'Graviton'
+						124: 'Astrophysique', 199:'Graviton'
 						},
 	'fleet': { 		202:'PT', 203:'GT', 204:'CLE', 205:'CLO',
 						206:'CR', 207:'VB', 208:'VC', 209:'REC', 
