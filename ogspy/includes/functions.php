@@ -260,7 +260,7 @@ function set_server_view() {
 
 function set_serverconfig() {
 	global $db, $user_data, $server_config;
-	global $pub_max_battlereport, $pub_max_favorites, $pub_max_favorites_spy, $pub_max_spyreport, $pub_server_active ,$pub_session_time, $pub_max_keeplog, $pub_default_skin, $pub_debug_log, $pub_reason, $pub_ally_protection, $pub_url_forum, $pub_max_keeprank, $pub_keeprank_criterion, $pub_max_keepspyreport, $pub_servername, $pub_allied, $pub_disable_ip_check, $pub_num_of_galaxies, $pub_num_of_systems, $pub_log_phperror, $pub_block_ratio, $pub_ratio_limit, $pub_speed_uni, $pub_ddr;
+	global $pub_max_battlereport, $pub_max_favorites, $pub_max_favorites_spy, $pub_max_spyreport, $pub_server_active ,$pub_session_time, $pub_max_keeplog, $pub_default_skin, $pub_debug_log, $pub_reason, $pub_ally_protection, $pub_url_forum, $pub_max_keeprank, $pub_keeprank_criterion, $pub_max_keepspyreport, $pub_servername, $pub_allied, $pub_disable_ip_check, $pub_num_of_galaxies, $pub_num_of_systems, $pub_log_phperror, $pub_block_ratio, $pub_ratio_limit, $pub_speed_uni, $pub_ddr, $pub_astro_strict;
 	
   if (!isset($pub_num_of_galaxies))
     $pub_num_of_galaxies = intval($server_config['num_of_galaxies']);
@@ -439,6 +439,11 @@ function set_serverconfig() {
 	//
 	if (!isset($pub_ddr)||!is_numeric($pub_ddr)) $pub_ddr = 0;
 	$request = "update ".TABLE_CONFIG." set config_value = '".$pub_ddr."' where config_name = 'ddr'";
+	$db->sql_query($request);
+
+    //
+	if (!isset($pub_astro_strict)||!is_numeric($pub_astro_strict)) $pub_ddr = 0;
+	$request = "update ".TABLE_CONFIG." set config_value = '".$pub_astro_strict."' where config_name = 'astro_strict'";
 	$db->sql_query($request);
 
 	//
