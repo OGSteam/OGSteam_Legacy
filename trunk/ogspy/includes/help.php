@@ -42,6 +42,7 @@ $help["galaxy_phalanx"] = "Chargez des rapports d'espionnage pour afficher les p
 $help["ratio_block"] = "Vous avez un ratio inferieur au seuil, vous ne pouvez pas accéder aux mods";
 $help["profile_speed_uni"] = "Indiquez le multiplicateur de vitesse de votre univers (1 par défaut)";
 $help["profile_ddr"] = "Cocher si le dépôt de ravitaillement est présent dans votre univers";
+$help["astro_strict"] = "Cocher si l'univers est ancien. Cela permet d'avoir 9 planetes sans avoir la technologie astrophysique correspondante.";
 
 /**
 * Création d'un lien d'aide en popup sur image

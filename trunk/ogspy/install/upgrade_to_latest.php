@@ -596,6 +596,7 @@ switch ($ogsversion) {
 		$requests[] = "ALTER TABLE ".TABLE_USER_TECHNOLOGY." CHANGE Expeditions Astrophysique SMALLINT(2) NOT NULL default '0'";
 		$requests[] = "ALTER TABLE ".TABLE_MOD." MODIFY version VARCHAR(10)";
 		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.0.7' WHERE config_name = 'version'";
+		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('astro_strict','1')";
 		$ogsversion = '3.0.7';
 		$up_to_date = true;
 		break;

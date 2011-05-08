@@ -46,6 +46,7 @@ $block_ratio = $server_config['block_ratio'] == 1 ? "checked" : "";
 $ratio_limit = $server_config['ratio_limit'];
 $speed_uni = $server_config['speed_uni'];
 $ddr = $server_config['ddr'];
+$astro_strict = $server_config['astro_strict'];
 ?>
 
 <table width="100%">
@@ -163,6 +164,12 @@ $ddr = $server_config['ddr'];
 <tr>
 	<th width="60%">D&eacute;p&ocirc;t de ravitaillement&nbsp;<?php echo help("profile_ddr");?></th>
 	<th><input name="ddr" value="1" type="checkbox"<?php print ($ddr==1)? ' checked':'' ?>></th>
+</tr>
+<tr>
+</tr>
+<tr>
+	<th width="60%">Technologie astrophysique stricte<?php echo help("astro_strict");?></th>
+	<th><input name="astro_strict" value="1" type="checkbox"<?php print ($astro_strict==1)? ' checked':'' ?>></th>
 </tr>
 <tr>
 <?php
