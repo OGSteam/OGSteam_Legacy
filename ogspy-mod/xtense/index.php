@@ -709,7 +709,7 @@ Calendar.setup({
 	</div>
 </div>
 
-<div id="foot"><?php echo round($php_timing, 2); ?> ms - Cr&eacute;&eacute; par Unibozu - <a href="http://www.ogsteam.fr/viewforum.php?id=59" onclick="return winOpen(this);" target="_blank">Support</a></div>
+<div id="foot"><?php echo round($php_timing, 2); ?> ms - Cr&eacute;&eacute; par Unibozu - <a href="http://board.ogsteam.fr/" onclick="return winOpen(this);" target="_blank">Support</a></div>
 
 
 </body>
