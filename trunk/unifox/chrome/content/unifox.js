@@ -3019,6 +3019,7 @@ function uf_init_interface2(table1,doc) {
 }
 
 function uf_changeInterface2(tbody,doc) {
+	//alert('ok');
 	var table = doc.getElementById("interface2");//[0].getElementsByTagName("tbody")[0];
 	var tdtitre = tbody.getElementsByTagName("tr")[0].getElementsByTagName("td")[0];
 	var tdimg = tbody.getElementsByTagName("tr")[1].getElementsByTagName("td")[0];
@@ -3107,8 +3108,10 @@ function uf_changeInterface2(tbody,doc) {
 }
 
 function uf_check_interface(table,doc) {
+	
 	if (table != null) {
 		if (ufGetPref("unifoxRestructurateBody",true)) {
+			ufLog("Restructurating Body");
 			// Correction d'un bug de positionnement en hauteur de ligne lie au rowspan du menu.
 			var trbug = uf_getNode("/html/body/table/tbody/tr",doc);
 			trbug.setAttribute("height", "20");
@@ -3121,9 +3124,22 @@ function uf_check_interface(table,doc) {
 				for (var cpt=0; cpt< tbodys.length; cpt++) {
 					uf_changeInterface2(tbodys[cpt],doc);
 				}
-				table.parentNode.parentNode.replaceChild(doc.getElementById("interface2"), doc.getElementById("interface"));
+				var newTable = doc.getElementById("interface2");
+				var oldTable = doc.getElementById("interface");
+				var div = oldTable.parentNode;
+				div.removeChild(oldTable);
+				//div.replaceChild(newTable,oldTable );
+				ufLog("newTable:"+newTable);
+				ufLog("oldTable:"+oldTable);
+				ufLog("table:"+table);
+				ufLog("table.parentNode:"+table.parentNode);
+				ufLog("oldTable.parentNode:"+oldTable.parentNode);
+				//ufDump(table);
+				//var parentTable = table.parentNode.parentNode;
+				//ufLog(parentTable);
+				//parentTable.replaceChild(newTable,oldTable );
 			}
-
+			ufLog("fin Restructurating Body");
 		//table.innerHTML+="";
 		} else {
 			var tbodys = table.getElementsByTagName("tbody");
@@ -3604,6 +3620,8 @@ function affiche_PTGT(tr,table,doc)
 function uf_TochagaFunctions(doc) {
 try{
 	if(!doc)return;
+	ufLog("debut uf_TochagaFunctions");
+	
 	//ajout des d?clarations de style perso
 	var headnode = uf_getNode("/html/head",doc);
 	var css = doc.createElement("style");
@@ -3641,13 +3659,16 @@ try{
 		table = uf_getNode("id('divpage')/table[2]/tbody",doc);//corps de page
 		if(!table)
 			table = uf_getNode("/html/body/table/tbody/tr[2]/td/center/table[2]/tbody",doc);//v3
+		ufLog("avant uf_check_interface:"+table);
 		uf_check_interface(table,doc);
-
+		ufLog("après uf_check_interface:"+table);
+		//alert(doc.body.innerHTML);
 		//inclus dans le jeu depuis le 02/05/08
 		if(ufGetPref("unifoxBuildingsTime",true))
 		{
 		table = uf_getNode("id('divpage')/table[1]/tbody",doc);//tableau situé au dessus, lorsqu'un batiment est en construction
 		if (table != null ) {
+			ufLog("avant uf_affiche_heure_bat_et_labo:"+table);
 			uf_affiche_heure_bat_et_labo(table,doc);
 		}
 		/*else {
@@ -3656,6 +3677,8 @@ try{
 			{table=table.snapshotItem(0);
 			alert(table.innerHTML);}
 			}*/
+		ufLog("fin uf_isBuildingsUrl");
+		//alert(doc.body.innerHTML);
 		}
 	}else if (uf_isResearchUrl(doc.location.href) ){
 		//centre technique
