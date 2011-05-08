@@ -1,4 +1,4 @@
-var ufConsoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+//var ufConsoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
 var prefObjUF = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 var PrefsBranchUF = prefObjUF.getBranch("unifox.userprefs.");
 //var ufGetPref("ufDebugMode", false); = false;
@@ -74,6 +74,7 @@ ufLog(e.name+": "+e.message+"|line "+e.lineNumber+"");
 }
 function ufLog(msg) {
  if(ufGetPref("ufDebugMode", false))
+	var ufConsoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
   ufConsoleService.logStringMessage("UniFox says: \n"+msg);
 }
 function ufGetBrowserLang()
@@ -297,7 +298,9 @@ function unifoxdebug(e,func,doc) {
 if(ufGetPref("ufDebugMode",true))
 {
 	var str=ufLang.GetStringFromName("errors.unifox")+"<br/>";
-	str+=e.name+": "+e.message+/*"<br/>line "+e.lineNumber+*/"<br/><br/>"+e.stack.replace(/\n/g,"<br/>");
+	str+=e.name+": "+e.message+/*"<br/>line "+e.lineNumber+*/"<br/><br/>;"
+	if(e.stack != null)
+		str+=e.stack.replace(/\n/g,"<br/>");
 	if(func)str+="<br/>"+ufLang.GetStringFromName("errors.in")+" "+func;
 	if(doc && doc.body) {
 		var div=doc.createElement("div");
