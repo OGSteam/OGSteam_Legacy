@@ -129,28 +129,28 @@ function quote($str) {
 function home_check($type, $coords) {
 	global $db, $user_data;
 	
-	$empty_planets 	= array(1=>1,2,3,4,5,6,7,8,9);
-	$empty_moons 	= array(10=>10,11,12,13,14,15,16,17,18);
+	$empty_planets 	= array(101=>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+	$empty_moons 	= array(201=>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
 	$planets = $moons = array();
-	$offset = ($type == TYPE_PLANET ? 0 : 9);
+	$offset = ($type == TYPE_PLANET ? 100 : 200);
 	
 	$query = $db->sql_query("SELECT planet_id, coordinates FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data['user_id']." ORDER BY planet_id ASC");
 	while ($data = $db->sql_fetch_assoc($query)) {
-		if ($data['planet_id'] < 10) {
+		if ($data['planet_id'] < 200) {
 			$planets[$data['planet_id']] = $data['coordinates'];
-			unset($empty_planets[$data['planet_id']], $empty_moons[$data['planet_id']+9]);
+			unset($empty_planets[$data['planet_id']], $empty_moons[$data['planet_id']+100]);
 		}
 		else {
 			$moons[$data['planet_id']] = $data['coordinates'];
-			unset($empty_moons[$data['planet_id']], $empty_planets[$data['planet_id']-9]);
+			unset($empty_moons[$data['planet_id']], $empty_planets[$data['planet_id']-100]);
 		}
 	}
 	foreach ($planets as $id => $p) {
 		if ($p == $coords || $coords == "unknown") {
 			// Si c'est une lune on check si une lune existe déjà
 			if ($type == TYPE_MOON) {
-				if (isset($moons[$id+$offset])) return array('update', 'id' => $id+$offset);
-				else return array('add', 'id' => $id+$offset);
+				if (isset($moons[$id+100])) return array('update', 'id' => $id+100);
+				else return array('add', 'id' => $id+100);
 			}
 			
 			return array('update', 'id' => $id);
@@ -160,17 +160,17 @@ function home_check($type, $coords) {
 	// Si une lune correspond a la planete, on place la planete sous la lune
 	foreach ($moons as $id => $m) {
 		if ($m == $coords) {
-			return array($type == TYPE_PLANET ? 'add' : 'update', 'id' => $id-9+$offset);
+			return array($type == TYPE_PLANET ? 'add' : 'update', 'id' => $id-100+$offset);
 		}
 	}
 	
 	if ($type == TYPE_PLANET) {
 		if (count($empty_planets) == 0) return array('full');
-		foreach ($empty_planets as $p) return array('add', 'id' => $p);
+		foreach ($empty_planets as $p) return array('add', 'id' => $p+$offset);
 	}
 	else {
 		if (count($empty_moons) == 0) return array('full');
-		foreach ($empty_moons as $p) return array('add', 'id' => $p);
+		foreach ($empty_moons as $p) return array('add', 'id' => $p+$offset);
 	}
 }
 

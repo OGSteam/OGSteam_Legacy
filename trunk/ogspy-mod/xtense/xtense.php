@@ -38,7 +38,7 @@ if ($time > mktime(16,0,0) && $time < (mktime(0,0,0)+60*60*24)) $timestamp = mkt
 
 Check::data(isset($pub_toolbar_version, $pub_mod_min_version, $pub_user, $pub_password, $pub_univers));
 
-if (version_compare($pub_toolbar_version, TOOLBAR_MIN_VERSION, '<=')) {
+if (version_compare($pub_toolbar_version, TOOLBAR_MIN_VERSION, '<')) {
 	$io->set(array(
 		'type' => 'wrong version',
 		'target' => 'toolbar',
@@ -47,7 +47,7 @@ if (version_compare($pub_toolbar_version, TOOLBAR_MIN_VERSION, '<=')) {
 	$io->send(0, true);
 }
 
-if(version_compare($pub_mod_min_version, PLUGIN_VERSION, '<=')) {
+if(version_compare($pub_mod_min_version, PLUGIN_VERSION, '<')) {
 	$io->set(array(
 		'type' => 'wrong version',
 		'target' => 'plugin',
@@ -154,7 +154,7 @@ switch ($pub_type){
 			
 			
 			$home = home_check($planet_type, $coords);
-			
+			add_log('overview', $home[0]);
 			if ($home[0] == 'full') {
 				$io->set(array(
 						'type' => 'home full'
