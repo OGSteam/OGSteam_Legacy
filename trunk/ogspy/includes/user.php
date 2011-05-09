@@ -984,7 +984,7 @@ function user_set_all_empire($data) {
 		}
 
 		//Remise en ordre des lunes selon la position des planètes
-		user_set_all_empire_resync();
+		user_set_all_empire_resync_moon();
 
 		if($pub_view=="planets") redirection("index.php?action=home&subaction=empire&view=".$pub_view."&alert_empire=true");
 		else redirection("index.php?action=home&subaction=empire&view=".$pub_view);
@@ -992,66 +992,79 @@ function user_set_all_empire($data) {
 	else redirection("index.php?action=message&id_message=set_empire_failed_data&info");
 }
 
-function user_set_all_empire_resync() {
+
+/**
+* remise en ordre des lunes en fonctions des positions des planetes
+*/
+function user_set_all_empire_resync_moon() {
 	global $db, $user_data;
+//
+//	$planet_position = array();
+//	$moon_position = array();
+//	$moon_position_extra = array();
+//	$position_free = array(18,17,16,15,14,13,12,11,10);
+//
+//	$request = "select planet_id, coordinates";
+//	$request .= " from ".TABLE_USER_BUILDING;
+//	$request .= " where user_id = ".$user_data["user_id"];
+//	$request .= " and planet_id <= 9";
+//	$request .= " order by planet_id";
+//	$result = $db->sql_query($request);
+//
+//	while (list($planet_id, $coordinates) = $db->sql_fetch_row($result)) {
+//		$planet_position[$coordinates] = $planet_id;
+//	}
+//
+//	$request = "select planet_id, coordinates";
+//	$request .= " from ".TABLE_USER_BUILDING;
+//	$request .= " where user_id = ".$user_data["user_id"];
+//	$request .= " and planet_id > 9";
+//	$request .= " order by planet_id";
+//	$result = $db->sql_query($request);
+//
+//	while (list($planet_id, $coordinates) = $db->sql_fetch_row($result)) {
+//		if (isset($planet_position[$coordinates])) {
+//			$moon_position[$planet_id] = $planet_position[$coordinates] + 9;
+//			unset($position_free[$planet_position[$coordinates] - 1]);
+//		}
+//		else {
+//			$moon_position_extra[] = $planet_id;
+//		}
+//	}
+//
+//	$position_free = array_values($position_free);
+//	$i=0;
+//	foreach (array_values($moon_position_extra) as $planet_id) {
+//		$moon_position[$planet_id] = $position_free[$i];
+//		$i++;
+//	}
+//
+//	$request = "update ".TABLE_USER_BUILDING." set planet_id = planet_id * (-1)";
+//	$request .= " where planet_id > 9";
+//	$request .= " and user_id = ".$user_data["user_id"];
+//	$db->sql_query($request);
+//	$request = "update ".TABLE_USER_DEFENCE." set planet_id = planet_id * (-1)";
+//	$request .= " where planet_id > 9";
+//	$request .= " and user_id = ".$user_data["user_id"];
+//	$db->sql_query($request);
+//
+//	while ($value = @current($moon_position)) {
+//		$request = "update ".TABLE_USER_BUILDING." set planet_id = ".$value." where planet_id = ".key($moon_position) * (-1);
+//		$db->sql_query($request);
+//		$request = "update ".TABLE_USER_DEFENCE." set planet_id = ".$value." where planet_id = ".key($moon_position) * (-1);
+//		$db->sql_query($request);
+//
+//		next($moon_position);
+//	}
+}
+/**
+* remise en ordre des planetes sans espaces vides ...
+* ( les id doivent se suivre 101,102,103 etc etc)
+*/
+function user_set_all_empire_resync_planet() {
+	global $db, $user_data;
+// a faire
 
-	$planet_position = array();
-	$moon_position = array();
-	$moon_position_extra = array();
-	$position_free = array(18,17,16,15,14,13,12,11,10);
-
-	$request = "select planet_id, coordinates";
-	$request .= " from ".TABLE_USER_BUILDING;
-	$request .= " where user_id = ".$user_data["user_id"];
-	$request .= " and planet_id <= 9";
-	$request .= " order by planet_id";
-	$result = $db->sql_query($request);
-
-	while (list($planet_id, $coordinates) = $db->sql_fetch_row($result)) {
-		$planet_position[$coordinates] = $planet_id;
-	}
-
-	$request = "select planet_id, coordinates";
-	$request .= " from ".TABLE_USER_BUILDING;
-	$request .= " where user_id = ".$user_data["user_id"];
-	$request .= " and planet_id > 9";
-	$request .= " order by planet_id";
-	$result = $db->sql_query($request);
-
-	while (list($planet_id, $coordinates) = $db->sql_fetch_row($result)) {
-		if (isset($planet_position[$coordinates])) {
-			$moon_position[$planet_id] = $planet_position[$coordinates] + 9;
-			unset($position_free[$planet_position[$coordinates] - 1]);
-		}
-		else {
-			$moon_position_extra[] = $planet_id;
-		}
-	}
-
-	$position_free = array_values($position_free);
-	$i=0;
-	foreach (array_values($moon_position_extra) as $planet_id) {
-		$moon_position[$planet_id] = $position_free[$i];
-		$i++;
-	}
-
-	$request = "update ".TABLE_USER_BUILDING." set planet_id = planet_id * (-1)";
-	$request .= " where planet_id > 9";
-	$request .= " and user_id = ".$user_data["user_id"];
-	$db->sql_query($request);
-	$request = "update ".TABLE_USER_DEFENCE." set planet_id = planet_id * (-1)";
-	$request .= " where planet_id > 9";
-	$request .= " and user_id = ".$user_data["user_id"];
-	$db->sql_query($request);
-
-	while ($value = @current($moon_position)) {
-		$request = "update ".TABLE_USER_BUILDING." set planet_id = ".$value." where planet_id = ".key($moon_position) * (-1);
-		$db->sql_query($request);
-		$request = "update ".TABLE_USER_DEFENCE." set planet_id = ".$value." where planet_id = ".key($moon_position) * (-1);
-		$db->sql_query($request);
-
-		next($moon_position);
-	}
 }
 
 function user_set_building($data, $planet_id, $planet_name, $fields, $coordinates, $temperature_min, $temperature_max, $satellite) {
@@ -1422,6 +1435,10 @@ function user_del_building() {
 		$request = "delete from ".TABLE_USER_TECHNOLOGY." where user_id = ".$user_data["user_id"];
 		$db->sql_query($request);
 	}
+    
+    //Remise en ordre des lunes selon la position des planètes
+    user_set_all_empire_resync_planet();
+	user_set_all_empire_resync_moon();
 
 	redirection("index.php?action=home&subaction=empire&view=".$pub_view);
 }
@@ -1431,6 +1448,8 @@ function user_del_building() {
 function user_move_empire() {
 	global $db, $user_data;
 	global $pub_planet_id, $pub_left, $pub_right;
+    
+    $nb_planete = find_nb_planete_user();
 
 	if (!check_var($pub_planet_id, "Num")) {
 		redirection("index.php?action=message&id_message=errordata&info");
@@ -1440,15 +1459,15 @@ function user_move_empire() {
 	}
 
 	$pub_planet_id = intval($pub_planet_id);
-	if ($pub_planet_id < 1 || $pub_planet_id > 9) {
+	if ($pub_planet_id < 101 || $pub_planet_id > (100+$nb_planete))    {
 		redirection("index.php?action=message&id_message=errorfatal&info");
 	}
 	if (isset($pub_left)) {
-		if ($pub_planet_id == 1) redirection("index.php?action=home&subaction=empire");
+		if ($pub_planet_id == 101) redirection("index.php?action=home&subaction=empire");
 		$new_position = $pub_planet_id-1;
 	}
 	elseif (isset($pub_right)) {
-		if ($pub_planet_id == 9) redirection("index.php?action=home&subaction=empire");
+		if ($pub_planet_id == (100+$nb_planete)) redirection("index.php?action=home&subaction=empire");
 		$new_position = $pub_planet_id+1;
 	}
 
@@ -1472,7 +1491,8 @@ function user_move_empire() {
 	$db->sql_query($request);
 
 	//Remise en ordre des lunes selon la position des planètes
-	user_set_all_empire_resync();
+    user_set_all_empire_resync_planet();
+	user_set_all_empire_resync_moon();
 
 	redirection("index.php?action=home&subaction=empire");
 }
