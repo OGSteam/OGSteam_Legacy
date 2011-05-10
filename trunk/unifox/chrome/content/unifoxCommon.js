@@ -74,8 +74,10 @@ ufLog(e.name+": "+e.message+"|line "+e.lineNumber+"");
 }
 function ufLog(msg) {
  if(ufGetPref("ufDebugMode", false))
+ {
 	var ufConsoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
   ufConsoleService.logStringMessage("UniFox says: \n"+msg);
+  }
 }
 function ufGetBrowserLang()
 {
