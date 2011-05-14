@@ -27,6 +27,34 @@ if (!defined('IN_SPYOGAME')) {
 	<td class="c">Description</td>
 </tr>
 <tr>
+	<th>3.07</th>
+	<th style="text-align:left">
+    - Remplacement de la technologie Expéditions par Astrophysique<br />
+	  - Support d'un nombre de planètes supérieur à 9(Désormais lié à la Technologie Astrophysique)<br />
+    - Désactivation de l'import par copier - coller<br />
+	  - Remise à jour des Liens vers les sites de l'OGSteam<br />
+	  - Nouvelle Gestion des Id Planètes <br />
+  </th>
+</tr>
+<tr>
+	<th>3.06</th>
+	<th style="text-align:left">
+    - Non Publiée<br />
+	</th>
+</tr>
+<tr>
+	<th>3.05</th>
+	<th style="text-align:left">
+    - Compatibilité avec OGame 0.78c<br />
+    - Depots de ravitaillement (optionnel)<br />
+    - Vitesse de l'univers paramètrable<br />
+    - Ajout des expéditions<br />
+    - RC directement parsé dans OGSpy<br />
+    - Changement de la structure de la base de donnée (optimisation ++++)<br />
+    - Affichage des RC enregistrés directement sur la vue galaxie<br />
+	</th>
+</tr>
+<tr>
 	<th>3.04b</th>
 	<th style="text-align:left">
 		- Suppression du fond transparent pour l'ajout des membres (admin)<br />
@@ -40,7 +68,7 @@ if (!defined('IN_SPYOGAME')) {
 		- Correction bug "Illegal mix of collations" <br />
 		- Correction bug d'ajout de membres <br />
 	</th>
-</th>
+</tr>
 <tr>
 	<th>3.04</th>
 	<th style="text-align:left">

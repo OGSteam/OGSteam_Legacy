@@ -93,6 +93,20 @@ if (!defined('IN_SPYOGAME')) {
 		<center><b>Développeur - débuggueur</b></center><br /> 
 	</td>
 </tr>
+<tr> 
+	<td width="100" height="100" align="center" valign="middle"></td> 
+	<td class="l"> 
+		&nbsp;<b><font color="Yellow" size="2">Machine</font></b><br /> 
+		<center><b>Développeur - débuggueur</b></center><br /> 
+	</td>
+</tr>
+<tr> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/11552.gif"></td> 
+	<td class="l"> 
+		&nbsp;<b><font color="Yellow" size="2">DarkNoon</font></b><br /> 
+		<center><b>Développeur - débuggueur</b></center><br /> 
+	</td>
+</tr>
 <tr>
 	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
 	<td class="l">
