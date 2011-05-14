@@ -61,17 +61,17 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 			$installed_mods[$i++]['version'] 	= $modversion;
 		}
 		
-	   // Récupérer la liste des dernières versions dans le fichier JSON
-	  $getjson_error = false; // Réinitialidation Code Erreur
-	  $contents = file_get_contents(JSON_FILE);
-	  if($contents === false) $getjson_error=true; //Erreur de lecture
-	  $results = utf8_encode($contents);
-	  $data = json_decode($results, true);
-	  $mod_names = array_keys($data); // Récupération des clés
-		
-		if ($getjson_error == true) {
-			die ('<font color="lime">'.$lang['autoupdate_tableau_error'].' '.JSON_FILE.'<br />'."\n".$lang['autoupdate_tableau_error1'].'</font>');
+		// Récupérer la liste des dernières versions dans le fichier JSON
+	    if(!file_exists("parameters/modupdate.json")) {
+		//Retry once to not overload the server.
+			if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
+				die ("Fichier JSON Introuvable !");
+			}
 		}
+		$contents = file_get_contents("parameters/modupdate.json");	
+		$results = utf8_encode($contents);
+		$data = json_decode($results, true);
+		$mod_names = array_keys($data); // Récupération des clés
 		
 		$tab = 0;
 		$num_mod = 0;
