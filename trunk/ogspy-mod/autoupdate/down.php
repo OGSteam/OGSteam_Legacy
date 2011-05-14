@@ -27,30 +27,25 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		$installed_mods[$a]['root'] = $modroot;
 		$installed_mods[$a++]['version'] = $modversion;
 	}
-	
 	// Récupérer la liste des dernières versions dans le fichier JSON
-  $getjson_error = false;
-  $contents = file_get_contents(JSON_FILE);
-  if($contents === false) $getjson_error=true; 
-  $results = utf8_encode($contents);
-  $data = json_decode($results, true);
-  $mod_names = array_keys($data);
+    if(!file_exists("parameters/modupdate.json")) {
+	//Retry once to not overload the server.
+		if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
+			die ("Fichier JSON Introuvable !");
+		}
+	}
+	$contents = file_get_contents("parameters/modupdate.json");	
+	$results = utf8_encode($contents);
+	$data = json_decode($results, true);
+	$mod_names = array_keys($data); // Récupération des clés
 
-	?>
+?>
 <table width='600'>
 <?php
 	if (!is__writable("./mod/")) {
 	echo "<tr><td class='c' colspan='100'><font color='red'>Attention le mod autoupdate n'a pas accès en écriture au repertoire '<b>mod</b>'.<br /> Les installations de nouveaux modules ne sont pas possible.<br>Donnez les droits 777 au répertoire <b>'[OGSPY]/mod'</b></font></td></tr>";
 	}
-	if ($getjson_error == true) { 
-?><!--
-	<tr>
-		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".JSON_FILE; ?><br />
-			<?php echo $lang['autoupdate_tableau_error1']; ?></font>
-		</td>
-	</tr>--> 
-<?php
-	}
+
 ?>
 	<tr>
 		<td class='c' colspan='4'><?php echo $lang['autoupdate_tableau_modnoinstall']; ?></td>

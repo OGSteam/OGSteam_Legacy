@@ -98,31 +98,25 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		$installed_mods[$i++]['version'] 	= $modversion;
 	}
 	
-	// Récupérer la liste des dernières versions dans le fichier JSON
-  $getjson_error = false; // Réinitialidation Code Erreur
-  $contents = file_get_contents(JSON_FILE);
-  if($contents === false) $getjson_error=true; //Erreur de lecture
-  $results = utf8_encode($contents);
-  $data = json_decode($results, true);
-  $mod_names = array_keys($data); // Récupération des clés
+// Récupérer la liste des dernières versions dans le fichier JSON
+
+    if(!file_exists("parameters/modupdate.json")) {
+	//Retry once to not overload the server.
+		if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
+			die ("Fichier JSON Introuvable !");//Dommage pour l'update...
+		}
+	}
+	$contents = file_get_contents("parameters/modupdate.json");	
+	$results = utf8_encode($contents);
+	$data = json_decode($results, true);
+	$mod_names = array_keys($data); // Récupération des clés
+
+
 ?>
 <div align="center"><?php echo $lang['autoupdate_tableau_info']; ?></div>
 <br />
 <table width='700'>
-<?php
-	if ($getjson_error == true)
-	{
-	
-?>
-	<tr>
-		<td class='c' colspan='100'><font color="lime"><?php echo $lang['autoupdate_tableau_error']." ".JSON_FILE; ?><br />
-		<?php echo $lang['autoupdate_tableau_error1']; ?></font></td>
-	</tr>
-		
-<?php		
-	}
 
-?>
 	<tr>
 		<td class='c' colspan='100'><?php echo $lang['autoupdate_tableau_modinstall'].$auto.$affiche; ?></td>
 	</tr>
