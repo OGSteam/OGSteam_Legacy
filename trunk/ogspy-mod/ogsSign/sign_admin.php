@@ -17,7 +17,7 @@ if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 }
 
 // MAJ du numéro d'univers
-if (!empty($pub_univers) && is_numeric($pub_univers)) {
+if (!empty($pub_univers) && ($pub_univers)) {
 	$query = 'UPDATE `'.TABLE_CONFIG.'` SET `config_value` = \''.$pub_univers.'\' WHERE `config_name` = \'univers\'';
 	$db->sql_query($query);
 }
@@ -125,7 +125,7 @@ if (!isset($pub_quoifaire) || $pub_quoifaire <> 'Tester le module') {
 		<tr><td class="c" colspan="2">Choix de l'univers</td></tr>
 		<tr>
 			<th>Numéro de votre univers</th>
-			<th width="170"><form method="POST" action=""><input type="text" name="univers" size="5" maxlength="3" value="<?php echo $num_uni[0]; ?>" style="text-align: center;">
+			<th width="170"><form method="POST" action=""><input type="text" name="univers" size="10" maxlength="15" value="<?php echo $num_uni[0]; ?>" style="text-align: center;">
 			<input type="submit" value="Changer l'univers"></form></th>
 		</tr>
 

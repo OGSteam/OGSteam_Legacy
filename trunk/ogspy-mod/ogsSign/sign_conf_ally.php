@@ -16,8 +16,17 @@ if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 	redirection('index.php?action=message&id_message=forbidden&info');
 }
 
+
+
 // listing de toutes les alliances
-$ally_list = galaxy_ally_listing();
+$request = "SELECT distinct ally FROM ".TABLE_RANK_ALLY_POINTS." order by ally";
+$result = $db->sql_query($request);
+while ($row = $db->sql_fetch_assoc($result)) {
+		if ($row["ally"] != "")	$ally_list[] = $row["ally"];
+	}
+
+
+
 $options_1 = '<option></option>'."\n";
 foreach ($ally_list as $ally_name) {
 	$options_1 .= '<option>'.$ally_name.'</option>'."\n";
@@ -25,7 +34,7 @@ foreach ($ally_list as $ally_name) {
 ?>
 <script language="JavaScript" type="text/javascript" src="js/autocomplete.js"></script>
 <?php
-	
+
 // si l'ally a été choisie
 if (isset($pub_ally_l)) {
 
@@ -90,7 +99,9 @@ if (empty($sign_exist)) {
 		$db->sql_query($query);
 
 		// et on va supprimer la signature pour qu'elle se régénère ('A' pour purger l'ally)
-		vide_sign_cache('A',$tag_choisi);
+	
+		vide_sign_cacheally('A', $tag_choisi);
+		
 	}
 }
 

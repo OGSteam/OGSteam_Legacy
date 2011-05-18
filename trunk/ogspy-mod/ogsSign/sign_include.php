@@ -59,6 +59,24 @@ function vide_sign_cache($typesign,$nom_fichier) {
 	}
 }
 
+// Function vide cache pour ally
+function vide_sign_cacheally($typesign,$nom_fichier) {
+	// on évite qu'il y ait des caractères bizarres
+	$suppr = array('\\','"','/','|','*','?');
+	$nom_fichier = str_replace($suppr,"",$nom_fichier);
+
+	unset($liste_purge);
+	if ($dhandle = opendir(DIR_SIGN_CACHE)) {
+		while (false !== ($file = readdir($dhandle))) {
+			if ($file == $typesign.'.'.$nom_fichier.'.png') {
+				// on efface directement le fichier
+				unlink(DIR_SIGN_CACHE.$file);
+			}
+		}
+		closedir($dhandle);
+	}
+}
+
 /**
  * Escapes strings to be included in javascript
  *

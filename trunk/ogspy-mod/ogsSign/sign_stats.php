@@ -251,9 +251,9 @@ if (!file_exists($fichier_stats) || ( $date_derniere_maj > filemtime($fichier_st
 	// Zone d'identification
 
 	image_string_contour($image, 2, 5, 18, $nom_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 255, 18, $uni_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 229, 18, $uni_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);// position vert
 	image_string_contour($image, 2, 5, 29, $alli_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 255, 29, 'ogame.'.$tld, $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 229, 29, 'ogame.'.$tld, $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
 
 	// Tableau
 
@@ -276,7 +276,7 @@ if (!file_exists($fichier_stats) || ( $date_derniere_maj > filemtime($fichier_st
 	// Zone d'identification
 
 	image_string_contour($image, 2, 41, 18, $nom_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 315, 18, $uni_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 290, 18, $uni_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
 	image_string_contour($image, 2, 41, 29, $alli_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
 
 	// Tableau
