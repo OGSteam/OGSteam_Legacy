@@ -4,8 +4,8 @@
 *	desc.		: Page d'accueil du module "Présentation Alliance"
 *	Authors	: Sylar - sylar@ogsteam.fr
 *	created	: 23/02/2008
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011
+*	version	: 1.0
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 
@@ -48,7 +48,14 @@ else
 	$pub_new_name="";
 	$pub_new_ally_name="";
 }
-
+// Click sur Delete
+if(isset($pub_delete))
+{
+	// On récupère la variable id pour suppression et on redirige
+		$del_id= $_GET['id'];
+		$pub_id = delete_pic($del_id);
+		redirection("index.php?action=$mod_name&page=acceuil");
+} 
 // Génération de la liste des images
 $pictures = get_pic();
 ?>
@@ -56,7 +63,7 @@ $pictures = get_pic();
 <table>
 	<tr>
 		<td class="c" colspan="5">
-			Liste des images acutelles
+			Liste des images actuelles
 		</td>
 	</tr>
 	<tr>

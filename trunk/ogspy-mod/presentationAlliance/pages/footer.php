@@ -4,8 +4,8 @@
 *	desc.		: Pied de page du module "Présentation Alliance"
 *	Authors	: Sylar - sylar@ogsteam.fr
 *	created	: 23/02/2008
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011
+*	version	: 1.0
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 ?>
