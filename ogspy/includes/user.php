@@ -1658,6 +1658,26 @@ function find_nb_planete_user()
     return $db->sql_numrows($result);
 
 }
+function find_nb_moon_user()
+{
+    global $db, $user_data;
+
+
+    $request = "select planet_id ";
+    $request .= " from " . TABLE_USER_BUILDING;
+    $request .= " where user_id = " . $user_data["user_id"];
+    $request .= " and planet_id > 199 ";
+    $request .= " order by planet_id";
+
+    $result = $db->sql_query($request);
+
+    //mini 9 pour eviter bug affichage
+    if ($db->sql_numrows($result) <= 9)
+        return 9;
+
+    return $db->sql_numrows($result);
+
+}
 
 /**
  * Suppression des données de batiments de l'utilisateur loggé

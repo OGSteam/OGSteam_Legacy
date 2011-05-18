@@ -163,7 +163,6 @@ else {
 <tr>
 	<th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><a>Sélectionnez une planète</a></th>
        <?php for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
-        //TODO => revoir et reecrire l html !!!!!!
         ?>
         <th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><label><input name="planet_id" value="<?php echo $view=="planets" ? $start : $start + 100; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? $start : $start + 100; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[$i]["planet_name"]; ?></label></th>
          <?php }
@@ -217,6 +216,21 @@ document.getElementById('satellite').style.visibility='hidden';
 </script>
 
 </form> --> 
+<?php
+// verification de compte de planete/lune avec la technologie astro
+$astro = astro_max_planete($user_technology['Astrophysique']);
+if (((find_nb_planete_user() > $astro )||(find_nb_moon_user() >  $astro))&&($user_technology != false)){
+echo '<tr>';
+echo '	<td class="c" colspan="';
+print ($nb_planete <10)?'10':($nb_planete +1) ; 
+echo '">Une incohérence a était trouvé dans votre espace personnel<br />';
+print (find_nb_planete_user() > $astro )?'En rapport avec le nombre de vos planetes<br />':'' ; 
+print (find_nb_moon_user() > $astro )?'En rapport avec le nombre de vos lunes<br />':'' ; 
+echo ' </td>';
+echo'</tr>';}
+
+?>
+
 <tr>
 	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Vue d'ensemble de votre empire</td>
    </tr>
