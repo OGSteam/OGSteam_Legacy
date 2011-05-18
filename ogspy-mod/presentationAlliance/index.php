@@ -27,8 +27,6 @@ if(!is_dir(FOLDER_OUTPUT))
 	exit();
 }
 
-// Titre
-echo"<center><font size='50' face='Verdana' color='#CECECE'>- Présentation alliance -</font></center>";
 ?>
 <table width="100%">
 
