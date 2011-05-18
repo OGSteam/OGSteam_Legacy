@@ -261,11 +261,11 @@ if (!file_exists($fichier_stats) || ( $date_derniere_maj > filemtime($fichier_st
 	// Zone d'identification
 
 	image_string_contour($image, 2, 5, 18, $nom_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 255, 18, $mem_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 229, 18, $mem_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
 	image_string_contour($image, 2, 5, 31, $alli_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 255, 31, $uni_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 229, 31, $uni_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
 	image_string_contour($image, 2, 5, 44, $founder_l.' : ', $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 255, 44, 'ogame.'.$tld, $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 229, 44, 'ogame.'.$tld, $couleur_perso_txt, $couleur_perso_styletxt, $_x, $_y);
 
 	// Tableau
 
@@ -289,9 +289,9 @@ if (!file_exists($fichier_stats) || ( $date_derniere_maj > filemtime($fichier_st
 	// Zone d'identification
 
 	image_string_contour($image, 2, 41, 18, $nom_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 315, 18, $mem_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 290, 18, $mem_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
 	image_string_contour($image, 2, 41, 31, $alli_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
-	image_string_contour($image, 2, 315, 31, $uni_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
+	image_string_contour($image, 2, 290, 31, $uni_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
 	image_string_contour($image, 2, 78, 44, $founder_u, $couleur_perso_txtvar, $couleur_perso_styletxt, $_x, $_y);
 
 	// Tableau
