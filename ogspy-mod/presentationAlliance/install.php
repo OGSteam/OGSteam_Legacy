@@ -4,8 +4,8 @@
 *	desc.		: Page d'installation du module "Présentation Alliance"
 *	Authors	: Sylar - sylar@ogsteam.fr
 *	created	: 23/02/2008
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011
+*	version	: 1.0
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
@@ -68,6 +68,6 @@ $db->sql_query($query);
 
 // Ajour du module dans la table des mod de OGSpy
 $query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active)";
-$query .= "VALUES ('presentation_alliance', 'Présentation<br/>Alliance', 'presentation_alliance', 'presentation_alliance', 'index.php', '0.0', 1)";
+$query .= "VALUES ('presentation_Alliance', 'Présentation<br/>Alliance', 'presentation_alliance', 'presentationAlliance', 'index.php', '0.0', 1)";
 $db->sql_query(utf8_decode($query));
 ?>

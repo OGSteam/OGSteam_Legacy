@@ -4,8 +4,7 @@
 *	desc.		: Script de mise à jour SQL du module "Présentation Alliance"
 *	Authors	: Lose - http://ogs.servebbs.net/; Edité par Sylar - sylar@ogsteam.fr
 *	created	: 30/11/2007
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011	version	: 1.0
 ***************************************************************************/
 /***************************************************************************
 * function update($pub_id)
@@ -83,7 +82,7 @@ function delete_pic($id)
 	// Effacer une image
 	global $db;
 	$query = "DELETE FROM ".TABLE_P_ALLY_PIC." WHERE id='$id'";
-	$db->sql_query($query);
+	$db->sql_query($query) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
 	debug_log("DELETE: ".$query);
 	$query = "DELETE FROM ".TABLE_P_ALLY_DATA." WHERE id_pic='$id'";
 	$db->sql_query($query);

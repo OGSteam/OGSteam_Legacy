@@ -4,8 +4,8 @@
 *	desc.		: début du script du module "Présentation Alliance"
 *	Authors	: Sylar - sylar@ogsteam.fr
 *	created	: 23/02/2008
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011
+*	version	: 1.0
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 
@@ -29,21 +29,61 @@ if(!is_dir(FOLDER_OUTPUT))
 
 // Titre
 echo"<center><font size='50' face='Verdana' color='#CECECE'>- Présentation alliance -</font></center>";
+?>
+<table width="100%">
 
-// Affichage du menu
-$return = $target = "";
-if(!isset($pub_page)) $pub_page = $menu[0]['lien'];
-foreach($menu as $btn)
-	if (($btn['admin'] && $user_data["user_admin"] == 1) || (!$btn['admin']))
-	{
-		$return .= "\t<td class='b' width='80' valign='center' height='30' onclick=\"window.location = 'index.php?action=".$mod_name."&page=".$btn['lien']."';\">\n";
-		$return .= "\t\t<b><font color='".($pub_page==$btn['lien']?"white":"grey")."'>".$btn['titre']."</font></b>\n\t</td>\n";
+		<table>
+		<tr align="center">
+<?php
+if (!isset($pub_page)) $pub_page = "accueil.php";
+//Menu Acceuil
+if ($pub_page != "accueil") echo '<td class="c" width="150"><a href="index.php?action=presentation_alliance&page=accueil" style="color: lime;"';
+	else echo '<th width="150"><a';
+    echo '>Accueil</a></td>',"\n";
+//Menu Editions
+if ($pub_page != "edition") echo '<td class="c" width="150"><a href="index.php?action=presentation_alliance&page=edition&id=0" style="color: lime;"';
+	else echo '<th width="150"><a';
+    echo '>Edition</a></td>',"\n";
+//Menu Upload
+if ($pub_page != "upload") echo '<td class="c" width="150"><a href="index.php?action=presentation_alliance&page=upload" style="color: lime;"';
+	else echo '<th width="150"><a';
+    echo '>Upload</a></td>',"\n";
+//Menu Changelog
+if ($pub_page != "changelog") echo '<td class="c" width="150"><a href="index.php?action=presentation_alliance&page=changelog" style="color: lime;"';
+	else echo '<th width="150"><a';
+    echo '>Changelog</a></td>',"\n";
+	?>
+		</tr>
+		</table>
+
+
+<?php
+	switch ($pub_page) {
+		case "acceuil" :
+		require_once("mod/presentationAlliance/pages/accueil.php");
+		break;
+
+		case "edition" :
+		require_once("mod/presentationAlliance/pages/edition.php");
+		break;
+		
+		case "upload" :
+		require_once("mod/presentationAlliance/pages/upload.php");
+		break;
+		
+		case "changelog" :
+		require_once("mod/presentationAlliance/pages/changelog.php");
+		break;
+
+		default:
+		require_once("mod/presentationAlliance/pages/accueil.php");
+		break;
 	}
-echo "\n\n<!-- menu -->\n<table><tbody><tr align='center'>".$return."\n</tr></tbody></table>\n";
+?>
+	
 
-// Affichage de la page demandée
-echo "\n\n<!-- page ".$pub_page.".php -->\n";
-include_once(FOLDER_PAGES."/".$pub_page.".php");
+
+<?php
 
 // Footer du mod
 include_once(FILE_FOOTER);

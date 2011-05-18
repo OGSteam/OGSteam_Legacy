@@ -21,5 +21,5 @@ $db->sql_query("DROP TABLE IF EXISTS ".TABLE_P_ALLY_PIC.";");
 $db->sql_query("DROP TABLE IF EXISTS ".TABLE_P_ALLY_DATA.";");
 
 // Modification de la table des mod de OGSpy
-$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='presentation_alliance'");
+$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='presentation_Alliance'");
 ?>

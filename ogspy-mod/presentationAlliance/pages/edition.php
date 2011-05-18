@@ -4,8 +4,8 @@
 *	desc.		: Page de configuration du module "Présentation Alliance"
 *	Authors	: Lose - http://ogs.servebbs.net/; Edité par Sylar - sylar@ogsteam.fr
 *	created	: 30/11/2007
-*	modified	: 25/02/2008
-*	version	: 0.1
+*	modified	: 18/05/2011
+*	version	: 1.0
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 
@@ -13,7 +13,18 @@ if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 global $user_data;
 
 // Si l'id n'est pas défini on prends la 1ere image
-if(!isset($pub_id)) $pub_id = key($pictures);
+$id = $_GET['id'];
+if($id=='0') 
+{
+?><br><?php
+	echo"<font color='red'><blink>Veuillez sélectionez une image avant !</blink></font>";
+?>
+<br/>
+	
+<?php
+
+}
+
 
 // Liste déroulante de choix des images
 if(isset($pub_list_pic)) $pub_id = $pub_list_pic;
