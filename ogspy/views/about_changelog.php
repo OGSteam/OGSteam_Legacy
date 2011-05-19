@@ -34,6 +34,8 @@ if (!defined('IN_SPYOGAME')) {
     - Désactivation de l'import par copier - coller<br />
 	  - Remise à jour des Liens vers les sites de l'OGSteam<br />
 	  - Nouvelle Gestion des Id Planètes <br />
+        - Mise a jour des diverses formules de calcul <br />
+        - Mise en conformité réglement ogame v1 <br />
   </th>
 </tr>
 <tr>
