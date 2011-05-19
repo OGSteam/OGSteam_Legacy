@@ -582,7 +582,7 @@ switch ($ogsversion) {
 		$ogsversion = '3.05';
 		$up_to_date = true;
 		break;
-	case '3.05':
+	case 'TABLE_USER_DEFENCE':
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('portee_missil','1')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_user','')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_admin','')";
@@ -597,7 +597,11 @@ switch ($ogsversion) {
 		$requests[] = "ALTER TABLE ".TABLE_MOD." MODIFY version VARCHAR(10)";
 		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.0.7' WHERE config_name = 'version'";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('astro_strict','1')";
-		$ogsversion = '3.0.7';
+        $requests[] = "UPDATE ".TABLE_USER_BUILDING." SET planet_id = (planet_id + 100) WHERE planet_id < 10";
+        $requests[] = "UPDATE ".TABLE_USER_BUILDING." SET planet_id = (planet_id + 191) WHERE planet_id > 9 and planet_id < 19 ";
+        $requests[] = "UPDATE ".TABLE_USER_DEFENCE." SET planet_id = (planet_id + 100) WHERE planet_id < 10";
+        $requests[] = "UPDATE ".TABLE_USER_DEFENCE." SET planet_id = (planet_id + 191) WHERE planet_id > 9 and planet_id < 19 ";
+        $ogsversion = '3.0.7';
 		$up_to_date = true;
 		break;
 		
