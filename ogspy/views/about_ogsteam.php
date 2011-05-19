@@ -94,7 +94,7 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr> 
-	<td width="100" height="100" align="center" valign="middle"></td> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogame.fr/wcf/images/avatars/avatar-22926."></td> 
 	<td class="l"> 
 		&nbsp;<b><font color="Yellow" size="2">Machine</font></b><br /> 
 		<center><b>Développeur - débuggueur</b></center><br /> 
@@ -104,6 +104,13 @@ if (!defined('IN_SPYOGAME')) {
 	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/11552.gif"></td> 
 	<td class="l"> 
 		&nbsp;<b><font color="Yellow" size="2">DarkNoon</font></b><br /> 
+		<center><b>Développeur - débuggueur</b></center><br /> 
+	</td>
+</tr>
+<tr> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/5290.gif"></td> 
+	<td class="l"> 
+		&nbsp;<b><font color="Yellow" size="2">naruto`kun</font></b><br /> 
 		<center><b>Développeur - débuggueur</b></center><br /> 
 	</td>
 </tr>
