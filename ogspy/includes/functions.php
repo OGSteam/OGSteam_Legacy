@@ -107,12 +107,50 @@ function write_file_gz($file, $mode, $text) {
 
 /**
 * Codage d'ip en hexadecimal
-* @param string $ip sous la form xxx.xxx.xxx.xxx
-* @return string IP codé en hexa : HHHHHHHH
+* @param string $ip sous la forme xxx.xxx.xxx.xxx en IPv4 et xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx en IPv6
+* @return string IP codé en hexa : HHHHHHHH en IPv4 et HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH en IPv6
 */
 function encode_ip($ip) {
-	$ip_sep = explode('.', $ip);
-	return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	if (substr_count($ip, ":") > 0 && substr_count($ip, ".") == 0) {
+		$ip_sep = explode(":", uncompress_ipv6($ip));
+		return implode($ip_sep);
+	} else {
+		$ip_sep = explode(".", $ip);
+		return sprintf("%02x%02x%02x%02x", $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
+	}
+}
+
+/**
+ * Décompression d'adresses IPv6
+ * @param string $ip IPv6 sous la forme xx::xxxx
+ * @return string IP sous la forme xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
+ */
+function uncompress_ipv6($ipv6) {
+	if (strpos($ipv6, "::") == false) {
+		$e = explode(":", $ipv6);
+		$s = 8 - sizeof($e) + 1;
+		foreach($e as $key=>$val) {
+			if ($val == "") {
+				for($i==0; $i<=$s; $i++) $newip[] = '0000';
+			} else $newip[] = padleft($val, '0', 4);
+		}
+		$ip = implode(":", $newip);
+	}
+	return $ip;
+}
+/**
+ * Complète une chaîne avec des caractères à gauche
+ * @param string $str chaîne à compléter
+ * @param string $strChar caractère de remplissage
+ * @param string $strChar longeur finale
+ * @return string chaîne complétée
+ */
+function padleft($str, $strChar, $intLength) {
+	$str = $str.'';
+	if (strlen($str) > 0) {
+		while (strlen($str) < $intLength) $str = $strChar.$str;
+	}
+	return $str;
 }
 
 /**
