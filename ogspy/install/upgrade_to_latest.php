@@ -5,7 +5,7 @@
 * @subpackage install
 * @created 28/11/2005
 * @modified 30/09/2007
-* @version 3.04b
+* @version 3.0.7
 */
 ?>
 <html>
@@ -614,7 +614,7 @@ foreach ($requests as $request) {
 	$db->sql_query($request);
 }
 
-if ( $ogsversion == '3.07' && function_exists ( 'import_RE' ) )
+if ( $ogsversion == '3.0.7' && function_exists ( 'import_RE' ) )
   import_RE();
 ?>
 	<h3 align='center'><font color='yellow'>Mise à jour du serveur OGSpy vers la version <?php echo $ogsversion;?> effectuée avec succès</font></h3>
