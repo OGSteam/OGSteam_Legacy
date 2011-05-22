@@ -1212,17 +1212,28 @@ function user_set_all_empire_resync_moon()
     // on ressort les complexes planete / lune ayant la meme cle
     $complexe = array_intersect_key($planet_position, $moon_position);
 
+    /// on passe les id se modifiant a 300
     foreach ($complexe as $cle_com => $valeur_com) {
-        $nouvelle_valeur = $planet_position[$cle_com] + 100;
-        $request = "update " . TABLE_USER_BUILDING . " set planet_id = " . $nouvelle_valeur .
-            " where planet_id = " . $moon_position[$cle_com] . "";
+        $nouvelle_valeur = $planet_position[$cle_com] + 200;
+        $request = "UPDATE " . TABLE_USER_DEFENCE . " SET planet_id  = " . $nouvelle_valeur .
+            " WHERE  planet_id = " . $moon_position[$cle_com] . " and user_id = " . $user_data["user_id"] .
+            "";
         $db->sql_query($request);
-        $request = "update " . TABLE_USER_DEFENCE . " set planet_id = " . $nouvelle_valeur .
-            " where planet_id = " . $moon_position[$cle_com] . "";
+        $request = "UPDATE " . TABLE_USER_BUILDING . " SET planet_id  = " . $nouvelle_valeur .
+            " WHERE  planet_id = " . $moon_position[$cle_com] . " and user_id = " . $user_data["user_id"] .
+            "";
         $db->sql_query($request);
-
-
     }
+
+    /// on remet le tout a 200 pour lunes
+    $request = "UPDATE " . TABLE_USER_BUILDING .
+        " SET planet_id  = planet_id -100 WHERE  planet_id > 299 and user_id = " . $user_data["user_id"] .
+        "";
+    $db->sql_query($request);
+    $request = "UPDATE " . TABLE_USER_DEFENCE .
+        " SET planet_id  = planet_id -100 WHERE  planet_id > 299 and user_id = " . $user_data["user_id"] .
+        "";
+    $db->sql_query($request);
 
 }
 /**
@@ -1701,6 +1712,18 @@ function user_del_building()
     $request = "delete from " . TABLE_USER_DEFENCE . " where user_id = " . $user_data["user_id"] .
         " and planet_id = " . intval($pub_planet_id);
     $db->sql_query($request);
+
+    // si on supprime une planete; la lune doit suivre
+    if (intval($pub_planet_id) < 199) {
+        $moon_id = (intval($pub_planet_id) + 100);
+        $request = "delete from " . TABLE_USER_BUILDING . " where user_id = " . $user_data["user_id"] .
+            " and planet_id = " . intval($moon_id);
+        $db->sql_query($request);
+
+        $request = "delete from " . TABLE_USER_DEFENCE . " where user_id = " . $user_data["user_id"] .
+            " and planet_id = " . intval($moon_id);
+        $db->sql_query($request);
+    }
 
     $request = "select * from " . TABLE_USER_BUILDING . " where planet_id <= 199";
     $result = $db->sql_query($request);
