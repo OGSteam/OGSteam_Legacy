@@ -1039,7 +1039,9 @@ function install_mod($mod_folder) {
 function uninstall_mod($mod_uninstall_name,$mod_uninstall_table) {
 	global $db;
 	$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='".$mod_uninstall_name."';");
+	if (!empty($mod_uninstall_table)){
 	$db->sql_query("DROP TABLE IF EXISTS ".$mod_uninstall_table."");
+	}
 }
 
 function update_mod($mod_folder,$mod_name){
