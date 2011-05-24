@@ -9,7 +9,10 @@
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-// Définitions
+// Ajout du module dans la table des mod de OGSpy
+$mod_folder = "presentationalliance";
+install_mod($mod_folder);
+
 global $db,$table_prefix;
 define("TABLE_P_ALLY_PIC", $table_prefix."pres_alliance_pic");
 define("TABLE_P_ALLY_DATA", $table_prefix."pres_alliance_data");
@@ -65,9 +68,4 @@ $query .= "( $id, 'stat', 'general', '{rank} ème en points', 600, 520, 0, 'verd
 $query .= "( $id, 'stat', 'fleet', '{rank} ème en flotte', 600, 530, 0, 'verdanab.ttf', 10, 'F76541',1 ), ";
 $query .= "( $id, 'stat', 'research', '{rank} ème en recherche', 600, 540, 0, 'verdanab.ttf', 10, 'F76541',1 ); ";
 $db->sql_query($query);
-
-// Ajour du module dans la table des mod de OGSpy
-$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active)";
-$query .= "VALUES ('presentation_Alliance', 'Présentation<br/>Alliance', 'presentation_alliance', 'presentationAlliance', 'index.php', '0.0', 1)";
-$db->sql_query(utf8_decode($query));
 ?>

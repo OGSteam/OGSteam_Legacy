@@ -63,7 +63,7 @@ $background_list = get_table_list(get_background_tab(),$pictures[$pub_id]['backg
 $image_tab = get_image_tab();
 ?>
 <br/>
-<form action='?action=presentation_alliance&page=<?php echo $pub_page?>&id=<?php echo $pub_id; ?>' method='post'> 
+<form action='?action=<?php echo $mod_name?>&page=<?php echo $pub_page?>&id=<?php echo $pub_id; ?>' method='post'> 
 <table width='30%'>
 	<tr>
 		<td class="c">

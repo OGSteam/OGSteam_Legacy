@@ -15,7 +15,7 @@ define('DEBUG','1');//*/
 global $table_prefix;
 define("TABLE_P_ALLY_PIC", $table_prefix."pres_alliance_pic");
 define("TABLE_P_ALLY_DATA", $table_prefix."pres_alliance_data");
-define("FOLDER_MOD", "mod/presentationAlliance");
+define("FOLDER_MOD", "mod/".$mod_name."");
 define("FOLDER_INC", FOLDER_MOD."/includes");
 define("FOLDER_PAGES", FOLDER_MOD."/pages");
 define("FOLDER_BKGND", FOLDER_MOD."/fonds");
