@@ -60,17 +60,11 @@ if (file_really_exists(DIR_SIGN_CACHE.'keep_ogsign_datas')) {
 // donc si on n'a pas pu inscrire la version, ou simplement si on ne devait pas conserver les données, on fait le nettoyage
 if ($ecrit === FALSE) {
 	$queries = array();
-	// suppression de la table d'enregistrement des signatures (joueurs & alliance)
-	$queries[] = 'DROP TABLE IF EXISTS `'.TABLE_USER_SIGN.'`';
-	$queries[] = 'DROP TABLE IF EXISTS `'.TABLE_ALLY_SIGN.'`';
-
 	// suppression du paramètre univers
-	$queries[] = 'DELETE FROM `'.TABLE_CONFIG.'` WHERE `config_name` = \'univers\'';
-
-	// exécution de toutes les requêtes
-	foreach ($queries as $query) {
-		$db->sql_query($query, false);
-	}
-}
-
+	$queries[] = 'DELETE FROM `'.TABLE_CONFIG.'` WHERE `config_name` = \'univers\'';		$db->sql_query($query, false);
+}	
+global $table_prefix;
+$mod_uninstall_name = "ogssign";
+$mod_uninstall_table = TABLE_USER_SIGN.','. TABLE_ALLY_SIGN;
+uninstall_mod($mod_unistall_name,$mod_uninstall_table);
 ?>

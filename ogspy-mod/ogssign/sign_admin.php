@@ -160,13 +160,13 @@ if (!isset($pub_quoifaire) || $pub_quoifaire <> 'Tester le module') {
 		while ($param_sign_ally = $db->sql_fetch_assoc($result_ally)) {
 			echo "\n\t<tr>\n\t\t",'<th style="-moz-opacity: 1; filter: alpha(opacity=100); /*suppression de la transparence éventuelle*/">'
 			// donc on affiche les signatures en question
-			,"\n\t\t",'<img src="mod/OGSign/',$param_sign_ally['ally_id'],'.A.png" alt="signature de l\'alliance ',$param_sign_ally['TAG'],'" title="',$param_sign_ally['TAG'],'"><br />'
+			,"\n\t\t",'<img src="mod/'.$folder.'/',$param_sign_ally['ally_id'],'.A.png" alt="signature de l\'alliance ',$param_sign_ally['TAG'],'" title="',$param_sign_ally['TAG'],'"><br />'
 			// réaffichage de l'adresse
 			,"\n\t\t",'<input type="text" value="',$debut_full_url_sign,$param_sign_ally['ally_id'],'.A.png" size="70" readonly="readonly" onClick="this.focus(); this.select();" style="text-align: center;"></th>'
 			// et on propose de les supprimer
 			,"\n\t\t",'<th><form method="POST" action=""><input type="hidden" name="ally_id" value="',$param_sign_ally['ally_id'],'"><input type="hidden" name="TAG" value="',$param_sign_ally['TAG'],'">'
 			,"\n\t\t",'<input type="submit" name="quoifaire" value="Supprimer"></form><br />'
-			,"\n\t\t",'<form method="POST" action="index.php?action=ogsign&subaction=ally"><input type="hidden" name="ally_l" value="',$param_sign_ally['TAG'],'">'
+			,"\n\t\t",'<form method="POST" action="index.php?action=ogssign&subaction=ally"><input type="hidden" name="ally_l" value="',$param_sign_ally['TAG'],'">'
 			,'<input type="submit" name="quoifaire" value="Modifier"></form></th>'
 			,"\n\t",'</tr>';
 		}
@@ -220,7 +220,7 @@ if (isset($pub_quoifaire) && $pub_quoifaire == 'Tester le module') {
 
 	// vérification de la version de la lib GD
 	echo '<tr><td class="c" colspan="2">Génération des images (global)</td></tr>',"\n",'<tr><th colspan="2">';
-	echo '<img src="mod/OGSign/testgd.php" width="36" height="36" alt="image de test" title="image de test">';
+	echo '<img src="mod/'.$folder.'/testgd.php" width="36" height="36" alt="image de test" title="image de test">';
 	echo "\n",infobulle('Vous devez voir une image avec écrit "OK" dedans.'),'<br />';
 	// note : gd_info() ne fonctionne que PHP 4 >= 4.3.0		(voir si OGSpy ne fonctionne pas avec un PHP inférieur)
 	if(function_exists("gd_info")) $composants_gd = gd_info();
@@ -302,7 +302,7 @@ if (isset($pub_quoifaire) && $pub_quoifaire == 'Tester le module') {
 	}
 
 	echo "\n\t</th></tr>\n\t",'<tr><td class="c" colspan="2">&nbsp;</td></tr>',"\n",'<tr><th colspan="2">';
-	echo '<a href="index.php?action=ogsign&subaction=admin">Retour à l\'administration</a>';
+	echo '<a href="index.php?action=ogssign&subaction=admin">Retour à l\'administration</a>';
 
 // fin de la partie de test du module
 } else {

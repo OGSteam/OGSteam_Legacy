@@ -13,6 +13,8 @@ require_once('sign_include.php');
 
 $queries = array();
 
+//définition donnée d'ajout du module
+
 // on supprime/recrée si l'admin n'a pas choisi de garder les données
 if (!file_really_exists(DIR_SIGN_CACHE.'keep_ogsign_datas')) {
 
@@ -67,21 +69,19 @@ if (!file_really_exists(DIR_SIGN_CACHE.'keep_ogsign_datas')) {
 	// création de l'univers dans la table CONFIG
 	$queries[] = 'INSERT INTO `'.TABLE_CONFIG.'` (`config_name`, `config_value`) VALUES (\'univers\', \'0\')';
 
+	// Ajout du module dans la table des mod de OGSpy
+
 	// insertion du mod (numéro de version automatique)
-	if (file_exists('mod/OGSign/version.txt')) {
-		$version_txt = file('mod/OGSign/version.txt');
-
-		$queries[] = 'INSERT INTO '.TABLE_MOD.' ( title, menu, action, root, link, version, active) VALUES'
-			." ('OGSign', 'OGSign', 'ogsign', 'OGSign', 'sign_conf.php', '".trim($version_txt[1])."', '1')";
-	}
-
+	if (file_exists('mod/'.$mod_folder.'/version.txt')) {
+		install_mod($mod_folder);
+		}
 } else {
 	// pas de numéro de version automatique, car si l'admin OGSign a gardé les données, et qu'il y a une MAJ de la base,
 	// il faudra passer par l'update pour faire cette MAJ
 	// néanmoins, il faut lire la dernière version installée (pour justement ne pas refaire des update déjà effectués avant)
 	$version_txt = file(DIR_SIGN_CACHE.'keep_ogsign_datas');
-	$queries[] = 'INSERT INTO '.TABLE_MOD.' (title, menu, action, root, link, version, active) VALUES'
-		." ('OGSign', 'OGSign', 'ogsign', 'OGSign', 'sign_conf.php', '".trim($version_txt[0])."', '1')";
+	install_mod($mod_folder);
+
 }
 
 // exécution de toutes les requêtes
@@ -96,9 +96,9 @@ if (!file_really_exists(DIR_SIGN_CACHE.'keep_ogsign_datas')) {
 
 	// nécessite PHP >= 4.3.2 pour détecter le mod_rewrite
 	// note : cela supprimera le .htaccess déjà présent, dans le cas d'une réinstallation, par exemple (mais il ne devrait pas y en avoir sur une install vierge, normalement...)
-	$chemin_htaccess = 'mod/OGSign/.htaccess';
+	$chemin_htaccess = 'mod/'.$mod_folder.'/.htaccess';
 	// c'est la lign à ajouter au .htaccess lorsque le mod_rewrite d'Apache est désactivé
-	$ligne_ErrorDocument = 'ErrorDocument 404 '.str_replace('index.php','mod/OGSign/urlrewriting.php',$_SERVER['SCRIPT_NAME']);
+	$ligne_ErrorDocument = 'ErrorDocument 404 '.str_replace('index.php','mod/'.$mod_folder.'/urlrewriting.php',$_SERVER['SCRIPT_NAME']);
 	$erreur_copie_htaccess = '';
 	$erreur_config_htaccess = '';
 

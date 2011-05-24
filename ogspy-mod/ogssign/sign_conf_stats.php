@@ -19,7 +19,7 @@ if (!empty($pub_pseudoIG)) {
 		echo '<table align="center" width="100%" cellpadding="0" cellspacing="1">
 		<tr><td class="c">Erreur</td></tr>
 		<tr><th>Ce pseudo est déjà utilisé sur une autre signature !<br />
-		<a href="index.php?action=ogsign&subaction=stats">Retour à la configuration</a></th></tr></table>';
+		<a href="index.php?action=ogssign&subaction=stats">Retour à la configuration</a></th></tr></table>';
 
 		// on revient au script appelant
 		return;
@@ -119,12 +119,12 @@ $param_sign = $db->sql_fetch_assoc($result);
 // création de l'adresse de la signature
 $url_sign = $full_url_sign = '';
 if (!empty($param_sign['pseudo_ig'])) {
-	$url_sign = 'mod/OGSign/'.$param_sign['pseudo_ig'].'.S.png';
+	$url_sign = 'mod/'.$folder.'/'.$param_sign['pseudo_ig'].'.S.png';
 	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9).$url_sign);
 }
 
 // dossier des fonds
-$dir_src_fonds = 'mod/OGSign/fonds/stats';
+$dir_src_fonds = 'mod/'.$folder.'/fonds/stats';
 ?>
 <script language="JavaScript" type="text/javascript">
 function show_fonds() {

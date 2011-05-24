@@ -12,9 +12,11 @@ if (!isset($table_prefix)) // pétage de cable à cause du global...
 
 define('TABLE_USER_SIGN',$table_prefix.'user_sign');
 define('TABLE_ALLY_SIGN',$table_prefix.'ally_sign');
+$mod_folder = "ogssign";
+$mod_name = "ogssign";
 
 // dossier du cache
-define('DIR_SIGN_CACHE', 'mod/OGSign/cache/');
+define('DIR_SIGN_CACHE', 'mod/'.$mod_folder.'/cache/');
 
 /**
  * protection des variables pour MySQL (gestion des guillemets)
