@@ -12,8 +12,9 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-$query = "DELETE FROM ".TABLE_MOD." WHERE title='autoupdate'";
-$db->sql_query($query);
+$mod_uninstall_name = "autoupdate";
+uninstall_mod($mod_unistall_name,$mod_uninstall_table);
+
 if(file_exists("mod/autoupdate/modupdate.json")) {
 	unlink("mod/autoupdate/modupdate.json");
 }
