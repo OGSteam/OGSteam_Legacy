@@ -15,7 +15,7 @@ require_once('sign_include.php');
 global $db;
 
 // on récupère le numéro de version
-$result = mysql_query('SELECT `version` FROM `'.TABLE_MOD.'` WHERE `title` = \'OGSign\'');
+$result = mysql_query('SELECT `version` FROM `'.TABLE_MOD.'` WHERE `title` = \''.$mod_name.'\'');
 $OGSign_version = mysql_result($result,0,'version');
 
 // et ensuite, on fait les MAJ qui s'imposent !
@@ -161,10 +161,7 @@ case '0.9e':
 }
 
 // MAJ du numéro de version automatique
-if (file_exists('mod/'.$root.'/version.txt')) {
-	$file = file('mod/'.$root.'/version.txt');
+update_mod($mod_folder,$mod_name);
 
-	$db->sql_query('UPDATE '.TABLE_MOD.' SET `version` = \''.trim($file[1]).'\' WHERE `id` = \''.$pub_mod_id.'\'');
-}
 
 ?>

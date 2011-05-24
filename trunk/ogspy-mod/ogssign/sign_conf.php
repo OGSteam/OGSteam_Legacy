@@ -12,6 +12,7 @@ if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
 require_once('views/page_header.php');
 require_once('sign_include.php');
+$folder = "ogssign";
 
 $query = 'SELECT `version` FROM `'.TABLE_MOD.'` WHERE `action`=\''.$pub_action.'\' AND `active`=\'1\' LIMIT 1';
 $result = $db->sql_query($query);
@@ -37,12 +38,12 @@ else
 <tr align="center">
 <?php
 // menu sign_conf_stats
-if ($pub_subaction != 'stats') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action=ogsign&subaction=stats" style="color: lime;"';
+if ($pub_subaction != 'stats') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action='.$folder.'&subaction=stats" style="color: lime;"';
 else echo '<th width="',floor(100/$nb_colonnes),'%"><a';
 echo '>Statistiques</a></td>',"\n";
 
 // menu sign_conf_prod
-if ($pub_subaction != 'prod') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action=ogsign&subaction=prod" style="color: lime;"';
+if ($pub_subaction != 'prod') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action='.$folder.'&subaction=prod" style="color: lime;"';
 else echo '<th width="',floor(100/$nb_colonnes),'%"><a';
 echo '>Production</a> ';
 echo infobulle('Paramétrez votre production grâce au mod "Production"<br>(les données sont reprises sur cette image)');
@@ -51,18 +52,18 @@ echo "\n";
 
 if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1 ) {
 	// menu sign_conf_ally
-	if ($pub_subaction != 'ally') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action=ogsign&subaction=ally" style="color: lime;"';
+	if ($pub_subaction != 'ally') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action='.$folder.'&subaction=ally" style="color: lime;"';
 	else echo '<th width="',floor(100/$nb_colonnes),'%"><a';
 	echo '>Alliance</a></td>';
 
-	if ($pub_subaction != 'admin') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action=ogsign&subaction=admin" style="color: lime;"';
+	if ($pub_subaction != 'admin') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action='.$folder.'&subaction=admin" style="color: lime;"';
 	else echo '<th width="',floor(100/$nb_colonnes),'%"><a';
 	echo '>Administration</a></td>';
 
 } else {
 
 	// menu sign_visu_ally
-	if ($pub_subaction != 'ally') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action=ogsign&subaction=ally" style="color: lime;"';
+	if ($pub_subaction != 'ally') echo '<td class="c" width="',floor(100/$nb_colonnes),'%"><a href="index.php?action='.$folder.'&subaction=ally" style="color: lime;"';
 	else echo '<th width="',floor(100/$nb_colonnes),'%"><a';
 	echo '>Alliance</a></td>';
 

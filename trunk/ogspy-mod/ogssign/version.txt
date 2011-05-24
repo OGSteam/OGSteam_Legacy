@@ -1,2 +1,3 @@
 OGSign
 1.0.0
+ogssign,OGSign,ogssign,ogssign,sign_conf.php,1,0
