@@ -1024,4 +1024,30 @@ function check_postvalue($secvalue) {
     }
     return true;
 }
+
+function install_mod($mod_config,$mod_folder) {
+	global $db;
+	$filename = 'mod/'.$mod_folder.'/version.txt';
+	if (file_exists($filename)) $file = file($filename);
+	$mod_version = trim($file[1]);
+	$mod_config = trim($file[2]);
+	$value_mod = explode (',', $mod_config);
+	$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active,admin_only) VALUES ('".$value_mod[0]."','".$value_mod[1]."','".$value_mod[2]."','".$value_mod[3]."','".$value_mod[4]."','".$mod_version."','".$value_mod[5]."','".$value_mod[6]."')";
+	$db->sql_query($query);
+}
+
+function uninstall_mod($mod_uninstall_name,$mod_uninstall_table) {
+	global $db;
+	$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='".$mod_uninstall_name."';");
+	$db->sql_query("DROP TABLE IF EXISTS ".$mod_uninstall_table."");
+}
+
+function update_mod($mod_folder,$mod_name){
+	global $db;
+		$filename = 'mod/'.$mod_folder.'/version.txt';
+	if (file_exists($filename)) $file = file($filename);
+	$mod_version = trim($file[1]);
+	$query = "UPDATE ".TABLE_MOD." SET version='".$mod_version."' WHERE action='".$mod_name."'";
+	$db->sql_query($query);
+	}
 ?>
