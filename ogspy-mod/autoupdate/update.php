@@ -11,18 +11,9 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
-// MAJ du numéro de version automatique
-if (file_exists('mod/'.$pub_modroot.'/version.txt')) {
-	$file = file('mod/'.$pub_modroot.'/version.txt');
-
-	$db->sql_query('UPDATE '.TABLE_MOD.' SET `version` = \''.trim($file[1]).'\' WHERE `id` = \''.$pub_mod_id.'\'');
-}
-elseif (file_exists('../mod/'.$pub_modroot.'/version.txt')) {
-	$file = file('../mod/'.$pub_modroot.'/version.txt');
-
-	$db->sql_query('UPDATE '.TABLE_MOD.' SET `version` = \''.trim($file[1]).'\' WHERE `id` = \''.$pub_mod_id.'\'');
-}
+$mod_folder= "autoupdate";
+$mod_name = "autoupdate";
+update_mod($mod_folder,$mod_name);
 
 if(file_exists("mod/autoupdate/modupdate.json")) {
 	unlink("mod/autoupdate/modupdate.json");

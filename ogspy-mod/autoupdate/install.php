@@ -11,7 +11,7 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
-$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active) VALUES ( 'AutoUpdate', 'Mise &agrave; jour<br />de [MOD]', 'autoupdate', 'autoupdate', 'autoupdate.php', '1.1.0', '1')";
-$db->sql_query($query);
+// Ajout du module dans la table des mod de OGSpy
+$mod_folder = "autoupdate";
+install_mod($mod_folder);
 ?>
