@@ -1,2 +1,3 @@
-AdvSpy
-0.9.5
+advspy
+1.0.0
+advspy,- AdvSpy -,AdvSpy,advspy,AdvSpy.php,1,0

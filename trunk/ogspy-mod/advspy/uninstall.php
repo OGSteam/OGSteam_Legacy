@@ -3,18 +3,16 @@
 define("IN_SPYOGAME", true);
 require_once("common.php");
 global $db;
-
+$mod_folder= "advspy";
 //includes advspy (environement de base)
 define("IN_MOD_ADVSPY",TRUE);
-$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/AdvSpy/";
+$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/".$mod_folder."/";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 
-//table des raids
-$query = "DROP TABLE `".$AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert']."`;";
-$db->sql_query($query);
+global $table_prefix;
+$mod_uninstall_name = "advspy";
+$mod_uninstall_table = $AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert'].', '.$AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad'];
+uninstall_mod($mod_unistall_name,$mod_uninstall_table);
 
-//table des sauvegardes
-$query = "DROP TABLE `".$AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']."`;";
-$db->sql_query($query);
 
 ?>
