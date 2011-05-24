@@ -7,13 +7,16 @@ global $db;
 
 //includes advspy (environement de base)
 define("IN_MOD_ADVSPY",TRUE);
-$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/advspy/";
+//ajout de advspy à la liste des mods actifs.
+$mod_folder= "advspy";
+install_mod($mod_folder);
+
+$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/".$mod_folder."/";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 
-//ajout de advspy à la liste des mods actifs.
-$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active)
-VALUES ('AdvSpy','- AdvSpy -','AdvSpy','advspy','AdvSpy.php','".$AdvSpyConfig['version']['advspy']."','1')";
-$db->sql_query($query);
+//$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active)
+//VALUES ('advspy','- AdvSpy -','AdvSpy','advspy','AdvSpy.php','".$AdvSpyConfig['version']['advspy']."','1')";
+//$db->sql_query($query);
 
 //creation de la table des raids
 $query = "CREATE TABLE `".$AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert']."` (
