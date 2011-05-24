@@ -31,6 +31,8 @@ if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 								<li>Résolution du probleme de suppression d'image</li>
 								<li>Suppression de la partie Admin pour un changelog</li>
 								<li>Harmonisation du style a ogspy</li>
+								<li>Changement de la casse du nom de dossier</li>
+								<li>Modification de l'install, uninstall et update</li>
 							</ul>
 						</td>
 					</tr>

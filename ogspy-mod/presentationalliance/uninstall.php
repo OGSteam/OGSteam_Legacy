@@ -10,16 +10,13 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 // Définitions
-global $db,$table_prefix;
-define("TABLE_P_ALLY_PIC", $table_prefix."pres_alliance_pic");
-define("TABLE_P_ALLY_DATA", $table_prefix."pres_alliance_data");
 
-// Suppression de la table des images
-$db->sql_query("DROP TABLE IF EXISTS ".TABLE_P_ALLY_PIC.";");
-
-// Suppression de la table des champs
-$db->sql_query("DROP TABLE IF EXISTS ".TABLE_P_ALLY_DATA.";");
+//define("TABLE_P_ALLY_PIC", $table_prefix."pres_alliance_pic");
+//define("TABLE_P_ALLY_DATA", $table_prefix."pres_alliance_data");
 
 // Modification de la table des mod de OGSpy
-$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='presentation_Alliance'");
+global $table_prefix;
+$mod_uninstall_name = "presentationalliance";
+$mod_uninstall_table = $table_prefix."pres_alliance_pic".', '.$table_prefix."pres_alliance_data";
+uninstall_mod($mod_unistall_name,$mod_uninstall_table);
 ?>

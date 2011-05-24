@@ -127,7 +127,7 @@ $background = get_background_tab();
 $back_per_ligne = ($x=count($background)<$back_per_ligne)?$x:5;
 ?>
 <br/><br/>
-<form action='?action=presentation_alliance&page=<?php echo $pub_page; ?>' method='post'>
+<form action='?action=<?php echo $mod_name?>&page=<?php echo $pub_page; ?>' method='post'>
 <table>
 	<tr>
 		<td class="c" colspan="2">

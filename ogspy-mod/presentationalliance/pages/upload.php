@@ -18,7 +18,7 @@ if ($_POST)
 //Upload de fond
 if($type=='fonds') 
 {
-	$dossier = 'mod/presentationAlliance/fonds/';
+	$dossier = 'mod/'.$mod_name.'/fonds/';
 	$fichier = basename($_FILES['file']['name']);
 	$taille_maxi = 300000;
 	$taille = filesize($_FILES['file']['tmp_name']);
@@ -62,7 +62,7 @@ if($type=='fonds')
 //Upload de police
 if($type=='font') 
 {
-	$dossier = 'mod/presentationAlliance/polices/';
+	$dossier = 'mod/'.$mod_name.'/polices/';
 	$fichier = basename($_FILES['file']['name']);
 	$taille_maxi = 500000;
 	$taille = filesize($_FILES['file']['tmp_name']);
@@ -106,7 +106,7 @@ if($type=='font')
 //Upload de images
 if($type=='images') 
 {
-	$dossier = 'mod/presentationAlliance/images/';
+	$dossier = 'mod/'.$mod_name.'/images/';
 	$fichier = basename($_FILES['file']['name']);
 	$taille_maxi = 300000;
 	$taille = filesize($_FILES['file']['tmp_name']);
@@ -151,7 +151,7 @@ if($type=='images')
 <br>
 <br>
 <!-- Formulaire d'envoie de fond -->
-<form method="post" action='?action=presentation_alliance&page=<?php echo $pub_page?>&type=fonds' enctype="multipart/form-data">
+<form method="post" action='?action=<?php echo $mod_name?>&page=<?php echo $pub_page?>&type=fonds' enctype="multipart/form-data">
   <!-- On limite le fichier à 300Ko -->
      <input type="hidden" name="MAX_FILE_SIZE" value="300000">
 		<table>
@@ -180,7 +180,7 @@ if($type=='images')
 			</tr>
 </form>
 <!-- Formulaire d'envoie d'images -->
-<form method="post" action='?action=presentation_alliance&page=<?php echo $pub_page?>&type=images' enctype="multipart/form-data">
+<form method="post" action='?action=<?php echo $mod_name?>&page=<?php echo $pub_page?>&type=images' enctype="multipart/form-data">
   <!-- On limite le fichier à 300Ko -->
 			<tr><th>
 					Image
@@ -192,7 +192,7 @@ if($type=='images')
 			</tr>
 </form>
 <!-- Formulaire d'envoie de police -->
-<form method="post" action='?action=presentation_alliance&page=<?php echo $pub_page?>&type=font' enctype="multipart/form-data">
+<form method="post" action='?action=<?php echo $mod_name?>&page=<?php echo $pub_page?>&type=font' enctype="multipart/form-data">
   <!-- On limite le fichier à 300Ko -->
      <input type="hidden" name="MAX_FILE_SIZE" >
 			<tr>
