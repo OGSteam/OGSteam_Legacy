@@ -1025,7 +1025,7 @@ function check_postvalue($secvalue) {
     return true;
 }
 
-function install_mod($mod_config,$mod_folder) {
+function install_mod($mod_folder) {
 	global $db;
 	$filename = 'mod/'.$mod_folder.'/version.txt';
 	if (file_exists($filename)) $file = file($filename);
