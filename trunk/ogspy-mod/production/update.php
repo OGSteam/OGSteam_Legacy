@@ -11,10 +11,8 @@ if (!$quet) {
 	$db->sql_query($query);
 }
 
-$filename = 'mod/production/version.txt';
-if (file_exists($filename)) $file = file($filename);
+$mod_folder = "production";
+$mod_name = "production";
+update_mod($mod_folder, $mod_name);
 
-// mise à jour du numéro de version
-	$query  = "UPDATE `".TABLE_MOD."` SET `version` = '".trim($file[1])."' WHERE `action` = 'production'";
-	$db->sql_query($query);
 ?>

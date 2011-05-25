@@ -12,12 +12,6 @@ if (!$quet) {
 }
 
 global $server_config;
-require_once("mod/production/lang/lang_fr.php");
-if (file_exists("mod/production/lang/lang_".$server_config['language'].".php")) require_once("mod/production/lang/lang_".$server_config['language'].".php");
-
-$filename = 'mod/production/version.txt';
-if (file_exists($filename)) $file = file($filename);
-
-$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active) VALUES ('".$lang['prod_uction']."','".$lang['prod_uction']."','production','production','production.php','".trim($file[1])."','1')";
-$db->sql_query($query);
+$mod_folder = "production";
+install_mod($mod_folder);
 ?>
