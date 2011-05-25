@@ -15,6 +15,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 require_once("views/page_header.php");
 
+
 $filename = "mod/production/version.txt";
 if (file_exists($filename)) 
 	$file = file($filename);
@@ -33,7 +34,9 @@ if (file_exists("mod/production/lang/lang_".$user_data['user_language'].".php"))
 	require("mod/production/lang/lang_".$user_data['user_language'].".php");
 
 // Enregistrement des données
-for ($i=1;$i<=9;$i++) {
+$start = 101; 
+$nb_planete = find_nb_planete_user(); 
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	if (isset($_POST['planete'.$i])) {
 		if ($_POST['planete'.$i] == 1) {
 			if (isset($_POST['SS'.$i]) && isset($_POST['M'.$i]) && isset($_POST['C'.$i]) && isset($_POST['D'.$i]) && isset($_POST['SoP'.$i]) && isset($_POST['FR'.$i])) {
@@ -79,7 +82,7 @@ if (isset($_POST['techno_energie'])) {
 // Récupération des informations de pourcentage de production sur les mines
 $planet = array("planet_id" => "", "M_percentage" => 0, "C_percentage" => 0, "D_percentage" => 0, "CES_percentage" => 100, "CEF_percentage" => 100, "Sat_percentage" => 100, "fields" => 163);
 $quet = mysql_query("SELECT planet_id, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage, fields FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data["user_id"]." AND planet_id < 10 ORDER BY planet_id");
-$user_building = array_fill(1, 9, $planet);
+$user_building = array_fill($start, $start+$nb_planete -1, $planet);
 while ($row = mysql_fetch_assoc($quet)) {
 	$arr = $row;
 	unset($arr["planet_id"]);
@@ -104,8 +107,6 @@ $geologue = $query["off_geologue"];
 
 // Réparation des informations sur la vitesse univers
 $query = mysql_fetch_assoc(mysql_query("SELECT `config_value` FROM ".TABLE_CONFIG." WHERE config_name = 'speed_uni'"));
-// pour les version d'OGSpy jusqu'à 3.04b, par défaut : 1
-// pour l'uni 50 français qui est à vitesse *2, il faut donc mettre... 2 !
 if (!$query["config_value"]) 
 	$query["config_value"] = 1;
 	
@@ -118,7 +119,7 @@ $vitesse = $query["config_value"];
 var batimentsOGSpy = new Array();
 var ressource = 2;
 <?php
-for ($i=1;$i<=9;$i++) {
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	if ($user_building[$i]['planet_name'] != '') {
 		$Planete[$i] = 1;
 		echo "batimentsOGSpy[".$i."] = new Array('".
@@ -148,7 +149,7 @@ echo "vitesse = ".$vitesse.";\n";
 function chargement () {
 <?php
 	$temp = array('',9,10,11,12,13,14);
-	for ($i=1;$i<=9;$i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		for ($b=1;$b<=6;$b++) {
 			echo "document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
 			echo "document.getElementById('rap_".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$temp[$b]."];\n";
@@ -194,12 +195,12 @@ function selection(sel) {
 function verif_donnee(envoye) {
 	global = new Array(0,1,1,1,1,1,1,1,1,1);
 	<?php
-		for ($i=1;$i<=9;$i++){
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 			for ($b=1;$b<=5;$b++) 
 				echo "if ((isNaN(parseFloat(document.getElementById('".$bati[$b].$i."').value))) || parseFloat(document.getElementById('".$bati[$b].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
 			echo "if (!document.getElementById('global".$i."').checked) global[".$i."] = 0;\n";
 		}
-		for ($i=1;$i<=9;$i++){
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 			echo "if ((isNaN(parseFloat(document.getElementById('".$bati[6].$i."').value))) || parseFloat(document.getElementById('".$bati[6].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][6];\n";
 		}
 	?>
@@ -226,7 +227,7 @@ function recup_donnee() {
 		for ($b = 1; $b <= 6; $b++){
 			echo "donnee['".$bati[$b]."'] = new Array;\n";
 			echo "donnee['rap_".$bati[$b]."'] = new Array;\n";
-			for ($i = 1; $i <= 9; $i++){
+			for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 				echo "donnee['".$bati[$b]."'][".$i."] = parseFloat(document.getElementById('".$bati[$b].$i."').value);\n";
 				echo "donnee['rap_".$bati[$b]."'][".$i."] = parseFloat(document.getElementById('rap_".$bati[$b].$i."').value);\n";
 			}
@@ -242,8 +243,8 @@ function calcul() {
 	cases = new Array();
 	cases_base = new Array(
 	<?php
-		echo "0";
-		for ($i = 1; $i <= 9; $i++) 
+		
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 			echo ", ".($user_building[$i]["fields_used"] - $user_building[$i]['M'] - $user_building[$i]['C'] - $user_building[$i]['D'] - $user_building[$i]['CES'] - $user_building[$i]['CEF']);
 	?>);
 	energie = new Array();
@@ -255,7 +256,7 @@ function calcul() {
 	cristal_heure[10] = 0;
 	deut_heure[10] = 0;
 	
-	for (i=1;i<=9;i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		if (batimentsOGSpy[i][15] == 1) {
 			prod_energie = Math.round(ingenieur * (production("CES", donnee['SoP'][i], 0, technologieNRJ) * donnee['rap_SoP'][i] / 100 + production("CEF", donnee['FR'][i], batimentsOGSpy[i][8], technologieNRJ) * donnee['rap_FR'][i] / 100 + production_sat(batimentsOGSpy[i][7], batimentsOGSpy[i][8]) * donnee['SS'][i] * donnee['rap_SS'][i] / 100));
 			cons_energie = Math.ceil((donnee['rap_M'][i]/100)*(Math.ceil(10 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) + Math.ceil((donnee['rap_C'][i]/100)*(Math.ceil(10 * donnee['C'][i] * Math.pow(1.1, donnee['C'][i])))) + Math.ceil((donnee['rap_D'][i]/100)*(Math.ceil(20 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]))));
@@ -287,7 +288,7 @@ function calcul() {
 
 function ecrire() {
 	<?php
-		for ($i=1;$i<=9;$i++) {
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 			if ($Planete[$i] == 1) {
 				echo "if (batimentsOGSpy['".$i."'][15] == 1) {\n";
 				echo "\tif (ratio[".$i."] == 1) couleur = 'lime';\n\telse couleur = 'red';\n";
@@ -354,13 +355,13 @@ window.onload = function () {Biper(); chargement();};
 <form name="Save" method="post" action="">
 <table width="100%">
 <tr>
-	<td class="c" colspan='10'><?php echo $lang['prod_uction_mod']."&nbsp;<input type='submit' value='".$lang['prod_save']."' onClick='javascript:verif_donnee(1)'>&nbsp;<input type='submit' value='".$lang['prod_reset']."' onClick='javascript:chargement()' >";?> </td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>"><?php echo $lang['prod_uction_mod']."&nbsp;<input type='submit' value='".$lang['prod_save']."' onClick='javascript:verif_donnee(1)'>&nbsp;<input type='submit' value='".$lang['prod_reset']."' onClick='javascript:chargement()' >";?> </td>
 </tr>
 <tr>
 	<th>
 <?php
 	echo "<a>".$lang['prod_planete']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		$name[$i] = $user_building[$i]["planet_name"];
 		if ($name[$i] == "") 
 			$name[$i] = "&nbsp;";
@@ -373,7 +374,7 @@ window.onload = function () {Biper(); chargement();};
 	<th>
 <?php
 	echo "<a>".$lang['prod_coordinates']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		$coordinates = $user_building[$i]["coordinates"];
 		if ($coordinates == "") 
 			$coordinates = "&nbsp;";
@@ -388,7 +389,7 @@ window.onload = function () {Biper(); chargement();};
 	<th>
 <?php
 	echo "<a>".$lang['prod_temperature_min']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		$temperature_min[$i] = $user_building[$i]["temperature_min"];
 		if ($temperature_min[$i] == "") 
 			$temperature_min[$i] = "&nbsp;";
@@ -401,7 +402,7 @@ window.onload = function () {Biper(); chargement();};
 	<th>
 <?php
 	echo "<a>".$lang['prod_temperature_max']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		$temperature_max[$i] = $user_building[$i]["temperature_max"];
 		if ($temperature_max[$i] == "") 
 			$temperature_max[$i] = "&nbsp;";
@@ -414,7 +415,7 @@ window.onload = function () {Biper(); chargement();};
 	<th>
 <?php
 	echo "<a>".$lang['prod_fields']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) 
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 		echo "\t<th><font color='lime'><span id='cases".$i."'></span></font> / <font color='lime'><span id='cases_tot".$i."'></span></font></th>\n";
 	?>
 </tr>
@@ -422,18 +423,18 @@ window.onload = function () {Biper(); chargement();};
 	<th>
 <?php
 	echo "<a>".$lang['prod_energy']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) 
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 		echo "\t<th><font color='lime'><span id='energie".$i."'></span></font> / <font color='lime'><span id='energie_tot".$i."'></span></font></th>\n";
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10"><?php echo $lang['prod_buildings'];?></td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>"><?php echo $lang['prod_buildings'];?></td>
 </tr>
 
 <?php
 	for ($b = 1; $b <= 5; $b++) {
 		echo "<tr><th><a>".$lang['prod_building_'.$bati[$b]]."</a></th>";
-		for ($i = 1; $i <= 9; $i++) {
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 			echo "\t<th><img style='cursor: pointer;vertical-align: middle;' src='images/action_remove.png' alt='-' onClick='javascript:add (".$b.",".$i.",-1)' /><input type='text' id='".$bati[$b].$i."' name='".$bati[$b].$i."' size='2' maxlength='2' onBlur='javascript:verif_donnee (0)' value='0'><img style='cursor: pointer;vertical-align: middle;' src='images/action_add.png' alt='+' onClick='javascript:add (".$b.",".$i.",1)' />\n";
 			echo "\t\t<select id='rap_".$bati[$b].$i."' name='rap_".$bati[$b].$i."' onChange='javascript:verif_donnee (0)'>";
 			for ($j = 100; $j >= 0; $j = $j - 10) 
@@ -444,7 +445,7 @@ window.onload = function () {Biper(); chargement();};
 		echo "</tr>";
 	}
 	echo "<tr><th><a>".$lang['prod_SS']."</a></th>";
-		for ($i = 1; $i <= 9; $i++) {
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 			echo "<input type='hidden' name='planete".$i."' value='".$Planete[$i]."'>";
 			echo "\t<th><img style='cursor: pointer;vertical-align: middle;' src='images/action_remove.png' alt='-' onClick='javascript:add (6,".$i.",-1)' /><input type='text' id='".$bati[6].$i."' name='".$bati[6].$i."' size='2' maxlength='6' onBlur=\"javascript:verif_donnee (0)\" value='0'><img style='cursor: pointer;vertical-align: middle;' src='images/action_add.png' alt='+' onClick='javascript:add (6,".$i.",1)' />\n";
 			echo "\t\t<select id='rap_".$bati[6].$i."' name='rap_".$bati[6].$i."' onChange='javascript:add (6,".$i.",1)'>";
@@ -456,7 +457,7 @@ window.onload = function () {Biper(); chargement();};
 		echo "</tr>";
 ?>
 <tr>
-<td class="c" colspan="10"><?php echo $lang['prod_tech_off'];?></td>
+<td class="c" colspan="<?php echo $nb_planete + 1?>"><?php echo $lang['prod_tech_off'];?></td>
 </tr>
 <tr><th><a><?php echo $lang['prod_technology_En'];?></a></th>
 	<th><img style='cursor: pointer;vertical-align: middle;' src='images/action_remove.png' alt='-' onClick='javascript:add (7,0,-1)' /><input type='text' id='techno_energie' name='techno_energie' size='2' maxlength='6' onBlur='javascript:verif_donnee (0)' value='0'><img style='cursor: pointer;vertical-align: middle;' src='images/action_add.png' alt='+' onClick='javascript:add (7,0,1)' /></th>
@@ -465,39 +466,39 @@ window.onload = function () {Biper(); chargement();};
 </tr>
 
 <tr>
-	<td class="c" colspan="10">
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">
 <?php
 	echo $lang['prod_prod_hour']."</td>\n</tr>\n<tr>\n<th><a>".$lang['prod_prod_factor']."</a></th>\n";
-	for ($i = 1; $i <= 9; $i++) 
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 		echo "\t<th><span id='fact".$i."'></span></th>\n";
 ?>
 </tr>
 <?php
 	for ($b = 1;$b <= 3; $b++) {
 		echo "<tr><th><a>".$lang['prod_building_'.$bati[$b]]."</a></th>";
-		for ($i = 1; $i <= 9; $i++) 
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 			echo "\t<th><span id='prodh_".$bati[$b].$i."'></span></th>\n";
 			
 		echo "</tr>";
 	}
 ?>
 <tr>
-	<td class="c" colspan="10">
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">
 <?php
 	echo $lang['prod_prod_day']."</td>\n</tr>\n";
 	for ($b = 1; $b <= 3; $b++) {
 		echo'<tr><th><a>'.$lang['prod_building_'.$bati[$b]].'</a></th>';
-		for ($i = 1; $i <= 9; $i++) 
+		for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) 
 			echo "\t<th><span id='prodj_".$bati[$b].$i."'></span></th>\n";
 			
 		echo "</tr>";
 	}
 ?>
 <tr>
-	<td class="c" colspan="10">
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">
 <?php
 	echo $lang['prod_total_prod']."</td>\n</tr>\n<tr><th><table width='100%' style='border:none'><tr><th style='border:none'><img style='cursor: pointer;vertical-align: middle;' src='images/action_delete.png' onClick='javascript:selection (0)' alt='-' title='".$lang['prod_none']."' /></th><th style='border:none'><a>".$lang['prod_account']."</a></th><th style='border:none'><img style='cursor: pointer;vertical-align: middle;' src='images/action_check.png' onClick='javascript:selection (1)' alt='+' title='".$lang['prod_all']."' /></th></tr></table></th>\n";
-	for ($i = 1; $i <= 9; $i++) {
+	for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 		echo "\t<th><label><input type='";
 		if ($Planete[$i] == 1) 
 			echo "checkbox";
@@ -557,7 +558,6 @@ window.onload = function () {Biper(); chargement();};
 </form>
 <br/>
 <?php
-	echo "<div align=center><font size='2'>".sprintf($lang['prod_created_by'],$mod_version,$creator_name,$modifier_name1,$modifier_name2)."</font><br />".
-		"<font size='1'><a href='".$forum_link."' target='_blank'>".$lang['prod_forum']."</a>.</font></div>";
+	echo "<div align=center><font size='2'>".sprintf($lang['prod_created_by'],$mod_version,$creator_name,$modifier_name1,$modifier_name2)."</font><br /></div>";
 	require_once("views/page_tail.php");
 ?>
