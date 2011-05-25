@@ -1026,14 +1026,28 @@ function check_postvalue($secvalue) {
 }
 
 function install_mod($mod_folder) {
-	global $db;
-	$filename = 'mod/'.$mod_folder.'/version.txt';
-	if (file_exists($filename)) $file = file($filename);
-	$mod_version = trim($file[1]);
-	$mod_config = trim($file[2]);
-	$value_mod = explode (',', $mod_config);
-	$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active,admin_only) VALUES ('".$value_mod[0]."','".$value_mod[1]."','".$value_mod[2]."','".$value_mod[3]."','".$value_mod[4]."','".$mod_version."','".$value_mod[5]."','".$value_mod[6]."')";
-	$db->sql_query($query);
+  global $db;
+  $filename = 'mod/'.$mod_folder.'/version.txt';
+  if (file_exists($filename)) $file = file($filename);
+ // On récupère les données du fichier version.txt 
+  $mod_version = trim($file[1]);
+  $mod_config = trim($file[2]);
+ 
+ // On explode la chaine d'information
+  $value_mod = explode (',', $mod_config);
+ 
+ // On vérifie si le mod est déjà installer
+		$check = "SELECT title FROM ".TABLE_MOD." WHERE title='".$value_mod[0]."'";
+		$query_check = $db->sql_query($check);
+		$result_check = mysql_num_rows($query_check);
+			
+			if($result_check!=0) {}
+			else if (count($value_mod) == 7)
+				{
+				// On vérifie le nombre de valeur de l'explode
+					$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active,admin_only) VALUES ('".$value_mod[0]."','".$value_mod[1]."','".$value_mod[2]."','".$value_mod[3]."','".$value_mod[4]."','".$mod_version."','".$value_mod[5]."','".$value_mod[6]."')";
+					$db->sql_query($query);
+				}
 }
 
 function uninstall_mod($mod_uninstall_name,$mod_uninstall_table) {
