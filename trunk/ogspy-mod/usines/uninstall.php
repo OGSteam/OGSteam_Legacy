@@ -4,8 +4,6 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 global $db;
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE title='Usines'";
-
-$db->sql_query($query);
+$mod_uninstall_name="usines";
+uninstall_mod($mod_uninstall_name,$mod_uninstall_table);
 ?>

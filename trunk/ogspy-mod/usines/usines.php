@@ -24,7 +24,7 @@ $user_building = $user_empire["building"];
 
 <table width="100%">
 <tr>
-	<td class="c" colspan="10">Mod Optimisation des Usines</td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">Mod Optimisation des Usines</td>
 </tr>
 <tr>
 	<th><a>Nom</a></th>
@@ -63,7 +63,7 @@ for ($i=$start ; $i<=$start+$nb_planete-1 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10"><?php echo $lang_empire["Batiment"] ?></td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>"><?php echo $lang_empire["Batiment"] ?></td>
 </tr>
 <tr>
 	<th><a><?php echo $lang_building["UdR"] ?></a></th>
@@ -99,7 +99,7 @@ for ($i=$start ; $i<=$start+$nb_planete-1 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Production</td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">Production</td>
 </tr>
 <tr>
 	<th><a><?php echo $lang_building["M"] ?></a></th>
@@ -141,7 +141,7 @@ for ($i=$start ; $i<=$start+$nb_planete-1 ; $i++) {
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Usines à construire</td>
+	<td class="c" colspan="<?php echo $nb_planete + 1?>">Usines à construire</td>
 </tr>
 <tr>
 	<th><a>Spécialisation Batiments</a></th>

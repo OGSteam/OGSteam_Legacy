@@ -1,2 +1,3 @@
 Usines
-0.3
+0.4
+usines,Usines,usines,usines,usines.php,1,0
