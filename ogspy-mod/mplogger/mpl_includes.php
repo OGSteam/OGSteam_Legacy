@@ -23,9 +23,6 @@ define("TABLE_MPC_Config", "$table_prefix$mod_name_config");
 $i=-1;
 $t_menu['fichier'][++$i] = 'msg_prives';	$t_menu['texte'][$i] = 'Messages';			$t_menu['admin'][$i] = 0;
 $t_menu['fichier'][++$i] = 'msg_public';	$t_menu['texte'][$i] = 'Messages Public';	$t_menu['admin'][$i] = 0;
-$t_menu['fichier'][++$i] = 'config';			$t_menu['texte'][$i] = 'Configuration';		$t_menu['admin'][$i] = 0;
+$t_menu['fichier'][++$i] = 'config';		$t_menu['texte'][$i] = 'Configuration';		$t_menu['admin'][$i] = 0;
 $t_menu['fichier'][++$i] = 'admin';			$t_menu['texte'][$i] = 'Admin';				$t_menu['admin'][$i] = 1;
-
-
-
- ?>
+?>
