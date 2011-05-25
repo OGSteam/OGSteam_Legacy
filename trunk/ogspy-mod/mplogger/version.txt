@@ -1,2 +1,3 @@
-MP_Logger
-0.1
+mp_logger
+1.0.1
+mp_logger,Messages IG,MP_Logger,mplogger,index.php,1,0

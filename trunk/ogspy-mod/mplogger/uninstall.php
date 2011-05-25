@@ -14,15 +14,9 @@ Script de désintallation
 // L'appel direct est interdit
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 include("mpl_includes.php");
-global $db;
 
-/*/Suppression de la table...
-$query = "DROP TABLE IF EXISTS ".TABLE_MPC.";";
-$db->sql_query($query);
-$query = "DROP TABLE IF EXISTS ".TABLE_MPC_config.";";
-$db->sql_query($query);
-*/
-$query = "DELETE FROM ".TABLE_MOD." WHERE title='$mod_name'";
-
-$db->sql_query($query);
+global $db, $table_prefix;
+$mod_uninstall_name = "mp_logger";
+$mod_uninstall_table = $table_prefix.$mod_name.'_config'.', '.$table_prefix.$mod_name;
+uninstall_mod($mod_uninstall_name, $mod_uninstall_table);
 ?>

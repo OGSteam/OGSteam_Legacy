@@ -14,16 +14,7 @@ Script de mise à jour
 // L'appel direct est interdit
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-global $db,$table_prefix;
-
-define("TABLE_MPC", $table_prefix."MP_Logger");
-define("FOLDER_MPC","mod/MP_Logger");
-
-if (file_exists(FOLDER_MPC.'/version.txt')) { 
-	$file = file(FOLDER_MPC.'/version.txt'); 
-}
-
-// mise à jour du numéro de version
-	$query  = 'UPDATE `'.TABLE_MOD.'` SET `version` = \''.trim($file[1]).'\' WHERE `title` = \'MP_Logger\'';
-	$db->sql_query($query);
+$mod_folder = "mplogger";
+$mod_name = "mp_logger";
+update_mod($mod_folder,$mod_name);
 ?>

@@ -16,6 +16,10 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 //Définitions
 global $db;
 global $table_prefix;
+
+$mod_folder = "mplogger";
+install_mod($mod_folder);
+
 define("TABLE_MPC", $table_prefix."MP_Logger");
 define("TABLE_MPC_Config", $table_prefix."MP_Logger_config");
 define("FOLDER_MPC","mod/MP_Logger");
@@ -49,8 +53,5 @@ $query = "INSERT INTO ".TABLE_MPC_Config." ( `config` , `valeur`) VALUES ( 'lign
 $db->sql_query($query);
 $query = "INSERT INTO ".TABLE_MPC_Config." ( `config` , `valeur`) VALUES ( 'jours' , '365' )";
 $db->sql_query($query);*/
-// Modification de la table des MOD de OGSpy
-if (file_exists(FOLDER_MPC.'/version.txt')) $file = file(FOLDER_MPC.'/version.txt'); 
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('','MP_Logger','Messages IG','MP_Logger','MP_Logger','index.php','".trim($file[1])."','1')";
-$db->sql_query($query);
+
 ?>
