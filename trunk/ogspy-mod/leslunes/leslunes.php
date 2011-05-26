@@ -71,7 +71,7 @@ if(!isset($pub_val)) {
 	$pub_CSD = "";
 	$pub_CPD = "";
 	$pub_CGD = "";
-	for ($i = 1; $i <= 12; $i++) {
+	for ($i = 1; $i <= 13; $i++) {
 		$pub_vaisseaux[$i] = "0";
 	}
 }
@@ -103,6 +103,7 @@ $vaisseaux[9]=array ("Sonde espionnage","100000000");
 $vaisseaux[10]=array ("Bombardier","4000(5000)");
 $vaisseaux[11]=array ("Destructeur","5000");
 $vaisseaux[12]=array ("Étoile de la mort","100");
+$vaisseaux[13]=array ("Traqueur","10000");
 
 if (isset($pub_subaction)) {
 	switch ($pub_subaction) {
@@ -145,8 +146,9 @@ if (isset($pub_subaction)) {
 	$vaisseaux[9][1]=$vaisseaux[9][1]*$TPH;
 	$vaisseaux[11][1]=$vaisseaux[11][1]*$TPH;
 	$vaisseaux[12][1]=$vaisseaux[12][1]*$TPH;
+	$vaisseaux[13][1]=$vaisseaux[13][1]*$TPH;
 
-				for ($i=1; $i<=12; $i++) {
+				for ($i=1; $i<=13; $i++) {
 					if (!empty($pub_vaisseaux[$i])){
 						$flotte[$i] = $vaisseaux[$i][1];
 					}
@@ -207,7 +209,7 @@ if (isset($pub_subaction)) {
 						<td class="c" align="center">Départ</td>
 						<td class="c" align="center">Arrivée</td>
 					</tr><?php
-					for ($i=1; $i<=12; $i++) {
+					for ($i=1; $i<=13; $i++) {
 					if($i<=10 && $pub_val=='post') {
 						$pvitesse = $i*10;
 					
@@ -370,6 +372,7 @@ if (isset($pub_subaction)) {
 								<li>Prise en compte de la vitesse de l'univers</li>
 								<li>Changement de la partie Administration en Changelog</li>
 								<li>Adaption du mod à OGSpy v3.0.7</li>
+								<li>Ajout du traqueur</li>
 							</ul>
 						</td>
 					</tr>
