@@ -10,7 +10,8 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 require_once("views/page_header.php");
-
+// on récupère la vitesse de l'uni
+$speed = $server_config['speed_uni'];
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='leslunes' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
@@ -41,18 +42,16 @@ else {
 	$bouton2 .= "<a>Retour de flotte</a>";
 	$bouton2 .= "</th>";
 }
-if ($user_data["user_admin"] == 0 || $user_data["user_coadmin"] == 0) {
-	if ($subaction != "option") {
-		$bouton3 = "\t\t\t"."<td class='c' align='center' width='150' onclick=\"window.location = 'index.php?action=leslunes&subaction=option';\">";
-		$bouton3 .= "<a style='cursor:pointer'><font color='lime'>Administration</font></a>";
+if ($subaction != "changelog") {
+		$bouton3 = "\t\t\t"."<td class='c' align='center' width='150' onclick=\"window.location = 'index.php?action=leslunes&subaction=changelog';\">";
+		$bouton3 .= "<a style='cursor:pointer'><font color='lime'>Changelog</font></a>";
 		$bouton3 .= "</td>";
 	}
 	else {
 		$bouton3 = "\t\t\t"."<th width='150'>";
-		$bouton3 .= "<a>Administration</a>";
+		$bouton3 .= "<a>Changelog</a>";
 		$bouton3 .= "</th>";
-	}
-} else $bouton3 = "";
+}
 
 echo "<table width=60%>\n";
 	echo $bouton1.$bouton2.$bouton3;
@@ -215,16 +214,16 @@ if (isset($pub_subaction)) {
 						if ($pub_CGD==$pub_CGA){
 							if ($pub_CSD==$pub_CSA){
 								if ($pub_CPD==$pub_CPA) {
-								$temps = round(10 + (35000/($pvitesse) * sqrt(5000/$vitesse)),0);
+								$temps = round(10 + (35000/($speed * $pvitesse) * sqrt(5000/$vitesse)),0);
 								} else {
-								$temps = round(10 + (35000/($pvitesse) * sqrt((1000000 + abs($pub_CPD-$pub_CPA)*5000)/$vitesse)));
+								$temps = round(10 + (35000/($speed * $pvitesse) * sqrt((1000000 + abs($pub_CPD-$pub_CPA)*5000)/$vitesse)));
 								}
 							} else {
-							$temps = round(10 + (35000/($pvitesse) * sqrt((2700000+abs($pub_CSD-$pub_CSA)*95000)/$vitesse)));
+							$temps = round(10 + (35000/($speed * $pvitesse) * sqrt((2700000+abs($pub_CSD-$pub_CSA)*95000)/$vitesse)));
 							}
 						}
 						else {
-						$temps = round(10+(35000/($pvitesse) * sqrt((abs($pub_CGD-$pub_CGA)*20000000)/$vitesse)));
+						$temps = round(10+(35000/($speed * $pvitesse) * sqrt((abs($pub_CGD-$pub_CGA)*20000000)/$vitesse)));
 						}
 					}
 					else {
@@ -246,7 +245,7 @@ if (isset($pub_subaction)) {
 					
 						if ($i<=10 && $pub_val=='post') {
 						echo date('H:i:s', mktime(0,0,$temps,$pub_DM,$pub_DJ,$pub_DA));
-						echo date('d/m/Y H:i:s', mktime($pub_HH,$pub_HM,$pub_HS - $temps,$pub_DM,$pub_DJ,$pub_DA));
+						echo " - ", date('d/m/Y H:i:s', mktime($pub_HH,$pub_HM,$pub_HS - $temps,$pub_DM,$pub_DJ,$pub_DA));
 						}
 					echo "</th>\n"
 					//arrivée
@@ -349,6 +348,34 @@ if (isset($pub_subaction)) {
 	</table>
 	</form>
 <?php break;
+		case "changelog" :	
+?>
+		<table style='width:60%'>
+		<tr style='line-height : 20px; vertical-align : center;'>
+						<td class='c' style='text-align : center; width : 20%; color : #FF00FF;'>Version</td>
+						<td class='c' style='text-align : center; color : #FF00FF;'>Modification</td>
+					</tr>
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>0.3b</td>
+						<td style='background-color : #273234;'>
+							<ul>
+								<li>Version initiale avec affichage sur une seule page</li>
+							</ul>
+						</td>
+					</tr>
+										<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.0</td>
+						<td style='background-color : #273234;'>
+							<ul>
+								<li>Prise en compte de la vitesse de l'univers</li>
+								<li>Changement de la partie Administration en Changelog</li>
+								<li>Adaption du mod à OGSpy v3.0.7</li>
+							</ul>
+						</td>
+					</tr>
+		</tr>
+		</table>
+<?php				
 	}
 } ?>
 <br />
