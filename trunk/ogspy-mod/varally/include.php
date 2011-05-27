@@ -5,13 +5,14 @@
 * @package varAlly
 * @author Aeris
 * @link http://ogsteam.fr
-* @version 2.1a
+* @version 1.0.0
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 /**
  *
  */
 require_once('./parameters/id.php');
+
 
 $sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
 $result = $db->sql_query($sql);
@@ -27,12 +28,13 @@ list($tblSpy)=$db->sql_fetch_row($result);
  */ 
 function page_footer() {
 global $db;
-	
+
 	//Récupére le numéro de version du mod
 	$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'varAlly\'';
 	$result = $db->sql_query($request);
 	list($version) = $db->sql_fetch_row($result);
 	echo '<div>varAlly (v'.$version.') créé par Aéris, légèrement modifié par CyberSpace</div>';
+	echo '<div>Remise à jour pour OGSpy 3.0.7 - Shad</div>';
 }
 
 /**
@@ -114,7 +116,7 @@ function affStats ( $field, $player ) {
 	switch ($nb) {
 		case 0; echo '<th colspan=\'2\'> - </th>'; break;
 		case 1; $val = $db->sql_fetch_assoc($result); echo '<th>? -> '.$val['points'].'</th><th>n/a</th>'; break;
-		case 2; $val = $db->sql_fetch_assoc($result); $new = $val['points']; $val = $db->sql_fetch_assoc($result); $ex = $val['points'];
+		case 2; $val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'','.'); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','.');
 			$ecart = $new - $ex; $pourcent = round(100*$ecart/$ex,2); if ($ecart<0) { $color='red'; } elseif ($ecart>0) { $color='lime'; $ecart = '+'.$ecart; $pourcent = '+'.$pourcent; } else { $color=''; }
 			echo '<th>'.$ex.' -> '.$new.' (<font color=\''.$color.'\'>'.$ecart.'</font>)</th><th><font color=\''.$color.'\'>'.$pourcent.'%</font></th>'; break;
 		default; echo '<th colspan=\'2\'> - Error - </th>'; break;
@@ -142,12 +144,12 @@ function affPoints ( $player, $where ) {
     	switch ($nb) {
 		case 0; echo '<th colspan=\'2\'> - </th>'; break;
 		case 1; $val = $db->sql_fetch_assoc($result); echo '<th>'.$val['points'].'</th><th>n/a</th>'; break;
-		case 2; $val = $db->sql_fetch_assoc($result); $new = $val['points']; $val = $db->sql_fetch_assoc($result); $ex = $val['points'];
+		case 2; $val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'','.'); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','.');
 		    $ecart = $new - $ex; 
 		    $pourcent = round(100*$ecart/$ex,2);        
 
 		    global $tblecart; 
-		    $tblecart[] = array( "joueur" => $player, "pts" => $ecart, "prc" => $pourcent );        
+		    $tblecart[] = array( "joueur" => $player, number_format("pts",0,'','.') => $ecart, "prc" => $pourcent );        
 
 		    if ($ecart<0) { $color='red'; } elseif ($ecart>0) { $color='lime'; $ecart = '+'.$ecart; $pourcent = '+'.$pourcent; } else { $color=''; }        
 

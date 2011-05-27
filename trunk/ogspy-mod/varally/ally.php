@@ -5,7 +5,7 @@
 * @package varAlly
 * @author Aeris
 * @link http://ogsteam.fr
-* @version 2.1b
+* @version 1.0.0
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 

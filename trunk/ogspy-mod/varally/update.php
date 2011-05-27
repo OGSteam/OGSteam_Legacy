@@ -4,14 +4,18 @@
 * Mise à jour du module
 * @package varAlly
 * @author Aeris
-* @version 2.1c
+* @version 1.0.0
 * @link http://ogsteam.fr
  */
 define('IN_SPYOGAME', true);
 include('./parameters/id.php');
+global $db;
+
+$mod_folder = "varally";
+$mod_name = "varally";
+update_mod 	($mod_folder,$mod_name);
 
 $queries = array();
-$queries[] = 'UPDATE `'.TABLE_MOD.'` SET `version`=\'2.1c\' WHERE `action`=\'varAlly\'';
 $queries[] = 'CREATE TABLE IF NOT EXISTS `'.$table_prefix.'varally` (
 	`datadate` int(11) NOT NULL default \'0\',
 	`player` varchar(30) NOT NULL default \'\',

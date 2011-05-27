@@ -5,12 +5,12 @@
 * @package varAlly
 * @author Aeris
 * @link http://ogsteam.fr
-* @version 2.1a
+* @version 1.0.0
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
 require_once('./views/page_header.php');
-require_once('./mod/varAlly/include.php');
+require_once('./mod/varally/include.php');
 
 $query = 'SELECT `active` FROM `'.TABLE_MOD.'` WHERE `action`=\'varAlly\' AND `active`=\'1\' LIMIT 1';
 if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt');
@@ -30,11 +30,11 @@ button_bar();
 <?php
 switch ($pub_subaction)
 {
-	case 'admin': require_once('./mod/varAlly/admin.php'); break;
-	case 'ally': require_once('./mod/varAlly/ally.php'); break;
-	case 'report': require_once('./mod/varAlly/addReport.php'); break;
-	case 'display': require_once('./mod/varAlly/display.php'); break;
-	default: require_once('./mod/varAlly/ally.php'); break;
+	case 'admin': require_once('./mod/varally/admin.php'); break;
+	case 'ally': require_once('./mod/varally/ally.php'); break;
+	case 'report': require_once('./mod/varally/addReport.php'); break;
+	case 'display': require_once('./mod/varally/display.php'); break;
+	default: require_once('./mod/varally/ally.php'); break;
 }
 ?>
 		</td>
