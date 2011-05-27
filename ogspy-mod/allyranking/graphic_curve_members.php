@@ -9,7 +9,7 @@
 /**
  * Fichier de fonctions du module allyRanking
  */
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");

@@ -9,16 +9,14 @@
 	if (!defined('IN_SPYOGAME')) {
 		die("Hacking attempt");
 	}
-
 	global $db;
 	
 	/**
 	 * Fichier de fonctions du module allyRanking
 	 */
-	require_once("mod/allyRanking/ARinclude.php");
+	require_once("mod/allyranking/ARinclude.php");
 	
 	$tablename = TABLE_RANK_MEMBERS;
-
 	if ($tablename=="TABLE_RANK_MEMBERS") { 
 		die("Variable TABLE_RANK_MEMBERS non définie ! Installation impossible.");
 	}
@@ -29,8 +27,8 @@
 	$db->sql_query("DELETE FROM ".TABLE_CONFIG." WHERE config_name='tagRanking'",DEBUG,true);
 	
 //Insertion du champs pour la declaration du module dans OGSpy
-	$query  = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active) VALUES ('allyRanking','".MENU_ICON."&nbsp;".MODULE_NAME."','".MODULE_ACTION."','".MODULE_DIR."','allyRankingMain.php','".MODULE_VERSION."','1');";
-	$db->sql_query($query,DEBUG,true);
+	$mod_folder = "allyranking";
+	install_mod($mod_folder);
 	
 //Insertion d'un nouveau paramètre tagRanking
 	$query = "INSERT INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('tagRanking','');";

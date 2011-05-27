@@ -28,7 +28,7 @@
 	/**
 	 * Fichier de fonctions du module allyRanking
 	 */
-	require_once("mod/allyRanking/ARinclude.php");
+	require_once("mod/allyranking/ARinclude.php");
 
 	/**
 	* Fichier des fonctions de la lib artichow

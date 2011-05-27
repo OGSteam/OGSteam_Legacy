@@ -4,7 +4,7 @@
  *	uninstall.php Fichier de desinstallation du module allyRanking
  *	@package	allyRanking
  *	@author		Jibus 
- * 	@version 	0.3
+ * 	@version 	1.0.0
  *	created	: 18/08/2006   
  *	modified	: 06/09/2006
  */
@@ -18,7 +18,7 @@ global $db,$table_prefix;
 /**
  * Fichier de fonctions du module allyRanking
  */
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 
 //On vérifie que la table xtense_callbacks existe (Xtense2)
 if( mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."xtense_callbacks"."'")))
@@ -33,11 +33,9 @@ if( mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."xtense_callb
   $db->sql_query($query);
   }
 
-$query = "DROP TABLE IF EXISTS ".TABLE_RANK_MEMBERS;
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE title='".MODULE_NAME."'";
-$db->sql_query($query);
+$mod_uninstall_name = "allyranking";
+$mod_uninstall_table = TABLE_RANK_MEMBERS;
+uninstall_mod($mod_uninstall_name,$mod_uninstall_table);
 
 $query = "DELETE FROM ".TABLE_CONFIG." WHERE config_name='tagRanking'";
 $db->sql_query($query);

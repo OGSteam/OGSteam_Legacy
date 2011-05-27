@@ -9,7 +9,7 @@
 /**
  * Fichier de fonctions du module allyRanking
  */
-//require_once("mod/allyRanking/ARinclude.php");
+//require_once("mod/allyranking/ARinclude.php");
 
 //define("DEBUG",false);
 
@@ -72,7 +72,7 @@ function ARpage_top_block($wa)
 		<br>
 		<table width='700' border=0>
 		<?php 
-			$ranking48_img  = '<img width="48" height="48" SRC="mod/allyRanking/images/ranking48.png" name="ranking48" align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">'; 
+			$ranking48_img  = '<img width="48" height="48" SRC="mod/allyranking/images/ranking48.png" name="ranking48" align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">'; 
 			echo "\t\t\t\t<tr><td class='c' width='50'>".$ranking48_img."</td><td class='c' width='750'>Classement des alliances</td></tr>\n";
 		?>
 		</table>
@@ -180,18 +180,18 @@ function ARtable_header_tabtxt($ally=null){
 	// Ligne 1
 	
 	if (isset($ally)) {$bb = "[    Alliance    $ally    ]\n<br>";}else{ $bb="";}
-	$bb .= "[                              Classement interne                            ]";
+	$bb .= "[                              Classement interne                              ]";
 	if ($pub_show_top1500)	$bb .= "[        TOP 1500        ]";
 	$bb .="\n<br>";
 	//--------
 	// Ligne 2
 	
-	$bb .= "[ Rang |        Joueur        |    Alliance     |  Points  |   Date rapport  ]";
+	$bb .= "[ Rang |        Joueur        |    Alliance     |   Points   |   Date rapport  ]";
 	if ($pub_show_top1500)	$bb .= "[ Rang |   Date rapport  ]";
 	$bb .= "\n<br>";
 	$bb = str_replace(" ","&nbsp;",$bb);
 
-	$bb .= "[----------------------------------------------------------------------------]";
+	$bb .= "[------------------------------------------------------------------------------]";
 	if ($pub_show_top1500)	$bb .= "[------------------------]";
 	$bb .="\n<br>";
 
@@ -362,7 +362,7 @@ function ARgalaxy_show_ranking_members($sortmode){
 				echo "\t<th>$rang</th>"
 					."<th><a href='index.php?action=search&type_search=player&string_search=$player&strict=on'>$player</a></th>"
 					."<th><a href='index.php?action=search&type_search=ally&string_search=$ally&strict=on'>$ally</a></th>"
-					."<th>$points</th>"
+					."<th>".number_format("$points",0,'','.')."</th>"
 					."<th>$dd</th>\n";
 				
 				if ($pub_show_top1500)
@@ -635,7 +635,7 @@ function ARgalaxy_show_ranking_members_tabtxt($sortmode){
 				if (strlen($dispally)<15) $dispally .=" ";
 
 				//Points sur 8 caractères
-				$disppoints = substr($blank,1,8-strlen($points)).$points;
+				$disppoints = substr($blank,1,8-strlen($points)).number_format($points,0,'','.');
 				
 				// Rang dans le classement général sur 4 caractères
 				$disprank = substr($blank,1,4-strlen($rank)).$rank;
@@ -780,7 +780,7 @@ function ARgalaxy_show_ranking_members_tabtxt($sortmode){
 	/**
 	 * Fichier de fonctions du module allyRanking
 	 */	 
-	require_once("mod/allyRanking/ARinclude.php");
+	require_once("mod/allyranking/ARinclude.php");
 
 	if (!defined('IN_SPYOGAME')) {
 		die("Hacking attempt");

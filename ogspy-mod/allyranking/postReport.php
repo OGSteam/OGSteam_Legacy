@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 /**
  * Fichier de fonctions du module allyRanking
  */
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 
 $allies = get_allies();
 
@@ -61,7 +61,7 @@ if ($allies != false)
 		
 		<?php
 		
-			$folder48_img  = '<img width="48" height="48" SRC="mod/allyRanking/images/folder48.png" name="folder48" align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">'; 
+			$folder48_img  = '<img width="48" height="48" SRC="mod/allyranking/images/folder48.png" name="folder48" align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">'; 
 			echo "<table width='700'>\n";
 			echo "<tr><td class='c' width='50'>".$folder48_img."</td><td class='c' width='750'>Ajout de rapports d'alliance</td></tr>\n";
 		

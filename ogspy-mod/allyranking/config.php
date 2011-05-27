@@ -9,7 +9,7 @@
 /**
  * Fichier de fonctions du module allyRanking
  */
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
@@ -154,7 +154,7 @@ function valid()
 
 	<table width='700' border=0>
 	<?php
-		$config48_img  = '<img width="48" height="48" SRC="mod/allyRanking/images/config48.png" name="config48" align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">';
+		$config48_img  = '<img width="48" height="48" SRC="mod/allyranking/images/config48.png" name="config48" align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">';
 		echo "<tr><td class='c' width='50'>".$config48_img."</td><td class='c' width='750'>Administration du module</td></tr>\n";
 
 	?>

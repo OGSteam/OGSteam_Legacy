@@ -1,2 +1,3 @@
-allyRanking
-0.4f
+allyranking
+1.0.0
+allyranking,<img align="absmiddle" src="mod/allyranking/images/graph_icon16.gif"> <?php &nbsp;?>allyRanking,allyranking,allyranking,allyRankingMain.php,1,0

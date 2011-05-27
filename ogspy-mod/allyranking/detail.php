@@ -41,7 +41,7 @@ for (var i=0;i<x.length;i++)
 </script>
 <?php
  
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 //define("DEBUG",true);
 
 	global $in_list;
@@ -70,7 +70,7 @@ if (!isset($pub_memberslist)) $pub_memberslist = array();
 
 	
 
-	$detail48_img  = '<img width="48" height="48" SRC="mod/allyRanking/images/detail48.png" name="detail48" align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">'; 
+	$detail48_img  = '<img width="48" height="48" SRC="mod/allyranking/images/detail48.png" name="detail48" align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">'; 
 
 	echo "<BR/><table width='810'>\n";
 	echo "\t<tr><td class='c' width='50'>".$detail48_img."</td><td class='c' width='750'>Evolution générale - Détail par membre</td></tr>\n";
