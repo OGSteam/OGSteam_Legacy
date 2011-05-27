@@ -5,13 +5,16 @@
 * @package varAlly
 * @author Aeris
 * @link http://ogsteam.fr
-* @version 2.1c
+* @version 1.0.0
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 include('./parameters/id.php');
+global $db;
+
+$mod_folder = "varally";
+install_mod($mod_folder);
 
 $queries = array();
-$queries[]  = 'REPLACE INTO `'.TABLE_MOD.'` (`id`,`title`,`menu`,`action`,`root`,`link`,`version`,`active`) VALUES (\'\',\'varAlly\',\'varAlly\',\'varAlly\',\'varAlly\',\'varAlly.php\',\'2.1c\',\'1\')';
 $queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'nbrjoueur\',\'3\')';
 $queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAlly\',\'\')';
 $queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAllySpy\',\'\')';
