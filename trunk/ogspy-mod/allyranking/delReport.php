@@ -15,7 +15,7 @@ if (!defined('IN_SPYOGAME')) {
 /**
  * Fichier de fonctions du module allyRanking
  */
-require_once("mod/allyRanking/ARinclude.php");
+require_once("mod/allyranking/ARinclude.php");
 
 
 $query  = "DELETE FROM ". TABLE_RANK_MEMBERS;

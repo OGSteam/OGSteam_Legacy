@@ -4,7 +4,7 @@
 *   @package allyRanking
 *   @author ericc
 *   @link http://www.ogsteam.fr
-*   @version : 0.4d
+*   @version : 1.0.0
 *   created	: 25/02/2008
 *   modified	:
 **/
@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 	class allyRanking_Callback extends Callback {
-		public $version = '2.3.0';
+		public $version = '2.3.6';
 		public function ally_list($rapport){
 			global $io;
 			if(ally_list($rapport))

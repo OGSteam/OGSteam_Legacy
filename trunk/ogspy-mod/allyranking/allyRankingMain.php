@@ -23,12 +23,12 @@ switch ($pub_subaction)
 {
 	//
 	case "graphic" :
-		require_once("mod/allyRanking/graphic_curve_members.php");
+		require_once("mod/allyranking/graphic_curve_members.php");
 	break;
 
 	// 
 	case "graphicglobal" :
-		require_once("mod/allyRanking/graphic_curve_global.php");
+		require_once("mod/allyranking/graphic_curve_global.php");
 	break;
 }
 
@@ -40,12 +40,12 @@ switch($pub_subaction)
 	//
 	case "config" : 
 		if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) 	
-			require_once("mod/allyRanking/config.php");
+			require_once("mod/allyranking/config.php");
 	break;
 
 	//
 	case "ranking" :
-		require_once("mod/allyRanking/allyRanking.php");
+		require_once("mod/allyranking/allyRanking.php");
 	break;
 	
 	//
@@ -53,12 +53,12 @@ switch($pub_subaction)
 		//
 		// TODO - Controler le droit d'ajout
 		//
-		require_once("mod/allyRanking/postReport.php");
+		require_once("mod/allyranking/postReport.php");
 	break;
 	
 	//
 	case "detail" : 
-		require_once("mod/allyRanking/detail.php");
+		require_once("mod/allyranking/detail.php");
 	break;
 	
 	//
@@ -66,23 +66,23 @@ switch($pub_subaction)
 		//
 		// TODO - Controler le droit d'ajout
 		//
-		require_once("mod/allyRanking/postReport.php");
+		require_once("mod/allyranking/postReport.php");
 	break;
 	
 	//
 	case "dropranking" :
-		require_once("mod/allyRanking/delReport.php");
+		require_once("mod/allyranking/delReport.php");
 	break;
 	
 	
 	// Cas particulier : Mise à jour du logiciel
 	case "update" :
-		require_once("mod/allyRanking/update.php");
+		require_once("mod/allyranking/update.php");
 	break;
 	
 	//
 	default :
-		require_once("mod/allyRanking/allyRanking.php");
+		require_once("mod/allyranking/allyRanking.php");
 	break;
 }
 ?>

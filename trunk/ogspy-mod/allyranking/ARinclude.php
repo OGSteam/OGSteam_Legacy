@@ -15,11 +15,11 @@ define("DEBUG",false);
 //================================================================================
 //================================================================================
 define("TABLE_RANK_MEMBERS",$table_prefix."rank_members");
-define("MODULE_NAME","allyRanking");
+define("MODULE_NAME","allyranking");
 define("MODULE_ACTION","allyRanking");
-define("MODULE_DIR","allyRanking");
+define("MODULE_DIR","allyranking");
 define("MODULE_VERSION","0.4f");
-define("MENU_ICON","<img align=\"absmiddle\" src=\"./mod/allyRanking/images/graph_icon16.gif\">");
+define("MENU_ICON","<img align=\"absmiddle\" src=\"./mod/allyranking/images/graph_icon16.gif\">");
 
 
 //================================================================================
@@ -233,6 +233,7 @@ function page_footer()
 	$result = $db->sql_query($request,false);
 	list($version)=$db->sql_fetch_row($result);
 	echo "<br/><B>allyRanking v$version</B> - Jibus&copy;2006-2008<br/>";
+	echo '<B><div>Remise à jour pour OGSpy 3.0.7 </B> - Shad</div>';
 }
 //================================================================================
 //================================================================================
@@ -243,10 +244,10 @@ function buttons_bar($subaction,$width=700)
 
 	//-------------------------------------------------
 	// Code pour les png transparents...:( Vive IE ! :(
-	$report_img  = '<img SRC="mod/allyRanking/images/folder.png"  name="report"  align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
-	$detail_img  = '<img SRC="mod/allyRanking/images/detail.png"  name="detail"  align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
-	$ranking_img = '<img SRC="mod/allyRanking/images/ranking.png" name="ranking" align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
-	$config_img  = '<img SRC="mod/allyRanking/images/config.png"  name="config"  align="absmiddle" style="behavior: url(\'mod/allyRanking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
+	$report_img  = '<img SRC="mod/allyranking/images/folder.png"  name="report"  align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
+	$detail_img  = '<img SRC="mod/allyranking/images/detail.png"  name="detail"  align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
+	$ranking_img = '<img SRC="mod/allyranking/images/ranking.png" name="ranking" align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
+	$config_img  = '<img SRC="mod/allyranking/images/config.png"  name="config"  align="absmiddle" style="behavior: url(\'mod/allyranking/images/pngbehavior.htc\');">&nbsp;&nbsp;';
 
 
 
@@ -355,7 +356,7 @@ function galaxy_getranking_members($lines,$ally,$attempt=0) {
 
 		//Recherche de la ligne 0 du tableau
 
-		if (preg_match("#^Nr\sNom\s\sStatut\sPoints\sCoord\sAdhésion\sOnline$#",$line))
+		if (preg_match("#^Nom\s\sRang\sPlace\sCoords\sAdhésion\sOnline$#",$line))
 		{
 			$OK = true;
 			continue;
