@@ -8,9 +8,6 @@
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
-if (!defined('GESTION_MOD')) {
-	die("Hacking attempt");
-}
 ?>
 <style type="text/css">
 <!--
