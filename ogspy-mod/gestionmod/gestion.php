@@ -9,6 +9,7 @@
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
+
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='gestion' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 define("GESTION_MOD", true);
@@ -17,7 +18,7 @@ global $user_data;
 //recuperaiton du dossier, et de la version
 $query = "SELECT root, version FROM `" . TABLE_MOD . "` WHERE `action`='gestion'";
 $result = $db->sql_fetch_assoc($db->sql_query($query));
-$dir = $result['root'];
+$dir = "gestionmod";
 $version = $result['version'];
 
 require_once("views/page_header.php");

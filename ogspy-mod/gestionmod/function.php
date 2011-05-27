@@ -63,15 +63,15 @@ return $group ;
 function new_group () {
 global $db,$dir;
 if (isset($_POST['new_group']) && isset($_POST['espace'])) {
-	if ($_POST['new_group'] == '') {$menu = '</a><img src="mod/'.$dir.'/image.gif" width="110" height="19"><a>';
+	if ($_POST['new_group'] == '') {$menu = '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"><a>';
 	} else {
 	if ($_POST['espace'] == 'oui' ) {
-	$menu = '</a><img src="mod/'.$dir.'/image.gif" width="110" height="19"></div></td></tr>';
-	$menu .='<tr><td><div align="center"><a><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
-	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
+	$menu = '<img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"></div></td></tr>';
+	$menu .='<tr><td><div align="center"><a href=""><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
+	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div>';
 	} else if ($_POST['espace'] == 'non' ) {
-	$menu ='</a><div align="center"><a><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
-	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
+	$menu ='<div align="center"><a href=""><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
+	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div>';
 	} }
 $num_group = nb_group();
 $num_new_group = $num_group + 1;
@@ -88,11 +88,11 @@ if (isset($_POST['ordre']) && isset($_POST['num_group']) && isset($_POST['nom_gr
 	switch ($_POST['ordre']) {
 	    case "Renommer Groupe" :
 		if ($_POST['espace'] == 'oui' ) {
-		$menu = '</a><img src="mod/'.$dir.'/image.gif" width="110" height="19"></div></td></tr>';
-		$menu .='<tr><td><div align="center"><a><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
+		$menu = '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"></div></td></tr>';
+		$menu .='<tr><td><div align="center"><a href=\"\"><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
 		$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
 		} else {
-		$menu .='</a><div align="center"><a><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
+		$menu .='</a><div align="center"><a href=""><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
 		$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
 		} 
 		$query = "UPDATE ".TABLE_MOD." SET menu='".$menu."' WHERE title = 'Group.".$_POST['num_group']."' ";
@@ -117,7 +117,7 @@ $result = $db->sql_query($query);
 	while ($mod = $db->sql_fetch_assoc($result)) {
 		if ($mod['link'] == 'group' ) $type = 1;
 		else $type = 0;
-		if ($mod['menu'] == '</a><img src="mod/'.$dir.'/image.gif" width="110" height="19"><a>') $type = 2;
+		if ($mod['menu'] == '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"><a>') $type = 2;
 		$list_mod[$i] = array('menu' => $mod['menu'] , 'position' => $i , 'type' => $type , 'id' => $mod['id'] , 'title' => $mod['title'] , 'version' => $mod['version'], 'active' => $mod['active']);
 		$query2 = "UPDATE ".TABLE_MOD." SET position='".$i."' WHERE id = '".$mod["id"]."' ";
 		$result2 = $db->sql_query($query2);
@@ -128,7 +128,7 @@ return $list_mod;
 
 function name_group ($menu) {
 $arr = array();
-if(preg_match("#^.*?<a><u>(.*?)<\/u><\/a>.*$#", $menu, $arr)) {
+if(preg_match("#^.*?<a href=\"\"><u>(.*?)<\/u><\/a>.*$#", $menu, $arr)) {
      $text = $arr[1];
 }
 return $text;

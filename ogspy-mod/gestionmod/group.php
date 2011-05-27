@@ -8,9 +8,7 @@
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
-if (!defined('GESTION_MOD')) {
-	die("Hacking attempt");
-}
+
 ?>
 <table align="center">
 		
@@ -51,5 +49,5 @@ $list_group = list_group();
 	echo "<th class='c' ><input type='submit' name='ordre' value='Renommer Groupe'></th>";
 	echo "<th class='c'colspan='2' ><input type='submit' name='ordre' value='Supprimer Groupe'></th></tr>";
 	echo "</form>";
-}?>	
+}?>
 </table>
