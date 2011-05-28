@@ -87,23 +87,23 @@ function log_ ($parameter, $option=0) {
         
         /* ----------- Erreur gestion mod ----------- */
         case 'mod_erreur_install_php' :
-		$line = "[admin] ".$member." fichier mod/".$option."/install.php introuvable ";
+		$line = "[admin][mod_erreur] ".$member." fichier mod/".$option."/install.php introuvable ";
 		break;
         
          case 'mod_erreur_install_txt' :
-		$line = "[admin] ".$member." fichier mod/".$option."/version.txt introuvable ";
+		$line = "[admin][mod_erreur] ".$member." fichier mod/".$option."/version.txt introuvable ";
 		break;
         
         case 'mod_erreur_minuscule' :
-		$line = "[admin] ".$member." dossier mod/".$option."/ n'est pas en minuscule ";
+		$line = "[admin][mod_erreur] ".$member." dossier mod/".$option."/ n'est pas en minuscule ";
 		break;
         
         case 'mod_erreur_install_bis' :
-		$line = "[admin] ".$member."  mod ".$option." déjà installé ";
+		$line = "[admin][mod_erreur] ".$member."  mod ".$option." déjà installé ";
 		break;
         
         case 'mod_erreur_txt_warning' :
-		$line = "[admin] ".$member."  mod/".$option."/version.txt mal formé ";
+		$line = "[admin][mod_erreur] ".$member."  mod/".$option."/version.txt mal formé ";
 		break;
         
         
