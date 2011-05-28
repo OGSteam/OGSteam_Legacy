@@ -130,9 +130,65 @@ function mod_install () {
 	global $pub_directory;
 
 	mod_check("directory");
+    // modif pour 3.0.7 
+    // check d un mod " normalisé"
+    // voir @ shad 
+    
+    // fichier install non present
+	if (!file_exists("mod/".$pub_directory."/install.php")) {
+	   log_("mod_erreur_install_php", $pub_directory);
+	  redirection("index.php?action=message&id_message=errorfatal&info");;
+        break;
+	}
+    
+    //fichier . txt non present 
+    if (!file_exists("mod/".$pub_directory."/version.txt")) {
+	          log_("mod_erreur_install_txt", $pub_directory);
+              redirection("index.php?action=message&id_message=errorfatal&info");
+        break;
+	}
+    
+  
+    //verification  presence de majuscule
+    if (!ctype_lower($pub_directory)) {
+               log_("mod_erreur_minuscule", $pub_directory);
+               redirection("index.php?action=message&id_message=errorfatal&info");
+        break;
+            
+    } 
+    
+    // verification sur le fichier .txt
+    $filename = 'mod/' . $pub_directory . '/version.txt';
+    // On récupère les données du fichier version.txt
+    $file = file($filename);
+    $mod_version = trim($file[1]);
+    $mod_config = trim($file[2]);
+     // On explode la chaine d'information
+    $value_mod = explode(',', $mod_config);
+    
+    // On vérifie si le mod est déjà installé""
+    $check = "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] .
+        "'";
+    $query_check = $db->sql_query($check);
+    $result_check = mysql_num_rows($query_check);
 
-	if (file_exists("mod/".$pub_directory."/install.php")) {
-		require_once("mod/".$pub_directory."/install.php");
+    if ($result_check != 0) { 
+   
+         log_("mod_erreur_install_bis",  $value_mod[0]);
+         redirection("index.php?action=message&id_message=errorfatal&info");
+        break;  
+        
+    }
+     if (count($value_mod) != 7) {
+  
+         log_("mod_erreur_txt_warning", $pub_directory);
+         redirection("index.php?action=message&id_message=errorfatal&info");
+        break;  
+        
+        }
+    
+    // si on arrive jusque la on peut installer
+        require_once("mod/".$pub_directory."/install.php");
 
 		$request = "select id from ".TABLE_MOD." where root = '{$pub_directory}'";
 		$result = $db->sql_query($request);
@@ -149,7 +205,7 @@ function mod_install () {
 		$result = $db->sql_query($request);
 		list($title) = $db->sql_fetch_row($result);
 		log_("mod_install", $title);
-	}
+	
 	redirection("index.php?action=administration&subaction=mod");
 }
 
