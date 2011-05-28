@@ -216,6 +216,49 @@ function mod_update () {
 	global $db, $pub_mod_id;
 
 	mod_check("mod_id");
+    
+     // modif pour 3.0.7 
+    // check d un mod " normalisé"
+    // voir @ shad 
+    
+    // fichier install non present
+	if (!file_exists("mod/".$pub_directory."/install.php")) {
+	   log_("mod_erreur_install_php", $pub_directory);
+	  redirection("index.php?action=message&id_message=errorfatal&info");;
+        break;
+	}
+    
+    //fichier . txt non present 
+    if (!file_exists("mod/".$pub_directory."/version.txt")) {
+	          log_("mod_erreur_install_txt", $pub_directory);
+              redirection("index.php?action=message&id_message=errorfatal&info");
+        break;
+	}
+    
+  
+    //verification  presence de majuscule
+    if (!ctype_lower($pub_directory)) {
+               log_("mod_erreur_minuscule", $pub_directory);
+               redirection("index.php?action=message&id_message=errorfatal&info");
+        break;
+            
+    } 
+    
+     // verification sur le fichier .txt
+    $filename = 'mod/' . $pub_directory . '/version.txt';
+    // On récupère les données du fichier version.txt
+    $file = file($filename);
+    $mod_version = trim($file[1]);
+    $mod_config = trim($file[2]);
+     // On explode la chaine d'information
+    $value_mod = explode(',', $mod_config);
+     
+     if (count($value_mod) != 7) {
+         log_("mod_erreur_txt_warning", $pub_directory);
+         redirection("index.php?action=message&id_message=errorfatal&info");
+        break;  
+        
+        }
 
 	$request = "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'";
 	$result = $db->sql_query($request);
