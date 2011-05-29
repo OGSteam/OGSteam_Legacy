@@ -85,15 +85,15 @@ function consumption($building, $level)
     global $server_config;
     switch ($building) {
         case "M":
-            $result = 10 * $level * pow(1.1, $level);
+            $result = $server_config['speed_uni'] * (10 * $level * pow(1.1, $level));
             break;
 
         case "C":
-            $result = 10 * $level * pow(1.1, $level);
+            $result = $server_config['speed_uni'] * (10 * $level * pow(1.1, $level));
             break;
 
         case "D":
-            $result = 20 * $level * pow(1.1, $level);
+            $result = $server_config['speed_uni'] * (20 * $level * pow(1.1, $level));
             break;
 
         case "CEF":
