@@ -28,7 +28,8 @@ while ($row = mysql_fetch_assoc($quet)) {
 	$user_percentage[$row["planet_id"]] = $arr;
 }
 
-
+/// ajout de la vitesse uni pour gestion js ...
+echo "<input type='hidden' id='vitesse_uni' size='2' maxlength='5' value='".$server_config['speed_uni']."'/>";
 ?>
 
 <SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
