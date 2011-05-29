@@ -63,10 +63,10 @@ if (is_writable("../mod/autoupdate/tmp")) {
 	$error2 .= "<tr><td width=\"250\">- \"mod/autoupdate/tmp\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
 }
 
-if (is_writable("../mod/Xtense")) {
-	$error2 .= "<tr><td width=\"250\">- \"mod/Xtense\" : </td><td><font color='green'>Ecriture autorisé</font></td></tr>";
+if (is_writable("../mod/xtense")) {
+	$error2 .= "<tr><td width=\"250\">- \"mod/xtense\" : </td><td><font color='green'>Ecriture autorisé</font></td></tr>";
 } else {
-	$error2 .= "<tr><td width=\"250\">- \"mod/Xtense\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
+	$error2 .= "<tr><td width=\"250\">- \"mod/xtense\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
 }
 
 if ($alerte) {
@@ -327,7 +327,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 		</tr>
 		<tr>
 			<th>Nom du répertoire du mod Xtense </th>
-			<th><input name="directory" type="text" value="<?php echo isset($pub_directory) ? $pub_directory : "Xtense";?>"></th>
+			<th><input name="directory" type="text" value="<?php echo isset($pub_directory) ? $pub_directory : "xtense";?>"></th>
 		</tr>
 		
 		
