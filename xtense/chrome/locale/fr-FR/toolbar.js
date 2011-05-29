@@ -35,8 +35,8 @@ Ximplements(Xlocales, {
 	'rc detected': 'Rapport de combat détecté',
 	
 	'no researchs' : 'Aucune recherche à envoyer',
-	'no buildings' : 'Aucun bâtiment à envoyer',
 	'no defenses' : 'Aucune défense à envoyer',
+	'no buildings' : 'Aucun bâtiment à envoyer',
 	'no fleet' : 'Pas de flotte à envoyer',
 	
 	'ranking player': 'joueurs',

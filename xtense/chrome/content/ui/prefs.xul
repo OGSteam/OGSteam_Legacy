@@ -256,7 +256,7 @@ persist="screenX screenY width" buttons="">
 				<rows>
 					<row>
 						<label>&opt.about;</label>
-						<label onclick="open_link('http://www.ogsteam.fr/');" class="text-link">www.ogsteam.fr</label>
+						<label onclick="open_link('http://board.ogsteam.fr/');" class="text-link">board.ogsteam.fr</label>
 					</row>
 					<row>
 						<label>&opt.license;</label>
@@ -267,7 +267,7 @@ persist="screenX screenY width" buttons="">
 		</groupbox>
 		<groupbox>
 			<caption label="&opt.links;" />
-			<label onclick="open_link('http://ogsteam.fr/forums/forum-40-xtense');" class="text-link">&opt.forum;</label>
+			<label onclick="open_link('http://board.ogsteam.fr');" class="text-link">&opt.forum;</label>
 		</groupbox>
 		
 		<groupbox>
@@ -278,6 +278,7 @@ persist="screenX screenY width" buttons="">
 			<label value="Jormund" />
 			<label value="Scaler" />
 			<label value="Sylar" />
+			<label value="DarkNoon" />
 			<label value="&opt.contrib.others;" />
 		</groupbox>
 	</prefpane>
