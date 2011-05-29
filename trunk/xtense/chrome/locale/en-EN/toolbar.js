@@ -23,6 +23,7 @@ Ximplements(Xlocales, {
 	
 	'overview detected': 'Overview detected',
 	'buildings detected': 'Buildings detected',
+	'installations detected': 'Installations détectés',
 	'researchs detected': 'Researchs detected',
 	'fleet detected': 'Fleet detected',
 	'defense detected': 'Defense detected',
@@ -95,6 +96,7 @@ Ximplements(Xlocales, {
 	
 	'page overview': 'Overview',
 	'page buildings': 'Buildings',
+	'page installations': 'Installations',
 	'page labo': 'Research',
 	'page defense': 'Defense',
 	'page fleet': 'Fleet',
@@ -102,6 +104,5 @@ Ximplements(Xlocales, {
 	
 	//'PM':'PM',
 	
-	
-	//'call messages': '-- Messages sent back from the modules'
+	'call messages': '-- Messages renvoyés par les appels'
 });

@@ -34,7 +34,7 @@ window.on('load', function(){
 var Xtense = {
 	VERSION: '2.3.9',
 	REVISION: 0,
-	PLUGIN_REQUIRED: '2.3.6',
+	PLUGIN_REQUIRED: '2.3.9',
 	
 	active: false,
 	CurrentTab: null,
@@ -156,7 +156,7 @@ var Xtense = {
 				return;
 			var Tab = Browser.tabContainer.childNodes[tabIndex].Xtab;
 			//Xconsole(doc.location.href+' '+Tab+' '+Browser.tabContainer.childNodes[tabIndex]);
-			if(typeof Tab == 'undefined')return;//http://ogsteam.fr/viewtopic.php?id=5028
+			if(typeof Tab == 'undefined')return;//http://board.ogsteam.fr/viewtopic.php?id=5028
 			var status = false;
 			
 			Xtoolbar.checkAutohide(doc.defaultView.top.document.location.href);

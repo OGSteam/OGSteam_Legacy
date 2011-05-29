@@ -22,12 +22,12 @@
 <!ENTITY opt.context-menu "Add a button in the context menu">
 <!ENTITY opt.autostart "Automatic activation">
 <!ENTITY opt.fixpopups "Fix alliance tooltips in the Galaxy">
-<!--<!ENTITY opt.secure-login.t "Permet de ne pas avoir son mot de passe dans les journaux d'apache lors de la connexion">-->
 <!ENTITY opt.log "Log">
 <!ENTITY opt.log-display-time "Display the date">
 <!ENTITY opt.log-max-size "Size of log (lines)">
 <!ENTITY opt.log-time-format "Date format">
 <!ENTITY opt.log.day-month "Day/Month">
+<!ENTITY opt.log-hide_psw "Hide your Password">
 <!ENTITY opt.display-execution-time "Display the module's execution time">
 <!ENTITY opt.display-new-messages "Display number of new OGSpy messages">
 
@@ -56,7 +56,6 @@
 <!ENTITY opt.msg.ally_msg "Alliance messages">
 <!ENTITY opt.msg.expeditions "Expeditions">
 
-<!ENTITY opt.messages-cache "Send messages only once per Firefox session">
 
 <!-- testing options -->
 <!ENTITY opt.developers "Testers options">
