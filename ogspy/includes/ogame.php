@@ -19,37 +19,48 @@ if (!isset($server_config['speed_uni'])) {
 //Production par heure
 function production($building, $level, $temperature_max = 0, $NRJ = 0)
 {
-    global $server_config , $user_data; ;
+    global $server_config, $user_data;
     switch ($building) {
         case "M":
-            $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
-            $prod_base= 20;
+            $geo = ($user_data['off_geologue'] == 0) ? 1:
+            1.10;
+            $prod_base = 20;
             $result = $prod_base + (30 * $level * pow(1.1, $level)); // formule de base
-            $result = $server_config['speed_uni'] * $result; // vitesste uni 
-            $result = $geo * $result; // geologue 
+            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result = $geo * $result; // geologue
             break;
 
         case "C":
-             $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
-            $prod_base= 10;
+            $geo = ($user_data['off_geologue'] == 0) ? 1:
+            1.10;
+            $prod_base = 10;
             $result = $prod_base + (20 * $level * pow(1.1, $level));
-            $result = $server_config['speed_uni'] * $result; // vitesste uni 
-            $result = $geo * $result; // geologue 
+            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result = $geo * $result; // geologue
             break;
 
         case "D":
-            $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
-            $result =  floor(10 * $level * pow(1.1, $level) * (1.44 - 0.004 * $temperature_max));
-            $result = $server_config['speed_uni'] * $result; // vitesste uni 
-            $result = $geo * $result; // geologue 
+            $geo = ($user_data['off_geologue'] == 0) ? 1:
+            1.10;
+            $result = floor(10 * $level * pow(1.1, $level) * (1.44 - 0.004 * $temperature_max));
+            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result = $geo * $result; // geologue
             break;
 
         case "CES":
+            $ing = ($user_data['off_ingenieur'] == 0) ? 1:
+            1.10;
             $result = 20 * $level * pow(1.1, $level);
+            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result = $ing * $result; // ingenieur
             break;
 
         case "CEF":
+            $ing = ($user_data['off_ingenieur'] == 0) ? 1:
+            1.10;
             $result = 30 * $level * pow((1.05 + 0.01 * $NRJ), $level);
+            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result = $ing * $result; // ingenieur
             break;
 
         default:
@@ -63,7 +74,9 @@ function production($building, $level, $temperature_max = 0, $NRJ = 0)
 //Production des satellites
 function production_sat($temperature_min, $temperature_max)
 {
-    return floor(((($temperature_min + $temperature_max) / 2) + 160) / 6);
+    global $user_data;
+    $ing = ($user_data['off_ingenieur'] == 0) ? 1 : 1.10;
+    return ($ing * floor(((($temperature_min + $temperature_max) / 2) + 160) / 6));
 }
 
 //Consommation d'énergie
@@ -122,7 +135,7 @@ function astro_max_planete($level)
 
     // anciens unis peuvent avoir 9 planetes sans la techno
     if ($server_config['astro_strict'] == 1 || $level < 15) {
-       return 9;
+        return 9;
     }
     return $result;
 }
