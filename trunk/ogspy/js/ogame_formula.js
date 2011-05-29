@@ -25,13 +25,14 @@ function production (building, level, temperature_max, NRJ) {
 		result = 0;
 		break;
 	}
-
-	return Math.round(result);
+    var speed = document.getElementById("vitesse_uni").value;
+	return Math.round(result * speed );
 }
 
 //Production des satellites
 function production_sat (temperature_min, temperature_max) {
-	return Math.floor((((parseInt(temperature_max) + parseInt(temperature_min)) / 2) + 160) / 6);
+    var speed = document.getElementById("vitesse_uni").value;
+	return Math.floor(((((parseInt(temperature_max) + parseInt(temperature_min)) / 2) + 160) / 6)* speed);
 }
 
 //Consommation d"énergie
@@ -57,14 +58,15 @@ function consumption (building, level) {
 		result = 0;
 		break;
 	}
-
-	return Math.round(result);
+    var speed = document.getElementById("vitesse_uni").value;
+	return Math.round(result * speed);
 }
 
 function update_page() {
 	var NRJ = document.getElementById("NRJ").value;
 	var Ing = document.getElementById("off_ingenieur").value;
 	var Geo = document.getElementById("off_geologue").value;
+	
 	
 	//
 	// Planètes
