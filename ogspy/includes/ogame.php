@@ -22,11 +22,13 @@ function production($building, $level, $temperature_max = 0, $NRJ = 0)
     global $server_config;
     switch ($building) {
         case "M":
-            $result = $server_config['speed_uni'] * (30 * $level * pow(1.1, $level));
+            $prod_base= 20;
+            $result = $server_config['speed_uni'] * ($prod_base + (30 * $level * pow(1.1, $level)));
             break;
 
         case "C":
-            $result = $server_config['speed_uni'] * (20 * $level * pow(1.1, $level));
+            $prod_base= 10;
+            $result = $server_config['speed_uni'] * ($prod_base + (20 * $level * pow(1.1, $level)));
             break;
 
         case "D":
