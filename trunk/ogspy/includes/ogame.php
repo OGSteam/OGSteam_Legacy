@@ -19,21 +19,29 @@ if (!isset($server_config['speed_uni'])) {
 //Production par heure
 function production($building, $level, $temperature_max = 0, $NRJ = 0)
 {
-    global $server_config;
+    global $server_config , $user_data; ;
     switch ($building) {
         case "M":
+            $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
             $prod_base= 20;
-            $result = $server_config['speed_uni'] * ($prod_base + (30 * $level * pow(1.1, $level)));
+            $result = $prod_base + (30 * $level * pow(1.1, $level)); // formule de base
+            $result = $server_config['speed_uni'] * $result; // vitesste uni 
+            $result = $geo * $result; // geologue 
             break;
 
         case "C":
+             $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
             $prod_base= 10;
-            $result = $server_config['speed_uni'] * ($prod_base + (20 * $level * pow(1.1, $level)));
+            $result = $prod_base + (20 * $level * pow(1.1, $level));
+            $result = $server_config['speed_uni'] * $result; // vitesste uni 
+            $result = $geo * $result; // geologue 
             break;
 
         case "D":
-            $result = $server_config['speed_uni'] * floor(10 * $level * pow(1.1, $level) * (1.44 -
-                0.004 * $temperature_max));
+            $geo = ($user_data['off_geologue']== 0) ? 1 : 1.10 ;
+            $result =  floor(10 * $level * pow(1.1, $level) * (1.44 - 0.004 * $temperature_max));
+            $result = $server_config['speed_uni'] * $result; // vitesste uni 
+            $result = $geo * $result; // geologue 
             break;
 
         case "CES":
