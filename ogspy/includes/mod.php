@@ -218,35 +218,41 @@ function mod_update () {
 
 	mod_check("mod_id");
     
+    $request = "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'";
+	$result = $db->sql_query($request);
+	list($root) = $db->sql_fetch_row($result);
+    
+    
+    
      // modif pour 3.0.7 
     // check d un mod " normalisé"
     // voir @ shad 
     
     // fichier mod_erreur_update non present
-	if (!file_exists("mod/".$pub_directory."/update.php")) {
-	  log_("mod_erreur_update", $pub_directory);
+	if (!file_exists("mod/".$root."/update.php")) {
+	  log_("mod_erreur_update", $root);
 	  redirection("index.php?action=message&id_message=errorfatal&info");;
         break;
 	}
     
     //fichier . txt non present 
-    if (!file_exists("mod/".$pub_directory."/version.txt")) {
-	          log_("mod_erreur_install_txt", $pub_directory);
+    if (!file_exists("mod/".$root."/version.txt")) {
+	          log_("mod_erreur_install_txt", $root);
               redirection("index.php?action=message&id_message=errorfatal&info");
         break;
 	}
     
   
     //verification  presence de majuscule
-    if (!ctype_lower($pub_directory)) {
-               log_("mod_erreur_minuscule", $pub_directory);
+    if (!ctype_lower($root)) {
+               log_("mod_erreur_minuscule", $root);
                redirection("index.php?action=message&id_message=errorfatal&info");
         break;
             
     } 
     
      // verification sur le fichier .txt
-    $filename = 'mod/' . $pub_directory . '/version.txt';
+    $filename = 'mod/' . $root . '/version.txt';
     // On récupère les données du fichier version.txt
     $file = file($filename);
     $mod_version = trim($file[1]);
@@ -255,15 +261,13 @@ function mod_update () {
     $value_mod = explode(',', $mod_config);
      
      if (count($value_mod) != 7) {
-         log_("mod_erreur_txt_warning", $pub_directory);
+         log_("mod_erreur_txt_warning", $root);
          redirection("index.php?action=message&id_message=errorfatal&info");
         break;  
         
         }
 
-	$request = "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'";
-	$result = $db->sql_query($request);
-	list($root) = $db->sql_fetch_row($result);
+
 
 	if (file_exists("mod/".$root."/update.php")) {
 		require_once("mod/".$root."/update.php");
