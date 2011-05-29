@@ -94,6 +94,10 @@ function log_ ($parameter, $option=0) {
 		$line = "[admin][mod_erreur] ".$member." fichier mod/".$option."/version.txt introuvable ";
 		break;
         
+       case 'mod_erreur_update' :
+		$line = "[admin][mod_erreur] ".$member." fichier mod/".$option."/update.php introuvable ";
+		break;
+        
         case 'mod_erreur_minuscule' :
 		$line = "[admin][mod_erreur] ".$member." dossier mod/".$option."/ n'est pas en minuscule ";
 		break;

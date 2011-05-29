@@ -214,6 +214,7 @@ function mod_install () {
 */
 function mod_update () {
 	global $db, $pub_mod_id;
+    	global $pub_directory;
 
 	mod_check("mod_id");
     
@@ -221,9 +222,9 @@ function mod_update () {
     // check d un mod " normalisé"
     // voir @ shad 
     
-    // fichier install non present
-	if (!file_exists("mod/".$pub_directory."/install.php")) {
-	   log_("mod_erreur_install_php", $pub_directory);
+    // fichier mod_erreur_update non present
+	if (!file_exists("mod/".$pub_directory."/update.php")) {
+	  log_("mod_erreur_update", $pub_directory);
 	  redirection("index.php?action=message&id_message=errorfatal&info");;
         break;
 	}
