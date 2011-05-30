@@ -18,27 +18,9 @@ $query = "SELECT id FROM ".TABLE_MOD." WHERE action='eXpedition'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
-//Si les tables existent, on les supprime
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION_TYPE_0."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION_TYPE_1."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION_TYPE_2."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION_TYPE_3."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXPEDITION_OPTS."";
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE root='eXpedition'";
-$db->sql_query($query);
+$mod_uninstall_name = "eXchange";
+$mod_uninstall_table = $table_prefix."eXpedition".','.$table_prefix."eXpedition_Type_0".','.$table_prefix."eXpedition_Type_1".','.$table_prefix."eXpedition_Type_2".','.$table_prefix."eXpedition_Type_3".','.$table_prefix."eXpedition_Opts";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 // On regarde si la table xtense_callbacks existe :
 $query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
