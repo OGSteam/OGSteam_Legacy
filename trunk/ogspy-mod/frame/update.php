@@ -8,10 +8,13 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
 global $db, $table_prefix;
 
-$query = "SELECT version FROM ".TABLE_MOD." WHERE `action`='ModFrame'";
+$query = "SELECT version FROM ".TABLE_MOD." WHERE `action`='frame'";
+$mod_folder = "frame";
+$mod_name = "ModFrames";
+update_mod($mod_folder, $mod_name);
+
 $result = $db->sql_query($query);
 list($mod_version) = $db->sql_fetch_row($result);
 
@@ -28,9 +31,5 @@ $query = "ALTER TABLE ".TABLE_FRAME." DROP INDEX `frame_id`";
 $db->sql_query($query);
 }
 
-if (file_exists('mod/ModFrame/version.txt'))
-	$file = file('mod/ModFrame/version.txt');
-
-$query = "UPDATE ".TABLE_MOD." SET `version`='".trim($file[1])."' WHERE `action`='ModFrame'";
 $db->sql_query($query);
 ?>

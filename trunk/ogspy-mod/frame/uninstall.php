@@ -8,14 +8,10 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
 global $db, $table_prefix;
-
 define("TABLE_FRAME", $table_prefix."mod_frames");
 
-$query = "DROP TABLE ".TABLE_FRAME."";
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE root='ModFrame'";
-$db->sql_query($query);
+$mod_uninstall_name = "nom du mode";
+$mod_uninstall_table = $table_prefix."mod_frames";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 ?>
