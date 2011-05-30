@@ -18,7 +18,6 @@ $user_empire = user_get_empire();
 $user_building = $user_empire["building"];
 $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
-
 if(!isset($pub_view) || $pub_view=="") $view = "planets";
 elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
@@ -315,7 +314,7 @@ if($view == "planets") {
 <?php
 for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$M = $user_building[$i]["M"];
-	if ($M != "") $production = production("M", $M);
+	if ($M != "") $production = production("M", $M, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -327,7 +326,7 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 <?php
 for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$C = $user_building[$i]["C"];
-	if ($C != "") $production = production("C", $C);
+	if ($C != "") $production = production("C", $C, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -342,7 +341,7 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$temperature_max = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i]["CEF"];
 	$CEF_consumption = consumption("CEF", $CEF);
-	if ($D != "") $production = production("D", $D, $temperature_max) - $CEF_consumption;
+	if ($D != "") $production = production("D", $D, $user_data['off_geologue'], $temperature_max) - $CEF_consumption;
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -360,9 +359,9 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	$temperature_max = $user_building[$i]["temperature_max"];
 
 	$production_CES = $production_CEF = $production_Sat = 0;
-	$production_CES = production("CES", $CES);
-	$production_CEF = production("CEF", $CEF);
-	$production_Sat = production_sat($temperature_min, $temperature_max) * $Sat;
+	$production_CES = production("CES", $CES ,  $user_data['off_ingenieur']);
+	$production_CEF = production("CEF", $CEF,  $user_data['off_ingenieur']);
+	$production_Sat = production_sat($temperature_min, $temperature_max , $user_data['off_ingenieur']) * $Sat;
 
 	$production = $production_CES + $production_CEF + $production_Sat;
 	if ($production == 0) $production = "&nbsp";
