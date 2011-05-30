@@ -1,2 +1,3 @@
 eXchange
-0.2.1
+1.0.0
+eXchange,eXchange,eXchange,exchange,index.php,1,0

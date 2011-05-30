@@ -15,19 +15,10 @@ $query = "SELECT id FROM ".TABLE_MOD." WHERE action='eXchange'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
-//Si les tables existent, on les supprime
 
-$query="DROP TABLE IF EXISTS ".TABLE_EXCHANGE_USER."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXCHANGE_ALLY."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_EXCHANGE_OPTS."";
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE root='eXchange'";
-$db->sql_query($query);
+$mod_uninstall_name = "exchange";
+$mod_uninstall_table = $table_prefix."eXchange_User".','.$table_prefix."eXchange_Ally".','.$table_prefix."eXchange_Opts";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 // On regarde si la table xtense_callbacks existe :
 $query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';

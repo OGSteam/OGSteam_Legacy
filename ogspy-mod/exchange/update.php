@@ -10,6 +10,10 @@ global $db, $table_prefix;
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
 //On récupère la version actuel du mod	
+$mod_folder = "exchange";
+$mod_name = "eXchange";
+update_mod($mod_folder, $mod_name);
+
 $query = "SELECT id, version FROM ".TABLE_MOD." WHERE action='eXchange'";
 $result = $db->sql_query($query);
 list($mod_id, $version) = $db->sql_fetch_row($result);
@@ -46,6 +50,5 @@ else
 	echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod eXchange ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
 }
 
-$query = "UPDATE ".TABLE_MOD." SET `version`='0.2.1' WHERE `action`='eXchange'";
-$db->sql_query($query);
+
 ?>
