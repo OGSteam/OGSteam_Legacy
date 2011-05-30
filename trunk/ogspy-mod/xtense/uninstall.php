@@ -10,14 +10,13 @@ if (!defined('IN_SPYOGAME') && !defined('IN_UNISPY2')) {
     die("Hacking attempt");
 }
 
-global $table_prefix;
-
-list($version, $root) = $db->sql_fetch_row($db->sql_query("SELECT version, root FROM ".TABLE_MOD." WHERE action = 'xtense'"));
+global $de,$table_prefix;
+$mod_uninstall_name = "xtense";
+$mod_uninstall_table = $table_prefix."xtense_groups".','.$table_prefix."xtense_callbacks";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 require_once("mod/{$root}/includes/config.php");
 
-$db->sql_query('DROP TABLE IF EXISTS `'.TABLE_XTENSE_GROUPS.'`');
-$db->sql_query('DROP TABLE IF EXISTS `'.TABLE_XTENSE_CALLBACKS.'`');
 $db->sql_query('DELETE FROM '.TABLE_CONFIG.' WHERE config_name LIKE "xtense_%"');
 
 

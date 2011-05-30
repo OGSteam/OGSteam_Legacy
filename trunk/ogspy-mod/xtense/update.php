@@ -7,13 +7,10 @@
  */
 
 if (!defined('IN_SPYOGAME')) die("Hacking Attemp!");
-global $table_prefix;
+global $db;
 
-list($version, $root) = $db->sql_fetch_row($db->sql_query("SELECT version, root FROM ".TABLE_MOD." WHERE action = 'xtense'"));
-
-require_once("mod/{$root}/includes/config.php");
-
-$query = "UPDATE ".TABLE_MOD." SET `version`='{$mod_version}' WHERE `action`='xtense'";
-$db->sql_query($query);
+$mod_folder = "xtense";
+$mod_name = "xtense";
+update_mod($mod_folder, $mod_name);
 
 ?>
