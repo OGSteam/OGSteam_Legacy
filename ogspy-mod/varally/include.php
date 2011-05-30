@@ -17,7 +17,7 @@ require_once('./parameters/id.php');
 $sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
 $result = $db->sql_query($sql);
 list($tblSpy)=$db->sql_fetch_row($result);
-define(TABLE_VARALLY,$table_prefix.$tblSpy);
+define('TABLE_VARALLY',$table_prefix.$tblSpy);
 
 $sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
 $result = $db->sql_query($sql);
