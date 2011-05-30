@@ -1,2 +1,3 @@
 ModFrames
-0.3a
+1.0.1
+ModFrames,Mod Frames,ModFrames,frame,index.php,1,0
