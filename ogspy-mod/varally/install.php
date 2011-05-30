@@ -10,26 +10,32 @@
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 include('./parameters/id.php');
 global $db;
-
+$is_ok = false;
 $mod_folder = "varally";
-install_mod($mod_folder);
+$is_ok = install_mod ($mod_folder);
+if ($is_ok == true)
+	{
+		$queries = array();
+		$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'nbrjoueur\',\'3\')';
+		$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAlly\',\'\')';
+		$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAllySpy\',\'\')';
+		$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'bilAlly\',\'\')';
+		$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tblAlly\',\'varally\')';
+		$queries[] = 'CREATE TABLE IF NOT EXISTS `'.$table_prefix.'varally` (
+			`datadate` int(11) NOT NULL default \'0\',
+			`player` varchar(30) NOT NULL default \'\',
+			`ally` varchar(100) NOT NULL default \'\',
+			`points` int(11) NOT NULL default \'0\',
+			`sender_id` int(11) NOT NULL default \'0\',
+			PRIMARY KEY  (`datadate`,`player`)
+		)';
 
-$queries = array();
-$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'nbrjoueur\',\'3\')';
-$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAlly\',\'\')';
-$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tagAllySpy\',\'\')';
-$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'bilAlly\',\'\')';
-$queries[] = 'INSERT IGNORE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES (\'tblAlly\',\'varally\')';
-$queries[] = 'CREATE TABLE IF NOT EXISTS `'.$table_prefix.'varally` (
-	`datadate` int(11) NOT NULL default \'0\',
-	`player` varchar(30) NOT NULL default \'\',
-	`ally` varchar(100) NOT NULL default \'\',
-	`points` int(11) NOT NULL default \'0\',
-	`sender_id` int(11) NOT NULL default \'0\',
-	PRIMARY KEY  (`datadate`,`player`)
-)';
-
-foreach ($queries as $query) {
-	$db->sql_query($query);
-}
+		foreach ($queries as $query) {
+		$db->sql_query($query);
+		}
+	}
+else
+	{
+		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 ?>
