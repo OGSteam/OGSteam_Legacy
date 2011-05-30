@@ -22,7 +22,7 @@ define("TABLE_CDR", $table_prefix . "cdr");
 if (class_exists("Callback")) {
     class cdr_Callback extends Callback
     {
-        public $version = '2.3.0';
+        public $version = '2.3.6';
         public function cdr($system)
         {
             global $io;
