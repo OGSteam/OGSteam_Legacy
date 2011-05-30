@@ -12,6 +12,10 @@ define("TABLE_EXPEDITION_TYPE_2", $table_prefix."eXpedition_Type_2");
 define("TABLE_EXPEDITION_OPTS", $table_prefix."eXpedition_Opts");
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
+$mod_folder = "expedition";
+$mod_name = "eXpedition";
+update_mod($mod_folder, $mod_name);
+
 // recupérer le nombre d'unite d'une flotte
 function calculUnits($tabFlotte)
 {
@@ -103,6 +107,4 @@ else
 	echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod eXpedition ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
 }
 
-$query = "UPDATE ".TABLE_MOD." SET `version`='0.4.3' WHERE `action`='eXpedition'";
-$db->sql_query($query);
 ?>
