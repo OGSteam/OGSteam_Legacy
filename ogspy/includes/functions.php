@@ -1226,7 +1226,7 @@ function install_mod($mod_folder)
                 $value_mod[4] . "','" . $mod_version . "','" . $value_mod[5] . "','" . $value_mod[6] .
                 "')";
             $db->sql_query($query);
-            $is_ok == true; /// tout c 'est bien passe'
+            $is_ok = true; /// tout c 'est bien passe'
         }
         return $is_ok;
 }
