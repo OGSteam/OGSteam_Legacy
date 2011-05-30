@@ -1,2 +1,3 @@
 CdR
-1.7.2
+1.7.3
+cdr,Champs de ruines,cdr,cdr,cdr.php,1,0

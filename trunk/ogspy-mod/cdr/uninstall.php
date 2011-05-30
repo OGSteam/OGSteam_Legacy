@@ -17,7 +17,8 @@ define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 define("TABLE_MOD_CDR", $table_prefix."mod_cdr");
 
 require_once("mod/cdr/lang/lang_fr.php");
-if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
+//modif 3.0.7
+//if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
 
 // On récupère l'id du mod pour xtense...
 $query = "SELECT id FROM ".TABLE_MOD." WHERE action='cdr'";

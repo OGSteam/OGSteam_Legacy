@@ -17,8 +17,9 @@ define("T_CDR", $table_prefix."cdr");
 define("M_CDR", $table_prefix."mod_cdr");
 
 require_once("mod/cdr/lang/lang_fr.php");
-if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
-if (file_exists("mod/cdr/lang/lang_".$user_data['user_language'].".php")) require("mod/cdr/lang/lang_".$user_data['user_language'].".php");
+//modif ogspy 3.0.7
+//if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
+//if (file_exists("mod/cdr/lang/lang_".$user_data['user_language'].".php")) require("mod/cdr/lang/lang_".$user_data['user_language'].".php");
 
 $req = "SELECT count(id_user) FROM ".M_CDR." WHERE id_user=".$user_data['user_id'];
 $req1 = $db->sql_query($req);
@@ -241,7 +242,7 @@ if (isset($pub_add) == 1) {
 	<input type="hidden" name="add" value="1" />
 	<table width='80%'>
 		<tr>
-			<td class='c' colspan='6'><center><?php echo sprintf($lang['player_option'],$user_data['user_name']); ?></center></td>
+			<td class='c' colspan='6'><center><?php echo $user_data['user_name']; ?></center></td>
 		</tr>
 	</table>
 	<br/>
