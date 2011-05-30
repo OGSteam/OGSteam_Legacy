@@ -104,15 +104,15 @@ if ($is_ok == true)
 			. " primary key ( id )"
 			. " )";
 		$db->sql_query($query);
-		
-		// On regarde si la table xtense_callbacks existe :
-		$query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
-		$result = $db->sql_query($query);
 		// On récupère le n° d'id du mod
-		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='eXchange' AND `active`='1' LIMIT 1";
+		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='eXpedition' AND `active`='1' LIMIT 1";
 		$result = $db->sql_query($query);
 		$mod_id = $db->sql_fetch_row($result);
 		$mod_id = $mod_id[0];
+		// On regarde si la table xtense_callbacks existe :
+		$query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
+		$result = $db->sql_query($query);
+		
 		if($db->sql_numrows($result) != 0)
 			{
 				//Bonne nouvelle le mod xtense 2 est installé !
