@@ -1195,7 +1195,7 @@ function check_postvalue($secvalue)
 function install_mod($mod_folder)
 {
     global $db;
-    $is_ok = false ;
+    $is_ok = false;
     $filename = 'mod/' . $mod_folder . '/version.txt';
     if (file_exists($filename)) {
         $file = file($filename);
@@ -1228,7 +1228,7 @@ function install_mod($mod_folder)
             $db->sql_query($query);
             $is_ok = true; /// tout c 'est bien passe'
         }
-        return $is_ok;
+    return $is_ok;
 }
 
 
@@ -1245,13 +1245,21 @@ function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
 function update_mod($mod_folder, $mod_name)
 {
     global $db;
+    $is_oki = false;
     $filename = 'mod/' . $mod_folder . '/version.txt';
-    if (file_exists($filename))
+    if (file_exists($filename)) {
         $file = file($filename);
+    } else {
+        return $is_oki;
+    }
+
     $mod_version = trim($file[1]);
+
     $query = "UPDATE " . TABLE_MOD . " SET version='" . $mod_version .
         "' WHERE action='" . $mod_name . "'";
     $db->sql_query($query);
+    $is_oki = true;
+    return $is_oki;
 }
 
 
