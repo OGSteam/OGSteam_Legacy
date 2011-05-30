@@ -12,12 +12,20 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 global $db, $table_prefix;
+
+$security = false;
+$mod_folder = "cdr";
+$security = install_mod($mod_folder);
+if ($security == true)
+  {
+    
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 define("TABLE_CDR", $table_prefix."cdr");
 define("TABLE_MOD_CDR", $table_prefix."mod_cdr");
 
 require_once("mod/cdr/lang/lang_fr.php");
-if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
+//modif 3.0.7
+//if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
 
 // Creation table qui recevra les infos de Xtense
 $query = "CREATE TABLE IF NOT EXISTS ".TABLE_CDR." ("
@@ -57,10 +65,11 @@ $db->sql_query($query);
 $filename = 'mod/cdr/version.txt';
 if (file_exists($filename)) $file = file($filename);
 
-$query = "INSERT INTO ".TABLE_MOD
-	." (title, menu, action, root, link, version, active, admin_only)"
-	." VALUES ('Cdr', 'Cdr', 'cdr', 'cdr', 'cdr.php', '".trim($file[1])."', '1', '0')";
-$db->sql_query($query);
+// modif pour la 3.0.7
+//$query = "INSERT INTO ".TABLE_MOD
+//	." (title, menu, action, root, link, version, active, admin_only)"
+//	." VALUES ('Cdr', 'Cdr', 'cdr', 'cdr', 'cdr.php', '".trim($file[1])."', '1', '0')";
+//$db->sql_query($query);
 
 // Insertion de la liaison entre Xtense v2 et cdr
 // Quelle est l'ID du mod ?
@@ -78,5 +87,5 @@ if ($db->sql_numrows($result) != 0) {
 	echo "<script>alert('".$lang['xtense_ok']."')</script>";
 } else // On averti qu'Xtense 2 n'est pas installé :
 	echo "<script>alert('".$lang['no_xtense']."')</script>";
-
+}
 ?>

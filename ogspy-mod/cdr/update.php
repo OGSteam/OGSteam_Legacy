@@ -16,14 +16,19 @@ define("TABLE_MOD_CDR", $table_prefix."mod_cdr");
 define("TABLE_CDR", $table_prefix."cdr");
 
 require_once("mod/cdr/lang/lang_fr.php");
-if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
+// mise a jour 3.0.7
+//if (file_exists("mod/cdr/lang/lang_".$server_config['language'].".php")) require_once("mod/cdr/lang/lang_".$server_config['language'].".php");
 
 $filename = 'mod/cdr/version.txt';
 if (file_exists($filename)) $file = file($filename);
 
-$query = "UPDATE ".TABLE_MOD." SET `version`='".trim($file[1])."' WHERE `action`='cdr'";
-$db->sql_query($query);
+$security = false;
+$security = update_mod('cdr','cdr');
+///mise a jour 3.0.7
+//$query = "UPDATE ".TABLE_MOD." SET `version`='".trim($file[1])."' WHERE `action`='cdr'";
+//$db->sql_query($query);
 
+if ($security == true){
 // Creation de la table qui recevra les option des membres
 $query = "CREATE TABLE IF NOT EXISTS ".TABLE_MOD_CDR." ("
 	." id_user INT(11) unsigned NOT NULL,"
@@ -58,5 +63,5 @@ if ($ver[0] < 1.60) {
 		." VALUES ('0','5000','10000','FFFF00','20000','FFA500','50000','FF0000','total','desc','0')";
 	$db->sql_query($query);
 }
-
+}
 ?>
