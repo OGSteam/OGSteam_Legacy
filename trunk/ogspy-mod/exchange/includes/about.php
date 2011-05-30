@@ -13,18 +13,24 @@ $contenu = "";
 
 if($fp)
 {
-   while(!feof($fp))
-   {
-	$contenu .= fgets($fp,1024);
-   }
-   
-   $pageAbout .= "<big><big>MOD eXchange</big></big>";
-   preg_match("#<span class=\"bbu\"></span>(.*)<span class=\"bbu\"></span>#", $contenu, $versionCourante);
-   $pageAbout .= $versionCourante[1];
-   $pageAbout .= "<br /><big><big>Changelog :</big></big>";
-   preg_match("#<em></em>(.*)<em></em>#", $contenu, $changeLog);
-   $pageAbout .= $changeLog[1];
-   ;
+	?>
+   <table style='width:60%'>
+					<tr style='line-height : 20px; vertical-align : center;'>
+						<td class='c' style='text-align : center; width : 20%; color : #FF00FF;'>Version</td>
+						<td class='c' style='text-align : center; color : #FF00FF;'>Modification</td>
+					</tr>
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.0</td>
+						<td style='background-color : #273234;'>
+							<ul>
+								<li>Mise en conformité des functions l'install, uninstall et update avec OGSpy 3.0.7</li>
+								<li>Mise a jour du mod avec Xtense</li>
+							</ul>
+						</td>
+					</tr>
+										
+	</table>
+  <?php
 }
 else
 {
