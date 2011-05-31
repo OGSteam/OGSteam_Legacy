@@ -63,7 +63,7 @@ function consumption (building, level) {
 		break;
 	}
     
-	return Math.round(speed);
+	return Math.round(result);
 }
 
 function update_page() {
