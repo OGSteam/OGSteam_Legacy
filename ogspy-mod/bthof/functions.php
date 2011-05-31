@@ -209,16 +209,7 @@
 					$val_max = $row[0];
 					echo "\n\t\t\t <tr> \n\t\t\t\t" . "<td style='color : #FF00F0; background-color : #273234; text-align: center;'>";
 
-					/*if ($affich){
-						if(!url_exists($lien  . $Table_icon[$NoBld]))
-							echo '<img src=\'http://uni3.ogame.fr/evolution/gebaeude/' . $Table_icon[$NoBld] . '\' /><br />';
-						else
-							echo '<img src=\'' . $lien . $Table_icon[$NoBld] . '\' /><br />';
-					} else {
-                    echo "&nbsp;";
-                    }*/
-                     // Affichage de l'icone
-                     if ($affich)
+					if ($affich)
                      {
                          aff_img($Table_icon[$NoBld]);
                      }else
@@ -452,7 +443,7 @@
         else
         {
             // sinon on affiche celle du skin de ogame
-            echo "<img src='http://uni3.ogame.fr/evolution/gebaeude/" . $imag . "' /><br />";
+            echo "<img src='http://renaissance.wow.free.fr/DL/Metal-BridgeFF1200/gebaeude/" . $imag . "' /><br />";
         }
     }
 
