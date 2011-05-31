@@ -34,7 +34,7 @@ function production($building, $level, $officier = 0 , $temperature_max = 0, $NR
 
         case "C":
             $geo = ($officier == 0) ? 1: 1.10;
-            $prod_base = 10;
+            $prod_base = 20;
             $result = $prod_base  + (20 * $level * pow(1.1, $level));
             $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
@@ -50,14 +50,14 @@ function production($building, $level, $officier = 0 , $temperature_max = 0, $NR
         case "CES":
             $ing = ($officier == 0) ? 1: 1.10;
             $result = 20 * $level * pow(1.1, $level);
-            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            //$result = $server_config['speed_uni'] * $result; // vitesste uni ne change pas la prod d E
             $result = $ing * $result; // ingenieur
             break;
 
         case "CEF":
             $ing = ($officier == 0) ? 1: 1.10;
             $result = 30 * $level * pow((1.05 + 0.01 * $NRJ), $level);
-            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            //$result = $server_config['speed_uni'] * $result; // vitesste uni ne change pas la prod d E
             $result = $ing * $result; // ingenieur
             break;
 
@@ -82,15 +82,15 @@ function consumption($building, $level)
     global $server_config;
     switch ($building) {
         case "M":
-            $result = $server_config['speed_uni'] * (10 * $level * pow(1.1, $level));
+            $result = 10 * $level * pow(1.1, $level);
             break;
 
         case "C":
-            $result = $server_config['speed_uni'] * (10 * $level * pow(1.1, $level));
+            $result = 10 * $level * pow(1.1, $level);
             break;
 
         case "D":
-            $result = $server_config['speed_uni'] * (20 * $level * pow(1.1, $level));
+            $result = 20 * $level * pow(1.1, $level);
             break;
 
         case "CEF":
