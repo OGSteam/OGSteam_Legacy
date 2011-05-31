@@ -29,7 +29,7 @@ if (isset($pub_delRanking))
 if (isset($pub_submitxt2))
   {
   // on récupère le n° d'id du mod
-  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyRanking' AND `active`='1' LIMIT 1";
+  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyranking' AND `active`='1' LIMIT 1";
   $result = $db->sql_query($query);
   $ally_id = $db->sql_fetch_row($result);
   $ally_id = $ally_id[0];
@@ -149,7 +149,7 @@ function valid()
 </script>
 
 <form name="form1" style='margin:0px;padding:0px;' action="" enctype="multipart/form-data"  method="POST" onsubmit="return valid();">
-	<input type="hidden" name="action" value="allyRanking"/>
+	<input type="hidden" name="action" value="allyranking"/>
 	<input type="hidden" name="subaction" value="config"/>
 
 	<table width='700' border=0>
@@ -240,7 +240,7 @@ function valid()
 		</tr>
 </form>
 <form style='margin:0px;padding:0px;' action="" enctype="multipart/form-data"  method="POST">
-	<input type="hidden" name="action" value="allyRanking"/>
+	<input type="hidden" name="action" value="allyranking"/>
 	<input type="hidden" name="subaction" value="config"/>
 
 		<tr>
@@ -296,7 +296,7 @@ function valid()
 		</tr>
 </form>
 <form style='margin:0px;padding:0px;' action="" enctype="multipart/form-data"  method="POST" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer définitivement ces classements');">
-	<input type="hidden" name="action" value="allyRanking"/>
+	<input type="hidden" name="action" value="allyranking"/>
 	<input type="hidden" name="subaction" value="config"/>
 
 		<tr>
@@ -411,7 +411,7 @@ function valid()
 		<?php
         //Connexion Xtense2
 echo "<form name='xt2' style='margin:0px;padding:0px;' action='' enctype='multipart/form-data' method='post'><center>";
-echo "<input type='hidden' name='action' value='allyRanking'/>
+echo "<input type='hidden' name='action' value='allyranking'/>
 	<input type='hidden' name='subaction' value='config'/>";
 //echo "<table width='60%' border='0'>
 echo "<tr><td class='c' colspan='2'>Xtense 2&nbsp;</td></tr>";
@@ -424,7 +424,7 @@ if( ! mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."xtense_cal
   else
   {
   // Si oui, on récupère le n° d'id du mod
-  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyRanking' AND `active`='1' LIMIT 1";
+  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyranking' AND `active`='1' LIMIT 1";
   $result = $db->sql_query($query);
   $ally_id = $db->sql_fetch_row($result);
   $ally_id = $ally_id[0];

@@ -87,7 +87,7 @@ function ARpage_top_block($wa)
 					<table border="0">
             <tr>
               <td>
-						    <input type="hidden" name="action" value="allyRanking"/>
+						    <input type="hidden" name="action" value="allyranking"/>
 						    <input type="hidden" name="subaction" value="ranking"/>
 						    <select name="date" onchange="this.form.submit();">
 							  <option value='lastreport'> Derniers rapports </option>
@@ -221,7 +221,7 @@ function ARevo_member(){
 	{
 		echo "<table width='700'>\n";
 		echo "\t<tr><td class='c' colspan='5'>Evolution du joueur $pub_member</td></tr>\n";
-		echo "\t<tr><th colspan='5'><img src='index.php?action=allyRanking&subaction=graphic&player=".$pub_member."&player_comp=&start=".$min."&end=".$max."&graph=members_points&titre=".$pub_member."' alt='pas de graphique disponible' /></th></tr>\n";
+		echo "\t<tr><th colspan='5'><img src='index.php?action=allyranking&subaction=graphic&player=".$pub_member."&player_comp=&start=".$min."&end=".$max."&graph=members_points&titre=".$pub_member."' alt='pas de graphique disponible' /></th></tr>\n";
 		echo "</table>\n";
 	}
 }
