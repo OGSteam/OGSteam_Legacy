@@ -12,10 +12,15 @@
 	// = Calcul du classement de production miniere =
 	// ==============================================//
 	
+	// On appelle les ingénieur nécessaire.
+	$off_ingenieur = $user_data['off_ingenieur'];
+	
 	function Create_Mine_HOF()
 	{
-		// if (!isset($nplayer))	global $nplayer;
-		
+	//if (!isset($nplayer))	global $nplayer;
+		$user_empire = user_get_empire();
+		$start = 101;
+		$nb_planet = find_nb_planete_user();
 		if (!isset($production_metal))	global $production_metal;
 		if (!isset($production_cristal))	global $production_cristal;
 		if (!isset($production_deuterium))	global $production_deuterium;
@@ -23,10 +28,9 @@
 		if (!isset($production_joueur))	global $production_joueur;
 		if (!isset($table_prefix))global $table_prefix;
 		if (!isset($db))	global $db;
-				$planet = array(false, 'user_id' => '', 'planet_name' => '', 'coordinates' => '', 'fields' => '', 'fields_used' => '', 'temperature' => '', 'Sat' => '',
+				$planet = array(false, 'user_id' => '', 'planet_name' => '', 'coordinates' => '', 'fields' => '', 'fields_used' => '', 'temperature_min' => '', 'temperature_max' => '', 'Sat' => '',
 				'M' => 0, 'C' => 0, 'D' => 0, 'CES' => 0, 'CEF' => 0 ,
 				'M_percentage' => 0, 'C_percentage' => 0, 'D_percentage' => 0, 'CES_percentage' => 100, 'CEF_percentage' => 100, 'Sat_percentage' => 100);
-
 		$sql="select distinct u.user_id,user_name from ".TABLE_USER." u,".$table_prefix."user_building b where user_active and u.user_id=b.user_id";
 		$result = $db->sql_query($sql);
 
@@ -38,13 +42,12 @@
 			
 			// Récupération des informations sur les mines du joueur
 			
-			$quet = mysql_query('SELECT planet_id, planet_name, coordinates, `fields`, temperature, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
-			
-			$user_building = array_fill(1, 9, $planet);
+			$quet = mysql_query('SELECT planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
+			$user_building = array_fill(1, $nb_planet, $planet);
 			
 			// Récupération des informations sur les technologies du joueur
 
-			$user_empire = user_get_empire();
+			
 			$user_technology = $user_empire["technology"];
 			$NRJ = $user_technology['NRJ'];
 			
@@ -57,7 +60,8 @@
 				unset($arr['planet_name']);
 				unset($arr['coordinates']);
 				unset($arr['fields']);
-				unset($arr['temperature']);
+				unset($arr['temperature_min']);
+				unset($arr['temperature_max']);
 				unset($arr['Sat']);
 				$fields_used = array_sum(array_values($arr));
 
@@ -66,15 +70,18 @@
 				$user_building[$row['planet_id']][0] = true;
 
 				// calcul des productions
+				global $db, $off_ingenieur;
+				require_once("includes/ogame.php");
 				
-				$metal_heure = 0;
-				$cristal_heure = 0;
-				$deut_heure = 0;
+				$metal_heure=0;
+				$cristal_heure=0;
+				$deut_heure=0;
 				$metal_jour = 0;
 				$cristal_jour = 0;
 				$deut_jour = 0;
-				
-				for ($i=1; $i<=9; $i++)
+				$start = 101;
+				$nb_planet = find_nb_planete_user();
+				for ($i=$start ; $i<=$start+$nb_planet-1 ; $i++)
 				{
 					$M = $user_building[$i]['M'];
 					$C = $user_building[$i]['C'];
@@ -88,19 +95,29 @@
 					$CES_per = $user_building[$i]['CES_percentage'];
 					$CEF_per = $user_building[$i]['CEF_percentage'];
 					$SAT_per = $user_building[$i]['Sat_percentage'];
-					$temperature = $user_building[$i]['temperature'];
-
-					$prod_energie = (($CES_per/100)*(floor(20 * $CES * pow(1.1, $CES)))) + (($CEF_per/100)*(floor(30 * $CEF * pow((1.05 + $NRJ * 0.01), $CEF)))) + (($SAT_per/100)* ($SAT * floor(($temperature / 4) + 20)));
-					$cons_energie = (($M_per/100)*(floor(10 * $M * pow(1.1, $M)))) + (($C_per/100)*(floor(10 * $C * pow(1.1, $C)))) + (($D_per/100)*(floor(20 * $D * pow(1.1, $D)))) ;
+					$temperature_min = $user_building[$i]['temperature_min'];
+					$temperature_max = $user_building[$i]['temperature_max'];
+					
+					$production_CES = ( $CES_per / 100 ) * ( production ( "CES", $CES, $off_ingenieur ));
+					$production_CEF = ( $CEF_per / 100 ) * ( production ("CEF", $off_ingenieur ));
+					$production_SAT = ( $SAT_per / 100 ) * ( production_sat ( $temperature_min, $temperature_max, $off_ingenieur ) * $SAT );
+					$prod_energie = $production_CES + $production_CEF + $production_SAT;
+					
+					$consommation_M = ( $M_per / 100 ) * ( consumption ( "M", $M ));
+					$consommation_C = ( $C_per / 100 ) * ( consumption ( "C", $C ));
+					$consommation_D = ( $D_per / 100 ) * ( consumption ( "D", $D ));
+					$cons_energie = $consommation_M + $consommation_C + $consommation_D;
+					
 					if ($cons_energie == 0) $cons_energie = 1;
 					$ratio = floor(($prod_energie/$cons_energie)*100)/100;
 					if ($ratio > 1) $ratio = 1;
 
-					$metal_heure = $metal_heure + 20 + round(($M_per/100)*$ratio*floor(30 * $M * pow(1.1, $M)));
-					$cristal_heure = $cristal_heure + 10 + round(($C_per/100)*$ratio*floor(20 * $C * pow(1.1, $C)));
-					$deut_heure = $deut_heure + (round(($D_per/100)*$ratio*floor(10 * $D * pow(1.1, $D) * (-0.002 * $temperature + 1.28))) - round(($CEF_per/100)*10 * $CEF * pow(1.1, $CEF)));
-				}
-
+					$metal_heure = $metal_heure + ( 20 + round (($M_per/100) * $ratio * ( production ( "M", $M ))));
+					$cristal_heure = $cristal_heure + ( 10 + round (( $C_per/100 ) * $ratio * ( production ( "C", $C ))));
+					$deut_heure = $deut_heure  + (( round (( $D_per/100) * $ratio * ( production ( "D", $D, 0, $temperature_max )))) -  consumption ("CEF", $CEF));
+		
+				}			
+				
 				$metal_jour = 24 * $metal_heure;
 				$cristal_jour = 24 * $cristal_heure;
 				$deut_jour = 24 * $deut_heure;
