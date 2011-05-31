@@ -1,16 +1,20 @@
 //Production par heure
 function production (building, level, temperature_max, NRJ) {
-	switch (building) {
+	var speed = document.getElementById("vitesse_uni").value;
+    switch (building) {
 		case "M":
 		result = 20 + 30 * level * Math.pow(1.1, level);
+        result = result * speed
 		break;
 
 		case "C":
 		result = 10 + 20 * level * Math.pow(1.1, level);
+        result = result * speed
 		break;
 
 		case "D":
 		result = Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max));
+        result = result * speed
 		break;
 
 		case "CES":
@@ -25,14 +29,13 @@ function production (building, level, temperature_max, NRJ) {
 		result = 0;
 		break;
 	}
-    var speed = document.getElementById("vitesse_uni").value;
-	return Math.round(result * speed );
+    
+	return Math.round(result );
 }
 
 //Production des satellites
 function production_sat (temperature_min, temperature_max) {
-    var speed = document.getElementById("vitesse_uni").value;
-	return Math.floor(((((parseInt(temperature_max) + parseInt(temperature_min)) / 2) + 160) / 6)* speed);
+   	return Math.floor(((((parseInt(temperature_max) + parseInt(temperature_min)) / 2) + 160) / 6));
 }
 
 //Consommation d"énergie
@@ -51,15 +54,16 @@ function consumption (building, level) {
 		break;
 
 		case "CEF":
-		result = Math.ceil(10 * level * Math.pow(1.1, level));
+        var speed = document.getElementById("vitesse_uni").value; // consommation de deut doublé par vitesse uni
+		result = Math.ceil(10 * level * Math.pow(1.1, level)* speed);
 		break;
 
 		default:
 		result = 0;
 		break;
 	}
-    var speed = document.getElementById("vitesse_uni").value;
-	return Math.round(result * speed);
+    
+	return Math.round(speed);
 }
 
 function update_page() {
