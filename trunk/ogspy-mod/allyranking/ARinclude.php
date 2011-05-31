@@ -16,7 +16,7 @@ define("DEBUG",false);
 //================================================================================
 define("TABLE_RANK_MEMBERS",$table_prefix."rank_members");
 define("MODULE_NAME","allyranking");
-define("MODULE_ACTION","allyRanking");
+define("MODULE_ACTION","allyranking");
 define("MODULE_DIR","allyranking");
 define("MODULE_VERSION","0.4f");
 define("MENU_ICON","<img align=\"absmiddle\" src=\"./mod/allyranking/images/graph_icon16.gif\">");
@@ -93,12 +93,11 @@ function getMenuStatus()
 
 	// Chercher si l'image ou le titre sont affichés
 
-	if (eregi('<img[^>]*>',$menu)!=false)
+	if (preg_match('/<img[^>]*>/i',$menu)!=false)
 		$icon = 1;
 	else
 		$icon = 0;
-
-	if (eregi(MODULE_NAME.'$',$menu)!=false)
+	if (preg_match('/'.MODULE_NAME.'$/i',$menu)!=false)
 		$title = 1;
 	else
 		$title = 0;
@@ -126,7 +125,7 @@ function addMenuIcon()
 
 	list($menu)=$db->sql_fetch_row($result);
 
-	if (eregi('<img[^>]*>',$menu)==false)
+	if (preg_match('/<img[^>]*>/i',$menu)==false)
 	{
 		$menu = MENU_ICON . "&nbsp;" . $menu;
 	}
@@ -145,7 +144,7 @@ function delMenuIcon()
 	$result = $db->sql_query($query);
 	list($menu)=$db->sql_fetch_row($result);
 
-	$menu = eregi_replace("<img[^>]*>&nbsp;","",$menu);
+	$menu = preg_replace('`<img[^>]*>&nbsp;`','',$menu);
 
 	$query = "UPDATE ".TABLE_MOD." SET menu = '$menu' WHERE TITLE='".MODULE_NAME."'";
 	$result = $db->sql_query($query);
@@ -161,7 +160,7 @@ function addMenuTitle()
 
 	list($menu)=$db->sql_fetch_row($result);
 
-	if (eregi('&nbsp;',$menu)==false)
+	if (preg_match('/&nbsp;/i',$menu)==false)
 	{
 		$menu = $menu . "&nbsp;" . MODULE_NAME ;
 	}
@@ -179,7 +178,7 @@ function delMenuTitle()
 	$result = $db->sql_query($query);
 	list($menu)=$db->sql_fetch_row($result);
 
-	$menu = eregi_replace(">&nbsp;[^>]*$",">",$menu);
+	$menu = preg_replace('`>&nbsp;[^>]*$`','>',$menu);
 
 	$query = "UPDATE ".TABLE_MOD." SET menu = '$menu' WHERE TITLE='".MODULE_NAME."'";
 	$result = $db->sql_query($query);
@@ -229,7 +228,7 @@ function page_footer()
 	global $db;
 
 	//Récupérer le numéro de version de la base
-	$request = "SELECT version from ".TABLE_MOD." WHERE title='allyRanking'";
+	$request = "SELECT version from ".TABLE_MOD." WHERE title='allyranking'";
 	$result = $db->sql_query($request,false);
 	list($version)=$db->sql_fetch_row($result);
 	echo "<br/><B>allyRanking v$version</B> - Jibus&copy;2006-2008<br/>";
@@ -263,7 +262,7 @@ function buttons_bar($subaction,$width=700)
 			echo '<th width="150" style="vertical-align:middle;">'.$report_img.'<a>Nouveau rapport</a></th>'."\n";
 		else
 		{
-			echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyRanking&subaction=report\';">'."\n";
+			echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyranking&subaction=report\';">'."\n";
 			echo '<a style="cursor:pointer">'.$report_img.'<font color="lime">Nouveau rapport</font></a>'."\n";
 			echo '</td>'."\n";
 		}
@@ -275,7 +274,7 @@ function buttons_bar($subaction,$width=700)
 		echo '<th width="150" style="vertical-align:middle;">'.$ranking_img.'<a>Classement</a></th>'."\n";
 	else
 	{
-		echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyRanking&subaction=ranking\';">'."\n";
+		echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyranking&subaction=ranking\';">'."\n";
 		echo '<a style="cursor:pointer">'.$ranking_img.'<font color="lime">Classement</font></a>'."\n";
 		echo '</td>'."\n";
 	}
@@ -286,7 +285,7 @@ function buttons_bar($subaction,$width=700)
 		echo '<th width="150" style="vertical-align:middle;">'.$detail_img.'<a>Détails</a></th>'."\n";
 	else
 	{
-		echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyRanking&subaction=detail\';">'."\n";
+		echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyranking&subaction=detail\';">'."\n";
 		echo '<a style="cursor:pointer">'.$detail_img.'<font color="lime">Détails</font></a>'."\n";
 		echo '</td>'."\n";
 	}
@@ -299,7 +298,7 @@ function buttons_bar($subaction,$width=700)
 			echo '<th width="150" style="vertical-align:middle;">'.$config_img.'<a>Configuration</a></th>'."\n";
 		else
 		{
-			echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyRanking&subaction=config\';">'."\n";
+			echo '<td class="c" width="150" onclick="window.location = \'index.php?action=allyranking&subaction=config\';">'."\n";
 			echo '<a style="cursor:pointer">'.$config_img.'<font color="lime">Configuration</font></a>'."\n";
 			echo '</td>'."\n";
 		}

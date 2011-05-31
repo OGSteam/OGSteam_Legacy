@@ -76,7 +76,7 @@ if (!isset($pub_memberslist)) $pub_memberslist = array();
 	echo "\t<tr><td class='c' width='50'>".$detail48_img."</td><td class='c' width='750'>Evolution générale - Détail par membre</td></tr>\n";
 	echo "\t<tr><th colspan='2'>";
 	if (count($pub_memberslist))
-		echo "<img src='index.php?action=allyRanking&subaction=graphicglobal&mblist=$mblist'/>";
+		echo "<img src='index.php?action=allyranking&subaction=graphicglobal&mblist=$mblist'/>";
 	else
 		echo "Choisissez des joueurs dont vous voulez visualiser la progression";
 	echo "</th> \n";
@@ -90,7 +90,7 @@ if (!isset($pub_memberslist)) $pub_memberslist = array();
 	$nb_max_col = 1;
 	$nb_col = 0;
 	echo "<form id='userlist' style='margin:0px;padding:0px;' action='' method='POST'>";
-	echo "<input type='hidden' name='action' value='allyRanking'>";
+	echo "<input type='hidden' name='action' value='allyranking'>";
 	echo "<input type='hidden' name='subaction' value='detail'>";
 	echo "<table width='810'>\n";
 	// Bouton CheckAll et UnCheckAll

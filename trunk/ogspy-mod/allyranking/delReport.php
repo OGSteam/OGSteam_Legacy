@@ -22,5 +22,5 @@ $query  = "DELETE FROM ". TABLE_RANK_MEMBERS;
 $query .= "  WHERE datadate = ".mysql_escape_string($pub_datadate);
 $result = $db->sql_query($query,DEBUG);
 
-redirection("index.php?action=allyRanking&subaction=ranking");
+redirection("index.php?action=allyranking&subaction=ranking");
 ?>

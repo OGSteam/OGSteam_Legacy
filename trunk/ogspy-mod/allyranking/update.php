@@ -30,7 +30,7 @@
 if( mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."xtense_callbacks"."'")))
   {
   // Si oui, on récupère le n° d'id du mod
-  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyRanking' AND `active`='1' LIMIT 1";
+  $query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='allyranking' AND `active`='1' LIMIT 1";
   $result = $db->sql_query($query);
   $ally_id = $db->sql_fetch_row($result);
   $ally_id = $ally_id[0];
