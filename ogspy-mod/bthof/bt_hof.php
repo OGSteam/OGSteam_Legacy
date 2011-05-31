@@ -16,7 +16,7 @@
 	
 	if (!defined ('IN_SPYOGAME'))		die("Hacking attempt");
 	// charge le fichier functions.php
-require_once("mod/bt_hof/functions.php");
+require_once("mod/bthof/functions.php");
 	
 	// error_reporting(E_ALL);
 	
@@ -85,8 +85,8 @@ require_once("mod/bt_hof/functions.php");
 	$Flottes_Label = array("Petit Transporteur","Grand Transporteur","Chasseur Léger","Chasseur Lourd","Croiseur","Vaisseau de Bataille","Vaisseau de Colonisation","Recycleur","Sonde d'Espionnage","Bombardier","Destructeur","Etoile de la Mort","Traqueur","Satellite Solaire");
 	$Flottes_icon  = array("202.gif","203.gif","204.gif","205.gif","206.gif","207.gif","208.gif","209.gif","210.gif","211.gif","213.gif","214.gif","215.gif","212.gif");
 
-	$Tech_label     = array("Technologie Espionnage","Technologie Ordinateur","Technologie Armes","Technologie Bouclier","Protect. vaisseaux","Technologie Energie","Technologie Hyperespace","Réacteur à combustion","Réacteur à impulsion","Propulsion hyperespace","Technologie Laser","Technologie Ions","Technologie Plasma","Réseau de recherche","Technologie Expéditions","Technologie Graviton");
-	$Tech_name      = array("Esp","Ordi","Armes","Bouclier","Protection","NRJ","Hyp","RC","RI","PH","Laser","Ions","Plasma","RRI","Expeditions","Graviton");
+	$Tech_label     = array("Technologie Espionnage","Technologie Ordinateur","Technologie Armes","Technologie Bouclier","Protect. Vaisseaux","Technologie Energie","Technologie Hyperespace","Réacteur à Combustion","Réacteur à Impulsion","Propulsion Hyperespace","Technologie Laser","Technologie Ions","Technologie Plasma","Réseau de Recherche","Technologie Astrophysique","Technologie Graviton");
+	$Tech_name      = array("Esp","Ordi","Armes","Bouclier","Protection","NRJ","Hyp","RC","RI","PH","Laser","Ions","Plasma","RRI","Astrophysique","Graviton");
 	$Tech_icon      = array("106.gif","108.gif","109.gif","110.gif","111.gif","113.gif","114.gif","115.gif","117.gif","118.gif","120.gif","121.gif","122.gif","123.gif","124.gif","199.gif");
 
 	$Def_label      = array( "Lance Missile","Laser Léger","Laser Lourd","Canon Gauss","Artillerie Ion","Lance Plasma","Missile Interception","Missile InterPlanétaire");
@@ -202,7 +202,7 @@ require_once("mod/bt_hof/functions.php");
 							<td class='c' style='width : 18%;'><a href='index.php?action=bt_hof&subaction=Production&mine=total'>Total</a></td>
 						</tr>
 				
-					<?php
+					<?php 
 					Create_Mine_HOF();
 					$valid_pub_mine = Array ('metal','cristal','deuterium','total');
 					if(!in_array($pub_mine,$valid_pub_mine)) $pub_mine = 'total';
@@ -215,7 +215,7 @@ require_once("mod/bt_hof/functions.php");
 					{
 						?>
 						
-						<tr>
+						<tr><?php echo $prod_energie;?>
 							<td style='background-color : #273234;'><?php echo '<span style=\'color : white; font-weight : bold;\'>' . $nb . '</span>'; ?></td>
 							<td style='background-color : #273234;'><a><?php echo '<span style=\'color : white; font-weight : bold;\'>' . $production_joueur[$key] . '</span>'; ?></a></td>
 							<td style='background-color : #273234;'><font color='red'><b><?php echo number_format($production_metal[$key]*$tbl['x'], 0, ',', ' '); ?></b></font></td>
@@ -224,7 +224,7 @@ require_once("mod/bt_hof/functions.php");
 							<td style='background-color : #273234;'><font color='grey'><?php echo number_format($production_total[$key]*$tbl['x'], 0, ',', ' '); ?></font></td>
 						</tr>
 							
-						<?php
+						<?php 
 						$nb++;
 					}
 							
@@ -462,7 +462,7 @@ require_once("mod/bt_hof/functions.php");
 					<tr>
 						<td style='background-color : #273234; text-align : center;'>0.5a</td>
 						<td style='background-color : #273234;'>
-							<i>Mise à jour par Shad0w</i>
+							<i>Mise à jour par Shad</i>
 							<ul>
 								<li>Ajout d'une section flotte</li>
 							</ul>
@@ -526,6 +526,20 @@ require_once("mod/bt_hof/functions.php");
 							<ul>
 								<li>Simplification du code d'affichage des icones</li>
 								<li>Correction du bug d'affichage si les icones n'était pas validés</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.0</td>
+						<td style='background-color : #273234;'>
+							<i>Mise à jour par Shad</i>
+							<ul>
+								<li>Changement du lien qui affiche les images</li>
+								<li>Mise a jour des fonctions d'install, update et uninstall</li>
+								<li>Remise a jour des id planètes et prise en compte du nombre de planètes et lunes</li>
+								<li>Remplacement de la techonologie expédition par astrophysique</li>
+								<li>Prise en compte de la vitesse de l'uni</li>
+								
 							</ul>
 						</td>
 					</tr>

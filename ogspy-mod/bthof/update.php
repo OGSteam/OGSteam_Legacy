@@ -78,10 +78,7 @@ if ($version == "0.4") {
 	$db->sql_query($query2);
 }
 
-$filename = 'mod/bt_hof/version.txt';
-if (file_exists($filename)) $file = file($filename);
-
-//Mise à jour du numéro de version
-$query = "UPDATE ".TABLE_MOD." SET version='".trim($file[1])."' WHERE action='bt_hof'";
-$db->sql_query($query);
+$mod_folder = "bthof";
+$mod_name = "bt_hof";
+update_mod($mod_folder,$mod_name);
 ?>
