@@ -15,7 +15,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 #
 if(class_exists("Callback")){
 class QuiMSonde_Callback extends Callback {
-        public $version = '2.3.0';
+        public $version = '2.3.8';
         public function qms_import_enemy_spy($spy){
 			global $io,$user;
 			require_once('lang/lang_french.php');
@@ -198,13 +198,13 @@ function get_real_sender_id($position){		// Renvoi le vrai #id du joueur qui s'e
 	list($user_id)=$db->sql_fetch_row($result);
 	return $user_id;
 }
-function get_coord($position){						// Renvoi le rang de la planète par rapport à une position formatée GG:SS:RR
-	$dPoint = strpos($position,":");	
-	$galaxy = substr ($position,0,$dPoint);
-	$tmp = substr ($position,$dPoint+1);	
-	$dPoint2 = strpos($tmp,":");	
-	$system = substr($tmp,0,$dPoint2); 	
-	$row = substr ($tmp,$dPoint2+1);	
-	return array($galaxy,$system,$row); 
-}
+// function get_coord($position){						// Renvoi le rang de la planète par rapport à une position formatée GG:SS:RR
+	// $dPoint = strpos($position,":");	
+	// $galaxy = substr ($position,0,$dPoint);
+	// $tmp = substr ($position,$dPoint+1);	
+	// $dPoint2 = strpos($tmp,":");	
+	// $system = substr($tmp,0,$dPoint2); 	
+	// $row = substr ($tmp,$dPoint2+1);	
+	// return array($galaxy,$system,$row); 
+// }
 ?>
