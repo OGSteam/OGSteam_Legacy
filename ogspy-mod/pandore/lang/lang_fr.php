@@ -129,13 +129,13 @@ $lang['pandore_Laser'] = "Technologie laser";
 $lang['pandore_Ions'] = "Technologie ions";
 $lang['pandore_Plasma'] = "Technologies plasma";
 $lang['pandore_RRI'] = "Réseau de recherche intergalactique";
-$lang['pandore_Expeditions'] = "Technologie Expéditions";
+$lang['pandore_Astrophysique'] = "Technologie Astrophysique";
 $lang['pandore_Graviton'] = "Technologie graviton";
 
 // Warnings
 $lang['pandore_warning'] = "Attention";
 $lang['pandore_warning_one_planete'] = "Seule 1 planète a été trouvée.";
-$lang['pandore_warning_less_planetes'] = "Seulement "./*$number_of_planets*/"%d"." planètes ont été trouvées.";
+$lang['pandore_warning_less_planetes'] = "Seulement "./*$number_of_planets*/"%1\$s"." planètes sur "./*$planet_max*/"%2\$s"." maximum ont été trouvées.";
 $lang['pandore_warning_ride_universe'] = "Sillonnez l'univers pour vous assurer que le joueur n'a pas d'autre planètes.";
 $lang['pandore_warning_old_reports'] = "Certains rapports d'espionnage datent de plus d'une semaine.";
 $lang['pandore_warning_respy'] = "Il serait préférable de ré-espionner les planètes et lunes suivantes&nbsp;:";
@@ -147,7 +147,7 @@ $lang['pandore_error'] = "Erreur";
 $lang['pandore_error_coord'] = "Coordonnées erronées, indiquez les valeurs séparées par deux points (ex: 1:234:5).";
 $lang['pandore_error_player'] = "Pas de joueur trouvé aux coordonnées";
 $lang['pandore_error_no_planete'] = "Aucune planète du joueur "./*$player_name*/"%s"." n'a été trouv&ée, vérifiez la typographie du pseudo.";
-$lang['pandore_error_planete'] = "Plus de 9 planètes ont été répertoriées pour le joueur "./*$player_name*/"%s".". Veuillez mettre à jour les systèmes solaires suivants&nbsp;:";
+$lang['pandore_error_planete'] = "Plus de "./*$planet_max*/"%1\$s"." planètes autorisé par son astrophysique, ont été répertoriées pour le joueur "./*$player_name*/"%2\$s".". Veuillez mettre à jour les systèmes solaires suivants&nbsp;:";
 $lang['pandore_error_missing_reports'] = "Il manque des rapports d'espionnage.";
 $lang['pandore_error_respy'] = "Veuillez espionner les planètes et lunes suivantes&nbsp;:";
 $lang['pandore_error_incomplete_reports'] = "Certains rapports d'espionnages sont incomplets.";
@@ -195,5 +195,7 @@ $lang['pandore_version_0.5'] = "- [Fix] Détection des lunes qui dépend de la lan
 	- [Fix] Erreur lors de l'enregistrement alors qu'un classement n'as pas été trouvé.<br />
 	- [Fix] Mauvais affichage des classements dans les enregistrements.<br />
 	- [Fix] Suppression impossible des enregistrements chez certains hébergeurs.";
-$lang['pandore_version_1.0.0'] = "- [Fix] Mise à jour de la compatibilité avec OGSpy 3.0.7.";
+$lang['pandore_version_1.0.0'] = "- [Fix] Mise à jour de la compatibilité avec OGSpy 3.0.7.<br />
+	- [Fix] Technologies Expéditions remplacé par Astrophysique.<br />
+	- [Add] Ajout du calcul de planètes maximum autorisé par l'astrophyque.<br />";
 ?>

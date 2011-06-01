@@ -129,13 +129,13 @@ $lang['pandore_Laser'] = "Laser Technology";
 $lang['pandore_Ions'] = "Ion Technology";
 $lang['pandore_Plasma'] = "Plasma Technology";
 $lang['pandore_RRI'] = "Intergalactic Research Network";
-$lang['pandore_Expeditions'] = "Expedition";
+$lang['pandore_Astrophysique'] = "Astrophysics Technology";
 $lang['pandore_Graviton'] = "Graviton Technology";
 
 // Warnings
 $lang['pandore_warning'] = "Warning";
 $lang['pandore_warning_one_planete'] = "Only 1 planete was found.";
-$lang['pandore_warning_less_planetes'] = "Only "./*$number_of_planets*/"%d"." planetes were found.";
+$lang['pandore_warning_less_planetes'] = "Only "./*$number_of_planets*/"%d"." planetes on "./*$planet_max*/"%2\$s"." maximum were found.";
 $lang['pandore_warning_ride_universe'] = "Travel through the universe to make sure the player doesn't have other planetes.";
 $lang['pandore_warning_old_reports'] = "Some espionage reports date from more than a week.";
 $lang['pandore_warning_respy'] = "It would be better to spy again the following planetes and moons:";
@@ -147,7 +147,8 @@ $lang['pandore_error'] = "Error";
 $lang['pandore_error_coord'] = "Wrong coordinates, enter the values separated by colons (ex: 1:234:5).";
 $lang['pandore_error_player'] = "No player found at coordinates";
 $lang['pandore_error_no_planete'] = "No planete of player "./*$player_name*/"%s"." were found, make sure the pseudo is good.";
-$lang['pandore_error_planete'] = "More than 9 planetes were found for the player "./*$player_name*/"%s".". Please update the following solar systems:";
+$lang['pandore_error_planete'] = "Plus de "./*$planet_max*/"%1\$s"." planètes autorisé par sa techonologie astrophysique, ont été répertoriées pour le joueur "./*$player_name*/"%2\$s".". Veuillez mettre à jour les systèmes solaires suivants&nbsp;:";
+$lang['pandore_error_planete'] = "More than "./*$planet_max*/"%1\$s"." planetes permitted by his Astrophysics Technology, were found for the player "./*$player_name*/"%2\$s".". Please update the following solar systems:";
 $lang['pandore_error_missing_reports'] = "There is missing spy reports.";
 $lang['pandore_error_respy'] = "Please spy the following planetes and moons:";
 $lang['pandore_error_incomplete_reports'] = "Some spy reports are incomplete.";
@@ -195,5 +196,6 @@ $lang['pandore_version_0.5'] = "- [Fix] Moon detection depending on language.<br
 	- [Fix] Error while recording while a rank have not been found.<br />
 	- [Fix] Bad display of rankings in the records.<br />
 	- [Fix] Impossible remove of records on some hosts.";
-	$lang['pandore_version_1.0.0'] = "- [Fix] Compatibility updated for OGSpy 3.0.7.";
-?>
+	$lang['pandore_version_1.0.0'] = "- [Fix] Compatibility updated for OGSpy 3.0.7.<br />
+	- [Fix] Expedition Technology replaced by Astrophysics.<br />
+	- [Add] Add maximum planete permitted by Astrophysics.";
