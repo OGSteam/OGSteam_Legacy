@@ -18,6 +18,9 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 include("qms_common.php");
 include(FOLDER_INCLUDE."/qms_main.php");
 
+$mod_folder = "quimsonde";
+$mod_name = "QuiMSonde";
+update_mod($mod_folder, $mod_name);
 
 // Quelle version met à jour ?
 if (file_exists(FOLDER_QMS.'/version.txt')) {
@@ -107,9 +110,6 @@ $db->sql_query($insert_config."( '2', 'search',
 $db->sql_query($insert_config."( '3', 'search', 
 	'Recherche+<|>?action=recherche_plus&ally_active=1&allys={alliance}&Chercher<|>Alliance<|>0' )");
 $db->sql_query($insert_config."( '0', 'searchID', '1|2|3' )");
-
-// mise à jour du numéro de version
-$db->sql_query("UPDATE `".TABLE_MOD."` SET `version` = '$version' WHERE `title` = '$mod_name'");
 
 
 // Insertion de la liaison entre Xtense v2 et QuiMSonde (merci Paradoxx!)

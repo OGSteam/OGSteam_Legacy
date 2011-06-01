@@ -24,9 +24,9 @@ define("TABLE_QMS", $table_prefix."QuiMeSonde");
 define("TABLE_QMS_config", $table_prefix."QuiMeSonde_config");
 
 // Nom des Dossiers
-define("FOLDER_QMS","mod/QuiMSonde");
-define("FOLDER_INCLUDE","mod/QuiMSonde/includes");
-define("FOLDER_LANG","mod/QuiMSonde/lang");
+define("FOLDER_QMS","mod/quimsonde");
+define("FOLDER_INCLUDE","mod/quimsonde/includes");
+define("FOLDER_LANG","mod/quimsonde/lang");
 
 
 // Variables Globales 
