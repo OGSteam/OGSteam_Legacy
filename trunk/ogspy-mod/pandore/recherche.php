@@ -1,4 +1,4 @@
-<?php
+<?
 /***************************************************************************
 *	filename	: recherche.php
 *	version		: 0.5
@@ -9,10 +9,10 @@
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-
+$planet_max = astro_max_planete($technologies['Astrophysique']);
 $error = 0;
 $error2 = Array(0,0,0);
-
+require_once("includes/ogame.php");
 // Fonction de filtrage des caracteres 'sensibles' pour les requetes mysql
 function sql_filter($in) {
 	return mysql_real_escape_string(str_replace(array(';','(',')',chr(39),'"','`','|'),'',$in));
@@ -26,8 +26,8 @@ $flotte = array("PT"=>0, "GT"=>0, "CLE"=>0, "CLO"=>0, "CR"=>0, "VB"=>0, "VC"=>0,
 $points_building = array("M"=>75, "C"=>72, "D"=>300, "CES"=>105, "CEF"=>1440, "UdR"=>720, "UdN"=>1600000, "CSp"=>700, "HM"=>2000, "HC"=>3000, "HD"=>4000, "Lab"=>800, "Ter"=>150000, "Silo"=>41000, "BaLu"=>80000, "Pha"=>80000, "PoSa"=>8000000, "DdR"=>60000);
 $puissance_building = array("M"=>1.5, "C"=>1.6, "D"=>1.5, "CES"=>1.5, "CEF"=>1.8, "UdR"=>2, "UdN"=>2, "CSp"=>2, "HM"=>2, "HC"=>2, "HD"=>2, "Lab"=>2, "Ter"=>2, "Silo"=>2, "BaLu"=>2, "Pha"=>2, "PoSa"=>2, "DdR"=>2);
 $points_defence = array("LM"=>2, "LLE"=>2, "LLO"=>8, "CG"=>37, "AI"=>8, "LP"=>130, "PB"=>20, "GB"=>100, "MIC"=>10, "MIP"=>25);
-$points_technology = array("Esp"=>1.4, "Ordi"=>1, "Armes"=>1, "Bouclier"=>.8, "Protection"=>1, "NRJ"=>1.2, "Hyp"=>6, "RC"=>1, "RI"=>6.6, "PH"=>36, "Laser"=>.3, "Ions"=>1.4, "Plasma"=>7, "RRI"=>800, "Expeditions"=>16, "Graviton"=>0);
-$technologies = array("Esp"=>0, "Ordi"=>0, "Armes"=>0, "Bouclier"=>0, "Protection"=>0, "NRJ"=>0, "Hyp"=>0, "RC"=>0, "RI"=>0, "PH"=>0, "Laser"=>0, "Ions"=>0, "Plasma"=>0, "RRI"=>0, "Expeditions"=>0, "Graviton"=>0);
+$points_technology = array("Esp"=>1.4, "Ordi"=>1, "Armes"=>1, "Bouclier"=>.8, "Protection"=>1, "NRJ"=>1.2, "Hyp"=>6, "RC"=>1, "RI"=>6.6, "PH"=>36, "Laser"=>.3, "Ions"=>1.4, "Plasma"=>7, "RRI"=>800, "Astrophysique"=>16, "Graviton"=>0);
+$technologies = array("Esp"=>0, "Ordi"=>0, "Armes"=>0, "Bouclier"=>0, "Protection"=>0, "NRJ"=>0, "Hyp"=>0, "RC"=>0, "RI"=>0, "PH"=>0, "Laser"=>0, "Ions"=>0, "Plasma"=>0, "RRI"=>0, "Astrophysique"=>0, "Graviton"=>0);
 $techno_necessaires = array("PT"=>array("RC"=>2), "GT"=>array("RC"=>6), "CLE"=>array("RC"=>1), "CLO"=>array("Protection"=>2, "RI"=>2), "CR"=>array("RI"=>4, "Ions"=>2), "VB"=>array("PH"=>4), "VC"=>array("RI"=>3), "REC"=>array("RC"=>6, "Bouclier"=>2), "SE"=>array("Esp"=>2, "RC"=>3), "BMD"=>array("RI"=>6, "Plasma"=>5), "DST"=>array("Hyp"=>5, "PH"=>6), "EDLM"=>array("Hyp"=>6, "PH"=>7, "Graviton"=>1), "TRA"=>array("Hyp"=>5, "PH"=>5, "Laser"=>12));
 $points = array("flottes"=>0, "batiments"=>0, "defenses"=>0, "recherches"=>0);
 
@@ -64,7 +64,7 @@ if ($search && ($error == 0 || $error == 4)) {
 	}
 	if ($error != 4) {
 		if (count($coordonnees) == 0) $error = 2;
-		if (count($coordonnees) > 9) $error = 1;
+		if (count($coordonnees) > $planet_max) $error = 1;
 	} elseif (count($coordonnees) > 0) {
 		$error = 0;
 		$target = 'player';
@@ -86,7 +86,7 @@ if ($search && $error == 0) {
 				if ($value != -1 && $key != 'dateRE') $rapports[$j][$key] = $value;
 				elseif ($value == -1 && $key != 'dateRE') {
 					$rapports[$j][$key] = 0;
-					if ($key != 'activite' && $key != 'Esp' && $key != 'Ordi' && $key != 'Armes' && $key != 'Bouclier' && $key != 'Protection' && $key != 'NRJ' && $key != 'Hyp' && $key != 'RC' && $key != 'RI' && $key != 'PH' && $key != 'Laser' && $key != 'Ions' && $key != 'Plasma' && $key != 'RRI' && $key != 'Graviton' && $key != 'Expeditions') $d = 1;
+					if ($key != 'activite' && $key != 'Esp' && $key != 'Ordi' && $key != 'Armes' && $key != 'Bouclier' && $key != 'Protection' && $key != 'NRJ' && $key != 'Hyp' && $key != 'RC' && $key != 'RI' && $key != 'PH' && $key != 'Laser' && $key != 'Ions' && $key != 'Plasma' && $key != 'RRI' && $key != 'Graviton' && $key != 'Astrophysique') $d = 1;
 				}
 				if ($key == 'Esp') $espionnage = max($value, $espionnage);
 			}
@@ -419,7 +419,7 @@ if ($error == 4) echo "</div></div></div><fieldset><legend>".$lang['pandore_erro
 if ($error == 3) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_player']." [".$search."].</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 if ($error == 2) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_no_planete'],$search)."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 if ($error == 1) {
-	echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$nom)."<br />";
+	echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$planet_max,$nom)."<br />";
 	for ($i = 0; $i < count($coordonnees); $i++) {
 		echo "[".$coordonnees[$i][0]."] ";
 	}
@@ -458,9 +458,11 @@ if ($search && $error == 0) {
 		echo "\t</tr>\n";
 		($row == 'b') ? $row = 'f' : $row = 'b';
 	}
+
+	
 	// Affichage des avertissements sur le nombre de planètes
-	if ($i == 1) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
-	elseif ($i < 9) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_warning_less_planetes'],$i)."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	if ($i == $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	elseif ($i < $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_warning_less_planetes'],$i,$planet_max)."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
 	// Affichage du nombre de sondes nécessaires
 	echo "\t<tr>\n\t\t<td colspan='4' class='c' style='text-align: center;'>".$lang['pandore_probe_number']."</td>\n\t</tr>\n\t<tr>\n\t\t<td colspan='3' class='".$row."' style='text-align: center;'>".$lang['pandore_buildings']."</td>\n\t\t<td class='".$row."' style='text-align: center;'>".$nb_sondes[0]."</td>\n\t</tr>\n";
 	($row == 'b') ? $row = 'f' : $row = 'b';
