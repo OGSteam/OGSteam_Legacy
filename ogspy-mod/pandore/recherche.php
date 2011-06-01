@@ -349,7 +349,7 @@ if (class_gene[2] == class_gene[1]) {
 }
 (points_batiments != points[0]) ? document.getElementById('nom_batiments').innerHTML = '<a><div title="<?php echo $lang['pandore_reset_buildings_points']; ?>" style="cursor: pointer;"><?php echo $lang['pandore_buildings_points']; ?></div></a>' : document.getElementById('nom_batiments').innerHTML = '<?php echo $lang['pandore_buildings_points']; ?>';
 (points_defenses != points[1]) ? document.getElementById('nom_defenses').innerHTML = '<a><div title="<?php echo $lang['pandore_reset_defenses_points']; ?>" style="cursor: pointer;"><?php echo $lang['pandore_defenses_points']; ?></div></a>' : document.getElementById('nom_defenses').innerHTML = '<?php echo $lang['pandore_defenses_points']; ?>';
-ligne1 = '<div style="display: table-row;"><div style="display: table-cell; vertical-align: middle;"><img style="width: 32px; height: 32px;" src="./mod/Pandore/icons/';
+ligne1 = '<div style="display: table-row;"><div style="display: table-cell; vertical-align: middle;"><img style="width: 32px; height: 32px;" src="./mod/pandore/icons/';
 ligne2 = ' <font title="<?php echo $lang['pandore_update_date']; ?>" style="color: rgb(' + String(r_t) + ',' + String(255 - r_t) + ',0);">' + String(class_techno[0]) + '</font></div></div>';
 (points_recherches != points[2] || type_techno == 1) ? document.getElementById('nom_recherches').innerHTML = '<a><div title="<?php echo $lang['pandore_reset_research_clic']; ?>" onclick="javascript:init_points_recherches()" style="cursor: pointer;"><a><?php echo $lang['pandore_reset_research']; ?> (' + String(nombre_recherches) + '&nbsp;/&nbsp;' + String(techno) + ')</div></a>' : document.getElementById('nom_recherches').innerHTML = '';
 if (class_techno[0]) {
@@ -415,11 +415,11 @@ window.onload = function() {Biper(); search_focus();}
 <br />
 <?php
 // Affichage des erreurs de recherche
-if ($error == 4) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_coord']."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
-if ($error == 3) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_player']." [".$search."].</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
-if ($error == 2) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_no_planete'],$search)."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
+if ($error == 4) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_coord']."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
+if ($error == 3) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_player']." [".$search."].</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
+if ($error == 2) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_no_planete'],$search)."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 if ($error == 1) {
-	echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$nom)."<br />";
+	echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$nom)."<br />";
 	for ($i = 0; $i < count($coordonnees); $i++) {
 		echo "[".$coordonnees[$i][0]."] ";
 	}
@@ -459,8 +459,8 @@ if ($search && $error == 0) {
 		($row == 'b') ? $row = 'f' : $row = 'b';
 	}
 	// Affichage des avertissements sur le nombre de planètes
-	if ($i == 1) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/Pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
-	elseif ($i < 9) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/Pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_warning_less_planetes'],$i)."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	if ($i == 1) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	elseif ($i < 9) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_warning_less_planetes'],$i)."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
 	// Affichage du nombre de sondes nécessaires
 	echo "\t<tr>\n\t\t<td colspan='4' class='c' style='text-align: center;'>".$lang['pandore_probe_number']."</td>\n\t</tr>\n\t<tr>\n\t\t<td colspan='3' class='".$row."' style='text-align: center;'>".$lang['pandore_buildings']."</td>\n\t\t<td class='".$row."' style='text-align: center;'>".$nb_sondes[0]."</td>\n\t</tr>\n";
 	($row == 'b') ? $row = 'f' : $row = 'b';
@@ -476,7 +476,7 @@ if ($search && $error == 0) {
 	foreach ($points_technology as $key => $value) {
 		echo "\t\t\t\t<tr><td align='right'>".$lang['pandore_'.$key]."</td><td><input type='text' id='".$key."' size='4' maxlength='2' onblur='javascript:calculs(2)' value='-' style='text-align: center;' /></td></tr>\n";
 	}
-	echo "\t\t\t</table></div>\n\t\t<span id='class_recherches'><div style='display: table-row;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 32px; height: 32px;' src='./mod/Pandore/icons/ok.png' alt='Ok :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>Le nombre de technologies correspond avec le classement recherche du <font title='".$lang['pandore_update_date']."' style='color: rgb(".$r_t.",".(255 - $r_t).",0);'>".$class_techno["date"]."</font></div></div></span></th>\n\t</tr>\n";
+	echo "\t\t\t</table></div>\n\t\t<span id='class_recherches'><div style='display: table-row;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 32px; height: 32px;' src='./mod/pandore/icons/ok.png' alt='Ok :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>Le nombre de technologies correspond avec le classement recherche du <font title='".$lang['pandore_update_date']."' style='color: rgb(".$r_t.",".(255 - $r_t).",0);'>".$class_techno["date"]."</font></div></div></span></th>\n\t</tr>\n";
 	echo "\t<tr><td class='c' align='center' onclick='javascript:init_points_vaisseaux()'><span id='nom_vaisseaux'>".$lang['pandore_calculated_fleet_points']."</span></td><th><input type='text' name='points_flotte' id='points_flotte' size='11' maxlength='9' onblur='javascript:calculs(3)' value='";
 	if (isset($simulation)) echo $simulation['points_flotte'];
 	echo "' style='text-align: center;' /></th></tr>\n";
@@ -501,7 +501,7 @@ if ($search && $error == 0) {
 	echo "</table></form></div></div></div>\n";
 	// Affichage des erreurs dues à un manque d'informations
 	if ($error2[1] == 1) {
-		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_missing_reports']."<br />".$lang['pandore_error_respy']."<br />";
+		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_missing_reports']."<br />".$lang['pandore_error_respy']."<br />";
 		for ($i = 0; $i < count($coordonnees); $i++) {
 			$k = Array(0,0);
 			for ($j = 0; isset($rapports) && $j < count($rapports); $j++) {
@@ -514,7 +514,7 @@ if ($search && $error == 0) {
 		echo "</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 	}
 	if ($error2[2] == 1) {
-		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_incomplete_reports']."<br />".$lang['pandore_error_respy']."<br />";
+		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_incomplete_reports']."<br />".$lang['pandore_error_respy']."<br />";
 		for ($i = 0; $i < count($coordonnees); $i++) {
 			if ($coordonnees[$i][2] == 1) echo "[".$coordonnees[$i][0]."] ";
 			if ($coordonnees[$i][4] == 1) echo "[".$coordonnees[$i][0]."&nbsp;".$lang['pandore_moon']."] ";
@@ -522,7 +522,7 @@ if ($search && $error == 0) {
 		echo "</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 	}
 	if ($error2[0] == 1) {
-		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_unknown_player'],$nom)."<br />".$lang['pandore_error_update_rankings']."<br />";
+		echo "</div></div></div><br />\n<fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/stop.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_unknown_player'],$nom)."<br />".$lang['pandore_error_update_rankings']."<br />";
 		if (!$class_gene["date"]) echo $lang['pandore_error_points_ranking'];
 		if (!$class_flotte["date"]) {
 			if ((!$class_gene["date"]) && (!$class_flotte["date"]) && (!$class_techno["date"])) echo ", ";
@@ -539,7 +539,7 @@ if ($search && $error == 0) {
 	if (array_sum($error2) == 0) {
 		// Affichage des avertissements de péremption
 		if (time() - $rapport_date_min >= 604800) {
-			echo "<br />\n<fieldset><legend>".$lang['pandore_warning']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_old_reports']."<br />".$lang['pandore_warning_respy']."<br />";
+			echo "<br />\n<fieldset><legend>".$lang['pandore_warning']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_old_reports']."<br />".$lang['pandore_warning_respy']."<br />";
 			for ($i = 0; $i < count($coordonnees); $i++) {
 				if (time()-$coordonnees[$i][2] >= 604800) echo "[".$coordonnees[$i][0]."] ";
 				if ($coordonnees[$i][3] && time()-$coordonnees[$i][4] >= 604800) echo "[".$coordonnees[$i][0]."&nbsp;".$lang['pandore_moon']."] ";
@@ -547,7 +547,7 @@ if ($search && $error == 0) {
 			echo "</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 		}
 		if (time() - min($class_gene["datadate"], $class_flotte["datadate"], $class_techno["datadate"]) >= 604800) {
-			echo "<br />\n<fieldset><legend>".$lang['pandore_warning']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/Pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_old_rankings']."<br />".$lang['pandore_warning_update_rankings']."<br />";
+			echo "<br />\n<fieldset><legend>".$lang['pandore_warning']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_old_rankings']."<br />".$lang['pandore_warning_update_rankings']."<br />";
 				if (time()-$class_gene["datadate"] >= 604800) echo $lang['pandore_error_points_ranking'];
 				if (time()-$class_flotte["datadate"] >= 604800) {
 					if ((time()-$class_gene["datadate"] >= 604800) && (time()-$class_flotte["datadate"] >= 604800) && (time()-$class_techno["datadate"] >= 604800)) echo ", ";

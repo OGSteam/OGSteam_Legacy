@@ -1,12 +1,10 @@
 <?php
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
-global $db;
-
-$filename = 'mod/Pandore/version.txt';
-if (file_exists($filename)) $file = file($filename);
-
-global $table_prefix;
+global $db, $table_prefix;
+$mod_folder = "pandore";
+$mod_name = "Pandore";
+update_mod($mod_folder, $mod_name);
 
 // Créer la table d'enregistrements si besoin
 $query = 'CREATE TABLE IF NOT EXISTS `'.$table_prefix.'mod_pandore` (
@@ -42,6 +40,4 @@ $query = 'CREATE TABLE IF NOT EXISTS `'.$table_prefix.'mod_pandore` (
 )';
 $db->sql_query($query);
 
-$query = "UPDATE ".TABLE_MOD." SET version='".trim($file[1])."' WHERE `title`='Pandore' ";
-$db->sql_query ( $query );
 ?>
