@@ -27,15 +27,15 @@ function production($building, $level, $officier = 0 , $temperature_max = 0, $NR
         case "M":
             $geo = ($officier == 0) ? 1: 1.10;
             $prod_base = 20;
-            $result = $prod_base  + (30 * $level * pow(1.1, $level)); // formule de base
+            $result = $prod_base  + floor(30 * $level * pow(1.1, $level)); // formule de base
             $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
             break;
 
         case "C":
             $geo = ($officier == 0) ? 1: 1.10;
-            $prod_base = 20;
-            $result = $prod_base  + (20 * $level * pow(1.1, $level));
+            $prod_base = 10;
+            $result = $prod_base  + floor(20 * $level * pow(1.1, $level));
             $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
             break;
