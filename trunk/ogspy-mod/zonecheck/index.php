@@ -20,7 +20,7 @@ if ( !defined ( 'IN_SPYOGAME' ) )
 
 define ( 'IN_ZONECHECK', true );
 
-$query = 'SELECT `root` FROM `' . TABLE_MOD . '` WHERE `action`="ZoneCheck" AND `active`=1 LIMIT 1';
+$query = 'SELECT `root` FROM `' . TABLE_MOD . '` WHERE `action`="zonecheck" AND `active`=1 LIMIT 1';
 if ( !$db->sql_numrows ( $db->sql_query ( $query ) ) )
   die ( 'Hacking attempt' );
 list ( $root ) = $db->sql_fetch_row ( $db->sql_query ( $query ) );
