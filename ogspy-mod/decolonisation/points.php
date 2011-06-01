@@ -30,19 +30,24 @@ if ($derniere_point_stats) {
 	$result = mysql_fetch_array($quet,MYSQL_ASSOC);
 	$points = $result['points'];
 }
+
 $nbre_planete=0;
+$tmp_nbre_planete=find_nb_planete_user();
 $lune=0;
-for ($i=1; $i<=9; $i++) {
+for ($i=101; $i<=$tmp_nbre_planete+100; $i++) {
 	if ($user_building[$i][0]) {
 		$nbre_planete += 1;
 		$planete[$nbre_planete] = $i;
-		if ($user_building[$i+9]['planet_name']) $lune = 1;
+		if ($user_building[$i+100]['planet_name']) $lune = 1;
 	}
 }
+echo $nbre_planete;
 
-$quet = mysql_query('SELECT config_value as ddr FROM '.TABLE_CONFIG.' WHERE config_name = "ddr"');
-$result = mysql_fetch_array($quet,MYSQL_ASSOC);
-$ddr = $result['ddr'];
+//modif 3.0.7
+//$quet = mysql_query('SELECT config_value as ddr FROM '.TABLE_CONFIG.' WHERE config_name = "ddr"');
+//$result = mysql_fetch_array($quet,MYSQL_ASSOC);
+//$ddr = $result['ddr'];
+$ddr = 1;
 
 // Affichage de l'en-tête de tableau
 echo "\n<table width='100%'>\n<tr>\n\t<td class='c' colspan='".($nbre_planete + 1)."'>".$lang['decolo_nization_mod']."</td>\n</tr>\n<tr>\n\t<th><a>".$lang['decolo_name']."</a></th>\n";
