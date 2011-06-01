@@ -21,6 +21,8 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 echo "<p align='center'><br />".$lang['pandore_legend']."</p><br /><br />";
 echo "<fieldset><legend><b><u>".$lang['pandore_pandore']."</u></b></legend>".
 	"<p align='center'><font size='2'>".$lang['pandore_intro']."</font></fieldset><br /><br />";
+	echo "<fieldset><legend><b><u>".$lang['pandore_version']." 1.0.0 :</u></b> <i>(".date($lang['pandore_changelog_date_format'],mktime(0, 0, 0, 6, 1, 2011)).")</i></legend>
+<p align='left'><font size='2'>".$lang['pandore_version_1.0.0']."<br /></font></p></fieldset>";
 echo "<fieldset><legend><b><u>".$lang['pandore_version']." 0.5 :</u></b> <i>(".date($lang['pandore_changelog_date_format'],mktime(0, 0, 0, 1, 9, 2010)).")</i></legend>
 <p align='left'><font size='2'>".$lang['pandore_version_0.5']."<br /></font></p></fieldset>";
 echo "<fieldset><legend><b><u>".$lang['pandore_version']." 0.4 :</u></b> <i>(".date($lang['pandore_changelog_date_format'],mktime(0, 0, 0, 9, 6, 2009)).")</i></legend>

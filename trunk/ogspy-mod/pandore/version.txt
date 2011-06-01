@@ -1,2 +1,3 @@
 Pandore
-0.5
+1.0.0
+Pandore,Pandore,pandore,pandore,pandore.php,1,0

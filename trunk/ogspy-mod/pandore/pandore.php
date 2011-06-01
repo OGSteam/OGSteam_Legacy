@@ -11,13 +11,13 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 //error_reporting(E_ALL | E_STRICT);
-
-$filename = 'mod/Pandore/version.txt';
+$mod_folder = "pandore";
+$filename = 'mod/'.$mod_folder.'/version.txt';
 if (file_exists($filename)) $file = file($filename);
 
-require_once("mod/Pandore/lang/lang_fr.php");
-if (file_exists("mod/Pandore/lang/lang_".$server_config['language'].".php")) require_once("mod/Pandore/lang/lang_".$server_config['language'].".php");
-if (file_exists("mod/Pandore/lang/lang_".$user_data['user_language'].".php")) require("mod/Pandore/lang/lang_".$user_data['user_language'].".php");
+require_once("mod/".$mod_folder."/lang/lang_fr.php");
+if (file_exists("mod/".$mod_folder."/lang/lang_".$server_config['language'].".php")) require_once("mod/".$mod_folder."/lang/lang_".$server_config['language'].".php");
+if (file_exists("mod/".$mod_folder."/lang/lang_".$user_data['user_language'].".php")) require("mod/".$mod_folder."/lang/lang_".$user_data['user_language'].".php");
 
 $mod_name = 'Pandore';
 $mod_version = trim($file[1]);
@@ -38,7 +38,8 @@ for ($i=0; $i<count($pages['fichier']); $i++) {
 echo "\t\t\t\t</tr>\n\t\t\t</table>\n<br />";
 include($pub_page.".php");
 
-echo "<div align=center><font size='2'>".sprintf($lang['pandore_created_by'],$mod_version,"<a href=mailto:gon.freecks@gmail.com>Scaler</a> &copy; 2008")."</font><br>";
+echo "<div align=center><font size='2'>".sprintf($lang['pandore_created_by'],"0.5"," <a href=mailto:gon.freecks@gmail.com>Scaler</a> &copy; 2008")."</font><br>";
+echo "<div align=center><font size='2'>".sprintf($lang['pandore_created_by'],$mod_version,"Shad &copy; 2011")."</font><br>";
 echo "<font size='1'>".sprintf($lang['pandore_forum'],"<a ".$link_pandore.">","</a>").".</font></div>";
 require_once("views/page_tail.php");
 ?>

@@ -20,62 +20,63 @@ $lang['pandore_date_format'] = "d-m-y H:i:s";
 $lang['pandore_search'] = "Recherche";
 $lang['pandore_target'] = "Cible";
 $lang['pandore_player'] = "Joueur";
-$lang['pandore_rank_points'] = "Classement g&eacute;n&eacute;ral";
+$lang['pandore_rank_points'] = "Classement général";
 $lang['pandore_rank_research'] = "Classement recherches";
 $lang['pandore_rank_fleet'] = "Classement vaisseaux";
 $lang['pandore_link_search'] = "Lien vers la page recherche";
-$lang['pandore_coordinates'] = "Coordonn&eacute;es";
+$lang['pandore_coordinates'] = "Coordonnées";
 $lang['pandore_send'] = "Lancer";
-$lang['pandore_planets'] = "Plan&egrave;tes";
+$lang['pandore_planets'] = "Planètes";
 $lang['pandore_moons'] = "Lunes";
 $lang['pandore_moon'] = "Lune";
 $lang['pandore_link_galaxy'] = "Lien vers la page galaxie";
-$lang['pandore_link_spy'] = "Lien vers les rapports d&#39;espionnages";
+$lang['pandore_link_spy'] = "Lien vers les rapports d'espionnages";
 $lang['pandore_no_report'] = "Pas de rapport";
 $lang['pandore_incomplete_report'] = "Rapport incomplet";
 $lang['pandore_last_complete_report_date'] = "Date du dernier rapport complet";
 $lang['pandore_jump_gate'] = "Porte de saut spatial";
 $lang['pandore_jump_gate_short'] = "P";
-$lang['pandore_probe_number'] = "Nombre de sondes n&eacute;cessaire pour l&#39;espionnage";
-$lang['pandore_buildings'] = "des b&acirc;timents";
+$lang['pandore_probe_number'] = "Nombre de sondes nécessaire pour l'espionnage";
+$lang['pandore_buildings'] = "des bâtiments";
 $lang['pandore_researchs'] = "des recherches";
-$lang['pandore_update_date'] = "Date de mise &agrave; jour";
+$lang['pandore_update_date'] = "Date de mise à jour";
 $lang['pandore_points_total'] = "Total de points";
-$lang['pandore_custom_points_total'] = "Total de points personnalis&eacute;";
-$lang['pandore_reset_points_total'] = "Cliquez pour r&eacute;initialiser le total de points";
-$lang['pandore_points_rank_unavailable'] = "Classement g&eacute;n&eacute;ral "./*start_red*/"%s"."indisponible"./*end_red*/"%s";
-$lang['pandore_points_rank_of'] = "Classement g&eacute;n&eacute;ral du"/*date*/;
-$lang['pandore_buildings_points'] = "Points b&acirc;timents";
-$lang['pandore_reset_buildings_points'] = "Cliquez pour r&eacute;initialiser les points b&acirc;timents";
+$lang['pandore_custom_points_total'] = "Total de points personnalisé;";
+$lang['pandore_reset_points_total'] = "Cliquez pour réinitialiser le total de points";
+$lang['pandore_points_rank_unavailable'] = "Classement général "./*start_red*/"%s"."indisponible"./*end_red*/"%s";
+$lang['pandore_points_rank_of'] = "Classement général du"/*date*/;
+$lang['pandore_buildings_points'] = "Points bâtiments";
+$lang['pandore_reset_buildings_points'] = "Cliquez pour réinitialiser les points bâtiments";
 $lang['pandore_defenses_points'] = "Points d&eacute;fenses";
-$lang['pandore_reset_defenses_points'] = "Cliquez pour r&eacute;initialiser les points d&eacute;fenses";
+$lang['pandore_reset_defenses_points'] = "Cliquez pour réinitialiser les points défenses";
 $lang['pandore_research_points'] = "Points recherches";
 $lang['pandore_research_menu'] = "Cliquez pour modifier les technologies";
-$lang['pandore_reset_research'] = "R&eacute;initialiser les recherches";
-$lang['pandore_reset_research_click'] = "Cliquez pour r&eacute;initialiser les recherches";
+$lang['pandore_reset_research'] = "Réinitialiser les recherches";
+$lang['pandore_reset_research_click'] = "Cliquez pour réinitialiser les recherches";
 $lang['pandore_ok'] = "Ok";
 $lang['pandore_research_rank_unavailable'] = "Classement recherche "./*start_red*/"%s"."indisponible"./*end_red*/"%s";
 $lang['pandore_good_number_research'] = "Le nombre de technologies correspond avec le classement recherche du"/*date*/;
 $lang['pandore_bad_number_research'] = "Le nombre de technologies ne correspond pas avec le classement recherche du"/*date*/;
-$lang['pandore_calculated_fleet_points'] = "Points vaisseaux calcul&eacute;s";
-$lang['pandore_reset_fleet_points'] = "Cliquez pour r&eacute;initialiser les points vaisseaux";
+$lang['pandore_calculated_fleet_points'] = "Points vaisseaux calculés";
+$lang['pandore_reset_fleet_points'] = "Cliquez pour réinitialiser les points vaisseaux";
 $lang['pandore_fleet_rank_unavailable'] = "Classement vaisseaux "./*start_red*/"%s"."indisponible"./*end_red*/"%s";
 $lang['pandore_fleet_rank_of'] = "Classement vaisseaux du"/*date*/;
 $lang['pandore_fleet_number'] = "Nombre de vaisseaux";
-$lang['pandore_custom_fleet_number'] = "Nombre de vaisseaux personnalis&eacute;";
-$lang['pandore_reset_fleet_number'] = "Cliquez pour r&eacute;initialiser le nombre de vaisseaux";
+$lang['pandore_custom_fleet_number'] = "Nombre de vaisseaux personnalisé;";
+$lang['pandore_reset_fleet_number'] = "Cliquez pour réinitialiser le nombre de vaisseaux";
 $lang['pandore_fleets'] = "Vaisseaux";
-$lang['pandore_spyed'] = "sond&eacute;s";
+$lang['pandore_spyed'] = "sondés";
 $lang['pandore_maximum'] = "maximum";
-$lang['pandore_assumed'] = "suppos&eacute;s";
-$lang['pandore_assumed_help'] = "Les flottes gris&eacute;es ne sont pas constructibles avec les technologies sond&eacute;es.";
+$lang['pandore_assumed'] = "supposés";
+$lang['pandore_assumed_help'] = "Les flottes grisées ne sont pas constructibles avec les technologies sondées.";
 $lang['pandore_help'] = "Aide";
 $lang['pandore_fleet_points'] = "Points vaisseaux";
 $lang['pandore_missing_points'] = "Points manquants";
 $lang['pandore_missing_fleet'] = "Vaisseaux manquants";
 $lang['pandore_save'] = "Sauvegarder";
 $lang['pandore_and'] = "et";
-$lang['pandore_created_by'] = "Mod Pandore v"./*$mod_version*/"%1\$s"." d&eacute;velopp&eacute; par "./*$creator_name*/"%2\$s";
+$lang['pandore_created_by'] = "Mod Pandore v"./*$mod_version*/"%1\$s"." développé par "./*$creator_name*/"%2\$s";
+$lang['pandore_updated_by'] = "Mod Pandore v"./*$mod_version*/"%1\$s"." Mise à jour par "./*$updator_name*/" %2\$s";
 $lang['pandore_forum'] = "Voir "./*forum_start_link*/"%1\$s"."plus d'informations"./*end_link*/"%2\$s";
 
 // Records
@@ -86,14 +87,14 @@ $lang['pandore_ranks_points'] = "Classements / points";
 $lang['pandore_points'] = "points";
 $lang['pandore_fleet'] = "flotte";
 $lang['pandore_research'] = "recherche";
-$lang['pandore_saved_by'] = "Sauvegard&eacute; par";
+$lang['pandore_saved_by'] = "Sauvegardé par";
 $lang['pandore_date'] = "Date";
 $lang['pandore_no_records'] = "Pas d\'enregistrements.";
 $lang['pandore_click'] = "Cliquez pour voir l\'enregistrement";
-$lang['pandore_select_all'] = "Tous s&eacute;lectionn&eacute;s";
-$lang['pandore_unselect_all'] = "Aucun s&eacute;lectionn&eacute;";
+$lang['pandore_select_all'] = "Tous sélectionnés";
+$lang['pandore_unselect_all'] = "Aucun sélectionné;";
 $lang['pandore_page'] = "Page "./*$page_number*/"%1\$s"." sur "./*$total_page*/"%2\$s";
-$lang['pandore_erase'] = "Effacer les enregistrements s&eacute;lectionn&eacute;s";
+$lang['pandore_erase'] = "Effacer les enregistrements sélectionnés";
 
 // Solar Satellite
 $lang['pandore_SAT'] = "Satellite solaire";
@@ -101,7 +102,7 @@ $lang['pandore_SAT'] = "Satellite solaire";
 // Fleet
 $lang['pandore_PT'] = "Petit transporteur";
 $lang['pandore_GT'] = "Grand transporteur";
-$lang['pandore_CLE'] = "Chasseur l&eacute;ger";
+$lang['pandore_CLE'] = "Chasseur léger";
 $lang['pandore_CLO'] = "Chasseur lourd";
 $lang['pandore_CR'] = "Croiseur";
 $lang['pandore_VB'] = "Vaisseau de bataille";
@@ -110,7 +111,7 @@ $lang['pandore_REC'] = "Recycleur";
 $lang['pandore_SE'] = "Sonde espionnage";
 $lang['pandore_BMD'] = "Bombardier";
 $lang['pandore_DST'] = "Destructeur";
-$lang['pandore_EDLM'] = "&Eacute;toile de la mort";
+$lang['pandore_EDLM'] = "Etoile de la mort";
 $lang['pandore_TRA'] = "Traqueur";
 
 // Technologies
@@ -119,39 +120,39 @@ $lang['pandore_Ordi'] = "Technologie ordinateur";
 $lang['pandore_Armes'] = "Technologie armes";
 $lang['pandore_Bouclier'] = "Technologie bouclier";
 $lang['pandore_Protection'] = "Technologie protection des vaisseaux";
-$lang['pandore_NRJ'] = "Technologie &eacute;nergie";
+$lang['pandore_NRJ'] = "Technologie Energie";
 $lang['pandore_Hyp'] = "Technologie hyperespace";
-$lang['pandore_RC'] = "R&eacute;acteur &agrave; combustion";
-$lang['pandore_RI'] = "R&eacute;acteur &agrave; impulsion";
+$lang['pandore_RC'] = "Réacteur à combustion";
+$lang['pandore_RI'] = "Réacteur à impulsion";
 $lang['pandore_PH'] = "Propulsion hyperespace";
 $lang['pandore_Laser'] = "Technologie laser";
 $lang['pandore_Ions'] = "Technologie ions";
 $lang['pandore_Plasma'] = "Technologies plasma";
-$lang['pandore_RRI'] = "R&eacute;seau de recherche intergalactique";
-$lang['pandore_Expeditions'] = "Technologie Exp&eacute;ditions";
+$lang['pandore_RRI'] = "Réseau de recherche intergalactique";
+$lang['pandore_Expeditions'] = "Technologie Expéditions";
 $lang['pandore_Graviton'] = "Technologie graviton";
 
 // Warnings
 $lang['pandore_warning'] = "Attention";
-$lang['pandore_warning_one_planete'] = "Seule 1 plan&egrave;te a &eacute;t&eacute; trouv&eacute;e.";
-$lang['pandore_warning_less_planetes'] = "Seulement "./*$number_of_planets*/"%d"." plan&egrave;tes ont &eacute;t&eacute; trouv&eacute;es.";
-$lang['pandore_warning_ride_universe'] = "Sillonnez l'univers pour vous assurer que le joueur n'a pas d'autre plan&egrave;tes.";
+$lang['pandore_warning_one_planete'] = "Seule 1 planète a été trouvée.";
+$lang['pandore_warning_less_planetes'] = "Seulement "./*$number_of_planets*/"%d"." planètes ont été trouvées.";
+$lang['pandore_warning_ride_universe'] = "Sillonnez l'univers pour vous assurer que le joueur n'a pas d'autre planètes.";
 $lang['pandore_warning_old_reports'] = "Certains rapports d'espionnage datent de plus d'une semaine.";
-$lang['pandore_warning_respy'] = "Il serait pr&eacute;f&eacute;rable de r&eacute;-espionner les plan&egrave;tes et lunes suivantes&nbsp;:";
+$lang['pandore_warning_respy'] = "Il serait préférable de ré-espionner les planètes et lunes suivantes&nbsp;:";
 $lang['pandore_warning_old_rankings'] = "Certains classements datent de plus d'une semaine.";
-$lang['pandore_warning_update_rankings'] = "Il serait pr&eacute;f&eacute;rable de mettre &agrave; jour les classements suivants&nbsp;:";
+$lang['pandore_warning_update_rankings'] = "Il serait préférable de mettre à jour les classements suivants&nbsp;:";
 
 // Errors
 $lang['pandore_error'] = "Erreur";
-$lang['pandore_error_coord'] = "Coordonn&eacute;es erron&eacute;es, indiquez les valeurs s&eacute;par&eacute;es par deux points (ex: 1:234:5).";
-$lang['pandore_error_player'] = "Pas de joueur trouv&eacute; aux coordonn&eacute;es";
-$lang['pandore_error_no_planete'] = "Aucune plan&egrave;te du joueur "./*$player_name*/"%s"." n'a &eacute;t&eacute; trouv&eacute;e, v&eacute;rifiez la typographie du pseudo.";
-$lang['pandore_error_planete'] = "Plus de 9 plan&egrave;tes ont &eacute;t&eacute; r&eacute;pertori&eacute;es pour le joueur "./*$player_name*/"%s".". Veuillez mettre &agrave; jour les syst&egrave;mes solaires suivants&nbsp;:";
+$lang['pandore_error_coord'] = "Coordonnées erronées, indiquez les valeurs séparées par deux points (ex: 1:234:5).";
+$lang['pandore_error_player'] = "Pas de joueur trouvé aux coordonnées";
+$lang['pandore_error_no_planete'] = "Aucune planète du joueur "./*$player_name*/"%s"." n'a été trouv&ée, vérifiez la typographie du pseudo.";
+$lang['pandore_error_planete'] = "Plus de 9 planètes ont été répertoriées pour le joueur "./*$player_name*/"%s".". Veuillez mettre à jour les systèmes solaires suivants&nbsp;:";
 $lang['pandore_error_missing_reports'] = "Il manque des rapports d'espionnage.";
-$lang['pandore_error_respy'] = "Veuillez espionner les plan&egrave;tes et lunes suivantes&nbsp;:";
+$lang['pandore_error_respy'] = "Veuillez espionner les planètes et lunes suivantes&nbsp;:";
 $lang['pandore_error_incomplete_reports'] = "Certains rapports d'espionnages sont incomplets.";
-$lang['pandore_error_unknown_player'] = "Le joueur "./*$player_name*/"%s"." n'as pas &eacute;t&eacute; trouv&eacute; dans les classements.";
-$lang['pandore_error_update_rankings'] = "Veuillez mettre &agrave; jour les classements suivants&nbsp;:";
+$lang['pandore_error_unknown_player'] = "Le joueur "./*$player_name*/"%s"." n'as pas été trouvé dans les classements.";
+$lang['pandore_error_update_rankings'] = "Veuillez mettre à jour les classements suivants&nbsp;:";
 $lang['pandore_error_points_ranking'] = "classement points";
 $lang['pandore_error_fleet_ranking'] = "classement vaisseaux";
 $lang['pandore_error_research_ranking'] = "classement recherche";
@@ -159,39 +160,40 @@ $lang['pandore_error_research_ranking'] = "classement recherche";
 // Changelog
 $lang['pandore_changelog'] = "Changelog";
 $lang['pandore_changelog_date_format'] = "d/m/y";
-$lang['pandore_intro'] = "Pandore fut cr&eacute;&eacute;e sur l'ordre de Zeus ou Jupiter qui voulait se venger des hommes pour le vol du feu par Prom&eacute;th&eacute;e.<br />
-Elle fut ainsi fa&ccedil;onn&eacute;e dans de l'argile par H&eacute;pha&iuml;stos ;<br />
-Ath&eacute;na lui donna ensuite la vie et l'habilla ;<br />
-Aphrodite lui donna la beaut&eacute; ;<br />
+$lang['pandore_intro'] = "Pandore fut crée sur l'ordre de Zeus ou Jupiter qui voulait se venger des hommes pour le vol du feu par Prométhée.<br />
+Elle fut ainsi façonnée dans de l'argile par Héphaïstos ;<br />
+Athéna lui donna ensuite la vie et l'habilla ;<br />
+Aphrodite lui donna la beauté ;<br />
 Apollon le talent musical,<br />
-enfin Herm&egrave;s lui apprit le mensonge et l'art de la persuasion.<br /><br />
-Oserez-vous ouvrir la bo&icirc;te ?";
+enfin Hermès lui apprit le mensonge et l'art de la persuasion.<br /><br />
+Oserez-vous ouvrir la boîte ?";
 $lang['pandore_version'] = "Version";
 $lang['pandore_legend'] = "[Fix] : supression d'un bug<br />".
 	"[Add] : rajout d'une fonction<br />".
-	"[Imp] : am&eacute;lioration d'une fonction";
-$lang['pandore_version_0.1'] = "- [Add] Recherche d'un pseudo ou de coordonn&eacute;es.<br />
-	- [Add] Affichage des plan&egrave;tes et des lunes du joueur.<br />
-	- [Add] Affichage des dates de derni&egrave;re mise &agrave; jour compl&egrave;te avec un d&eacute;grad&eacute; de couleur en fonction de leur anciennet&eacute; (moins d'un jour : vert, plus d'une semaine : rouge).<br />
-	- [Add] Affichage des diff&eacute;rents points et du nombre total de vaisseaux.<br />
-	- [Add] Affichage des vaisseaux trouv&eacute;s dans les rapports d'espionnage et du maximum possible de chaque vaisseaux.<br />
-	- [Add] Possibilit&eacute; de tester une composition de flotte.";
+	"[Imp] : amélioration d'une fonction";
+$lang['pandore_version_0.1'] = "- [Add] Recherche d'un pseudo ou de coordonnées.<br />
+	- [Add] Affichage des planètes et des lunes du joueur.<br />
+	- [Add] Affichage des dates de dernière mise à jour complète avec un dégradé de couleur en fonction de leur ancienneté (moins d'un jour : vert, plus d'une semaine : rouge).<br />
+	- [Add] Affichage des différents points et du nombre total de vaisseaux.<br />
+	- [Add] Affichage des vaisseaux trouvés dans les rapports d'espionnage et du maximum possible de chaque vaisseaux.<br />
+	- [Add] Possibilité de tester une composition de flotte.";
 $lang['pandore_version_0.2'] = "- [Fix] Divers bugs.<br />
-	- [Imp] Affichage des r&eacute;sultats m&ecirc;me lorsqu'il manque des informations.";
+	- [Imp] Affichage des résultats même lorsqu'il manque des informations.";
 $lang['pandore_version_0.3'] = "- [Fix] Encore des erreurs de calcul.<br />
-	- [Fix] L'avertissement des rapports de plus d'une semaine reste parfois alors que tous les rapports sont &agrave; jour.<br />
-	- [Fix] Les lunes sont toujours affich&eacute;es dans l'avertissement comme datant de plus d'une semaine.";
-$lang['pandore_version_0.4'] = "- [Fix] Date du dernier rapport complet erron&eacute;e.<br />
-	- [Fix] D&eacute;tection des plan&egrave;tes nomm&eacute;es 'lune' erron&eacute;e.<br />
-	- [Add] Modifier les points et technologies &agrave; la main.<br />
+	- [Fix] L'avertissement des rapports de plus d'une semaine reste parfois alors que tous les rapports sont à jour.<br />
+	- [Fix] Les lunes sont toujours affichées dans l'avertissement comme datant de plus d'une semaine.";
+$lang['pandore_version_0.4'] = "- [Fix] Date du dernier rapport complet erronée.<br />
+	- [Fix] Détection des planètes nommées 'lune' erronée.<br />
+	- [Add] Modifier les points et technologies à la main.<br />
 	- [Add] Raccourcis vers les RE, la page galaxie et la page recherche.<br />
-	- [Add] Nombre de sondes n&eacute;cessaires pour avoir un rapport complet, lorsque les technologies sont connues.<br />
+	- [Add] Nombre de sondes nécessaires pour avoir un rapport complet, lorsque les technologies sont connues.<br />
 	- [Add] Enregistrements de simulations.<br />
 	- [Imp] Internationalisation.";
-$lang['pandore_version_0.5'] = "- [Fix] DÃ©tection des lunes qui dÃ©pend de la langue d'affichage.<br />
-	- [Fix] La langue par dÃ©faut devient le franÃ§ais.<br />
-	- [Fix] Erreur lors de l'installation avec une version rÃ©cente de mySQL.<br />
-	- [Fix] Erreur lors de l'enregistrement alors qu'un classement n'as pas Ã©tÃ© trouvÃ©.<br />
+$lang['pandore_version_0.5'] = "- [Fix] Détection des lunes qui dépend de la langue d'affichage.<br />
+	- [Fix] La langue par défaut devient le français.<br />
+	- [Fix] Erreur lors de l'installation avec une version récente de mySQL.<br />
+	- [Fix] Erreur lors de l'enregistrement alors qu'un classement n'as pas été trouvé.<br />
 	- [Fix] Mauvais affichage des classements dans les enregistrements.<br />
-	- [Fix] Suppression impossible des enregistrements chez certains hÃ©bergeurs.";
+	- [Fix] Suppression impossible des enregistrements chez certains hébergeurs.";
+$lang['pandore_version_1.0.0'] = "- [Fix] Mise à jour de la compatibilité avec OGSpy 3.0.7.";
 ?>
