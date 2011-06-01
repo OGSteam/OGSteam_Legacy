@@ -5,15 +5,7 @@
 * @author Gorn
 * @fileversion 2.5
 *
-* 0 = pas de changement
-* 1 = status
-* 2 = lune
-* 4 = alliance
-* 8 = nom
-* 16 = planète
-* 32 = colonisation
 */
-
 // Sécurité
 if ( !defined ( 'IN_SPYOGAME' ) || !defined ( 'IN_ZONECHECK' ) )
    die ( 'Hacking attempt' );
@@ -24,6 +16,12 @@ if ( !defined ( 'IN_SPYOGAME' ) || !defined ( 'IN_ZONECHECK' ) )
   </tr>
   <tr>
     <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Version 1.0.0 by Shad:
+      <ul><li>Ajout des fonctions install, uninstall et update pour compatibilité avec OGSpy 3.0.7</li>
+      <li>Réparation de la liste pour afficher les colo.</li>
+    </ul></td>
   </tr>
   <tr>
     <td>Version 2.6 :

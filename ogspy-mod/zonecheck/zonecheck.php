@@ -17,6 +17,7 @@
 // Sécurité
 if ( !defined ( 'IN_SPYOGAME' ) || !defined ( 'IN_ZONECHECK' ) )
    die ( 'Hacking attempt' );
+   
 ?>
 <table>
   <tr>
@@ -28,8 +29,11 @@ if ( !defined ( 'IN_SPYOGAME' ) || !defined ( 'IN_ZONECHECK' ) )
       <select name="planete" onchange="javascript: change_planete();">
         <option>Sélectionnez votre planète</option>
         <?php
-$request = 'SELECT planet_id, planet_name, coordinates FROM ' . TABLE_USER_BUILDING . ' WHERE user_id = ' . 
-  $user_data['user_id'] . ' AND planet_id < 10 order by planet_id';
+	$start = 101;
+	$nb_planet = find_nb_planete_user() + $start;
+	
+		$request = 'SELECT planet_id, planet_name, coordinates FROM ' . TABLE_USER_BUILDING . ' WHERE user_id = ' . 
+  $user_data['user_id'] . ' AND planet_id BETWEEN '.$start.' AND '.$nb_planet.' order by planet_id';
 $result = $db->sql_query($request);
 while ( $row = $db->sql_fetch_assoc($result) )
 {

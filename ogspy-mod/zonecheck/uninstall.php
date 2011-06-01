@@ -22,15 +22,7 @@ define ( 'TABLE_MOD_ZONECHECK', $table_prefix . 'ZoneCheck' );
 define ( 'TABLE_MOD_ZONECHECK_CFG', $table_prefix . 'ZoneCheck_config' );
 define ( 'TABLE_MOD_ZONECHECK_HST', $table_prefix . 'ZoneCheck_histo' );
 
-$query = 'DROP TABLE IF EXISTS `' . TABLE_MOD_ZONECHECK . '`';
-$db->sql_query ( $query );
-
-$query = 'DROP TABLE IF EXISTS `' . TABLE_MOD_ZONECHECK_CFG . '`';
-$db->sql_query ( $query );
-
-$query = 'DROP TABLE IF EXISTS `' . TABLE_MOD_ZONECHECK_HST . '`';
-$db->sql_query ( $query );
-
-$query = 'DELETE FROM ' . TABLE_MOD . ' WHERE action = \'ZoneCheck\'';
-$db->sql_query($query);
+$mod_uninstall_name = "zonecheck";
+$mod_uninstall_table = TABLE_MOD_ZONECHECK.','.TABLE_MOD_ZONECHECK_CFG.','.TABLE_MOD_ZONECHECK_HST;
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 ?>

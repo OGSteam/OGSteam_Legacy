@@ -20,10 +20,13 @@ if ( ! defined ( 'IN_SPYOGAME' ) )
 // Constantes / Variables globales
 global $db, $table_prefix;
 define ( 'TABLE_MOD_ZONECHECK_HST', $table_prefix . 'ZoneCheck_histo' );
+
+
+echo $mod_version;
+
 ?>
-<script language="javascript">alert ( '<?php print mod_version ?>');</script>
 <?php
-switch ( mod_version() )
+switch ( $mod_version )
 {
   case '2.5':
   case '2.5a':
@@ -47,37 +50,26 @@ switch ( mod_version() )
     $db->sql_query ( $query );
     if ( defined ( 'TABLE_MOD_CFG' ) )
     {
-      $query = 'INSERT IGNORE INTO ' . TABLE_MOD_CFG ' VALUES ( "ZoneCheck", "nb_system", (SELECT nb_system FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "block", (SELECT block FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "moon", (SELECT moon FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "deco", (SELECT deco FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "vac", (SELECT vac FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "inactif", (SELECT inactif FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "unstatus", (SELECT unstatus FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "colo", (SELECT colo FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "less", (SELECT less FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "middle", (SELECT middle FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "more", (SELECT more FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "outofdate", (SELECT outofdate FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
-        ( "ZoneCheck", "affichage", (SELECT affichage FROM ' . TABLE_MOD_ZONECHECK_CFG . ') )';
-      $db->sql_query ( $query );
-      $db->sql_query ( 'DROP TABLE ' . TABLE_MOD_ZONECHECK_CFG );
+      // $query = 'INSERT IGNORE INTO ' . TABLE_MOD_CFG ' VALUES ( "ZoneCheck", "nb_system", (SELECT nb_system FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "block", (SELECT block FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "moon", (SELECT moon FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "deco", (SELECT deco FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "vac", (SELECT vac FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "inactif", (SELECT inactif FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "unstatus", (SELECT unstatus FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "colo", (SELECT colo FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "less", (SELECT less FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "middle", (SELECT middle FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "more", (SELECT more FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "outofdate", (SELECT outofdate FROM ' . TABLE_MOD_ZONECHECK_CFG . ') ), 
+        // ( "ZoneCheck", "affichage", (SELECT affichage FROM ' . TABLE_MOD_ZONECHECK_CFG . ') )';
+      // $db->sql_query ( $query );
+      // $db->sql_query ( 'DROP TABLE ' . TABLE_MOD_ZONECHECK_CFG );
     }
     break;
   default:
-    $query = 'CREATE TABLE IF NOT EXISTS ' . TABLE_MOD_ZONECHECK_HST . ' (
-      coordinates varchar(9) NOT NULL default "",
-      oldname varchar(50) NOT NULL default "",
-      newname varchar(50) NOT NULL default "",
-      ally varchar(50) NOT NULL default "",
-      type enum("P","A") NOT NULL default "P",
-      date int(11) NOT NULL default "0",
-      PRIMARY KEY  (oldname,newname),
-      KEY coordinates (coordinates))';
-    $db->sql_query ( $query );
-    break;
+    $mod_folder = "zonecheck";
+	$mod_name = "zonecheck";
+	update_mod($mod_folder, $mod_name);
 }
-
-$query = 'UPDATE ' . TABLE_MOD . ' SET version="2.6" WHERE action="ZoneCheck"';
-$db->sql_query ( $query );
 ?>
