@@ -1,2 +1,3 @@
 News
-1.6
+1.0.0
+News,News,News,news,News.php,1,0

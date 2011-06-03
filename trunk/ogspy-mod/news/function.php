@@ -57,7 +57,7 @@ function infobulle($txt_contenu, $titre = 'Aide', $largeur = '300') {
 }
 
 function smiley() {
-	$folder = "./mod/News/smilies/";
+	$folder = "./mod/".$mod_folder."/smilies/";
 	$dossier = opendir($folder);
 	$res = "";
 	$count = 1;
@@ -87,7 +87,7 @@ function smiley() {
 /**Fonction de parsing de smiley ***
 Récupère le nom des images dans un tableau, puis boucle pour remplacer les tags smiley par le smiley correspondant */
 function parsesmiley($text) {
-	$folder = "./mod/News/smilies/";
+	$folder = "./mod/".$mod_folder."/smilies/";
 	$dossier = opendir($folder);
 	$res = array();
 	$i = 0;
