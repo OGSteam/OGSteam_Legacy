@@ -165,12 +165,9 @@ function installation_db($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_passw
 	define ( 'TABLE_MOD_CFG', $sgbd_tableprefix . 'mod_config' );
 	define ( 'TABLE_MOD_CONFIG', $sgbd_tableprefix . 'mod_config' );
 	define ( 'TABLE_CONFIG', $sgbd_tableprefix . 'config' );
-	if ( file_exists ("../mod/".$pub_directory."/install.php"))
-    	require_once("../mod/".$pub_directory."/install.php");
-	if ( file_exists ("../mod/autoupdate/install.php"))
-    	require_once("../mod/autoupdate/install.php");
 		
 	generate_id($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password, $sgbd_tableprefix, $num_of_galaxies, $num_of_systems);
+
 }
 
 /**

@@ -3,12 +3,12 @@ function production (building, level, temperature_max, NRJ) {
 	var speed = document.getElementById("vitesse_uni").value;
     switch (building) {
 		case "M":
-		result = 20 + 30 * level * Math.pow(1.1, level);
+		result = 30 + 30 * level * Math.pow(1.1, level);
         result = result * speed
 		break;
 
 		case "C":
-		result = 10 + 20 * level * Math.pow(1.1, level);
+		result = 15 + 20 * level * Math.pow(1.1, level);
         result = result * speed
 		break;
 
