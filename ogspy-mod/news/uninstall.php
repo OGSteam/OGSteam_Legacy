@@ -15,13 +15,11 @@ if (!defined('IN_SPYOGAME')) {
 // (Donc pas besoin de la faire dans le fichier uninstall.php)
 
 // Suppression des tables spécifiques au module
+global $db, $table_prefix;
+$mod_uninstall_name = "news";
+$mod_uninstall_table = $table_prefix."news".','.$table_prefix."news_aide".','.$table_prefix."news_cat";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
-$query="DROP TABLE IF EXISTS `".table_prefix."news`";
-$db->sql_query($query);
-$query="DROP TABLE IF EXISTS `".table_prefix."news_aide`";
-$db->sql_query($query);
-$query="DROP TABLE IF EXISTS `".table_prefix."news_cat`";
-$db->sql_query($query);
 $query="ALTER TABLE `".TABLE_GROUP."`
   DROP `news_post`,
   DROP `news_edit`,

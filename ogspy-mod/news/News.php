@@ -20,15 +20,16 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 //Raccourci vers le subaction
 $nac="?action=News&amp;subaction";
 
+
 // Header OGSpy
 require_once("views/page_header.php");
-require_once("mod/News/bbcode.php");
-require_once("mod/News/function.php");
+require_once("mod/news/bbcode.php");
+require_once("mod/news/function.php");
 
 //teste les droits
 $droit = news_rights();
 //récupére les tags bbcode => pour la fonction de parsing bbcode
-getBBTags('mod/News/bbcode.xml');
+getBBTags('mod/news/bbcode.xml');
 
 /*** Clignotement du menu ***/
 if ($server_config["news_BlinkHourDuration"]>0) {
@@ -201,16 +202,16 @@ switch($pub_subaction) {
 		break;
 	case "Options":
 		if($droit['admin']) {
-			require_once("mod/News/news_admin.php");
+			require_once("mod/news/news_admin.php");
 		}
 		exit();
 		break;
 	case "Tutoriels":
-		require_once("mod/News/news_aide.php");
+		require_once("mod/news/news_aide.php");
 		exit();
 		break;
 	case "Divers":
-		require_once("mod/News/news_divers.php");
+		require_once("mod/news/news_divers.php");
 		exit();
 		break;
 }
