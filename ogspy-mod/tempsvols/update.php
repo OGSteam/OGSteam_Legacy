@@ -13,11 +13,6 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 global $db,$table_prefix;
-if (file_exists('mod/tempsvols/version.txt')) { 
-	$file = file('mod/tempsvols/version.txt'); 
-}
-
-// mise à jour du numéro de version
-	$query  = 'UPDATE `'.TABLE_MOD.'` SET `version` = \''.trim($file[1]).'\' WHERE `title` = \'tempsvol\'';
-	$db->sql_query($query);
-?>
+$mod_folder = "tempsvols";
+$mod_name = "tempsvols";
+update_mod($mod_folder, $mod_name);
