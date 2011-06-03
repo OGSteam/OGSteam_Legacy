@@ -18,7 +18,7 @@ if (!$db->sql_numrows($result)) die("Hacking attempt");
 $mod_version = 0;
 list($mod_version) = $db->sql_fetch_row($result);
 
-define ("MODMSGDIR","mod/Messagerie/");
+define ("MODMSGDIR","mod/messagerie/");
 // Includes
 require_once(MODMSGDIR."functions.php");
 
