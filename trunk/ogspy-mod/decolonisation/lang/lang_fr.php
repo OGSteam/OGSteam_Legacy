@@ -35,21 +35,21 @@ $lang['decolo_moon_buildings_points'] = "Points B&acirc;timents Lune";
 $lang['decolo_building_M'] = "Mine de m&eacute;tal";
 $lang['decolo_building_C'] = "Mine de cristal";
 $lang['decolo_building_D'] = "Synth&eacute;tiseur de deut&eacute;rium";
-$lang['decolo_building_SoP'] = "Centrale &eacute;lectrique solaire";
-$lang['decolo_building_FR'] = "Centrale &eacute;lectrique de fusion";
-$lang['decolo_building_RF'] = "Usine de robots";
-$lang['decolo_building_NF'] = "Usine de nanites";
-$lang['decolo_building_S'] = "Chantier spatial";
-$lang['decolo_building_MS'] = "Hangar de m&eacute;tal";
-$lang['decolo_building_CS'] = "Hangar de cristal";
-$lang['decolo_building_DT'] = "R&eacute;servoir de deut&eacute;rium";
-$lang['decolo_building_RL'] = "Laboratoire de recherche";
-$lang['decolo_building_T'] = "Terraformeur";
-$lang['decolo_building_ML'] = "Silo de missiles";
-$lang['decolo_building_AD'] = "D&eacute;p&ocirc;t de ravitaillement";
-$lang['decolo_building_LB'] = "Base lunaire";
-$lang['decolo_building_SPh'] = "Phalange de capteur";
-$lang['decolo_building_JG'] = "Porte de saut spatial";
+$lang['decolo_building_CES'] = "Centrale &eacute;lectrique solaire";
+$lang['decolo_building_CEF'] = "Centrale &eacute;lectrique de fusion";
+$lang['decolo_building_UdR'] = "Usine de robots";
+$lang['decolo_building_UdN'] = "Usine de nanites";
+$lang['decolo_building_CSp'] = "Chantier spatial";
+$lang['decolo_building_HM'] = "Hangar de m&eacute;tal";
+$lang['decolo_building_HC'] = "Hangar de cristal";
+$lang['decolo_building_HD'] = "R&eacute;servoir de deut&eacute;rium";
+$lang['decolo_building_Lab'] = "Laboratoire de recherche";
+$lang['decolo_building_Ter'] = "Terraformeur";
+$lang['decolo_building_Silo'] = "Silo de missiles";
+$lang['decolo_building_DdR'] = "D&eacute;p&ocirc;t de ravitaillement";
+$lang['decolo_building_BaLu'] = "Base lunaire";
+$lang['decolo_building_Pha'] = "Phalange de capteur";
+$lang['decolo_building_PoSa'] = "Porte de saut spatial";
 
 // Solar Satellite
 $lang['decolo_SS'] = "Satellite solaire";
@@ -57,16 +57,17 @@ $lang['decolo_SS'] = "Satellite solaire";
 // Defense
 $lang['decolo_defense_points'] = "Points D&eacute;fense";
 $lang['decolo_moon_defense_points'] = "Points D&eacute;fense Lune";
-$lang['decolo_defense_ML'] = "Lanceur de missiles";
-$lang['decolo_defense_LL'] = "Artillerie laser l&eacute;g&egrave;re";
-$lang['decolo_defense_HL'] = "Artillerie laser lourde";
-$lang['decolo_defense_GC'] = "Canon de Gauss";
-$lang['decolo_defense_IC'] = "Artillerie &agrave; ions";
-$lang['decolo_defense_PC'] = "Lanceur de plasma";
-$lang['decolo_defense_SSD'] = "Petit bouclier";
-$lang['decolo_defense_LSD'] = "Grand bouclier";
-$lang['decolo_defense_ABM'] = "Missile Interception";
-$lang['decolo_defense_IM'] = "Missile Interplan&eacute;taire";
+$lang['decolo_defense_LM'] = "Lanceur de missiles";
+$lang['decolo_defense_LLE'] = "Artillerie laser l&eacute;g&egrave;re";
+$lang['decolo_defense_LLO'] = "Artillerie laser lourde";
+$lang['decolo_defense_CG'] = "Canon de Gauss";
+$lang['decolo_defense_AI'] = "Artillerie &agrave; ions";
+$lang['decolo_defense_LP'] = "Lanceur de plasma";
+$lang['decolo_defense_PB'] = "Petit bouclier";
+$lang['decolo_defense_GB'] = "Grand bouclier";
+$lang['decolo_defense_MIC'] = "Missile Interception";
+$lang['decolo_defense_MIP'] = "Missile Interplan&eacute;taire";
+
 
 // Changelog
 $lang['decolo_back'] = "Retour";
