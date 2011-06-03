@@ -51,23 +51,6 @@ if (is_writable("../mod")) {
 	$error2 .= "<tr><td width=\"250\">- \"mod\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
 }
 
-if (is_writable("../mod/autoupdate")) {
-	$error2 .= "<tr><td width=\"250\">- \"mod/autoupdate\" : </td><td><font color='green'>Ecriture autorisé</font></td></tr>";
-} else {
-	$error2 .= "<tr><td width=\"250\">- \"mod/autoupdate\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
-}
-
-if (is_writable("../mod/autoupdate/tmp")) {
-	$error2 .= "<tr><td width=\"250\">- \"mod/autoupdate/tmp\" : </td><td><font color='green'>Ecriture autorisé</font></td></tr>";
-} else {
-	$error2 .= "<tr><td width=\"250\">- \"mod/autoupdate/tmp\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
-}
-
-if (is_writable("../mod/xtense")) {
-	$error2 .= "<tr><td width=\"250\">- \"mod/xtense\" : </td><td><font color='green'>Ecriture autorisé</font></td></tr>";
-} else {
-	$error2 .= "<tr><td width=\"250\">- \"mod/xtense\" : </td><td><font color='red'>Ecriture impossible</font></td></tr>";
-}
 
 if ($alerte) {
 	echo "<br /><br />";
@@ -322,11 +305,6 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 			<th>Mot de passe [Confirmer]</th>
 			<th><input name="admin_password2" type="password"></th>
 		</tr>
-		<tr>
-			<th>Nom du répertoire du mod Xtense </th>
-			<th><input name="directory" type="text" value="<?php echo isset($pub_directory) ? $pub_directory : "xtense";?>"></th>
-		</tr>
-		
 		
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
