@@ -11,9 +11,7 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-global $db;
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE title='tempsvols'";
-
-$db->sql_query($query);
+global $db, $table_prefix;
+$mod_uninstall_name = "tempsvols";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 ?>

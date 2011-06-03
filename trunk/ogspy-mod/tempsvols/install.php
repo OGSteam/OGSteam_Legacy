@@ -13,11 +13,15 @@ if (!defined('IN_SPYOGAME')) {
 
 global $db;
 
-if (file_exists('mod/tempsvols/version.txt')) { 
-	$file = file('mod/tempsvols/version.txt'); 
-}
-
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('', 'tempsvol', 'Temps de vol', 'tempsvols', 'tempsvols', 'tempsvols.php', '".trim($file[1])."', '1')";
-
-$db->sql_query($query);
+$is_ok = false;
+$mod_folder = "tempsvols";
+$is_ok = install_mod ($mod_folder);
+if ($is_ok == true)
+	{
+		// Si besoin de creer des tables, à faire ici
+	}
+else
+	{
+		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 ?>

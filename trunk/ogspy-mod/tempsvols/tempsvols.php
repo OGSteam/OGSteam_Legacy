@@ -41,22 +41,23 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
 </style>
 <script type="text/javascript">
+var speeduni = '<?php echo $server_config['speed_uni'];?>';
 var data2 = Array(
 	//typ,ant,speed,speed2,verbr,lager)
 	//    0  , 1, 2   , 3    , 4 , 5      )
-	Array(201, 1, 5000, 10000, 10, 5000), //KT
-	Array(202, 1, 7500, 0, 50, 25000),    //GT
-	Array(203, 1, 12500, 0, 20, 50),      //LJ
-	Array(204, 2, 10000, 0, 75, 100),     //SJ
-	Array(205, 2, 15000, 0, 300, 800),    //KRZ
-	Array(206, 3, 10000, 0, 500, 1500),   //SS
-	Array(207, 2, 2500, 0, 1000, 7500),   //KS
-	Array(208, 1, 2000, 0, 300, 20000),   //REC
-	Array(209, 1, 100000000, 0, 1, 0),    //Spio
-	Array(211, 2, 4000, 5000, 1000, 500), //Bomber
-	Array(212, 3, 5000, 0, 1000, 2000),   //Zer
-  Array(213, 3, 100, 0, 1, 1000000),     //TS 
-	Array(214, 3, 10000, 0, 250, 750)     //TR
+	Array(201, 1, speeduni * 5000, speeduni * 10000, 10, 5000), //KT
+	Array(202, 1, speeduni * 7500, 0, 50, 25000),    //GT
+	Array(203, 1, speeduni * 12500, 0, 20, 50),      //LJ
+	Array(204, 2, speeduni * 10000, 0, 75, 100),     //SJ
+	Array(205, 2, speeduni * 15000, 0, 300, 800),    //KRZ
+	Array(206, 3, speeduni * 10000, 0, 500, 1500),   //SS
+	Array(207, 2, speeduni * 2500, 0, 1000, 7500),   //KS
+	Array(208, 1, speeduni * 2000, 0, 300, 20000),   //REC
+	Array(209, 1, speeduni * 100000000, 0, 1, 0),    //Spio
+	Array(211, 2, speeduni * 4000, 5000, 1000, 500), //Bomber
+	Array(212, 3, speeduni * 5000, 0, 1000, 2000),   //Zer
+  Array(213, 3, speeduni * 100, 0, 1, 1000000),     //TS 
+	Array(214, 3, speeduni * 10000, 0, 250, 750)     //TR
 );
 
 function dist() {
