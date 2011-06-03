@@ -97,4 +97,7 @@ $lang['decolo_version_0.6'] = "- [Fix] Correction d'erreurs.<br />".
 $lang['decolo_version_0.7b'] = "- [Imp] Internationalisation.";
 $lang['decolo_version_0.7c'] = "- [Fix] D&eacute;p&ocirc;t de Ravitaillement sur les lunes.<br />".
 	"- [Imp] Am&eacute;lioration du code.";
+$lang['decolo_version_0.7.5'] = "- [Fix] r&eacute;&eacute;criture du mod<br />".
+	"- [Fix] mise a niveau pour ogspy 3.0.7<br />".
+"- [Imp] utilisation des fonctions d ogspy pour calcul des couts batiments.<br />";
 ?>

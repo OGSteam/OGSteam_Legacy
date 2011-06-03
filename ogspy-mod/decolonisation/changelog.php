@@ -20,6 +20,8 @@ TODO
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 echo "<p align='center'><a href='index.php?action=".$mod_name."'>".$lang['decolo_back']."</a><br /><br />".$lang['decolo_legend']."</p><br />";
+echo "<fieldset><legend><b><u>".$lang['decolo_version']." 0.7.5 :</u></b> <i>(".date($lang['decolo_date_format'],mktime(0, 0, 0, 6, 3, 2011)).")</i></legend>
+<p align='left'><font size='2'>".$lang['decolo_version_0.7.5']."<br /></font></p></fieldset>";
 echo "<fieldset><legend><b><u>".$lang['decolo_version']." 0.7c :</u></b> <i>(".date($lang['decolo_date_format'],mktime(0, 0, 0, 6, 1, 2009)).")</i></legend>
 <p align='left'><font size='2'>".$lang['decolo_version_0.7c']."<br /></font></p></fieldset>";
 echo "<fieldset><legend><b><u>".$lang['decolo_version']." 0.7b :</u></b> <i>(".date($lang['decolo_date_format'],mktime(0, 0, 0, 8, 30, 2008)).")</i></legend>
