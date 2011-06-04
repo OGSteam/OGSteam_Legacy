@@ -28,8 +28,8 @@ $updator_name = "<a>Shad</a> &copy; 2011";
 
 // Récupération des chaines de langue
 require_once("mod/production/lang/lang_fr.php");
-if (file_exists("mod/production/lang/lang_".$server_config['language'].".php")) require_once("mod/production/lang/lang_".$server_config['language'].".php");
-if (file_exists("mod/production/lang/lang_".$user_data['user_language'].".php")) require("mod/production/lang/lang_".$user_data['user_language'].".php");
+//if (file_exists("mod/production/lang/lang_".$server_config['language'].".php")) require_once("mod/production/lang/lang_".$server_config['language'].".php");
+//if (file_exists("mod/production/lang/lang_".$user_data['user_language'].".php")) require("mod/production/lang/lang_".$user_data['user_language'].".php");
 
 // Enregistrement des données
 for ($i=$start;$i<=$nb_planet;$i++) {
@@ -74,7 +74,7 @@ if (isset($_POST['techno_energie'])) {
 
 // Récupération des informations sur les mines
 $planet = array("planet_id" => "", "M_percentage" => 0, "C_percentage" => 0, "D_percentage" => 0, "CES_percentage" => 100, "CEF_percentage" => 100, "Sat_percentage" => 100, "fields" => 163);
-$quet = mysql_query("SELECT planet_id, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage, fields FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data["user_id"]." AND planet_id < 10 ORDER BY planet_id");
+$quet = mysql_query("SELECT planet_id, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage, fields FROM ".TABLE_USER_BUILDING." WHERE user_id = ".$user_data["user_id"]." AND planet_id < 199 ORDER BY planet_id");
 $user_building = array_fill($start, $nb_planet, $planet);
 while ($row = mysql_fetch_assoc($quet)) {
 	$arr = $row;
@@ -171,11 +171,11 @@ verif_donnee ();
 function verif_donnee(envoye) {
 global = new Array(0,1,1,1,1,1,1,1,1,1);
 <?php
-for ($i=101;$i<=111;$i++){
+for ($i=$start;$i<=$nb_planet;$i++){
 	for ($b=1;$b<=5;$b++) echo "if ((isNaN(parseFloat(document.getElementById('".$bati[$b].$i."').value))) || parseFloat(document.getElementById('".$bati[$b].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
 	echo "if (!document.getElementById('global".$i."').checked) global[".$i."] = 0;\n";
 }
-for ($i=101;$i<=111;$i++){
+for ($i=$start;$i<=$nb_planet;$i++){
 	echo "if ((isNaN(parseFloat(document.getElementById('".$bati[6].$i."').value))) || parseFloat(document.getElementById('".$bati[6].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][6];\n";
 }
 ?>
@@ -220,7 +220,8 @@ for (i=start;i<=nb_planet;i++) {
 	if (batimentsOGSpy[i][14] == 1) {
 		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100)*(Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100)*(Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.floor((donnee['rap_SS'][i]/100)* (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] / 4) + 20)))) * ingenieur);
 		cons_energie = Math.ceil((donnee['rap_M'][i]/100)*(Math.ceil(10 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) + Math.ceil((donnee['rap_C'][i]/100)*(Math.ceil(10 * donnee['C'][i] * Math.pow(1.1, donnee['C'][i])))) + Math.ceil((donnee['rap_D'][i]/100)*(Math.ceil(20 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]))));
-		if (cons_energie == 0) cons_energie = 1;
+	
+        if (cons_energie == 0) cons_energie = 1;
 		energie[i] = prod_energie - cons_energie;
 		energie_tot[i] = prod_energie;
 		ratio[i] = Math.floor((prod_energie/cons_energie)*100)/100;
@@ -337,7 +338,7 @@ for ($i=$start;$i<=$nb_planet;$i++) {
 	<th><a>
 <?php
 echo $lang['prod_fields']."</a></th>\n";
-for ($i=$start;$i<=$nb_planet;$i++) echo "\t<th><font color='lime'><span id='cases".$i."'></span></font> / <font color='lime'><span id='cases_tot".$i."'></span></font></th>\n";
+for ($i=$start;$i<=$nb_planet;$i++) echo "\t<th><font color='lime'><span id='cases".$i."'>".$user_building[$i]["fields"]."</span></font> / <font color='lime'><span id='cases_tot".$i."'>".$user_building[$i]["fields_used"]."</span></font></th>\n";
 ?>
 </tr>
 <tr>
@@ -469,4 +470,6 @@ echo "<div align=center><font size='2'>".sprintf($lang['prod_created_by'],$mod_v
 "<div align=center><font size='2'>".sprintf($lang['prod_updated_by'],$mod_version,$updator_name)."</font><br />".
 	"<font size='1'><a href='".$forum_link."' target='_blank'>".$lang['prod_forum']."</a>.</font></div>";
 require_once("views/page_tail.php");
+
+
 ?>
