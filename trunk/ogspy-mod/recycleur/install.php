@@ -16,6 +16,11 @@ global $table_prefix;
 define("TABLE_recycleurs", $table_prefix."recycleurs");
 define("TABLE_phalanges", $table_prefix."phalanges");
 
+$is_ok = false;
+$mod_folder = "recycleur";
+$is_ok = install_mod ($mod_folder);
+if ($is_ok == true) {
+
 $query="DROP TABLE IF EXISTS ".TABLE_phalanges."";
 $db->sql_query($query);
 
@@ -51,6 +56,5 @@ PRIMARY KEY ( `id` )
 
 $db->sql_query($query);
 
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('','Recycleurs','Recycleurs','recycleurs','recycleurs','index.php','1.1','1')";
-$db->sql_query($query);
+}
 ?>
