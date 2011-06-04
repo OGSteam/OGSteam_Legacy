@@ -2,8 +2,8 @@
 if ( ! defined ( 'IN_SPYOGAME' ) )
   die ( 'Hacking attempt' );
 include_once("views/page_header.php");
-if ( ! isset ( $pub_subaction ) || ! file_exists ( 'mod/recycleurs/' . $pub_subaction . '.php' ) )
-  $pub_subaction = 'index';
+if ( ! isset ( $pub_subaction ) || ! file_exists ( 'mod/recycleur/' . $pub_subaction . '.php' ) )
+{ $pub_subaction = 'index';}
 ?>
 <table height="600px">
   <tr height="10%">
