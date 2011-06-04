@@ -20,10 +20,11 @@ $lang['prod_reset'] = "Reset";
 $lang['prod_planete'] = "Planete";
 $lang['prod_coordinates'] = "Coordinates";
 $lang['prod_temperature_min'] = "Minimal temperature";
-$lang['prod_temperature_max'] = "Maximal temperature";
+$lang['prod_temperature_max'] = "maximal";
 $lang['prod_fields'] = "Fields";
 $lang['prod_energy'] = "Energy";
 $lang['prod_created_by'] = "Mod Production v"./*$mod_version*/"%s developed by "./*$creator_name*/"%2\$s modified by "./*$modifier_name1*/"%3\$s and "./*$modifier_name2*/"%4\$s";
+$lang['prod_updated_by'] = "Mod Production v"./*$mod_version*/"%s updated by "./*$updator_name*/"%2\$s";
 $lang['prod_forum'] = "more information";
 
 // Buildings
