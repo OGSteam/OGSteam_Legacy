@@ -144,7 +144,8 @@ for ($i=$start;$i<=$nb_planet;$i++) {
 		echo "document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
 		echo "document.getElementById('rap_".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$temp[$b]."];\n";
 	}
-	echo "document.getElementById('global".$i."').checked = true;\n";
+       $j = $i - 100;
+	echo "document.getElementById('global".$j."').checked = true;\n";
 }
 echo "document.getElementById('techno_energie').value = ".$user_technology['NRJ'].";\n";
 echo "document.getElementById('ingenieur').checked = ";
@@ -165,15 +166,25 @@ verif_donnee ();
 function selection (sel) {
 if (sel == 0) sel = false;
 else sel = true;
-for (i=start;i<=nb_planet;i++) document.getElementById('global' + i).checked = sel;
+for (i=1;i<=nb_planet;i++) document.getElementById('global' + i).checked = sel; 
 verif_donnee ();
 }
 function verif_donnee(envoye) {
-global = new Array(0,1,1,1,1,1,1,1,1,1);
+<?php
+// avant modif pour 3.0.7
+//global = new Array(0,1,1,1,1,1,1,1,1,1);
+echo "global = new Array(0"; 
+for ($i=$start;$i<=$nb_planet;$i++){
+    echo ",1"; 
+    }
+echo ");";
+?>
+
 <?php
 for ($i=$start;$i<=$nb_planet;$i++){
+    $j = $i - 100;
 	for ($b=1;$b<=5;$b++) echo "if ((isNaN(parseFloat(document.getElementById('".$bati[$b].$i."').value))) || parseFloat(document.getElementById('".$bati[$b].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][".$b."];\n";
-	echo "if (!document.getElementById('global".$i."').checked) global[".$i."] = 0;\n";
+	echo "if (!document.getElementById('global".$j."').checked) global[".$j."] = 0;\n";
 }
 for ($i=$start;$i<=$nb_planet;$i++){
 	echo "if ((isNaN(parseFloat(document.getElementById('".$bati[6].$i."').value))) || parseFloat(document.getElementById('".$bati[6].$i."').value) < 0 ) document.getElementById('".$bati[$b].$i."').value = batimentsOGSpy[".$i."][6];\n";
@@ -231,13 +242,13 @@ for (i=start;i<=nb_planet;i++) {
 		metal_heure[i] = vitesse * Math.floor((20 + Math.round((donnee['rap_M'][i]/100)*ratio[i]*Math.floor(30 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) * geologue);
 		cristal_heure[i] = vitesse * Math.floor((10 + Math.round((donnee['rap_C'][i]/100)*ratio[i]*Math.floor(20 * donnee['C'][i]* Math.pow(1.1, donnee['C'][i])))) * geologue);
 		deut_heure[i] = vitesse * Math.floor(Math.round((donnee['rap_D'][i]/100)*ratio[i]*Math.floor(10 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]) * (-0.002 * batimentsOGSpy[i][7] + 1.28))) * geologue - Math.round((donnee['rap_FR'][i]/100) * 10 * donnee['FR'][i] * Math.pow(1.1, donnee['FR'][i])));
-	/// pb avec les global ... le nb de planete n est pas pris en compte
-    //todo
-    //if (global[i] == 1) {
+
+    var j = i-100;
+    if (global[j] == 1) {
 			metal_heure[nb_planet+1] = metal_heure[nb_planet+1] + metal_heure[i];
 			cristal_heure[nb_planet+1] = cristal_heure[nb_planet+1] + cristal_heure[i];
 			deut_heure[nb_planet+1] = deut_heure[nb_planet+1] + deut_heure[i];
-	//	}
+		}
 		cases[i] = cases_base[i] + donnee['M'][i] + donnee['C'][i] + donnee['D'][i] + donnee['SoP'][i] + donnee['FR'][i];
 	}
 }
@@ -413,10 +424,11 @@ for ($b=1;$b<=3;$b++) {
 <?php
 echo $lang['prod_total_prod']."</td>\n</tr>\n<tr><th><table width='100%' style='border:none'><tr><th style='border:none'><img style='cursor: pointer;vertical-align: middle;' src='images/action_delete.png' onClick='javascript:selection (0)' alt='-' title='".$lang['prod_none']."' /></th><th style='border:none'><a>".$lang['prod_account']."</a></th><th style='border:none'><img style='cursor: pointer;vertical-align: middle;' src='images/action_check.png' onClick='javascript:selection (1)' alt='+' title='".$lang['prod_all']."' /></th></tr></table></th>\n";
 for ($i=101;$i<=$nb_planet;$i++) {
+    $j=$i -100;
 	echo "\t<th><label><input type='";
 	if ($Planete[$i] == 1) echo "checkbox";
 	else echo "hidden";
-	echo "' id='global$i' name='global$i' onClick='javascript:verif_donnee (0)'>&nbsp;$name[$i]</label></th>\n";
+	echo "' id='global$j' name='global$j' onClick='javascript:verif_donnee (0)'>&nbsp;$name[$i]</label></th>\n";
 }
 ?>
 </tr>
