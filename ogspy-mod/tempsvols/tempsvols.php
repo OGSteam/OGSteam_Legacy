@@ -576,8 +576,8 @@ function soute(cargaison,conso){
 <br />
 
 <?php
-if (file_exists('mod/tempsvol/version.txt')) { 
-	$file = file('mod/tempsvol/version.txt'); 
+if (file_exists('mod/tempsvols/version.txt')) { 
+	$file = file('mod/tempsvols/version.txt'); 
 }
 ?>
 Temps de vol <?php echo trim($file[1]) ?><br>
