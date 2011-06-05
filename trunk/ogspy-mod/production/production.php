@@ -97,11 +97,12 @@ $ingenieur = $query["off_ingenieur"];
 $geologue = $query["off_geologue"];
 
 // Réparation des informations sur la vitesse univers
-$query = mysql_fetch_assoc(mysql_query("SELECT `config_value` FROM ".TABLE_CONFIG." WHERE config_name = 'speed_uni'"));
+//$query = mysql_fetch_assoc(mysql_query("SELECT `config_value` FROM ".TABLE_CONFIG." WHERE config_name = 'speed_uni'"));
 // pour les version d'OGSpy jusqu'à 3.04b, par défaut : 1
 // pour l'uni 50 français qui est à vitesse *2, il faut donc mettre... 2 !
-if (!$query["config_value"]) $query["config_value"] = 1;
-$vitesse = $query["config_value"];
+//if (!$query["config_value"]) $query["config_value"] = 1;
+// modif pour 3.0.7 on economise une requete pour piocher dans global
+$vitesse = $server_config['speed_uni']
 ?>
 <SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
 <script type="text/javascript">
@@ -216,6 +217,8 @@ calcul ();
 function calcul () {
 ratio = new Array();
 cases = new Array();
+
+
 cases_base = new Array(0<?php
 for ($i=$start;$i<=$nb_planet;$i++) echo ", ".($user_building[$i]["fields_used"] - $user_building[$i]['M'] - $user_building[$i]['C'] - $user_building[$i]['D'] - $user_building[$i]['CES'] - $user_building[$i]['CEF']);
 ?>);
@@ -229,7 +232,7 @@ cristal_heure[nb_planet+1] = 0;
 deut_heure[nb_planet+1] = 0;
 for (i=start;i<=nb_planet;i++) {
 	if (batimentsOGSpy[i][14] == 1) {
-		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100)*(Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100)*(Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.floor((donnee['rap_SS'][i]/100)* (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] / 4) + 20)))) * ingenieur);
+		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100)*(Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100)*(Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.floor((donnee['rap_SS'][i]/100)* (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] + 140) / 6)))) * ingenieur); 
 		cons_energie = Math.ceil((donnee['rap_M'][i]/100)*(Math.ceil(10 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) + Math.ceil((donnee['rap_C'][i]/100)*(Math.ceil(10 * donnee['C'][i] * Math.pow(1.1, donnee['C'][i])))) + Math.ceil((donnee['rap_D'][i]/100)*(Math.ceil(20 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]))));
 	
         if (cons_energie == 0) cons_energie = 1;
@@ -239,9 +242,10 @@ for (i=start;i<=nb_planet;i++) {
 		if (ratio[i] > 1) ratio[i] = 1;
 		if (cons_energie == 1) energie[i] = 0;
 
-		metal_heure[i] = vitesse * Math.floor((20 + Math.round((donnee['rap_M'][i]/100)*ratio[i]*Math.floor(30 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) * geologue);
-		cristal_heure[i] = vitesse * Math.floor((10 + Math.round((donnee['rap_C'][i]/100)*ratio[i]*Math.floor(20 * donnee['C'][i]* Math.pow(1.1, donnee['C'][i])))) * geologue);
-		deut_heure[i] = vitesse * Math.floor(Math.round((donnee['rap_D'][i]/100)*ratio[i]*Math.floor(10 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]) * (-0.002 * batimentsOGSpy[i][7] + 1.28))) * geologue - Math.round((donnee['rap_FR'][i]/100) * 10 * donnee['FR'][i] * Math.pow(1.1, donnee['FR'][i])));
+		metal_heure[i] = vitesse * Math.floor((30 + Math.round((donnee['rap_M'][i]/100)*ratio[i]*Math.floor(30 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) * geologue);
+		cristal_heure[i] = vitesse * Math.floor((15 + Math.round((donnee['rap_C'][i]/100)*ratio[i]*Math.floor(20 * donnee['C'][i]* Math.pow(1.1, donnee['C'][i])))) * geologue);
+//		deut_heure[i] = vitesse * Math.floor(Math.round((donnee['rap_D'][i]/100)*ratio[i]*Math.floor(10 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]) * (-0.002 * batimentsOGSpy[i][7] + 1.28))) * geologue - Math.round((donnee['rap_FR'][i]/100) * 10 * donnee['FR'][i] * Math.pow(1.1, donnee['FR'][i])));
+        deut_heure[i] = vitesse * Math.floor(Math.round((donnee['rap_D'][i]/100)*ratio[i]*Math.floor(10 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]) * (1.44 - (0.004 * batimentsOGSpy[i][7])))) * geologue - Math.round((donnee['rap_FR'][i]/100) * 10 * donnee['FR'][i] * Math.pow(1.1, donnee['FR'][i])));
 
     var j = i-100;
     if (global[j] == 1) {
