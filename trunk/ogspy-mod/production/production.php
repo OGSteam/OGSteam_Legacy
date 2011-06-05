@@ -213,9 +213,9 @@ energie_tot = new Array();
 metal_heure = new Array();
 cristal_heure = new Array();
 deut_heure = new Array();
-metal_heure[10] = 0;
-cristal_heure[10] = 0;
-deut_heure[10] = 0;
+metal_heure[nb_planet+1] = 0;
+cristal_heure[nb_planet+1] = 0;
+deut_heure[nb_planet+1] = 0;
 for (i=start;i<=nb_planet;i++) {
 	if (batimentsOGSpy[i][14] == 1) {
 		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100)*(Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100)*(Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.floor((donnee['rap_SS'][i]/100)* (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] / 4) + 20)))) * ingenieur);
@@ -231,11 +231,13 @@ for (i=start;i<=nb_planet;i++) {
 		metal_heure[i] = vitesse * Math.floor((20 + Math.round((donnee['rap_M'][i]/100)*ratio[i]*Math.floor(30 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) * geologue);
 		cristal_heure[i] = vitesse * Math.floor((10 + Math.round((donnee['rap_C'][i]/100)*ratio[i]*Math.floor(20 * donnee['C'][i]* Math.pow(1.1, donnee['C'][i])))) * geologue);
 		deut_heure[i] = vitesse * Math.floor(Math.round((donnee['rap_D'][i]/100)*ratio[i]*Math.floor(10 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]) * (-0.002 * batimentsOGSpy[i][7] + 1.28))) * geologue - Math.round((donnee['rap_FR'][i]/100) * 10 * donnee['FR'][i] * Math.pow(1.1, donnee['FR'][i])));
-		if (global[i] == 1) {
-			metal_heure[10] = metal_heure[10] + metal_heure[i];
-			cristal_heure[10] = cristal_heure[10] + cristal_heure[i];
-			deut_heure[10] = deut_heure[10] + deut_heure[i];
-		}
+	/// pb avec les global ... le nb de planete n est pas pris en compte
+    //todo
+    //if (global[i] == 1) {
+			metal_heure[nb_planet+1] = metal_heure[nb_planet+1] + metal_heure[i];
+			cristal_heure[nb_planet+1] = cristal_heure[nb_planet+1] + cristal_heure[i];
+			deut_heure[nb_planet+1] = deut_heure[nb_planet+1] + deut_heure[i];
+	//	}
 		cases[i] = cases_base[i] + donnee['M'][i] + donnee['C'][i] + donnee['D'][i] + donnee['SoP'][i] + donnee['FR'][i];
 	}
 }
@@ -249,7 +251,7 @@ for ($i=$start;$i<=$nb_planet;$i++) {
 		echo "\tif (ratio[".$i."] == 1) couleur = 'lime';\n\telse couleur = 'red';\n";
 		echo "\tif (cases[".$i."] <= ".$user_building[$i]["fields"].") couleur2 = 'lime';\n\telse couleur2 = 'red';\n";
 		echo "\tdocument.getElementById('fact".$i."').innerHTML = '<font color=\'' + couleur + '\'>' + ratio[".$i."] + '</font>';\n";
-		echo "\tdocument.getElementById('cases".$i."').innerHTML = '<font color=\'' + couleur2 + '\'>' + format(cases[".$i."]) + '</font>';\n";
+		echo "\tdocument.getElementById('cases".$i."').innerHTML = '<font color=\'' + couleur2 + '\'>' + format(".$user_building[$i]["fields_used"].") + '</font>';\n";
 		echo "\tdocument.getElementById('cases_tot".$i."').innerHTML = format(".$user_building[$i]["fields"].");\n";
 		echo "\tdocument.getElementById('energie".$i."').innerHTML = '<font color=\'' + couleur + '\'>' + format(energie[".$i."]) + '</font>';\n";
 		echo "\tdocument.getElementById('energie_tot".$i."').innerHTML = format(energie_tot[".$i."]);\n";
@@ -262,27 +264,27 @@ for ($i=$start;$i<=$nb_planet;$i++) {
 		echo "} else document.getElementById('global".$i."').disabled = true;\n";
 	}
 } ?>
-document.getElementById('prodh_mtot').innerHTML = format(metal_heure[10]);
-document.getElementById('prodh_ctot').innerHTML = format(cristal_heure[10]);
-document.getElementById('prodh_dtot').innerHTML = format(deut_heure[10]);
-document.getElementById('prodh_ptot').innerHTML = format(Math.floor((metal_heure[10] + cristal_heure[10] + deut_heure[10]) / 1000));
-document.getElementById('prodj_mtot').innerHTML = format(24 * metal_heure[10]);
-document.getElementById('prodj_ctot').innerHTML = format(24 * cristal_heure[10]);
-document.getElementById('prodj_dtot').innerHTML = format(24 * deut_heure[10]);
-document.getElementById('prodj_ptot').innerHTML = format(Math.floor(24 * (metal_heure[10] + cristal_heure[10] + deut_heure[10]) / 1000));
-document.getElementById('prods_mtot').innerHTML = format(24 * 7 * metal_heure[10]);
-document.getElementById('prods_ctot').innerHTML = format(24 * 7 * cristal_heure[10]);
-document.getElementById('prods_dtot').innerHTML = format(24 * 7 * deut_heure[10]);
-document.getElementById('prods_ptot').innerHTML = format(Math.floor(24 * 7 * (metal_heure[10] + cristal_heure[10] + deut_heure[10]) / 1000));
+document.getElementById('prodh_mtot').innerHTML = format(metal_heure[nb_planet+1]);
+document.getElementById('prodh_ctot').innerHTML = format(cristal_heure[nb_planet+1]);
+document.getElementById('prodh_dtot').innerHTML = format(deut_heure[nb_planet+1]);
+document.getElementById('prodh_ptot').innerHTML = format(Math.floor((metal_heure[nb_planet+1] + cristal_heure[nb_planet+1] + deut_heure[nb_planet+1]) / 1000));
+document.getElementById('prodj_mtot').innerHTML = format(24 * metal_heure[nb_planet+1]);
+document.getElementById('prodj_ctot').innerHTML = format(24 * cristal_heure[nb_planet+1]);
+document.getElementById('prodj_dtot').innerHTML = format(24 * deut_heure[nb_planet+1]);
+document.getElementById('prodj_ptot').innerHTML = format(Math.floor(24 * (metal_heure[nb_planet+1] + cristal_heure[nb_planet+1] + deut_heure[nb_planet+1]) / 1000));
+document.getElementById('prods_mtot').innerHTML = format(24 * 7 * metal_heure[nb_planet+1]);
+document.getElementById('prods_ctot').innerHTML = format(24 * 7 * cristal_heure[nb_planet+1]);
+document.getElementById('prods_dtot').innerHTML = format(24 * 7 * deut_heure[nb_planet+1]);
+document.getElementById('prods_ptot').innerHTML = format(Math.floor(24 * 7 * (metal_heure[nb_planet+1] + cristal_heure[nb_planet+1] + deut_heure[nb_planet+1]) / 1000));
 func_rapport();
 }
 function func_rapport(ress) {
 if (ress > 0 && ress < 4) ressource = ress;
-rapport_arr = new Array('',deut_heure[10],cristal_heure[10],metal_heure[10]);
+rapport_arr = new Array('',deut_heure[nb_planet+1],cristal_heure[nb_planet+1],metal_heure[nb_planet+1]);
 rapport = rapport_arr[ressource] / ressource;
-document.getElementById('rapport_m').innerHTML = Math.round(100 * metal_heure[10] / rapport) / 100;
-document.getElementById('rapport_c').innerHTML = Math.round(100 * cristal_heure[10] / rapport) / 100;
-document.getElementById('rapport_d').innerHTML = Math.round(100 * deut_heure[10] / rapport) / 100;
+document.getElementById('rapport_m').innerHTML = Math.round(100 * metal_heure[nb_planet+1] / rapport) / 100;
+document.getElementById('rapport_c').innerHTML = Math.round(100 * cristal_heure[nb_planet+1] / rapport) / 100;
+document.getElementById('rapport_d').innerHTML = Math.round(100 * deut_heure[nb_planet+1] / rapport) / 100;
 }
 function format(x) {
 var signe = '';
