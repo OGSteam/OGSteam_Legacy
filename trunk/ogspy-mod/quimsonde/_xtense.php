@@ -15,7 +15,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 #
 if(class_exists("Callback")){
 class QuiMSonde_Callback extends Callback {
-        public $version = '2.3.8';
+        public $version = '2.3.9';
         public function qms_import_enemy_spy($spy){
 			global $io,$user;
 			require_once('lang/lang_french.php');
