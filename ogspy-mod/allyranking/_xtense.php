@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 	class allyRanking_Callback extends Callback {
-		public $version = '2.3.6';
+		public $version = '2.3.9';
 		public function ally_list($rapport){
 			global $io;
 			if(ally_list($rapport))

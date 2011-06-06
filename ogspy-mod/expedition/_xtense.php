@@ -4,7 +4,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 class eXpedition_Callback extends Callback {
-        public $version = '2.3.8';
+        public $version = '2.3.9';
         public function eXpedition_xtense2_integration($expedition){
 			global $io,$user_data;
 			// Si vous avez des questions sur cet algorithme de vérification à 2F30 adressez-vous à unibozu sur le forum

@@ -6,7 +6,7 @@ if (!defined('IN_SPYOGAME'))
 if (class_exists("Callback")) {
     class eXchange_Callback extends Callback
     {
-        public $version = '2.3.8';
+        public $version = '2.3.9';
         public function eXchange_xtense2_msg($msg)
         {
             global $io, $user_data;
