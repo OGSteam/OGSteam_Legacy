@@ -12,16 +12,21 @@
 
 
 // vérification de sécurité
+if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if (!defined('OGSIGN')) die('Hacking attempt');
 require_once("../../includes/functions.php");
-init_serverconfig();
 require_once("../../includes/ogame.php");
-
-
+require_once("../../common.php");
+init_serverconfig();
+global $db;
+$off_ingenieur = $user_data['off_ingenieur'];
+$off_geologue = $user_data['off_geologue'];
+$start = 101;
+$nb_planet = $start + find_nb_planete_user() - 1;
 $user_id = $param_sign['user_id'];	// pour la sign_prod
 $nom_u = $param_sign['pseudo_ig'];
-
 // on met le fond par défaut, si le fond demandé n'existe pas
+
 if (file_exists('fonds/prod/'.$param_sign['nom_fond_prod']))
 	$nom_fond = 'fonds/prod/'.$param_sign['nom_fond_prod'];
 else
@@ -29,11 +34,10 @@ else
 
 // les paramètres vérifiés permettent de trouver le fond 
 $fichier_stats = 'cache/'.$nom_player.'.P.png';
-
+		
 // aucun moyen de savoir si il y a eu MAJ des données dans Empire...
 // donc si filemtime($fichier_stats) + 48h > date actuelle, on va regénérer l'image
 if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) {
-
 	// le séparateur de milliers pour l'affichage des grands nombres
 	$sepa_milliers = $param_sign['sepa_milliers_prod'];
 	// transformation de l'espace
@@ -45,7 +49,7 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 	$coords = $result['coordinates'];
 
 	$coords = explode(':',$coords);
-
+	
 	// enfin, d'après ces coords, on trouve l'ally du joueur
 	$quet = mysql_query('SELECT ally FROM '.TABLE_UNIVERSE.' WHERE galaxy = '.$coords[0].' and system = '.$coords[1].' and row = '.$coords[2]);
 	$result = mysql_fetch_array($quet,MYSQL_ASSOC);
@@ -58,32 +62,30 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 
 	$quet = mysql_query('SELECT planet_id, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
 
-	$user_building = array_fill(1, 9, $planet);
+	$user_building = array_fill($start, $nb_planet, $planet);
 	while ($row = mysql_fetch_assoc($quet)) {
 		$user_building[$row['planet_id']] = $row;
 		$user_building[$row['planet_id']][0] = true;
-	}
+
+		}
 
 // Récupération des informations sur les technologies
 	$query = mysql_fetch_assoc(mysql_query("SELECT `NRJ` FROM ".TABLE_USER_TECHNOLOGY." WHERE `user_id` = ".$user_id));
 	$NRJ = $query['NRJ'];
 
-	// Récupération des informations sur les officiers
-	$query = mysql_fetch_assoc(mysql_query("SELECT `off_ingenieur`, `off_geologue` FROM ".TABLE_USER." WHERE `user_id` = ".$user_id));
-	$ingenieur = $query['off_ingenieur'];
-	$geologue = $query['off_geologue'];
+
 
 	// calcul des productions
-	$metal_heure = 0;
-	$cristal_heure = 0;
-	$deut_heure = 0;
+	$metal_heure=0;
+	$cristal_heure=0;
+	$deut_heure=0;
 	$metal_jour = 0;
 	$cristal_jour = 0;
 	$deut_jour = 0;
-
-	for ($i=1; $i<=9; $i++) {
+	for ($i=$start; $i<=$nb_planet; $i++) {
 		// si la planète existe, on calcule la prod de ressources
 		if ($user_building[$i][0] === TRUE) {
+
 			$M = $user_building[$i]['M'];
 			$C = $user_building[$i]['C'];
 			$D = $user_building[$i]['D'];
@@ -98,19 +100,25 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 			$SAT_per = $user_building[$i]['Sat_percentage'];
 			$temperature_min = $user_building[$i]['temperature_min'];
 			$temperature_max = $user_building[$i]['temperature_max'];
+			$production_CES = ( $CES_per / 100 ) * ( production ( "CES", $CES, $off_ingenieur ));
+			$production_CEF = ( $CEF_per / 100 ) * ( production ("CEF", $off_ingenieur ));
+			$production_SAT = ( $SAT_per / 100 ) * ( production_sat ( $temperature_min, $temperature_max, $off_ingenieur ) * $SAT );
+			$prod_energie = $production_CES + $production_CEF + $production_SAT;
+			
+			//Consommation
+			$consommation_M = ( $M_per / 100 ) * ( consumption ( "M", $M ));
+			$consommation_C = ( $C_per / 100 ) * ( consumption ( "C", $C ));
+			$consommation_D = ( $D_per / 100 ) * ( consumption ( "D", $D ));
+			$cons_energie = $consommation_M + $consommation_C + $consommation_D;
 				
-			$prod_energie = round((1 + $ingenieur / 10) * (production("CES", $CES, 0, $NRJ) * $CES_per / 100 + production("CEF", $CEF, $temperature_max, $NRJ) * $CEF_per / 100 + production_sat($temperature_min, $temperature_max) * $SAT * $SAT_per / 100));
-			//round((round(($CES_per/100)*(floor(20 * $CES * pow(1.1, $CES)))) + round(($CEF_per/100)*(floor(30 * $CEF * pow(1.05 + 0.01 * $NRJ, $CEF)))) + floor(($SAT_per/100)* ($SAT * floor(($temperature / 4) + 20)))) * (1 + $ingenieur / 10)) ;
-			$cons_enregie = ceil(($M_per/100)*(ceil(10 * $M * pow(1.1, $M)))) + ceil(($C_per/100)*(ceil(10 * $C * pow(1.1, $C)))) + ceil(($D_per/100)*(ceil(20 * $D * pow(1.1, $D)))) ;
-			if ($cons_enregie == 0) $cons_enregie = 1;
-			$ratio = floor(($prod_energie/$cons_enregie)*100)/100;
+			if ($cons_energie == 0) $cons_energie = 1;
+			$ratio = floor(($prod_energie/$cons_energie)*100)/100;
 			if ($ratio > 1) $ratio = 1;
 
 			// calcul de la production horaire
-			$metal_heure = $metal_heure + VITESSE_UNI * $geologue * floor((20 + round(($M_per/100)*$ratio*floor(30 * $M * pow(1.1, $M)))) * (1 + $geologue / 10));
-			$cristal_heure = $cristal_heure + VITESSE_UNI * $geologue * floor((10 + round(($C_per/100)*$ratio*floor(20 * $C * pow(1.1, $C)))) * (1 + $geologue / 10));
-			$deut_heure = $deut_heure + VITESSE_UNI * (round(production("D", $D, $temperature_max, $NRJ) * ($D_per / 100) * $ratio * (1 + $geologue / 10)) - round(consumption("CEF", $CEF) * $CEF_per / 100));
-			//$deut_heure + VITESSE_UNI * floor((round(($D_per/100)*$ratio*floor(10 * $D * pow(1.1, $D) * (-0.002 * $temperature + 1.28))) - round(($CEF_per/100) * 10 * $CEF * pow(1.1, $CEF))) * (1 + $geologue / 10));
+			$metal_heure = $metal_heure + ( 20 + round (($M_per/100) * $ratio * ( production ( "M", $M, $off_geologue ))));
+			$cristal_heure = $cristal_heure + ( 10 + round (( $C_per/100 ) * $ratio * ( production ( "C", $C, $off_geologue ))));
+			$deut_heure = $deut_heure  + (( round (( $D_per/100) * $ratio * ( production ( "D", $D, $off_geologue, $temperature_max )))) -  consumption ("CEF", $CEF));
 		}
 	}
 

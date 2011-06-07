@@ -189,10 +189,4 @@ $prod_l = 'Production';
 // extension de votre OGame
 $tld = 'fr';
 
-// vitesse de l'univers
-$query = mysql_fetch_assoc(mysql_query("SELECT config_value FROM ".TABLE_CONFIG." WHERE `config_name`='speed_uni'"));
-// pour les version d'OGSpy jusqu'à 3.04b, par défaut : 1
-// pour l'uni 50 français qui est à vitesse *2, il faut donc mettre... 2 !
-if (!$query["config_value"]) $query["config_value"] = 1;
-define('VITESSE_UNI', $query["config_value"]);
 ?>
