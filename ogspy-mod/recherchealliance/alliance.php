@@ -299,6 +299,29 @@ if ( isset( $pub_ally ) && ( $pub_ally <> '' ) )
                 <option value="52">52</option>
 		<option value="53">53</option>
                 <option value="54">54</option>
+				<option value="55">55</option>
+				<option value="56">56</option>
+				<option value="57">57</option>
+				<option value="58">58</option>
+				<option value="59">59</option>
+				<option value="60">60</option>
+				<option value="61">61</option> 
+				<option value="62">62</option>
+				<option value="63">63</option>
+				<option value="64">64</option>
+				<option value="65">65</option>
+				<option value="Andromeda">Andromeda</option>
+				<option value="Capella">Capella</option>
+				<option value="Draco">Draco</option> 
+				<option value="Electra">Electra</option>
+				<option value="Fornax">Fornax</option>
+				<option value="Gemini">Gemini</option>
+				<option value="Hydra">Hydra</option>
+				<option value="Io">Io</option>
+				<option value="Jupiter">Jupiter</option>
+				<option value="Kassiopeia">Kassiopeia</option>
+				<option value="Leo">Leo</option>
+
                 </select></td></tr>
 <tr><td colspan=2 align=center>
                 <p align="center"><input type=submit value="Rechercher"><br></td></tr> </form>
