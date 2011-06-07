@@ -54,7 +54,7 @@ var data2 = Array(
 	Array(207, 2, speeduni * 2500, 0, 1000, 7500),   //KS
 	Array(208, 1, speeduni * 2000, 0, 300, 20000),   //REC
 	Array(209, 1, speeduni * 100000000, 0, 1, 0),    //Spio
-	Array(211, 2, speeduni * 4000, 5000, 1000, 500), //Bomber
+	Array(211, 2, speeduni * 4000, speeduni * 5000, 1000, 500), //Bomber
 	Array(212, 3, speeduni * 5000, 0, 1000, 2000),   //Zer
   Array(213, 3, speeduni * 100, 0, 1, 1000000),     //TS 
 	Array(214, 3, speeduni * 10000, 0, 250, 750)     //TR
@@ -581,7 +581,8 @@ if (file_exists('mod/tempsvols/version.txt')) {
 }
 ?>
 Temps de vol <?php echo trim($file[1]) ?><br>
-Créé par Santory d'apres un script de marshen (2005-2006).</div>
+Créé par Santory d'apres un script de marshen (2005-2006).<br>
+Mise à jour par Shad (2011).</div>
 <?php
 require_once("views/page_tail.php");
 ?>
