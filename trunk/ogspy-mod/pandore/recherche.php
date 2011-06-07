@@ -9,7 +9,7 @@
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-$planet_max = astro_max_planete($technologies['Astrophysique']);
+$planet_max = find_nb_planete_user();
 $error = 0;
 $error2 = Array(0,0,0);
 require_once("includes/ogame.php");
@@ -461,8 +461,10 @@ if ($search && $error == 0) {
 
 	
 	// Affichage des avertissements sur le nombre de planètes
-	if ($i == $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	if ($i == 1) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_one_planete']."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	elseif ($i == $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/ok.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_warning_all_planete']."</div></td>\n\t</tr>\n";
 	elseif ($i < $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/warning.png' alt='".$lang['pandore_warning']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_warning_less_planetes'],$i,$planet_max)."<br />".$lang['pandore_warning_ride_universe']."</div></td>\n\t</tr>\n";
+	elseif ($i > $planet_max) echo "\t<tr>\n\t\t<td colspan='4' class='".$row."' style='vertical-align: middle;'><div style='display: table-cell; vertical-align: middle;'><img style='width: 64px; height: 64px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error_planete']." :' /></div>\n\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$planet_max,$nom)."</div></td>\n\t</tr>\n";
 	// Affichage du nombre de sondes nécessaires
 	echo "\t<tr>\n\t\t<td colspan='4' class='c' style='text-align: center;'>".$lang['pandore_probe_number']."</td>\n\t</tr>\n\t<tr>\n\t\t<td colspan='3' class='".$row."' style='text-align: center;'>".$lang['pandore_buildings']."</td>\n\t\t<td class='".$row."' style='text-align: center;'>".$nb_sondes[0]."</td>\n\t</tr>\n";
 	($row == 'b') ? $row = 'f' : $row = 'b';

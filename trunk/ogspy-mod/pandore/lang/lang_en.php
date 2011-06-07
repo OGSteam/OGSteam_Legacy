@@ -134,6 +134,7 @@ $lang['pandore_Graviton'] = "Graviton Technology";
 
 // Warnings
 $lang['pandore_warning'] = "Warning";
+$lang['pandore_warning_all_planete'] = "All planets were found.";
 $lang['pandore_warning_one_planete'] = "Only 1 planete was found.";
 $lang['pandore_warning_less_planetes'] = "Only "./*$number_of_planets*/"%d"." planetes on "./*$planet_max*/"%2\$s"." maximum were found.";
 $lang['pandore_warning_ride_universe'] = "Travel through the universe to make sure the player doesn't have other planetes.";
