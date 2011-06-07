@@ -1,2 +1,3 @@
-Recherche Alliance
-1.4a
+recherchealliance
+1.0.2
+recherchealliance,Recherche Ally,alliance,recherchealliance,index.php,1,0

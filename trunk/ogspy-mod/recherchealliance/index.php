@@ -23,19 +23,19 @@ switch($pub_page)
 {
 
 	case "changelog" : 
-		require_once("./mod/recherche_alliance/changelog.php");
+		require_once("./mod/recherchealliance/changelog.php");
 	break;
 
 	case "coord" :
-		require_once("./mod/recherche_alliance/coord.php");
+		require_once("./mod/recherchealliance/coord.php");
 	break;
 
 	case "joueur" :
-		require_once("./mod/recherche_alliance/joueur.php");
+		require_once("./mod/recherchealliance/joueur.php");
 	break;
 
 	default :
-		require_once("./mod/recherche_alliance/alliance.php");
+		require_once("./mod/recherchealliance/alliance.php");
 	break;
 }
 

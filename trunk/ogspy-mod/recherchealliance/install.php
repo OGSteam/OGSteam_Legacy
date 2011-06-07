@@ -11,13 +11,10 @@
 *
  */
  
-define("IN_SPYOGAME", true);
+if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-if (file_exists('mod/recherche_alliance/version.txt')) {
- 	    $file = file('mod/recherche_alliance/version.txt');
+global $db;
 
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('','recherche_alliance','Recherche Ally','alliance','recherche_alliance','index.php', '" . trim($file[1])  ."','1')";
-$db->sql_query($query);
-
-}
+$mod_folder = "recherchealliance";
+install_mod($mod_folder);
 ?>
