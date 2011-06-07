@@ -19,6 +19,17 @@ require_once("menu.php");
 <th width="104">Version</th><th width="476">Modification</th>
 <?php //version 1.0 ?>
 </tr>
+
+<?php //version 1.1 ?>
+<tr><th width="104" height="8"><font color="#FF0000">1.5 by Shad</font></th>
+<th width="476" height="8">
+        <p align="left">- Mise à niveau pour OGSpy 3.0.7.</p>
+		<p style="margin-top: 0; margin-bottom: 0" align="left">- Mise à jour des univers.</p>
+
+</th>
+
+</tr>
+
 <?php //version 1.1 ?>
 <tr><th width="104" height="8"><font color="#FF0000">1.4</font></th>
 <th width="476" height="8">
