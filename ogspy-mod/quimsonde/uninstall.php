@@ -36,7 +36,7 @@ uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 // Suppression de la liaison entre Xtense v2 et QuiMSonde (merci Paradoxx!)
 
 // On regarde si la table xtense_callbacks existe :
-$result = $db->sql_query('show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ');
+$result = $db->sql_query('show tables like "'.TABLE_XTENSE_CALLBACKS.'" ');
 if($db->sql_numrows($result) != 0){
 
 	//Maintenant on regarde si QuiMSonde est dedans normalement oui mais on est jamais trop prudent...

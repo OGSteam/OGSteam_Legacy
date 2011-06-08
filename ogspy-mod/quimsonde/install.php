@@ -93,7 +93,7 @@ if ($is_ok == true)
 		// include("_xtense.php");
 		
 		// On regarde si la table xtense_callbacks existe :
-		$query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
+		$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
 		$result = $db->sql_query($query);
 		// On récupère le n° d'id du mod
 		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='QuiMSonde' AND `active`='1' LIMIT 1";
