@@ -36,7 +36,7 @@ $query = "DELETE FROM ".TABLE_MOD." WHERE root='cdr'";
 $db->sql_query($query);
 
 // On regarde si la table xtense_callbacks existe :
-$query = 'SHOW TABLES FROM '.$db->dbname.' LIKE "'.TABLE_XTENSE_CALLBACKS.'"';
+$query = 'SHOW TABLES LIKE "'.TABLE_XTENSE_CALLBACKS.'"';
 $result = $db->sql_query($query);
 if ($db->sql_numrows($result) != 0) {
 	//Le mod xtense 2 est installé !
