@@ -43,7 +43,7 @@ global $db;
 	$request = 'SELECT version from '.TABLE_MOD.' WHERE title=\'gameOgame\'';
 	$result = $db->sql_query($request);
 	list($version) = $db->sql_fetch_row($result);
-	echo '<div style="background-color:#232425;">gameOgame (v'.$version.') cr&eacute;&eacute; par A&eacute;ris<br />Modifi&eacute; par ericc</div>';
+	echo '<div style="background-color:#232425;">gameOgame (v'.$version.') créé par Aéris<br />Modifié par ericc<br />Mise à jour by Shad</div>';
 }
 
 //-------------------------------------------------------------------------------------------------------------------

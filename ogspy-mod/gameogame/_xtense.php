@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 class gameOgame_Callback extends Callback {
-        public $version = '2.3.0';
+        public $version = '2.3.9';
         public function gog_rc($rapport){
 			global $io;
 			if(gog_rc($rapport))
