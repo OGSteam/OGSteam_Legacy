@@ -1,2 +1,3 @@
 gameOgame
-2.1b
+1.0.0
+gameOgame,gameOgame,gameOgame,gameogame,index.php,1,0

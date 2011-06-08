@@ -173,8 +173,8 @@ if ((!isset($pub_mix)) || $pub_mix == 'yes')
 					$lune = '<font color=\''.($val['lune'] ? 'lime' : 'red').'\'>'.$val['%lune'].'%';
 				}
 				$img = '<br>';
-				if (($id == $user_data['user_id']) && ($recyclage<>'-') && ($valRecyclage<100)) $img .= '<form method=\'post\' action=\'?action=gameOgame&reportRecyclage='.$val['id'].'\'><input type=\'image\' src=\'./mod/gameOgame/images/recyclage.png\'></form>';
-				if ($id == $user_data['user_id'] || $user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1 || $user_data['management_user'] == 1 || isAdmin($user_data['user_id'])) $img .= '<form method=\'post\' action=\'?action=gameOgame&subaction=display\' onSubmit="return confirm(\'Etes-vous sûr de vouloir supprimer ce rapport?\');"><input type=\'hidden\' name=\'player\' value=\''.$player_save.'\'><input type=\'hidden\' name=\'delete\' value=\''.$val['id'].'\'><input type=\'image\' src=\'./mod/gameOgame/images/delete.png\' title=\'Supprimer ce rapport\'></form>';
+				if (($id == $user_data['user_id']) && ($recyclage<>'-') && ($valRecyclage<100)) $img .= '<form method=\'post\' action=\'?action=gameOgame&reportRecyclage='.$val['id'].'\'><input type=\'image\' src=\'./mod/gameogame/images/recyclage.png\'></form>';
+				if ($id == $user_data['user_id'] || $user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1 || $user_data['management_user'] == 1 || isAdmin($user_data['user_id'])) $img .= '<form method=\'post\' action=\'?action=gameOgame&subaction=display\' onSubmit="return confirm(\'Etes-vous sûr de vouloir supprimer ce rapport?\');"><input type=\'hidden\' name=\'player\' value=\''.$player_save.'\'><input type=\'hidden\' name=\'delete\' value=\''.$val['id'].'\'><input type=\'image\' src=\'./mod/gameogame/images/delete.png\' title=\'Supprimer ce rapport\'></form>';
 				echo '<tr><th nowrap><a href=\'?action=gameOgame&displayRC='.$val['id'].'\'>'.$val['id'].'</a>'.$img.'<th nowrap>'.date('d/m/Y',$val['date']).'<br>'.date('H:i:s',$val['date']).'</th><th nowrap>'.$val['attaquant'].'<br>vs.</br>'.$val['defenseur'].'</th><th nowrap>Attaquant: '.convNumber($val['pertesA']).'<br>Défenseur: '.convNumber($val['pertesD']).'</th><th nowrap>'.convNumber($val['pillageM']).' métal<br>'.convNumber($val['pillageC']).' cristal<br>'.convNumber($val['pillageD']).' deutérium</th><th nowrap>'.$recyclage.$precyclage.'</th><th nowrap>'.$lune.'</th><th nowrap>'.convNumber($points).'</th></tr>';
 			}
 			echo '</table><br>';
@@ -236,8 +236,8 @@ else
 			$lune = '<font color=\''.($val['lune'] ? 'lime' : 'red').'\'>'.$val['%lune'].'%';
 		}
 		$img = '<br>';
-		if (($id == $user_data['user_id']) && ($recyclage<>'-') && ($valRecyclage<100)) $img .= '<form method=\'post\' action=\'?action=gameOgame&reportRecyclage='.$val['id'].'\'><input type=\'image\' src=\'./mod/gameOgame/images/recyclage.png\'></form>';
-		if ($id == $user_data['user_id'] || $user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1 || $user_data['management_user'] == 1 || isAdmin($user_data['user_id'])) $img .= '<form method=\'post\' action=\'?action=gameOgame&subaction=display\' onSubmit="return confirm(\'Etes-vous sûr de vouloir supprimer ce rapport?\');"><input type=\'hidden\' name=\'player\' value=\''.$player_save.'\'><input type=\'hidden\' name=\'delete\' value=\''.$val['id'].'\'><input type=\'image\' src=\'./mod/gameOgame/images/delete.png\' title=\'Supprimer ce rapport\'></form>';
+		if (($id == $user_data['user_id']) && ($recyclage<>'-') && ($valRecyclage<100)) $img .= '<form method=\'post\' action=\'?action=gameOgame&reportRecyclage='.$val['id'].'\'><input type=\'image\' src=\'./mod/gameogame/images/recyclage.png\'></form>';
+		if ($id == $user_data['user_id'] || $user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1 || $user_data['management_user'] == 1 || isAdmin($user_data['user_id'])) $img .= '<form method=\'post\' action=\'?action=gameOgame&subaction=display\' onSubmit="return confirm(\'Etes-vous sûr de vouloir supprimer ce rapport?\');"><input type=\'hidden\' name=\'player\' value=\''.$player_save.'\'><input type=\'hidden\' name=\'delete\' value=\''.$val['id'].'\'><input type=\'image\' src=\'./mod/gameogame/images/delete.png\' title=\'Supprimer ce rapport\'></form>';
 		echo '<tr><th nowrap><a href=\'?action=gameOgame&displayRC='.$val['id'].'\'>'.$val['id'].'</a>'.$img.'<th nowrap>'.date('d/m/Y',$val['date']).'<br>'.date('H:i:s',$val['date']).'</th><th nowrap>'.$val['attaquant'].'<br>vs.</br>'.$val['defenseur'].'</th><th nowrap>Attaquant: '.convNumber($val['pertesA']).'<br>Défenseur: '.convNumber($val['pertesD']).'</th><th nowrap>'.convNumber($val['pillageM']).' métal<br>'.convNumber($val['pillageC']).' cristal<br>'.convNumber($val['pillageD']).' deutérium</th><th nowrap>'.$recyclage.$precyclage.'</th><th nowrap>'.$lune.'</th><th nowrap>'.convNumber($points).'</th></tr>';
 		}
 	echo '</table><br>';
@@ -250,8 +250,8 @@ function arrows($ordrename)
 {
 	global $pub_order,$pub_sort,$pub_mix,$pub_memberslist;
 	echo '&nbsp;&nbsp;&nbsp;';
-	echo '<form method=\'post\' action=\'?action=gameOgame&subaction=display&sort=up\' >';
-	echo '<input type=\'image\' src=\'./mod/gameOgame/images/'.((($pub_order==$ordrename)&&($pub_sort=='up'))?'rup.gif':'up.gif').'\'  name=\'order\' value=\''.$ordrename.'\' width=10px height=9px />';
+	echo '<form method=\'post\' action=\'?action=gameogame&subaction=display&sort=up\' >';
+	echo '<input type=\'image\' src=\'./mod/gameogame/images/'.((($pub_order==$ordrename)&&($pub_sort=='up'))?'rup.gif':'up.gif').'\'  name=\'order\' value=\''.$ordrename.'\' width=10px height=9px />';
 	echo '<input type=\'hidden\' name=\'mix\' value=\''.$pub_mix.'\' />';
 	foreach ($pub_memberslist as $val)
 	{
@@ -260,7 +260,7 @@ function arrows($ordrename)
 	echo '</form>';
 	echo '&nbsp;';
 	echo '<form method=\'post\' action=\'?action=gameOgame&subaction=display&sort=down\' >';
-	echo '<input type=\'image\' src=\'./mod/gameOgame/images/'.((($pub_order==$ordrename)&&($pub_sort=='down'))?'rdown.gif':'down.gif').'\'  align=\'middle\' name=\'order\' value=\''.$ordrename.'\' width=10px height=9px />';
+	echo '<input type=\'image\' src=\'./mod/gameogame/images/'.((($pub_order==$ordrename)&&($pub_sort=='down'))?'rdown.gif':'down.gif').'\'  align=\'middle\' name=\'order\' value=\''.$ordrename.'\' width=10px height=9px />';
 	echo '<input type=\'hidden\' name=\'mix\' value=\''.$pub_mix.'\' />';
 	foreach ($pub_memberslist as $val)
 	{
@@ -296,11 +296,11 @@ function pages()
 	echo '<table width=100% ><tr>';
 	echo '<td style=\'text-align: left;\' class=\'s\' >';
 	echo '<form method=\'post\' action=\'?action=gameOgame&subaction=display\' >';
-	echo '<input type=\'image\' src=\'./mod/gameOgame/images/'.(($pub_page <= 1)? 'rleft.gif': 'left.gif').'\' name=\'page\' value=\''.($pub_page - 1).' align=\'middle\' />';
+	echo '<input type=\'image\' src=\'./mod/gameogame/images/'.(($pub_page <= 1)? 'rleft.gif': 'left.gif').'\' name=\'page\' value=\''.($pub_page - 1).' align=\'middle\' />';
 	echo '&nbsp;Page Pr&eacute;c&eacute;dente</td>';
 	echo '<td style=\'text-align: right;\' class=\'s\' >';
 	echo 'Page Suivante&nbsp;';
-	echo '<input type=\'image\' src=\'./mod/gameOgame/images/right.gif\' name=\'page\' value=\''.($pub_page + 1).' align=\'middle\' />';
+	echo '<input type=\'image\' src=\'./mod/gameogame/images/right.gif\' name=\'page\' value=\''.($pub_page + 1).' align=\'middle\' />';
 	echo '</td>';
 	echo '<input type=\'hidden\' name=\'order\' value=\''.$pub_order.'\' />';
 	echo '<input type=\'hidden\' name=\'sort\' value=\''.$pub_sort.'\' />';

@@ -128,4 +128,8 @@ function gog_xt2()
         $db->sql_query($query);
     }
 }
+//Fichier update
+$mod_folder = "gameogame";
+$mod_name = "gameOgame";
+update_mod($mod_folder, $mod_name);
 ?>
