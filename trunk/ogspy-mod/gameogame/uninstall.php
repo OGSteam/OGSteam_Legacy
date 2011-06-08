@@ -9,7 +9,6 @@ global $db, $table_prefix;
 $query = "SELECT id FROM ".TABLE_MOD." WHERE action='gameOgame'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
-var_dump($mod_id);
 $mod_uninstall_name = "gameOgame";
 $mod_uninstall_table = $table_prefix."game".','.$table_prefix."game_users".','.$table_prefix."game_recyclage";
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
