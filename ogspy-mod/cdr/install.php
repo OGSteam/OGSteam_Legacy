@@ -73,10 +73,14 @@ if (file_exists($filename)) $file = file($filename);
 
 // Insertion de la liaison entre Xtense v2 et cdr
 // Quelle est l'ID du mod ?
-$mod_id = $db->sql_insertid();
+		// On récupère le n° d'id du mod
+		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='cdr' AND `active`='1' LIMIT 1";
+		$result = $db->sql_query($query);
+		$mod_id = $db->sql_fetch_row($result);
+		$mod_id = $mod_id[0];
 
 // On regarde si la table xtense_callbacks existe :
-$result = $db->sql_query('SHOW tables FROM '.$db->dbname.' LIKE "'.TABLE_XTENSE_CALLBACKS.'"');
+$result = $db->sql_query('SHOW tables LIKE "'.TABLE_XTENSE_CALLBACKS.'"');
 if ($db->sql_numrows($result) != 0) {
 	// Maintenant on regarde si cdr est dedans
 	$result = $db->sql_query("SELECT * FROM ".TABLE_XTENSE_CALLBACKS." WHERE mod_id = '$mod_id'");
