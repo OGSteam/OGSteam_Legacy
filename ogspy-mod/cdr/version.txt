@@ -1,3 +1,3 @@
-CdR
+Champs de ruines
 1.7.3
-cdr,Champs de ruines,cdr,cdr,cdr.php,1,0
+Champs de ruines,Champs de ruines,cdr,cdr,cdr.php,1,0

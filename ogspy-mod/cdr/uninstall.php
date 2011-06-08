@@ -25,16 +25,6 @@ $query = "SELECT id FROM ".TABLE_MOD." WHERE action='cdr'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
-// Si les tables existent, on les supprime
-$query = "DROP TABLE IF EXISTS ".TABLE_CDR;
-$db->sql_query($query);
-
-$query = "DROP TABLE IF EXISTS ".TABLE_MOD_CDR;
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE root='cdr'";
-$db->sql_query($query);
-
 // On regarde si la table xtense_callbacks existe :
 $query = 'SHOW TABLES LIKE "'.TABLE_XTENSE_CALLBACKS.'"';
 $result = $db->sql_query($query);
@@ -51,5 +41,9 @@ if ($db->sql_numrows($result) != 0) {
 	}
 }
 echo "<script>alert(".$lang['xtense_gone'].")</script>";
+
+$mod_uninstall_name = "cdr";
+$mod_uninstall_table = $table_prefix."cdr".', '.$table_prefix."mod_cdr";
+uninstall_mod($mod_uninstall_name, $mod_uninstall_table);
 
 ?>
