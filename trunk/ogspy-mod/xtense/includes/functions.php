@@ -11,9 +11,9 @@ if (!defined('IN_SPYOGAME')) die("Hacking Attemp!");
  * Fonctions commune d'installation des callbacks des mods
  *
  * @param string $action - Action du mod
- * @param array $data - Appels Ã  installer
+ * @param array $data - Appels à installer
  * @param string $version - Optionnel, version miniale requise de xtense
- * @return false/int - Retourne false si il y a une erreur ou le nombre d'appels ajoutÃ©s
+ * @return false/int - Retourne false si il y a une erreur ou le nombre d'appels ajoutés
  */
 function install_callbacks ($action, $data, $version = null) {
 	global $db, $table_prefix;
@@ -65,7 +65,7 @@ function error_handler($no, $str, $file, $line) {
 }
 
 /**
- * AmÃ©lioration de var_dump()
+ * Amélioration de var_dump()
  *
  */
 function dump() {
@@ -99,7 +99,7 @@ function move_plugin () {
 }
 
 /**
- * Echappement forcÃ© pour la syntaxe Json
+ * Echappement forcé pour la syntaxe Json
  *
  * @param string $str
  * @return string
@@ -119,7 +119,7 @@ function quote($str) {
 }
 
 /**
- * Verification de l'empire (Mise Ã  jour, rajout, empire plein)
+ * Verification de l'empire (Mise à jour, rajout, empire plein)
  *
  * @param int $type
  * @param string $coords
@@ -147,7 +147,7 @@ function home_check($type, $coords) {
 	}
 	foreach ($planets as $id => $p) {
 		if ($p == $coords || $coords == "unknown") {
-			// Si c'est une lune on check si une lune existe dÃ©jÃ 
+			// Si c'est une lune on check si une lune existe déjà
 			if ($type == TYPE_MOON) {
 				if (isset($moons[$id+100])) return array('update', 'id' => $id+100);
 				else return array('add', 'id' => $id+100);
@@ -201,17 +201,17 @@ function add_log($type, $data = null) {
 	if ($type == 'buildings' || $type == 'overview' || $type == 'defense' || $type == 'research' || $type == 'fleet') {
 		if (!$server_config['xtense_log_empire']) return;
 		
-		if ($type == 'buildings') 	$message = 'envoie les batiments de sa plan&egrave;te '.$data['planet_name'].' ('.$data['coords'].')';
-		if ($type == 'overview') 	$message ='envoie les informations de sa plan&egrave;te '.$data['planet_name'].' ('.$data['coords'].')';
-		if ($type == 'defense') 	$message = 'envoie les defenses de sa plan&egrave;te '.$data['planet_name'].' ('.$data['coords'].')';
+		if ($type == 'buildings') 	$message = 'envoie les batiments de sa planète '.$data['planet_name'].' ('.$data['coords'].')';
+		if ($type == 'overview') 	$message ='envoie les informations de sa planète '.$data['planet_name'].' ('.$data['coords'].')';
+		if ($type == 'defense') 	$message = 'envoie les defenses de sa planète '.$data['planet_name'].' ('.$data['coords'].')';
 		if ($type == 'research') 	$message = 'envoie ses recherches';
-		if ($type == 'fleet') 		$message = 'envoie la flotte de sa plan&egrave;te '.$data['planet_name'].' ('.$data['coords'].')';
+		if ($type == 'fleet') 		$message = 'envoie la flotte de sa planète '.$data['planet_name'].' ('.$data['coords'].')';
 	}
 	
 	if ($type == 'system') {
 		if (!$server_config['xtense_log_system']) return;
 		
-		$message = 'envoie le syst&egrave;me solaire '.$data['coords'];
+		$message = 'envoie le système solaire '.$data['coords'];
 	}
 	
 	if ($type == 'ranking') {
@@ -221,7 +221,7 @@ function add_log($type, $data = null) {
 	}
 	
 	if ($type == 'ally_list') {
-		$message = 'envoie la liste des membres de l&#039;alliance '.$data['tag'];
+		$message = 'envoie la liste des membres de l\'alliance '.$data['tag'];
 	}
 	
 	if ($type == 'rc') {
@@ -233,12 +233,12 @@ function add_log($type, $data = null) {
 		
 		$extra = array();
 		if ($data['msg']) $extra[] = 'messages : '.$data['msg'];
-		if ($data['ally_msg']) $extra[] = $data['ally_msg'].' messages d&#039;alliance';
+		if ($data['ally_msg']) $extra[] = $data['ally_msg'].' messages d\'alliance';
 		if ($data['ennemy_spy']) $extra[] = $data['ennemy_spy'].' espionnages ennemis';
 		if ($data['rc_cdr']) $extra[] = $data['rc_cdr'].' rapports de recyclages';
-		if ($data['expedition']) $extra[] = $data['expedition'].' rapports d&#039;expedition';
-		if ($data['added_spy']) $extra[] = $data['added_spy'].' rapports d&#039;espionnage ajout&eacute;s : '.implode(', ', $data['added_spy_coords']);
-		if ($data['ignored_spy']) $extra[] = $data['ignored_spy'].' rapports d&#039;espionnage ignor&eacute;s';
+		if ($data['expedition']) $extra[] = $data['expedition'].' rapports d\'expedition';
+		if ($data['added_spy']) $extra[] = $data['added_spy'].' rapports d\'espionnage ajoutés : '.implode(', ', $data['added_spy_coords']);
+		if ($data['ignored_spy']) $extra[] = $data['ignored_spy'].' rapports d\'espionnage ignorés';
 		
 		if (!empty($extra)) $message .= ' ('.implode(', ', $extra).')';
 	}
