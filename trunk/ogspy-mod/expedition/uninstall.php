@@ -23,7 +23,7 @@ $mod_uninstall_table = $table_prefix."eXpedition".','.$table_prefix."eXpedition_
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 echo $mod_id;
 // On regarde si la table xtense_callbacks existe :
-$query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
+$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
 $result = $db->sql_query($query);
 if($db->sql_numrows($result) != 0)
 {
