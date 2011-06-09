@@ -23,9 +23,9 @@ if ($systeme <1)
 {
 $systeme = "1";
 }
-if ($systeme >499)
+if ($systeme >$nb_systems)
 {
-$systeme = "499";
+$systeme = $nb_systems;
 }
 
 if(isset($pub_position)) $position=$pub_position;

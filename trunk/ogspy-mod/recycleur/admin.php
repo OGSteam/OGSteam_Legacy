@@ -8,7 +8,7 @@ if ($user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 }
 ?>
 <form method="POST" action="index.php?action=recycleurs&sub_action=razr"> 
-	<table><tr><td> 
+	<table  align="center"><tr><td> 
 		<table width="200" style="border:2px #003399 solid;" cellpadding="3"> 
 			
 				<td align="center" class="c" colspan="2">Remise à Zéro des tables</td><tr>			

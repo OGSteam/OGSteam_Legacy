@@ -43,18 +43,18 @@ if ($systemea <1)
 {
 $systemea = "1";
 }
-if ($systemea >499)
+if ($systemea >$nb_systems)
 {
-$systemea = "499";
+$systemea = $nb_systems;
 }
 
 if ($systemep <1)
 {
 $systemep = "1";
 }
-if ($systemep >499)
+if ($systemep >$nb_systems)
 {
-$systemep = "499";
+$systemep = $nb_systems;
 }
 
 
