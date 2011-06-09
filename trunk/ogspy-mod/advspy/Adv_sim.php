@@ -6,7 +6,7 @@
 *	created		: 16/08/2006
 ***************************************************************************/
 
-// DÃ©clarations OgSpy
+// Déclarations OgSpy
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if (!defined('IN_MOD_ADVSPY')) die("Hacking attempt");
 
@@ -21,14 +21,14 @@ function AdvSpy_PrintHtml_Tab_Simulateur(){
 <div class='box'><div class='box_background'> </div> <div class='box_contents'>
 <fieldset style=\"border:1px solid #FF0000; padding:5px; \">
 <legend><font color=\"#FF0000\"><b><u>/!\</u> ATTENTION <u>/!\</u></b></font></legend>
-Ce simulateur permet de se faire rapidement une idÃ©e de la force d'une flotte en vue d'un raid.<br/>
+Ce simulateur permet de se faire rapidement une idée de la force d'une flotte en vue d'un raid.<br/>
 Le systeme PATATE <font size=\"1\">(Petite Addition de Toutes les Armes avec Technologies en Express)</font> calcule la force d'une flotte.<br/>
-Lors d'une 'Simulation' Les flottes sont comparÃ©s et le rÃ©sultat est prÃ©sentÃ© sous forme de pourcentage reprÃ©sentant un taux de rÃ©ussite de l'attaque.<br/>
-Ce systeme de calcul est loin d'etre le plus prÃ©cis donc n'oubliez pas que ce score est donnÃ© A TITRE INDICATIF et ne reprÃ©sente en aucun cas
- une simulation fiable Ã  100% d'un combat, il est donc nÃ©cessaire d'utiliser un simulateur comme
+Lors d'une 'Simulation' Les flottes sont comparés et le résultat est présenté sous forme de pourcentage représentant un taux de réussite de l'attaque.<br/>
+Ce systeme de calcul est loin d'etre le plus précis donc n'oubliez pas que ce score est donné A TITRE INDICATIF et ne représente en aucun cas
+ une simulation fiable à  100% d'un combat, il est donc nécessaire d'utiliser un simulateur comme
  <a href=\"http://www.speedsim.net/\" target=\"_blank\">SpeedSim</a>
  avant l'envois de toute flotte attaquante.<br/>
--Vous Ãªtes prÃ©venus-<br/>
+-Vous êtes prévenus-<br/>
 </fieldset> </div> </div>";
 	}
 	
@@ -42,7 +42,7 @@ print "<div class='box'><div class='box_background'> </div> <div class='box_cont
 			<td class=\"b\" align=\"center\">
 <b><font size=\"3\">Flotte attaquant (ma flotte)</font></b>
 
-<a style=\"cursor:pointer\" onClick=\"AdvSpy_Sim_atk_CLEAR();\" title='Vider tous les vaisseaux'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+<a style=\"cursor:pointer\" onClick=\"AdvSpy_Sim_atk_CLEAR();\" title='Vider tous les vaisseaux'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 
 			</td>
 			</tr>
@@ -65,9 +65,9 @@ print "<div class='box'><div class='box_background'> </div> <div class='box_cont
 		<td><input type=\"text\" name=\"".'AdvSpy_Sim_atk_'.$valuesarray['PostVar']."\" id=\"".'AdvSpy_Sim_atk_'.$valuesarray['PostVar']."\" size=\"8\" value=\"".$BlockRecherche['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]."\" onkeyup=\"AdvSpy_Sim_RefreshAll();\">
 		</td><td>
 
-		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_atk_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_atk_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 		
-		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." reprÃ©sentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
+		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." représentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
 		</td></tr>
 		";
 	}
@@ -157,9 +157,9 @@ print "<div class='box'><div class='box_background'> </div> <div class='box_cont
 			<table width=\"100%\">
 			<tr>
 			<td class=\"b\" align=\"center\">
-<b><font size=\"3\">Flotte dÃ©fenseur</font></b>
+<b><font size=\"3\">Flotte défenseur</font></b>
 
-<a style=\"cursor:pointer\" onClick=\"AdvSpy_Sim_def_CLEAR();\" title='Vider tous les vaisseaux et dÃ©fenses'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+<a style=\"cursor:pointer\" onClick=\"AdvSpy_Sim_def_CLEAR();\" title='Vider tous les vaisseaux et défenses'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 
 			</td>
 			</tr>
@@ -183,9 +183,9 @@ print "<div class='box'><div class='box_background'> </div> <div class='box_cont
 		<td><input type=\"text\" name=\"".'AdvSpy_Sim_def_'.$valuesarray['PostVar']."\" id=\"".'AdvSpy_Sim_def_'.$valuesarray['PostVar']."\" size=\"8\" value=\"".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]."\" onkeyup=\"AdvSpy_Sim_RefreshAll();\">
 		</td><td>
 		
-		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_def_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_def_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 		
-		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." reprÃ©sentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
+		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." représentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
 		</td></tr>";
 	}
 
@@ -208,16 +208,16 @@ print "<div class='box'><div class='box_background'> </div> <div class='box_cont
 		<td><input type=\"text\" name=\"".'AdvSpy_Sim_def_'.$valuesarray['PostVar']."\" id=\"".'AdvSpy_Sim_def_'.$valuesarray['PostVar']."\" size=\"8\" value=\"".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]."\" onkeyup=\"AdvSpy_Sim_RefreshAll();\">
 		</td><td>
 		
-		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_def_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+		<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_Sim_def_".$valuesarray['PostVar']."').value='';AdvSpy_Sim_RefreshAll();\" title='Vider'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 		
-		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." reprÃ©sentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
+		".AdvSpy_GetHtml_OgspyTooltipImage("Info","Ces ".$BlockRecherche['AdvSpy_Sim_def_'.$valuesarray['PostVar']]." ".$valuesarray['Name']." représentent :<br/><br/>".($RessourcesBalance[$valuesarray['PostVar']]+0)." % des ressources<br/>".($PatateBalance[$valuesarray['PostVar']]+0)." % de la patate<br/><br/>de la flotte totale<br/>")."
 		</td></tr>";
 	}	
 	print "</table>";
 	//================================
 	print "<br/><br/><br/><br/><br/><br/>
 <table width=\"190px\"><tr><td style=\"font-size:9px;\">
-Si les Recherches ne sont pas sondÃ©es dans le Rapport d'Espionnage alors ces technologies Armes / Bouclier / Protection seront utilisÃ©es pour le dÃ©fenseur.
+Si les Recherches ne sont pas sondées dans le Rapport d'Espionnage alors ces technologies Armes / Bouclier / Protection seront utilisées pour le défenseur.
 </td></tr>
 </table>";
 	
@@ -344,10 +344,10 @@ Si les Recherches ne sont pas sondÃ©es dans le Rapport d'Espionnage alors ces te
 		<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" height=\"13\">
 			<tr>
 				<td valign=\"top\">
-					<div id=\"AdvSpy_Sim_def_PatatePRC_f_$key\" style=\"width: 0px; height: 7px; border: 1px solid #FFFFFF; background-color: $color\" title=\"Total des $name du dÃ©fenseur (vaisseaux)\"></div>
+					<div id=\"AdvSpy_Sim_def_PatatePRC_f_$key\" style=\"width: 0px; height: 7px; border: 1px solid #FFFFFF; background-color: $color\" title=\"Total des $name du défenseur (vaisseaux)\"></div>
 				</td>
 				<td valign=\"top\">
-					<div id=\"AdvSpy_Sim_def_PatatePRC_d_$key\" style=\"width: 0px; height: 7px; border: 1px solid #FFFFFF; background-color: $color\" title=\"Total des $name du dÃ©fenseur (dÃ©fenses)\"></div>
+					<div id=\"AdvSpy_Sim_def_PatatePRC_d_$key\" style=\"width: 0px; height: 7px; border: 1px solid #FFFFFF; background-color: $color\" title=\"Total des $name du défenseur (défenses)\"></div>
 				</td>
 			</tr>
 		</table>
@@ -582,7 +582,7 @@ function AdvSpy_PatatePourcentToColor($PatatePourcent){
  * @return void 
  **/
 function beta_CalcVolume($as_CurrentFleet,$as_CurrentDef){
-	$VOLUME=1; // pourquoi 1 ? Parsque ca evite les divisions par 0 ki font chier Ã  faire des if pour les eviter.
+	$VOLUME=1; // pourquoi 1 ? Parsque ca evite les divisions par 0 ki font chier à  faire des if pour les eviter.
 	foreach($as_CurrentFleet as $as_fleetname=>$as_fleetnum){
 		$VOLUME=$VOLUME+$as_fleetnum;
 	}
@@ -662,7 +662,7 @@ function AdvSpy_GetPatateFromFlatArmy($FlatArmy,$Elements='Fleet+Def') {
 		$TechBouclier=$FlatArmy['t_bouclier'];
 		$TechProtect=$FlatArmy['t_protect'];
 	} else {
-		//technologies par defaut (Ã  ameliorer)
+		//technologies par defaut (à  ameliorer)
 		$TechArmes=$BlockRecherche['AdvSpy_Sim_def_t_armes'];
 		$TechBouclier=$BlockRecherche['AdvSpy_Sim_def_t_bouclier'];
 		$TechProtect=$BlockRecherche['AdvSpy_Sim_def_t_protect'];

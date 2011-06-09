@@ -51,12 +51,12 @@ include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_functions.php";
 //include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."AdvSpy_Lang_fra.php";
 // Récupération des chaines de langue
 require_once("mod/advspy/lang/lang_FR/AdvSpy.php");
-if (file_exists("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php")) require_once("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php");
-if (file_exists("mod/advspy/lang/lang_".$user_data['user_language']."/AdvSpy.php")) require("mod/advspy/lang/lang_".$server_config['language']."/AdvSpy.php");
+if (file_exists("mod/advspy/lang/lang_FR/AdvSpy.php")) require_once("mod/advspy/lang/lang_FR/AdvSpy.php");
+if (file_exists("mod/advspy/lang/lang_FR/AdvSpy.php")) require("mod/advspy/lang/lang_FR/AdvSpy.php");
 
 //versions concomitantes
-$AdvSpyConfig['version']['ogspy']='4.0';
-$AdvSpyConfig['version']['ogame']='[FR]0.83';
+$AdvSpyConfig['version']['ogspy']='3.7';
+$AdvSpyConfig['version']['ogame']='[FR]2.22';
 
 if(isset($pub_RaidAlert_Row) && isset($pub_RaidAlert_System) && isset($pub_RaidAlert_Galaxy))
 {

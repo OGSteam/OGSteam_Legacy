@@ -6,7 +6,7 @@
 *	created		: 16/08/2006
 ***************************************************************************/
 
-// DÃ©clarations OgSpy
+// Déclarations OgSpy
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if (!defined('IN_MOD_ADVSPY')) die("Hacking attempt");
 
@@ -32,24 +32,24 @@ function AdvSpy_PrintHtml_Menu_Tris(){
 	<tr>
 		<td colspan=\"2\" align=\"center\">
 		<a onClick=\"AdvSpy_SearchResultMoin();\" style=\"cursor:pointer\" >&lt;&nbsp;-</a>&nbsp;
-		<a onClick=\"oldPP=(parseInt(document.getElementById('AdvSpy_SearchResult_Max').value,10)-parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10))+1;newPP=parseInt(prompt('Afficher combien de rÃ©sultats par page ?',oldPP));document.getElementById('AdvSpy_SearchResult_Max').value=parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10)+newPP-1;document.getElementById('AdvSpy_SearchResult_PerPage').innerHTML=newPP;\" style=\"cursor:pointer;font-weight:normal\" id=\"AdvSpy_SearchResult_PPTitle\">Afficher <span id=\"AdvSpy_SearchResult_PerPage\">".(( $BlockRecherche['AdvSpy_SearchResult_Max'] - $BlockRecherche['AdvSpy_SearchResult_Min'] )+1)."</span> rÃ©sultats</a>
+		<a onClick=\"oldPP=(parseInt(document.getElementById('AdvSpy_SearchResult_Max').value,10)-parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10))+1;newPP=parseInt(prompt('Afficher combien de résultats par page ?',oldPP));document.getElementById('AdvSpy_SearchResult_Max').value=parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10)+newPP-1;document.getElementById('AdvSpy_SearchResult_PerPage').innerHTML=newPP;\" style=\"cursor:pointer;font-weight:normal\" id=\"AdvSpy_SearchResult_PPTitle\">Afficher <span id=\"AdvSpy_SearchResult_PerPage\">".(( $BlockRecherche['AdvSpy_SearchResult_Max'] - $BlockRecherche['AdvSpy_SearchResult_Min'] )+1)."</span> résultats</a>
 		<a onClick=\"AdvSpy_SearchResultPlus();\" style=\"cursor:pointer\" >+&nbsp;&gt;</a>
 		</td>
 	</tr>
 	<tr>
 		<td align=\"center\">de <input type=\"text\" name=\"AdvSpy_SearchResult_Min\" id=\"AdvSpy_SearchResult_Min\" size=\"4\" value=\"".$BlockRecherche['AdvSpy_SearchResult_Min']."\" onkeyup=\"document.getElementById('AdvSpy_SearchResult_PerPage').innerHTML=(parseInt(document.getElementById('AdvSpy_SearchResult_Max').value,10)-parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10))+1\" ></td>
-		<td align=\"center\">Ã  <input type=\"text\" name=\"AdvSpy_SearchResult_Max\" id=\"AdvSpy_SearchResult_Max\" size=\"4\" value=\"".$BlockRecherche['AdvSpy_SearchResult_Max']."\" onkeyup=\"document.getElementById('AdvSpy_SearchResult_PerPage').innerHTML=(parseInt(document.getElementById('AdvSpy_SearchResult_Max').value,10)-parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10))+1\" ></td>
+		<td align=\"center\">À  <input type=\"text\" name=\"AdvSpy_SearchResult_Max\" id=\"AdvSpy_SearchResult_Max\" size=\"4\" value=\"".$BlockRecherche['AdvSpy_SearchResult_Max']."\" onkeyup=\"document.getElementById('AdvSpy_SearchResult_PerPage').innerHTML=(parseInt(document.getElementById('AdvSpy_SearchResult_Max').value,10)-parseInt(document.getElementById('AdvSpy_SearchResult_Min').value,10))+1\" ></td>
 	</tr>
 	</table>
 	";
 	
 	print "<div align=\"center\" style=\"text-align: center;\">";
-	if (($BlockRecherche['AdvSpy_OnlyMyScan']=="ON") ) { // cochÃ© par dÃ©faut
+	if (($BlockRecherche['AdvSpy_OnlyMyScan']=="ON") ) { // coché par défaut
 		print "<input type=\"checkbox\" name=\"AdvSpy_OnlyMyScan\" id=\"AdvSpy_OnlyMyScan\" value=\"ON\" checked>";
 	} else {
 		print "<input type=\"checkbox\" name=\"AdvSpy_OnlyMyScan\" id=\"AdvSpy_OnlyMyScan\" value=\"ON\">";
 	}
-	print "<label title=\"N'affiche que mes RE que j'ai envoyÃ© moi mÃªme\" style=\"cursor:pointer\" for=\"AdvSpy_OnlyMyScan\">Afficher uniquement <u>mes</u> RE</label>\n";
+	print "<label title=\"N'affiche que mes RE que j'ai envoyé moi mÀªme\" style=\"cursor:pointer\" for=\"AdvSpy_OnlyMyScan\">Afficher uniquement <u>mes</u> RE</label>\n";
 	
 	print "</div>";
 
@@ -68,7 +68,7 @@ function AdvSpy_PrintHtml_Menu_Secteur(){
 	<tr>
 		<td></td>
 		<td>Galaxie</td>
-		<td>SystÃ¨me</td>
+		<td>Système</td>
 		<td>Rang</td>
 	</tr>
 	<tr>
@@ -101,14 +101,14 @@ function AdvSpy_PrintHtml_Menu_Secteur(){
 <a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_GalaxyMin').value='9';document.getElementById('AdvSpy_GalaxyMax').value='9';\" title=\"Galaxie 9\">[9]</a>";
 
 	} elseif ($AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max'] == 50) {
-	// Uni 50 (50 Galaxies)
+	//nombre de galaxie
 		print "<font size=\"1\">";
 		print "<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_GalaxyMin').value='1';document.getElementById('AdvSpy_GalaxyMax').value='".$AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max']."';document.getElementById('AdvSpy_SystemMin').value='1';document.getElementById('AdvSpy_SystemMax').value='".$AdvSpyConfig['Settings']['OgameUniverse_System_Max']."';document.getElementById('AdvSpy_RowMin').value='1';document.getElementById('AdvSpy_RowMax').value='".$AdvSpyConfig['Settings']['OgameUniverse_Row_Max']."';\" title=\"Tous l'univers\">[*-*]</a>&nbsp;\n";
 		$i=0;
 		while($i<=9){
 			$s=$i*5+1;
 			$e=$i*5+5;
-			print "<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_GalaxyMin').value='$s';document.getElementById('AdvSpy_GalaxyMax').value='$e';\" title=\"Galaxie ".$s." Ã  ".$e."\">[".$s."-".$e."]</a>&nbsp;\n";
+			print "<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_GalaxyMin').value='$s';document.getElementById('AdvSpy_GalaxyMax').value='$e';\" title=\"Galaxie ".$s." À  ".$e."\">[".$s."-".$e."]</a>&nbsp;\n";
 			$i++;
 		} // while
 
@@ -123,7 +123,7 @@ function AdvSpy_PrintHtml_Menu_Secteur(){
 	
 	<tr>
         <td colspan=\"4\" >
-            <b>Ã  +- <input type=\"text\" name=\"rangeSys\" size=\"3\" id=\"rangeSys\" value=\"20\" onChange=\"AdvSpy_SelPlanette(document.getElementById('planetteSel').value,this.value)\"> systÃ¨mes de :<br/>
+            <b>À  +- <input type=\"text\" name=\"rangeSys\" size=\"3\" id=\"rangeSys\" value=\"20\" onChange=\"AdvSpy_SelPlanette(document.getElementById('planetteSel').value,this.value)\"> systèmes de :<br/>
             <select name=\"planetteSel\"  id=\"planetteSel\" onChange=\"AdvSpy_SelPlanette(this.value,document.getElementById('rangeSys').value)\">
             <option value=''>Aucune</option>
             ".AdvSpy_GetEmpirePlanetsListAsOptions()."
@@ -135,9 +135,9 @@ function AdvSpy_PrintHtml_Menu_Secteur(){
 	
 </table>
 <br/>
-Cacher ces planÃ¨tes :<br/>
+Cacher ces planètes :<br/>
 <input type=\"text\" name=\"AdvSpy_CoordsToHide\" id=\"AdvSpy_CoordsToHide\" size=\"20\" value=\"".$BlockRecherche['AdvSpy_CoordsToHide']."\">
-<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_CoordsToHide').value='';AdvSpy_DivResult_SHOWALL();\" title='Effacer la liste'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_CoordsToHide').value='';AdvSpy_DivResult_SHOWALL();\" title='Effacer la liste'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 </p>
 </fieldset>";
 
@@ -153,8 +153,8 @@ function AdvSpy_PrintHtml_Menu_RE(){
 	print "<br/>\n";
 	print AdvSpy_GetHtml_Menu_DetailSondage();
 	//$BlockRecherche['AdvSpy_PlanetSearch']
-	print "<br/>Nom de planÃ¨te (ou de lune) :<br/><input type=\"text\" name=\"AdvSpy_PlanetSearch\" id=\"AdvSpy_PlanetSearch\" value=\"".$BlockRecherche['AdvSpy_PlanetSearch']."\"/>
-	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_PlanetSearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>
+	print "<br/>Nom de planète (ou de lune) :<br/><input type=\"text\" name=\"AdvSpy_PlanetSearch\" id=\"AdvSpy_PlanetSearch\" value=\"".$BlockRecherche['AdvSpy_PlanetSearch']."\"/>
+	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_PlanetSearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>
 	";
 	print "</fieldset>\n";
 }
@@ -177,12 +177,12 @@ function AdvSpy_GetHtml_Menu_NoDoublon(){
 	global $AdvSpyConfig, $lang,$BlockRecherche;
 	$out="";
 	
-	if (($BlockRecherche['AdvSpy_NoDoublon']=="ON") OR (!$BlockRecherche['ChercherOK']) ) { // cochÃ© par dÃ©faut
+	if (($BlockRecherche['AdvSpy_NoDoublon']=="ON") OR (!$BlockRecherche['ChercherOK']) ) { // coché par défaut
 		$out.="<input type=\"checkbox\" name=\"AdvSpy_NoDoublon\" id=\"AdvSpy_NoDoublon\" value=\"ON\" checked>";
 	} else {
 		$out.="<input type=\"checkbox\" name=\"AdvSpy_NoDoublon\" id=\"AdvSpy_NoDoublon\" value=\"ON\">";
 	}
-	$out.="<label title=\"N'affiche que le dernier RE par planÃ¨te\" style=\"cursor:pointer\" for=\"AdvSpy_NoDoublon\">Pas de doublons.</label><br/>\n";
+	$out.="<label title=\"N'affiche que le dernier RE par planète\" style=\"cursor:pointer\" for=\"AdvSpy_NoDoublon\">Pas de doublons.</label><br/>\n";
 	return $out;
 }
 
@@ -216,7 +216,7 @@ function AdvSpy_GetHtml_Menu_DetailSondage(){
 		} else {
 			$out.="<input type=\"checkbox\" name=\"AdvSpy_Reduire_$Cat\" id=\"AdvSpy_Reduire_$Cat\" value=\"ON\" onClick=\"if (this.checked) { AdvSpy_DivCat_".$Cat."_HIDEALL() } else { AdvSpy_DivCat_".$Cat."_SHOWALL() } ;\" >\n";
 		}
-		$out.="<label style=\"cursor:pointer\" for=\"AdvSpy_Reduire_$Cat\" title=\"RÃ©duit la vue des $name Ã  l'affichage\"><font color='".$AdvSpyConfig['color'][$Cat]."'>RÃ©duire ?</font></label><br/>\n";
+		$out.="<label style=\"cursor:pointer\" for=\"AdvSpy_Reduire_$Cat\" title=\"Réduit la vue des $name À  l'affichage\"><font color='".$AdvSpyConfig['color'][$Cat]."'>Réduire ?</font></label><br/>\n";
 
 		
 	}
@@ -241,11 +241,11 @@ function AdvSpy_PrintHtml_Menu_Player(){
 	
 	// Recherche par nom de joueur
 	print "Nom joueur :<br/><input type=\"text\" name=\"AdvSpy_PlayerSearch\" id=\"AdvSpy_PlayerSearch\" size=\"15\" value=\"".$BlockRecherche['AdvSpy_PlayerSearch']."\">
-	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_PlayerSearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a><br/>";
+	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_PlayerSearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a><br/>";
 
 	// Recherche par alliance
 	print "Tag alliance :<br/><input type=\"text\" name=\"AdvSpy_AllySearch\" id=\"AdvSpy_AllySearch\" size=\"7\" value=\"".$BlockRecherche['AdvSpy_AllySearch']."\">
-	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_AllySearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\"></a>";
+	<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_AllySearch').value=''\" title='Effacer la recherche'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\"></a>";
 
 	print "</fieldset>";
 }
@@ -266,22 +266,22 @@ function AdvSpy_PrintHtml_Menu_Ressources(){
 	} else {
 		print "<input type=\"checkbox\" name=\"AdvSpy_OnlyGrandNombre\" id=\"AdvSpy_OnlyGrandNombre\" value=\"ON\">";
 	}
-	print "<label style=\"cursor:pointer\" for=\"AdvSpy_OnlyGrandNombre\" title=\"N'affiche le RE que si une des ressources dÃ©passe le seuil 'Grand Nombre'\">Que si dÃ©passÃ©.</label><br/>";
+	print "<label style=\"cursor:pointer\" for=\"AdvSpy_OnlyGrandNombre\" title=\"N'affiche le RE que si une des ressources dépasse le seuil 'Grand Nombre'\">Que si dépassé.</label><br/>";
 
 	// Metal Mini (0=aucun)
-	print "<br/><table><tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinMetal(0)\" title=\"Remettre Ã  0\">Metal Mini : </a></td>\n";
+	print "<br/><table><tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinMetal(0)\" title=\"Remettre À  0\">Metal Mini : </a></td>\n";
 	print "<td><input type=\"text\" name=\"AdvSpy_RessourceMinMetal\" id=\"AdvSpy_RessourceMinMetal\" size=\"5\" value=\"".$BlockRecherche['AdvSpy_RessourceMinMetal']."\"> K</td></tr>";
 
 	// Cristal Mini (0=aucun)
-	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinCristal(0)\" title=\"Remettre Ã  0\">Cristal Mini : </a></td>\n";
+	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinCristal(0)\" title=\"Remettre À  0\">Cristal Mini : </a></td>\n";
 	print "<td><input type=\"text\" name=\"AdvSpy_RessourceMinCristal\" id=\"AdvSpy_RessourceMinCristal\" size=\"5\" value=\"".$BlockRecherche['AdvSpy_RessourceMinCristal']."\"> K</td></tr>";
 
 	// Deut Mini (0=aucun)
-	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinDeut(0)\" title=\"Remettre Ã  0\">Deut Mini : </a></td>\n";
+	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinDeut(0)\" title=\"Remettre À  0\">Deut Mini : </a></td>\n";
 	print "<td><input type=\"text\" name=\"AdvSpy_RessourceMinDeut\" id=\"AdvSpy_RessourceMinDeut\" size=\"5\" value=\"".$BlockRecherche['AdvSpy_RessourceMinDeut']."\"> K</td></tr>";
 
 	// Energie Mini (0=aucun)
-	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinEnergie(0)\" title=\"Remettre Ã  0\">Energie Mini : </a></td>\n";
+	print "<tr><td><a style=\"cursor:pointer\" onClick=\"AdvSpy_SetMinEnergie(0)\" title=\"Remettre À  0\">Energie Mini : </a></td>\n";
 	print "<td><input type=\"text\" name=\"AdvSpy_RessourceMinEnergie\" id=\"AdvSpy_RessourceMinEnergie\" size=\"5\" value=\"".$BlockRecherche['AdvSpy_RessourceMinEnergie']."\"> K</td></tr>";
 	
 	print "</table></fieldset>";
@@ -312,14 +312,14 @@ function AdvSpy_PrintHtml_Menu_Analyses(){
 	} else {
 		print "<input type=\"checkbox\" name=\"AdvSpy_HideRaided\" id=\"AdvSpy_HideRaided\" value=\"ON\" onClick=\"if (this.checked) { document.getElementById('AdvSpy_OnlyRaided').checked=0 };\">";
 	}
-	print "<label style=\"cursor:pointer\" for=\"AdvSpy_HideRaided\" title=\"Cacher les RE raidÃ©s\">Cacher les RE raidÃ©s</label><br/>";
+	print "<label style=\"cursor:pointer\" for=\"AdvSpy_HideRaided\" title=\"Cacher les RE raidés\">Cacher les RE raidés</label><br/>";
 	
 	if ($BlockRecherche['AdvSpy_OnlyRaided']=="ON") {
 		print "<input type=\"checkbox\" name=\"AdvSpy_OnlyRaided\" id=\"AdvSpy_OnlyRaided\" value=\"ON\" onClick=\"if (this.checked) { document.getElementById('AdvSpy_HideRaided').checked=0 };\" checked>";
 	} else {
 		print "<input type=\"checkbox\" name=\"AdvSpy_OnlyRaided\" id=\"AdvSpy_OnlyRaided\" value=\"ON\" onClick=\"if (this.checked) { document.getElementById('AdvSpy_HideRaided').checked=0 };\">";
 	}
-	print "<label style=\"cursor:pointer\" for=\"AdvSpy_OnlyRaided\" title=\"N'afficher que les RE raidÃ©s\">N'afficher que les RE raidÃ©s</label><br/>";
+	print "<label style=\"cursor:pointer\" for=\"AdvSpy_OnlyRaided\" title=\"N'afficher que les RE raidés\">N'afficher que les RE raidés</label><br/>";
 
 	
 	print "il y a moin de...<br/>";
@@ -361,7 +361,7 @@ function AdvSpy_GetHtml_Menu_LISTES($SingleSpyCat='',$hide=1){
 	foreach($SpyCatList as $Cat=>$Catname){
 		$CatColor=$AdvSpyConfig['color'][$Cat];
 		$out.="<fieldset style=\"padding: 3px;\"><legend><a style=\"cursor:pointer\" title=\"Click pour Afficher/Masquer\" onClick=\"AdvSpy_ToggleVisibilityFromID('AdvSpy_DivMenuListes_$Cat')\">
-		<b> $Catname </b></a> | <label style=\"cursor:pointer\" for=\"AdvSpy_Reduire_$Cat\" title=\"RÃ©duit la vue des $Catname Ã  l'affichage\">
+		<b> $Catname </b></a> | <label style=\"cursor:pointer\" for=\"AdvSpy_Reduire_$Cat\" title=\"Réduit la vue des $Catname À  l'affichage\">
 		<font color='".$AdvSpyConfig['color'][$Cat]."'><b>R?</b></font></label> </legend>
 		<div id=\"AdvSpy_DivMenuListes_$Cat\"$hidestyle>\n";
 		
@@ -382,14 +382,14 @@ function AdvSpy_GetHtml_Menu_LISTES($SingleSpyCat='',$hide=1){
 
 <select name=\"".$PostVar."\" id=\"".$PostVar."\" size=\"1\" style=\"font-weight: bold;\" onChange=\"CheckOptionList('".$PostVar."')\">";
 			if ($BlockRecherche[$PostVar]=="indifferent") {
-			    $out.="<option value=\"indifferent\" selected>IndiffÃ©rent</option>";
+			    $out.="<option value=\"indifferent\" selected>Indifférent</option>";
 			} else {
-				$out.="<option value=\"indifferent\">IndiffÃ©rent</option>";
+				$out.="<option value=\"indifferent\">Indifférent</option>";
 			}
 			if ($BlockRecherche[$PostVar]=="present") {
-			    $out.="<option value=\"present\" style=\"color: red\" selected>PrÃ©sent (au moins 1)</option>";
+			    $out.="<option value=\"present\" style=\"color: red\" selected>Présent (au moins 1)</option>";
 			} else {
-				$out.="<option value=\"present\" style=\"color: red\">PrÃ©sent (au moins 1)</option>";
+				$out.="<option value=\"present\" style=\"color: red\">Présent (au moins 1)</option>";
 			}
 			if ($BlockRecherche[$PostVar]=="absent") {
 			    $out.="<option value=\"absent\" style=\"color: green\" selected>Absent</option>";

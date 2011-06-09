@@ -31,7 +31,7 @@ function AdvSpy_START()
 
     //on charge les variables d'environement Ogspy dans AdvSpy.
     $AdvSpyConfig['User_Empire'] = user_get_empire();
-    $AdvSpyConfig['User_Data'] = $user_data;
+	$AdvSpyConfig['User_Data'] = $user_data;
 
     $AdvSpyConfig['UserIsAdmin'] = 0;
     if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1)
@@ -2047,10 +2047,10 @@ function AdvSpy_Options_GetHtmlFormatedValue($Value = '', $Type)
         if ($Value == '') {
             return '';
         } elseif ($Value == 1) {
-            return "<img border=\"0\" src=\"./mod/AdvSpy/checked.png\" title=\"" . $lang['UI_Lang']['OptionIsYes'] .
+            return "<img border=\"0\" src=\"./mod/advspy/images/checked.png\" title=\"" . $lang['UI_Lang']['OptionIsYes'] .
                 " ($Value)\"/>";
         } elseif ($Value == 0) {
-            return "<img border=\"0\" src=\"./mod/AdvSpy/unchecked.png\" title=\"" . $lang['UI_Lang']['OptionIsNo'] .
+            return "<img border=\"0\" src=\"./mod/advspy/images/unchecked.png\" title=\"" . $lang['UI_Lang']['OptionIsNo'] .
                 " ($Value)\"/>";
         }
     }

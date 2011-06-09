@@ -8,9 +8,11 @@ global $db;
 //includes advspy (environement de base)
 define("IN_MOD_ADVSPY",TRUE);
 //ajout de advspy à la liste des mods actifs.
+$is_ok = false;
 $mod_folder= "advspy";
 install_mod($mod_folder);
-
+if ($is_ok == true)
+  {
 $AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/".$mod_folder."/";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 
@@ -54,6 +56,9 @@ $db->sql_query($query);
 //sauvegardes crées par défaut
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_DefaultSaves.php";
 $db->sql_query(AdvSpy_Config_GetSqlOfDefaultSaves($AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']));
-
-
-?>
+  }
+else
+  {
+  echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+  }
+  ?>
