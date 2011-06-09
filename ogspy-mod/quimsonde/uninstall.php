@@ -23,7 +23,7 @@ define("FOLDER_QMS","mod/quimsonde");
 include(FOLDER_QMS."/lang/lang_french.php");
 
 // On récupère l'id du mod pour xtense... (merci Paradoxx)
-$mod_name = QuiMSonde;
+$mod_name = "QuiMSonde";
 $result = $db->sql_query ("SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='QuiMSonde' AND `active`='1' LIMIT 1");
 list($mod_id) = $db->sql_fetch_row($result);
 
@@ -45,7 +45,7 @@ if($db->sql_numrows($result) != 0){
 	// S'il est dedans : alors on l'enlève!
 	if($db->sql_numrows($result) != 0)
 		$db->sql_query("DELETE FROM ".TABLE_XTENSE_CALLBACKS." where mod_id = ".$mod_id);
-		echo("<script> alert('La compatibilité du mod eXpedition avec le mod Xtense2 a été désinstallée !') </script>");
+		echo("<script> alert('La compatibilité du mod Qui Me Sonde avec le mod Xtense2 a été désinstallée !') </script>");
 }
 
 

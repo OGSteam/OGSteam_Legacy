@@ -1,3 +1,3 @@
-QuiMSonde
+Qui Me Sonde
 1.0.0
-QuiMSonde,QuiMSonde,QuiMSonde,quimsonde,QuiMSonde.php,1,0
+Qui Me Sonde,QuiMSonde,QuiMSonde,quimsonde,QuiMSonde.php,1,0

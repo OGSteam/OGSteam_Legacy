@@ -26,7 +26,7 @@ $is_ok = install_mod ($mod_folder);
 if ($is_ok == true)
 	{
 		// Est-ce qu'une table existe déjà ? 
-		$query = $db->sql_query('SHOW TABLES FROM `'.$db->dbname.'` LIKE "'.TABLE_QMS.'" ');
+		$query = $db->sql_query('SHOW TABLES LIKE "'.TABLE_QMS.'" ');
 		if($db->sql_numrows($query) != 0)
 			{	// Oui, alors on regarde si y'a bien la colonne distance, ajouté à la v1.0 
 				$col_distance = false;
@@ -114,13 +114,13 @@ if ($is_ok == true)
 					$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES 
 					('.$mod_id.', "qms_import_enemy_spy", "ennemy_spy", 1)';
 					$db->sql_query($query);		
-					echo("<script> alert('La compatibilité du mod QuiMSonde avec le mod Xtense2 est installée !') </script>");
+					echo("<script> alert('La compatibilité du mod Qui Me Sonde avec le mod Xtense2 est installée !') </script>");
 				}
 			}	
 		else
 			{
 			//On averti qu'Xtense 2 n'est pas installé :
-			echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod QuiMSonde ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
+			echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod Qui Me Sonde ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
 			}	
 	}
 else
