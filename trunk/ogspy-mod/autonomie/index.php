@@ -61,9 +61,10 @@ if ($pub_page == "historique")
 }
 
 //insertion du pied de page
-echo'<table><p align=\'center\'><a href="">'.$mod.'</a> | Version '.$version.' | Mirtador | 2006</p></table>';
+echo'<br><br><br><br><table><p align=\'center\'><a href="">'.$mod.'</a> | Version '.$version.' | Mirtador | 2006</p></table>';
 echo"Autonomie de production des mines, calcul des GT...<br>
 Par <a href='http://board.ogsteam.fr/forums/message_send.php?id=4498'>Mirtador</a>, modifié par <a href='http://board.ogsteam.fr/forums/message_send.php?id=227'>oXid_FoX</a>.<br />
+Remise à jour par <a>Shad</a>.<br />
 <a href='http://board.ogsteam.fr/forums/sujet-2388-mod-autonomie'>Informations</a>";
 
 //Insertion du bas de page d'OGSpy
