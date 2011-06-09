@@ -1,2 +1,3 @@
-MOD Autonomie
-1.5.3
+autonomie
+1.6.0
+autonomie,Autonomie <br> de vos planètes,autonomie,autonomie,index.php,1,0

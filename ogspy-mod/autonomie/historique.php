@@ -107,4 +107,15 @@ note: Il faut modifier dans le code à la 18ème ligne le chiffre pour le faire. D
 <li>Mise en conformité du numéro de version de mod.</li>
 </ul></td>
 </tr>
+<tr>
+<th><font color="#FF0000">1.6.0 by Shad</font></th>
+<td><ul>
+<li>Mise en conformité des functions install, uninstall et update avec OGSpy 3.0.7.</li>
+<li>Récupération des formules de calcul sur OGSpy</li>
+<li>Prise en compte de la vitesse de OGSpy</li>
+<li>Formatage des nombes</li>
+<li>Ajustement de td qui couper en deux le nombre de vaisseaux nécessaire</li>
+<li>Mise à jour du charset</li>
+</ul></td>
+</tr>
 </table>
