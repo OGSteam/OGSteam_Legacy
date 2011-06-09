@@ -10,7 +10,6 @@ if (!defined('IN_SPYOGAME')) {
 die("Hacking attempt");
 }
 
-
 ?>
 
 
@@ -18,7 +17,7 @@ die("Hacking attempt");
 
 <div id="recy" name="recy"> 
 	<form method="POST" action="index.php?action=recycleurs&sub_action=add"> 
-	<table><tr><td> 
+	<table  align="center"><tr><td> 
 		<table width="450" style="border:2px #003399 solid;" cellpadding="3"> 
 			
 				<td align="center" class="c" colspan="4">Formulaire d'envoie des recycleurs</td> 
@@ -46,7 +45,7 @@ die("Hacking attempt");
 </div> 
 <center>________________________________________</center>
 <?php
-for ( $i = 1; $i < 10; $i++) {
+for ( $i = 1; $i < $nb_galaxies; $i++) {
 	echo '<center>
 	<table border="2" width="90%">
 	<b><td colspan="6"><font size="5" color="#FFFFFF"><A name='.$i.'>G'.$i.'</A></font></b></tr>

@@ -1,7 +1,14 @@
-<table><tr><td> 
-		<table width="450" style="border:2px #003399 solid;" cellpadding="3"> 
+<table  align="center"><tr><td> 
+		<table width="480" style="border:2px #003399 solid;" cellpadding="3"> 
 			
 				<td align="center" class="c" colspan="4">Version</td> 
+				<tr> 
+				<th align="center" width="50">- 1.0.0</th> 
+				<br></th> 
+				<th align="center">- Adaptation à OGSpy 3.0.7<br>
+- Mise en conformité de la page index<br>
+- Récupération de la taille de l'univers via OGSpy<br>
+				</tr><tr> 
 			<tr> 
 				<th align="center">- 1.1</th> 
 				<br></th> 
@@ -33,7 +40,7 @@
 		</table> 
 		</td></tr></table> 
 		
-		<table><tr><td> 
+		<table  align="center"><tr><td> 
 		<table width="450" style="border:2px #003399 solid;" cellpadding="3"> 
 			
 				<td align="center" class="c" colspan="4">Info</td> 
