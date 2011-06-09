@@ -9,6 +9,10 @@
 
 
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
+global $db;
+$mod_uninstall_name = "modSQL";
+$mod_uninstall_table = "";
+uninstall_mod($mod_uninstall_name, $mod_uninstall_table);
 
 // suppression du paramètre modSQL_coadmin
 $queries[] = 'DELETE FROM `'.TABLE_CONFIG.'` WHERE `config_name` = \'modSQL_coadmin\'';
