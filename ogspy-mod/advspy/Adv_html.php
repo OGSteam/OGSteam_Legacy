@@ -6,7 +6,7 @@
 *	created		: 16/08/2006
 ***************************************************************************/
 
-// DÃ©clarations OgSpy
+// Déclarations OgSpy
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if (!defined('IN_MOD_ADVSPY')) die("Hacking attempt");
 
@@ -87,7 +87,7 @@ function AdvSpy_PrintHtml_JavaScript_StaticFunctions(){
 <script type=\"text/javascript\">
 <!--
 
-// hard-coded pour l'instant, Ã  rendre polymorphe...
+// hard-coded pour l'instant, À  rendre polymorphe...
 
 function SendFleetToSimDef(pt,gt,cle,clo,cro,vb,vc,rec,se,bom,sat,des,edlm,traq,mis,lle,llo,gaus,ion,pla,pb,gb,mi,mip,techA,techB,techP) {
 	document.getElementById(\"AdvSpy_Sim_def_f_pt\").value=pt;
@@ -585,7 +585,7 @@ function AdvSpy_Sim_RefreshAll(){
 		$Structure=$Params['Structure'];
 		
 		print "
-	// initialisation des dÃ©fenses def
+	// initialisation des défenses def
 	if ( (document.getElementById('AdvSpy_Sim_def_$PostVar').value!='') && (isNumeric(document.getElementById('AdvSpy_Sim_def_$PostVar').value)) ) {
 		AdvSpy_Sim_def_$PostVar=Number( parseFloat(document.getElementById('AdvSpy_Sim_def_$PostVar').value)	);
 	} else {
@@ -630,7 +630,7 @@ function AdvSpy_Sim_RefreshAll(){
 	document.getElementById('AdvSpy_Sim_def_Patate_total').innerHTML=AdvSpy_GetHtmlFormatedNumber(Number((AdvSpy_Sim_def_Patate_f_total+AdvSpy_Sim_def_Patate_d_total)/1000000).toFixed(2),' ');
 
 
-	// PondÃ©ration pour le graphique  :   armes*6.6    bouclier*28      protect*0.1
+	// Pondération pour le graphique  :   armes*6.6    bouclier*28      protect*0.1
 
 	AdvSpy_Sim_atk_Patate_totalP=  (AdvSpy_Sim_atk_Patate_armes*6.6)   + (AdvSpy_Sim_atk_Patate_bouclier*28)   + (AdvSpy_Sim_atk_Patate_protect*0.1);
 	AdvSpy_Sim_def_Patate_f_totalP=(AdvSpy_Sim_def_Patate_f_armes*6.6) + (AdvSpy_Sim_def_Patate_f_bouclier*28) + (AdvSpy_Sim_def_Patate_f_protect*0.1);
@@ -883,11 +883,11 @@ function AdvSpy_PrintHtml_ClipboardCopyAlert(){
 	global $AdvSpyConfig, $lang;
 
 	print "<fieldset style=\"padding: 2px; ; color:#C0C0C0; background-color:#000040\">
-<legend><b>".$lang['UI_Lang']['ClipboardCopyAlert_Title']." : <a style=\"cursor:pointer\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_FireFoxCopyAlertDiv');\"><img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a></b></legend>
+<legend><b>".$lang['UI_Lang']['ClipboardCopyAlert_Title']." : <a style=\"cursor:pointer\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_FireFoxCopyAlertDiv');\"><img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a></b></legend>
 <br/><br/>
 ".$lang['UI_Lang']['ClipboardCopyAlert_Text']."
 <br/><br/>
-<a style=\"cursor:pointer\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_FireFoxCopyAlertDiv');\"><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png\" border=\"0\" alt=\"[X]\" title=\"".$lang['UI_Lang']['CloseMsgText']."\"> ".$lang['UI_Lang']['CloseMsgText']." <img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a>
+<a style=\"cursor:pointer\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_FireFoxCopyAlertDiv');\"><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png\" border=\"0\" alt=\"[X]\" title=\"".$lang['UI_Lang']['CloseMsgText']."\"> ".$lang['UI_Lang']['CloseMsgText']." <img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
@@ -898,7 +898,7 @@ function AdvSpy_PrintHtml_ClipboardCopyAlert(){
 
 
 /**
- * Reconstruction d'un RE en texte Ã  partir d'un FlatSpyRepport
+ * Reconstruction d'un RE en texte À  partir d'un FlatSpyRepport
  **/
 function AdvSpy_GetFromFlatSpyRepportReStyleString($FlatSpyRepport){
 	global $AdvSpyConfig, $lang;
@@ -949,7 +949,7 @@ function AdvSpy_GetFromFlatSpyRepportReStyleString($FlatSpyRepport){
 
 
 /**
- * Reconstruction d'un RE en BBCode Ã  partir d'un FlatSpyRepport(Advanced ou pas)
+ * Reconstruction d'un RE en BBCode À  partir d'un FlatSpyRepport(Advanced ou pas)
  **/
 function AdvSpy_GetFromFlatSpyRepportReStyleBBCode($FlatSpyRepport){
 	global $AdvSpyConfig, $lang;
@@ -1010,7 +1010,7 @@ function AdvSpy_GetFromFlatSpyRepportReStyleBBCode($FlatSpyRepport){
 
 
 /**
- * Affichage d'un RE en mode HTML (l'interieur des rÃ©sultat)
+ * Affichage d'un RE en mode HTML (l'interieur des résultat)
  **/
 function AdvSpy_PrintSpyRepportHtmlResult($FlatSpyRepport){
 	global $AdvSpyConfig, $lang,$BlockRecherche;
@@ -1138,7 +1138,7 @@ function AdvSpy_GetHtml_OgspyTooltipImage($title,$text,$size=300,$picturepath='i
 
 /**
  * Execution de la requete SQL, filtre, tris, et enfin affichage des RE.
- * c'est pas le meilleur endroit oÃ¹ placer tout ca (adv_html), mais bon...
+ * c'est pas le meilleur endroit oÀ¹ placer tout ca (adv_html), mais bon...
  **/
 function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 	global $AdvSpyConfig, $lang,$db,$BlockRecherche;
@@ -1154,12 +1154,12 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		if ($query=AdvSpy_GetSqlRequestFromBlockRecherche($BlockRecherche)) {
 		    $result = $db->sql_query($query);
 		} else {
-			print "(Error: Probleme avec votre recherche, le refus vien du gÃ©nÃ©rateur de reqete SQL pour les RE) ".$nothing;
+			print "(Error: Probleme avec votre recherche, le refus vien du générateur de reqete SQL pour les RE) ".$nothing;
 		}
 		if ($RaidAlertQuery=AdvSpy_GetRaidAlertSqlRequestFromBlockRecherche($BlockRecherche)) {
 		    $RaidAlertResult = $db->sql_query($RaidAlertQuery);
 		} else {
-			print "(Error: Probleme avec votre recherche, le refus vien du gÃ©nÃ©rateur de reqete SQL pour les RaidAlert) ".$nothing;
+			print "(Error: Probleme avec votre recherche, le refus vien du générateur de reqete SQL pour les RaidAlert) ".$nothing;
 		}		
 	} else {
 		print $nothing;
@@ -1173,7 +1173,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		if ($BlockRecherche['AdvSpy_TRIS']==1) { // tris par date mais en fait pas de tris parsque c deja dans le SQL donc pas besoin
 			$SortCriteria='';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==2) { // tris par date inversÃ©
+		if ($BlockRecherche['AdvSpy_TRIS']==2) { // tris par date inversé
 			$SortCriteria='datadate';
 			$SortOrder='asc';
 		}
@@ -1218,11 +1218,11 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 			$SortCriteria='PATATE_f';
 			$SortOrder='desc';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==13) { // PATATE- DÃ©fenses (<)
+		if ($BlockRecherche['AdvSpy_TRIS']==13) { // PATATE- Défenses (<)
 			$SortCriteria='PATATE_d';
 			$SortOrder='asc';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==14) { // PATATE- DÃ©fenses (>)
+		if ($BlockRecherche['AdvSpy_TRIS']==14) { // PATATE- Défenses (>)
 			$SortCriteria='PATATE_d';
 			$SortOrder='desc';
 		}
@@ -1234,15 +1234,15 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 			$SortCriteria='Raid_PT';
 			$SortOrder='desc';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==17) { // CoordonÃ©es (<)
+		if ($BlockRecherche['AdvSpy_TRIS']==17) { // Coordonées (<)
 			$SortCriteria='Coords_triable';
 			$SortOrder='asc';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==18) { // CoordonÃ©es (<)
+		if ($BlockRecherche['AdvSpy_TRIS']==18) { // Coordonées (<)
 			$SortCriteria='Coords_triable';
 			$SortOrder='desc';
 		}
-		if ($BlockRecherche['AdvSpy_TRIS']==19) { // Scanner d`activitÃ© (<)
+		if ($BlockRecherche['AdvSpy_TRIS']==19) { // Scanner d`activité (<)
 			$SortCriteria='lastseen';
 			$SortOrder='asc';
 		}
@@ -1258,7 +1258,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 	//fin petits details pour le tris
 
 
-	//recuperation de la liste des raids deja effectuÃ©s
+	//recuperation de la liste des raids deja effectués
 	$RaidAlertResults=array();
 	if(isset($RaidAlertResult))
 	while ($val=@mysql_fetch_assoc($RaidAlertResult)) {
@@ -1331,7 +1331,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		//coords pour le tris
 		$FlatSpyRepportAdvancedList[$TotalSql]['Coords_triable']='1'.AdvSpy_AddZeroToNum($FlatSpyRepportAdvancedList[$TotalSql]['spy_galaxy'],3).AdvSpy_AddZeroToNum($FlatSpyRepportAdvancedList[$TotalSql]['spy_system'],3).AdvSpy_AddZeroToNum($FlatSpyRepportAdvancedList[$TotalSql]['spy_row'],3);
 	
-		//ca c'est la liste de toutes les informations d'un RE, Ã  partir de ca on peut tout faire.
+		//ca c'est la liste de toutes les informations d'un RE, À  partir de ca on peut tout faire.
 		//$FlatSpyRepportAdvancedList[0]=
 		//[spy_id][spy_galaxy][spy_system][spy_row][sender_id][datadate][rawdata][active][galaxy][system][row][moon][phalanx][gate]
 		//[name][ally][player][status][last_update][last_update_moon][last_update_user_id][proba]
@@ -1347,7 +1347,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		//['Indice_PR'][Coords_triable] ['lastseen']
 
 
-		// analyse Ã©liminatoire pour les doublons, en se basant sur un critÃ¨re chronologique (donc on dois le faire mantenant et PAS APRES le tris)
+		// analyse éliminatoire pour les doublons, en se basant sur un critère chronologique (donc on dois le faire mantenant et PAS APRES le tris)
 		$ReadyToPrint=TRUE;
 		if ($FlatSpyRepportAdvancedList[$TotalSql]['lune']) {
 			$ItemCoord="(".$FlatSpyRepportAdvancedList[$TotalSql]['spy_galaxy'].":".$FlatSpyRepportAdvancedList[$TotalSql]['spy_system'].":".$FlatSpyRepportAdvancedList[$TotalSql]['spy_row'].")";
@@ -1367,7 +1367,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		//on copie le critere de tris dans le tableau de tris
 		if ($ReadyToPrint) {
 			$ThisValue=$FlatSpyRepportAdvancedList[$TotalSql][$SortCriteria];
-			// Ã  propos de lastseen faut faire un petit ajustement ici pour que le critÃ¨re de tris se fasse bien
+			// À  propos de lastseen faut faire un petit ajustement ici pour que le critère de tris se fasse bien
 			if ( (($ThisValue=='') OR ($ThisValue=='??')) AND ($SortCriteria=='lastseen') ) {
 				$ThisValue='99';
 			}
@@ -1404,7 +1404,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
 	
 	foreach($SortList as $num=>$criteriavalue){
-		$ReadyToPrint=TRUE; // si false alors le RE ne sera pas affichÃ©
+		$ReadyToPrint=TRUE; // si false alors le RE ne sera pas affiché
 
 
 		if ($FlatSpyRepportAdvancedList[$num]['lune']) {
@@ -1414,7 +1414,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		}
 		//$ItemCoord= [x:x:x] (planete) // (x:x:x) (lune)
 		
-		//elements cachÃ©s
+		//elements cachés
 		if (strpos($BlockRecherche['AdvSpy_CoordsToHide'],$ItemCoord) !== FALSE) {
 			$ReadyToPrint=FALSE;
 			$NoPrintReason['AdvSpy_CoordsToHide']++;
@@ -1476,7 +1476,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		}
 		
 		
-		//info alliance complÃ©mentaires ...
+		//info alliance complémentaires ...
 		
 		$AllyTagIsAllied=FALSE;
 		foreach(explode(',',str_replace(';',',',$AdvSpyConfig['OgspyConfig']['allied'])) as $Allied){
@@ -1517,20 +1517,20 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		if ($AllyTagIsEnemy) { $FlatSpyRepportAdvancedList[$num]['AllyTagIsEnemy']=1; }
 		
 		
-		//on masque les ally protÃ©gÃ©es suivant les differents parametres de la configuration.
+		//on masque les ally protégées suivant les differents parametres de la configuration.
 		if (($AdvSpyConfig['protection']['Hide_Allied']) && ($AllyTagIsAllied) && (!$AdvSpyConfig['UserIsAdmin']) ) { $ReadyToPrint=FALSE; $NoPrintReason['Hide_Allied']++; }
 		if (($AdvSpyConfig['protection']['Hide_Protected']) && ($AllyTagIsProtected) && (!$AdvSpyConfig['UserIsAdmin']) ) { $ReadyToPrint=FALSE; $NoPrintReason['Hide_AllyProtected']++; }
 		
-		//on s'occupe des differentes listes de protection spÃ©cifiques AdvSpy.
+		//on s'occupe des differentes listes de protection spécifiques AdvSpy.
 		// a faire : exception pour les admins
 		if ((in_array($FlatSpyRepportAdvancedList[$num]['player'],$AdvSpyConfig['protection']['customlist_player'])) ) { $ReadyToPrint=FALSE; $NoPrintReason['customlist_player']++; }
 		if ((in_array($FlatSpyRepportAdvancedList[$num]['ally'],$AdvSpyConfig['protection']['customlist_allytag'])) ) { $ReadyToPrint=FALSE;  $NoPrintReason['customlist_allytag']++; }
 		if ((in_array($FlatSpyRepportAdvancedList[$num]['coord'],$AdvSpyConfig['protection']['customlist_coord'])) ) { $ReadyToPrint=FALSE;   $NoPrintReason['customlist_coord']++; }
 		
-		//On cache les RE raidÃ©s
+		//On cache les RE raidés
 		if ( ($BlockRecherche['AdvSpy_HideRaided']) && ($FlatSpyRepportAdvancedList[$num]['Raided']) ) { $ReadyToPrint=FALSE; $NoPrintReason['AdvSpy_HideRaided']++; }
 
-		//On affiche que les RE raidÃ©s
+		//On affiche que les RE raidés
 		if ( ($BlockRecherche['AdvSpy_OnlyRaided']) && (!$FlatSpyRepportAdvancedList[$num]['Raided']) ) { $ReadyToPrint=FALSE; $NoPrintReason['AdvSpy_OnlyRaided']++; }
 
 		
@@ -1557,7 +1557,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		
 		
 		
-		// si il a Ã©tÃ© gentil, on l'ajoute Ã  la liste des heureux rapports qui vont etre affichÃ©s
+		// si il a été gentil, on l'ajoute À  la liste des heureux rapports qui vont etre affichés
 		if ($ReadyToPrint) {
 			if (( ($TotalPrintable+1 >= $BlockRecherche['AdvSpy_SearchResult_Min']) && ($TotalPrintable+1 <= $BlockRecherche['AdvSpy_SearchResult_Max']) )) {
 				$PrintList[]=$FlatSpyRepportAdvancedList[$num];				
@@ -1604,7 +1604,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 		AdvSpy_PrintHtmlSearchResult($values);
 	}
 	
-	//on fini 2/3 trucs pour les stats en dehors de la boucle prÃ©cÃ©dente.
+	//on fini 2/3 trucs pour les stats en dehors de la boucle précédente.
 	$Diviseur=$AdvSpyConfig['Current']['SearchStats']['TotalPrinted'];
 	if ($Diviseur==0) { $Diviseur=1; }
 	foreach($AdvSpyConfig['Current']['SearchStats']['Total'] as $VarName=>$VarValue){
@@ -1615,7 +1615,7 @@ function AdvSpy_PrintHtml_Tab_ResultatRecherche(){
 	print "\n\n</div></div>\n\n";
 	
 	
-	// le script pour rÃ©-afficher tous les RE :
+	// le script pour ré-afficher tous les RE :
 	print "<script type=\"text/javascript\">
 <!--
 function AdvSpy_DivResult_SHOWALL() {";
@@ -1726,22 +1726,22 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 			AdvSpy_log("Enregistrement d'une sauvegarde: ".$BlockRecherche['AdvSpy_SaveNameToSave']);
 			$SaveData=AdvSpy_array_to_string(AdvSpy_SaveLoad_GetSaveArrayFromBlockRecherche($BlockRecherche));
 			$SaveOwner=$AdvSpyConfig['User_Data']['user_id'];
-			$SaveType=2; // privÃ©
+			$SaveType=2; // privé
 			if ($BlockRecherche['AdvSpy_SaveIsPublic']) {
-				$SaveType=1; // privÃ©/partagÃ©
+				$SaveType=1; // privé/partagé
 			}
 			if ($BlockRecherche['AdvSpy_SaveIsDefault']) {
-				$SaveType=0; // gÃ©nÃ©rale
-				$SaveOwner=1; // crÃ©e par l'utilisateur Ã  l'id numero 1 (compte 'admin' considÃ©rÃ© comme "-AdvSpy-") 
-				// bug connu au cas oÃ¹ il n'existe pas d'utilisateur 1 mais c'est le compte administrateur par dÃ©faut et il est insuppressible
-				// donc pas de problÃ¨mes tant que la BDD n'est pas trafiquÃ©e...
+				$SaveType=0; // générale
+				$SaveOwner=1; // crée par l'utilisateur À  l'id numero 1 (compte 'admin' considéré comme "-AdvSpy-") 
+				// bug connu au cas oÀ¹ il n'existe pas d'utilisateur 1 mais c'est le compte administrateur par défaut et il est insuppressible
+				// donc pas de problèmes tant que la BDD n'est pas trafiquée...
 			}
 			
 			print "Sauvegarde... ";
 			$requete = AdvSpy_SaveLoad_GetSqlRequestForNewSave($SaveOwner,$SaveType,$BlockRecherche['AdvSpy_SaveNameToSave'],$SaveData);
 			$result = $db->sql_query($requete);
 			if ($result) {
-				print "OK !<br/>Nouvelle sauvegarde crÃ©e:<br/>";
+				print "OK !<br/>Nouvelle sauvegarde crée:<br/>";
 				print $BlockRecherche['AdvSpy_SaveNameToSave'];
 			} else {
 				print "Erreur (!)";
@@ -1779,13 +1779,13 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 						print "Erreur (!)";
 					}
 				} else {
-					print "DesolÃ© mais vous n'avez pas le droit de supprimer cette sauvegarde";
+					print "Desolé mais vous n'avez pas le droit de supprimer cette sauvegarde";
 				}
 			} else {
 				print "Vous devez confirmer pour supprimer";
 			}
 		} else {
-			print "Selectionnez une sauvegarde Ã  supprimer";
+			print "Selectionnez une sauvegarde À  supprimer";
 		}
 		print "</fieldset></div></div><br/>";		
 	}
@@ -1794,7 +1794,7 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 
 	//affichage du reste...	
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
-	print "<fieldset style=\"padding: 10px;\"><legend><b> Sauvegardes gÃ©nÃ©rales et publiques </b></legend>";
+	print "<fieldset style=\"padding: 10px;\"><legend><b> Sauvegardes générales et publiques </b></legend>";
 	$requete = AdvSpy_SaveLoad_GetSqlRequestForSaveList(1);
 	$result = $db->sql_query($requete);
 	$SaveList=array();
@@ -1808,7 +1808,7 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 	print "<br/>";
 	
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
-	print "<fieldset style=\"padding: 10px;\"><legend><b> Sauvegardes privÃ©es : (de l'utilisateur ".$AdvSpyConfig['User_Data']['user_name'].")</b></legend>";
+	print "<fieldset style=\"padding: 10px;\"><legend><b> Sauvegardes privées : (de l'utilisateur ".$AdvSpyConfig['User_Data']['user_name'].")</b></legend>";
 	$requete = AdvSpy_SaveLoad_GetSqlRequestForSaveList(0,$AdvSpyConfig['User_Data']['user_id']);
 	$result = $db->sql_query($requete);
 	$SaveList=array();
@@ -1822,9 +1822,9 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 	
 	
 	$titlemessage="Vous n'etes pas Admin, vous ne pouvez supprimer que vos propres sauvegardes";
-	if ($AdvSpyConfig['UserIsAdmin']) { $titlemessage="Vous etes Admin, vous pouvez supprimer n'importe quelle sauvegarde. (GÃ©nÃ©rales et publiques)"; }
+	if ($AdvSpyConfig['UserIsAdmin']) { $titlemessage="Vous etes Admin, vous pouvez supprimer n'importe quelle sauvegarde. (Générales et publiques)"; }
 	
-	print "<label for=\"AdvSpy_SaveDelConfirmation\" style=\"cursor:pointer\" title=\"$titlemessage\">Effacer la sauvegarde selectionnÃ©e</label></p>";
+	print "<label for=\"AdvSpy_SaveDelConfirmation\" style=\"cursor:pointer\" title=\"$titlemessage\">Effacer la sauvegarde selectionnée</label></p>";
 	print AdvSpy_GetHtml_SubmitBT($lang['UI_Lang']['BT_Del']);
 	
 	print "</fieldset></div></div><br/><br/>";
@@ -1846,7 +1846,7 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 		}
 	}
 	
-	if ($AdvSpyConfig['UserIsAdmin']) { $ListeElementsSauvegarde['AdvSpy_SaveIsDefault']='Sauvegarde GÃ©nÃ©rale (Admin Only)'; }
+	if ($AdvSpyConfig['UserIsAdmin']) { $ListeElementsSauvegarde['AdvSpy_SaveIsDefault']='Sauvegarde Générale (Admin Only)'; }
 
 	foreach($ListeElementsSauvegarde as $PostVar=>$Name){
 		print "<input type=\"checkbox\" id=\"$PostVar\" name=\"$PostVar\" value=\"ON\" /><label for=\"$PostVar\" style=\"cursor:pointer\"> $Name</label><br/>";
@@ -1854,15 +1854,15 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 
 
 	print "<br/>Inclure dans la sauvegarde:<br/>
-	<br/>Les critÃ¨res de recherche,<br/>";
+	<br/>Les critères de recherche,<br/>";
 
 	$ListeElementsSauvegarde=array();
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_Tris']='Ordre de tris, rÃ©sultats min/max et mes scan';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_Secteur']='Secteur (et planÃ¨tes cachÃ©es)';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_RE']='Age Max, Doublons, Lunes, Scan, RÃ©duction et Nom de planÃ¨te';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_Tris']='Ordre de tris, résultats min/max et mes scan';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_Secteur']='Secteur (et planètes cachées)';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_RE']='Age Max, Doublons, Lunes, Scan, Réduction et Nom de planète';
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_Joueur']='Inactifs, Nom de Joueur et tag d\'ally';
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_Ressources']='Grand Nombre, et ressources mini';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_Analyse']='Taux de patate mini, patate mini/maxi et R.E. raidÃ©s';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_Analyse']='Taux de patate mini, patate mini/maxi et R.E. raidés';
 	foreach($ListeElementsSauvegarde as $PostVar=>$Name){
 		print "<input type=\"checkbox\" id=\"$PostVar\" name=\"$PostVar\" value=\"ON\" checked/><label for=\"$PostVar\" style=\"cursor:pointer\"> $Name</label><br/>";
 	}
@@ -1870,8 +1870,8 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 	print "<br/>".$lang['UI_Lang']['SearchPlus'].",<br/>";
 	$ListeElementsSauvegarde=array();
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMFleet']='Min/Max Flottes';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMDef']='Min/Max DÃ©fenses';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMBuildings']='Min/Max BÃ¢timents';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMDef']='Min/Max Défenses';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMBuildings']='Min/Max BÀ¢timents';
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_MMTech']='Min/Max Technologies';
 
 	foreach($ListeElementsSauvegarde as $PostVar=>$Name){
@@ -1883,8 +1883,8 @@ function AdvSpy_PrintHtml_Tab_SaveLoad(){
 	$ListeElementsSauvegarde=array();
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_atk']='Flotte attaquant';
 	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_atk_tech']='Tech attaquant';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_def']='Flotte (et def) du dÃ©fenseur';
-	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_def_tech']='Tech dÃ©fenseur';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_def']='Flotte (et def) du défenseur';
+	$ListeElementsSauvegarde['AdvSpy_SaveElement_Sim_def_tech']='Tech défenseur';
 
 	foreach($ListeElementsSauvegarde as $PostVar=>$Name){
 		print "<input type=\"checkbox\" id=\"$PostVar\" name=\"$PostVar\" value=\"ON\" checked/><label for=\"$PostVar\" style=\"cursor:pointer\"> $Name</label><br/>";
@@ -1915,22 +1915,22 @@ function AdvSpy_PrintHtml_Tab_Administration(){
 	if ($file = @file($AdvSpyConfig['Settings']['AdvSpy_AutoUpdate_MasterURL'].$AdvSpy_LastVersionFileName)) { $AdvSpy_RemoteVersion=trim(@$file[0]); }
 
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
-	print "<fieldset style=\"padding: 10px;\"><legend><b> Mise Ã  jour : </b></legend>";
+	print "<fieldset style=\"padding: 10px;\"><legend><b> Mise À  jour : </b></legend>";
 	print "Votre version de AdvSpy : ".$AdvSpyConfig['version']['advspy']."<br/>";
-	print "DÃ¨rniÃ¨re version disponible : ".$AdvSpy_RemoteVersion."<br/>";
+	print "Dèrnière version disponible : ".$AdvSpy_RemoteVersion."<br/>";
 
 	if ($AdvSpy_RemoteVersion == $AdvSpyConfig['version']['advspy']) {
 		print "<font color=\"green\">OK</font>";
 
 	} else {
 		if ($AdvSpy_RemoteVersion==0) {
-			print "Erreur pendant la recherche de mise Ã  jour<br/>";
-			print "Vous pouvez verifier la derniÃ¨re version disponible via le mod \"Mise Ã  jour de [MOD]\"<br/>
+			print "Erreur pendant la recherche de mise À  jour<br/>";
+			print "Vous pouvez verifier la dernière version disponible via le mod \"Mise À  jour de [MOD]\"<br/>
 			Ou bien visiter le <a href=\"http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte\" target=\"_blank\">Topic officiel</a><br/>";
 		}
 		else {
 			if ($AdvSpy_RemoteVersion != $AdvSpyConfig['version']['advspy']) {
-				print "<font color=\"red\">Vous devriez mettre Ã  jour le mod !<br/>";
+				print "<font color=\"red\">Vous devriez mettre À  jour le mod !<br/>";
 				print "<blink><a href=\"http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte\" target=\"_blank\">TOPIC OFFICIEL</a></blink>";
 				print "</font>";
 			}
@@ -1945,10 +1945,10 @@ function AdvSpy_PrintHtml_Tab_Administration(){
 	print "<fieldset style=\"padding: 10px;\"><legend><b> Entretien : </b></legend>";
 	
 	print "<input type=\"checkbox\" name=\"ForceDefaultSavesInstallation\" id=\"ForceDefaultSavesInstallation\" value=\"ON\" />";
-	print "<label for=\"ForceDefaultSavesInstallation\" style=\"cursor:pointer\">Forcer le chargement des sauvegardes par dÃ©faut (ne le faites pas plusieurs fois sinon vous aurez tout en double)</label>";
+	print "<label for=\"ForceDefaultSavesInstallation\" style=\"cursor:pointer\">Forcer le chargement des sauvegardes par défaut (ne le faites pas plusieurs fois sinon vous aurez tout en double)</label>";
 	
 	if(isset($pub_ForceDefaultSavesInstallation) && ($pub_ForceDefaultSavesInstallation == "ON") ) {
-		print "<br/><font color=\"red\"><strong>Sauvegardes par dÃ©faut installÃ©es !!!</strong></font>";
+		print "<br/><font color=\"red\"><strong>Sauvegardes par défaut installées !!!</strong></font>";
 	}
 	print AdvSpy_GetHtml_SubmitBT($lang['UI_Lang']['BT_Admin']);
 	print "</fieldset></div></div>";
@@ -1983,7 +1983,7 @@ function AdvSpy_PrintHtml_Tab_Administration(){
 
 
 /**
- * Affichage d'un tableau Ã  RE
+ * Affichage d'un tableau À  RE
  **/
 function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	global $AdvSpyConfig, $lang,$BlockRecherche;
@@ -2006,7 +2006,7 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	//[Coords_triable]
 
 
-	// En premier : le menu de gauche avec tout ce qu'il y a dedan. (c'est Ã  dire les conteneurs pour le Clipboard Copy et 2/3 autres craps)
+	// En premier : le menu de gauche avec tout ce qu'il y a dedan. (c'est À  dire les conteneurs pour le Clipboard Copy et 2/3 autres craps)
 	
 	print "<div id=\"AdvSpy_DivResult_".$FlatSpyRepportAdvanced['spy_id']."\"><table>
 	<tr><td valign=\"top\" width=\"10px\">
@@ -2016,22 +2016,22 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	} else {
 		print "AdvSpy_HideSearchResult(".$FlatSpyRepportAdvanced['spy_id'].",'[".$FlatSpyRepportAdvanced['spy_galaxy'].":".$FlatSpyRepportAdvanced['spy_system'].":".$FlatSpyRepportAdvanced['spy_row']."]');\">";
 	}
-	print "<br/><img title=\"Cacher cette planÃ¨te\" alt=\"hide\" src=\"./images/drop.png\"></a>\n";
+	print "<br/><img title=\"Cacher cette planète\" alt=\"hide\" src=\"images/drop.png\"></a>\n";
 	
 	//Ancien RE
-	print "<br/><br/><a onClick='AdvSpy_PopSpyOldScool(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].")' title='Voir le(s) rapport(s) de cette planÃ¨te (OGSpy old style)'>
-	<img style=\"cursor:pointer\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."ogs.png\" width=\"16\" height=\"16\" /></a>\n";
+	print "<br/><br/><a onClick='AdvSpy_PopSpyOldScool(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].")' title='Voir le(s) rapport(s) de cette planète (OGSpy old style)'>
+	<img style=\"cursor:pointer\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/ogs.png\" width=\"16\" height=\"16\" /></a>\n";
 	
 	//Voir les stats du joueur
 	print "<br/><br/><a style=\"cursor:pointer\" onclick=\"AdvSpy_PopStats(".$FlatSpyRepportAdvanced['spy_id'].",'".$FlatSpyRepportAdvanced['player']."','".$AdvSpyConfig['User_Data']['user_stat_name']."');\">
-		<img title=\"Afficher les statistiques de ce joueur\" alt=\"stats\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."stats.png\"></a>\n";
+		<img title=\"Afficher les statistiques de ce joueur\" alt=\"stats\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/stats.png\"></a>\n";
 
 	if ($FlatSpyRepportAdvanced['Raided']) {
 		print "<br/><br/><a style=\"cursor:pointer\" onclick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");\">
-		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\" alt='[R]' title='Cette planÃ¨te est signalÃ© comme raidÃ©e ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ).' /></a>\n";
+		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\" alt='[R]' title='Cette planète est signalé comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ).' /></a>\n";
 	} else {
 		print "<br/><br/><a style=\"cursor:pointer\" onclick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");\">
-		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.png\" border=\"0\" alt='[R]' title='Signaler votre raid. (Aucun depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." )' /></a>\n";
+		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/raid.png\" border=\"0\" alt='[R]' title='Signaler votre raid. (Aucun depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." )' /></a>\n";
 	}
 
 	//Copier le RE
@@ -2039,10 +2039,10 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	
 	if (AdvSpy_Options_GetValue('ExpressCopyClipRE')) { // copie express de re
 		print "<br/><br/><a onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_Standard_".$FlatSpyRepportAdvanced['spy_id']."');\">
-		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Copie express de rapport dans le presse-papier  (Compatible IE et FireFox**)\" /></a>\n";
+		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Copie express de rapport dans le presse-papier  (Compatible IE et FireFox**)\" /></a>\n";
 	} else { // bouton normal avec menu de copie et tout.
 		print "<br/><br/><a onClick='AdvSpy_ToggleVisibilityFromID(\"CopyPop_".$FlatSpyRepportAdvanced['spy_id']."\")'>
-		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Menu de copie de rapport dans le presse-papier  (Compatible IE et FireFox**)\" /></a>\n";
+		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Menu de copie de rapport dans le presse-papier  (Compatible IE et FireFox**)\" /></a>\n";
 
 	}
 	
@@ -2063,10 +2063,10 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 			<tr>
 			<td align=\"left\" width=\"100\" class=\"b\" >
 				<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_AllySearch').value='".$FlatSpyRepportAdvanced['ally']."'\" title='Chercher les rapports sur cette alliance.'>
-				<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."search.png\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"./index.php?action=search&type_search=ally&string_search=".$FlatSpyRepportAdvanced['ally']."&strict=on\" title='Recherche l`alliance \"".$FlatSpyRepportAdvanced['ally']."\" dans OGSpy' >".$FlatSpyRepportAdvanced['ally']."</td>
+				<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/search.png\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"./index.php?action=search&type_search=ally&string_search=".$FlatSpyRepportAdvanced['ally']."&strict=on\" title='Recherche l`alliance \"".$FlatSpyRepportAdvanced['ally']."\" dans OGSpy' >".$FlatSpyRepportAdvanced['ally']."</td>
 			<td align=\"left\" width=\"200\" class=\"b\" >
 				<a style=\"cursor:pointer\" onClick=\"document.getElementById('AdvSpy_PlayerSearch').value='".$FlatSpyRepportAdvanced['player']."'\" title='Chercher les rapports sur ce joueur.'>
-				<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."search.png\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"./index.php?action=search&type_search=player&string_search=".$FlatSpyRepportAdvanced['player']."&strict=on\" title='Recherche le joueur \"".$FlatSpyRepportAdvanced['player']."\" dans OGSpy' >".$FlatSpyRepportAdvanced['player']."</a></td>
+				<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/search.png\" border=\"0\"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"./index.php?action=search&type_search=player&string_search=".$FlatSpyRepportAdvanced['player']."&strict=on\" title='Recherche le joueur \"".$FlatSpyRepportAdvanced['player']."\" dans OGSpy' >".$FlatSpyRepportAdvanced['player']."</a></td>
 			<td align=\"center\" width=\"5\" class=\"b\" >
 				<label style=\"cursor:pointer\" title='Status Joueur (inactif,vacance...)' for='inactif'>
 				<blink><font color=\"#FF0000\"><b>".$FlatSpyRepportAdvanced['status']."</b></font></blink></label></td>
@@ -2093,41 +2093,41 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 			<td align=\"center\" width=\"50\" class=\"b\"><a title=\"Indice 'Patate Par Ressource' (IPR) (plus c'est petit plus ca vaux le coup de raider)\">".$FlatSpyRepportAdvanced['Indice_PR']."</a></td>";
 
 	if (($FlatSpyRepportAdvanced['moon']) && (!$FlatSpyRepportAdvanced['lune'])) {
-		print  "<td align=\"center\" class=\"b\"><a title=\"Cette planÃ¨te possÃ¨de une lune !\">
-		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."HasMoon.png\" border=\"0\" alt=\"[M!]\" title=\"Cette planÃ¨te possÃ¨de une lune !\" />
+		print  "<td align=\"center\" class=\"b\"><a title=\"Cette planète possède une lune !\">
+		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/HasMoon.png\" border=\"0\" alt=\"[M!]\" title=\"Cette planète possède une lune !\" />
 		</a></td>";
 	} elseif (($FlatSpyRepportAdvanced['lune'])) {
-		print  "<td align=\"center\" class=\"b\"><a title=\"Cette planÃ¨te est une lune\">
-		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."IsMoon.png\" border=\"0\" alt=\"[M]\" title=\"Cette planÃ¨te est une lune\" />
+		print  "<td align=\"center\" class=\"b\"><a title=\"Cette planète est une lune\">
+		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/IsMoon.png\" border=\"0\" alt=\"[M]\" title=\"Cette planète est une lune\" />
 		</a></td>";
 	}
 
 	if($FlatSpyRepportAdvanced['lastseen']!='')
-		print "<td align=\"center\" width=\"20\" class=\"b\" ><a title='Derniers mouvement dÃ©tectÃ© par le scanner des sondes.'>".$FlatSpyRepportAdvanced['lastseen']."mn</a></td>";
+		print "<td align=\"center\" width=\"20\" class=\"b\" ><a title='Derniers mouvement détecté par le scanner des sondes.'>".$FlatSpyRepportAdvanced['lastseen']."mn</a></td>";
 	
 	
 
 	if($FlatSpyRepportAdvanced['AllyTagIsAllied'])
-		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Alliance amie (ne pas raider)'><blink><font color=\"#44FF00\"><b>AlliÃ©</b></font></blink></a></td>";
+		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Alliance amie (ne pas raider)'><blink><font color=\"#44FF00\"><b>Allié</b></font></blink></a></td>";
 	if($FlatSpyRepportAdvanced['AllyTagIsEnemy'])
-		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Alliance ennemie !! (Ã  l`assaut !)'><blink><font color=\"#FF4400\"><b>Enemie</b></font></blink></a></td>";
+		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Alliance ennemie !! (À  l`assaut !)'><blink><font color=\"#FF4400\"><b>Enemie</b></font></blink></a></td>";
 		
 
-	// un peut d'explication pour celle lÃ  :
+	// un peut d'explication pour celle lÀ  :
 	//Si on est admin et que :
-	//		L'alliance est alliÃ©e et les alliÃ©s sont protÃ©gÃ©s
+	//		L'alliance est alliée et les alliés sont protégés
 	//	ou
-	//		L'alliance est ProtegÃ©e et la protection est activÃ©e
+	//		L'alliance est Protegée et la protection est activée
 	// alors ...
-	// si ce RE est quand meme envoyÃ© Ã  cette fonction c'est qu'on a la chance d'etre un admin, donc on l'affiche...
+	// si ce RE est quand meme envoyé À  cette fonction c'est qu'on a la chance d'etre un admin, donc on l'affiche...
 	if ($AdvSpyConfig['UserIsAdmin'] && (
 		 (($FlatSpyRepportAdvanced['AllyTagIsAllied']) && ($AdvSpyConfig['protection']['Hide_Allied'])) ||
 		 (($FlatSpyRepportAdvanced['AllyTagIsProtected']) && ($AdvSpyConfig['protection']['Hide_Protected'])) ) ) {
-		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Seul un admin peut le voir.'><blink><font color=\"#FF0088\"><b>ProtÃ©gÃ©</b></font></blink></a></td>";
+		print "<td align=\"center\" width=\"20\" class=\"b\"><a title='Seul un admin peut le voir.'><blink><font color=\"#FF0088\"><b>Protégé</b></font></blink></a></td>";
 	}
 	
 	if ($FlatSpyRepportAdvanced['Raided']) {
-	    print "<td align=\"center\" width=\"20\" class=\"b\"><a onClick='AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");' style='cursor:pointer;' title='Cette planÃ¨te est signalÃ©e comme raidÃ©e ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ) .'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\"/></a></td>";
+	    print "<td align=\"center\" width=\"20\" class=\"b\"><a onClick='AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");' style='cursor:pointer;' title='Cette planète est signalée comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ) .'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\"/></a></td>";
 	}
 	
 	
@@ -2136,8 +2136,8 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	//Fin du menu du haut
 	print "</tr></table></div>";
 	
-	// les div des differents popups associÃ©s Ã  un RE (son id)
-	// placÃ©s juste apres le menu du haut pour s'afficher par dessus le texte du RE
+	// les div des differents popups associés À  un RE (son id)
+	// placés juste apres le menu du haut pour s'afficher par dessus le texte du RE
 	print "<DIV id=\"PopSpyOldScool_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"z-index: 20; POSITION: absolute;\"></DIV>";
 	print "<DIV id=\"PopStats_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"z-index: 20; POSITION: absolute;\"></DIV>";
 	print "<DIV id=\"ToolTip_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"z-index: 20; POSITION: absolute; background-color:".$AdvSpyConfig['color']['ToolTipBackground']."\"></DIV>";
@@ -2145,15 +2145,15 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	print "<DIV id=\"PopRaid_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"z-index: 20; POSITION: absolute;visibility:hidden;display:none;\">
 <fieldset style=\"padding: 2px; ; color:#C0C0C0; background-color:#000040\">
 <legend><a style=\"cursor:pointer\" onClick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].")\">
-<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Raid Alert :</legend>
+<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Raid Alert :</legend>
 Lorsque vous raidez cette planete, vous pouvez le signaler ici.<br/>
-Faites le quand vous envoyez votre flotte, IL N'Y A PAS DE RC A COLLER, ceci sert surtout Ã  garder un historique des raids, pas comptabiliser les gains<br/>
+Faites le quand vous envoyez votre flotte, IL N'Y A PAS DE RC A COLLER, ceci sert surtout À  garder un historique des raids, pas comptabiliser les gains<br/>
 <iframe name=\"Frame_RaidAlert_".$FlatSpyRepportAdvanced['spy_id']."\" id=\"Frame_RaidAlert_".$FlatSpyRepportAdvanced['spy_id']."\" src=\"about:blank\" width=\"600\" height=\"200\" marginwidth=\"1\" marginheight=\"1\" border=\"0\" frameborder=\"0\">
 ! Get FireFox !</iframe>
 <br/>
 <a style=\"cursor:pointer\" onClick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].")\">
-<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'> ".$lang['UI_Lang']['CloseMsgText']." 
-<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'>
+<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'> ".$lang['UI_Lang']['CloseMsgText']." 
+<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'>
 </a>
 &nbsp;</fieldset>
 </DIV>";
@@ -2161,15 +2161,15 @@ Faites le quand vous envoyez votre flotte, IL N'Y A PAS DE RC A COLLER, ceci ser
 
 	print "<div id='PatateInfo_".$FlatSpyRepportAdvanced['spy_id']."' style='z-index: 20; visibility:hidden;display:none;position: absolute;'>
 		<fieldset style=\"padding: 2px; ; color:#FFFFFF; background-color:#000040\">
-		<legend><a style=\"cursor:pointer\" onClick='AdvSpy_ViewPatateInfo(".$FlatSpyRepportAdvanced['spy_id'].")'><img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> PATATE Infos :</legend>
+		<legend><a style=\"cursor:pointer\" onClick='AdvSpy_ViewPatateInfo(".$FlatSpyRepportAdvanced['spy_id'].")'><img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> PATATE Infos :</legend>
 		<br/>
 		<table>
-		<td>PATATE DÃ©fenseur :</td><td>".AdvSpy_GetPointsFromPatate($FlatSpyRepportAdvanced['PATATE'])." P</td></tr>
+		<td>PATATE Défenseur :</td><td>".AdvSpy_GetPointsFromPatate($FlatSpyRepportAdvanced['PATATE'])." P</td></tr>
 		<tr><td>PATATE Attaquant :</td><td>".AdvSpy_GetPointsFromPatate($BlockRecherche['AdvSpy_Current_AtkPatate'])." P</td></tr>
 		<tr><td></td><td></td></tr>
 		<td><b>Chances de Victoire :</b></td><td><font color=\"".AdvSpy_PatatePourcentToColor($FlatSpyRepportAdvanced['TauxPatateVsCurrentAtk'])."\"><b> ".$FlatSpyRepportAdvanced['TauxPatateVsCurrentAtk']." %</b></font></td></tr></table><br/>
 		";
-	//print "Pour gagner Ã  85% vous devez envoyer au moins :<br/>";
+	//print "Pour gagner À  85% vous devez envoyer au moins :<br/>";
 	print "<table>";
 /*		$as_FleetListToPrint=array('vb'=>5);
 		foreach($as_RawFleetList as $as_RawFleet){
@@ -2183,7 +2183,7 @@ Faites le quand vous envoyez votre flotte, IL N'Y A PAS DE RC A COLLER, ceci ser
 		}*/
 	print  "</table>";
 	print  "&lt;&lt;-- Copier cette flotte dans le presse papier (l'autre menu)<br/>";
-	print  "<hr/><div align=\"center\" ><a style=\"cursor:pointer\" onClick=\"SendFleetToSimDef('".$FlatSpyRepportAdvanced['f_pt']."','".$FlatSpyRepportAdvanced['f_gt']."','".$FlatSpyRepportAdvanced['f_cle']."','".$FlatSpyRepportAdvanced['f_clo']."','".$FlatSpyRepportAdvanced['f_cro']."','".$FlatSpyRepportAdvanced['f_vb']."','".$FlatSpyRepportAdvanced['f_vc']."','".$FlatSpyRepportAdvanced['f_rec']."','".$FlatSpyRepportAdvanced['f_se']."','".$FlatSpyRepportAdvanced['f_bom']."','".$FlatSpyRepportAdvanced['f_sat']."','".$FlatSpyRepportAdvanced['f_des']."','".$FlatSpyRepportAdvanced['f_edlm']."','".$FlatSpyRepportAdvanced['f_traq']."','".$FlatSpyRepportAdvanced['d_mis']."','".$FlatSpyRepportAdvanced['d_lle']."','".$FlatSpyRepportAdvanced['d_llo']."','".$FlatSpyRepportAdvanced['d_gaus']."','".$FlatSpyRepportAdvanced['d_ion']."','".$FlatSpyRepportAdvanced['d_pla']."','".$FlatSpyRepportAdvanced['d_pb']."','".$FlatSpyRepportAdvanced['d_gb']."','".$FlatSpyRepportAdvanced['d_mi']."','".$FlatSpyRepportAdvanced['d_mip']."','".$FlatSpyRepportAdvanced['t_armes']."','".$FlatSpyRepportAdvanced['t_bouclier']."','".$FlatSpyRepportAdvanced['t_protect']."');\">Copier cette flotte dans le simulateur. (DÃ©fenseur)</a></div>";
+	print  "<hr/><div align=\"center\" ><a style=\"cursor:pointer\" onClick=\"SendFleetToSimDef('".$FlatSpyRepportAdvanced['f_pt']."','".$FlatSpyRepportAdvanced['f_gt']."','".$FlatSpyRepportAdvanced['f_cle']."','".$FlatSpyRepportAdvanced['f_clo']."','".$FlatSpyRepportAdvanced['f_cro']."','".$FlatSpyRepportAdvanced['f_vb']."','".$FlatSpyRepportAdvanced['f_vc']."','".$FlatSpyRepportAdvanced['f_rec']."','".$FlatSpyRepportAdvanced['f_se']."','".$FlatSpyRepportAdvanced['f_bom']."','".$FlatSpyRepportAdvanced['f_sat']."','".$FlatSpyRepportAdvanced['f_des']."','".$FlatSpyRepportAdvanced['f_edlm']."','".$FlatSpyRepportAdvanced['f_traq']."','".$FlatSpyRepportAdvanced['d_mis']."','".$FlatSpyRepportAdvanced['d_lle']."','".$FlatSpyRepportAdvanced['d_llo']."','".$FlatSpyRepportAdvanced['d_gaus']."','".$FlatSpyRepportAdvanced['d_ion']."','".$FlatSpyRepportAdvanced['d_pla']."','".$FlatSpyRepportAdvanced['d_pb']."','".$FlatSpyRepportAdvanced['d_gb']."','".$FlatSpyRepportAdvanced['d_mi']."','".$FlatSpyRepportAdvanced['d_mip']."','".$FlatSpyRepportAdvanced['t_armes']."','".$FlatSpyRepportAdvanced['t_bouclier']."','".$FlatSpyRepportAdvanced['t_protect']."');\">Copier cette flotte dans le simulateur. (Défenseur)</a></div>";
 	print  "<hr/><div align=\"center\" ><a target=\"_blank\" href=\"".AdvSpy_Get_SpeedSimWebUrlFromFlatArray(AdvSpy_GetFlatArmyFromBlockRechercheMask($BlockRecherche,'AdvSpy_Sim_atk_'),$FlatSpyRepportAdvanced)."\" >Copier cette flotte dans WebSim.Speedsim.Net</a></div>";
 	print  "<hr/><div align=\"center\" ><a target=\"_blank\" href=\"".AdvSpy_Get_DragoSimUrlFromFlatArray(AdvSpy_GetFlatArmyFromBlockRechercheMask($BlockRecherche,'AdvSpy_Sim_atk_'),$FlatSpyRepportAdvanced)."\" >Copier cette flotte dans Drago-Sim.Com</a></div>";
 
@@ -2194,7 +2194,7 @@ Faites le quand vous envoyez votre flotte, IL N'Y A PAS DE RC A COLLER, ceci ser
 		<fieldset style=\"padding: 2px; ; color:#FFFFFF; background-color:#3c2a00\">
 
 		<legend><a style=\"cursor:pointer\" onClick='AdvSpy_ToggleVisibilityFromID(\"RecycleInfo_".$FlatSpyRepportAdvanced['spy_id']."\")'>
-		<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Recyclage Infos :</legend>";
+		<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Recyclage Infos :</legend>";
 		
 /*
 $FlatSpyRepportAdvanced['CDR_f_m'] = 73200;
@@ -2220,7 +2220,7 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 		<td colspan=\"2\" align=\"center\">
 		<b>Total</b><table border=\"1\" width=\"100%\">
 			<tr>
-				<td align=\"center\">MÃ©tal</td>
+				<td align=\"center\">Métal</td>
 				<td align=\"center\">Cristal</td>
 				<td align=\"center\"><b>Total</b></td>
 			</tr>
@@ -2239,7 +2239,7 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 		<td align=\"center\">		<font size=\"2\">Vaisseaux:</font><br>
 <table border=\"1\" width=\"100%\">
 			<tr>
-				<td align=\"center\"><font size=\"2\">MÃ©tal</font></td>
+				<td align=\"center\"><font size=\"2\">Métal</font></td>
 				<td align=\"center\"><font size=\"2\">Cristal</font></td>
 				<td align=\"center\"><font size=\"2\">Total</font></td>
 			</tr>
@@ -2252,9 +2252,9 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 				<td colspan=\"3\" align=\"center\">Recycleurs : ".AdvSpy_GetFormatedNumber($FlatSpyRepportAdvanced['CDR_f_rec'])."</td>
 			</tr>
 		</table></td>
-		<td align=\"center\"><font size=\"2\">DÃ©fenses:</font><table border=\"1\" width=\"100%\">
+		<td align=\"center\"><font size=\"2\">Défenses:</font><table border=\"1\" width=\"100%\">
 			<tr>
-				<td align=\"center\"><font size=\"2\">MÃ©tal</font></td>
+				<td align=\"center\"><font size=\"2\">Métal</font></td>
 				<td align=\"center\"><font size=\"2\">Cristal</font></td>
 				<td align=\"center\"><font size=\"2\">Total</font></td>
 			</tr>
@@ -2277,7 +2277,7 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 		<td colspan=\"2\" align=\"center\">
 		<b>Total</b><table border=\"1\" width=\"100%\">
 			<tr>
-				<td align=\"center\">MÃ©tal</td>
+				<td align=\"center\">Métal</td>
 				<td align=\"center\">Cristal</td>
 				<td align=\"center\"><b>Total</b></td>
 			</tr>
@@ -2304,8 +2304,8 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 		<div id='RessourcesInfo_".$FlatSpyRepportAdvanced['spy_id']."' style='z-index: 20; visibility:hidden;display:none;position: absolute;'>
 		<fieldset style=\"padding: 2px; ; color:#FFFFFF; background-color:#000040\">
 		<legend><a style=\"cursor:pointer\" onClick='AdvSpy_ViewRessourcesInfo(".$FlatSpyRepportAdvanced['spy_id'].")'>
-		<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Ressources Infos :</legend>
-		<br/>Ressources Ã  gagner en raidant <br/><br/><table>
+		<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a> Ressources Infos :</legend>
+		<br/>Ressources À  gagner en raidant <br/><br/><table>
 
 		<tr><td> </td><td align='right'>En 1 raid</td> <td align='right'>En 2 raids</td> <td align='right'>En 3 raids</td> </tr>		
 		<tr><td>Metal :   </td><td align='right'>".AdvSpy_GetFormatedNumber($FlatSpyRepportAdvanced['Raid_metal'])."</td> <td align='right'>".AdvSpy_GetFormatedNumber($FlatSpyRepportAdvanced['Raid2_metal'])."</td>  <td align='right'>".AdvSpy_GetFormatedNumber($FlatSpyRepportAdvanced['Raid3_metal'])."</td> </tr>
@@ -2330,38 +2330,38 @@ $FlatSpyRepportAdvanced['CDR_t_rec'] = 4;
 	print "<DIV width=\"100%\" id=\"CopyPop_".$FlatSpyRepportAdvanced['spy_id']."\" style='z-index: 20; visibility:hidden;display:none;position: absolute;'>
 <fieldset style=\"padding: 2px; ; color:#C0C0C0; background-color:#000040\">
 <legend><a style=\"cursor:pointer\" onClick='AdvSpy_Div_HIDE(\"CopyPop_".$FlatSpyRepportAdvanced['spy_id']."\")'>
-<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a>
+<img src='".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/clear.png' border='0' alt='[X]' title='".$lang['UI_Lang']['CloseMsgText']."'></a>
 &nbsp;Copier ce rapport dans le presse-papier :</legend>
 <table width=\"100%\" border=\"0\" style=\"border-collapse: collapse\">
 	<tr>
 		<td width=\"$diviseurpc%\" align=\"center\">
 		<a style=\"cursor:pointer\" onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_Standard_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."');\">
-		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier le rapport 'Standard'</a><br>
+		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier le rapport 'Standard'</a><br>
 		<font size=\"1\">(Texte simple, lisible &amp; compatible SpeedSim)</font></td>
 
 		<td width=\"$diviseurpc%\" align=\"center\">
 		<a style=\"cursor:pointer\" onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');\">
-		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier le rapport au format BBCode</a><br>
+		<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier le rapport au format BBCode</a><br>
 		<font size=\"1\">(Pour les forums PhpBB et compatibles)</font></td>";
 
 		if ($AdvSpyConfig['Settings']['EnableDebug']) {
 			print "<td width=\"$diviseurpc%\" align=\"center\">
 			<a style=\"cursor:pointer\" onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_Original_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."');\">
-			<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier les info de DEBUG</a><br>
-			<font size=\"1\">(le \$FlatSpyRepport associÃ©)</font></td>";
+			<img style=\"cursor:pointer\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Copier le rapport dans le presse-papier  (Compatible IE et FireFox**)\" /> Copier les info de DEBUG</a><br>
+			<font size=\"1\">(le \$FlatSpyRepport associé)</font></td>";
 		}
 		
 		
 	print "</tr>
 	<tr>
-		<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Rapport copiÃ© !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."');\" />
+		<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Rapport copié !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."');\" />
 		<TEXTAREA WRAP=\"off\" rows=\"23\" cols=\"$diviseurpc%\" name=\"AdvSpy_ClipHolder_Standard_".$FlatSpyRepportAdvanced['spy_id']."\" id=\"AdvSpy_ClipHolder_Standard_".$FlatSpyRepportAdvanced['spy_id']."\"    onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_Standard_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_Standard_".$FlatSpyRepportAdvanced['spy_id']."');\" >".AdvSpy_GetFromFlatSpyRepportReStyleString($FlatSpyRepportAdvanced)."</TEXTAREA>\n</td>
-		<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Rapport copiÃ© !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');\" />
+		<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Rapport copié !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');\" />
 		<TEXTAREA WRAP=\"off\" rows=\"23\" cols=\"$diviseurpc%\" name=\"AdvSpy_ClipHolder_BBCode_".$FlatSpyRepportAdvanced['spy_id']."\" id=\"AdvSpy_ClipHolder_BBCode_".$FlatSpyRepportAdvanced['spy_id']."\"        onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_BBCode_".$FlatSpyRepportAdvanced['spy_id']."');\" >".AdvSpy_GetFromFlatSpyRepportReStyleBBCode($FlatSpyRepportAdvanced)."</TEXTAREA>\n</td>";
 		
 		
 		if ($AdvSpyConfig['Settings']['EnableDebug']) {
-			print "<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."copy.png\" title=\"Rapport copiÃ© !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."');\" />
+			print "<td width=\"$diviseurpc%\" align=\"center\"><img width=\"64\" height=\"64\" id=\"AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."\" style=\"cursor:pointer;visibility:hidden;display:none;position: absolute;\" border=\"0\" src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/copy.png\" title=\"Rapport copié !\" onClick=\"AdvSpy_Div_HIDE('AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."');\" />
 			<TEXTAREA WRAP=\"off\" rows=\"23\" cols=\"$diviseurpc%\" name=\"AdvSpy_ClipHolder_Original_".$FlatSpyRepportAdvanced['spy_id']."\" id=\"AdvSpy_ClipHolder_Original_".$FlatSpyRepportAdvanced['spy_id']."\"    onClick=\"AdvSpy_CopyHolderToClip('AdvSpy_ClipHolder_Original_".$FlatSpyRepportAdvanced['spy_id']."');AdvSpy_Div_SHOW('AdvSpy_ClipHolderIcon_Original_".$FlatSpyRepportAdvanced['spy_id']."');\" >".AdvSpy_Print_Rvar($FlatSpyRepportAdvanced,'$FlatSpyRepportAdvanced')."</TEXTAREA>\n</td>";
 		}
 		
@@ -2392,13 +2392,13 @@ function AdvSpy_PrintHtml_Tab_Statistiques() {
 	global $AdvSpyConfig, $lang,$BlockRecherche;
 	
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
-	print "<fieldset style=\"padding: 5px;\"><legend><b>Statistiques (BasÃ©es sur les rÃ©sultats affichÃ©s de la recherche)</b></legend><br/>";
+	print "<fieldset style=\"padding: 5px;\"><legend><b>Statistiques (Basées sur les résultats affichés de la recherche)</b></legend><br/>";
 	
 	if ($AdvSpyConfig['Current']['SearchStats']['TotalPrintable']>0) {
 	
-		print "Nombre de rÃ©sultats <b>retournÃ©s par la base de donnÃ©e : ".$AdvSpyConfig['Current']['SearchStats']['TotalSql']."</b><br/>";
+		print "Nombre de résultats <b>retournés par la base de donnée : ".$AdvSpyConfig['Current']['SearchStats']['TotalSql']."</b><br/>";
 		
-		print "Nombre de rÃ©sultats <b>filtrÃ©s : </b>";
+		print "Nombre de résultats <b>filtrés : </b>";
 		
 		$printplusbefore=false;
 		foreach($AdvSpyConfig['Current']['SearchStats']['NoPrintReasons'] as $ReasonTag=>$RNum){
@@ -2417,13 +2417,13 @@ function AdvSpy_PrintHtml_Tab_Statistiques() {
 		}
 		print "<br/>\n";
 		
-		print "<b>".round(  ($AdvSpyConfig['Current']['SearchStats']['TotalSql']-$AdvSpyConfig['Current']['SearchStats']['TotalPrintable']  )  /$AdvSpyConfig['Current']['SearchStats']['TotalSql']*100)."%</b> des RE sont filtrÃ©s.<br/>";
+		print "<b>".round(  ($AdvSpyConfig['Current']['SearchStats']['TotalSql']-$AdvSpyConfig['Current']['SearchStats']['TotalPrintable']  )  /$AdvSpyConfig['Current']['SearchStats']['TotalSql']*100)."%</b> des RE sont filtrés.<br/>";
 		print "<br/>\n";
 		
 		print "Sur un <b>total de ".$AdvSpyConfig['Current']['SearchStats']['TotalPrintable']." <i>affichable</i></b><br />";
 		
-		print "Nombre de rÃ©sultats <b>affichÃ©s sur cette page: ".$AdvSpyConfig['Current']['SearchStats']['TotalPrinted']."</b><br />
-		Avec ".$AdvSpyConfig['Current']['SearchStats']['NoPrintReasons']['Autre_Page']." RE sur les pages suivantes/prÃ©cÃ©dentes.<br />";
+		print "Nombre de résultats <b>affichés sur cette page: ".$AdvSpyConfig['Current']['SearchStats']['TotalPrinted']."</b><br />
+		Avec ".$AdvSpyConfig['Current']['SearchStats']['NoPrintReasons']['Autre_Page']." RE sur les pages suivantes/précédentes.<br />";
 		
 		
 		print "<br/>";
@@ -2457,7 +2457,7 @@ function AdvSpy_PrintHtml_Tab_Statistiques() {
 		print "</tbody></table>";
 		
 	} else {
-		print "Aucun rÃ©sultat donc pas de stats.";
+		print "Aucun résultat donc pas de stats.";
 	}
 
 	print "</fieldset></div></div>";
@@ -2531,16 +2531,16 @@ function AdvSpy_PrintHtml_Tab_Options(){
 
 	print '<tr>
 	<td align="center" class="c">Nom / Description</th>
-	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Config','Option par dÃ©faut telle que dÃ©finie dans Adv_Config.php',300,'images/help.png').'<br/>Config</font></td>
-	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Admin','Option telle que dÃ©finie par l\'administrateur',300,'images/help.png').'<br/>Admin</font></td>
-	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Verrouillage Admin','L\'administrateur a-t-il verrouillÃ© cette option pour interdire aux utilisateurs de dÃ©finir leur propre config personelle ?',300,'images/help.png').'<br/>Lock</font></td>
-	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Admin','Option personnelle telle que dÃ©finie par l\'utilisateur',300,'images/help.png').'<br/>User</font></td>
+	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Config','Option par défaut telle que définie dans Adv_Config.php',300,'images/help.png').'<br/>Config</font></td>
+	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Admin','Option telle que définie par l\'administrateur',300,'images/help.png').'<br/>Admin</font></td>
+	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Verrouillage Admin','L\'administrateur a-t-il verrouillé cette option pour interdire aux utilisateurs de définir leur propre config personelle ?',300,'images/help.png').'<br/>Lock</font></td>
+	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Admin','Option personnelle telle que définie par l\'utilisateur',300,'images/help.png').'<br/>User</font></td>
 	<td align="center" class="c"><font size="1">'.AdvSpy_GetHtml_OgspyTooltipImage('Valeure active','Valeure actuelle de l\'option',300,'images/help.png').'<br/>Actif</font></td>
-	<td align="center" class="c">Edition '.AdvSpy_GetHtml_OgspyTooltipImage('Edition','Ce que vous voyez sÃ©lectionnÃ© par dÃ©faut sont vos options personnelles. Mais si l\'admin a verrouillÃ© l\'option, la valeur active peut Ãªtre diffÃ©rente, et donc utilisÃ©e par AdvSpy pour vos recherches.',300,'images/help.png').'</td>
+	<td align="center" class="c">Edition '.AdvSpy_GetHtml_OgspyTooltipImage('Edition','Ce que vous voyez sélectionné par défaut sont vos options personnelles. Mais si l\'admin a verrouillé l\'option, la valeur active peut Àªtre différente, et donc utilisée par AdvSpy pour vos recherches.',300,'images/help.png').'</td>
 	';
 	
 	if (($AdvSpyConfig['UserIsAdmin']) AND ($Current_Edition_Target=='0')) {
-		print '<td align="center" class="c">Verrouiller'.AdvSpy_GetHtml_OgspyTooltipImage('Verrouiller','(Uniquement en mode `Admin`) Verrouiller la valeur \'Admin\' et forcer tous les utilisateurs Ã  utiliser cette option pour leurs recherches.',300,'images/help.png').'</td>';
+		print '<td align="center" class="c">Verrouiller'.AdvSpy_GetHtml_OgspyTooltipImage('Verrouiller','(Uniquement en mode `Admin`) Verrouiller la valeur \'Admin\' et forcer tous les utilisateurs À  utiliser cette option pour leurs recherches.',300,'images/help.png').'</td>';
 	}
 	
 	print '</tr>';
@@ -2554,7 +2554,7 @@ function AdvSpy_PrintHtml_Tab_Options(){
 
 		if (isset($OptionProp['Value_Admin_IsLocked'])) {
 			if ($OptionProp['Value_Admin_IsLocked']) {
-				print '<td align="center" class="b">'."<img border=\"0\" src=\"./mod/AdvSpy/lock.png\" title=\"VerrouillÃ©\"/>".'</td>';
+				print '<td align="center" class="b">'."<img border=\"0\" src=\"./mod/advspy/lock.png\" title=\"Verrouillé\"/>".'</td>';
 			} else {
 				print '<td align="center" ></td>';
 			}
@@ -2584,7 +2584,7 @@ function AdvSpy_PrintHtml_Tab_Options(){
 				if (@$OptionProp['Value_Admin_IsLocked']) { $selected='checked'; }
 				$Name='AdvSpy_Options_LockAdmin_'.$OptionVar;
 				print "<input type=\"checkbox\" value=\"ON\" name=\"$Name\" id=\"$Name\"/ $selected>";
-				print "<label for=\"".$Name."\" style=\"cursor: pointer;\" title=\"Verrouiller la valeur Â´AdminÂ´ et forcer tous les utilisateurs Ã  utiliser cette option pour leurs recherches.\"><font size=\"1\">Admin Lock</font></label>";
+				print "<label for=\"".$Name."\" style=\"cursor: pointer;\" title=\"Verrouiller la valeur Â´AdminÂ´ et forcer tous les utilisateurs À  utiliser cette option pour leurs recherches.\"><font size=\"1\">Admin Lock</font></label>";
 				print '</td>';
 			}
 		}
@@ -2612,7 +2612,7 @@ function AdvSpy_PrintHtml_Tab_Options(){
  **/
 function AdvSpy_GetHtml_FormElementByType($Type,$Name,$Defaut=''){
 
-	if (strpos($Type,'*') === 0) { $Type=substr($Type,1); }  // on vire l'Ã©toile (important)
+	if (strpos($Type,'*') === 0) { $Type=substr($Type,1); }  // on vire l'étoile (important)
 	$Type=strtolower($Type);
 	
 

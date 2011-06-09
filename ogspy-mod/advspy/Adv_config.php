@@ -3,7 +3,7 @@
 *	filename	: config.php pour AdvSpy v0.9 et +
 *	Author		: kilops - http://ogs.servebbs.net/
 ***************************************************************************/
-//================= Securit√© == ne pas toucher ! ==================
+//================= SecuritÈ == ne pas toucher ! ==================
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 if (!defined('IN_MOD_ADVSPY')) die("Hacking attempt");
 //=================================================================
@@ -13,19 +13,19 @@ if (!defined('IN_MOD_ADVSPY')) die("Hacking attempt");
 // ====================== CONFIGURATION ===========================
 // ========================================================touchez!
 
-// TRUE = les ally prot√©g√©es seront cach√©es lors des recherches. -sauf pour les admins- (voir configuration OGSpy).
-// FALSE si vous ne voulez pas les cacher. (mais une alerte s'afficheras quand meme √† cot√© du R.E.)
+// TRUE = les ally protÈgÈes seront cachÈes lors des recherches. -sauf pour les admins- (voir configuration OGSpy).
+// FALSE si vous ne voulez pas les cacher. (mais une alerte s'afficheras quand meme ‡† cotÈ du R.E.)
 $AdvSpyConfig['protection']['Hide_Protected']=TRUE;
 
-// TRUE = les ally amies seront cach√©es lors des recherches. -sauf pour les admins- (voir configuration OGSpy).
-// FALSE si vous ne voulez pas les cacher. (mais une alerte s'afficheras quand meme √† cot√© du R.E.)
+// TRUE = les ally amies seront cachÈes lors des recherches. -sauf pour les admins- (voir configuration OGSpy).
+// FALSE si vous ne voulez pas les cacher. (mais une alerte s'afficheras quand meme ‡† cotÈ du R.E.)
 $AdvSpyConfig['protection']['Hide_Allied']=FALSE;
 
-// Listes personnalis√©es pour cacher les rapports au sujet de joueurs, d'alliance, ou de coordon√©es que vous specifiez ici
-// pour cr√©er une liste de joueur par exemple faites le sous la forme :
+// Listes personnalisÈes pour cacher les rapports au sujet de joueurs, d'alliance, ou de coordonÈes que vous specifiez ici
+// pour crÈer une liste de joueur par exemple faites le sous la forme :
 // $AdvSpyConfig['protection']['customlist_player']=array('nom de joueur','luke skywalker','nadia');
 // si vous ne voulez cacher personne, laissez vide : array()
-// Pour les coordon√©es mettez les sous la forme : array('[1:2:3]','[9:499:15]','[4:5:6]')
+// Pour les coordonÈes mettez les sous la forme : array('[1:2:3]','[9:499:15]','[4:5:6]')
 // EXEMPLES :
 // $AdvSpyConfig['protection']['customlist_player']=array('Moi','Mon pote','et un autre');
 // $AdvSpyConfig['protection']['customlist_allytag']=array('MATF','UAA');
@@ -37,7 +37,7 @@ $AdvSpyConfig['protection']['customlist_player']=array();
 $AdvSpyConfig['protection']['customlist_allytag']=array();
 $AdvSpyConfig['protection']['customlist_coord']=array();
 
-// Liste des alliances ENNEMIES √† raider en priorit√© :) (alerte en rouge)
+// Liste des alliances ENNEMIES ‡† raider en prioritÈ :) (alerte en rouge)
 $AdvSpyConfig['protection']['customlist_enemytag']=array();
 
 
@@ -82,8 +82,8 @@ $AdvSpyConfig['color']['ToolTipBackground']='#FFFF77'; // jaune clair
 
 // ================================================================
 
-//Liste (en secondes) des ages max de RE propos√©s dans la liste d√©roulante.
-// info : les calculs sont possible √† l'interieur meme des elements.
+//Liste (en secondes) des ages max de RE proposÈs dans la liste dÈroulante.
+// info : les calculs sont possible ‡† l'interieur meme des elements.
 $AdvSpyConfig['Settings']['ListeAgeMax']=array(
 												60*30, // 30 mn
 												60*60, //60 sec * 60 = 1 heure
@@ -108,71 +108,71 @@ $AdvSpyConfig['Settings']['ListeAgeMax']=array(
 
 
 // ne mettez rien ('') si vous ne voulez pas de point dans les nombres (defaut : '.')
-$lang['Options']['SeparateurDeMilliers']['Name']='S√©parateur de milliers';
-$lang['Options']['SeparateurDeMilliers']['Desc']='Caract√®re utilis√© pour ponctuer les nombres √† chaque milliers ex: 123.456.789 (Par d√©faut \'.\' ou rien pour ne pas avoir de s√©parateur) --- Cel√† affecte l\'affichage des RE dans AdvSpy, et les RE copi√©s dans le presse-papier avec BBCode seulement';
+$lang['Options']['SeparateurDeMilliers']['Name']='SÈparateur de milliers';
+$lang['Options']['SeparateurDeMilliers']['Desc']='CaractËre utilisÈ pour ponctuer les nombres ‡† chaque milliers ex: 123.456.789 (Par dÈfaut \'.\' ou rien pour ne pas avoir de sÈparateur) --- Cel‡† affecte l\'affichage des RE dans AdvSpy, et les RE copiÈs dans le presse-papier avec BBCode seulement';
 $lang['Options']['SeparateurDeMilliers']['Type']='*string';
 $lang['Options']['SeparateurDeMilliers']['Value_Config']='.';
 
 
-// TRUE= Consid√©rer qu'une plan√®te appell√©e 'lune' est une lune (defaut : FALSE)
-// FALSE= Consid√©rer une lune uniquement si ' (Lune) ' est affich√© apr√®s le nom de l'astre dans le RE (ogame 0.76 et +)
+// TRUE= ConsidÈrer qu'une planËte appellÈe 'lune' est une lune (defaut : FALSE)
+// FALSE= ConsidÈrer une lune uniquement si ' (Lune) ' est affichÈ aprËs le nom de l'astre dans le RE (ogame 0.76 et +)
 $AdvSpyConfig['Settings']['OldMoonDetection']=FALSE;
 
 // Detection 'intelligente' de lune
-// TRUE= Se base su plusieurs crit√®res (comme les batiments pr√©sents) pour d√©terminer si ce rapport concerne une lune ou pas.
-// FALSE= d√©conseill√© !! uniquement si vous jouez sur un univers 'chelou'.
-// Info: Quand cette option est activ√©e, elle est prioritaire sur les autres options (comme OldMoonDetection).
+// TRUE= Se base su plusieurs critËres (comme les batiments prÈsents) pour dÈterminer si ce rapport concerne une lune ou pas.
+// FALSE= dÈconseillÈ !! uniquement si vous jouez sur un univers 'chelou'.
+// Info: Quand cette option est activÈe, elle est prioritaire sur les autres options (comme OldMoonDetection).
 $AdvSpyConfig['Settings']['SmartMoonDetection']=TRUE;
 
 
 
-//Nombre de r√©sultats maximum par d√©faut
-$lang['Options']['SearchResult_DefaultMax']['Name']='Nombre max de r√©sultat par page';
-$lang['Options']['SearchResult_DefaultMax']['Desc']='Nombre maximum de Rapport d\'Espionnage √† afficher par d√©faut sur chaque page (D√©faut: 20)';
+//Nombre de rÈsultats maximum par dÈfaut
+$lang['Options']['SearchResult_DefaultMax']['Name']='Nombre max de rÈsultat par page';
+$lang['Options']['SearchResult_DefaultMax']['Desc']='Nombre maximum de Rapport d\'Espionnage ‡† afficher par dÈfaut sur chaque page (DÈfaut: 20)';
 $lang['Options']['SearchResult_DefaultMax']['Type']='integer';
 $lang['Options']['SearchResult_DefaultMax']['Value_Config']='20';
 
 
-// TRUE = (d√©faut) Affiche les messages d'AdvSpy dans les logs d'OGSpy.
-// FALSE = D√©sactiv√©
+// TRUE = (dÈfaut) Affiche les messages d'AdvSpy dans les logs d'OGSpy.
+// FALSE = DÈsactivÈ
 $AdvSpyConfig['Settings']['EnableLog']=TRUE;
 
 
-// TRUE = Affiche les messages suppl√©mentaires de d√©bug visibles dans la parte 'Administration' (donc reserv√© aux admins).
-// FALSE = (d√©faut) D√©sactiv√© car inutile sauf si vous etes d√©veloppeurs/curieux.
+// TRUE = Affiche les messages supplÈmentaires de dÈbug visibles dans la parte 'Administration' (donc reservÈ aux admins).
+// FALSE = (dÈfaut) DÈsactivÈ car inutile sauf si vous etes dÈveloppeurs/curieux.
 $AdvSpyConfig['Settings']['EnableDebug']=TRUE;
 
-// Pr√©fixe des tables de la base de donn√©es ()
+// PrÈfixe des tables de la base de donnÈes ()
 if (@TABLE_USER) { $AdvSpyConfig['Settings']['AdvSpy_TablePrefix']=substr(TABLE_USER, 0, strlen(TABLE_USER)-4); }
 else { $AdvSpyConfig['Settings']['AdvSpy_TablePrefix']='ogspy_'; }
 
 // nom de la table pour RaidAlert (defaut : "advspy_raids")
 $AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert']="advspy_raids";
-// pas touche √† cette ligne ki ajoute le pr√©fixe :
+// pas touche ‡† cette ligne ki ajoute le prÈfixe :
 $AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert']=$AdvSpyConfig['Settings']['AdvSpy_TablePrefix'].$AdvSpyConfig['Settings']['AdvSpy_TableName_RaidAlert'];
 
 // nom de la table pour les sauvegardes (defaut : "advspy_save")
 $AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']="advspy_save";
-// pas touche √† cette ligne ki ajoute le pr√©fixe :
+// pas touche ‡† cette ligne ki ajoute le prÈfixe :
 $AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']=$AdvSpyConfig['Settings']['AdvSpy_TablePrefix'].$AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad'];
 
 
 
 
 
-// Changez suivant les options sp√©ciales de votre serveur
+// Changez suivant les options spÈciales de votre serveur
 // par exemple, uni 50 FR :
 //     $AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max']=50;
 //     $AdvSpyConfig['Settings']['OgameUniverse_System_Max']=100;
 //     $AdvSpyConfig['Settings']['OgameUniverse_Row_Max']=15;
-// d√©faut : 9 / 499 / 15
-// (merci shadowmoon pour l'id√©e :] )
+// dÈfaut : 9 / 499 / 15
+// (merci shadowmoon pour l'idÈe :] )
 
 $AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max']=9;
 $AdvSpyConfig['Settings']['OgameUniverse_System_Max']=499;
 $AdvSpyConfig['Settings']['OgameUniverse_Row_Max']=15;
 
-// un minimum est-il n√©c√©ssaire ?
+// un minimum est-il nÈcÈssaire ?
 // rappel : pour le moment une limitation de raidalert (la structure de la bdd) fais que le maximum absolu est de : 99 / 999 / 99
 
 
@@ -190,8 +190,8 @@ $AdvSpyConfig['Settings']['OgameUniverse_Row_Max']=15;
 // ====Les nom prix et puissances des vaisseaux, batiments et =====
 // ====tous les elements 'statiques' du jeux Ogame=================
 // ================================================================
-// ====Ne changez rien de ce qui ce trouve ci dessous √† moins =====
-// ====qu'une mise √† jour du jeux ne modifie des carracteristiques=
+// ====Ne changez rien de ce qui ce trouve ci dessous ‡† moins =====
+// ====qu'une mise ‡† jour du jeux ne modifie des carracteristiques=
 // ====d'un vaisseaux ou meme en rajoute un (ex:traqueur) =========
 // ================================================================
 // ================================================================
@@ -200,32 +200,32 @@ $AdvSpyConfig['Settings']['OgameUniverse_Row_Max']=15;
 
 
 
-$lang['DicOgame']['Text']['Spy']['start']="Mati√®res premi√®res sur "; //laissez les espaces !
+$lang['DicOgame']['Text']['Spy']['start']="MatiËres premiËres sur "; //laissez les espaces !
 $lang['DicOgame']['Text']['Spy']['lune']=" (Lune) "; //laissez les espaces !
 $lang['DicOgame']['Text']['Spy']['interlude']=" le "; //laissez les espaces !
-$lang['DicOgame']['Text']['Spy']['nolastseen']="Le scanner des sondes n'a pas d√©tect√© d'anomalies atmosph√©riques sur cette plan√®te. Une activit√© sur cette plan√®te dans la derni√®re heure peut quasiment √™tre exclue";
-$lang['DicOgame']['Text']['Spy']['lastseenstart']="Le scanner des sondes a d√©tect√© des anomalies dans l'atmosph√®re de cette plan√®te, indiquant qu'il y a eu une activit√© sur cette plan√®te dans les ";
-$lang['DicOgame']['Text']['Spy']['lastseenend']=" derni√®res minutes.";
-$lang['DicOgame']['Text']['Spy']['metal']="M√©tal:";
+$lang['DicOgame']['Text']['Spy']['nolastseen']="Le scanner des sondes n'a pas dÈtectÈ d'anomalies atmosphÈriques sur cette planËte. Une activitÈ sur cette planËte dans la derniËre heure peut quasiment ‡™tre exclue";
+$lang['DicOgame']['Text']['Spy']['lastseenstart']="Le scanner des sondes a dÈtectÈ des anomalies dans l'atmosphËre de cette planËte, indiquant qu'il y a eu une activitÈ sur cette planËte dans les ";
+$lang['DicOgame']['Text']['Spy']['lastseenend']=" derniËres minutes.";
+$lang['DicOgame']['Text']['Spy']['metal']="MÈtal:";
 $lang['DicOgame']['Text']['Spy']['cristal']="Cristal:";
-$lang['DicOgame']['Text']['Spy']['deut']="Deut√©rium:";
+$lang['DicOgame']['Text']['Spy']['deut']="DeutÈrium:";
 $lang['DicOgame']['Text']['Spy']['energie']="Energie:";
 $lang['DicOgame']['Text']['Spy']['Fleet']="Flotte";
-$lang['DicOgame']['Text']['Spy']['Def']="D√©fense";
-$lang['DicOgame']['Text']['Spy']['Buildings']="B√¢timents";
+$lang['DicOgame']['Text']['Spy']['Def']="DÈfense";
+$lang['DicOgame']['Text']['Spy']['Buildings']="B‡¢timents";
 $lang['DicOgame']['Text']['Spy']['Tech']="Recherche";
-$lang['DicOgame']['Text']['Spy']['end']="Probabilit√© de destruction de la flotte d'espionnage :";
+$lang['DicOgame']['Text']['Spy']['end']="ProbabilitÈ de destruction de la flotte d'espionnage :";
 
 
 
 //pas touche
-$lang['DicOgame']['SpyCatList']=array('Fleet'=>'Flottes','Def'=>'D√©fenses','Buildings'=>'B√¢timents','Tech'=>'Recherches');
+$lang['DicOgame']['SpyCatList']=array('Fleet'=>'Flottes','Def'=>'DÈfenses','Buildings'=>'B‡¢timents','Tech'=>'Recherches');
 
 
 // ================================================================
 // ======================BATIMENTS=================================
 
-//$lang['DicOgame']['Buildings'][0]['Name']="Mine de m√©tal";
+//$lang['DicOgame']['Buildings'][0]['Name']="Mine de mÈtal";
 $lang['DicOgame']['Buildings'][0]['PostVar']='b_metal';
 $lang['DicOgame']['Buildings'][0]['OgsName']='M';
 
@@ -233,15 +233,15 @@ $lang['DicOgame']['Buildings'][0]['OgsName']='M';
 $lang['DicOgame']['Buildings'][1]['PostVar']='b_cristal';
 $lang['DicOgame']['Buildings'][1]['OgsName']='C';
 
-//$lang['DicOgame']['Buildings'][2]['Name']="Synth√©tiseur de deut√©rium";
+//$lang['DicOgame']['Buildings'][2]['Name']="SynthÈtiseur de deutÈrium";
 $lang['DicOgame']['Buildings'][2]['PostVar']='b_deut';
 $lang['DicOgame']['Buildings'][2]['OgsName']='D';
 
-//$lang['DicOgame']['Buildings'][3]['Name']="Centrale √©lectrique solaire";
+//$lang['DicOgame']['Buildings'][3]['Name']="Centrale Èlectrique solaire";
 $lang['DicOgame']['Buildings'][3]['PostVar']='b_solaire';
 $lang['DicOgame']['Buildings'][3]['OgsName']='CES';
 
-//$lang['DicOgame']['Buildings'][4]['Name']="Centrale √©lectrique de fusion";
+//$lang['DicOgame']['Buildings'][4]['Name']="Centrale Èlectrique de fusion";
 $lang['DicOgame']['Buildings'][4]['PostVar']='b_fusion';
 $lang['DicOgame']['Buildings'][4]['OgsName']='CEF';
 
@@ -257,7 +257,7 @@ $lang['DicOgame']['Buildings'][6]['OgsName']='UdN';
 $lang['DicOgame']['Buildings'][7]['PostVar']='b_spatial';
 $lang['DicOgame']['Buildings'][7]['OgsName']='CSp';
 
-//$lang['DicOgame']['Buildings'][8]['Name']="Hangar de m√©tal";
+//$lang['DicOgame']['Buildings'][8]['Name']="Hangar de mÈtal";
 $lang['DicOgame']['Buildings'][8]['PostVar']='b_hmetal';
 $lang['DicOgame']['Buildings'][8]['OgsName']='HM';
 
@@ -265,7 +265,7 @@ $lang['DicOgame']['Buildings'][8]['OgsName']='HM';
 $lang['DicOgame']['Buildings'][9]['PostVar']='b_hcristal';
 $lang['DicOgame']['Buildings'][9]['OgsName']='HC';
 
-//$lang['DicOgame']['Buildings'][10]['Name']="R√©servoir de deut√©rium";
+//$lang['DicOgame']['Buildings'][10]['Name']="RÈservoir de deutÈrium";
 $lang['DicOgame']['Buildings'][10]['PostVar']='b_hdeut';
 $lang['DicOgame']['Buildings'][10]['OgsName']='HD';
 
@@ -293,7 +293,7 @@ $lang['DicOgame']['Buildings'][15]['OgsName']='Pha';
 $lang['DicOgame']['Buildings'][16]['PostVar']='b_stargate';
 $lang['DicOgame']['Buildings'][16]['OgsName']='PoSa';
 
-//$lang['DicOgame']['Buildings'][17]['Name']="D√©pot de Ravitaillement";
+//$lang['DicOgame']['Buildings'][17]['Name']="DÈpot de Ravitaillement";
 $lang['DicOgame']['Buildings'][17]['PostVar']='b_depot';
 $lang['DicOgame']['Buildings'][17]['OgsName']='DdR';
 
@@ -328,11 +328,11 @@ $lang['DicOgame']['Tech'][5]['OgsName']='NRJ';
 $lang['DicOgame']['Tech'][6]['PostVar']='t_hyper';
 $lang['DicOgame']['Tech'][6]['OgsName']='Hyp';
 
-//$lang['DicOgame']['Tech'][7]['Name']="R√©acteur √† combustion";
+//$lang['DicOgame']['Tech'][7]['Name']="RÈacteur ‡† combustion";
 $lang['DicOgame']['Tech'][7]['PostVar']='t_combu';
 $lang['DicOgame']['Tech'][7]['OgsName']='RC';
 
-//$lang['DicOgame']['Tech'][8]['Name']="R√©acteur √† impulsion";
+//$lang['DicOgame']['Tech'][8]['Name']="RÈacteur ‡† impulsion";
 $lang['DicOgame']['Tech'][8]['PostVar']='t_impu';
 $lang['DicOgame']['Tech'][8]['OgsName']='RI';
 
@@ -352,11 +352,11 @@ $lang['DicOgame']['Tech'][11]['OgsName']='Ions';
 $lang['DicOgame']['Tech'][12]['PostVar']='t_plasma';
 $lang['DicOgame']['Tech'][12]['OgsName']='Plasma';
 
-//$lang['DicOgame']['Tech'][13]['Name']="R√©seau de recherche intergalactique";
+//$lang['DicOgame']['Tech'][13]['Name']="RÈseau de recherche intergalactique";
 $lang['DicOgame']['Tech'][13]['PostVar']='t_reseau';
 $lang['DicOgame']['Tech'][13]['OgsName']='RRI';
 
-//$lang['DicOgame']['Tech'][14]['Name']="Technologie Exp√©ditions";
+//$lang['DicOgame']['Tech'][14]['Name']="Technologie ExpÈditions";
 $lang['DicOgame']['Tech'][14]['PostVar']='t_expeditions';
 $lang['DicOgame']['Tech'][14]['OgsName']='Expeditions';
 
@@ -389,7 +389,7 @@ $lang['DicOgame']['Fleet'][1]['Fret']=25000;
 $lang['DicOgame']['Fleet'][1]['Vitesse']=7500;
 $lang['DicOgame']['Fleet'][1]['Carbu']=50;
 
-//$lang['DicOgame']['Fleet'][2]['Name']='Chasseur l√©ger';
+//$lang['DicOgame']['Fleet'][2]['Name']='Chasseur lÈger';
 $lang['DicOgame']['Fleet'][2]['PostVar']='f_cle';
 $lang['DicOgame']['Fleet'][2]['OgsName']='CLE';
 $lang['DicOgame']['Fleet'][2]['Prix']=array(3000,1000,0);
@@ -499,7 +499,7 @@ $lang['DicOgame']['Fleet'][11]['Fret']=2000;
 $lang['DicOgame']['Fleet'][11]['Vitesse']=5000;
 $lang['DicOgame']['Fleet'][11]['Carbu']=1000;
 
-//$lang['DicOgame']['Fleet'][12]['Name']='√âtoile de la mort';
+//$lang['DicOgame']['Fleet'][12]['Name']='‡âtoile de la mort';
 $lang['DicOgame']['Fleet'][12]['PostVar']='f_edlm';
 $lang['DicOgame']['Fleet'][12]['OgsName']='EDLM';
 $lang['DicOgame']['Fleet'][12]['Prix']=array(5000000,4000000,1000000);
@@ -532,7 +532,7 @@ $lang['DicOgame']['Def'][0]['Structure']=2000;
 $lang['DicOgame']['Def'][0]['Bouclier']=20;
 $lang['DicOgame']['Def'][0]['Attaque']=80;
 
-//$lang['DicOgame']['Def'][1]['Name']='Artillerie laser l√©g√®re';
+//$lang['DicOgame']['Def'][1]['Name']='Artillerie laser lÈgËre';
 $lang['DicOgame']['Def'][1]['PostVar']='d_lle';
 $lang['DicOgame']['Def'][1]['OgsName']='LLE';
 $lang['DicOgame']['Def'][1]['Prix']=array(1500,500,0);
@@ -556,7 +556,7 @@ $lang['DicOgame']['Def'][3]['Structure']=35000;
 $lang['DicOgame']['Def'][3]['Bouclier']=200;
 $lang['DicOgame']['Def'][3]['Attaque']=1100;
 
-//$lang['DicOgame']['Def'][4]['Name']='Artillerie √† ions';
+//$lang['DicOgame']['Def'][4]['Name']='Artillerie ‡† ions';
 $lang['DicOgame']['Def'][4]['PostVar']='d_ion';
 $lang['DicOgame']['Def'][4]['OgsName']='AI';
 $lang['DicOgame']['Def'][4]['Prix']=array(2000,6000,0);
@@ -596,7 +596,7 @@ $lang['DicOgame']['Def'][8]['Structure']=8000;
 $lang['DicOgame']['Def'][8]['Bouclier']=1;
 $lang['DicOgame']['Def'][8]['Attaque']=1;
 
-//$lang['DicOgame']['Def'][9]['Name']='Missile Interplan√©taire';
+//$lang['DicOgame']['Def'][9]['Name']='Missile InterplanÈtaire';
 $lang['DicOgame']['Def'][9]['PostVar']='d_mip';
 $lang['DicOgame']['Def'][9]['OgsName']='MIP';
 $lang['DicOgame']['Def'][9]['Prix']=array(12500,2500,10000);
@@ -606,16 +606,16 @@ $lang['DicOgame']['Def'][9]['Attaque']=12000;
 
 // ================================================================
 // ================================================================
-// √ßa c'est plus en rapport avec le coeur d'AdvSpy ... notament l'affichage des statistiques ...
-// y a pas forcement tout mais vous croyez pas que c'est deja ass√© non ?
+// ‡ßa c'est plus en rapport avec le coeur d'AdvSpy ... notament l'affichage des statistiques ...
+// y a pas forcement tout mais vous croyez pas que c'est deja assÈ non ?
 
 /*
 $lang['FlatSpyElements']['spy_galaxy']['Name']='Galaxie';
-$lang['FlatSpyElements']['spy_system']['Name']='Syst√®me';
+$lang['FlatSpyElements']['spy_system']['Name']='SystËme';
 $lang['FlatSpyElements']['spy_row']['Name']='Rang';
-$lang['FlatSpyElements']['metal']['Name']='M√©tal pr√©sent';
-$lang['FlatSpyElements']['cristal']['Name']='Cristal pr√©sent';
-$lang['FlatSpyElements']['deut']['Name']='Deut√©rium pr√©sent';
+$lang['FlatSpyElements']['metal']['Name']='MÈtal prÈsent';
+$lang['FlatSpyElements']['cristal']['Name']='Cristal prÈsent';
+$lang['FlatSpyElements']['deut']['Name']='DeutÈrium prÈsent';
 $lang['FlatSpyElements']['energie']['Name']='Energie produite';
 foreach($lang['DicOgame']['SpyCatList'] as $Cat=>$Catname){
 	foreach($lang['DicOgame'][$Cat] as $num=>$valuesarray){
@@ -624,38 +624,38 @@ foreach($lang['DicOgame']['SpyCatList'] as $Cat=>$Catname){
 }
 $lang['FlatSpyElements']['PATATE']['Name']='Patate totale de la flotte';
 $lang['FlatSpyElements']['PATATE_f']['Name']='Patate des vaisseaux';
-$lang['FlatSpyElements']['PATATE_d']['Name']='Patate des d√©fenses';
+$lang['FlatSpyElements']['PATATE_d']['Name']='Patate des dÈfenses';
 $lang['FlatSpyElements']['PATATE_Balance_f']['Name']='Pourcentage de Patate de la flotte';
-$lang['FlatSpyElements']['PATATE_Balance_d']['Name']='Pourcentage de Patate de la d√©fense';
+$lang['FlatSpyElements']['PATATE_Balance_d']['Name']='Pourcentage de Patate de la dÈfense';
 $lang['FlatSpyElements']['TauxPatateVsCurrentAtk']['Name']='Chances de victoire';
 $lang['FlatSpyElements']['ArmyRessources']['Name']='Ressources totale de la flotte';
 $lang['FlatSpyElements']['ArmyRessources_f']['Name']='Resoources totale des vaisseaux';
-$lang['FlatSpyElements']['ArmyRessources_d']['Name']='Resoources totale des d√©fenses';
+$lang['FlatSpyElements']['ArmyRessources_d']['Name']='Resoources totale des dÈfenses';
 $lang['FlatSpyElements']['ArmyRessourcesD']['Name']='Ressources totale de la flotte (avec Deut)';
 $lang['FlatSpyElements']['ArmyRessourcesD_f']['Name']='Ressources totale de la flotte (avec Deut)';
-$lang['FlatSpyElements']['ArmyRessourcesD_d']['Name']='Ressources totale des d√©fenses (avec Deut)';
+$lang['FlatSpyElements']['ArmyRessourcesD_d']['Name']='Ressources totale des dÈfenses (avec Deut)';
 $lang['FlatSpyElements']['GrandNombre']['Name']='Le plus Grand Nombre';
-$lang['FlatSpyElements']['Transport_PT']['Name']='Nombre de PT n√©c√©ssaires pour le transport';
-$lang['FlatSpyElements']['Transport_GT']['Name']='Nombre de GT n√©c√©ssaires pour le transport';
-$lang['FlatSpyElements']['Raid_metal']['Name']='M√©tal √† gagner en raidant (1/2 du total)';
-$lang['FlatSpyElements']['Raid_cristal']['Name']='Cristal √† gagner en raidant (1/2 du total)';
-$lang['FlatSpyElements']['Raid_deut']['Name']='Deut√©rium √† gagner en raidant (1/2 du total)';
-$lang['FlatSpyElements']['Raid_total']['Name']='Ressources totales √† gagner en raidant (1/2 du total)';
+$lang['FlatSpyElements']['Transport_PT']['Name']='Nombre de PT nÈcÈssaires pour le transport';
+$lang['FlatSpyElements']['Transport_GT']['Name']='Nombre de GT nÈcÈssaires pour le transport';
+$lang['FlatSpyElements']['Raid_metal']['Name']='MÈtal ‡† gagner en raidant (1/2 du total)';
+$lang['FlatSpyElements']['Raid_cristal']['Name']='Cristal ‡† gagner en raidant (1/2 du total)';
+$lang['FlatSpyElements']['Raid_deut']['Name']='DeutÈrium ‡† gagner en raidant (1/2 du total)';
+$lang['FlatSpyElements']['Raid_total']['Name']='Ressources totales ‡† gagner en raidant (1/2 du total)';
 
-$lang['FlatSpyElements']['Raid2_metal']['Name']='M√©tal √† gagner en raidant 2 fois';
-$lang['FlatSpyElements']['Raid2_cristal']['Name']='Cristal √† gagner en raidant 2 fois';
-$lang['FlatSpyElements']['Raid2_deut']['Name']='Deut√©rium √† gagner en raidant 2 fois';
-$lang['FlatSpyElements']['Raid2_total']['Name']='Ressources totales √† gagner en raidant 2 fois';
+$lang['FlatSpyElements']['Raid2_metal']['Name']='MÈtal ‡† gagner en raidant 2 fois';
+$lang['FlatSpyElements']['Raid2_cristal']['Name']='Cristal ‡† gagner en raidant 2 fois';
+$lang['FlatSpyElements']['Raid2_deut']['Name']='DeutÈrium ‡† gagner en raidant 2 fois';
+$lang['FlatSpyElements']['Raid2_total']['Name']='Ressources totales ‡† gagner en raidant 2 fois';
 
-$lang['FlatSpyElements']['Raid3_metal']['Name']='M√©tal √† gagner en raidant 3 fois';
-$lang['FlatSpyElements']['Raid3_cristal']['Name']='Cristal √† gagner en raidant 3 fois';
-$lang['FlatSpyElements']['Raid3_deut']['Name']='Deut√©rium √† gagner en raidant 3 fois';
-$lang['FlatSpyElements']['Raid3_total']['Name']='Ressources totales √† gagner en raidant 3 fois';
+$lang['FlatSpyElements']['Raid3_metal']['Name']='MÈtal ‡† gagner en raidant 3 fois';
+$lang['FlatSpyElements']['Raid3_cristal']['Name']='Cristal ‡† gagner en raidant 3 fois';
+$lang['FlatSpyElements']['Raid3_deut']['Name']='DeutÈrium ‡† gagner en raidant 3 fois';
+$lang['FlatSpyElements']['Raid3_total']['Name']='Ressources totales ‡† gagner en raidant 3 fois';
 
-$lang['FlatSpyElements']['Raid_PT']['Name']='Nombre de PT n√©c√©ssaires pour le raid';
-$lang['FlatSpyElements']['Raid_GT']['Name']='Nombre de GT n√©c√©ssaires pour le raid';
+$lang['FlatSpyElements']['Raid_PT']['Name']='Nombre de PT nÈcÈssaires pour le raid';
+$lang['FlatSpyElements']['Raid_GT']['Name']='Nombre de GT nÈcÈssaires pour le raid';
 $lang['FlatSpyElements']['Ressources_total']['Name']='Total des ressources';
-$lang['FlatSpyElements']['Raided']['Name']='Nombre de raids r√©cents signal√©s';
+$lang['FlatSpyElements']['Raided']['Name']='Nombre de raids rÈcents signalÈs';
 $lang['FlatSpyElements']['Indice_PR']['Name']='Indice Patate/Ressources';
 */
 
@@ -667,50 +667,50 @@ if (file_exists($VersionFilePath)) {
 	$AdvSpyConfig['version']['advspy']=trim(@$file[1]);
 }
 
-// URL o√π se trouvent les mises √† jour officielles :
-// d√©faut : "http://kilops2.free.fr/og/AdvSpy/"
+// URL o‡π se trouvent les mises ‡† jour officielles :
+// dÈfaut : "http://kilops2.free.fr/og/AdvSpy/"
 $AdvSpyConfig['Settings']['AdvSpy_AutoUpdate_MasterURL']="http://kilops2.free.fr/og/AdvSpy/";
 
 
 
-// liste des crit√®res de tris :
-/*
-$AdvSpyConfig['Liste_Tris']=array('1'=>'Date (r√©cents en premier)',
+// liste des critËres de tris :
+
+$AdvSpyConfig['Liste_Tris']=array('1'=>'Date (rÈcents en premier)',
 							'2'=>'Date (vieux en premier)',
 							'3'=>'Ressources total (&gt;)',
 							'4'=>'Metal (&gt;)',
 							'5'=>'Cristal (&gt;)',
-							'6'=>'Deut√©rium (&gt;)',
+							'6'=>'DeutÈrium (&gt;)',
 							'7'=>'Flottes (en ressources) (&gt;)',
 							'8'=>'Indice Patate/Ressource (&lt;)',
 							'9'=>'PATATE Totale (&lt;)',
 							'10'=>'PATATE Totale (&gt;)',
 							'11'=>'PATATE- Vaisseaux (&lt;)',
 							'12'=>'PATATE- Vaisseaux (&gt;)',
-							'13'=>'PATATE- D√©fenses (&lt;)',
-							'14'=>'PATATE- D√©fenses (&gt;)',
+							'13'=>'PATATE- DÈfenses (&lt;)',
+							'14'=>'PATATE- DÈfenses (&gt;)',
 							'15'=>'Taux de Patate (&gt;)',
 							'16'=>'Nombre de PT/GT (raid) (&gt;)',
-							'17'=>'Coordon√©es (&lt;)',
-							'18'=>'Coordon√©es (&gt;)',
-							'19'=>'Scanner d`activit√© (&lt;)',
+							'17'=>'CoordonnÈes (&lt;)',
+							'18'=>'CoordonnÈes (&gt;)',
+							'19'=>'Scanner d`activitÈ (&lt;)',
 							'20'=>'Champ de ruines (&gt;)',
 							'21'=>'Champ de ruines (&lt;)');
-*/
 
-// ca on s'en sert pour l'affichage des noms dans les d√©tails d'une sauvegarde. (Name)
-// le Type sert aussi (et surtout) √† la verification du formulaire post√©.
-// integer 1 8 = nombre entier de 1 √† 8 (inclus)
+
+// ca on s'en sert pour l'affichage des noms dans les dÈtails d'une sauvegarde. (Name)
+// le Type sert aussi (et surtout) ‡† la verification du formulaire postÈ.
+// integer 1 8 = nombre entier de 1 ‡† 8 (inclus)
 // si pas de max... pas de max.
 // duration = entier (en secondes, convertis en texte)
 // onoff = 'ON' (en maj) ou '' (rien=off)
 // *num = (numeric) nombre (un . pour virgule)
 // boolean = 0 ou 1
 //
-// L'√©toile * en 1ere position signifie que NULL ('' vide) est aussi accept√©
+// L'Ètoile * en 1ere position signifie que NULL ('' vide) est aussi acceptÈ
 //
 // *integer = pareil pour un nombre entier , l'etoile compte partout (y compris dans duration ...)
-// tout √©l√©ment du formulaire (BlockRecherche) qui ne correspond pas √† ces d√©finitions g√©n√®re une erreur (log+die()).
+// tout ÈlÈment du formulaire (BlockRecherche) qui ne correspond pas ‡† ces dÈfinitions gÈnËre une erreur (log+die()).
 
 
 //$lang['BlockRechercheElements']['ChercherOK']['Name']='Bouton Chercher';
@@ -722,10 +722,10 @@ $lang['BlockRechercheElements']['AdvSpy_TRIS']['Type']='integer 1 21';
 //$lang['BlockRechercheElements']['AdvSpy_OnlyMyScan']['Name']='Uniquement mes RE';
 $lang['BlockRechercheElements']['AdvSpy_OnlyMyScan']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SearchResult_Min']['Name']='R√©sultat min';
+//$lang['BlockRechercheElements']['AdvSpy_SearchResult_Min']['Name']='RÈsultat min';
 $lang['BlockRechercheElements']['AdvSpy_SearchResult_Min']['Type']='integer 1';
 
-//$lang['BlockRechercheElements']['AdvSpy_SearchResult_Max']['Name']='R√©sultat max';
+//$lang['BlockRechercheElements']['AdvSpy_SearchResult_Max']['Name']='RÈsultat max';
 $lang['BlockRechercheElements']['AdvSpy_SearchResult_Max']['Type']='integer 1';
 
 //$lang['BlockRechercheElements']['AdvSpy_GalaxyMin']['Name']='Galaxie Min';
@@ -734,10 +734,10 @@ $lang['BlockRechercheElements']['AdvSpy_GalaxyMin']['Type']='integer 1 '.$AdvSpy
 //$lang['BlockRechercheElements']['AdvSpy_GalaxyMax']['Name']='Galaxie Max';
 $lang['BlockRechercheElements']['AdvSpy_GalaxyMax']['Type']='integer 1 '.$AdvSpyConfig['Settings']['OgameUniverse_Galaxy_Max'];
 
-//$lang['BlockRechercheElements']['AdvSpy_SystemMin']['Name']='Syst√®me Min';
+//$lang['BlockRechercheElements']['AdvSpy_SystemMin']['Name']='SystËme Min';
 $lang['BlockRechercheElements']['AdvSpy_SystemMin']['Type']='integer 1 '.$AdvSpyConfig['Settings']['OgameUniverse_System_Max'];
 
-//$lang['BlockRechercheElements']['AdvSpy_SystemMax']['Name']='Syst√®me Max';
+//$lang['BlockRechercheElements']['AdvSpy_SystemMax']['Name']='SystËme Max';
 $lang['BlockRechercheElements']['AdvSpy_SystemMax']['Type']='integer 1 '.$AdvSpyConfig['Settings']['OgameUniverse_System_Max'];
 
 //$lang['BlockRechercheElements']['AdvSpy_RowMin']['Name']='Rang Min';
@@ -746,7 +746,7 @@ $lang['BlockRechercheElements']['AdvSpy_RowMin']['Type']='integer 1 '.$AdvSpyCon
 //$lang['BlockRechercheElements']['AdvSpy_RowMax']['Name']='Rang Max';
 $lang['BlockRechercheElements']['AdvSpy_RowMax']['Type']='integer 1 '.$AdvSpyConfig['Settings']['OgameUniverse_Row_Max'];
 
-//$lang['BlockRechercheElements']['AdvSpy_CoordsToHide']['Name']='Plan√®tes cach√©es';
+//$lang['BlockRechercheElements']['AdvSpy_CoordsToHide']['Name']='PlanËtes cachÈes';
 $lang['BlockRechercheElements']['AdvSpy_CoordsToHide']['Type']='*string';
 
 //$lang['BlockRechercheElements']['AdvSpy_AgeMax']['Name']='Age Max du RE';
@@ -758,28 +758,28 @@ $lang['BlockRechercheElements']['AdvSpy_NoDoublon']['Type']='*onoff';
 //$lang['BlockRechercheElements']['AdvSpy_ShowOnlyMoon']['Name']='Afficher que les lunes';
 $lang['BlockRechercheElements']['AdvSpy_ShowOnlyMoon']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Scanned_Fleet']['Name']='Flotte sond√©e';
+//$lang['BlockRechercheElements']['AdvSpy_Scanned_Fleet']['Name']='Flotte sondÈe';
 $lang['BlockRechercheElements']['AdvSpy_Scanned_Fleet']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Reduire_Fleet']['Name']='R√©duire les flottes';
+//$lang['BlockRechercheElements']['AdvSpy_Reduire_Fleet']['Name']='RÈduire les flottes';
 $lang['BlockRechercheElements']['AdvSpy_Reduire_Fleet']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Scanned_Def']['Name']='D√©fenses sond√©es';
+//$lang['BlockRechercheElements']['AdvSpy_Scanned_Def']['Name']='DÈfenses sondÈes';
 $lang['BlockRechercheElements']['AdvSpy_Scanned_Def']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Reduire_Def']['Name']='R√©duire d√©fenses';
+//$lang['BlockRechercheElements']['AdvSpy_Reduire_Def']['Name']='RÈduire dÈfenses';
 $lang['BlockRechercheElements']['AdvSpy_Reduire_Def']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Scanned_Buildings']['Name']='B√¢timents sond√©s';
+//$lang['BlockRechercheElements']['AdvSpy_Scanned_Buildings']['Name']='B‡¢timents sondÈs';
 $lang['BlockRechercheElements']['AdvSpy_Scanned_Buildings']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Reduire_Buildings']['Name']='R√©duire les b√¢timents';
+//$lang['BlockRechercheElements']['AdvSpy_Reduire_Buildings']['Name']='RÈduire les b‡¢timents';
 $lang['BlockRechercheElements']['AdvSpy_Reduire_Buildings']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Scanned_Tech']['Name']='Recherches sond√©es';
+//$lang['BlockRechercheElements']['AdvSpy_Scanned_Tech']['Name']='Recherches sondÈes';
 $lang['BlockRechercheElements']['AdvSpy_Scanned_Tech']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_Reduire_Tech']['Name']='R√©duire les recherches';
+//$lang['BlockRechercheElements']['AdvSpy_Reduire_Tech']['Name']='RÈduire les recherches';
 $lang['BlockRechercheElements']['AdvSpy_Reduire_Tech']['Type']='*onoff';
 
 //$lang['BlockRechercheElements']['AdvSpy_OnlyInactif']['Name']='Seulement les inactifs';
@@ -791,22 +791,22 @@ $lang['BlockRechercheElements']['AdvSpy_PlayerSearch']['Type']='*string';
 //$lang['BlockRechercheElements']['AdvSpy_AllySearch']['Name']='Nom d\'ally';
 $lang['BlockRechercheElements']['AdvSpy_AllySearch']['Type']='*string';
 
-//$lang['BlockRechercheElements']['AdvSpy_PlanetSearch']['Name']='Nom de plan√®te';
+//$lang['BlockRechercheElements']['AdvSpy_PlanetSearch']['Name']='Nom de planËte';
 $lang['BlockRechercheElements']['AdvSpy_PlanetSearch']['Type']='*string';
 
 //$lang['BlockRechercheElements']['AdvSpy_SeuilGrandNombre']['Name']='Grand Nombre';
 $lang['BlockRechercheElements']['AdvSpy_SeuilGrandNombre']['Type']='*num';
 
-//$lang['BlockRechercheElements']['AdvSpy_OnlyGrandNombre']['Name']='Seulement si Grand Nombre est d√©pass√©';
+//$lang['BlockRechercheElements']['AdvSpy_OnlyGrandNombre']['Name']='Seulement si Grand Nombre est dÈpassÈ';
 $lang['BlockRechercheElements']['AdvSpy_OnlyGrandNombre']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_RessourceMinMetal']['Name']='M√©tal minimum';
+//$lang['BlockRechercheElements']['AdvSpy_RessourceMinMetal']['Name']='MÈtal minimum';
 $lang['BlockRechercheElements']['AdvSpy_RessourceMinMetal']['Type']='*num';
 
 //$lang['BlockRechercheElements']['AdvSpy_RessourceMinCristal']['Name']='Cristal minimum';
 $lang['BlockRechercheElements']['AdvSpy_RessourceMinCristal']['Type']='*num';
 
-//$lang['BlockRechercheElements']['AdvSpy_RessourceMinDeut']['Name']='Deut√©rium minimum';
+//$lang['BlockRechercheElements']['AdvSpy_RessourceMinDeut']['Name']='DeutÈrium minimum';
 $lang['BlockRechercheElements']['AdvSpy_RessourceMinDeut']['Type']='*num';
 
 //$lang['BlockRechercheElements']['AdvSpy_RessourceMinEnergie']['Name']='Energie minimum';
@@ -815,10 +815,10 @@ $lang['BlockRechercheElements']['AdvSpy_RessourceMinEnergie']['Type']='*num';
 //$lang['BlockRechercheElements']['AdvSpy_TauxPatateMini']['Name']='Chances de victoire minimum';
 $lang['BlockRechercheElements']['AdvSpy_TauxPatateMini']['Type']='*num';
 
-//$lang['BlockRechercheElements']['AdvSpy_HideRaided']['Name']='Cacher les RE raid√©s';
+//$lang['BlockRechercheElements']['AdvSpy_HideRaided']['Name']='Cacher les RE raidÈs';
 $lang['BlockRechercheElements']['AdvSpy_HideRaided']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_OnlyRaided']['Name']='N\'afficher que les RE raid√©s';
+//$lang['BlockRechercheElements']['AdvSpy_OnlyRaided']['Name']='N\'afficher que les RE raidÈs';
 $lang['BlockRechercheElements']['AdvSpy_OnlyRaided']['Type']='*onoff';
 
 //$lang['BlockRechercheElements']['AdvSpy_RaidAgeMax']['Name']='Raids de moin de';
@@ -845,11 +845,11 @@ foreach($lang['DicOgame']['SpyCatList'] as $Cat=>$Catname){
 			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]['Name']='[Simulateur]Attaque '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]['Type']='*integer';
 			
-			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]D√©fense '.$valuesarray['Name'].''; }
+			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]DÈfense '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Type']='*integer';
 		}
 		if (strpos($valuesarray['PostVar'],'d_') === 0) {
-			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]D√©fense '.$valuesarray['Name'].''; }
+			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]DÈfense '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Type']='*integer';
 		}		
 	}
@@ -864,20 +864,20 @@ $lang['BlockRechercheElements']['AdvSpy_Sim_atk_t_bouclier']['Type']='*integer';
 //$lang['BlockRechercheElements']['AdvSpy_Sim_atk_t_protect']['Name']='[Simulateur]Attaque Tech Protection';
 $lang['BlockRechercheElements']['AdvSpy_Sim_atk_t_protect']['Type']='*integer';
 
-//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_armes']['Name']='[Simulateur]D√©fense Tech Armes';
+//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_armes']['Name']='[Simulateur]DÈfense Tech Armes';
 $lang['BlockRechercheElements']['AdvSpy_Sim_def_t_armes']['Type']='*integer';
 
-//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_bouclier']['Name']='[Simulateur]D√©fense Tech Bouclier';
+//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_bouclier']['Name']='[Simulateur]DÈfense Tech Bouclier';
 $lang['BlockRechercheElements']['AdvSpy_Sim_def_t_bouclier']['Type']='*integer';
 
-//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_protect']['Name']='[Simulateur]D√©fense Tech Protection';
+//$lang['BlockRechercheElements']['AdvSpy_Sim_def_t_protect']['Name']='[Simulateur]DÈfense Tech Protection';
 $lang['BlockRechercheElements']['AdvSpy_Sim_def_t_protect']['Type']='*integer';
 
 
 
-// Name est pas vraiment utile pour ceux l√†, ce qui compte c'est le Type pour la securit√©
+// Name est pas vraiment utile pour ceux l‡†, ce qui compte c'est le Type pour la securitÈ
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveIdToLoad']['Name']='Num√©ro de sauvegarde';
+//$lang['BlockRechercheElements']['AdvSpy_SaveIdToLoad']['Name']='NumÈro de sauvegarde';
 $lang['BlockRechercheElements']['AdvSpy_SaveIdToLoad']['Type']='*integer';
 
 //$lang['BlockRechercheElements']['AdvSpy_SaveDelConfirmation']['Name']='Confirmation de suppression';
@@ -889,7 +889,7 @@ $lang['BlockRechercheElements']['AdvSpy_SaveNameToSave']['Type']='*string';
 //$lang['BlockRechercheElements']['AdvSpy_SaveIsPublic']['Name']='Sauvegarde publique';
 $lang['BlockRechercheElements']['AdvSpy_SaveIsPublic']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveIsDefault']['Name']='Sauvegarde g√©n√©rale';
+//$lang['BlockRechercheElements']['AdvSpy_SaveIsDefault']['Name']='Sauvegarde gÈnÈrale';
 $lang['BlockRechercheElements']['AdvSpy_SaveIsDefault']['Type']='*onoff';
 
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_Tris']['Name']='Sauvegarde du tris';
@@ -901,10 +901,10 @@ $lang['BlockRechercheElements']['AdvSpy_SaveElement_Secteur']['Type']='*onoff';
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_RE']['Name']='Sauvegarde des carracteristiques du RE';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_RE']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Joueur']['Name']='Sauvegarde des crit√®res de joueurs';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Joueur']['Name']='Sauvegarde des critËres de joueurs';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_Joueur']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Ressources']['Name']='Sauvegarde des crit√®res de ressources';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Ressources']['Name']='Sauvegarde des critËres de ressources';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_Ressources']['Type']='*onoff';
 
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_Analyse']['Name']='Sauvegarde des contraintes de Patate';
@@ -913,10 +913,10 @@ $lang['BlockRechercheElements']['AdvSpy_SaveElement_Analyse']['Type']='*onoff';
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMFleet']['Name']='Sauvegarde de Recherche Plus Flotte';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_MMFleet']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMDef']['Name']='Sauvegarde de Recherche Plus D√©fenses';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMDef']['Name']='Sauvegarde de Recherche Plus DÈfenses';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_MMDef']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMBuildings']['Name']='Sauvegarde de Recherche Plus B√¢timents';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMBuildings']['Name']='Sauvegarde de Recherche Plus B‡¢timents';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_MMBuildings']['Type']='*onoff';
 
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_MMTech']['Name']='Sauvegarde de Recherche Plus Technologies';
@@ -928,10 +928,10 @@ $lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_atk']['Type']='*onoff';
 //$lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_atk_tech']['Name']='Sauvegarde du Simulateur Attaquant (tech)';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_atk_tech']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def']['Name']='Sauvegarde du Simulateur D√©fenseur';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def']['Name']='Sauvegarde du Simulateur DÈfenseur';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def']['Type']='*onoff';
 
-//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def_tech']['Name']='Sauvegarde du Simulateur D√©fenseur (tech)';
+//$lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def_tech']['Name']='Sauvegarde du Simulateur DÈfenseur (tech)';
 $lang['BlockRechercheElements']['AdvSpy_SaveElement_Sim_def_tech']['Type']='*onoff';
 
 // ===================================================================================================
@@ -944,38 +944,38 @@ $lang['Options']['']['Value_Config']='xx';
 */
 
 
-//$lang['Options']['RecycleDef']['Name']='D√©fenses dans d√©bris (Uni40)';
-//$lang['Options']['RecycleDef']['Desc']='Prend en compte les d√©bris des d√©fenses pour le calcul du champ de ruines recyclable (Sp√©cifique Uni 40 fr)';
+//$lang['Options']['RecycleDef']['Name']='DÈfenses dans dÈbris (Uni40)';
+//$lang['Options']['RecycleDef']['Desc']='Prend en compte les dÈbris des dÈfenses pour le calcul du champ de ruines recyclable (SpÈcifique Uni 40 fr)';
 $lang['Options']['RecycleDef']['Type']='*boolean';
 $lang['Options']['RecycleDef']['Value_Config']='0';
 
-//$lang['Options']['HideCopyClipAlert']['Name']='D√©sactiver le message d`erreur de copie presse-papier';
-//$lang['Options']['HideCopyClipAlert']['Desc']='Permet de ne plus voir l`avertissement pour les cas o√π la copie automatique ne fonctionne pas (sous linux par ex)';
+//$lang['Options']['HideCopyClipAlert']['Name']='DÈsactiver le message d`erreur de copie presse-papier';
+//$lang['Options']['HideCopyClipAlert']['Desc']='Permet de ne plus voir l`avertissement pour les cas o‡π la copie automatique ne fonctionne pas (sous linux par ex)';
 $lang['Options']['HideCopyClipAlert']['Type']='*boolean';
 $lang['Options']['HideCopyClipAlert']['Value_Config']='0';
 
 //$lang['Options']['ExpressCopyClipRE']['Name']='Copie express des RE dans le Presse-Papier';
-//$lang['Options']['ExpressCopyClipRE']['Desc']='Si activ√©, le menu de copie de RE ne s\'affiche plus et tente de copier directement le RE \'Standard\' dans le presse-papier quand on click sur l\'icone';
+//$lang['Options']['ExpressCopyClipRE']['Desc']='Si activÈ, le menu de copie de RE ne s\'affiche plus et tente de copier directement le RE \'Standard\' dans le presse-papier quand on click sur l\'icone';
 $lang['Options']['ExpressCopyClipRE']['Type']='*boolean';
 $lang['Options']['ExpressCopyClipRE']['Value_Config']='0';
 
 //$lang['Options']['ShowRaidsInPT']['Name']='Afficher le nombre de <b>Petits Transporteurs</b> pour les raids';
-//$lang['Options']['ShowRaidsInPT']['Desc']='Indique le nombre de PT n√©c√©ssaires lors d`un raid √† la place du nombre de GT';
+//$lang['Options']['ShowRaidsInPT']['Desc']='Indique le nombre de PT nÈcÈssaires lors d`un raid ‡† la place du nombre de GT';
 $lang['Options']['ShowRaidsInPT']['Type']='*boolean';
 $lang['Options']['ShowRaidsInPT']['Value_Config']='0';
 
-//$lang['Options']['BackgroundOpacity']['Name']='Opacit√© du fond gris√© (de 0 √† 100)';
-//$lang['Options']['BackgroundOpacity']['Desc']='Opacit√© du fond gris√© 0=transparent 100=noir, D√©faut: 50';
+//$lang['Options']['BackgroundOpacity']['Name']='OpacitÈ du fond grisÈ (de 0 ‡† 100)';
+//$lang['Options']['BackgroundOpacity']['Desc']='OpacitÈ du fond grisÈ 0=transparent 100=noir, DÈfaut: 50';
 $lang['Options']['BackgroundOpacity']['Type']='integer';
 $lang['Options']['BackgroundOpacity']['Value_Config']='50';
 
 //$lang['Options']['HideSimAlert']['Name']='Cacher l\'avertissement dans le simulateur de combat';
-//$lang['Options']['HideSimAlert']['Desc']='Si activ√©, le message d\'avertissement en haut de l\'onglet "Simulateur de combat" ne sera pas affich√©';
+//$lang['Options']['HideSimAlert']['Desc']='Si activÈ, le message d\'avertissement en haut de l\'onglet "Simulateur de combat" ne sera pas affichÈ';
 $lang['Options']['HideSimAlert']['Type']='*boolean';
 $lang['Options']['HideSimAlert']['Value_Config']='0';
 
 //$lang['Options']['CompactSpy']['Name']='Afficher le contenu des RE en colonnes';
-//$lang['Options']['CompactSpy']['Desc']='Si activ√©, les vaisseaux/def/batiments/tech seront affich√©s en tableau 2*2';
+//$lang['Options']['CompactSpy']['Desc']='Si activÈ, les vaisseaux/def/batiments/tech seront affichÈs en tableau 2*2';
 $lang['Options']['CompactSpy']['Type']='*boolean';
 $lang['Options']['CompactSpy']['Value_Config']='1';
 
