@@ -16,8 +16,8 @@ $filename = 'mod/'.$mod_folder.'/version.txt';
 if (file_exists($filename)) $file = file($filename);
 
 require_once("mod/".$mod_folder."/lang/lang_fr.php");
-if (file_exists("mod/".$mod_folder."/lang/lang_".$server_config['language'].".php")) require_once("mod/".$mod_folder."/lang/lang_".$server_config['language'].".php");
-if (file_exists("mod/".$mod_folder."/lang/lang_".$user_data['user_language'].".php")) require("mod/".$mod_folder."/lang/lang_".$user_data['user_language'].".php");
+if (file_exists("mod/".$mod_folder."/lang/lang_fr.php")) require_once("mod/".$mod_folder."/lang/lang_fr.php");
+if (file_exists("mod/".$mod_folder."/lang/lang_fr.php")) require("mod/".$mod_folder."/lang/lang_fr.php");
 
 $mod_name = 'Pandore';
 $mod_version = trim($file[1]);
