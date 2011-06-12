@@ -27,6 +27,7 @@ $points_building = array("M"=>75, "C"=>72, "D"=>300, "CES"=>105, "CEF"=>1440, "U
 $puissance_building = array("M"=>1.5, "C"=>1.6, "D"=>1.5, "CES"=>1.5, "CEF"=>1.8, "UdR"=>2, "UdN"=>2, "CSp"=>2, "HM"=>2, "HC"=>2, "HD"=>2, "Lab"=>2, "Ter"=>2, "Silo"=>2, "BaLu"=>2, "Pha"=>2, "PoSa"=>2, "DdR"=>2);
 $points_defence = array("LM"=>2, "LLE"=>2, "LLO"=>8, "CG"=>37, "AI"=>8, "LP"=>130, "PB"=>20, "GB"=>100, "MIC"=>10, "MIP"=>25);
 $points_technology = array("Esp"=>1.4, "Ordi"=>1, "Armes"=>1, "Bouclier"=>.8, "Protection"=>1, "NRJ"=>1.2, "Hyp"=>6, "RC"=>1, "RI"=>6.6, "PH"=>36, "Laser"=>.3, "Ions"=>1.4, "Plasma"=>7, "RRI"=>800, "Astrophysique"=>16, "Graviton"=>0);
+$points_technology_ratio = array("Esp"=>2, "Ordi"=>2, "Armes"=>2, "Bouclier"=>2, "Protection"=>2, "NRJ"=>2, "Hyp"=>2, "RC"=>2, "RI"=>2, "PH"=>2, "Laser"=>2, "Ions"=>2, "Plasma"=>2, "RRI"=>2, "Astrophysique"=>1.75, "Graviton"=>0);
 $technologies = array("Esp"=>0, "Ordi"=>0, "Armes"=>0, "Bouclier"=>0, "Protection"=>0, "NRJ"=>0, "Hyp"=>0, "RC"=>0, "RI"=>0, "PH"=>0, "Laser"=>0, "Ions"=>0, "Plasma"=>0, "RRI"=>0, "Astrophysique"=>0, "Graviton"=>0);
 $techno_necessaires = array("PT"=>array("RC"=>2), "GT"=>array("RC"=>6), "CLE"=>array("RC"=>1), "CLO"=>array("Protection"=>2, "RI"=>2), "CR"=>array("RI"=>4, "Ions"=>2), "VB"=>array("PH"=>4), "VC"=>array("RI"=>3), "REC"=>array("RC"=>6, "Bouclier"=>2), "SE"=>array("Esp"=>2, "RC"=>3), "BMD"=>array("RI"=>6, "Plasma"=>5), "DST"=>array("Hyp"=>5, "PH"=>6), "EDLM"=>array("Hyp"=>6, "PH"=>7, "Graviton"=>1), "TRA"=>array("Hyp"=>5, "PH"=>5, "Laser"=>12));
 $points = array("flottes"=>0, "batiments"=>0, "defenses"=>0, "recherches"=>0);
@@ -165,7 +166,7 @@ if ($search && $error == 0 && isset($rapports)) {
 if ($search && $error == 0 && isset($rapports)) {
 	foreach ($points_technology as $key => $value) {
 		foreach ($rapports as $re) $technologies[$key] = max($re[$key], $technologies[$key]);
-		$points["recherches"] += floor($points_technology[$key] * (pow(2, $technologies[$key]) - 1));
+		$points["recherches"] += floor($points_technology[$key] * (pow($points_technology_ratio, $technologies[$key]) - 1));
 	}
 }
 
