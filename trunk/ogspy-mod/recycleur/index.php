@@ -2,17 +2,17 @@
 if ( ! defined ( 'IN_SPYOGAME' ) )
   die ( 'Hacking attempt' );
 include_once("views/page_header.php");
-<<<<<<< .mine
+
 // if ( ! isset ( $pub_subaction ) || ! file_exists ( 'mod/recycleur/' . $pub_subaction . '.php' ) )
   // $pub_subaction = 'index';
   
 // config OGSpy
 $nb_galaxies = $server_config['num_of_galaxies'] + 1;
 $nb_systems = $server_config['num_of_systems']+1;
-=======
+
 if ( ! isset ( $pub_subaction ) || ! file_exists ( 'mod/recycleur/' . $pub_subaction . '.php' ) )
 { $pub_subaction = 'index';}
->>>>>>> .r6782
+
 ?>
 
 <table width="100%">
@@ -113,7 +113,7 @@ switch ($pub_subaction) {
 
 <?php
 print '<hr width="325px">' . "\n";
-print '<p align="center">MOD Recycleurs & Phalanges | Version 1.1 | DeusIrae</p>' . "\n";
+print '<p align="center">MOD Recycleurs & Phalanges | Version 1.0.0 | DeusIrae</p>' . "\n";
 print '<p align="center">Mise à jour par Shad</p>' . "\n";
 include_once './views/page_tail.php';
 ?>
