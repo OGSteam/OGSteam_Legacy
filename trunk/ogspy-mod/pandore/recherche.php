@@ -9,10 +9,11 @@
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-$planet_max = find_nb_planete_user();
+
 $error = 0;
 $error2 = Array(0,0,0);
 require_once("includes/ogame.php");
+
 // Fonction de filtrage des caracteres 'sensibles' pour les requetes mysql
 function sql_filter($in) {
 	return mysql_real_escape_string(str_replace(array(';','(',')',chr(39),'"','`','|'),'',$in));
@@ -56,58 +57,75 @@ if ($search && $target == 'coord') {
 	}
 }
 
-// Recherche des planètes du joueur
-if ($search && ($error == 0 || $error == 4)) {
-	$res = mysql_query("SELECT galaxy, system, row, name, moon FROM ".TABLE_UNIVERSE." WHERE player = '".$nom."' ORDER BY galaxy ASC, system ASC, row ASC");
-	while ($coords = mysql_fetch_assoc($res)) {
-		$coords["moon"] == 0 ? $coords["moon"] = FALSE : $coords["moon"] = $lang['pandore_moon'];
-		$coordonnees[] = Array ($coords["galaxy"].':'.$coords["system"].':'.$coords["row"],$coords["name"],0,$coords["moon"],0);
-	}
-	if ($error != 4) {
-		if (count($coordonnees) == 0) $error = 2;
-		if (count($coordonnees) > $planet_max) $error = 1;
-	} elseif (count($coordonnees) > 0) {
-		$error = 0;
-		$target = 'player';
-	}
-}
 
-// Recherche des rapports d'espionnages sur les planètes
-$espionnage = -1;
-if ($search && $error == 0) {
-	$rapport_date_min = time();
-	for ($i = 0; $i < count($coordonnees); $i++) {
-		$res = mysql_query("SELECT * FROM ".TABLE_PARSEDSPY." WHERE coordinates = '".$coordonnees[$i][0]."' ORDER BY dateRE ASC");
-		while ($rapport = mysql_fetch_assoc($res)) {
-			$d = 0;
-			$j = $i;
-			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0) $j += count($coordonnees);
-			$coordonnees[$i][5] = $rapport['PoSa'];
-			foreach ($rapport as $key => $value) {
-				if ($value != -1 && $key != 'dateRE') $rapports[$j][$key] = $value;
-				elseif ($value == -1 && $key != 'dateRE') {
-					$rapports[$j][$key] = 0;
-					if ($key != 'activite' && $key != 'Esp' && $key != 'Ordi' && $key != 'Armes' && $key != 'Bouclier' && $key != 'Protection' && $key != 'NRJ' && $key != 'Hyp' && $key != 'RC' && $key != 'RI' && $key != 'PH' && $key != 'Laser' && $key != 'Ions' && $key != 'Plasma' && $key != 'RRI' && $key != 'Graviton' && $key != 'Astrophysique') $d = 1;
-				}
-				if ($key == 'Esp') $espionnage = max($value, $espionnage);
+// Recherche des planètes du joueur
+if ($search && ($error == 0 || $error == 4)) 
+	{
+		$res = mysql_query("SELECT galaxy, system, row, name, moon FROM ".TABLE_UNIVERSE." WHERE player = '".$nom."' ORDER BY galaxy ASC, system ASC, row ASC");
+		while ($coords = mysql_fetch_assoc($res)) 
+			{
+				$coords["moon"] == 0 ? $coords["moon"] = FALSE : $coords["moon"] = $lang['pandore_moon'];
+				$coordonnees[] = Array ($coords["galaxy"].':'.$coords["system"].':'.$coords["row"],$coords["name"],0,$coords["moon"],0);
 			}
-			if ($d == 0) $rapports[$j]["dateRE"] = $rapport["dateRE"];
-			else {
-				$rapports[$j]["dateRE"] = 1;
-				$error2[2] = 1;
+		if ($error != 4) 
+			{
+				if (count($coordonnees) == 0) $error = 2;
+
+				$error = 0;
+				// Recherche des rapports d'espionnages sur les planètes
+				$espionnage = -1;
+				if ($search && $error == 0) 
+					{
+						$rapport_date_min = time();
+						for ($i = 0; $i < count($coordonnees); $i++) 
+							{
+								$res = mysql_query("SELECT * FROM ".TABLE_PARSEDSPY." WHERE coordinates = '".$coordonnees[$i][0]."' ORDER BY dateRE ASC");
+								while ($rapport = mysql_fetch_assoc($res)) 
+									{
+										$d = 0;
+										$j = $i;
+										if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0) $j += count($coordonnees);
+										$coordonnees[$i][5] = $rapport['PoSa'];
+										foreach ($rapport as $key => $value) 
+											{
+												if ($value != -1 && $key != 'dateRE') $rapports[$j][$key] = $value;
+												elseif ($value == -1 && $key != 'dateRE') 
+													{
+														$rapports[$j][$key] = 0;
+														if ($key != 'activite' && $key != 'Esp' && $key != 'Ordi' && $key != 'Armes' && $key != 'Bouclier' && $key != 'Protection' && $key != 'NRJ' && $key != 'Hyp' && $key != 'RC' && $key != 'RI' && $key != 'PH' && $key != 'Laser' && $key != 'Ions' && $key != 'Plasma' && $key != 'RRI' && $key != 'Graviton' && $key != 'Astrophysique') $d = 1;
+													}
+												if ($key == 'Esp') $espionnage = max($value, $espionnage);
+											}
+										if ($d == 0) $rapports[$j]["dateRE"] = $rapport["dateRE"];
+										else 
+											{
+												$rapports[$j]["dateRE"] = 1;
+												$error2[2] = 1;
+											}
+									}
+								(isset($rapports) && isset($rapports[$i])) ? $coordonnees[$i][2] = $rapports[$i]["dateRE"] : $error2[1] = 1;
+								if ($coordonnees[$i][3]) 
+									{
+										if (isset($rapports[$i + count($coordonnees)]["planet_name"])) 
+											{
+												$coordonnees[$i][3] = $rapports[$i + count($coordonnees)]["planet_name"];
+												$coordonnees[$i][4] = $rapports[$i + count($coordonnees)]["dateRE"];
+											}
+										else $error2[1] = 1;
+									}
+								$rapport_date_min = min($rapport_date_min, $coordonnees[$i][2]);
+								if ($coordonnees[$i][3]) $rapport_date_min = min($rapport_date_min, $coordonnees[$i][4]);
+							}
+					}
+			// La recherche sur les RE est faite, on verifie l'astro pour savoir si tout est ok par rapport a l'astro
+			$planet_max = ceil ($rapports[$j]['Astrophysique']/2) + 1;
+			if (count($coordonnees) > $planet_max) $error = 1;
+			} 
+		elseif (count($coordonnees) > 0) 
+			{
+				$target = 'player';
 			}
-		}
-		(isset($rapports) && isset($rapports[$i])) ? $coordonnees[$i][2] = $rapports[$i]["dateRE"] : $error2[1] = 1;
-		if ($coordonnees[$i][3]) {
-			if (isset($rapports[$i + count($coordonnees)]["planet_name"])) {
-				$coordonnees[$i][3] = $rapports[$i + count($coordonnees)]["planet_name"];
-				$coordonnees[$i][4] = $rapports[$i + count($coordonnees)]["dateRE"];
-			} else $error2[1] = 1;
-		}
-		$rapport_date_min = min($rapport_date_min, $coordonnees[$i][2]);
-		if ($coordonnees[$i][3]) $rapport_date_min = min($rapport_date_min, $coordonnees[$i][4]);
 	}
-}
 
 // Recherche des classements du joueur
 if ($search && $error == 0) {
