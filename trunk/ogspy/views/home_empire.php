@@ -22,6 +22,8 @@ if(!isset($pub_view) || $pub_view=="") $view = "planets";
 elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
 $start = $view=="planets" ? 101 : 201;
+ $view_ratio = false; // vue prod reel si ratio inf a 0
+
 ?>
 
 <!-- DEBUT DU SCRIPT -->
@@ -125,9 +127,11 @@ function message(msg) {
 <!-- FIN DU SCRIPT -->
 
 <table width="100%">
+<!--
 <tr>
 	<td class="c" colspan="<?php print ($nb_planete <10)?'10':($nb_planete +1) ; ?>">Collez les informations et sélectionnez une planète pour les y assigner</td>
 </tr>
+-->
 <tr>
 <?php
 if ($view == "planets") {
@@ -317,7 +321,7 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	if ($M != "") $production = production("M", $M, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
-	echo "\t"."<th>".$production."</th>"."\n";
+	echo "\t"."<th>".floor($production)."</th>"."\n";
 }
 ?>
 </tr>
@@ -329,7 +333,7 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	if ($C != "") $production = production("C", $C, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
-	echo "\t"."<th>".$production."</th>"."\n";
+	echo "\t"."<th>".floor($production)."</th>"."\n";
 }
 ?>
 </tr>
@@ -344,31 +348,93 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 	if ($D != "") $production = production("D", $D, $user_data['off_geologue'], $temperature_max) - $CEF_consumption;
 	else $production = "&nbsp";
 
-	echo "\t"."<th>".$production."</th>"."\n";
+	echo "\t"."<th>".floor($production)."</th>"."\n";
 }
 ?>
 </tr>
 <tr>
 	<th><a>Energie</a></th>
 <?php
+//modif 3.0.7
+$product= array( "M" => 0, "C" => 0, "D" => 0,"ratio" => 1, "conso_E" => 0, "prod_E" => 0 );
 for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
-	$CES = $user_building[$i]["CES"];
-	$CEF = $user_building[$i]["CEF"];
-	$Sat = $user_building[$i]["Sat"];
-	$temperature_min = $user_building[$i]["temperature_min"];
-	$temperature_max = $user_building[$i]["temperature_max"];
+    $ratio[$i] = $product;
+   $NRJ = $user_technology["NRJ"] != "" ? $user_technology["NRJ"] : "0"; // pour deut !!!! erreur dans ancienne formule ou nrj etait pas prise en compte
+    $ratio[$i] = bilan_production_ratio($user_building[$i]["M"],$user_building[$i]["C"],$user_building[$i]["D"],$user_building[$i]["CES"], 
+    $user_building[$i]["CEF"],$user_building[$i]["Sat"],$user_building[$i]["temperature_min"],$user_building[$i]["temperature_max"],$NRJ,$user_data['off_ingenieur'],$user_data['off_geologue']);
+     }
+   
+   
 
-	$production_CES = $production_CEF = $production_Sat = 0;
-	$production_CES = production("CES", $CES ,  $user_data['off_ingenieur']);
-	$production_CEF = production("CEF", $CEF,  $user_data['off_ingenieur']);
-	$production_Sat = production_sat($temperature_min, $temperature_max , $user_data['off_ingenieur']) * $Sat;
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
+    	echo "\t"."<th>".floor($ratio[$i]["prod_E"])."</th>\n\t";
 
-	$production = $production_CES + $production_CEF + $production_Sat;
-	if ($production == 0) $production = "&nbsp";
+/// implementation vue reel prod si jamais ration inferieur a 1
+	//echo "\t"."<th>";
+//    echo floor($production);
+//    echo ""; // todo
+//    echo "</th>"."\n";
+   
+        if($ratio[$i]['ratio'] != 1) $view_ratio = true ;
+        }
 
-	echo "\t"."<th>".$production."</th>"."\n";
+        
+ if ($view_ratio = true) {
+    ?>
+ <tr>
+	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Production Réelle</td>
+  </tr>
+  
+  
+   <tr>
+	<th><a>ratio</a></th>
+   <?php 
+   // ratio
+   for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
+	echo "\t"."<th>";
+    echo ($ratio[$i]['ratio'] != 1) ? "<font color='red'>".round($ratio[$i]['ratio'], 3)."</font color]" :  "<font color='lime'>-</font color]" ; 
+     echo "</th>"."\n"; 
+
+} ?>
+    
+  <tr>
+	<th><a>Métal</a></th>
+<?php
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
+	echo "\t"."<th>";
+ echo ($ratio[$i]['ratio'] != 1) ? floor($ratio[$i]['M']) :  "-" ; 
+    echo "</th>"."\n";
 }
 ?>
+</tr>
+<tr>
+	<th><a>Cristal</a></th>
+<?php
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
+		echo "\t"."<th>";
+    echo ($ratio[$i]['ratio'] != 1) ? floor($ratio[$i]['C']) :  "-" ; 
+    echo "</th>"."\n";
+}
+?>
+</tr>
+<tr>
+	<th><a>Deutérium</a></th>
+<?php
+for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
+	echo "\t"."<th>";
+    echo ($ratio[$i]['ratio'] != 1) ? floor($ratio[$i]['D']) :  "-" ; 
+    echo "</th>"."\n";
+}
+
+
+    
+    
+    
+ }      
+
+?>
+  
+    
 </tr>
 <tr>
 	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Bâtiments</td>

@@ -10,8 +10,8 @@
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
-
-require "includes/ogame.php";
+//integré dasn le common.php
+//require "includes/ogame.php";
 
 if (!isset($pub_zoom) || !isset($pub_user_stat_name) || !isset($pub_player_comp) || !isset($pub_user_stat_name)) {
 	$pub_user_stat_name = "";
@@ -188,9 +188,9 @@ $user_technology = $user_empire["technology"];
 
 $nb_planete = find_nb_planete_user();
 
-$b = round(all_building_cumulate(array_slice($user_building,0,9))/1000);
-$d = round(all_defence_cumulate(array_slice($user_defence,0,9))/1000);
-$l = round(all_lune_cumulate(array_slice($user_building,9,9), array_slice($user_defence,9,9))/1000);
+$b = round(all_building_cumulate(array_slice($user_building,0,$nb_planete))/1000);
+$d = round(all_defence_cumulate(array_slice($user_defence,0,$nb_planete))/1000);
+$l = round(all_lune_cumulate(array_slice($user_building,$nb_planete,$nb_planete), array_slice($user_defence,$nb_planete,$nb_planete))/1000);
 $t = round(all_technology_cumulate($user_technology)/1000);
 $f = $last["general_pts"] - $b - $d - $l - $t;
 if($f < 0) $f = 0;
@@ -206,7 +206,7 @@ for($i=1; $i<=$nb_planete; $i++)
 {
 	$b = round(all_building_cumulate(array_slice($user_building,$i-1,1))/1000);
 	$d = round(all_defence_cumulate(array_slice($user_defence,$i-1,1))/1000);
-	$l = round(all_lune_cumulate(array_slice($user_building,$i+8,1), array_slice($user_defence,$i+8,1))/1000);
+	$l = round(all_lune_cumulate(array_slice($user_building,$i+$nb_planete-1,1), array_slice($user_defence,$i+$nb_planete-1,1))/1000);
 	if($b!=0 || $d!=0 || $l!=0) {
 		$planet[] = $b + $d + $l;
 		$planet_name[] = $user_building[$i+100]['planet_name'];

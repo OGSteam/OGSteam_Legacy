@@ -127,4 +127,12 @@ if (!defined('IN_SPYOGAME')) {
 		<center><b>Equipe de test OGSpy 3.02</b></center><br />
 	</td>
 </tr>
+<tr>
+	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
+	<td class="l">
+		&nbsp;<b><font color="Yellow" size="2">Equipe de test OGSpy 3.0.7</font></b><br />
+		<center><b>Noumaïos - Peuchy - Superbox</b></center><br />
+        
+	</td>
+</tr>
 </table>
