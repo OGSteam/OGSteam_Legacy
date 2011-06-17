@@ -169,7 +169,7 @@ function Set(ally) {
 		else echo '<option value="./views/admin.php">Administration</option>';
 		if ($open_admin == "./views/profile.php") echo '<option selected value="./views/profile.php">Profil</option>';
 		else echo '<option value="./views/profile.php">Profil</option>';
-		if ($oopen_admin == "./views/home.php") echo '<option selected value="./views/home.php">Espace personnel</option>';
+		if ($open_admin == "./views/home.php") echo '<option selected value="./views/home.php">Espace personnel</option>';
 		else echo '<option value="./views/home.php">Espace personnel</option>';
 		if ($open_admin == "./views/galaxy.php") echo '<option selected value="./views/galaxy.php">Galaxie</option>';
 		else echo '<option value="./views/galaxy.php">Galaxie</option>';
