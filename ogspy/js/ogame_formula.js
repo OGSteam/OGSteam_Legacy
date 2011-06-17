@@ -237,7 +237,7 @@ function update_page() {
 		var building_1 = document.getElementById("building_" + i).value;
 		building_1 = building_1.split('<>');
 		var b_pts_1 = Math.floor(((60 + 15) * (1 - Math.pow(1.5, M_1[i])) / (-0.5)) + ((48 + 24) * (1 - Math.pow(1.6, C_1[i])) / (-0.6)) + ((225 +75) * (1 - Math.pow(1.5, D_1[i])) / (-0.5)) + ((75 + 30) * (1 - Math.pow(1.5, CES_1[i])) / (-0.5)) + ((900 + 360 + 180) * (1 - Math.pow(1.8, CEF_1[i])) / (-0.8)));
-		for(j=0; j<(building_1.length-2); j++) {
+		for(j=0; j<(building_1.length); j++) { // 	for(j=0; j<(building_1.length-2); j++) {
 			b_pts_1 = b_pts_1 + init_b_prix[j] * (Math.pow(2, building_1[j]) - 1);
 		}
 		total_pts_1[i] = b_pts_1;
@@ -275,7 +275,7 @@ function update_page() {
 		var lune_defence_1 = document.getElementById("lune_d_" + (i )).value;
 		lune_defence_1 = lune_defence_1.split('<>');
 		lune_pts_1[i] = 0;
-		for(j=0; j<(lune_b_1.length-2); j++) {
+		for(j=0; j<(lune_b_1.length); j++) { // pk ? for(j=0; j<(lune_b_1.length-2); j++) ne prennait pas en compte ddr 
 			lune_pts_1[i] += init_b_prix[j] * (Math.pow(2, lune_b_1[j]) - 1);
 		}
 		for(j=0; j<lune_defence_1.length; j++) {
