@@ -26,12 +26,13 @@ function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ
     global $server_config;
     switch ($building) {
         case "M":
-            $geo = ($officier == 0) ? 1: 1.10;
+            $geo = ($officier == 0) ? 1:
+            1.10;
             $prod_base = 30;
-            $result =  30 * $level * pow(1.1, $level); // formule de base
+            $result = 30 * $level * pow(1.1, $level); // formule de base
             $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
-            $result =  floor($result); // arrondi inf ( apres geologue)
+            $result = floor($result); // arrondi inf ( apres geologue)
             $result = $prod_base + $result; // prod de base
             break;
 
@@ -42,7 +43,7 @@ function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ
             $result = 20 * $level * pow(1.1, $level);
             $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
-            $result =  floor($result); // arrondi inf ( apres geologue)
+            $result = floor($result); // arrondi inf ( apres geologue)
             $result = $prod_base + $result; // prod de base
             break;
 
@@ -66,7 +67,7 @@ function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ
         case "CEF":
             $ing = ($officier == 0) ? 1:
             1.10;
-            $result = 30 * $level * pow((1.05 + $NRJ * 0.01), $level) ;
+            $result = 30 * $level * pow((1.05 + $NRJ * 0.01), $level);
             //$result = $server_config['speed_uni'] * $result; // vitesste uni ne change pas la prod d E
             $result = $ing * $result; // ingenieur
             break;
@@ -138,12 +139,13 @@ function ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temp
 
     $ratio = 1; // indique le pourcentage a appliquer sur la prod
     $ratio_temp = 1;
-    $ratio_temp = ($consommation_E == 0) ? 0 : ($production_E * 100 / $consommation_E) / 100; // fix division par 0
+    $ratio_temp = ($consommation_E == 0) ? 0 : ($production_E * 100 / $consommation_E) /
+        100; // fix division par 0
     $ratio = ($ratio_temp >= 1) ? 1 : $ratio_temp;
 
-    return array("ratio" => $ratio, "conso_E" => $consommation_E, "prod_E" => $production_E ,
-    "prod_CES" => $prod_CES, "prod_CEF" => $prod_CEF, "prod_SAT" => $prod_SAT,
-    "conso_M" => $conso_M, "conso_C" => $conso_C, "conso_D" => $conso_D);
+    return array("ratio" => $ratio, "conso_E" => $consommation_E, "prod_E" => $production_E,
+        "prod_CES" => $prod_CES, "prod_CEF" => $prod_CEF, "prod_SAT" => $prod_SAT,
+        "conso_M" => $conso_M, "conso_C" => $conso_C, "conso_D" => $conso_D);
 
 }
 
@@ -183,10 +185,10 @@ function bilan_production_ratio($M, $C, $D, $CES, $CEF, $SAT, $temperature_min,
 
 
     return array("M" => $prod_M, "C" => $prod_C, "D" => $prod_D, "ratio" => $ratio,
-        "conso_E" => $consommation_E, "prod_E" => $production_E
-        ,"prod_CES" => $prod_CES, "prod_CEF" => $prod_CEF, "prod_SAT" => $prod_SAT,
-    "conso_M" => $conso_M, "conso_C" => $conso_C, "conso_D" => $conso_D);
-    }
+        "conso_E" => $consommation_E, "prod_E" => $production_E, "prod_CES" => $prod_CES,
+        "prod_CEF" => $prod_CEF, "prod_SAT" => $prod_SAT, "conso_M" => $conso_M,
+        "conso_C" => $conso_C, "conso_D" => $conso_D);
+}
 
 
 //Capacité des hangars de stockage
@@ -315,15 +317,15 @@ function building_upgrade($building, $level)
             $D = 100000 * pow(2, ($level - 1));
             $NRJ = 1000 * pow(2, ($level - 1));
             break;
-            
-         case "DdR":
+
+        case "DdR":
             $M = 20000 * pow(2, ($level - 1));
             $C = 40000 * pow(2, ($level - 1));
             $D = 0;
             $NRJ = 0;
             break;
-            
-         case "Silo":
+
+        case "Silo":
             $M = 20000 * pow(2, ($level - 1));
             $C = 20000 * pow(2, ($level - 1));
             $D = 1000 * pow(2, ($level - 1));
@@ -543,8 +545,8 @@ function all_building_cumulate($user_building)
 
             if ($key == "M" || $key == "C" || $key == "D" || $key == "CES" || $key == "CEF" ||
                 $key == "UdR" || $key == "UdN" || $key == "CSp" || $key == "HM" || $key == "HC" ||
-                $key == "HD" || $key == "Lab" || $key == "Ter" || $key == "DdR" || $key == "Silo" || $key ==
-                "BaLu" || $key == "Pha" || $key == "PoSa") {
+                $key == "HD" || $key == "Lab" || $key == "Ter" || $key == "DdR" || $key ==
+                "Silo" || $key == "BaLu" || $key == "Pha" || $key == "PoSa") {
                 list($M, $C, $D) = array_values(building_cumulate($key, $level));
                 $total += $M + $C + $D;
             }
@@ -605,10 +607,21 @@ function all_technology_cumulate($user_technology)
         return 0;
 
     for ($i = 0; $i < sizeof($init_t_prix); $i++) {
-        $pow =  ($keys[$i] != "Astrophysique") ? 2 : 1.75; // puissance change a cause de l astro ...
+        $pow = ($keys[$i] != "Astrophysique") ? 2 : 1.75; // puissance change a cause de l astro ...
 
-        $total += $init_t_prix[$keys[$i]] * (pow($pow, ($user_technology[$keys[$i]] != "") ?
-            $user_technology[$keys[$i]] : 0) - 1);
+        if ($keys[$i] != "Astrophysique") {
+            $total += $init_t_prix[$keys[$i]] * (pow($pow, ($user_technology[$keys[$i]] !=
+                "") ? $user_technology[$keys[$i]] : 0) - 1);
+        } else {
+            $j = 0;
+            $user_technology[$keys[$i]] = ($user_technology[$keys[$i]] != "") ? $user_technology[$keys[$i]] : 0;
+            while ($j <= $user_technology[$keys[$i]]) {
+                $total += $init_t_prix[$keys[$i]] * (pow($pow, ($j - 1)));
+                $j++;
+            }
+
+        }
+
 
     }
 
