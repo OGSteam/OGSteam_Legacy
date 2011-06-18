@@ -228,7 +228,7 @@ function update_page() {
 	// Points
 	//
 
-	init_b_prix = new Array(720, 1600000, 700, 2000, 3000, 4000, 800, 150000, 41000, 80000, 80000, 8000000, 60000);
+	init_b_prix = new Array(720, 1600000, 700, 1000, 1500, 2000, 800, 150000, 41000, 80000, 80000, 8000000, 60000);
 
 	// Batiments planetes
 	var total_b_pts = 0;
