@@ -118,13 +118,13 @@ if ($search && ($error == 0 || $error == 4))
 							}
 					}
 			// La recherche sur les RE est faite, on verifie l'astro pour savoir si tout est ok par rapport a l'astro
-			$planet_max = ceil ($rapports[$j]['Astrophysique']/2) + 1;
-			if (count($coordonnees) > $planet_max) $error = 1;
-			} 
-		elseif (count($coordonnees) > 0) 
-			{
-				$target = 'player';
-			}
+			// $planet_max = ceil ($rapports[$j]['Astrophysique']/2) + 1;
+			// if (count($coordonnees) > $planet_max) $error = 1;
+			// } 
+		// elseif (count($coordonnees) > 0) 
+			// {
+				// $target = 'player';
+			// }
 	}
 
 // Recherche des classements du joueur
@@ -437,13 +437,13 @@ window.onload = function() {Biper(); search_focus();}
 if ($error == 4) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_coord']."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 if ($error == 3) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".$lang['pandore_error_player']." [".$search."].</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
 if ($error == 2) echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_no_planete'],$search)."</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
-if ($error == 1) {
-	echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$planet_max,$nom)."<br />";
-	for ($i = 0; $i < count($coordonnees); $i++) {
-		echo "[".$coordonnees[$i][0]."] ";
-	}
-	echo "</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
-}
+// if ($error == 1) {
+	// echo "</div></div></div><fieldset><legend>".$lang['pandore_error']."</legend>\n\t<center>\n\t\t<div style='max-width: 80%;'>\n\t\t\t<div style='display: table-cell; vertical-align: middle;'><img style='width: 128px; height: 128px;' src='./mod/pandore/icons/error.png' alt='".$lang['pandore_error']." :' /></div>\n\t\t\t<div style='display: table-cell; vertical-align: middle; padding-left: 5px; text-align: left;'>".sprintf($lang['pandore_error_planete'],$planet_max,$nom)."<br />";
+	// for ($i = 0; $i < count($coordonnees); $i++) {
+		// echo "[".$coordonnees[$i][0]."] ";
+	// }
+	// echo "</div>\n\t\t</div>\n\t</center>\n</fieldset>\n";
+// }
 // Si pas d'erreur, afficher le résultat lorsqu'une recherche est lancée
 if ($search && $error == 0) {
 	// Affichage du nom, des classements et du tableau des coordonnées trouvées
