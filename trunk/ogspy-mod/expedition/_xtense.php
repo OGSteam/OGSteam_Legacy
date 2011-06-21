@@ -68,10 +68,10 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
     $retour = false ;
 	$eXpXtense2Debug = false;
 	// Tout d'abord si il a été soumis un RExp :
-	$regExVaiss =     "#Votre\sflotte\ss'est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss'y\ssont\sjoints\s:(.+)#";
-	$regExRess =      "#Vous\savez\scollecté\s(\d+)\sunités\sde\s(\S+)\s*#";
-	$regExMarchand1 = "#liste\sde\sclients\sprivilégiés#";
-	$regExMarchand2 = "#dans\svotre\sempire\sun\sreprésentant\schargé\sde\sressources\sà\séchanger#";
+	$regExVaiss =    	"#Votre\sflotte\ss`est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss`y\ssont\sjoints\s:(.+)#";
+	$regExRess =		"#L'attaquant\sobtient\s(\w+)\s(\d+)#";
+	$regExMarchand1 = 	"#liste\sde\sclients\sprivilégiés#";
+	$regExMarchand2 = 	"#dans\svotre\sempire\sun\sreprésentant\schargé\sde\sressources\sà\séchanger#";
 	// on enleve les séparateurs
 	$content = str_replace('.', '', $content);
 	//Compatibilité UNIX/Windows
@@ -153,7 +153,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			$rec = $reg[1]; 
 			$units += ( 10 + 6  + 2  ) * $rec;
 		}
-		if(preg_match("#Sonde\sespionnage\s(\d+)#", $expVaiss[1], $reg))
+		if(preg_match("#Sonde\sd`espionnage\s(\d+)#", $expVaiss[1], $reg))
 		{
 			$se = $reg[1]; 
 			$units += ( 0  + 1  + 0  ) * $se;
@@ -181,7 +181,9 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_galaxie = $galaxy 
 			and pos_sys = $systeme 
 			and type = 2";
-		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");		
+
+		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
+
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 		  $retour = true;
@@ -217,37 +219,37 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 
 		}
 		$typeRess = -1;
-		if($expRess[2] == "Métal")
+		if($expRess[1] == "Métal")
 		{
 			$typeRess = 0;
-			$met = $expRess[1];
+			$met = $expRess[2];
 			$cri = 0;
 			$deut = 0;
 			$antimat = 0;
 		}
-		if($expRess[2] == "Cristal")
+		if($expRess[1] == "Cristal")
 		{
 			$typeRess = 1;
 			$met = 0;
-			$cri = $expRess[1];
+			$cri = $expRess[2];
 			$deut = 0;
 			$antimat = 0;
 		}
-		if($expRess[2] == "Deutérium")
+		if($expRess[1] == "Deutérium")
 		{
 			$typeRess = 2;
 			$met = 0;
 			$cri = 0;
-			$deut = $expRess[1];
+			$deut = $expRess[2];
 			$antimat = 0;
 		}
-		if($expRess[2] == "Antimatière")
+		if($expRess[1] == "Antimatière")
 		{
 			$typeRess = 3;
 			$met = 0;
 			$cri = 0;
 			$deut = 0;
-			$antimat = $expRess[1];
+			$antimat = $expRess[2];
 		}
 		if($typeRess == -1)
 		{
@@ -261,7 +263,9 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and pos_galaxie = $galaxy 
 			and pos_sys = $systeme 
 			and type = 1";
+
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
+
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 		    $retour = true;
@@ -287,57 +291,19 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		}
 		
 	}
-	else if(preg_match($regExMarchand1, $content) != 0)
+	else if((preg_match($regExMarchand1, $content) != 0) || (preg_match($regExMarchand2, $content) != 0))
 	{
 		if($eXpXtense2Debug)
 		{
-			echo("<big><big>-Rapport marchand1 -</big></big> <br />");
-			echo($content."<br />");
-			echo("Date : $timestmp  <br />");
-			echo("Coordonnees : [$galaxy:$systeme:16]  <br />");
-		}
-		$query = 
-			"Select * 
-			From ".TABLE_EXPEDITION." 
-			Where user_id = $uid 
-			and date = $timestmp 
-			and pos_galaxie = $galaxy 
-			and pos_sys = $systeme and type = 3";
-		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
-		if($db->sql_numrows($db->sql_query($query)) == 0)
-		{
-		    $retour = true;
-			$query = 
-				"Insert into ".TABLE_EXPEDITION." 
-				(id, user_id, date, pos_galaxie, pos_sys, type) 
-				values ('', $uid, $timestmp, $galaxy, $systeme, 3)";
-			$db->sql_query($query);
-			$idInsert = $db->sql_insertid();
-			$query = 
-				"Insert into ".TABLE_EXPEDITION_TYPE_3." 
-				(id, id_eXpedition, typeRessource)
-				 values ('', $idInsert, 0)";
-			$db->sql_query($query);
-		}
-		else
-		{
-			if($eXpXtense2Debug)
-			{
-				echo('<big><big>> Rapport de marchand1 du '.$timestmp.' deja ajoute !</big></big> <br />');
-			}
-			return false;
-		}
-	}
-	else if(preg_match($regExMarchand2, $content) != 0)
-	{
-		if($eXpXtense2Debug)
-		{
-			echo("<big><big>-Rapport marchand2 </big></big><br />-");
+			if(preg_match($regExMarchand1, $content) != 0)
+				echo("<big><big>-Rapport marchand1-</big></big><br />");
+			else
+				echo("<big><big>-Rapport marchand2-</big></big><br />");
 			echo($content."<br />");
 			echo("Date : $timestmp <br />");
 			echo("Coordonnees : [$galaxy:$systeme:16]  <br />");
 		}
-
+		
 		$query = 
 			"Select * 
 			From ".TABLE_EXPEDITION." 
@@ -345,7 +311,9 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			and date = $timestmp 
 			and pos_galaxie = $galaxy 
 			and pos_sys = $systeme and type = 3";
+
 		if($eXpXtense2Debug) echo("<br /> Db : $query <br />");
+
 		if($db->sql_numrows($db->sql_query($query)) == 0)
 		{
 		    $retour = true;
@@ -365,7 +333,10 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		{
 			if($eXpXtense2Debug)
 			{
-				echo('<big><big>> Rapport de marchand2 du '.$timestmp.' deja ajoute !</big></big> <br />');
+				if(preg_match($regExMarchand1, $content) != 0)
+					echo('<big><big>> Rapport de marchand1 du '.$timestmp.' deja ajoute !</big></big> <br />');
+				else
+					echo('<big><big>> Rapport de marchand2 du '.$timestmp.' deja ajoute !</big></big> <br />');
 			}
 			return false;
 		}
@@ -405,14 +376,10 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 		}
 		else
 		{
-			if($eXpXtense2Debug)
-			{
-				echo('<big><big>> Rapport de rien du '.$timestmp.' deja ajoute !</big></big> <br />');
-			}
+			if($eXpXtense2Debug) echo('<big><big>> Rapport de rien du '.$timestmp.' deja ajoute !</big></big> <br />');
 			return false;
 		}
 	}
 	return $retour;
 }
-
 ?>
