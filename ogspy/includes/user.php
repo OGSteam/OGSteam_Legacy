@@ -2531,9 +2531,8 @@ function UNparseRC($id_RC)
     $result = $db->sql_query($query);
     list($dateRC, $coordinates, $nb_rounds, $victoire, $pertes_A, $pertes_D, $gain_M,
         $gain_C, $gain_D, $debris_M, $debris_C, $lune) = $db->sql_fetch_row($result);
-    $dateRC = date('d-m-Y H:i:s', $dateRC);
-    $template = 'Les flottes suivantes se sont affrontées le ' . $dateRC .
-        ' aux coordonnées ' . $coordinates . " :\n\n";
+    $dateRC = date('d.m.Y H:i:s', $dateRC);
+    $template = 'Les flottes suivantes s\'affrontent (' . $dateRC . "):\n\n";
 
     // Récupération de chaque round du RC
     for ($idx = 1; $idx <= $nb_rounds; $idx++) {
@@ -2555,9 +2554,14 @@ function UNparseRC($id_RC)
             $key = '';
             $ship = 0;
             $vivant_att = false;
-            $template .= 'Attaquant ' . $player . ' ([' . $coordinates . '])' . "\n" .
-                'Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coque: ' . $Protection .
-                '%' . "\n";
+            $template .= 'Attaquant ' . $player;
+			if ($coordinates!='0:0:0')
+			{
+				$template .= ' [' . $coordinates . ']';
+				if($idx==1)
+					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
+				$template .="\n";
+			}
             $ship_type = 'Type';
             $ship_nombre = 'Nombre';
             $ship_armes = 'Armes';
@@ -2579,7 +2583,7 @@ function UNparseRC($id_RC)
                 $template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier .
                     "\n" . $ship_protection . "\n\n";
             else
-                $template .= 'Détruit !' . "\n\n";
+                $template .= ' détruit.' . "\n\n";
         } // Fin récupération de chaque attaquant du RC
 
         // Récupération de chaque défenseur du RC
@@ -2594,9 +2598,14 @@ function UNparseRC($id_RC)
             $key = '';
             $ship = 0;
             $vivant_def = false;
-            $template .= 'Défenseur ' . $player . ' ([' . $coordinates . '])' . "\n" .
-                'Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coque: ' . $Protection .
-                '%' . "\n";
+            $template .= 'Défenseur ' . $player;
+			if ($coordinates!='0:0:0')
+			{
+				$template .= ' [' . $coordinates . ']';
+				if($idx==1)
+					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
+				$template .="\n";
+			}
             $ship_type = 'Type';
             $ship_nombre = 'Nombre';
             $ship_armes = 'Armes';
@@ -2629,18 +2638,18 @@ function UNparseRC($id_RC)
                 $template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier .
                     "\n" . $ship_protection . "\n\n";
             else
-                $template .= 'Détruit !' . "\n\n";
+                $template .= ' détruit.' . "\n\n";
         } // Fin récupération de chaque défenseur du RC
 
         // Résultat du round
         if ($attaque_tir != 0 || $defense_tir != 0) {
             $template .= 'La flotte attaquante tire ' . $attaque_tir .
-                ' fois avec une puissance totale de ' . $attaque_puissance .
+                ' fois avec une force totale de ' . $attaque_puissance .
                 ' sur le défenseur. Les boucliers du défenseur absorbent ' . $defense_bouclier .
-                ' points de dégâts' . "\n";
+                ' points de dommage.' . "\n\n";
             $template .= 'La flotte défensive tire au total ' . $defense_tir .
-                ' fois avec une puissance totale de ' . $defense_puissance . ' sur l\'attaquant. Les boucliers de l\'attaquant absorbent ' .
-                $attaque_bouclier . ' points de dégâts' . "\n\n";
+                ' fois avec une force totale de ' . $defense_puissance . ' sur l\'attaquant. Les boucliers de l\'attaquant absorbent ' .
+                $attaque_bouclier . ' points de dommage.' . "\n\n";
         }
     } // Fin récupération de chaque round du RC
 
@@ -2648,15 +2657,15 @@ function UNparseRC($id_RC)
     switch ($victoire) {
         case 'N':
             $template .= 'La bataille se termine par un match nul, les deux flottes rentrent vers leurs planètes respectives.' .
-                "\n\n\n";
+                "\n\n";
             break;
         case 'A':
-            $template .= 'L\'attaquant a gagné la bataille !' . "\n" . 'Il emporte' . "\n" .
+            $template .= 'L\'attaquant a gagné la bataille ! Il emporte ' .
                 $gain_M . ' unités de métal, ' . $gain_C . ' unités de cristal et ' . $gain_D .
-                ' unités de deutérium' . "\n\n\n";
+                ' unités de deutérium.' . "\n\n";
             break;
         case 'D':
-            $template .= 'Le défenseur a gagné la bataille !' . "\n\n\n";
+            $template .= 'Le défenseur a gagné la bataille !' . "\n\n";
             break;
     }
 
@@ -2664,7 +2673,7 @@ function UNparseRC($id_RC)
     $template .= 'L\'attaquant a perdu au total ' . $pertes_A . ' unités.' . "\n";
     $template .= 'Le défenseur a perdu au total ' . $pertes_D . ' unités.' . "\n";
     $template .= 'Un champ de débris contenant ' . $debris_M .
-        ' unités de métal et ' . $debris_C . ' unités de cristal se forme dans l\'orbite de cette planète.' .
+        ' de métal et ' . $debris_C . ' de cristal se forme dans l\'orbite de la planète.' .
         "\n";
     $template .= 'La probabilité de création d\'une lune est de ' . $lune . ' %';
 
