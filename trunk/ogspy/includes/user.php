@@ -2588,12 +2588,12 @@ function UNparseRC($id_RC)
 
         // Récupération de chaque défenseur du RC
         $query = 'SELECT player, coordinates, Armes, Bouclier, Protection, PT, GT, CLE, CLO, CR, VB, VC, REC, 
-      SE, BMD, DST, EDLM, TRA, LM, LLE, LLO, CG, AI, LP, PB, GB FROM ' .
+      SE, BMD, SAT, DST, EDLM, TRA, LM, LLE, LLO, CG, AI, LP, PB, GB FROM ' .
             TABLE_ROUND_DEFENSE . ' WHERE 
       id_rcround = ' . $id_rcround;
         $result_defense = $db->sql_query($query);
         while (list($player, $coordinates, $Armes, $Bouclier, $Protection, $PT, $GT, $CLE,
-            $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $DST, $EDLM, $TRA, $LM, $LLE, $LLO, $CG, $AI,
+            $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $SAT, $DST, $EDLM, $TRA, $LM, $LLE, $LLO, $CG, $AI,
             $LP, $PB, $GB) = $db->sql_fetch_row($result_defense)) {
             $key = '';
             $ship = 0;
@@ -2675,7 +2675,8 @@ function UNparseRC($id_RC)
     $template .= 'Un champ de débris contenant ' . $debris_M .
         ' de métal et ' . $debris_C . ' de cristal se forme dans l\'orbite de la planète.' .
         "\n";
-    $template .= 'La probabilité de création d\'une lune est de ' . $lune . ' %';
+	if($lune>0)
+		$template .= 'La probabilité de création d\'une lune est de ' . $lune . ' %';
 
     return ($template);
 }
