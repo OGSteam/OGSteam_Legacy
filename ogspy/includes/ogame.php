@@ -26,47 +26,42 @@ function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ
     global $server_config;
     switch ($building) {
         case "M":
-            $geo = ($officier == 0) ? 1:
-            1.10;
+            $geo = ($officier == 0) ? 1: 1.10;
             $prod_base = 30;
-            $result = 30 * $level * pow(1.1, $level); // formule de base
-            $result = $server_config['speed_uni'] * $result; // vitesste uni
+            $result =  30 * $level * pow(1.1, $level); // formule de base
             $result = $geo * $result; // geologue
-            $result = floor($result); // arrondi inf ( apres geologue)
-            $result = $prod_base + $result; // prod de base
+			$result =  floor($result); // arrondi inf ( apres geologue)
+			$result = $prod_base + $result; // prod de base
+			$result = $server_config['speed_uni'] * $result; // vitesse uni
             break;
 
         case "C":
-            $geo = ($officier == 0) ? 1:
-            1.10;
+            $geo = ($officier == 0) ? 1: 1.10;
             $prod_base = 15;
             $result = 20 * $level * pow(1.1, $level);
-            $result = $server_config['speed_uni'] * $result; // vitesste uni
-            $result = $geo * $result; // geologue
-            $result = floor($result); // arrondi inf ( apres geologue)
-            $result = $prod_base + $result; // prod de base
+			$result = $geo * $result; // geologue
+			$result =  floor($result); // arrondi inf ( apres geologue)
+			$result = $prod_base + $result; // prod de base
+            $result = $server_config['speed_uni'] * $result; // vitesse uni
             break;
 
         case "D":
-            $geo = ($officier == 0) ? 1:
-            1.10;
+            $geo = ($officier == 0) ? 1: 1.10;
             $result = (10 * $level * pow(1.1, $level) * (1.44 - 0.004 * $temperature_max));
-            $result = $server_config['speed_uni'] * $result; // vitesste uni
             $result = $geo * $result; // geologue
-            $result = floor($result);
+			$result =  floor($result); // arrondi inf ( apres geologue)
+			$result = $server_config['speed_uni'] * $result; // vitesse uni
             break;
 
         case "CES":
-            $ing = ($officier == 0) ? 1:
-            1.10;
+            $ing = ($officier == 0) ? 1: 1.10;
             $result = 20 * $level * pow(1.1, $level);
             //$result = $server_config['speed_uni'] * $result; // vitesste uni ne change pas la prod d E
             $result = $ing * $result; // ingenieur
             break;
 
         case "CEF":
-            $ing = ($officier == 0) ? 1:
-            1.10;
+            $ing = ($officier == 0) ? 1: 1.10;
             $result = 30 * $level * pow((1.05 + $NRJ * 0.01), $level);
             //$result = $server_config['speed_uni'] * $result; // vitesste uni ne change pas la prod d E
             $result = $ing * $result; // ingenieur
@@ -139,8 +134,7 @@ function ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temp
 
     $ratio = 1; // indique le pourcentage a appliquer sur la prod
     $ratio_temp = 1;
-    $ratio_temp = ($consommation_E == 0) ? 0 : ($production_E * 100 / $consommation_E) /
-        100; // fix division par 0
+    $ratio_temp = ($consommation_E == 0) ? 0 : ($production_E * 100 / $consommation_E) / 100; // fix division par 0
     $ratio = ($ratio_temp >= 1) ? 1 : $ratio_temp;
 
     return array("ratio" => $ratio, "conso_E" => $consommation_E, "prod_E" => $production_E,
@@ -545,8 +539,8 @@ function all_building_cumulate($user_building)
 
             if ($key == "M" || $key == "C" || $key == "D" || $key == "CES" || $key == "CEF" ||
                 $key == "UdR" || $key == "UdN" || $key == "CSp" || $key == "HM" || $key == "HC" ||
-                $key == "HD" || $key == "Lab" || $key == "Ter" || $key == "DdR" || $key ==
-                "Silo" || $key == "BaLu" || $key == "Pha" || $key == "PoSa") {
+                $key == "HD" || $key == "Lab" || $key == "Ter" || $key == "DdR" || $key == "Silo" ||
+				$key == "BaLu" || $key == "Pha" || $key == "PoSa") {
                 list($M, $C, $D) = array_values(building_cumulate($key, $level));
                 $total += $M + $C + $D;
             }
