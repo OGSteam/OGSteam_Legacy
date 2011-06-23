@@ -709,15 +709,28 @@ switch ($pub_type){
 					);
 					$id_rcround[$i] = $db->sql_insertid();
 				}
+				//Ne pas le faire si destruction attaquant ou défenseur au 1er tour, ou match nul au 1er tour
+				if ($pub_count>1) {
+					$i++;
+					$db->sql_query("INSERT INTO ".TABLE_PARSEDRCROUND." (
+								`id_rc`, `numround`, `attaque_tir`, `attaque_puissance`, `defense_bouclier`, `attaque_bouclier`, `defense_tir`, `defense_puissance`
+							) VALUE (
+								'{$id_rc}', '{$i}', 0, 0, 0, 0, 0, 0
+							)"
+						);
+						$id_rcround[$i] = $db->sql_insertid();
+				}
 				
+				$j = 1;
 				foreach ($pub_n as $i => $n){
 					$fields = '';
 					$values = '';
-					$j = 1;
 					
-					foreach ($n['content'] as $field => $value){
-						$fields .= ", `{$field}`";
-						$values .= ", '{$value}'";
+					if (array_key_exists('content',$n)){
+						foreach ($n['content'] as $field => $value){
+							$fields .= ", `{$field}`";
+							$values .= ", '{$value}'";
+						}
 					}
 					
 					$db->sql_query("INSERT INTO ".(($n['type'] == "D") ? TABLE_ROUND_DEFENSE : TABLE_ROUND_ATTACK)." (
