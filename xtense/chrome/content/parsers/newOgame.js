@@ -896,7 +896,7 @@ var XnewOgame = {
 					for(var td=1;td<values.snapshotLength;td++){
 						var value = values.snapshotItem(td).textContent.trim();
 						if(value){
-							val[td] = value;
+							val[td] = value.replace(/\./g, '');
 						}
 					}
 				}
@@ -917,21 +917,38 @@ var XnewOgame = {
 					}
 				}
 				
-				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim();
-				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+				var dest=0;
+				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non détruit
+				if (player.length==0) { //Dans ce cas, joueur détruit
+					player = Xpath.getStringValue(this.doc,paths.infos.destroyed,info).trim();
+					dest=1;
+				}
+				if (!dest)
+					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+				else
+					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.userNameAndDestroyed));
 				if(m){
 					var player = m[1];
-					var coords = m[2];
+					if (!dest)
+						var coords = m[2];
+					else
+						var coords = "0:0:0"; //Si joueur détruit, pas besoin de ses coordonnées, on affiche "Joueur XXX détruit"
 					var type = "A";
 				} else {
-					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+					if(!dest)
+						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+					else
+						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.userNameAndDestroyed));
+					
 					if(m){
 						var player = m[1];
-						var coords = m[2];
+						if (!dest)
+							var coords = m[2];
+						else
+							var coords = "0:0:0";
 					} else {
 						var player = "";
 						var coords = "";
-						
 					}
 					var type = "D";
 				}
@@ -990,7 +1007,7 @@ var XnewOgame = {
 			var result = Xpath.getStringValue(this.doc,paths.result).trim();
 			if (result.match(new RegExp(rcStrings['regxps']['nul'], 'gi')))
 				var win = "N";
-			else if (result.match(new RegExp(rcStrings['regxps']['attack'], 'gi')))
+			else if (result.match(new RegExp(rcStrings['regxps']['attack_win'], 'gi')))
 				var win = "A";
 			else
 				var win = "D";
@@ -1009,6 +1026,8 @@ var XnewOgame = {
 				var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
 				if(m)
 					rslt[i] = m[1].replace(/\./g, '');
+				else
+					rslt[i] = 0;
 			}
 			var nbrounds = rounds.snapshotLength;
 			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.combat_round);
@@ -1022,7 +1041,7 @@ var XnewOgame = {
 					type: 'rc',
 					date: date,
 					win: win,
-					count: (nbrounds-1),
+					count: nbrounds,
 					result: rslt,
 					moon: moon,
 					moonprob : moonprob,

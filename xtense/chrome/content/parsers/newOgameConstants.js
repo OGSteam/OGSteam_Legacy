@@ -92,7 +92,8 @@ XnewOgame.Xpaths = {
 		list_rounds : '//div[@class="round_info"]',
 		infos: {
 			player : 'span[contains(@class, "name")]',
-			weapons : 'span[contains(@class, "weapons")]'
+			weapons : 'span[contains(@class, "weapons")]',
+			destroyed : 'span[contains(@class, "destroyed")]'
 		},
 		list_types : 'table/tbody/tr[1]/th',
 		list_values : 'table/tbody/tr[2]/td',
@@ -144,6 +145,7 @@ XnewOgame.regexps = {
 	planetNameAndCoords : ' (.*) \\[(\\d+:\\d+:\\d+)\\]',
 	planetCoords : '\\[(\\d+:\\d+:\\d+)\\]',
 	userNameAndCoords : '(.*) \\[(\\d+:\\d+:\\d+)\\]',
+	userNameAndDestroyed : ' (.*) d.truit',
 	moon : '=(\\d+)*',
 	
 	messages : {
