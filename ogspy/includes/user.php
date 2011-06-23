@@ -2543,7 +2543,21 @@ function UNparseRC($id_RC)
         $result_round = $db->sql_query($query);
         list($id_rcround, $attaque_tir, $attaque_puissance, $attaque_bouclier, $defense_tir,
             $defense_puissance, $defense_bouclier) = $db->sql_fetch_row($result_round);
-
+		// On formate les résultats
+		$nf_gain_M = number_format($gain_M,0,',','.');
+		$nf_gain_C = number_format($gain_C,0,',','.');
+		$nf_gain_D = number_format($gain_D,0,',','.');
+		$nf_pertes_A = number_format($pertes_A,0,',','.');
+		$nf_pertes_D = number_format($pertes_D,0,',','.');
+		$nf_debris_M = number_format($debris_M,0,',','.');
+		$nf_debris_C = number_format($debris_C,0,',','.');
+		$nf_attaque_tir = number_format($attaque_tir,0,',','.');
+		$nf_attaque_puissance = number_format($attaque_puissance,0,',','.');
+		$nf_attaque_bouclier = number_format($attaque_bouclier,0,',','.');
+		$nf_defense_tir = number_format($defense_tir,0,',','.');
+		$nf_defense_puissance = number_format($defense_puissance,0,',','.');
+		$nf_defense_bouclier = number_format($defense_bouclier,0,',','.');
+	
         // Récupération de chaque attaquant du RC
         $query = 'SELECT player, coordinates, Armes, Bouclier, Protection, PT, GT, CLE, CLO, CR, VB, VC, REC, 
       SE, BMD, DST, EDLM, TRA FROM ' . TABLE_ROUND_ATTACK .
@@ -2571,12 +2585,12 @@ function UNparseRC($id_RC)
                 if (isset($$key) && $$key > 0) {
                     $vivant_att = true;
                     $ship_type .= "\t" . $ship;
-                    $ship_nombre .= "\t" . $$key;
-                    $ship_protection .= "\t" . round(($base_ships[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10);
-                    $ship_bouclier .= "\t" . round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
-                        1));
-                    $ship_armes .= "\t" . round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1));
+                    $ship_nombre .= "\t" . number_format($$key,0,',','.');;
+                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) *
+                        0.1 + 1)) / 10),0,',','.');
+                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
+                        1)),0,',','.');
+                    $ship_armes .= "\t" . number_format(round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
             if ($vivant_att == true)
@@ -2615,23 +2629,23 @@ function UNparseRC($id_RC)
                 if (isset($$key) && $$key > 0) {
                     $vivant_def = true;
                     $ship_type .= "\t" . $ship;
-                    $ship_nombre .= "\t" . $$key;
-                    $ship_protection .= "\t" . round(($base_ships[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10);
-                    $ship_bouclier .= "\t" . round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
-                        1));
-                    $ship_armes .= "\t" . round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1));
+                    $ship_nombre .= "\t" . number_format($$key,0,',','.');
+                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) *
+                        0.1 + 1)) / 10),0,',','.');
+                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
+                        1)),0,',','.');
+                    $ship_armes .= "\t" . number_format(round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
             foreach ($key_defs as $key => $def) {
                 if (isset($$key) && $$key > 0) {
                     $vivant_def = true;
                     $ship_type .= "\t" . $def;
-                    $ship_nombre .= "\t" . $$key;
-                    $ship_protection .= "\t" . round(($base_defs[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10);
-                    $ship_bouclier .= "\t" . round($base_defs[$key][1] * (($Bouclier / 10) * 0.1 + 1));
-                    $ship_armes .= "\t" . round($base_defs[$key][2] * (($Armes / 10) * 0.1 + 1));
+                    $ship_nombre .= "\t" . number_format($$key,0,',','.');
+                    $ship_protection .= "\t" . number_format(round(($base_defs[$key][0] * (($Protection / 10) *
+                        0.1 + 1)) / 10),0,',','.');
+                    $ship_bouclier .= "\t" . number_format(round($base_defs[$key][1] * (($Bouclier / 10) * 0.1 + 1)),0,',','.');
+                    $ship_armes .= "\t" . number_format(round($base_defs[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
             if ($vivant_def == true)
@@ -2643,25 +2657,25 @@ function UNparseRC($id_RC)
 
         // Résultat du round
         if ($attaque_tir != 0 || $defense_tir != 0) {
-            $template .= 'La flotte attaquante tire ' . $attaque_tir .
-                ' fois avec une force totale de ' . $attaque_puissance .
-                ' sur le défenseur. Les boucliers du défenseur absorbent ' . $defense_bouclier .
+            $template .= 'La flotte attaquante tire ' . $nf_attaque_tir .
+                ' fois avec une force totale de ' . $nf_attaque_puissance .
+                ' sur le défenseur. Les boucliers du défenseur absorbent ' . $nf_defense_bouclier .
                 ' points de dommage.' . "\n\n";
-            $template .= 'La flotte défensive tire au total ' . $defense_tir .
-                ' fois avec une force totale de ' . $defense_puissance . ' sur l\'attaquant. Les boucliers de l\'attaquant absorbent ' .
-                $attaque_bouclier . ' points de dommage.' . "\n\n";
+            $template .= 'La flotte défensive tire au total ' . $nf_defense_tir .
+                ' fois avec une force totale de ' . $nf_defense_puissance . ' sur l\'attaquant. Les boucliers de l\'attaquant absorbent ' .
+                $nf_attaque_bouclier . ' points de dommage.' . "\n\n";
         }
     } // Fin récupération de chaque round du RC
 
     // Qui a remporté le combat ?
-    switch ($victoire) {
+	    switch ($victoire) {
         case 'N':
             $template .= 'La bataille se termine par un match nul, les deux flottes rentrent vers leurs planètes respectives.' .
                 "\n\n";
             break;
         case 'A':
             $template .= 'L\'attaquant a gagné la bataille ! Il emporte ' .
-                $gain_M . ' unités de métal, ' . $gain_C . ' unités de cristal et ' . $gain_D .
+                $nf_gain_M . ' unités de métal, ' . $nf_gain_C . ' unités de cristal et ' . $nf_gain_D .
                 ' unités de deutérium.' . "\n\n";
             break;
         case 'D':
@@ -2670,10 +2684,10 @@ function UNparseRC($id_RC)
     }
 
     // Pertes et champs de débris
-    $template .= 'L\'attaquant a perdu au total ' . $pertes_A . ' unités.' . "\n";
-    $template .= 'Le défenseur a perdu au total ' . $pertes_D . ' unités.' . "\n";
-    $template .= 'Un champ de débris contenant ' . $debris_M .
-        ' de métal et ' . $debris_C . ' de cristal se forme dans l\'orbite de la planète.' .
+    $template .= 'L\'attaquant a perdu au total ' . $nf_pertes_A . ' unités.' . "\n";
+    $template .= 'Le défenseur a perdu au total ' . $nf_pertes_D . ' unités.' . "\n";
+    $template .= 'Un champ de débris contenant ' . $nf_debris_M .
+        ' de métal et ' . $nf_debris_C . ' de cristal se forme dans l\'orbite de la planète.' .
         "\n";
 	if($lune>0)
 		$template .= 'La probabilité de création d\'une lune est de ' . $lune . ' %';
