@@ -104,7 +104,7 @@ XnewOgame.locales = {
 					211 : 'Bombardier', 
 					212 : 'Sat.sol.', 
 					213 : 'Destr.', 		
-					214 : 'RIP', 
+					214 : 'Rip', 
 					215 : 'Traqueur',
 				},	
 				'defense' :  { 	
@@ -146,7 +146,8 @@ XnewOgame.locales = {
 				'moonprob' : 'une lune est de (\\d+) %',
 				'attack' : 'Attaquant',
 				'defense' : 'Défenseur',
-				'nul' : 'match nul'
+				'nul' : 'match nul',
+				'attack_win' : 'L`attaquant a gagné la bataille'
 			}
 			
 		},
