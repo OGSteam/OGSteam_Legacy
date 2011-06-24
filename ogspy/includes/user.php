@@ -2569,13 +2569,6 @@ function UNparseRC($id_RC)
             $ship = 0;
             $vivant_att = false;
             $template .= 'Attaquant ' . $player;
-			if ($coordinates!='0:0:0')
-			{
-				$template .= ' [' . $coordinates . ']';
-				if($idx==1)
-					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
-				$template .="\n";
-			}
             $ship_type = 'Type';
             $ship_nombre = 'Nombre';
             $ship_armes = 'Armes';
@@ -2593,9 +2586,13 @@ function UNparseRC($id_RC)
                     $ship_armes .= "\t" . number_format(round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
-            if ($vivant_att == true)
-                $template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier .
-                    "\n" . $ship_protection . "\n\n";
+            if ($vivant_att == true) {
+				$template .= ' [' . $coordinates . ']';
+				if($idx==1)
+					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
+				$template .="\n";
+				$template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier . "\n" . $ship_protection . "\n\n";
+			}
             else
                 $template .= ' détruit.' . "\n\n";
         } // Fin récupération de chaque attaquant du RC
@@ -2613,13 +2610,6 @@ function UNparseRC($id_RC)
             $ship = 0;
             $vivant_def = false;
             $template .= 'Défenseur ' . $player;
-			if ($coordinates!='0:0:0')
-			{
-				$template .= ' [' . $coordinates . ']';
-				if($idx==1)
-					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
-				$template .="\n";
-			}
             $ship_type = 'Type';
             $ship_nombre = 'Nombre';
             $ship_armes = 'Armes';
@@ -2648,9 +2638,13 @@ function UNparseRC($id_RC)
                     $ship_armes .= "\t" . number_format(round($base_defs[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
-            if ($vivant_def == true)
-                $template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier .
-                    "\n" . $ship_protection . "\n\n";
+            if ($vivant_def == true) {
+                $template .= ' [' . $coordinates . ']';
+				if($idx==1)
+					$template .= ' Armes: ' . $Armes . '% Bouclier: ' . $Bouclier . '% Coques: ' . $Protection . '%';
+				$template .="\n";
+				$template .= $ship_type . "\n" . $ship_nombre . "\n" . $ship_armes . "\n" . $ship_bouclier . "\n" . $ship_protection . "\n\n";
+			}
             else
                 $template .= ' détruit.' . "\n\n";
         } // Fin récupération de chaque défenseur du RC
