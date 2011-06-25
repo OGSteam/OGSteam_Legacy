@@ -2579,10 +2579,8 @@ function UNparseRC($id_RC)
                     $vivant_att = true;
                     $ship_type .= "\t" . $ship;
                     $ship_nombre .= "\t" . number_format($$key,0,',','.');;
-                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10),0,',','.');
-                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
-                        1)),0,',','.');
+                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) * 0.1 + 1)) / 10),0,',','.');
+                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 + 1)),0,',','.');
                     $ship_armes .= "\t" . number_format(round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
@@ -2620,10 +2618,8 @@ function UNparseRC($id_RC)
                     $vivant_def = true;
                     $ship_type .= "\t" . $ship;
                     $ship_nombre .= "\t" . number_format($$key,0,',','.');
-                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10),0,',','.');
-                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 +
-                        1)),0,',','.');
+                    $ship_protection .= "\t" . number_format(round(($base_ships[$key][0] * (($Protection / 10) * 0.1 + 1)) / 10),0,',','.');
+                    $ship_bouclier .= "\t" . number_format(round($base_ships[$key][1] * (($Bouclier / 10) * 0.1 + 1)),0,',','.');
                     $ship_armes .= "\t" . number_format(round($base_ships[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
             }
@@ -2632,8 +2628,7 @@ function UNparseRC($id_RC)
                     $vivant_def = true;
                     $ship_type .= "\t" . $def;
                     $ship_nombre .= "\t" . number_format($$key,0,',','.');
-                    $ship_protection .= "\t" . number_format(round(($base_defs[$key][0] * (($Protection / 10) *
-                        0.1 + 1)) / 10),0,',','.');
+                    $ship_protection .= "\t" . number_format(round(($base_defs[$key][0] * (($Protection / 10) * 0.1 + 1)) / 10),0,',','.');
                     $ship_bouclier .= "\t" . number_format(round($base_defs[$key][1] * (($Bouclier / 10) * 0.1 + 1)),0,',','.');
                     $ship_armes .= "\t" . number_format(round($base_defs[$key][2] * (($Armes / 10) * 0.1 + 1)),0,',','.');
                 }
@@ -2655,8 +2650,8 @@ function UNparseRC($id_RC)
                 ' fois avec une force totale de ' . $nf_attaque_puissance .
                 ' sur le défenseur. Les boucliers du défenseur absorbent ' . $nf_defense_bouclier .
                 ' points de dommage.' . "\n\n";
-            $template .= 'La flotte défensive tire au total ' . $nf_defense_tir .
-                ' fois avec une force totale de ' . $nf_defense_puissance . ' sur l\'attaquant. Les boucliers de l\'attaquant absorbent ' .
+            $template .= 'La flotte de défense tire ' . $nf_defense_tir .
+                ' fois sur l\'attaquant avec une force de ' . $nf_defense_puissance . '. Les boucliers de l\'attaquant absorbent ' .
                 $nf_attaque_bouclier . ' points de dommage.' . "\n\n";
         }
     } // Fin récupération de chaque round du RC
