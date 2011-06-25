@@ -1,28 +1,50 @@
 //Production par heure
 function production (building, level, temperature_max, NRJ) {
 	var speed = document.getElementById("vitesse_uni").value;
+	var NRJ = document.getElementById("NRJ").value;
+	var Ing = document.getElementById("off_ingenieur").value;
+	var Geo = document.getElementById("off_geologue").value;
+	var result;
+	
     switch (building) {
 		case "M":
-		result = 30 + 30 * level * Math.pow(1.1, level);
-        result = result * speed
+		var geo = (Ing = 0) ? 1: 1.10;
+		var prod_base = 30;
+		result = 30 * level * Math.pow(1.1, level);
+		result = result * geo;
+		result = Math.floor(result);
+		result = prod_base + result;
+		result = result * speed;
 		break;
 
 		case "C":
-		result = 15 + 20 * level * Math.pow(1.1, level);
-        result = result * speed
+		var geo = (Ing = 0) ? 1: 1.10;
+		var prod_base = 15;
+		result = 20 * level * Math.pow(1.1, level);
+		result = result * geo;
+		result = Math.floor(result);
+		result = prod_base + result;
+		result = result * speed;
 		break;
 
 		case "D":
+		var geo = (Ing = 0) ? 1: 1.10;
 		result = Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max));
-        result = result * speed
+		result = result * geo;
+		result = Math.floor(result);
+        result = result * speed;
 		break;
 
 		case "CES":
+		var geo = (Ing = 0) ? 1: 1.10;
 		result = 20 * level * Math.pow(1.1, level);
+		result = result * geo;
 		break;
 
 		case "CEF":
+		var geo = (Ing = 0) ? 1: 1.10;
 		result = 30 * level * Math.pow((1.05 + 0.01 * NRJ), level);
+		result = result * geo;
 		break;
 
 		default:
@@ -103,11 +125,7 @@ function update_page() {
 		var M_1_percentage = document.getElementById("M_" + i + "_percentage").value;
 	
 		M_1_conso[i] = Math.round(consumption("M", M_1[i]) * M_1_percentage / 100);
-		if (Geo < 1){
 		M_1_prod[i] = Math.round(production("M", M_1[i], temperature_max_1, NRJ) * M_1_percentage / 100);
-		} else {
-		M_1_prod[i] = Math.round((production("M", M_1[i], temperature_max_1, NRJ) * M_1_percentage / 100) + (production("M", M_1[i], temperature_max_1, NRJ) * M_1_percentage / 100)/10);
-		}
 	
 		document.getElementById("M_" + i + "_conso").innerHTML = M_1_conso[i];
 		document.getElementById("M_" + i + "_prod").innerHTML = M_1_prod[i];
@@ -117,11 +135,7 @@ function update_page() {
 		var C_1_percentage = document.getElementById("C_" + i + "_percentage").value;
 	
 		C_1_conso[i] = Math.round(consumption("C", C_1[i]) * C_1_percentage / 100);
-		if (Geo < 1){
 		C_1_prod[i] = Math.round(production("C", C_1[i], temperature_max_1, NRJ) * C_1_percentage / 100);
-		} else {
-		C_1_prod[i] = Math.round((production("C", C_1[i], temperature_max_1, NRJ) * C_1_percentage / 100) + (production("C", C_1[i], temperature_max_1, NRJ) * C_1_percentage / 100)/10);
-		}
 	
 		document.getElementById("C_" + i + "_conso").innerHTML = C_1_conso[i];
 		document.getElementById("C_" + i + "_prod").innerHTML = C_1_prod[i];
@@ -147,11 +161,8 @@ function update_page() {
 		var D_1_percentage = document.getElementById("D_" + i + "_percentage").value;
 	
 		D_1_conso[i] = Math.round(consumption("D", D_1[i]) * D_1_percentage / 100);
-		if (Geo < 1){
 		D_1_prod[i] = Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100);
-		} else {
-		D_1_prod[i] = Math.round((Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100)) + (Math.round(production("D", D_1[i], temperature_max_1, NRJ) * D_1_percentage / 100) - Math.round(consumption("CEF", CEF_1[i]) * CEF_1_percentage / 100))/10);
-		}
+
 		
 		document.getElementById("D_" + i + "_conso").innerHTML = D_1_conso[i];
 		document.getElementById("D_" + i + "_prod").innerHTML = D_1_prod[i];
