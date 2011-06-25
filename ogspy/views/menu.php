@@ -120,12 +120,12 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 </tr>
 <tr><td><div align="center"><a href="index.php?action=galaxy">Galaxie</a></div></td></tr>
 <tr><td><div align="center"><a href="index.php?action=cartography">Espace alliance</a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=search">Recherche</a></div></td></tr>
+<tr><td><div align="center"><a href="index.php?action=search">Rechercher</a></div></td></tr>
 <tr><td><div align="center"><a href="index.php?action=ranking">Classement</a></div></td></tr>
 <tr>
 	<td><div align="center"><img src="<?php echo $link_css;?>/gfx/user-menu.jpg" width="110" height="19"></div></td>
 </tr>
-<tr><td><div align="center"><a href="index.php?action=statistic">Statistiques</a></div></td></tr>
+<tr><td><div align="center"><a href="index.php?action=statistic">Etat Cartographie</a></div></td></tr>
 <tr><td><div align="center"><a href="index.php?action=galaxy_obsolete">Syst. obsolètes</a></div></td></tr>
 <tr>
 	<td><div align="center"><img src="<?php echo $link_css;?>/gfx/user-menu.jpg" width="110" height="19"></div></td>
@@ -163,7 +163,7 @@ if ($db->sql_numrows($result)) {
 <?php if ($server_config["url_forum"] != "") {?>
 <tr><td><div align="center"><a href="<?php echo $server_config["url_forum"];?>" target="_blank">Forum</a></div></td></tr>
 <?php }?>
-<tr><td><div align="center"><a href="index.php?action=about">A propos ...</a></div></td></tr>
+<tr><td><div align="center"><a href="index.php?action=about">A propos</a></div></td></tr>
 <tr>
 	<td><div align="center"><img src="<?php echo $link_css;?>/gfx/user-menu.jpg" width="110" height="35"></div></td>
 </tr>
