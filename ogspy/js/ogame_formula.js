@@ -36,15 +36,15 @@ function production (building, level, temperature_max, NRJ) {
 		break;
 
 		case "CES":
-		var geo = (Ing = 0) ? 1: 1.10;
+		var ingenieur = (Ing = 0) ? 1: 1.10;
 		result = 20 * level * Math.pow(1.1, level);
-		result = result * geo;
+		result = result * ingenieur;
 		break;
 
 		case "CEF":
-		var geo = (Ing = 0) ? 1: 1.10;
+		var ingenieur = (Ing = 0) ? 1: 1.10;
 		result = 30 * level * Math.pow((1.05 + 0.01 * NRJ), level);
-		result = result * geo;
+		result = result * ingenieur;
 		break;
 
 		default:
@@ -52,7 +52,7 @@ function production (building, level, temperature_max, NRJ) {
 		break;
 	}
     
-	return Math.round(result );
+	return result;
 }
 
 //Production des satellites
@@ -90,9 +90,6 @@ function consumption (building, level) {
 
 function update_page() {
 	var NRJ = document.getElementById("NRJ").value;
-	var Ing = document.getElementById("off_ingenieur").value;
-	var Geo = document.getElementById("off_geologue").value;
-	
 	
 	//
 	// Planètes
