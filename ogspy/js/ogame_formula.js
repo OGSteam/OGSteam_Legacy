@@ -8,29 +8,29 @@ function production (building, level, temperature_max, NRJ) {
 	
     switch (building) {
 		case "M":
-		var geo = (Ing = 0) ? 1: 1.10;
+		var geologue = (Geo = 0) ? 1: 1.10;
 		var prod_base = 30;
 		result = 30 * level * Math.pow(1.1, level);
-		result = result * geo;
+		result = result * geologue;
 		result = Math.floor(result);
 		result = prod_base + result;
 		result = result * speed;
 		break;
 
 		case "C":
-		var geo = (Ing = 0) ? 1: 1.10;
+		var geologue = (Geo = 0) ? 1: 1.10;
 		var prod_base = 15;
 		result = 20 * level * Math.pow(1.1, level);
-		result = result * geo;
+		result = result * geologue;
 		result = Math.floor(result);
 		result = prod_base + result;
 		result = result * speed;
 		break;
 
 		case "D":
-		var geo = (Ing = 0) ? 1: 1.10;
+		var geologue = (Geo = 0) ? 1: 1.10;
 		result = Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max));
-		result = result * geo;
+		result = result * geologue;
 		result = Math.floor(result);
         result = result * speed;
 		break;
@@ -168,11 +168,9 @@ function update_page() {
 		document.getElementById("D_" + i + "_prod").innerHTML = D_1_prod[i];
 	
 		//Energie
-		if (Ing < 1){
+
 		NRJ_1[i] = Math.round(CES_1_production + CEF_1_production + Sat_1_production);
-		} else {
-		NRJ_1[i] = Math.round(CES_1_production + CEF_1_production + Sat_1_production + (CES_1_production + CEF_1_production + Sat_1_production)/10);
-		}
+
 		var NRJ_1_delta = NRJ_1[i] - (M_1_conso[i] + C_1_conso[i] + D_1_conso[i]);
 		if (NRJ_1_delta < 0) NRJ_1_delta = "<font color='red'>" + NRJ_1_delta + "</font>";
 		document.getElementById("NRJ_" + i).innerHTML = NRJ_1_delta + " / " + NRJ_1[i];
