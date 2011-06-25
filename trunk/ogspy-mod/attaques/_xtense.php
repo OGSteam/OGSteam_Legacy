@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 class Attaques_Callback extends Callback {
-        public $version = '2.3.0';
+        public $version = '2.3.9';
         public function attack_rc($rapport){
 			global $io;
 			if(attack_rc($rapport))
@@ -45,7 +45,7 @@ class Attaques_Callback extends Callback {
 
 
 // Version minimum de Xtense2
-$xtense_version="2.3.0";
+$xtense_version="2.3.9";
  
 // Import des Rapports de combats
 function attack_rc($rapport)
