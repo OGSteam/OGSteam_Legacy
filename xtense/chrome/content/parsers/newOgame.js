@@ -885,95 +885,11 @@ var XnewOgame = {
 
 		var infos = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_infos);
 		if(infos.snapshotLength > 0){
-		   	for(var table=0;table<infos.snapshotLength;table++){
-				var dat = {};
-				var val = {};
-				var weap = {};
-				var info = infos.snapshotItem(table);
-				
-				var values = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_values, info);
-				if(values.snapshotLength > 0){
-					for(var td=1;td<values.snapshotLength;td++){
-						var value = values.snapshotItem(td).textContent.trim();
-						if(value){
-							val[td] = value.replace(/\./g, '');
-						}
-					}
-				}
-				
-				var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_types, info);
-				if(types.snapshotLength > 0){
-					for(var th=1;th<types.snapshotLength;th++){
-						var type = types.snapshotItem(th).textContent.trim();
-						if(type){
-							for (var i in rcStrings['units']) {
-								for (var j in rcStrings['units'][i]) {
-									var typ = type.match(new RegExp(rcStrings['units'][i][j]));
-									if (typ)
-										dat[this.database[i][j]] = val[th];
-								}
-							}
-						}
-					}
-				}
-				
-				var dest=0;
-				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non détruit
-				if (player.length==0) { //Dans ce cas, joueur détruit
-					player = Xpath.getStringValue(this.doc,paths.infos.destroyed,info).trim();
-					dest=1;
-				}
-				if (!dest)
-					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
-				else
-					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.userNameAndDestroyed));
-				if(m){
-					var player = m[1];
-					if (!dest)
-						var coords = m[2];
-					else
-						var coords = "0:0:0"; //Si joueur détruit, pas besoin de ses coordonnées, on affiche "Joueur XXX détruit"
-					var type = "A";
-				} else {
-					if(!dest)
-						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
-					else
-						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.userNameAndDestroyed));
-					
-					if(m){
-						var player = m[1];
-						if (!dest)
-							var coords = m[2];
-						else
-							var coords = "0:0:0";
-					} else {
-						var player = "";
-						var coords = "";
-					}
-					var type = "D";
-				}
-				
-				var weapons = Xpath.getStringValue(this.doc,paths.infos.weapons,info).trim();
-				for (var i in rcStrings['regxps']['weapons']) {
-					var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
-					if(m)
-						weap[i] = m[1].replace(/\./g, '');
-					else
-						weap[i] = "";
-				}
-				
-				if(coords != "")
-					data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
-			}
-			
-			var temp = eval(Xprefs.getChar('rc-temp'));
-			if(table == 2 && temp.name && temp.coords && !data[1])
-				data[1] = {player : temp.name, coords : temp.coords, type : 'D', weapons : {arm : '0', bcl : '0', coq : '0'}, content : {}};
-			Xprefs.setChar('rc-temp', '');
-			
+			//Heure et rounds
 			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_rounds);
-			if(rounds.snapshotLength > 0){
-				for(var div=0;div<rounds.snapshotLength;div++){
+			var nbrounds = rounds.snapshotLength;
+			if(nbrounds > 0){
+				for(var div=0;div<nbrounds;div++){
 					var round = rounds.snapshotItem(div).textContent.trim();
 					
 					if(div == 0){
@@ -1003,7 +919,106 @@ var XnewOgame = {
 					}
 				}
 			}
+
+			//Vaisseaux/Défenses/Joueur/Coordonnées/Technos
+		   	for(var table=0;table<infos.snapshotLength;table++){
+				var dat = {};
+				var val = {};
+				var weap = {};
+				var info = infos.snapshotItem(table);
+				var nbJoueurs=infos.snapshotLength/nbrounds;
+				
+				//Nombre d'unités
+				var values = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_values, info);
+				if(values.snapshotLength > 0){
+					for(var td=1;td<values.snapshotLength;td++){
+						var value = values.snapshotItem(td).textContent.trim();
+						if(value){
+							val[td] = value.replace(/\./g, '');
+						}
+					}
+				}
+				
+				//Type de l'unité
+				var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_types, info);
+				if(types.snapshotLength > 0){
+					for(var th=1;th<types.snapshotLength;th++){
+						var type = types.snapshotItem(th).textContent.trim();
+						if(type){
+							for (var i in rcStrings['units']) {
+								for (var j in rcStrings['units'][i]) {
+									var typ = type.match(new RegExp(rcStrings['units'][i][j]));
+									if (typ)
+										dat[this.database[i][j]] = val[th];
+								}
+							}
+						}
+					}
+				}
+
+				//Nom joueur et coordonnées
+				var dest=0;
+				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non détruit
+				if (player.length==0) { //Dans ce cas, joueur détruit
+					player = Xpath.getStringValue(this.doc,paths.infos.destroyed,info).trim();
+					dest=1;
+				}
+				if (!dest)
+					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+				else
+					var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.userNameAndDestroyed));
+				if(m){
+					var player = m[1];
+					if (!dest)
+						var coords = m[2];
+					else
+						var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; //Joueur détruit, on récupère ses coordonnées lorsqu'il était encore vivant
+					var type = "A";
+				} else {
+					if(!dest)
+						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+					else
+						var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.userNameAndDestroyed));
+					
+					if(m){
+						var player = m[1];
+						if (!dest)
+							var coords = m[2];
+						else {
+							//Défenseur où à lieu le raid est détruit au 1er tour (si et seulement si il s'agit du défenseur où à lieu le raid)
+							var temp = eval(Xprefs.getChar('rc-temp'));
+							if (temp != "")
+								var coords = temp.coords;
+							else
+								var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; // Défenseur détruit et rounds>1
+							Xprefs.setChar('rc-temp', '');
+						}
+					} else {
+						var player = "";
+						var coords = "";
+					}
+					var type = "D";
+				}
+				
+				//Technos
+				var weapons = Xpath.getStringValue(this.doc,paths.infos.weapons,info).trim();
+				for (var i in rcStrings['regxps']['weapons']) {
+					var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
+					if(m)
+						weap[i] = m[1].replace(/\./g, '');
+					else { //Joueur détruit
+						if ((table-nbJoueurs)<0) //Défenseur où à lieu le raid détruit au 1er tour -> technos inutiles
+							weap[i] = 0;
+						else
+							weap[i] = data[(table-nbJoueurs)%nbJoueurs]['weapons'][i]; //On récupère ses technos lorsqu'il était encore vivant
+					}
+				}
+				
+				if(coords != "")
+					data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
+			}
 			
+			//Pillages/Pertes/Cdr/Lune
 			var result = Xpath.getStringValue(this.doc,paths.result).trim();
 			if (result.match(new RegExp(rcStrings['regxps']['nul'], 'gi')))
 				var win = "N";
@@ -1029,12 +1044,14 @@ var XnewOgame = {
 				else
 					rslt[i] = 0;
 			}
-			var nbrounds = rounds.snapshotLength;
+
+			//Texte entier du raid, brut
 			var rounds = Xpath.getOrderedSnapshotNodes(this.doc,paths.combat_round);
 			var round = -1;
 			if(rounds.snapshotLength > 0){
 				round = rounds.snapshotItem(0).textContent.trim();
 			}
+
 			var Request = this.newRequest();
 			Request.set(
 				{
