@@ -30,6 +30,9 @@ while ($row = mysql_fetch_assoc($quet)) {
 
 /// ajout de la vitesse uni pour gestion js ...
 echo "<input type='hidden' id='vitesse_uni' size='2' maxlength='5' value='".$server_config['speed_uni']."'/>";
+echo "<input type='hidden' id='off_ingenieur' value='".$user_data["off_ingenieur"]."'/>";
+echo "<input type='hidden' id='off_geologue' value='".$user_data["off_geologue"]."'/>";
+
 ?>
 
 <SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
@@ -170,7 +173,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 <tr>
 	<th><a>Energie</a></th>
 <?php
-echo "<input type='hidden' id='off_ingenieur' size='2' maxlength='5' value='".$user_data["off_ingenieur"]."'/>";
+
 for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='NRJ_".$i."'>-</div></font></th>"."\n";
 }
@@ -188,7 +191,7 @@ Métal
 <tr>
 	<th><a>Niveau</a></th>
 <?php
-echo "<input type='hidden' id='off_geologue' size='2' maxlength='5' value='".$user_data["off_geologue"]."'/>";
+
 for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	$M = $user_building[$i]["M"];
 	echo "\t"."<th><input type='text' id='M_".$i."' size='2' maxlength='2' value='".$M."' onchange='update_page();'></th>"."\n";
