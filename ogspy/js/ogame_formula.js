@@ -4,12 +4,12 @@ function production (building, level, temperature_max, NRJ) {
 	var NRJ = document.getElementById("NRJ").value;
 	var Ing = document.getElementById("off_ingenieur").value;
 	var Geo = document.getElementById("off_geologue").value;
-	var result;
+	var result,geologue,ingenieur,prod_base = 0;
 	
     switch (building) {
 		case "M":
-		var geologue = (Geo = 0) ? 1: 1.10;
-		var prod_base = 30;
+		geologue = (Geo == 0) ? 1: 1.10;
+		prod_base = 30;
 		result = 30 * level * Math.pow(1.1, level);
 		result = result * geologue;
 		result = Math.floor(result);
@@ -18,8 +18,8 @@ function production (building, level, temperature_max, NRJ) {
 		break;
 
 		case "C":
-		var geologue = (Geo = 0) ? 1: 1.10;
-		var prod_base = 15;
+		geologue = (Geo == 0) ? 1: 1.10;
+		prod_base = 15;
 		result = 20 * level * Math.pow(1.1, level);
 		result = result * geologue;
 		result = Math.floor(result);
@@ -28,7 +28,7 @@ function production (building, level, temperature_max, NRJ) {
 		break;
 
 		case "D":
-		var geologue = (Geo = 0) ? 1: 1.10;
+		geologue = (Geo == 0) ? 1: 1.10;
 		result = Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max));
 		result = result * geologue;
 		result = Math.floor(result);
@@ -36,13 +36,13 @@ function production (building, level, temperature_max, NRJ) {
 		break;
 
 		case "CES":
-		var ingenieur = (Ing = 0) ? 1: 1.10;
+		ingenieur = (Ing == 0) ? 1: 1.10;
 		result = 20 * level * Math.pow(1.1, level);
 		result = result * ingenieur;
 		break;
 
 		case "CEF":
-		var ingenieur = (Ing = 0) ? 1: 1.10;
+		ingenieur = (Ing == 0) ? 1: 1.10;
 		result = 30 * level * Math.pow((1.05 + 0.01 * NRJ), level);
 		result = result * ingenieur;
 		break;
@@ -57,7 +57,11 @@ function production (building, level, temperature_max, NRJ) {
 
 //Production des satellites
 function production_sat (temperature_min, temperature_max) {
-   	return Math.floor(((((parseInt(temperature_max) + parseInt(temperature_min)) / 2) + 160) / 6));
+
+	var ingenieur = 0;
+	var Ing = document.getElementById("off_ingenieur").value;
+	ingenieur = (Ing == 1) ? 1.10: 1;
+   	return Math.floor(ingenieur * ((((parseInt(temperature_min) + parseInt(temperature_max)) / 2) + 160) / 6));
 }
 
 //Consommation d"énergie
@@ -77,7 +81,7 @@ function consumption (building, level) {
 
 		case "CEF":
         var speed = document.getElementById("vitesse_uni").value; // consommation de deut doublé par vitesse uni
-		result = Math.ceil(10 * level * Math.pow(1.1, level)* speed);
+		result = Math.ceil((10 * level * Math.pow(1.1, level))* speed);
 		break;
 
 		default:
@@ -151,7 +155,7 @@ function update_page() {
 		Sat_1[i] = document.getElementById("Sat_" + i).value;
 		var Sat_1_percentage = document.getElementById("Sat_" + i + "_percentage").value;
 		var Sat_1_production = production_sat(temperature_min_1, temperature_max_1) * Sat_1[i] * Sat_1_percentage / 100;
-	
+
 	
 		//Deutérium - Planète 1
 		D_1[i] = document.getElementById("D_" + i).value;
@@ -167,7 +171,6 @@ function update_page() {
 		//Energie
 
 		NRJ_1[i] = Math.round(CES_1_production + CEF_1_production + Sat_1_production);
-
 		var NRJ_1_delta = NRJ_1[i] - (M_1_conso[i] + C_1_conso[i] + D_1_conso[i]);
 		if (NRJ_1_delta < 0) NRJ_1_delta = "<font color='red'>" + NRJ_1_delta + "</font>";
 		document.getElementById("NRJ_" + i).innerHTML = NRJ_1_delta + " / " + NRJ_1[i];
