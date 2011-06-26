@@ -464,7 +464,8 @@ var XnewOgame = {
 		
 		if(levels.snapshotLength > 0){
 		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
-		   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim().replace(".", "");
+				
 		   		if(level!=""){
 		   			tabLevel.push(level);
 		   		}
