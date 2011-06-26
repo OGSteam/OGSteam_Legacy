@@ -376,10 +376,11 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
 //    echo "</th>"."\n";
    
         if($ratio[$i]['ratio'] != 1) $view_ratio = true ;
+		//$view_ratio = false ;
         }
 
         
- if ($view_ratio = true) {
+ if ($view_ratio == true) {
     ?>
  <tr>
 	<td class="c" colspan="<?php print ($nb_planete <10)?'10':$nb_planete +1 ?>">Production Réelle</td>
@@ -387,7 +388,7 @@ for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
   
   
    <tr>
-	<th><a>ratio</a></th>
+	<th><a>Ratio</a></th>
    <?php 
    // ratio
    for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
