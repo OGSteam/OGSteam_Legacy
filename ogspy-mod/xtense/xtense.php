@@ -408,7 +408,7 @@ switch ($pub_type){
 			$coords 		= $pub_coords;
 			$planet_type 	= ((int)$pub_planet_type == TYPE_PLANET ? TYPE_PLANET : TYPE_MOON);
 			$planet_name 	= utf8_decode($pub_planet_name);
-			if (isset($pub_SAT)) $ss = (int)$pub_SAT;
+			if (isset($pub_SAT)) $ss = $pub_SAT;
 			
 			$home = home_check($planet_type, $coords);
 					
