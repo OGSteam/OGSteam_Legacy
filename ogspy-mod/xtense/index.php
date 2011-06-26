@@ -28,12 +28,6 @@ if (isset($pub_page)) {
 if ($page == 'infos') {
 	$plugin_url = 'http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/')+1).
 	($server_config['xtense_plugin_root'] == 1 ? '' : "mod/{$root}/") .'xtense.php';
-	
-	$toolbar = array();
-	if($rdf = file_get_contents('http://update.ogsteam.fr/xtense/')){
-		preg_match('#em\:version\=\"(.*)\"#', $rdf, $toolbar['version']);
-		preg_match('#em\:updateLink\=\"(.*)\"#', $rdf, $toolbar['link']);
-	}
 }
 
 if ($page == 'config') {
@@ -312,7 +306,7 @@ function toggle_callback_info() {
 	
 <?php if ($page == 'infos') { ?>
 	<h2>T&eacute;l&eacute;chargement de la barre</h2>
-		<p>Derni&egrave;re version disponible : <a href="<?php echo $toolbar['link'][1]; ?>" onclick="return install(event);" target="_blank">Xtense <?php echo $toolbar['version'][1]; ?></a></p>
+		<p>Version Firefox : <a href="https://addons.mozilla.org/fr/firefox/addon/ogxtense/" target="_blank">Page extension Xtense</a></p>
 	<h2>Informations</h2>
 	
 	<p>Voici les informations que vous devez rentrer dans le plugin Xtense pour vous connecter &agrave; ce serveur :</p>
