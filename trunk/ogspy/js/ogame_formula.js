@@ -29,7 +29,7 @@ function production (building, level, temperature_max, NRJ) {
 
 		case "D":
 		geologue = (Geo == 0) ? 1: 1.10;
-		result = Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max));
+		result = 10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max);
 		result = result * geologue;
 		result = Math.floor(result);
         result = result * speed;
