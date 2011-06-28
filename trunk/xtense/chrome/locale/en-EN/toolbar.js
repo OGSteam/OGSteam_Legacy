@@ -88,7 +88,7 @@ Ximplements(Xlocales, {
 	'success ranking': '$2 ranks of $1 ($3-$4) updated', // Primary type, secondary type, offset min, offset max
 	'success rc': 'Battle report sent',
 	'success ally_list': 'Members list of alliance [$1] sent', // TAG
-	'success messages': 'Messages sent',
+	'success messages': 'Message sent',
 	'success fleetSending': 'Fleet departure sent',
 	'success spy': 'Spy report sent',
 	
