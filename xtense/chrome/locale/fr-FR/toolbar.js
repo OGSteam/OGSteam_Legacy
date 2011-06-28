@@ -9,7 +9,7 @@ Ximplements(Xlocales, {
 	
 	'ogspy menu tooltip': 'Connexion automatique au serveur OGSpy',
 	
-	'fatal error': 'Une erreur critique est survenue et a arrêtée l\'exécution de Xtense',
+	'fatal error': 'Une erreur critique est survenue et a arrêté l\'exécution de Xtense',
 	'parsing error': 'Une erreur critique est survenue lors de la récupération des données de la page',
 	
 	'no ogspy server': 'Aucun serveur',

@@ -21,7 +21,7 @@ var Xtoolbar = {
 	ogspyConnect : function (id) {
 		var server = eval(Xprefs.getChar('server'+id));
 		var n = -1;
-		var url = server.url.substr(0, ((n = server.url.indexOf('mod/Xtense/xtense.php')) == -1 ? server.url.indexOf('xtense.php') : n));
+		var url = server.url.substr(0, ((n = server.url.indexOf('mod/xtense/xtense.php')) == -1 ? server.url.indexOf('xtense.php') : n));
 		var dataString = 'action=login_web&login='+server.user+'&password='+server.password;
 		var stringStream = Cc['@mozilla.org/io/string-input-stream;1'].createInstance(Ci.nsIStringInputStream);
 		if ('data' in stringStream) stringStream.data = dataString;
