@@ -344,7 +344,7 @@ var XnewOgame = {
 	},
 	
 	parseOverview : function () {
-		this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
 		var cases = this.win.textContent[1].getInts()[2];
 		var temperature_max = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
@@ -373,7 +373,7 @@ var XnewOgame = {
 
     parseStation : function () {		
 		var paths = XnewOgame.Xpaths.levels;
-		this.Tab.setStatus(Xl('installations detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('installations detected'), XLOG_NORMAL, {url: this.url});
 		var Request = this.newRequest();
 		Request.set('type', 'buildings');
 		
@@ -415,7 +415,7 @@ var XnewOgame = {
 	
 	parseResearchs : function () {
 		var paths = XnewOgame.Xpaths.levels;		
-		this.Tab.setStatus(Xl('researchs detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('researchs detected'), XLOG_NORMAL, {url: this.url});
 		var Request = this.newRequest();
 		Request.set('type', 'researchs');
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
@@ -457,7 +457,7 @@ var XnewOgame = {
 
 	parseBuildings : function () {
 		var paths = XnewOgame.Xpaths.levels;
-		this.Tab.setStatus(Xl('buildings detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('buildings detected'), XLOG_NORMAL, {url: this.url});
 		var Request = this.newRequest();
 		Request.set('type', 'buildings');
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
@@ -525,7 +525,7 @@ var XnewOgame = {
 
 	parseDefense : function () {		
 		var paths = XnewOgame.Xpaths.levels;
-		this.Tab.setStatus(Xl('defense detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('defense detected'), XLOG_NORMAL, {url: this.url});
 		var Request = this.newRequest();
 		Request.set('type', 'defense');
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
@@ -561,7 +561,7 @@ var XnewOgame = {
 	
 	parseShipyard : function () {		
 		var paths = XnewOgame.Xpaths.levels;
-		this.Tab.setStatus(Xl('fleet detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('fleet detected'), XLOG_NORMAL, {url: this.url});
 		var Request = this.newRequest();
 		Request.set('type', 'fleet');
 		var levels = Xpath.getOrderedSnapshotNodes(this.doc,paths.level,null);
@@ -618,7 +618,7 @@ var XnewOgame = {
 				Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
 				return;
 			}
-			XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
+			//XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
 			Xconsole(Xl('system detected', coords[0], coords[1]));
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
 			Xconsole(paths.rows+' '+rows.snapshotLength);
@@ -809,7 +809,7 @@ var XnewOgame = {
 				}
 				
 				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){
-					XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
+					//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
 					if (offset != 0 && length != 0) {
 						Request.set(
 							{
@@ -860,7 +860,7 @@ var XnewOgame = {
 			}
 
 			if(this.lastAction != 'ally_list' && rowsData != ""){
-				XnewOgame.Tab.setStatus(Xl('ally_list detected'), XLOG_NORMAL, {url: this.url});
+				//XnewOgame.Tab.setStatus(Xl('ally_list detected'), XLOG_NORMAL, {url: this.url});
 				var tag = Xpath.getStringValue(doc,paths.tag);
 				Request.set(
 					{
@@ -880,7 +880,7 @@ var XnewOgame = {
 
 	parseRc : function () {
 		var paths = this.Xpaths.rc;
-		this.Tab.setStatus(Xl('rc detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('rc detected'), XLOG_NORMAL, {url: this.url});
 		var rcStrings = this.l('combat report');
 		var data = {};
 		var rnds = {};
@@ -1077,7 +1077,7 @@ var XnewOgame = {
 	
 	parseSpyReport: function(RE) {
 		var paths = this.Xpaths.messages.spy;
-		this.Tab.setStatus(Xl('re detected'), XLOG_NORMAL, {url: this.url});
+		//this.Tab.setStatus(Xl('re detected'), XLOG_NORMAL, {url: this.url});
 		var spyStrings = this.l('spy reports');
 		var locales = this.l('messages');
 		var data = {};
@@ -1153,6 +1153,7 @@ var XnewOgame = {
 		var locales = this.l('messages');
 		
 		data.date = XparseDate(date,this.l('dates')['messages']);
+		data.type = '';
 		
 		// Messages de joueurs
 		if(Xprefs.getBool('msg-msg')) {
@@ -1183,20 +1184,14 @@ var XnewOgame = {
 		
 		// Messages d'alliance
 		if(Xprefs.getBool('msg-ally_msg')) {
-			var reg = new RegExp(this.regexps.ally);
-			Xconsole(from.match(reg));
-			Xconsole(subject.match(reg));
-			
-			if (from.match(reg)) { // si  il y a des []  dans le from et le sujet, c'est un nom d'alliance, donc un message d'alliance
+			var m = from.match(new RegExp(XnewOgame.regexps.ally));
+			if(m){
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ally_msg']);
-				var message = Xpath.getStringValue(this.doc,paths.contents['msg']).trim();
-				var m = from.match(new RegExp(this.regexps.ally));
-				if(m) {
-					data.type = 'ally_msg';
-					data.from = m[1];
-					data.tag = m[1]; 
-					data.message = message;
-				}
+				var message = contentNode.innerHTML;
+				data.type = 'ally_msg';
+				data.from = m[1];
+				data.tag = m[1];
+				data.message = message;
 			} else Xconsole('The message is not an ally message');
 		}
 		
@@ -1244,7 +1239,8 @@ var XnewOgame = {
 			if (m!=null){
 				var rapport = Xpath.getStringValue(this.doc,paths.contents['rc']).trim();
 				var m2 = rapport.match(new RegExp(locales['combat defence']+this.regexps.planetNameAndCoords));
-				Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+				if (m2)
+					Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
 			}
 		}
 		
