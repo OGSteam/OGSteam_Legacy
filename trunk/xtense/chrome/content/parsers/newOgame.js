@@ -344,6 +344,7 @@ var XnewOgame = {
 	},
 	
 	parseOverview : function () {
+		this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
 		var cases = this.win.textContent[1].getInts()[2];
 		var temperature_max = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
@@ -617,6 +618,7 @@ var XnewOgame = {
 				Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
 				return;
 			}
+			XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
 			Xconsole(Xl('system detected', coords[0], coords[1]));
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
 			Xconsole(paths.rows+' '+rows.snapshotLength);
@@ -877,8 +879,8 @@ var XnewOgame = {
 	},
 
 	parseRc : function () {
-		this.Tab.setStatus(Xl('rc detected'), XLOG_NORMAL, {url: this.url});
 		var paths = this.Xpaths.rc;
+		this.Tab.setStatus(Xl('rc detected'), XLOG_NORMAL, {url: this.url});
 		var rcStrings = this.l('combat report');
 		var data = {};
 		var rnds = {};
@@ -1075,6 +1077,7 @@ var XnewOgame = {
 	
 	parseSpyReport: function(RE) {
 		var paths = this.Xpaths.messages.spy;
+		this.Tab.setStatus(Xl('re detected'), XLOG_NORMAL, {url: this.url});
 		var spyStrings = this.l('spy reports');
 		var locales = this.l('messages');
 		var data = {};
@@ -1151,44 +1154,6 @@ var XnewOgame = {
 		
 		data.date = XparseDate(date,this.l('dates')['messages']);
 		
-		// Espionnages perso
-		if(Xprefs.getBool('msg-spy')) {
-			var m = subject.match(new RegExp(locales['espionage of']+this.regexps.planetNameAndCoords));
-			if(m){
-				Xconsole('spy detected');
-				Xconsole("subject:"+subject);
-				
-				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['spy']);
-				var content = contentNode.innerHTML;
-				
-				data.planetName = m[1];
-				data.coords = m[2];
-				
-				m = content.match(new RegExp(locales['unespionage prob']+this.regexps.probability));
-				if(m)
-					data.proba = m[1];
-				
-				Ximplements(data, this.parseSpyReport(content));		
-				data.type = 'spy';
-			} else Xconsole('The message is not a spy report');
-		}
-		
-		// Espionnages ennemis
-		 if(Xprefs.getBool('msg-ennemy_spy')) {
-			if(subject.match(new RegExp(locales['espionnage action']))) {
-				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ennemy_spy']);
-				var rawdata = contentNode.textContent.trim();
-				var m = rawdata.match(new RegExp(this.regexps.messages.ennemy_spy));
-
-				if(m){
-					data.type = 'ennemy_spy';
-					data.from = m[1];
-					data.to = m[2];
-					data.proba = m[3];
-				}
-			} else Xconsole('The message is not an ennemy spy');
-		}
-		
 		// Messages de joueurs
 		if(Xprefs.getBool('msg-msg')) {
 			if (this.doc.getElementById('melden')) { // si bouton "reporter", c'est un mp
@@ -1235,19 +1200,42 @@ var XnewOgame = {
 			} else Xconsole('The message is not an ally message');
 		}
 		
-		// Expeditions
-		if(Xprefs.getBool('msg-expeditions')) {
-			var m = subject.match(new RegExp(locales['expedition result']+this.regexps.planetCoords));
-			var m2 = from.match(new RegExp(locales['fleet command']));
-			
-			if (m2!=null && m!=null) {
-				var coords = m[1];
-				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['expedition']);
-				var message = Xpath.getStringValue(this.doc,paths.contents['expedition']).trim();
-				data.type = 'expedition';
-				data.coords = coords;
-				data.content = message;
-			} else Xconsole('The message is not an expedition report');
+		// Espionnages perso
+		if(Xprefs.getBool('msg-spy')) {
+			var m = subject.match(new RegExp(locales['espionage of']+this.regexps.planetNameAndCoords));
+			if(m){
+				Xconsole('spy detected');
+				Xconsole("subject:"+subject);
+				
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['spy']);
+				var content = contentNode.innerHTML;
+				
+				data.planetName = m[1];
+				data.coords = m[2];
+				
+				m = content.match(new RegExp(locales['unespionage prob']+this.regexps.probability));
+				if(m)
+					data.proba = m[1];
+				
+				Ximplements(data, this.parseSpyReport(content));		
+				data.type = 'spy';
+			} else Xconsole('The message is not a spy report');
+		}
+		
+		// Espionnages ennemis
+		 if(Xprefs.getBool('msg-ennemy_spy')) {
+			if(subject.match(new RegExp(locales['espionnage action']))) {
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ennemy_spy']);
+				var rawdata = contentNode.textContent.trim();
+				var m = rawdata.match(new RegExp(this.regexps.messages.ennemy_spy));
+
+				if(m){
+					data.type = 'ennemy_spy';
+					data.from = m[1];
+					data.to = m[2];
+					data.proba = m[3];
+				}
+			} else Xconsole('The message is not an ennemy spy');
 		}
 		
 		//RC
@@ -1279,6 +1267,21 @@ var XnewOgame = {
 					data.C_total = nums[3];
 				}
 			} else Xconsole('The message is not a harvesting report');
+		}
+		
+		// Expeditions
+		if(Xprefs.getBool('msg-expeditions')) {
+			var m = subject.match(new RegExp(locales['expedition result']+this.regexps.planetCoords));
+			var m2 = from.match(new RegExp(locales['fleet command']));
+			
+			if (m2!=null && m!=null) {
+				var coords = m[1];
+				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['expedition']);
+				var message = Xpath.getStringValue(this.doc,paths.contents['expedition']).trim();
+				data.type = 'expedition';
+				data.coords = coords;
+				data.content = message;
+			} else Xconsole('The message is not an expedition report');
 		}
 
 		// Aucun message
