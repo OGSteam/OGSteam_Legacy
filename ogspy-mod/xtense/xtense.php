@@ -822,7 +822,7 @@ switch ($pub_type){
 		} else {
 			$line = $pub_data;
 			switch($line['type']){
-				case 'message': //MESSAGE PERSO
+				case 'msg': //MESSAGE PERSO
 					Check::data(isset($line['coords'], $line['from'], $line['subject'], $line['message']), Check::coords($line['coords']), Check::planet_name($line['from']));
 					
 					$msg = array(
