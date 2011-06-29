@@ -2678,9 +2678,14 @@ function UNparseRC($id_RC)
     $template .= 'Un champ de débris contenant ' . $nf_debris_M .
         ' de métal et ' . $nf_debris_C . ' de cristal se forme dans l\'orbite de la planète.' .
         "\n";
+	
+	$lunePourcent = floor(($debris_M + $debris_C) / 100000);
+	$lunePourcent = ($lunePourcent<0 ? 0 : ($lunePourcent>20 ? 20 : $lunePourcent));
+	if ($lunePourcent>0)
+		$template .= 'La probabilité de création d\'une lune est de ' . $lunePourcent . ' %.';
 		
 	if($lune==1)
-		$template .= 'Les quantités énormes de métal et de cristal s\'attirent, formant ainsi une lune dans l\'orbite de cette planète. Une lune a été crée.';
+		$template .= '\nLes quantités énormes de métal et de cristal s\'attirent, formant ainsi une lune dans l\'orbite de cette planète. Une lune a été crée.';
 
     return ($template);
 }
