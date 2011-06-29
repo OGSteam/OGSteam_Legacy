@@ -628,8 +628,8 @@ var XnewOgame = {
 				var rowsData = [];
 				for (var i = 0; i < rows.snapshotLength ; i++) {
 					var row = rows.snapshotItem(i);
-					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'t');
-					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'t');
+					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'');
+					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'');
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
 					
 					if (player == '') {
