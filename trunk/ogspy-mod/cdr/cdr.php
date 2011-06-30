@@ -2,6 +2,15 @@
 var index;
 function sort_int(p1,p2) {return p1[index]-p2[index];} //fonction pour trier les nombres
 function sort_char(p1,p2) {return ((p1[index]>=p2[index])<<1)-1;} //fonction pour trier les strings
+function sort_coord(p1, p2) {
+	var coordPattern = '(\\d+):(\\d+):(\\d+)';
+	var m1 = p1[index].match(coordPattern);
+	var m2 = p2[index].match(coordPattern);
+	var val1 = (m1[1]*15000 + m1[2]*20 + m1[3]*1)
+	var val2 = (m2[1]*15000 + m2[2]*20 + m2[3]*1);
+	var val = val1 - val2
+	return (val);
+}
 
 function TableOrder(e,Dec) { //Dec= 0:Croissant, 1:Décroissant
 //---- Détermine : oCell(cellule) oTable(table) index(index cellule) -----//
@@ -12,42 +21,47 @@ function TableOrder(e,Dec) { //Dec= 0:Croissant, 1:Décroissant
 	for (index=0 ; oTable.rows[0].cells[index]!=oCell ; index++); //determine l'index de la cellule
 
 //---- Copier Tableau Html dans Table JavaScript ----//
-	var Table = new Array();
+	var table = new Array();
 	for (r=1;r<oTable.rows.length;r++)
-		Table[r-1] = new Array();
+		table[r-1] = new Array();
 
 	for (c=0;c<oTable.rows[0].cells.length;c++) { //Sur toutes les cellules
 		var Type;
-		objet = oTable.rows[1].cells[c].innerHTML.replace(/<\/?[^>]+>/gi,"");
-		if (objet.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d$/)) { //date jj/mm/aaaa
+		var objet = oTable.rows[1].cells[c].innerHTML.replace(/<\/?[^>]+>/gi,"");
+		if (objet.match(/^\d\d[\/-]\d\d[\/-]\d\d\d\d\s\d\d:\d\d:\d\d$/)) { //date jj/mm/aaaa hh:mm:ss
 			FntSort[c] = sort_char;
 			Type = 0;
 		} else if (objet.match(/^[0-9£$\.\s-]+$/)) { //nombre, numéraire
 			FntSort[c] = sort_int;
 			Type = 1;
+		} else if (objet.match(/^\d+:\d+:\d+$/)) { //Coordonnées
+			FntSort[c] = sort_coord;
+			Type = 2;
 		} else { //Chaine de caractère
 			FntSort[c] = sort_char;
-			Type = 2;
+			Type = 3;
 		}
 
 		for (r=1;r<oTable.rows.length;r++) { //De toutes les rangées
-			switch (objet = oTable) {
-				case 0: Table[r-1][c] = new Date(objet.substring(6),objet.substring(3,5),objet.substring(0,2)); break; //date jj/mm/aaaa
-				case 1: Table[r-1][c] = parseFloat(objet.replace(/[^0-9.-]/g,'')); break; //nombre
-				case 2: Table[r-1][c] = objet.toLowerCase(); break; //Chaine de caractère
+			objet = oTable.rows[r].cells[c].innerHTML.replace(/<\/?[^>]+>/gi,"");
+			switch (Type) {
+				case 0: table[r-1][c] = new Date(objet.substring(6,10), objet.substring(3,5), objet.substring(0,2), objet.substring(11,13), objet.substring(14,16), objet.substring(17,19)); break; //date jj/mm/aaaa hh:mm:ss
+				case 1: table[r-1][c] = parseFloat(objet.replace(/[^0-9.-]/g,'')); break; //nombre
+				case 2: table[r-1][c] = objet.toLowerCase(); break; //Chaine de caractère si coordonnées
+				case 3: table[r-1][c] = objet.toLowerCase(); break; //Chaine de caractère
 			}
-			Table[r-1][c+oTable.rows[0].cells.length] = oTable.rows[r].cells[c].innerHTML;
+			table[r-1][c+oTable.rows[0].cells.length] = oTable.rows[r].cells[c].innerHTML;
 		}
 	}
 
 //--- Tri Table ---//
-	Table.sort(FntSort[index]);
-	if (Dec) Table.reverse();
+	table.sort(FntSort[index]);
+	if (Dec) table.reverse();
 
 //---- Copier Table JavaScript dans Tableau Html ----//
 	for (c=0;c<oTable.rows[0].cells.length;c++) //Sur toutes les cellules
 		for (r=1;r<oTable.rows.length;r++) //De toutes les rangées
-			oTable.rows[r].cells[c].innerHTML = Table[r-1][c+oTable.rows[0].cells.length];
+			oTable.rows[r].cells[c].innerHTML = table[r-1][c+oTable.rows[0].cells.length];
 }
 </SCRIPT>
 
@@ -108,9 +122,7 @@ if ($subaction != "option") {
 echo "<br/><br/><table width=60%>\n";
 echo $bouton1.$bouton2;
 echo "</table>\n";
-?>
 
-<?php
 if (isset($pub_subaction)) {
 	switch ($pub_subaction) {
 		case "cdr" :
