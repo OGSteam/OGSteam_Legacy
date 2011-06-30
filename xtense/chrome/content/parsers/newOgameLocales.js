@@ -155,6 +155,7 @@ XnewOgame.locales = {
 		'messages' : {
 			'espionage of': 'Rapport d`espionnage de',
 			'unespionage prob': 'Probabilité de contre-espionnage ',
+			'activity': '(\\d+)</font> dernières minutes',
 			'moon' : 'type',
 			'espionnage action' : 'Activité d\`espionnage',
 			'fleet command' : 'Tour de contrôle',
