@@ -1212,6 +1212,11 @@ var XnewOgame = {
 				if(m)
 					data.proba = m[1];
 				
+				data.activity = 0;
+				m = content.match(new RegExp(locales['activity']));
+				if (m)
+					data.activity = m[1];
+				
 				Ximplements(data, this.parseSpyReport(content));		
 				data.type = 'spy';
 			} else Xconsole('The message is not a spy report');
