@@ -169,8 +169,8 @@ function berechne() {
 		}
 	}
 
-	time = 10+ Math.round(350/document.getElementById('sel2').value * Math.sqrt(enf*1000/spd));
-	time = time/speeduni;
+	var time1 = Math.round(time = (10 + (350 / document.getElementById('sel2').value * Math.sqrt(enf*1000/spd))));
+	time = Math.round(time / speeduni);
 
 //selon le depart
 	var cheak;
@@ -180,7 +180,7 @@ function berechne() {
 	chaine = document.getElementById('heure_depart1').value;
 	cheak = reg.test(chaine);
 	if(cheak == true){
-		time2 = chaine.split(reg2);
+		var time2 = chaine.split(reg2);
 		if( ((time2[0] > 0 && time2[0] < 32)&&(time2[1] > 0 && time2[1] < 13)&&(time2[3] >= 0 && time2[3] < 24)&&((time2[4] >= 0 && time2[4] < 60))&&((time2[5] >= 0 && time2[5] < 60))) == true ){
 			if(anz == 0){
 				document.getElementById('heure_arrive1').firstChild.nodeValue = '-';		
@@ -206,7 +206,7 @@ function berechne() {
 	var reg3=new RegExp("^[0-9]{1,2}/[0-9]{1,2}/{1}[0-9]{4} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$","g");
 	cheak = reg3.test(chaine);
 	if(cheak == true){
-		time3 = chaine.split(reg2);
+		var time3 = chaine.split(reg2);
 		if( ((time3[0] > 0 && time3[0] < 32)&&(time3[1] > 0 && time3[1] < 13)&&(time3[3] >= 0 && time3[3] < 24)&&((time3[4] >= 0 && time3[4] < 60))&&((time3[5] >= 0 && time3[5] < 60))) == true ){
 			if(anz == 0){
 				document.getElementById('heure_depart2').firstChild.nodeValue = '-';		
@@ -265,7 +265,7 @@ function berechne() {
 		num = document.getElementById('i'+data2[i][0]).value;
 		if (num != 0) {
 			shipspd = retint(document.getElementById('s'+data2[i][0]).firstChild.nodeValue);
-			spd2 = 35000 / ( time - 10 ) * Math.sqrt( enf * 10 / shipspd );
+			spd2 = 35000 / ( time1 - 10 ) * Math.sqrt( enf * 10 / shipspd );
 			verbrauch = num * (data2[i][4] + (data2[i][0] == 201 && document.getElementById('imp').value > 4 ? 10 : 0));
 			gesverbrauch += verbrauch * enf / 35000 * Math.pow(spd2 / 10 + 1 , 2);
 		}
@@ -567,7 +567,7 @@ function soute(cargaison,conso){
 		<th><span id="sges">-</span></th>
 	</tr>
 	<tr>
-		<th colspan="4"><INPUT TYPE=BUTTON VALUE="RESET" OnClick="javascript:clearflote()"></th>
+		<th colspan="4"><INPUT TYPE=BUTTON VALUE="Effacer tout" OnClick="javascript:clearflote()"></th>
 	</tr>
 </table>
 <script type="text/javascript">
