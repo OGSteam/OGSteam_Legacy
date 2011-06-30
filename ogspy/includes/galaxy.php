@@ -3135,6 +3135,12 @@ function UNparseRE ( $id_RE )
 		dateRE, proba FROM ' . TABLE_PARSEDSPY . ' WHERE id_spy=' . $id_RE;
 	$result = $db->sql_query ( $query );
 	$row = $db->sql_fetch_assoc ( $result );
+	
+	$queryPlayerName = "SELECT player FROM " . TABLE_UNIVERSE . " WHERE concat(galaxy, ':', system, ':', row) = (SELECT coordinates FROM " . TABLE_PARSEDSPY . " WHERE id_spy=" . $id_RE . ")";
+	$resultPN = $db->sql_query ( $queryPlayerName );
+	$rowPN = $db->sql_fetch_assoc ( $resultPN );
+	
+	$sep_mille = ".";
 
 	if ( preg_match ( '/\(Lune\)/', $row['planet_name'] ) )
 		$moon = 1;
@@ -3144,19 +3150,19 @@ function UNparseRE ( $id_RE )
 	$dateRE = date ( 'm-d H:i:s', $row['dateRE'] );
 	$template = '<table border="0" cellpadding="2" cellspacing="0" align="center">
 	<tr>
-		<td class="l" colspan="4" class="c">Matières premières sur ' . $row['planet_name'] . ' [' . $row['coordinates'] . '] le ' . $dateRE . '</td>
+		<td class="l" colspan="4" class="c">Ressources sur ' . $row['planet_name'] . ' [' . $row['coordinates'] . '] (joueur \'' . $rowPN['player'] . '\') le ' . $dateRE . '</td>
 	</tr>
 	<tr>
-		<td class="c" style="text-align:right;">Métal</td>
-		<th>' . $row['metal'] . '</th>
-		<td class="c" style="text-align:right;">Cristal</td>
-		<th>' . $row['cristal'] . '</th>
+		<td class="c" style="text-align:right;">Métal:</td>
+		<th>' . number_format($row['metal'], 0, ',', $sep_mille) . '</th>
+		<td class="c" style="text-align:right;">Cristal:</td>
+		<th>' . number_format($row['cristal'], 0, ',', $sep_mille) . '</th>
 	</tr>
 	<tr>
-		<td class="c" style="text-align:right;">Deutérium</td>
-		<th>'. $row['deuterium'] . '</th>
-		<td class="c" style="text-align:right;">Energie</td>
-		<th>' . $row['energie'] . '</th>
+		<td class="c" style="text-align:right;">Deutérium:</td>
+		<th>'. number_format($row['deuterium'], 0, ',', $sep_mille) . '</th>
+		<td class="c" style="text-align:right;">Energie:</td>
+		<th>' . number_format($row['energie'], 0, ',', $sep_mille) . '</th>
 	</tr>
 	<tr>
 		<th colspan="4">';
@@ -3273,7 +3279,7 @@ function UNparseRE ( $id_RE )
 			if ( $row[$key] > 0 )
 			{
 				$template .= '    <td class="c" style="text-align:right;">' . $flotte[$key] . '</td>
-		<th>' . $row[$key] . '</th>' . "\n";
+		<th>' . number_format($row[$key], 0, ',', $sep_mille) . '</th>' . "\n";
 				if ( $count == 0 )
 				{
 					$count = 1;
@@ -3302,7 +3308,7 @@ function UNparseRE ( $id_RE )
 			if ( $row[$key] > 0 )
 			{
 				$template .= '    <td class="c" style="text-align:right;">' . $defs[$key] . '</td>
-		<th>' . $row[$key] . '</th>' . "\n";
+		<th>' . number_format($row[$key], 0, ',', $sep_mille) . '</th>' . "\n";
 				if ( $count == 0 )
 				{
 					$count = 1;
