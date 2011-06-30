@@ -3166,7 +3166,7 @@ function UNparseRE ( $id_RE )
 	</tr>
 	<tr>
 		<th colspan="4">';
-	if ( $row['activite'] > -1 ) 
+	if ( $row['activite'] > 0 ) 
 		$template .= 'Le scanner des sondes a détecté des anomalies dans l\'atmosphère de cette planète, indiquant qu\'il y a eu une activité sur cette planète dans les ' . $row['activite'] . ' dernières minutes.';
 	else
 		$template .= 'Le scanner des sondes n\'a pas détecté d\'anomalies atmosphériques sur cette planète. Une activité sur cette planète dans la dernière heure peut quasiment être exclue.';
