@@ -848,13 +848,16 @@ switch ($pub_type){
 				break;
 				
 				case 'spy': //RAPPORT ESPIONNAGE
-					Check::data(isset($line['coords'], $line['content'], $line['playerName'], $line['planetName'], $line['proba']));
+					Check::data(isset($line['coords'], $line['content'], $line['playerName'], $line['planetName'], $line['proba'], $line['activity']));
 					Check::data(Check::planet_name($line['planetName']), Check::player_name($line['playerName']), Check::coords($line['coords']));
 					
 					$proba = (int)$line['proba'];
 					$proba = $proba > 100 ? 100 : $proba;
+					$activite = (int)$line['activity'];
+					$activite = $activite > 59 ? 59 : $activite;
 					$spy = array(
 							'proba' => $proba,
+							'activite' => $activite,
 							'coords' => explode(':', $line['coords']),
 							'content' => $line['content'],
 							'time' => $line['date'],
@@ -875,8 +878,8 @@ switch ($pub_type){
 					$data = array();
 					$values = $fields = '';
 					
-						$fields .= 'planet_name,coordinates,sender_id, proba, dateRE';
-						$values .= '"'.trim($spy['planet_name']).'", "'.$coords.'", '.$user_data['user_id'].', '.$spy['proba'].', '.$spy['time'].' ';
+						$fields .= 'planet_name, coordinates, sender_id, proba, activite, dateRE';
+						$values .= '"'.trim($spy['planet_name']).'", "'.$coords.'", '.$user_data['user_id'].', '.$spy['proba'].', '.$spy['activite'].', '.$spy['time'].' ';
 					
 					foreach($spy['content'] as $field => $value){
 						$fields .= ', `'.$field.'`';
