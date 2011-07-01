@@ -51,7 +51,8 @@
 <!ENTITY opt.msg.only_checked "Only checked messages">
 <!ENTITY opt.msg.spy "Own spy reports">
 <!ENTITY opt.msg.ennemy_spy "Other players spy reports">
-<!ENTITY opt.msg.rc "Harvesting reports">
+<!ENTITY opt.msg.rc "Battle report">
+<!ENTITY opt.msg.rc_cdr "Harvesting Report">
 <!ENTITY opt.msg.msg "Private messages">
 <!ENTITY opt.msg.ally_msg "Alliance messages">
 <!ENTITY opt.msg.expeditions "Expeditions">
