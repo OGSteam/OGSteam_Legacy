@@ -147,7 +147,7 @@ var Xtense = {
 			catch (e) {}
 			
 			
-			if (url == 'about:blank' || !url) 
+			if (url == 'about:blank' || url.match('delivery.ads.gfsrv.net') || !url) //delivery.ads.gfsrv.net -> Pub sur le côté
 				return;
 			
 			if(typeof doc.defaultView.top == 'undefined')return;//TODO comprendre comment ça peut arriver
