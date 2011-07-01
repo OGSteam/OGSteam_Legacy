@@ -1,0 +1,11 @@
+Login Page:
+https://addons.mozilla.org/fr/developers/addons
+
+Login:
+ogspy_team
+
+Password:
+nk3zmKo7R86R
+
+
+Après chaque publication, demander la vérification partielle du Module pour qu'il soit rendu disponible aux moteurs de recherche.

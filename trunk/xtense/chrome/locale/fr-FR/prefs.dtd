@@ -50,8 +50,9 @@
 <!ENTITY opt.msg "Traitement des messages">
 <!ENTITY opt.msg.spy "Rapports d'espionnage">
 <!ENTITY opt.msg.ennemy_spy "Espionnages ennemis">
-<!ENTITY opt.msg.rc_cdr "Rapports de recyclages">
 <!ENTITY opt.msg.rc "Rapports d'attaque">
+<!ENTITY opt.msg.only_checked "Seulement Messages cochés">
+<!ENTITY opt.msg.rc_cdr "Rapports de recyclages">
 <!ENTITY opt.msg.msg "Messages de joueurs">
 <!ENTITY opt.msg.ally_msg "Messages d'alliance">
 <!ENTITY opt.msg.expeditions "Expeditions">
