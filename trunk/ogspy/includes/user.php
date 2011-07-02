@@ -2682,10 +2682,10 @@ function UNparseRC($id_RC)
 	$lunePourcent = floor(($debris_M + $debris_C) / 100000);
 	$lunePourcent = ($lunePourcent<0 ? 0 : ($lunePourcent>20 ? 20 : $lunePourcent));
 	if ($lunePourcent>0)
-		$template .= 'La probabilité de création d\'une lune est de ' . $lunePourcent . ' %.';
+		$template .= 'La probabilité de création d\'une lune est de ' . $lunePourcent . ' %';
 		
 	if($lune==1)
-		$template .= '\nLes quantités énormes de métal et de cristal s\'attirent, formant ainsi une lune dans l\'orbite de cette planète. Une lune a été crée.';
+		$template .= "\nLes quantités énormes de métal et de cristal s'attirent, formant ainsi une lune dans l'orbite de cette planète.";
 
     return ($template);
 }
