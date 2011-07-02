@@ -46,7 +46,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 		echo "<th colspan='".$nbcol1."'><a>".$lib_page[$i]."</a></th>";
 	} 
 	else {
-		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=mod_flottes&subaction2=simul&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
+		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=flottes&subaction2=simul&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
 	}
 }
 echo "</tr><tr>";

@@ -213,7 +213,7 @@ function buttons_bar($subaction)
 		}
 		else 
 		{
-			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=insert\';">'."\n";
+			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=insert\';">'."\n";
 			echo 'Insertion de flotte'."\n";
 			echo '</td>'."\n";
 		}
@@ -225,7 +225,7 @@ function buttons_bar($subaction)
 		}
 		else 
 		{
-			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=flottes\';">'."\n";
+			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=flottes\';">'."\n";
 			echo 'Flottes'."\n";
 			echo '</td>'."\n";
 		}
@@ -237,7 +237,7 @@ function buttons_bar($subaction)
 		}
 		else 
 		{
-			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=bbcode\';">'."\n";
+			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=bbcode\';">'."\n";
 			echo 'Export BBCode'."\n";
 			echo '</td>'."\n";
 		}
@@ -249,7 +249,7 @@ function buttons_bar($subaction)
         }
         else 
         {
-        echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=bbcode2\';">'."\n";
+        echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=bbcode2\';">'."\n";
         echo 'Export BBCode Détaillé'."\n";
         echo '</td>'."\n";
         }
@@ -261,7 +261,7 @@ function buttons_bar($subaction)
  		}
  		else 
  		{
- 			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=mybb\';">'."\n";
+ 			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=mybb\';">'."\n";
  			echo 'Export MyBB Détaillé'."\n";
  			echo '</td>'."\n";
  		}
@@ -273,7 +273,7 @@ function buttons_bar($subaction)
 		}
 		else 
 		{
-			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=graphe\';">'."\n";
+			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=graphe\';">'."\n";
 			echo 'Graphe de répartition de flotte'."\n";
 			echo '</td>'."\n";
 		}
@@ -286,7 +286,7 @@ function buttons_bar($subaction)
 		}
 		else 
 		{
-			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=admin\';">'."\n";
+			echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=admin\';">'."\n";
 			echo 'Administration'."\n";
 			echo '</td>'."\n";
 		}
@@ -300,7 +300,7 @@ function buttons_bar($subaction)
         }
         else 
         {
-            echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=mod_flottes&subaction=xtense2\';">'."\n";
+            echo '<td class="menu_off" width="12.5%" onclick="window.location = \'index.php?action=flottes&subaction=xtense2\';">'."\n";
             echo 'Xtense2'."\n";
             echo '</td>'."\n";
         }
@@ -336,8 +336,8 @@ function compte_planet($iduser,$nbpla,$game){
     // FLOTTESTOEMPIRE ajout de $table_prefix dans global
 
 	global $user_data, $mod_flottes_lang, $db,$members_data,$table_prefix;
-
-	if (!isset($nbpla) || $nbpla==0) $nbpla=9;
+	
+	if (!isset($nbpla) || $nbpla==0) $nbpla=$nb_planet;
 
 	$request = "SELECT MAX(planet_id) as nbpla FROM ".TABLE_USER_BUILDING." WHERE user_id=".$iduser." ";
 	$result = $db->sql_query($request);

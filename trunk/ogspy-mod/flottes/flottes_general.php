@@ -29,7 +29,7 @@ buttons_bar($pub_subaction);
 
 
 <form action='index.php' method='POST' name='form'>
-<input type='hidden' name='action' value='mod_flottes' >
+<input type='hidden' name='action' value='flottes' >
 <input type='hidden' name='permit' value='change' >
 <table width="100%">
 	<tr>
@@ -345,7 +345,7 @@ $request = "SELECT DISTINCT ".TABLE_USER.".user_id, ".TABLE_USER.".user_name FRO
 	<table>
 		<tr>
 			<td>
-				<input type='hidden' name='action' value='mod_flottes' >
+				<input type='hidden' name='action' value='flottes' >
 				<select name="flottes_user_id">
 <?php
 	// $ok verifit si j'ai pas essayé de tricher:
@@ -373,7 +373,7 @@ $request = "SELECT DISTINCT ".TABLE_USER.".user_id, ".TABLE_USER.".user_name FRO
 if (!isset($pub_subaction2)) $pub_subaction2 = "flottes";
 
 if ($pub_subaction2 != "flottes") {
-	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=mod_flottes&subaction2=flottes&flottes_user_id=".$flottes_user_id."';\">";
+	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=flottes&subaction2=flottes&flottes_user_id=".$flottes_user_id."';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Flottes</font></a>";
 	echo "</th>";
 }
@@ -384,7 +384,7 @@ else {
 }
 
 if ($pub_subaction2 != "def" & $validemp) {
-	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=mod_flottes&subaction2=def&flottes_user_id=".$flottes_user_id."';\">";
+	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=flottes&subaction2=def&flottes_user_id=".$flottes_user_id."';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Défenses</font></a>";
 	echo "</th>";
 }
@@ -395,7 +395,7 @@ else {
 }
 
 if ($pub_subaction2 != "empire" & $validemp) {
-	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=mod_flottes&subaction2=empire&flottes_user_id=".$flottes_user_id."';\">";
+	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=flottes&subaction2=empire&flottes_user_id=".$flottes_user_id."';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Empire</font></a>";
 	echo "</th>";
 }
@@ -406,7 +406,7 @@ else {
 }
 /*
 if ($pub_subaction2 != "simul" & $validemp=='1') {
-	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=mod_flottes&subaction2=simul&flottes_user_id=".$flottes_user_id."';\">";
+	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=flottes&subaction2=simul&flottes_user_id=".$flottes_user_id."';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Simulation</font></a>";
 	echo "</th>";
 }
@@ -417,7 +417,7 @@ else {
 }
 */
 if ($pub_subaction2 != "stat" & $validemp) {
-	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=mod_flottes&subaction2=stat&flottes_user_id=".$flottes_user_id."';\">";
+	echo "\t\t\t"."<th class='c' width='150' onclick=\"window.location = 'index.php?action=flottes&subaction2=stat&flottes_user_id=".$flottes_user_id."';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Statistiques</font></a>";
 	echo "</th>";
 }

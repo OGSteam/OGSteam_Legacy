@@ -71,7 +71,7 @@ if(sizeof($dates) > 0) {
 ?>
 <center>
 <form method="get" action="index.php">
-<input type="hidden" name="action" value="mod_flottes" />
+<input type="hidden" name="action" value="flottes" />
 <input type="hidden" name="subaction2" value="stat" />
 <input type="hidden" name="flottes_user_id" value=<?php echo $user_data['user_id']; ?> />
 <input type="hidden" name="zoom" value="<?php echo $zoom; ?>" />

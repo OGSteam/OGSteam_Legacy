@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 	class flottes_Callback extends Callback {
-		public $version = '2.3.0';
+		public $version = '2.3.9';
 		public function flottes_import_fleet($rapport){
 			global $io;
 			if(flottes_import_fleet($rapport))
@@ -35,7 +35,7 @@ if(class_exists("Callback")){
 
 // TEST XTENSE2
 global $xtense_version, $table_prefix;
-$xtense_version = "2.3.0";
+$xtense_version = "2.3.8";
 
 // Definitions
 define("TABLE_MOD_FLOTTES", $table_prefix."mod_flottes");

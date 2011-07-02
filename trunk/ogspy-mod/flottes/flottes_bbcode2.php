@@ -314,7 +314,7 @@ if($result = $db->sql_query($request)) {
 //		echo 'Rapport converti<br><textarea rows=\'10\' cols=\'10\'>'.$conv.'</textarea>';
 ?>
 	<form action='' method='POST' name='flottes'>
-	<input type='hidden' name='action' value='mod_flottes' >
+	<input type='hidden' name='action' value='flottes' >
 	<input type='hidden' name='permit' value='change' >
 		<table width="100%">
 			<tr align="center">

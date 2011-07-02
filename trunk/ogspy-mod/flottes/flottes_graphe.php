@@ -17,8 +17,8 @@ if (!defined('IN_SPYOGAME')) {
 
 
 if (!isset($num_of_galaxies) || !isset($num_of_systems)) { 
-	$num_of_galaxies = 9;
-	$num_of_systems = 499;
+	$num_of_galaxies = $server_config['num_of_systems'] ;
+	$num_of_systems = $server_config['num_of_galaxies'];
 }
 
 if(isset($pub_graph) && $pub_graph == "barre") {
@@ -85,7 +85,7 @@ if (function_exists('imagecreatetruecolor') !== FALSE) {
 			}
 		}
 //		$div_nb=2;
-		echo "<br /><img src='index.php?action=mod_flottes&graph=barre&repartition=".implode(":",$repartition)."&div_nb=".($div_nb<1?((-1)/$div_nb):$div_nb)."&galaxy_down=".$galaxy_down."' alt='pas de graphique disponible' />";
+		echo "<br /><img src='index.php?action=flottes&graph=barre&repartition=".implode(":",$repartition)."&div_nb=".($div_nb<1?((-1)/$div_nb):$div_nb)."&galaxy_down=".$galaxy_down."' alt='pas de graphique disponible' />";
 //	}
 //	echo "<br>debug2<br>".implode(":",$repartition)."<br>".$div_nb."<br>";
 } else {

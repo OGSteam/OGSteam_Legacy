@@ -20,20 +20,17 @@ define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 define("TABLE_GROUP", $table_prefix."group");
 
 // On recupere l'id du mod pour Xtense V2
-$result = $db->sql_query("SELECT id FROM ".TABLE_MOD." WHERE action='mod_flottes'");
-list($mod_id) = $db->sql_fetch_row($result);
+$query = "SELECT id, version FROM ".TABLE_MOD." WHERE action='flottes'";
+$resultid = $db->sql_query($query);
+list($mod_id, $version) = $db->sql_fetch_row($resultid);
 
-$query = "DROP TABLE ".TABLE_MOD_FLOTTES;
-$db->sql_query($query);
+$mod_uninstall_name = "flottes";
+$mod_uninstall_table = 	TABLE_MOD_FLOTTES.', '.TABLE_MOD_FLOTTES_ADM;
+uninstall_mod($mod_uninstall_name,$mod_uninstall_table);
 
-$query = "DROP  TABLE ".TABLE_MOD_FLOTTES_ADM;
-$db->sql_query($query);
-
+echo $mod_id;
 $request = "DELETE FROM ".TABLE_GROUP." WHERE group_name='mod_flottes'";
 $db->sql_query($request);
-
-// Suppression de la ligne, dans la table des mods.
-$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE root='flottes'");
 
 // Suppression de la liaison entre Xtense v2 et Flottes
 
@@ -48,6 +45,7 @@ if($result != 0){
     // S'il est dedans, on l'enleve
     if($db->sql_numrows($result) != 0)
         $db->sql_query("DELETE FROM ".TABLE_XTENSE_CALLBACKS." where mod_id = $mod_id");
+		echo("<script> alert('La compatibilité du mod Flottes avec le mod Xtense2 a été désinstallée !') </script>");
 }
 
 ?>

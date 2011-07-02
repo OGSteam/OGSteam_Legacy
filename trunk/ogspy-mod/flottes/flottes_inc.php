@@ -41,7 +41,7 @@ if($result = $db->sql_query($request)) {
 else {
 	$CF=$CFO=$CFU=$CFP=$CFA=$CB1=$CB2=$CB3=$CB4=$CB5='lime';
 	$GA='OGAME';
-	$PLA=9;
+	$PLA=$nb_planet;
 }	
 
 ?>
@@ -49,8 +49,10 @@ else {
 <script language="JavaScript">
 <?php
 global $user_building;
+$nb_planet = find_nb_planete_user();
+$nb_moon = find_nb_moon_user();
 $name = $coordinates = $fields = $temperature = $satellite = "";
-for ($i=1 ; $i<=18 ; $i++) {
+for ($i=1 ; $i<=$nb_planet+$nb_moon ; $i++) {
 	$name .= "'".$user_building[$i]["planet_name"]."', ";
 	$coordinates .= "'".$user_building[$i]["coordinates"]."', ";
 	$fields .= "'".$user_building[$i]["fields"]."', ";
@@ -93,11 +95,11 @@ function autofill(planet_id, planet_selected) {
 	var lign = 0;
 	var id = 0;
 	var lim = 40;
-	if(planet_id > 9) {
+	if(planet_id > $nb_planet) {
 		lim = 17;
 		planet_id -= 9;
 	}
-	for(i = 1; i <= 18; i++) {
+	for(i = start; i <= start+nb_planete-1; i++) {
 		for(lign = 1; lign <= lim; lign++) {
 			id = lign*10+i;
 			document.getElementById(id).style.color = 'lime';
@@ -278,7 +280,7 @@ while(list($users, $id) = $db->sql_fetch_row($result)) {
 	}
 }
 
-//Autorise la diffusion de mon flottes:
+//Autorise la diffusion de ma flotte:
 if(!isset($pub_add_ship) && isset($pub_permit) && !isset($pub_add) && !isset($pub_del) && $pub_permit=="change") {
 	if(isset($pub_active) && $pub_active) {
 		$request = "UPDATE ".TABLE_MOD_FLOTTES." SET activate='1' WHERE user_id=".$user_data['user_id'];

@@ -263,7 +263,7 @@ else
 // affichage
 $gameselect='OGAME';
 $phpfonc="ogame";
-$nplapage=9;
+$nplapage=11;
 $lib_page=array("Planètes ","Lunes ","","","","","","","");
 	
 // version antérieure à la 3.10
@@ -303,6 +303,7 @@ $LANG["ogame_LaserTechnology"] = "Technologie laser";
 $LANG["ogame_IonTechnology"] = "Technologie ions";
 $LANG["ogame_PlasmaTechnology"] = "Technologies plasma";
 $LANG["ogame_IntergalacticResearchNetwork"] = "Réseau de recherche intergalactique";
+$LANG["ogame_AstrophysiqueTechnology"] = "Technologie astrophysiques";
 $LANG["ogame_GravitonTechnology"] = "Technologie graviton";
 $LANG["ogame_RocketLauncher"] = "Lanceur de missiles";
 $LANG["ogame_LightLaser"] = "Artillerie laser légère";
@@ -429,6 +430,7 @@ $vaisseaux_lang[14]=array ("Satellite solaire","2500","1","1","0","0","0");
 	$ions_lang="Ions";
 	$plasma_lang="Plasma";
 	$rri_lang="RRI";
+	$astro_lang="Astrophysique";
 	$grav_lang="Graviton";
 	
 	// Valeur défense total

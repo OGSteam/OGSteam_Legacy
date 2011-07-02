@@ -30,7 +30,7 @@ $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
 
 if(!isset($pub_view) || $pub_view=="") $view = "0";
 else $view = $pub_view;
-$start = $view=="0" ? 1 : ($view*$nplapage)+1;
+
 ?>
 <table width="100%">
 <tr>
@@ -48,7 +48,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 		echo "<th colspan='".$nbcol1."'><a>".$lib_page[$i]."</a></th>";
 	} 
 	else {
-		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=mod_flottes&subaction2=empire&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
+		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=flottes&subaction2=empire&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
 	}
 }
 
@@ -57,6 +57,14 @@ echo "<td class='c' colspan='". $nbcol2."'>Vue d'ensemble de votre empire</td>";
 echo "</tr><tr>";
 echo "<th width='10%'><a>Nom</a></th>";
 
+for ($i=0 ; $i<=$affplanet[1] ; $i++) {
+	if ($view == $i) {
+		$start = $view=="0" ? 101 : ($view*$nplapage)+1;
+	} 
+	else {
+		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
+	}
+	
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") {
@@ -98,13 +106,24 @@ for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 ?>
 </tr>
 <tr>
-	<th><a>Température</a></th>
+	<th><a>Température Min.</a></th>
 <?php
-for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
-	$temperature = $user_building[$i]["temperature"];
-	if ($temperature == "") $temperature = "&nbsp;";
+for ($i=$start;  $i<=$start+$nplapage-1 ; $i++) {
+	$temperature_min = $user_building[$i]["temperature_min"];
+	if ($temperature_min == "") $temperature_min = "&nbsp;";
 
-	echo "\t"."<th>".$temperature."</th>"."\n";
+	echo "\t"."<th>".$temperature_min."</th>"."\n";
+}
+?>
+</tr>
+<tr>
+	<th><a>Température Max.</a></th>
+<?php
+for ($i=$start;  $i<=$start+$nplapage-1 ; $i++) {
+	$temperature_max = $user_building[$i]["temperature_max"];
+	if ($temperature_max == "") $temperature_max = "&nbsp;";
+
+	echo "\t"."<th>".$temperature_max."</th>"."\n";
 }
 $test_og=0;
 if ($view == "1" || $gameselect=="OGAME") $test_og=1;
@@ -117,7 +136,7 @@ if ($view == "1" || $gameselect=="OGAME") $test_og=1;
 
 for ($i=$start;  $i<=$start+$nplapage-1 ; $i++) {
 	$M = $user_building[$i][$m_lang];
-	if ($M != "") $production = production($m_lang, $M);
+	if ($M != "") $production = production("M", $M, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -127,7 +146,7 @@ echo '<th><a>'.$LANG["ogame_Crystal"].'</a></th>';
 
 for ($i=$start ;  $i<=$start+$nplapage-1; $i++) {
 	$C = $user_building[$i][$c_lang];
-	if ($C != "") $production = production($c_lang, $C);
+	if ($C != "") $production = production("C", $C, $user_data['off_geologue']);
 	else $production = "&nbsp";
 
 	echo "\t"."<th>".$production."</th>"."\n";
@@ -137,19 +156,20 @@ echo '<th><a>'.$LANG["ogame_Deuterium"].'</a></th>';
 
 for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 	$D = $user_building[$i][$d_lang];
-	$temperature = $user_building[$i]["temperature"];
+	$temperature = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i][$cef_lang];
 	$CEF_consumption = consumption($cef_lang, $CEF);
-	if ($D != "") $production = production($d_lang, $D, $temperature) - $CEF_consumption;
+	if ($D != "") $production = production("D", $D, $user_data['off_geologue'], $temperature_max) - $CEF_consumption;
 	else $production = "&nbsp";
 
-	echo "\t"."<th>".$production."</th>"."\n";
+	echo "\t"."<th>".floor($production)."</th>"."\n";
 }
 ?>
 </tr>
 <tr>
 	<th><a>Energie</a></th>
 <?php
+$product= array( "M" => 0, "C" => 0, "D" => 0,"ratio" => 1, "conso_E" => 0, "prod_E" => 0 );
 for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 	$CES = $user_building[$i][$ces_lang];
 	$CEF = $user_building[$i][$cef_lang];
@@ -160,7 +180,7 @@ for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 	$production_CES = $production_CEF = $production_Sat = 0;
 	$production_CES = production($ces_lang, $CES);
 	$production_CEF = production($cef_lang, $CEF);
-	$production_Sat = production_sat($temperature) * $Sat;
+	$production_Sat = production_sat($temperature_min, $temperature_max, $officier = 0);
 
 	$production = $production_CES + $production_CEF + $production_Sat;
 	if ($production == 0) $production = "&nbsp";
@@ -793,6 +813,31 @@ for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	echo "\t"."<th><font color='lime' id='6".($i)."'>".$RRI."</font></th>"."\n";
 }
 echo "</tr><tr>";
+echo '<th><a>'.$LANG["ogame_AstrophysiqueTechnology"].'</a></th>';
+
+for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
+	$Lab = $user_building[$i][$lab_lang];
+	$Astrophysique = "&nbsp;";
+
+	if ($user_building[$i][0] == true) {
+		$Astrophysique = $user_technology[$astro_lang] != "" ? $user_technology[$astro_lang] : "0";
+		$requirement = $technology_requirement[$astro_lang];
+
+		while ($value = current($requirement)) {
+			$key = key($requirement);
+			if ($key == 0) {
+				if ($Lab < $value) $Astrophysique = "-";
+			}
+			elseif ($user_technology[$key] < $value) {
+				$Astrophysique = "-";
+			}
+			next($requirement);
+		}
+	}
+
+	echo "\t"."<th><font color='lime' id='6".($i)."'>".$Astrophysique."</font></th>"."\n";
+}
+echo "</tr><tr>";
 echo '<th><a>'.$LANG["ogame_GravitonTechnology"].'</a></th>';
 
 for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
@@ -817,7 +862,7 @@ for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 
 	echo "\t"."<th><font color='lime' id='6".($i)."'>".$Graviton."</font></th>"."\n";
 }
-
+}
  // fin de si view="planets"
 ?>
 </tr>
