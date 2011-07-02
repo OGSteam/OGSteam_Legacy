@@ -47,7 +47,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 		echo "<th colspan='".$nbcol1."'><a>".$lib_page[$i]."</a></th>";
 	} 
 	else {
-		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=mod_flottes&subaction2=def&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
+		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=flottes&subaction2=def&view=".$i."&flottes_user_id=".$user_data['user_id']."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
 	}
 }
 
@@ -56,6 +56,15 @@ echo "<td class='c' colspan='". $nbcol2."'>Vue d'ensemble de votre défense</td>"
 echo "</tr><tr>";
 echo "<th width='10%'><a>Nom</a></th>";
 
+for ($i=0 ; $i<=$affplanet[1] ; $i++) {
+	if ($view == $i) {
+		$start = $view=="0" ? 101 : ($view*$nplapage)+1;
+	} 
+	else {
+		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
+	}
+	
+	
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") {
@@ -192,7 +201,7 @@ for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	echo "\t"."<th><font color='lime' id='6".($i)."'>".$MIP."</font></th>"."\n";
 }
 
-//} // fin de si view="planets"
+} // fin de si view="planets"
 ?>
 </tr>
 </table>

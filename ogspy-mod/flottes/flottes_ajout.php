@@ -16,7 +16,7 @@ if (!defined('IN_SPYOGAME')) {
 
 // insertion des fonctions flotte
 require_once("./mod/flottes/function_flottes.php");
-require_once("./mod/flottes/flottes_inc.php");
+//require_once("./mod/flottes/flottes_inc.php");
 require_once("./mod/flottes/flottes_lang.php");
 require_once("./includes/".$phpfonc.".php");
 
@@ -36,7 +36,7 @@ $start = $view=="0" ? 1 : ($view*$nplapage)+1;
 
 ?>
 <form action='index.php' method='POST' name='form'>
-<input type='hidden' name='action' value='mod_flottes' >
+<input type='hidden' name='action' value='flottes' >
 <input type='hidden' name='permit' value='change' >
 <table width="100%">
 	<tr><td colspan='15'>&nbsp;</td></tr>
@@ -54,7 +54,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 		echo "<th colspan='".$nbcol1."'><a>".$lib_page[$i]."</a></th>";
 	} 
 	else {
-		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=mod_flottes&subaction=insert&view=".$i."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
+		echo "<td class='c' align='center' colspan='".$affplanet[2]."' onClick=\"window.location = 'index.php?action=flottes&subaction=insert&view=".$i."';\"><a style='cursor:pointer'><font color='lime'>".$lib_page[$i]."</font></a></td>";
 	}
 }
 

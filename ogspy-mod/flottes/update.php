@@ -20,17 +20,18 @@ define("TABLE_GROUP", $table_prefix."group");
 define("TABLE_MOD_FLOTTES", $table_prefix."mod_flottes");
 define("FLOTTES_FOLDER","mod/flottes");
 
+    	
 // Verification version
 if (file_exists(FLOTTES_FOLDER.'/version.txt')) {
     list($mod_name,$version) = file(FLOTTES_FOLDER.'/version.txt'); 
-    $mod_name = trim($mod_name);
-    $vfinale = trim($version);
+   
+	
 }
 else {
     die('Le fichier "version.txt" est introuvable !');
 }
 
-$query = "SELECT `id`, `version` FROM ".TABLE_MOD." WHERE `action`='mod_flottes'";
+$query = "SELECT `id`, `version` FROM ".TABLE_MOD." WHERE `action`='flottes'";
 $result = $db->sql_query($query);
 
 		
@@ -40,15 +41,15 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
 		CASE "0.2" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.3'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
-		//echo "0.20";
-//		break;
+		// echo "0.20";
+		// break;
 		
 		CASE "0.21" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.3'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.3";
-		//echo "0.21";
-//		break;
+		// echo "0.21";
+		// break;
 		
 		CASE "0.3"  :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.6'  WHERE action='mod_flottes' AND version='".$version."'";
@@ -56,22 +57,22 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
 		$query="ALTER TABLE ".TABLE_MOD_FLOTTES." ADD `TRA` INT NOT NULL DEFAULT '0'";
 		$db->sql_query($query);
 		$version="0.6";
-		//echo "0.3";
-//		break;
+		// echo "0.3";
+		// break;
 		
 		CASE "0.4"  :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.6'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.6";
-		//echo "0.4";
-//		break;
+		// echo "0.4";
+		// break;
 		
 		CASE "0.5"  :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.6'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.6";
-		//echo "0.5";
-//		break;
+		// echo "0.5";
+		// break;
 		
 		CASE "0.6" :
 		$query ="ALTER TABLE ".TABLE_MOD_FLOTTES." ADD `SAT` INT NOT NULL DEFAULT '0'";
@@ -79,50 +80,50 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
 		$query = "UPDATE ".TABLE_MOD." SET version='0.7'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.7";
-		//echo "0.6";
-//		break;
+		// echo "0.6";
+		// break;
 		
 		CASE "0.7" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.7";
-//		break;
+		// echo "0.7";
+		// break;
 		
 		CASE "0.71" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.71";
-//		break;
+		// echo "0.71";
+		// break;
 		
 		CASE "0.72" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.72";
-//		break;
+		// echo "0.72";
+		// break;
 		
 		CASE "0.73" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.73";
-//		break;
+		// echo "0.73";
+		// break;
 		
 		CASE "0.74" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.74";
-//		break;
+		// echo "0.74";
+		// break;
 		
 		CASE "0.75" :
 		$query = "UPDATE ".TABLE_MOD." SET version='0.76'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version="0.76";
-		//echo "0.75";
-//		break;
+		// echo "0.75";
+		// break;
 		
 		CASE "0.76" :
 		$query = "ALTER TABLE  ".TABLE_MOD_FLOTTES_ADM." ADD `GAME` VARCHAR( 8 ) NOT NULL DEFAULT 'OGAME' ";
@@ -137,105 +138,106 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "0.76";
-//		break;
+		// echo "0.76";
+		// break;
 		
 		CASE "1.00" :
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "1.00";
-//		break;
+		// echo "1.00";
+		// break;
 		
 		CASE "1.01" :
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "1.01";
-//		break;
+		// echo "1.01";
+		// break;
 		
 		CASE "1.02" :
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "1.02";
-//		break;
+		// echo "1.02";
+		// break;
 		
 		CASE "1.03" :
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "1.03";
-//		break;
+		// echo "1.03";
+		// break;
 
 		CASE "1.04" :
 		$query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
 		$db->sql_query($query);
 		$version=$vfinale;
-		//echo "1.04";
+		// echo "1.04";
 		break;
 
         CASE "1.05" :
         $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
         $db->sql_query($query);
         $version=$vfinale;
-        //echo "1.05";
+        // echo "1.05";
         break;
         		
         CASE "1.06" :
         $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
         $db->sql_query($query);
         $version=$vfinale;
-        //echo "1.06";
+        // echo "1.06";
         break;
                 
         CASE "1.07" :
         $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
         $db->sql_query($query);
         $version=$vfinale;
-        //echo "1.07";
+        // echo "1.07";
         break;
                 
         CASE "1.08a" :
         $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
         $db->sql_query($query);
         $version=$vfinale;
-        //echo "1.08a";
+        // echo "1.08a";
         break;
                 
         CASE "1.08b" :
         $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
         $db->sql_query($query);
         $version=$vfinale;
-        //echo "1.08b";
+        // echo "1.08b";
         break;
-                		
-		default:
-		$query = "UPDATE ".TABLE_MOD." SET version='0.2'  WHERE action='mod_flottes' AND version<'0.2'";
-		$db->sql_query($query);
-
-/// Nouvelle table pour la gestion des couleurs
-		$query = "CREATE TABLE ".TABLE_MOD_FLOTTES_ADM." (".
-			" group_name varchar(20) not null default '',".
-			" color_fleet varchar(8) not null default '',".
-			" color_fleet_old varchar(8) not null default '',".
-			" color_fleet_user varchar(8) not null default '',".
-			" color_fleet_point varchar(8) not null default '',".
-			"color_fleet_alli varchar(8) not null default '',".
-			"color_bbc_1 varchar(8) not null default '',".
-			"color_bbc_2 varchar(8) not null default '',".
-			"color_bbc_3 varchar(8) not null default '',".
-			"color_bbc_4 varchar(8) not null default '',".
-			"color_bbc_5 varchar(8) not null default '',".
-			" primary key (group_name))";
-		$db->sql_query($query);
-
-		$request = "INSERT INTO ".TABLE_MOD_FLOTTES_ADM." (group_name,color_fleet,color_fleet_old,color_fleet_user, color_fleet_point, color_fleet_alli, ";
-		$request .="color_bbc_1, color_bbc_2, color_bbc_3, color_bbc_4, color_bbc_5)   VALUES ('mod_flottes', 'lime', 'yellow', 'red', 'lime', 'teal', ";
-		$request .="'yellow', 'red', 'green', 'cyan', 'orange')";
-		$db->sql_query($request);
 		
-		break;
+		default:
+		$mod_folder = "flottes";
+		$mod_name = "flottes";
+		update_mod($mod_folder, $mod_name);
+
+// / Nouvelle table pour la gestion des couleurs
+		// $query = "CREATE TABLE ".TABLE_MOD_FLOTTES_ADM." (".
+			// " group_name varchar(20) not null default '',".
+			// " color_fleet varchar(8) not null default '',".
+			// " color_fleet_old varchar(8) not null default '',".
+			// " color_fleet_user varchar(8) not null default '',".
+			// " color_fleet_point varchar(8) not null default '',".
+			// "color_fleet_alli varchar(8) not null default '',".
+			// "color_bbc_1 varchar(8) not null default '',".
+			// "color_bbc_2 varchar(8) not null default '',".
+			// "color_bbc_3 varchar(8) not null default '',".
+			// "color_bbc_4 varchar(8) not null default '',".
+			// "color_bbc_5 varchar(8) not null default '',".
+			// " primary key (group_name))";
+		// $db->sql_query($query);
+
+		// $request = "INSERT INTO ".TABLE_MOD_FLOTTES_ADM." (group_name,color_fleet,color_fleet_old,color_fleet_user, color_fleet_point, color_fleet_alli, ";
+		// $request .="color_bbc_1, color_bbc_2, color_bbc_3, color_bbc_4, color_bbc_5)   VALUES ('mod_flottes', 'lime', 'yellow', 'red', 'lime', 'teal', ";
+		// $request .="'yellow', 'red', 'green', 'cyan', 'orange')";
+		// $db->sql_query($request);
+		
+		// break;
 
 	}
 
@@ -256,6 +258,9 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
 // On regarde si la table xtense_callbacks existe
+$query = "SELECT id, version FROM ".TABLE_MOD." WHERE action='flottes'";
+$resultid = $db->sql_query($query);
+list($mod_id, $version) = $db->sql_fetch_row($resultid);
 $result = $db->sql_query('show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ');
 if($db->sql_numrows($result) != 0){
 
@@ -265,9 +270,10 @@ if($db->sql_numrows($result) != 0){
 	// s'il n'y est pas, on l'ajoute
 	if($db->sql_numrows($result) == 0)
 		$db->sql_query("INSERT INTO ".TABLE_XTENSE_CALLBACKS." (mod_id, function, type, active) VALUES ('$mod_id', 'flottes_import_fleet', 'fleet', 1)");
+	echo("<script> alert('La compatibilité du mod Flottes avec le mod Xtense2 \n est installée !') </script>");		
 }
 else {
-	echo("<script> alert('Le mod Xtense 2 n\'est pas installÃ©. \nLa compatibilitÃ© du mod Flottes ne sera donc pas installÃ©e !\nPensez Ã  installer Xtense 2 c'est pratique ;)') </script>");
+	echo("<script> alert('Le mod Xtense 2 n'est pas installé. La compatibilité du mod Flottes ne sera donc pas installé !\nPensez Ã  installer Xtense 2 c'est pratique ;)') </script>");
 }
 ?>
 

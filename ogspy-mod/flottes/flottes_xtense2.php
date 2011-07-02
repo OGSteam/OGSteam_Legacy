@@ -65,7 +65,7 @@ if($r_callback1 != 0){
         // desactiver xtense2
         echo '<table class="xtense2_f">';
         echo '<tr height="30px" valign="middle">';
-        echo '<td class="xtense2_f" onclick="window.location = \'index.php?action=mod_flottes&subaction=xtense2&act=desactive\';">';
+        echo '<td class="xtense2_f" onclick="window.location = \'index.php?action=flottes&subaction=xtense2&act=desactive\';">';
         echo 'DESACTIVER Xtense2';
         echo '</td></tr></table>';
     }
@@ -79,7 +79,7 @@ if($r_callback1 != 0){
         // activer xtense2
         echo '<table class="xtense2_f">';
         echo '<tr height="30px" valign="middle">';
-        echo '<td class="xtense2_f" onclick="window.location = \'index.php?action=mod_flottes&subaction=xtense2&act=active\';">';
+        echo '<td class="xtense2_f" onclick="window.location = \'index.php?action=flottes&subaction=xtense2&act=active\';">';
         echo 'ACTIVER Xtense2';
         echo '</td></tr></table>';
     }

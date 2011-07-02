@@ -11,7 +11,7 @@
 //secu
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("./views/page_header.php");
-$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='mod_flottes' AND `active`='1' LIMIT 1";
+$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='flottes' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 // fin de secu
 
