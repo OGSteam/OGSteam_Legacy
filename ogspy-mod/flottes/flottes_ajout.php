@@ -24,6 +24,9 @@ global $CF,$CFO,$CFU,$CFP,$CFA,$CB1,$CB2,$CB3,$CB4,$CB5,$GA,$PLA;
 
 buttons_bar($pub_subaction);
 
+$user_flottes = user_get_empire();
+$user_building = $user_flottes["building"];
+
 $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
 //echo $affplanet[0]." - ".$affplanet[1]." - ".$affplanet[2]." - ".$affplanet[3];
 
@@ -32,7 +35,6 @@ $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
 
 if(!isset($pub_view) || $pub_view=="") $view = "0";
 else $view = $pub_view;
-$start = $view=="0" ? 1 : ($view*$nplapage)+1;
 
 ?>
 <form action='index.php' method='POST' name='form'>
@@ -81,14 +83,18 @@ echo $liste_planet;
 <tr>
 	<th width="6%"><a>Nom</a></th>
 <?php
-for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
-	$name = $user_building[$i]["planet_name"];
-	if ($name == "") {
-		 $name=$name=$lib_page[$view].$i;
+for ($i=0 ; $i<=$affplanet[1] ; $i++) {
+	if ($view == $i) {
+		$start = $view=="0" ? 101 : ($view*$nplapage)+1;
+	} 
+	else {
+		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
 	}
 
-	echo "\t"."<th><label for='".$i."'>".$name."</label></th>"."\n";
-}
+for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
+	$name = $user_building[$i]["planet_name"];
+	echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
+}}
 ?>
 </tr>
 <tr>
