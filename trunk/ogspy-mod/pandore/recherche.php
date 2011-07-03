@@ -23,7 +23,7 @@ if (isset($pub_pandoresearch)) $search = sql_filter($pub_pandoresearch);
 
 $points_flotte = array("PT"=>4, "GT"=>12, "CLE"=>4, "CLO"=>10, "CR"=>29, "VB"=>60, "VC"=>40, "REC"=>18, "SE"=>1, "BMD"=>90, "SAT"=>2.5, "DST"=>125, "EDLM"=>10000, "TRA"=>85);
 $flotte = array("PT"=>0, "GT"=>0, "CLE"=>0, "CLO"=>0, "CR"=>0, "VB"=>0, "VC"=>0, "REC"=>0, "SE"=>0, "BMD"=>0, "SAT"=>0, "DST"=>0, "EDLM"=>0, "TRA"=>0);
-$points_building = array("M"=>75, "C"=>72, "D"=>300, "CES"=>105, "CEF"=>1440, "UdR"=>720, "UdN"=>1600000, "CSp"=>700, "HM"=>2000, "HC"=>3000, "HD"=>4000, "Lab"=>800, "Ter"=>150000, "Silo"=>41000, "BaLu"=>80000, "Pha"=>80000, "PoSa"=>8000000, "DdR"=>60000);
+$points_building = array("M"=>75, "C"=>72, "D"=>300, "CES"=>105, "CEF"=>1440, "UdR"=>720, "UdN"=>1600000, "CSp"=>700, "HM"=>1000, "HC"=>1500, "HD"=>2000, "Lab"=>800, "Ter"=>150000, "Silo"=>41000, "BaLu"=>80000, "Pha"=>80000, "PoSa"=>8000000, "DdR"=>60000);
 $puissance_building = array("M"=>1.5, "C"=>1.6, "D"=>1.5, "CES"=>1.5, "CEF"=>1.8, "UdR"=>2, "UdN"=>2, "CSp"=>2, "HM"=>2, "HC"=>2, "HD"=>2, "Lab"=>2, "Ter"=>2, "Silo"=>2, "BaLu"=>2, "Pha"=>2, "PoSa"=>2, "DdR"=>2);
 $points_defence = array("LM"=>2, "LLE"=>2, "LLO"=>8, "CG"=>37, "AI"=>8, "LP"=>130, "PB"=>20, "GB"=>100, "MIC"=>10, "MIP"=>25);
 $points_technology = array("Esp"=>1.4, "Ordi"=>1, "Armes"=>1, "Bouclier"=>.8, "Protection"=>1, "NRJ"=>1.2, "Hyp"=>6, "RC"=>1, "RI"=>6.6, "PH"=>36, "Laser"=>.3, "Ions"=>1.4, "Plasma"=>7, "RRI"=>800, "Astrophysique"=>16, "Graviton"=>0);
@@ -517,8 +517,8 @@ if ($search && $error == 0) {
 		for ($i = 0; $i < count($coordonnees); $i++) {
 			$k = Array(0,0);
 			for ($j = 0; isset($rapports) && $j < count($rapports); $j++) {
-				if (isset($rapports[$j]) && $rapports[$j]["coordinates"] == $coordonnees[$i][0]) $k[0] = 1;
-				if (isset($rapports[$j + count($coordonnees)]) && $rapports[$j + count($coordonnees)]["coordinates"] == $coordonnees[$i][0]) $k[1] = 1;
+				if (isset($rapports[$j]) && $rapports[$j]["coordinates"] == $coordonnees[$i][0] && substr($rapports[$j]["planet_name"], 0, 10) == substr($coordonnees[$i][1], 0, 10)) $k[0] = 1;
+				if (isset($rapports[$j + count($coordonnees)]) && $rapports[$j + count($coordonnees)]["coordinates"] == $coordonnees[$i][0] && substr($rapports[$j + count($coordonnees)]["planet_name"], 0, 10) == substr($coordonnees[$i][3], 0, 10)) $k[1] = 1;
 			}
 			if ($k[0] == 0) echo "[".$coordonnees[$i][0]."] ";
 			if ($k[1] == 0 && $coordonnees[$i][3]) echo "[".$coordonnees[$i][0]."&nbsp;".$lang['pandore_moon']."] ";
