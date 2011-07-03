@@ -26,7 +26,7 @@ $user_defence = $user_empire["defence"];
 $user_technology = $user_empire["technology"];
 
 $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
-//echo $affplanet[0]." - ".$affplanet[1]." - ".$affplanet[2]." - ".$affplanet[3];
+//var_dump($affplanet);
 
 if(!isset($pub_view) || $pub_view=="") $view = "0";
 else $view = $pub_view;
@@ -67,11 +67,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 	
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
-	if ($name == "") {
-		 $name=$name=$lib_page[$view].$i;
-	}
-
-	echo "\t"."<th><label for='".$i."'>".$name."</label></th>"."\n";
+	echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
 }
 ?>
 </tr>
@@ -159,10 +155,10 @@ for ($i=$start ;  $i<=$start+$nplapage-1 ; $i++) {
 	$temperature = $user_building[$i]["temperature_max"];
 	$CEF = $user_building[$i][$cef_lang];
 	$CEF_consumption = consumption($cef_lang, $CEF);
-	if ($D != "") $production = production("D", $D, $user_data['off_geologue'], $temperature_max) - $CEF_consumption;
+	if ($D != "") $production = floor(production("D", $D, $user_data['off_geologue'], $temperature_max) - $CEF_consumption);
 	else $production = "&nbsp";
 
-	echo "\t"."<th>".floor($production)."</th>"."\n";
+	echo "\t"."<th>".$production."</th>"."\n";
 }
 ?>
 </tr>
