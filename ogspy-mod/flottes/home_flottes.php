@@ -1,10 +1,10 @@
 <?php
 /***************************************************************************
 *	filename	: home_flottes.php
-*	desc.		: 1.03
+*	desc.		: 1.0.0
 *	Author		: 
 *	created		: 
-*	modified	: 
+*	modified	: 03/07/2011
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) {
@@ -25,7 +25,7 @@ $user_defence = $user_flottes["defence"];
 $user_technology = $user_flottes["technology"];
 
 $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
-//echo $affplanet[0]." - ".$affplanet[1]." - ".$affplanet[2]." - ".$affplanet[3];
+//var_dump($affplanet);
 
 if(!isset($pub_view) || $pub_view=="") $view = "0";
 else $view = $pub_view;
