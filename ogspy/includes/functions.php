@@ -130,7 +130,7 @@ function uncompress_ipv6($ipv6)
         $s = 8 - sizeof($e) + 1;
         foreach ($e as $key => $val) {
             if ($val == "") {
-                for ($i == 0; $i <= $s; $i++)
+                for ($i = 0; $i <= $s; $i++)
                     $newip[] = '0000';
             } else
                 $newip[] = padleft($val, '0', 4);
