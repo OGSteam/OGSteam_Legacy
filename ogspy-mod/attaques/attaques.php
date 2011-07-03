@@ -29,97 +29,6 @@ $yesterday = $date-1;
 if($septjours < 1) $septjours = 1;
 if($yesterday < 1) $yesterday = 1;
 
-//Fonction d'ajout d'un rapport de combat
-if (isset($pub_rapport))
-{
-	$pub_rapport = mysql_real_escape_string($pub_rapport);
-
-  $pub_rapport = str_replace(".","",$pub_rapport);  
-	//Compatibilité UNIX/Windows
-	$pub_rapport = str_replace("\r\n","\n",$pub_rapport);
-	//Compatibilité IE/Firefox
-	$pub_rapport = str_replace("\t",' ',$pub_rapport);
-	
-	//On regarde si le rapport soumis est un RC
-	//"Les flottes suivantes s'affrontent (07.06.2011 11:04:13):";
-	//L`attaquant a gagné la bataille ! Il emporte 392.880 unités de métal, 154.464 unités de cristal et 96.856 unités de deutérium.
-	if (!preg_match('#Les flottes suivantes s\'affrontent \((\d{2}).(\d{2}).(\d{4}) (\d{2})\:(\d{2})\:(\d{2})\)#',$pub_rapport,$date))
-	{
-		$nonvalid = "Le texte inséré n'est pas un RC valide. Enregistrement de l'attaque non effectué !!!";
-	} 
-	else
-	{
-		preg_match('#(\d*) unités de métal, (\d*) unités de cristal et (\d*) unités de deutérium#',$pub_rapport,$ressources);
-    preg_match('#attaquant\sa\sperdu\sau\stotal\s(\d*)\sunités#',$pub_rapport,$pertesA);
-    $pertes = $pertesA[1];
-
-		$timestamp = mktime($date[3],$date[4],$date[5],$date[1],$date[2],date('Y'));
-		
-		//Puis les informations pour les coordonnées
-		preg_match('#Défenseur\s.+\[(.+)]#',$pub_rapport,$pre_coord);
-		$coord_attaque = $pre_coord[1];
-		
-    //On vérifie que vous êtes bien l'attaquant
-		preg_match('#Attaquant\s.{3,70}\[(.{5,8})]#',$pub_rapport,$pre_coord);
-		$coord_attaquant = $pre_coord[1];
-		//On regarde dans les coordonnées de l'espace personnel du joueur qui insère les données via le plugin si les coordonnées de l'attaquant correspondent à une de ses planètes
-    $query = "SELECT coordinates FROM ".TABLE_USER_BUILDING." WHERE user_id='$user_data[user_id]'";
-    $result = $db->sql_query($query);
-    $attaquant = 0;
-    $defenseur = 0;
-   	while(list($coordinates) = $db->sql_fetch_row($result))
-	{
-		if($coordinates == $coord_attaquant) $attaquant = 1;
-		if($coordinates == $coord_attaque) $defenseur = 1;
-	}
-	if ($attaquant != 1 && $config[defenseur] != 1) {
-  $nonvalid = "Vous n'êtes pas l'attanquant. Enregistrement de l'attaque non effectué !!!";
-    } 
-    else 
-    {
-    if ($defenseur == 1 && $config[defenseur] == 1)
-      {
-      // récupération des pertes défenseurs
-      preg_match('#défenseur\sa\sperdu\sau\stotal\s(\d*)\sunités#',$rapport,$pertesD);
-      $pertes = $pertesD[1];
-      //les coordonnées de l'attaque deviennent celle de l'attaquant
-      $coord_attaque = $coord_attaquant;
-      //on soustrait les ressources volées
-      $ressources[1] = -$ressources[1];
-      $ressources[2] = -$ressources[2];
-      $ressources[3] = -$ressources[3];
-      }
-      
-		//On vérifie que cette attaque n'a pas déja été enregistrée
-		$query = "SELECT attack_id FROM ".TABLE_ATTAQUES_ATTAQUES." WHERE attack_user_id='$user_data[user_id]' AND attack_date='$timestamp' AND attack_coord='$coord_attaque' ";
-		$result = $db->sql_query($query);
-		$nb = mysql_num_rows($result);
-		
-		if ($nb == 0)
-		{
-			//On insere ces données dans la base de données
-			$query = "INSERT INTO ".TABLE_ATTAQUES_ATTAQUES." ( `attack_id` , `attack_user_id` , `attack_coord` , `attack_date` , `attack_metal` , `attack_cristal` , `attack_deut` , `attack_pertes` )
-				VALUES (
-					NULL , '$user_data[user_id]', '$coord_attaque', '$timestamp', '$ressources[1]', '$ressources[2]', '$ressources[3]', '$pertes')";
-			$db->sql_query($query);
-			
-			//On met le message de validation
-			$valid="Enregistrement de l'attaque effectué.";
-			
-			//On ajoute l'action dans le log
-			$line = $user_data['user_name']." ajoute une attaque dans le module de gestion des attaques";
-			$fichier = "log_".date("ymd").'.log';
-			$line = "/*".date("d/m/Y H:i:s").'*/ '.$line;
-			write_file(PATH_LOG_TODAY.$fichier, "a", $line);
-		}
-		else
-		{
-			//On met le message de non validation
-			$nonvalid="Vous avez déja enregistrée cette attaques.";
-		}
-	 }
-  }
-}
 
 //On verifie si il y a des attaques qui ne sont pas du mois actuel
 $query = "SELECT MONTH(FROM_UNIXTIME(attack_date)) AS month, YEAR(FROM_UNIXTIME(attack_date)) AS year, SUM(attack_metal) AS metal, SUM(attack_cristal) AS cristal, SUM(attack_deut) AS deut, SUM(attack_pertes) as pertes FROM ".TABLE_ATTAQUES_ATTAQUES." WHERE attack_user_id=".$user_data['user_id']." AND MONTH(FROM_UNIXTIME(attack_date)) <> $mois GROUP BY month"; 
@@ -181,7 +90,7 @@ $bbcolor=unserialize($bbcolor[0]);
 			$bbcode .="Les pertes s'&eacute;lèvent à [color=".$bbcolor[perte]."]".$attack_pertes."[/color].\n\n";
 		}
 		
-		$bbcode .="[url=http://www.ogsteam.fr/forums/sujet-1358-mod-gestion-attaques]G&eacute;n&eacute;r&eacute; par le module de gestion des attaques[/url]";
+		$bbcode .="[url=http://board.ogsteam.fr/forums/sujet-1358-mod-gestion-attaques]G&eacute;n&eacute;r&eacute; par le module de gestion des attaques[/url]";
 		
 		echo"<br><br>";
 		echo"<fieldset><legend><b><font color='#0080FF'>Liste de vos attaques du 01/".$month."/".$year." au 31/".$month."/".$year."</font></legend>";
@@ -270,52 +179,6 @@ $resultgains = $db->sql_query($query);
 $pub_date_from = strftime("%d %b %Y", $pub_date_from);
 $pub_date_to = strftime("%d %b %Y", $pub_date_to);
 
-//Création du field pour Ajouter une nouvelles attaque
-//echo"<fieldset><legend><b><font color='#0080FF'>Ajouter une nouvelle attaque ";
-//echo help("ajouter_attaque");
-// echo"</font></b></legend>
-//	<table width='60%' align='center'>
-//	<tr>
-//	<td align='center'><font color='FFFFFF'><big><big>Pour ajouter une nouvelle attaque, copiez un rapport de combat, puis collez le ci-dessous :
-//	</big></big></font></td>
-//	</tr>
-//	<tr>
-//	<td><p><form action='index.php?action=attaques&page=attaques' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' cols='25'></textarea></p></td>
-//	</tr>
-//	<tr>
-//	<td align='center'><p><input type='submit' value='Ajouter'></form></td>
-	//</tr>";
-	
-	
-	//TEMPORAIRE TEMPS QUE LE PARSING N'AURA PAS ETE REFAIS
-echo"</font></b></legend>
-	<table width='60%' align='center'>
-	 <tr>
-	 <td align='center'><font color='FFFFFF'><big><big>Actuellement vous ne pouvez importez les RC qu'avec Xtense
-	 </big></big></font></td>
-	 </tr>
-	 <tr>
-	 <td><p><form action='index.php?action=attaques&page=attaques' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' cols='25'></textarea></p></td>
-	 </tr>
-	 <tr>
-	 <td align='center'><p><input type='submit' value='Ajouter'></form></td>
-	 </tr>";
-
-//Insertion du message de validation si défini
-if (isset($valid))
-{
-	echo"<tr><td align='center'><blink><font color='00FF40'>";
-	echo $valid;
-	echo"</font></blink>";
-	echo"</td></tr>";
-}
-//Insertion du message de non validation si défini
-if (isset($nonvalid))
-{
-	echo"<tr><td align='center'><blink><font color='FF0000'>".$nonvalid."</td></tr>";
-	echo"</font></blink>";
-}
-echo"</table></fieldset><br><br>";
 
 //Création du field pour choisir l'affichage (attaque du jour, de la semaine ou du mois
 echo"<fieldset><legend><b><font color='#0080FF'>Date d'affichage des attaques ";

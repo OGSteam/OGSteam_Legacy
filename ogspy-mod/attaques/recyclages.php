@@ -30,81 +30,7 @@ $yesterday = $date-1;
 if($septjours < 1) $septjours = 1;
 if($yesterday < 1) $yesterday = 1;
 
-//Fonction d'ajout d'un rapport de recyclage
-if (isset($pub_rapport))
-{
-	$pub_rapport = mysql_real_escape_string($pub_rapport);
-//	$pub_rapport = str_replace('.','',$pub_rapport);  // suppression des points, MAJ ogame 0.76 http://www.ogsteam.fr/forums/viewtopic.php?pid=27408#p27408
-	
-	//On regarde si le rapport soumis est valide
-	if(stristr($pub_rapport, 'recycleurs ont une capacité totale de') === FALSE)
-	{
-		echo"<blink><font color='#FF0000'><big>Le rapport que vous avez soumis n'est pas un rapport de recyclage valide !!!</big></font></blink><br><br>";
-	}
-	else
-	{
-		//On récupère les données pour les coordonnées
-		$pre_coord = explode("[", $pub_rapport);
-		$pre_coord2 = explode("]", $pre_coord[1]);
-		if (strlen($pre_coord2[1])==0)
-		  {
-      $recy_coord = "1:1:1";
-      }else{
-      $recy_coord = $pre_coord2[0];
-      }
-		
-		//On récupère les données pour le métal
-		$pre_recy = strstr($pub_rapport,'collecté');
-		$pre_recy = str_replace('.','',$pre_recy);
-		$pre_recy_metal = explode(" ",$pre_recy);
-		$recy_metal = floatval($pre_recy_metal[1]);
-		
-		//On récupère les données pour le cristal
-		$pre_recy_cristal = strstr($pre_recy,'et');
-		$pre_recy_cristal2 = explode(" ",$pre_recy_cristal);
-		$recy_cristal = floatval($pre_recy_cristal2[1]);
-		
-		//On récupère les données pour la date
-		preg_match('#(\d*)\.(\d*)\.(\d*)\s(\d*):(\d*):(\d*)#',$pub_rapport,$date);
-			
-		if( ($recy_coord == 0) || !$date)
-		{
-			//On met le message de validation
-			echo"<blink><font color='#FF0000'><big>Votre rapport de recyclage n'est pas complet !!!</big></font></blink><br>heures = ".($date[4])."<br>minutes = ".($date[5])."<br>secondes = ".($date[6])."<br>mois = ".($date[2])."<br>jour = ".($date[1])."<br>jour = ".($date[3])."<br>";
-		}
-		else {
-			$timestamp = mktime($date[4],$date[5],$date[6],$date[2],$date[1],$date[3]);
-			//On vérifie que ce recyclage n'a pas déja été enregistrée
-			$query = "SELECT recy_id FROM ".TABLE_ATTAQUES_RECYCLAGES." WHERE recy_user_id=".$user_data['user_id']." AND recy_date=".$timestamp." AND recy_cristal=".$recy_cristal." AND recy_metal=".$recy_metal." AND recy_coord='$recy_coord' ";
-			$result = $db->sql_query($query);
-			$nb = mysql_num_rows($result);
-			
-			if ($nb == 0)
-			{
-				//On insere ces données dans la base de données
-				$query = "INSERT INTO ".TABLE_ATTAQUES_RECYCLAGES." ( `recy_id` , `recy_user_id` , `recy_coord` , `recy_date` , `recy_metal` , `recy_cristal` )
-					VALUES (
-						NULL , '$user_data[user_id]', '$recy_coord', '$timestamp', '$recy_metal', '$recy_cristal'
-					)";
-				$db->sql_query($query);
-				
-				//On met le message de validation
-				$valid="Enregistrement du recyclage effectué.";
-				
-				//On ajoute l'action dans le log
-				$line = $user_data['user_name']." ajoute un recyclage dans le module de gestion des attaques";
-				$fichier = "log_".date("ymd").'.log';
-				$line = "/*".date("d/m/Y H:i:s").'*/ '.$line;
-				write_file(PATH_LOG_TODAY.$fichier, "a", $line);
-			}
-			else
-			{
-			//On met le message de non validation
-			$nonvalid="Vous avez déja enregistrée ce recyclage.";
-			}
-		}	
-	}
-}
+
 //Fonction de suppression d'un rapport d'attaque
 if (isset($pub_recy_id))
 {
@@ -163,38 +89,6 @@ $resultgains = $db->sql_query($query);
 //On récupère la date au bon format
 $pub_date_from = strftime("%d %b %Y", $pub_date_from);
 $pub_date_to = strftime("%d %b %Y", $pub_date_to);
-
-//Création du field pour Ajouter un nouveau recyclage
-echo"<fieldset><legend><b><font color='#0080FF'>Ajouter un nouveau recyclage ";
-echo help("ajouter_recy");
-echo"</font></b></legend>
-	<table width='60%' align='center'>
-	<tr>
-	<td align='center'><font color='FFFFFF'><big><big>Pour ajouter un nouveau recyclage, copiez le rapport de recyclage, puis collez le dessous :
-	</big></big></font></td>
-	</tr>
-	<tr>
-	<td><p><form action='index.php?action=attaques&page=recyclages' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' id='rapport' cols='25' onFocus='clear_box()'>ATTENTION :\n\n Vous devez copier l'intégralités du rapport de recyclage, y compris la date et l'heure du recyclage.</textarea></p></td>
-	</tr>
-	<tr>
-	<td align='center'><p><input type='submit' value='Ajouter'></form></td>
-	</tr>";
-
-//Insertion du message de validation si défini
-if (isset($valid))
-{
-	echo"<tr><td align='center'><blink><font color='00FF40'>";
-	echo $valid;
-	echo"</font></blink>";
-	echo"</td></tr>";
-}
-//Insertion du message de non validation si défini
-if (isset($nonvalid))
-{
-	echo"<tr><td align='center'><blink><font color='FF0000'>".$nonvalid."</td></tr>";
-	echo"</font></blink>";
-}
-echo"</table></fieldset><br><br>";
 
 //Création du field pour choisir l'affichage (attaque du jour, de la semaine ou du mois
 echo"<fieldset><legend><b><font color='#0080FF'>Date d'affichage des recyclages ";
