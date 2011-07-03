@@ -41,13 +41,15 @@ if (isset($pub_rapport))
 	$pub_rapport = str_replace("\t",' ',$pub_rapport);
 	
 	//On regarde si le rapport soumis est un RC
-	if (!preg_match('#Les\sflottes\ssuivantes\sse\ssont\saffrontées\sle\s(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})#',$pub_rapport,$date))
+	//"Les flottes suivantes s'affrontent (07.06.2011 11:04:13):";
+	//L`attaquant a gagné la bataille ! Il emporte 392.880 unités de métal, 154.464 unités de cristal et 96.856 unités de deutérium.
+	if (!preg_match('#Les flottes suivantes s\'affrontent \((\d{2}).(\d{2}).(\d{4}) (\d{2})\:(\d{2})\:(\d{2})\)#',$pub_rapport,$date))
 	{
 		$nonvalid = "Le texte inséré n'est pas un RC valide. Enregistrement de l'attaque non effectué !!!";
 	} 
 	else
 	{
-		preg_match('#(\d*)\sunités\sde\smétal,\s(\d*)\sunités\sde\scristal\set\s(\d*)\sunités\sde\sdeutérium#',$pub_rapport,$ressources);
+		preg_match('#(\d*) unités de métal, (\d*) unités de cristal et (\d*) unités de deutérium#',$pub_rapport,$ressources);
     preg_match('#attaquant\sa\sperdu\sau\stotal\s(\d*)\sunités#',$pub_rapport,$pertesA);
     $pertes = $pertesA[1];
 
@@ -269,20 +271,35 @@ $pub_date_from = strftime("%d %b %Y", $pub_date_from);
 $pub_date_to = strftime("%d %b %Y", $pub_date_to);
 
 //Création du field pour Ajouter une nouvelles attaque
-echo"<fieldset><legend><b><font color='#0080FF'>Ajouter une nouvelle attaque ";
-echo help("ajouter_attaque");
+//echo"<fieldset><legend><b><font color='#0080FF'>Ajouter une nouvelle attaque ";
+//echo help("ajouter_attaque");
+// echo"</font></b></legend>
+//	<table width='60%' align='center'>
+//	<tr>
+//	<td align='center'><font color='FFFFFF'><big><big>Pour ajouter une nouvelle attaque, copiez un rapport de combat, puis collez le ci-dessous :
+//	</big></big></font></td>
+//	</tr>
+//	<tr>
+//	<td><p><form action='index.php?action=attaques&page=attaques' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' cols='25'></textarea></p></td>
+//	</tr>
+//	<tr>
+//	<td align='center'><p><input type='submit' value='Ajouter'></form></td>
+	//</tr>";
+	
+	
+	//TEMPORAIRE TEMPS QUE LE PARSING N'AURA PAS ETE REFAIS
 echo"</font></b></legend>
 	<table width='60%' align='center'>
-	<tr>
-	<td align='center'><font color='FFFFFF'><big><big>Pour ajouter une nouvelle attaque, copiez un rapport de combat, puis collez le ci-dessous :
-	</big></big></font></td>
-	</tr>
-	<tr>
-	<td><p><form action='index.php?action=attaques&page=attaques' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' cols='25'></textarea></p></td>
-	</tr>
-	<tr>
-	<td align='center'><p><input type='submit' value='Ajouter'></form></td>
-	</tr>";
+	 <tr>
+	 <td align='center'><font color='FFFFFF'><big><big>Actuellement vous ne pouvez importez les RC qu'avec Xtense
+	 </big></big></font></td>
+	 </tr>
+	 <tr>
+	 <td><p><form action='index.php?action=attaques&page=attaques' method='post'><input type='hidden' name='date_from' value='$pub_date_from'><input type='hidden' name='date_to' value='$pub_date_to'><textarea rows='6' name='rapport' cols='25'></textarea></p></td>
+	 </tr>
+	 <tr>
+	 <td align='center'><p><input type='submit' value='Ajouter'></form></td>
+	 </tr>";
 
 //Insertion du message de validation si défini
 if (isset($valid))
