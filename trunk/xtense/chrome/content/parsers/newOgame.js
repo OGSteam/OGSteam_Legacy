@@ -924,6 +924,7 @@ var XnewOgame = {
 			}
 
 			//Vaisseaux/Défenses/Joueur/Coordonnées/Technos
+			var rc_temp = eval(Xprefs.getChar('rc-temp')); //Coordonnées de destination
 		   	for(var table=0;table<infos.snapshotLength;table++){
 				var dat = {};
 				var val = {};
@@ -960,7 +961,7 @@ var XnewOgame = {
 				}
 
 				//Nom joueur et coordonnées
-				var dest=0;
+				var dest = 0;
 				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non détruit
 				if (player.length==0) { //Dans ce cas, joueur détruit
 					player = Xpath.getStringValue(this.doc,paths.infos.destroyed,info).trim();
@@ -988,14 +989,12 @@ var XnewOgame = {
 						if (!dest)
 							var coords = m[2];
 						else {
-							//Défenseur où à lieu le raid est détruit au 1er tour (si et seulement si il s'agit du défenseur où à lieu le raid)
-							var temp = eval(Xprefs.getChar('rc-temp'));
-							if (temp != "")
-								var coords = temp.coords;
+							if (rc_temp != "")
+								var coords = rc_temp.coords; //Si défenseur où à lieu le raid est détruit au 1er tour
 							else
-								var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; // Défenseur détruit et rounds>1
-							Xprefs.setChar('rc-temp', '');
+								var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; // Si ce n'est pas le 1er round
 						}
+						rc_temp = "";
 					} else {
 						var player = "";
 						var coords = "";
