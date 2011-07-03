@@ -355,5 +355,12 @@ if ($version == "0.8d")
 	
 	$version = "0.8.11";
   }
+  if ($version = "0.8.11")
+  {
+  // Puis on change le numéro de version
+  $mod_folder = "attaques";
+  $mod_name = "attaques";
+  update_mod($mod_folder,$mod_name);
+  }
   
 ?>

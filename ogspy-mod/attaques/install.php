@@ -17,6 +17,9 @@ define("TABLE_ATTAQUES_ATTAQUES", $table_prefix."attaques_attaques");
 define("TABLE_ATTAQUES_RECYCLAGES", $table_prefix."attaques_recyclages");
 define("TABLE_ATTAQUES_ARCHIVES", $table_prefix."attaques_archives");
 
+$mod_folder = "attaques";
+install_mod($mod_folder);
+
 //Si la table attaques_attaques existe, on la supprime
 $query="DROP TABLE IF EXISTS ".TABLE_ATTAQUES_ATTAQUES."";
 $db->sql_query($query);
@@ -71,9 +74,6 @@ $query = "CREATE TABLE ".TABLE_ATTAQUES_ARCHIVES." ("
 	. " )";
 $db->sql_query($query);
 
-//on insère les données du mod, dans la table mod.
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('', 'Gestion des attaques', 'Gestion des<br>attaques', 'attaques', 'attaques', 'index.php', '0.8.11', '1')";
-$db->sql_query($query);
 
 //On vérifie que la table ogspy_mod_config
 if( ! mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."mod_config"."'")))
