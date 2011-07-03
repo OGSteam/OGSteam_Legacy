@@ -339,9 +339,15 @@ function compte_planet($iduser,$nbpla,$game){
 	
 	if (!isset($nbpla) || $nbpla==0) $nbpla=$nb_planet;
 
-	$request = "SELECT MAX(planet_id) as nbpla FROM ".TABLE_USER_BUILDING." WHERE user_id=".$iduser." ";
-	$result = $db->sql_query($request);
-	list($nbplanet) = $db->sql_fetch_row($result);
+	$request = "select planet_id ";
+    $request .= " from " . TABLE_USER_BUILDING;
+    $request .= " where user_id = " . $iduser;
+    $request .= " and planet_id < 299 ";
+    $request .= " order by planet_id";
+
+    $result = $db->sql_query($request);
+
+    $nbplanet = $db->sql_numrows($result);
 
 	if ($nbplanet<$nbpla) { 
 		 $page=0;
