@@ -9,13 +9,16 @@
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+
 $error = 0;
 $error2 = Array(0,0,0);
 require_once("includes/ogame.php");
 
+global $server_config;
+
 // Fonction de filtrage des caracteres 'sensibles' pour les requetes mysql
 function sql_filter($in) {
-	return mysql_real_escape_string(str_replace(array(';','(',')',chr(39),'"','`','|'),'',$in));
+	return mysql_real_escape_string(str_replace(array(';', '(', ')', chr(39), '"', '`', '|'), '', $in));
 }
 $search = FALSE; $target = 'player';
 if (isset($pub_target)) $target = sql_filter($pub_target);
@@ -61,16 +64,18 @@ if ($search && ($error == 0 || $error == 4)) {
 	$res = mysql_query("SELECT galaxy, system, row, name, moon FROM ".TABLE_UNIVERSE." WHERE player = '".$nom."' ORDER BY galaxy ASC, system ASC, row ASC");
 	while ($coords = mysql_fetch_assoc($res)) {
 		$coords["moon"] == 0 ? $coords["moon"] = FALSE : $coords["moon"] = $lang['pandore_moon'];
-		$coordonnees[] = Array ($coords["galaxy"].':'.$coords["system"].':'.$coords["row"],$coords["name"],0,$coords["moon"],0);
+		$coordonnees[] = Array ($coords["galaxy"].':'.$coords["system"].':'.$coords["row"], $coords["name"], 0, $coords["moon"], 0);
 	}
 	if ($error != 4) {
 		if (count($coordonnees) == 0) $error = 2;
-		//if (count($coordonnees) > $planet_max) $error = 1;
+		if ((count($coordonnees) > $planet_max) && ($server_config['astro_strict']==1)) $error = 1; //Erreur sur nombre de planètes trop grand uniquement si astro stricte
 	} elseif (count($coordonnees) > 0) {
 		$error = 0;
 		$target = 'player';
 	}
 }
+
+//echo $coordonnees[$i][0].' - '.$coordonnees[$i][1].' - '.$coordonnees[$i][3].'<br />';
 
 // Recherche des rapports d'espionnages sur les planètes
 $espionnage = -1;
@@ -81,13 +86,14 @@ if ($search && $error == 0) {
 		while ($rapport = mysql_fetch_assoc($res)) {
 			$d = 0;
 			$j = $i;
-			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0) $j += count($coordonnees);
+			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0) //C'est une lune
+				$j += count($coordonnees); //Pour mettre les rapports de lune après ceux des planètes
 			$coordonnees[$i][5] = $rapport['PoSa'];
 			foreach ($rapport as $key => $value) {
 				if ($value != -1 && $key != 'dateRE') $rapports[$j][$key] = $value;
 				elseif ($value == -1 && $key != 'dateRE') {
 					$rapports[$j][$key] = 0;
-					if ($key != 'activite' && $key != 'Esp' && $key != 'Ordi' && $key != 'Armes' && $key != 'Bouclier' && $key != 'Protection' && $key != 'NRJ' && $key != 'Hyp' && $key != 'RC' && $key != 'RI' && $key != 'PH' && $key != 'Laser' && $key != 'Ions' && $key != 'Plasma' && $key != 'RRI' && $key != 'Graviton' && $key != 'Astrophysique') $d = 1;
+					if ($key != 'activite' && !array_key_exists($key, $technologies)) $d = 1;
 				}
 				if ($key == 'Esp') $espionnage = max($value, $espionnage);
 			}
@@ -97,6 +103,7 @@ if ($search && $error == 0) {
 				$error2[2] = 1;
 			}
 		}
+		
 		(isset($rapports) && isset($rapports[$i])) ? $coordonnees[$i][2] = $rapports[$i]["dateRE"] : $error2[1] = 1;
 		if ($coordonnees[$i][3]) {
 			if (isset($rapports[$i + count($coordonnees)]["planet_name"])) {
@@ -193,10 +200,10 @@ if ($search && $error == 0) {
 	if ($espionnage == -1) {
 		$nb_sondes[0] = $nb_sondes[1] = 'inconnu';
 	} else {
-		$N = $espionnage - $user_technology['NRJ'];
-		$nb_sondes[1] = 5 + pow($N, 2);
+		$N = $espionnage - $user_technology['Esp'];
+		$nb_sondes[1] = 5 + pow($N, 2);  //recherches
 		if ($N < 0) $nb_sondes[1] = max(1, 9 + 3 * $N);
-		$nb_sondes[0] = max(1, $nb_sondes[1] - 2);
+		$nb_sondes[0] = max(1, $nb_sondes[1] - 2); //batiments
 	}
 }
 
