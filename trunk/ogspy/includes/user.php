@@ -353,6 +353,8 @@ function member_user_set()
 
     $user_id = $user_data["user_id"];
     $user_info = user_get($user_id);
+	$user_empire = user_get_empire();
+	$user_technology = $user_empire["technology"];
 
     $password_validated = null;
     if (!isset($pub_pseudo) || !isset($pub_old_password) || !isset($pub_new_password) ||
