@@ -67,11 +67,7 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
-	if ($name == "") {
-		 $name=$name=$lib_page[$view].$i;
-	}
-
-	echo "\t"."<th><label for='".$i."'>".$name."</label></th>"."\n";
+	echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
 }
 ?>
 </tr>
