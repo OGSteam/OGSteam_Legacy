@@ -69,9 +69,9 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 	$eXpXtense2Debug = false;
 	// Tout d'abord si il a été soumis un RExp :
 	$regExVaiss =    	"#Votre\sflotte\ss`est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss`y\ssont\sjoints\s:(.+)#";
-	$regExRess =		"#L'attaquant\sobtient\s(\w+)\s(\d+)#";
-	$regExMarchand1 = 	"#liste\sde\sclients\sprivilégiés#";
-	$regExMarchand2 = 	"#dans\svotre\sempire\sun\sreprésentant\schargé\sde\sressources\sà\séchanger#";
+	$regExRess =		"#L'attaquant\sobtient\s(\S+)\s(\d+)#";
+	$regExMarchand1 = 	"#liste\sde\sclients\sprivil.gi.s#";
+	$regExMarchand2 = 	"#dans\svotre\sempire\sun\srepr.sentant\scharg.\sde\sressources\s.\s.changer#";
 	// on enleve les séparateurs
 	$content = str_replace('.', '', $content);
 	//Compatibilité UNIX/Windows
@@ -123,7 +123,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			$gt = $reg[1]; 
 			$units += ( 6  + 6  + 0  ) * $gt;
 		}
-		if(preg_match("#Chasseur\sléger\s(\d+)#", $expVaiss[1], $reg))
+		if(preg_match("#Chasseur\sl.ger\s(\d+)#", $expVaiss[1], $reg))
 		{
 			$cle = $reg[1]; 
 			$units += ( 3  + 1  + 0  ) * $cle;
@@ -219,7 +219,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 
 		}
 		$typeRess = -1;
-		if($expRess[1] == "Métal")
+		if(preg_match("#M.tal#", $expRess[1]))
 		{
 			$typeRess = 0;
 			$met = $expRess[2];
@@ -227,7 +227,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			$deut = 0;
 			$antimat = 0;
 		}
-		if($expRess[1] == "Cristal")
+		if(preg_match("#Cristal#", $expRess[1]))
 		{
 			$typeRess = 1;
 			$met = 0;
@@ -235,7 +235,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			$deut = 0;
 			$antimat = 0;
 		}
-		if($expRess[1] == "Deutérium")
+		if(preg_match("#Deut.rium#", $expRess[1]))
 		{
 			$typeRess = 2;
 			$met = 0;
@@ -243,7 +243,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 			$deut = $expRess[2];
 			$antimat = 0;
 		}
-		if($expRess[1] == "Antimatière")
+		if(preg_match("#Antimati.re#", $expRess[1]))
 		{
 			$typeRess = 3;
 			$met = 0;
