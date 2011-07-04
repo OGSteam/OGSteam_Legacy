@@ -32,7 +32,6 @@ switch ($pub_subaction)
 {
 	case 'admin': require_once('./mod/varally/admin.php'); break;
 	case 'ally': require_once('./mod/varally/ally.php'); break;
-	case 'report': require_once('./mod/varally/addReport.php'); break;
 	case 'display': require_once('./mod/varally/display.php'); break;
 	default: require_once('./mod/varally/ally.php'); break;
 }
