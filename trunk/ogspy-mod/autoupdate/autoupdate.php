@@ -14,7 +14,9 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 *
 */
 require_once("views/page_header.php");
+if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre à jour PHP(>= 5.2)");
 require_once("mod/autoupdate/functions.php");
+
 
 if (empty($pub_sub) OR $pub_sub == 'tableau' OR $pub_sub == 'maj' OR $pub_sub == 'down' OR $pub_sub == 'admin') {
 	/**
@@ -23,7 +25,7 @@ if (empty($pub_sub) OR $pub_sub == 'tableau' OR $pub_sub == 'maj' OR $pub_sub ==
 	if (file_exists("mod/autoupdate/parameters.php")) {
 		require_once("mod/autoupdate/parameters.php");
 	} else {
-		$result = generate_parameters(0, 1, 1, date("d"), date("H"), 0, 0);
+		$result = generate_parameters(0, 1, 1, date("d"), date("H"), 0, 0, 1);
 	}
 }
 /**

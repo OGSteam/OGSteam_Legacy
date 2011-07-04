@@ -31,11 +31,11 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$multi = 1;
 				}
 /*die ("--".COADMIN."--".DOWNJSON."--".CYCLE."--".$begind."--".BEGINH."--".$multi."--");*/
-				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ, BAN_MODS);
 				$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 			} else {
 				$affiche = copymodupdate("yes");
-				generate_parameters(COADMIN, DOWNJSON, CYCLE, date("d"), BEGINH, 1, AUTO_MAJ);
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, date("d"), BEGINH, 1, AUTO_MAJ, BAN_MODS);
 			}
 		} elseif (CYCLE > 1) {
 			if(MULTI == CYCLE) {
@@ -46,7 +46,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$begind = BEGIND;
 					$multi = MULTI;
 				}
-				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ);
+				generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, BEGINH, $multi, AUTO_MAJ, BAN_MODS);
 				$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 			} else {
 				$cycle1 = CYCLE - 1;
@@ -55,7 +55,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 					$multi = 1;
 					$beginh = date("H");
 					$affiche = copymodupdate("yes");
-					generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
+					generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ,BAN_MODS );
 				} else {
 					$begind = BEGIND;
 					$calcul = (date("H") - BEGINH);
@@ -63,7 +63,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 						$multi = MULTI + 1;
 						$beginh = date("H");
 						$affiche = copymodupdate("yes");
-						generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ);
+						generate_parameters(COADMIN, DOWNJSON, CYCLE, $begind, $beginh, $multi, AUTO_MAJ,BAN_MODS);
 					} else {
 						$affiche = "<br />\n".$lang['autoupdate_tableau_error3']." : <a href='index.php?action=autoupdate&sub=tableau&down=yes'>".$lang['autoupdate_tableau_ok1']."</a>";
 					}
@@ -98,17 +98,8 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		$installed_mods[$i++]['version'] 	= $modversion;
 	}
 	
-// Récupérer la liste des dernières versions dans le fichier JSON
-
-    if(!file_exists("parameters/modupdate.json")) {
-	//Retry once to not overload the server.
-		if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
-			die ("Fichier JSON Introuvable !");//Dommage pour l'update...
-		}
-	}
-	$contents = file_get_contents("parameters/modupdate.json");	
-	$results = utf8_encode($contents);
-	$data = json_decode($results, true);
+	// Recupération des Mods disponible sur l'ogsteam
+	$data = getmodlist();
 	$mod_names = array_keys($data); // Récupération des clés
 
 
