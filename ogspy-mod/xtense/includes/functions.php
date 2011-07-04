@@ -160,7 +160,7 @@ function home_check($type, $coords) {
 	// Si une lune correspond a la planete, on place la planete sous la lune
 	foreach ($moons as $id => $m) {
 		if ($m == $coords) {
-			return array($type == TYPE_PLANET ? 'add' : 'update', 'id' => $id-100+$offset);
+			return array($type == TYPE_PLANET ? 'add' : 'update', 'id' => $id-200+$offset);
 		}
 	}
 	
