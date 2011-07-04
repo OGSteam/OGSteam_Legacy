@@ -602,7 +602,6 @@ switch ($ogsversion) {
         $requests[] = "UPDATE ".TABLE_USER_BUILDING." SET planet_id = (planet_id + 191) WHERE planet_id > 9 and planet_id < 19 ";
         $requests[] = "UPDATE ".TABLE_USER_DEFENCE." SET planet_id = (planet_id + 100) WHERE planet_id < 10";
         $requests[] = "UPDATE ".TABLE_USER_DEFENCE." SET planet_id = (planet_id + 191) WHERE planet_id > 9 and planet_id < 19 ";
-        $requests[] = "ALTER TABLE ".TABLE_USER_BUILDING." DROP `temperature` ";
         $ogsversion = '3.0.7';
 		$up_to_date = true;
 		break;
