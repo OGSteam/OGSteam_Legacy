@@ -9,13 +9,31 @@
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
-$tag = $server_config['tagAllySpy'];
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tagAlly\'';
+$result = $db->sql_query($sql);
+list($tag)=$db->sql_fetch_row($result);
+
 check_tag($tag);
 $listTag = explode(';',$tag);
 
+$dateMin = $dateMax = '';
+/* If Truc débile pour initialiser les champs*/
+if(!isset($pub_dateMin)){
+	$query = 'SELECT DISTINCT `datadate` FROM `'.TABLE_VARALLY.'` ORDER BY `datadate` ASC';
+	$result = $db->sql_query($query);
+	list($pub_dateMin)=$db->sql_fetch_row($result);
+	$pub_dateMin= date('d/m/Y H:i:s',$pub_dateMin);
+	
+}
+
 $query = 'SELECT DISTINCT `datadate` FROM `'.TABLE_VARALLY.'` ORDER BY `datadate` DESC';
 $result = $db->sql_query($query);
-$dateMin = $dateMax = '';
+if(!isset($pub_dateMax)){ 
+	list($pub_dateMax)=$db->sql_fetch_row($result);
+	$pub_dateMax= date('d/m/Y H:i:s',$pub_dateMax);
+}
+
+
 while ($var = $db->sql_fetch_assoc($result))
 {
 	$dateMin .= '<option'.((date('d/m/Y H:i:s',$var['datadate'])==$pub_dateMin) ? ' selected' : '').'>'.date('d/m/Y H:i:s',$var['datadate']).'</option>';
@@ -28,6 +46,7 @@ Date max: <select name='dateMax'><?php echo $dateMax; ?></select>&nbsp;
 <input type='submit' value='Afficher'>
 </form>
 <?php
+
 if ($tag == '')
 {
 	echo '<table width=\'100%\'><tr><td class=\'c\'>Pas d\'alliance sélectionnée</th></tr></table></br>';
@@ -37,11 +56,11 @@ if ($tag == '')
 	{
 		$dateMinStamped = parseDate($pub_dateMin);
 		$dateMaxStamped = parseDate($pub_dateMax);
-		if ($dateMinStamped<=$dateMaxStamped)
+		if ($dateMinStamped < $dateMaxStamped)
 		{
 			$whereDate = ' AND `datadate`>=\''.$dateMinStamped.'\' AND `datadate`<=\''.$dateMaxStamped.'\'';
 		} else {
-			echo 'Dates erronées (min > max)!';
+			die ('Dates incorrectes: Merci de sélectionner deux dates cohérentes');
 		}
 	}
 	foreach ($listTag as $tag)
@@ -80,8 +99,11 @@ if ($tag == '')
 ?>
 		</table><br><br />
 <?php
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'bilAlly\'';
+$result = $db->sql_query($sql);
+list($bilSpy)=$db->sql_fetch_row($result);
 
-if($server_config['bilAlly']=="oui") {
+if($bilSpy =="oui") {
 	
 	/* Et aller, un bon coup de trash code à cause de la mauvaise gestion des variables...*/
 	//$pub = 'pub_';
@@ -91,7 +113,7 @@ if($server_config['bilAlly']=="oui") {
 
 <?php
 // Récupération du nombre de joueur par défaut
-$sql = "SELECT config_value FROM ".TABLE_CONFIG." WHERE config_name='nbrjoueur'";
+$sql = "SELECT value FROM ".TABLE_MOD_CFG." WHERE config='nbrjoueur'";
 $result = $db->sql_query($sql);
 list($nbrjou)=$db->sql_fetch_row($result);
 ?>

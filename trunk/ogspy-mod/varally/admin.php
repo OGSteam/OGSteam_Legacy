@@ -16,39 +16,38 @@ if (isset($pub_modif))
 	check_tag($pub_tag);
 	switch ($pub_modif)
 	{
-		case 'tag':	   $sql = 'UPDATE `'.TABLE_CONFIG.'` SET `config_value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config_name`=\'tagAlly\''; $db->sql_query($sql); break;
-		case 'report': $sql = 'UPDATE `'.TABLE_CONFIG.'` SET `config_value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config_name`=\'tagAllySpy\''; $db->sql_query($sql); break;
-		case 'table':  $sql = 'UPDATE`'.TABLE_CONFIG.'` SET `config_value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config_name`=\'tblAlly\''; $db->sql_query($sql); break;
-		case 'bilan':  $sql = 'UPDATE`'.TABLE_CONFIG.'` SET `config_value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config_name`=\'bilAlly\''; $db->sql_query($sql); break;
-		case 'nbrjou':  $sql = 'UPDATE`'.TABLE_CONFIG.'` SET `config_value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config_name`=\'nbrjoueur\''; $db->sql_query($sql); break;
+		case 'tag':	   $sql = 'UPDATE `'.TABLE_MOD_CFG.'` SET `value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config`=\'tagAlly\''; $db->sql_query($sql); break;
+		case 'report': $sql = 'UPDATE `'.TABLE_MOD_CFG.'` SET `value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config`=\'tagAllySpy\''; $db->sql_query($sql); break;
+		case 'table':  $sql = 'UPDATE`'.TABLE_MOD_CFG.'` SET `value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config`=\'tblAlly\''; $db->sql_query($sql); break;
+		case 'bilan':  $sql = 'UPDATE`'.TABLE_MOD_CFG.'` SET `value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config`=\'bilAlly\''; $db->sql_query($sql); break;
+		case 'nbrjou':  $sql = 'UPDATE`'.TABLE_MOD_CFG.'` SET `value`=\''.mysql_real_escape_string($pub_tag).'\' WHERE `config`=\'nbrjoueur\''; $db->sql_query($sql); break;
 	}
 }
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tagAlly\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tagAlly\'';
 $result = $db->sql_query($sql);
 list($tag)=$db->sql_fetch_row($result);
 	
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tagAllySpy\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tagAllySpy\'';
 $result = $db->sql_query($sql);
 list($tagSpy)=$db->sql_fetch_row($result);
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tblAlly\'';
 $result = $db->sql_query($sql);
 list($tblSpy)=$db->sql_fetch_row($result);
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'bilAlly\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'bilAlly\'';
 $result = $db->sql_query($sql);
 list($bilSpy)=$db->sql_fetch_row($result);
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'nbrjoueur\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'nbrjoueur\'';
 $result = $db->sql_query($sql);
 list($nbrJou)=$db->sql_fetch_row($result);
 
 echo '<form action=\'?action=varAlly&subaction=admin\' method=\'post\'>Utiliser les stats de&nbsp;: 
  <select name="tag">
-  <option value="varally">varAlly</option>
-  <option value="rank_members"'; if($tblSpy=='rank_members') echo 'selected="selected"'; echo '>allyRanking</option>
   <option value="rank_player_points"'; if($tblSpy=='rank_player_points') echo 'selected="selected"'; echo '>Stats générales</option>
+  <option value="rank_members"'; if($tblSpy=='rank_members') echo 'selected="selected"'; echo '>allyRanking</option>
  </select> 
  <input type=\'submit\' value=\'Valider\'>
  <input type=\'hidden\' name=\'modif\' value=\'table\'> 

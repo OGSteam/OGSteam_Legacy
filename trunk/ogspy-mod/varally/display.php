@@ -7,9 +7,11 @@
  */
 if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
-$tag = $server_config['tagAlly'];
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tagAlly\'';
+$result = $db->sql_query($sql);
+list($tag)=$db->sql_fetch_row($result);
 
-$tag = $pub_affiche ? $pub_tag : $tag;
+$tag = isset($pub_affiche) ? $pub_tag : $tag;
 check_tag($tag);
 echo '<form action=\'?action=varAlly&subaction=display\' method=\'post\'>Liste des tags à afficher: <input type=\'text\' name=\'tag\' value=\''.$tag.'\'> <input type=\'submit\' value=\'Afficher\'><input type=\'hidden\' name=\'affiche\' value=\'true\'></form>';
 

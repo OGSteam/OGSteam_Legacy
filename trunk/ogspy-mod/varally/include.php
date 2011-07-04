@@ -14,12 +14,12 @@ if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 require_once('./parameters/id.php');
 
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tblAlly\'';
 $result = $db->sql_query($sql);
 list($tblSpy)=$db->sql_fetch_row($result);
 define('TABLE_VARALLY',$table_prefix.$tblSpy);
 
-$sql = 'SELECT `config_value` FROM `'.TABLE_CONFIG.'` WHERE `config_name`=\'tblAlly\'';
+$sql = 'SELECT `value` FROM `'.TABLE_MOD_CFG.'` WHERE `config`=\'tblAlly\'';
 $result = $db->sql_query($sql);
 list($tblSpy)=$db->sql_fetch_row($result);
 
@@ -64,14 +64,6 @@ global $tblSpy;
 		} else {
 			echo '<th width=\'150\'><a>Stats</a></th>';
 		}
-		
-		//Bouton Nouveau rapport
-		if ($pub_subaction != 'report' && $tblSpy == 'varally')
-		{
-			echo '<td class=\'c\' width=\'150\' onclick="window.location =\'?action=varAlly&subaction=report\'"><a style=\'cursor:pointer\'><font color=\'lime\'>Nouveau rapport</font></a></td>';
-		} elseif($tblSpy == 'varally') {
-			echo '<th width=\'150\'><a>Nouveau rapport</a></th>';
-		}
 
 		//Bouton Administration
 		if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1) if ($pub_subaction != 'admin')
@@ -115,8 +107,8 @@ function affStats ( $field, $player ) {
 	
 	switch ($nb) {
 		case 0; echo '<th colspan=\'2\'> - </th>'; break;
-		case 1; $val = $db->sql_fetch_assoc($result); echo '<th>? -> '.$val['points'].'</th><th>n/a</th>'; break;
-		case 2; $val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'','.'); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','.');
+		case 1; (double)$val = $db->sql_fetch_assoc($result); echo '<th>? -> '.$val['points'].'</th><th>n/a</th>'; break;
+		case 2; (double)$val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'',''); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','');
 			$ecart = $new - $ex; $pourcent = round(100*$ecart/$ex,2); if ($ecart<0) { $color='red'; } elseif ($ecart>0) { $color='lime'; $ecart = '+'.$ecart; $pourcent = '+'.$pourcent; } else { $color=''; }
 			echo '<th>'.$ex.' -> '.$new.' (<font color=\''.$color.'\'>'.$ecart.'</font>)</th><th><font color=\''.$color.'\'>'.$pourcent.'%</font></th>'; break;
 		default; echo '<th colspan=\'2\'> - Error - </th>'; break;
@@ -143,13 +135,13 @@ function affPoints ( $player, $where ) {
 	$nb = $db->sql_numrows($result);
     	switch ($nb) {
 		case 0; echo '<th colspan=\'2\'> - </th>'; break;
-		case 1; $val = $db->sql_fetch_assoc($result); echo '<th>'.$val['points'].'</th><th>n/a</th>'; break;
-		case 2; $val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'','.'); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','.');
+		case 1; (double)$val = $db->sql_fetch_assoc($result); echo '<th>'.$val['points'].'</th><th>n/a</th>'; break;
+		case 2; (double)$val = $db->sql_fetch_assoc($result); $new = number_format($val['points'],0,'',''); $val = $db->sql_fetch_assoc($result); $ex = number_format($val['points'],0,'','');
 		    $ecart = $new - $ex; 
 		    $pourcent = round(100*$ecart/$ex,2);        
 
 		    global $tblecart; 
-		    $tblecart[] = array( "joueur" => $player, number_format("pts",0,'','.') => $ecart, "prc" => $pourcent );        
+		    $tblecart[] = array( "joueur" => $player, "pts" => $ecart, "prc" => $pourcent );        
 
 		    if ($ecart<0) { $color='red'; } elseif ($ecart>0) { $color='lime'; $ecart = '+'.$ecart; $pourcent = '+'.$pourcent; } else { $color=''; }        
 
