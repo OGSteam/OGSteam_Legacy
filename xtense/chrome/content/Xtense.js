@@ -146,7 +146,8 @@ var Xtense = {
 			}
 			catch (e) {}
 			
-			
+			if (url == null)
+				return;
 			if (url == 'about:blank' || url.match('delivery.ads.gfsrv.net') || !url) //delivery.ads.gfsrv.net -> Pub sur le côté
 				return;
 			
