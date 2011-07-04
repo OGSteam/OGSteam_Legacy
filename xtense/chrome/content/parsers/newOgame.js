@@ -327,7 +327,10 @@ var XnewOgame = {
 		} else this.planet_type = '0';
 		
 		var name = Xpath.getStringValue(this.doc,paths.name);
-		var coords = Xpath.getStringValue(this.doc,paths.coords).match(new RegExp(this.regexps.planetCoords))[1];
+		var coords = null;
+		var coords_list = Xpath.getStringValue(this.doc,paths.coords);
+		if (coords_list)
+			coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1];
 		
 		return {planet_name: name, coords : coords, planet_type : this.planet_type};
 	},
@@ -350,7 +353,7 @@ var XnewOgame = {
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
 
 		var planetData = this.getPlanetData();
-		if(planetData.coords == "unknown") {
+		if(planetData.coords == null) {
 			Xconsole("plan&egrave;te unique");
 			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
 			planetData.coords = coords;
