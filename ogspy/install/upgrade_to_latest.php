@@ -582,7 +582,7 @@ switch ($ogsversion) {
 		$ogsversion = '3.05';
 		$up_to_date = true;
 		break;
-	case 'TABLE_USER_DEFENCE':
+	case '3.05':
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('portee_missil','1')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_user','')";
 		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('open_admin','')";
