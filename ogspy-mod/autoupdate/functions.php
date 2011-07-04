@@ -12,6 +12,8 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
+$ban_mod = array('sql','mplogger','naqOgsPlugin','ogsfox','quiMObserve','packMod','modUpdate','market');
+
 /**
 *Récupère la version du mod
 */
@@ -26,7 +28,7 @@ function versionmod() {
 /**
 *Génère le fichier parameters.php
 */
-function generate_parameters($coadmin, $downjson, $cycle, $begind, $beginh, $multi, $auto) {
+function generate_parameters($coadmin, $downjson, $cycle, $begind, $beginh, $multi, $auto, $ban_mods) {
 	global $lang;
 	
 	$id_php = '<?php'."\n";
@@ -47,6 +49,7 @@ function generate_parameters($coadmin, $downjson, $cycle, $begind, $beginh, $mul
 	$id_php .= 'DEFINE("BEGIND", '.$begind.');'."\n";
 	$id_php .= 'DEFINE("BEGINH", '.$beginh.');'."\n";
 	$id_php .= 'DEFINE("MULTI", '.$multi.');'."\n";
+	$id_php .= 'DEFINE("BAN_MODS", '.$ban_mods.');'."\n";
 	$id_php .= '?>';
 	//On ouvre le fichier en écriture et on efface ce qu'il y a dedans
 	if (!fopen("mod/autoupdate/parameters.php", "wb")) {
@@ -159,4 +162,26 @@ if (! function_exists("is__writable") ) {
 	
 	}
 }
+function getmodlist(){
+	global $ban_mod;
+	// Récupérer la liste des dernières versions dans le fichier JSON
+    if(!file_exists("parameters/modupdate.json")) {
+	//Retry once to not overload the server.
+		if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
+			die ("Fichier JSON Introuvable !");
+		}
+	}
+	$contents = file_get_contents("parameters/modupdate.json");	
+	$results = utf8_encode($contents);
+	$data = json_decode($results, true);
+	//Suppresion des Mods interdits
+	if( BAN_MODS == 1){
+		foreach( $ban_mod as $to_ban)
+		{
+			unset($data[$to_ban]);
+		}
+	}
+	//var_dump($data);
+	return $data;	
+}	
 ?>

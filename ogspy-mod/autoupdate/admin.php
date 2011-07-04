@@ -25,7 +25,7 @@ if (isset($pub_valid)) {
 		exit();
 	}
 	if(empty($pub_cycle)) $pub_cycle = 0;
-	$generated = generate_parameters($pub_coadmin, $pub_down, $pub_cycle, date("d"), date("H"), 0, $pub_autoMaJ);
+	$generated = generate_parameters($pub_coadmin, $pub_down, $pub_cycle, date("d"), date("H"), 0, $pub_autoMaJ, $pub_banlist);
 }
 
 // Récupération des paramètres dans le fichier parameters.php
@@ -36,7 +36,7 @@ foreach($arr as $zeile){
 	sort($zeile);$s=0;
 	foreach($zeile as $bzeile){
 		$s = ($s) ? 0 : 1;
-		if($bzeile == 'versionmod' OR $bzeile == 'generate_parameters' OR $bzeile == 'copymodupdate') {
+		if($bzeile == 'versionmod' OR $bzeile == 'generate_parameters' OR $bzeile == 'copymodupdate' OR $bzeile == 'json_decode') {
 			if($bzeile == 'versionmod') {
 				$versionmod = $bzeile;
 			}
@@ -45,6 +45,9 @@ foreach($arr as $zeile){
 			}
 			if($bzeile == 'copymodupdate') {
 				$copymodupdate = $bzeile;
+			}
+			if($bzeile == 'json_decode') {
+				$json_on = $bzeile;
 			}
 		}
 	}
@@ -66,6 +69,10 @@ foreach($arr as $zeile){
 		<td class="c">Copymodupdate</td>
 		<th><?php if(empty($copymodupdate)) echo $lang['autoupdate_admin_off']; else echo $lang['autoupdate_admin_define']; ?></th>
 	</tr>
+	<tr>
+		<td class="c">JSON_Decode</td>
+		<th><?php if(empty($json_on)) echo $lang['autoupdate_admin_off']; else echo $lang['autoupdate_admin_define']; ?></th>
+	</tr>
 </table>
 <br />
 <table>
@@ -85,6 +92,10 @@ foreach($arr as $zeile){
 	<tr>
 		<th><?php echo $lang['autoupdate_admin_down']; ?><br /><?php echo $lang['autoupdate_admin_down1']; ?></th>
 		<th><input type="radio" name="down" <?php echo (DOWNJSON == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="down" <?php echo (DOWNJSON == 0) ? 'checked' : ''; ?> value="0"/></th>
+	</tr>
+	<tr>
+		<th><?php echo $lang['autoupdate_admin_banlist']; ?><br /><?php echo $lang['autoupdate_admin_banlist1']; ?></th>
+		<th><input type="radio" name="banlist" <?php echo (BAN_MODS == 1) ? 'checked' : ''; ?> value="1"/> <font size="5">|</font> <input type="radio" name="banlist" <?php echo (BAN_MODS == 0) ? 'checked' : ''; ?> value="0"/></th>
 	</tr>
 	<?php if(DOWNJSON == 1) { ?>
 	<tr>
