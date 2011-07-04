@@ -21,7 +21,7 @@ $queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VAL
 $queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VALUES (\'varally\',\'tagAlly\',\'\')';
 $queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VALUES (\'varally\',\'tagAllySpy\',\'\')';
 $queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VALUES (\'varally\',\'bilAlly\',\'\')';
-$queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VALUES (\'varally\',\'tblAlly\',\'varally\')';
+$queries[] = 'INSERT IGNORE INTO '.TABLE_MOD_CFG.' (`mod`,`config`, `value`) VALUES (\'varally\',\'tblAlly\',\'rank_player_points\')';
 
 foreach ($queries as $query) {
 	$db->sql_query($query);
