@@ -8,7 +8,7 @@ $fisheyeFolder = FOLDEREXP."includes/fisheye";
 $menuFixe 	= getOpts($user_data['user_id'], 0);
 $eXpDebug	= getOpts($user_data['user_id'], 1);
 
-$nombreLien = 8;
+$nombreLien = 7; //Les expéditions s'envoient désormais uniquement avec Xtense
 $title[1] =  "Les stats de mes eXpeditions";
 $title[2] =  "Les stats des eXpeditions de tous les utilisateurs";
 $title[3] =  "Détail de mes eXpeditions";
@@ -16,7 +16,7 @@ $title[4] =  "Détail de toutes les eXpeditions";
 $title[5] =  "Hall of Fame des eXpeditions";
 $title[6] =  "Exporter en BBCode une eXpedition";
 $title[7] =  "Options de eXpedition";
-$title[8] =  "Ajouter une eXpedition";
+//$title[8] =  "Ajouter une eXpedition";
 $link[1]  =  "stat&sousmodule=user";
 $link[2]  =  "stat&sousmodule=global";
 $link[3]  =  "detail&sousmodule=user";
@@ -24,7 +24,7 @@ $link[4]  =  "detail&sousmodule=global";
 $link[5]  =  "hof";
 $link[6]  =  "bbcode";
 $link[7]  =  "config";
-$link[8]  =  "add";
+//$link[8]  =  "add";
 $image[1] =  "2";
 $image[2] =  "1";
 $image[3] =  "4";
@@ -32,7 +32,7 @@ $image[4] =  "3";
 $image[5] =  "8";
 $image[6] =  "10";
 $image[7] =  "7";
-$image[8] =  "9";
+//$image[8] =  "9";
 
 if ($menuFixe  == 0)
 {
