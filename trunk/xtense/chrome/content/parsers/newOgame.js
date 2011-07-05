@@ -326,11 +326,14 @@ var XnewOgame = {
 			this.planet_type = '1';
 		} else this.planet_type = '0';
 		
-		var name = Xpath.getStringValue(this.doc,paths.name);
+		var name = Xpath.getStringValue(this.doc, paths.name);
 		var coords = null;
-		var coords_list = Xpath.getStringValue(this.doc,paths.coords);
-		if (coords_list)
-			coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1];
+		var coords_list = Xpath.getStringValue(this.doc, paths.coords); //Si plusieurs planètes
+		if (!coords_list) {
+			Xconsole("plan&egrave;te unique");
+			coords_list = Xpath.getStringValue(this.doc, paths.coords_unique_planet); //Si 1 seule planète
+		}
+		coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1]; //On récupère les coordonnées
 		
 		return {planet_name: name, coords : coords, planet_type : this.planet_type};
 	},
@@ -353,11 +356,6 @@ var XnewOgame = {
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
 
 		var planetData = this.getPlanetData();
-		if(planetData.coords == null) {
-			Xconsole("plan&egrave;te unique");
-			var coords = this.win.textContent[5].match(new RegExp(this.regexps.coords))[1];
-			planetData.coords = coords;
-		}
 		
 		var Request = this.newRequest();
 		Request.set(
@@ -390,7 +388,7 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		
+
 		Request.set(this.getPlanetData());
 		if(this.planet_type == '0'){
 			var send = {
