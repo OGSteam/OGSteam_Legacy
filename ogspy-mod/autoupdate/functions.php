@@ -12,7 +12,7 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-$ban_mod = array('sql','mplogger','naqOgsPlugin','ogsfox','quiMObserve','packMod','modUpdate','market');
+$ban_mod = array('sql','mplogger','naqogsplugin','ogsfox','quimobserve','packmod','modupdate','market','myspeach');
 
 /**
 *Récupère la version du mod
