@@ -9,15 +9,15 @@
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) 	die("Hacking attempt");
 
+// Menu OGSpy
+require_once("views/page_header.php");
+
 // Définitions
 global $mod_name;
 $mod_name = "presentationalliance";
 
 // Tout se passe dans config
-require_once("config.php");
-
-// Menu OGSpy
-require_once("views/page_header.php");
+require_once("mod/".$mod_name."/config.php");
 
 // Si le dossier de sortie n'existe toujours pas, on demande à l'utilisateur
 if(!is_dir(FOLDER_OUTPUT))

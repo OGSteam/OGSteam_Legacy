@@ -12,7 +12,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 define('DEBUG','1');//*/
 
 // Définitions
-global $table_prefix;
+global $table_prefix,$mod_name;
 define("TABLE_P_ALLY_PIC", $table_prefix."pres_alliance_pic");
 define("TABLE_P_ALLY_DATA", $table_prefix."pres_alliance_data");
 define("FOLDER_MOD", "mod/".$mod_name."");
