@@ -14,12 +14,24 @@
 	
 	// On appelle les ingénieur nécessaire.
 	$off_ingenieur = $user_data['off_ingenieur'];
+	$off_geologue = $user_data['off_geologue'];
+	
+	// On véréfie que le dépôt de ravitaillement fait activer sur l'univers.
+	$ddr = $server_config['ddr'];
+	
+	if ($ddr == 1)
+		{
+			$number ="17";
+		}
+	else
+		{
+			$number ="16";
+		}
 	
 	function Create_Mine_HOF()
 	{
 	//if (!isset($nplayer))	global $nplayer;
 		$user_empire = user_get_empire();
-		$start = 101;
 		$nb_planet = find_nb_planete_user();
 		if (!isset($production_metal))	global $production_metal;
 		if (!isset($production_cristal))	global $production_cristal;
@@ -70,7 +82,7 @@
 				$user_building[$row['planet_id']][0] = true;
 
 				// calcul des productions
-				global $db, $off_ingenieur;
+				global $db, $off_ingenieur, $off_geologue;
 				require_once("includes/ogame.php");
 				
 				$metal_heure=0;
@@ -81,8 +93,9 @@
 				$deut_jour = 0;
 				$start = 101;
 				$nb_planet = find_nb_planete_user();
+				
 				for ($i=$start ; $i<=$start+$nb_planet-1 ; $i++)
-				{
+				{				
 					$M = $user_building[$i]['M'];
 					$C = $user_building[$i]['C'];
 					$D = $user_building[$i]['D'];
@@ -97,9 +110,8 @@
 					$SAT_per = $user_building[$i]['Sat_percentage'];
 					$temperature_min = $user_building[$i]['temperature_min'];
 					$temperature_max = $user_building[$i]['temperature_max'];
-					
 					$production_CES = ( $CES_per / 100 ) * ( production ( "CES", $CES, $off_ingenieur ));
-					$production_CEF = ( $CEF_per / 100 ) * ( production ("CEF", $off_ingenieur ));
+					$production_CEF = ( $CEF_per / 100 ) * ( production ("CEF", $CEF, $off_ingenieur,$temperature_max, $NRJ ));
 					$production_SAT = ( $SAT_per / 100 ) * ( production_sat ( $temperature_min, $temperature_max, $off_ingenieur ) * $SAT );
 					$prod_energie = $production_CES + $production_CEF + $production_SAT;
 					
@@ -112,10 +124,10 @@
 					$ratio = floor(($prod_energie/$cons_energie)*100)/100;
 					if ($ratio > 1) $ratio = 1;
 
-					$metal_heure = $metal_heure + ( 20 + round (($M_per/100) * $ratio * ( production ( "M", $M ))));
-					$cristal_heure = $cristal_heure + ( 10 + round (( $C_per/100 ) * $ratio * ( production ( "C", $C ))));
-					$deut_heure = $deut_heure  + (( round (( $D_per/100) * $ratio * ( production ( "D", $D, 0, $temperature_max )))) -  consumption ("CEF", $CEF));
-		
+					$metal_heure = $metal_heure + (( production ( "M", $M, $off_geologue )) * $ratio);
+					$cristal_heure = $cristal_heure + (( production ( "C", $C, $off_geologue )) * $ratio);
+					$deut_heure = $deut_heure  + ((( production ( "D", $D, $off_geologue, $temperature_max )) * $ratio) -  (consumption ("CEF", $CEF)));
+			
 				}			
 				
 				$metal_jour = 24 * $metal_heure;
@@ -442,7 +454,7 @@
         }
         else
         {
-            // sinon on affiche celle du skin de ogame
+            // sinon on affiche celle d'un site extérieur
             echo "<img src='http://renaissance.wow.free.fr/DL/Metal-BridgeFF1200/gebaeude/" . $imag . "' /><br />";
         }
     }
