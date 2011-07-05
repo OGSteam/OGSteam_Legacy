@@ -829,7 +829,7 @@ switch ($pub_type){
 							'coords' => explode(':', $line['coords']),
 							'from' => $line['from'],
 							'subject' => $line['subject'],
-							'message' => $line['message'],
+							'message' => utf8_decode($line['message']),
 							'time' => $line['date']
 					);
 					$call->add('msg', $msg);
