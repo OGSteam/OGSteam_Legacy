@@ -77,9 +77,9 @@ require_once("mod/bthof/functions.php");
 	
 	$bbcode = "[color=orange][b][u]HoF Bâtiments - Flottes - Technologies - Défense - Production Miniere[/u][/b][/color]\n\n\n"; 	
 
-	$Building_Name  = array("M","C","D","CES","CEF","UdR","UdN","CSp","HM","HC","HD","Lab","Ter","Silo","BaLu","Pha","PoSa");
-	$Building_Label = array("Mine de métal","Mine de Cristal","Synthétiseur de deutérium","Centrale électrique solaire","Centrale électrique de fusion","Usine de robots","Usine de nanites ","Chantier spatial","Hangar de métal","Hangar de cristal","Réservoir de deutérium","Laboratoire de recherche","Terraformeur","Silo de missiles ","Base Lunaire","Phalange de capteur","Porte de saut spatial");
-	$Building_icon  = array("1.gif","2.gif","3.gif","4.gif","12.gif","14.gif","15.gif","21.gif","22.gif","23.gif","24.gif","31.gif","33.gif","44.gif","41.gif","42.gif","43.gif");
+	$Building_Name  = array("M","C","D","CES","CEF","UdR","UdN","CSp","HM","HC","HD","Lab","Ter","Silo","BaLu","Pha","PoSa","DdR");
+	$Building_Label = array("Mine de métal","Mine de Cristal","Synthétiseur de deutérium","Centrale électrique solaire","Centrale électrique de fusion","Usine de robots","Usine de nanites ","Chantier spatial","Hangar de métal","Hangar de cristal","Réservoir de deutérium","Laboratoire de recherche","Terraformeur","Silo de missiles ","Base Lunaire","Phalange de capteur","Porte de saut spatial","Dépôt de Ravitaillement");
+	$Building_icon  = array("1.gif","2.gif","3.gif","4.gif","12.gif","14.gif","15.gif","21.gif","22.gif","23.gif","24.gif","31.gif","33.gif","44.gif","41.gif","42.gif","43.gif","34.gif");
 
 	$Flottes_Name  = array("PT","GT","CLE","CLO","CR","VB","VC","REC","SE","BMD","DST","EDLM","TRA","SAT");
 	$Flottes_Label = array("Petit Transporteur","Grand Transporteur","Chasseur Léger","Chasseur Lourd","Croiseur","Vaisseau de Bataille","Vaisseau de Colonisation","Recycleur","Sonde d'Espionnage","Bombardier","Destructeur","Etoile de la Mort","Traqueur","Satellite Solaire");
@@ -172,7 +172,7 @@ require_once("mod/bthof/functions.php");
 		switch ($pub_subaction)
 		{
 			case "Batiments" : // Page Bâtiments
-				Create_HOF($Building_Name,$Building_Label,$Building_icon,"Bâtiments","user_building",16,$affichage);
+				Create_HOF($Building_Name,$Building_Label,$Building_icon,"Bâtiments","user_building",$number,$affichage);
 				break;
 		
 			case "Flottes" : // Page Flottes
@@ -215,7 +215,7 @@ require_once("mod/bthof/functions.php");
 					{
 						?>
 						
-						<tr><?php echo $prod_energie;?>
+						<tr>
 							<td style='background-color : #273234;'><?php echo '<span style=\'color : white; font-weight : bold;\'>' . $nb . '</span>'; ?></td>
 							<td style='background-color : #273234;'><a><?php echo '<span style=\'color : white; font-weight : bold;\'>' . $production_joueur[$key] . '</span>'; ?></a></td>
 							<td style='background-color : #273234;'><font color='red'><b><?php echo number_format($production_metal[$key]*$tbl['x'], 0, ',', ' '); ?></b></font></td>
@@ -235,7 +235,7 @@ require_once("mod/bthof/functions.php");
 				Get_BBCode();
 			
 				$bbcode .= "[b][color=".$bbcode_t."]Bâtiments[/color][/b]\n\n";
-				$bbcode .= HOF_bbcode($Building_Name,$Building_Label,"Bâtiments","user_building",16,$bbcode_o,$bbcode_r,$bbcode_l);
+				$bbcode .= HOF_bbcode($Building_Name,$Building_Label,"Bâtiments","user_building",$number,$bbcode_o,$bbcode_r,$bbcode_l);
 			
 				$bbcode .= "\n\n[b][color=".$bbcode_t."]Flottes[/color][/b]\n\n";
 				$bbcode .= HOF_bbcode($Flottes_Name,$Flottes_Label,"Flottes","bthof_flottes",13,$bbcode_o,$bbcode_r,$bbcode_l);
@@ -540,6 +540,15 @@ require_once("mod/bthof/functions.php");
 								<li>Remplacement de la techonologie expédition par astrophysique</li>
 								<li>Prise en compte de la vitesse de l'uni</li>
 								
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.1</td>
+						<td style='background-color : #273234;'>
+							<i>Mise à jour par Shad</i>
+							<ul>
+								<li>Prise en compte du dépôt de ravitaillement si activé sur le serveur.</li>								
 							</ul>
 						</td>
 					</tr>
