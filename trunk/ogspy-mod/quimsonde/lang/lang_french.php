@@ -579,6 +579,6 @@ $lang['qms_footer'] =
 	"<div align=\"right\"><font size=\"2\">%1\$s v%2\$s by <a href='mailto:sylar.web@free.fr'>Sylar</a> <s>©</s> 2008</font><br/>\n".
 	"<font size=\"1\">Mod de Gestion des Espionnages subits<br />".
 	"<a href='index.php?action=%2\$s&page=changelog'>ChangeLog</a> / ".
-	"<a href='http://ogsteam.fr/viewtopic.php?id=4816' target='_blank'>plus d'infos</a></font><br/></div>\n";
+	"<a href='http://board.ogsteam.fr/viewtopic.php?id=4816' target='_blank'>plus d'infos</a></font><br/></div>\n";
 
 ?>
