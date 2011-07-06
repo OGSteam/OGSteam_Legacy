@@ -315,12 +315,12 @@ function calcul_changement ( $statut_changed, $player, $statut ) {
 
   // Est-ce une décolonisation ou non ?
   if ( $player == '' && isset ( $changed ) ) {
-    if ( ereg ( 'Planète', $changed ) ) $num_planete--;
-    if ( ereg ( 'Lune', $changed ) ) $num_lune--;
-    if ( ereg ( 'Ally', $changed ) ) $num_ally--;
-    if ( ereg ( 'PseuDo', $changed ) ) $num_PseuDo--;
-    if ( ereg ( 'Statut', $changed ) ) $num_statut--;
-    if ( ereg ( 'Colonisation', $changed ) ) $num_colo--;
+    if ( preg_match ( '/Planète/i', $changed ) ) $num_planete--;
+    if ( preg_match ( '/Lune/i', $changed ) ) $num_lune--;
+    if ( preg_match ( '/Ally/i', $changed ) ) $num_ally--;
+    if ( preg_match ( '/PseuDo/i', $changed ) ) $num_PseuDo--;
+    if ( preg_match ( '/Statut/i', $changed ) ) $num_statut--;
+    if ( preg_match ( '/Colonisation/i', $changed ) ) $num_colo--;
     $changed = 'Décolonisation';
     $color = ' background-color: ' . $color_deco . '; font-weight:bold;';
     $td = 'td';
