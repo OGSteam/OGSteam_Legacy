@@ -306,7 +306,7 @@ function toggle_callback_info() {
 	
 <?php if ($page == 'infos') { ?>
 	<h2>T&eacute;l&eacute;chargement de la barre</h2>
-		<p>Version Firefox : <a href="https://addons.mozilla.org/fr/firefox/addon/ogxtense/" target="_blank">Page extension Xtense</a></p>
+		<p>Version Firefox (Récupérez la dernière version et ouvrez le fichier avec Firefox): <a href="http://update.ogsteam.fr/xtense/download.php" target="_blank">Module Xtense</a></p>
 	<h2>Informations</h2>
 	
 	<p>Voici les informations que vous devez rentrer dans le plugin Xtense pour vous connecter &agrave; ce serveur :</p>
