@@ -1517,7 +1517,8 @@ function galaxy_reportspy_show() {
 	else {
 		$request .= " where id_spy = ".intval($pub_spy_id);
 	}
-	$request .= " and planet_name not like '%(Lune)%' AND planet_name not like 'lune' order by dateRE desc LIMIT 1";
+	$request .= " and BaLu<=0 and Pha<=0 and PoSa<=0 and planet_name not like '%(Lune)%'";
+	$request .= " order by dateRE desc LIMIT 1";
 	$result = $db->sql_query($request);
 
 	$reports = array();
@@ -1534,7 +1535,8 @@ function galaxy_reportspy_show() {
 	else {
 		$request .= " where id_spy = ".intval($pub_spy_id);
 	}
-	$request .= " and (planet_name like '%(Lune)%' OR planet_name like 'lune') order by dateRE desc LIMIT 1";
+	$request .= " and ((M<=0 and C<=0 and D<=0 and CES<=0 and CEF<=0 and UdN<=0 and Lab<=0 and Ter<=0 and Silo<=0) or planet_name like '%(Lune)%')";
+	$request .= " order by dateRE desc LIMIT 1";
 	$result = $db->sql_query($request);
 
 	while (list($pub_spy_id, $user_name, $dateRE) = $db->sql_fetch_row($result)) {
