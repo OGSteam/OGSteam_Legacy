@@ -75,8 +75,6 @@ if ($search && ($error == 0 || $error == 4)) {
 	}
 }
 
-//echo $coordonnees[$i][0].' - '.$coordonnees[$i][1].' - '.$coordonnees[$i][3].'<br />';
-
 // Recherche des rapports d'espionnages sur les planètes
 $espionnage = -1;
 if ($search && $error == 0) {
@@ -103,12 +101,14 @@ if ($search && $error == 0) {
 				$error2[2] = 1;
 			}
 		}
+		$coordonnees[$i]['id_spy'] = $rapports[$i]["id_spy"];
 		
 		(isset($rapports) && isset($rapports[$i])) ? $coordonnees[$i][2] = $rapports[$i]["dateRE"] : $error2[1] = 1;
 		if ($coordonnees[$i][3]) {
 			if (isset($rapports[$i + count($coordonnees)]["planet_name"])) {
 				$coordonnees[$i][3] = $rapports[$i + count($coordonnees)]["planet_name"];
 				$coordonnees[$i][4] = $rapports[$i + count($coordonnees)]["dateRE"];
+				$coordonnees[$i]['id_spy_moon'] = $rapports[$i + count($coordonnees)]["id_spy"];
 			} else $error2[1] = 1;
 		}
 		$rapport_date_min = min($rapport_date_min, $coordonnees[$i][2]);
@@ -452,12 +452,12 @@ if ($search && $error == 0) {
 		if ($coord[4] == 1) $coord_l = $lang['pandore_incomplete_report'];
 		$coords = explode(":",$coord[0]);
 		echo "\t<tr>\n\t\t<td rowspan='2' class='".$row."' style='text-align: center; vertical-align: middle; background-image: none;'>".++$i."</td>\n\t\t<td rowspan='2' class='".$row."' style='text-align: center; vertical-align: middle; background-image: none; cursor: pointer;' onclick='window.open(&quot;?action=galaxy&galaxy=".$coords[0]."&system=".$coords[1]."&quot;)' target='_blank' title='".$lang['pandore_link_galaxy']."'><a>".$coord[0]."</a></td>\n\t\t<td class='".$row."' style='text-align: center; vertical-align: middle; background-image: none;'>";
-		if ($coord[2] != 0) echo "<a href='#' onclick='window.open(&quot;?action=show_reportspy&galaxy=".$coords[0]."&system=".$coords[1]."&row=".$coords[2]."&quot;,&quot;_blank&quot;,&quot;width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0&quot;);return(false)' title='".$lang['pandore_link_spy']."' style='display: block;'>".$coord[1]."</a></td>\n";
+		if ($coord[2] != 0) echo "<a href='#' onclick='window.open(&quot;?action=show_reportspy&galaxy=".$coords[0]."&system=".$coords[1]."&row=".$coords[2]."&spy_id=".$coord['id_spy']."&quot;,&quot;_blank&quot;,&quot;width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0&quot;);return(false)' title='".$lang['pandore_link_spy']."' style='display: block;'>".$coord[1]."</a></td>\n";
 		else echo $coord[1]."</td>\n";
 		if ($coord[3]) {
 			echo "\t\t<td class='".$row."' style='text-align: center; vertical-align: middle; background-image: none;'>";
 			if ($coord[4] != 0) {
-				echo "<a href='#' onclick='window.open(&quot;?action=show_reportspy&galaxy=".$coords[0]."&system=".$coords[1]."&row=".$coords[2]."&quot;,&quot;_blank&quot;,&quot;width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0&quot;);return(false)' title='".$lang['pandore_link_spy']."' style='display: block;'>".$coord[3];
+				echo "<a href='#' onclick='window.open(&quot;?action=show_reportspy&galaxy=".$coords[0]."&system=".$coords[1]."&row=".$coords[2]."&spy_id=".$coord['id_spy_moon']."&quot;,&quot;_blank&quot;,&quot;width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0&quot;);return(false)' title='".$lang['pandore_link_spy']."' style='display: block;'>".$coord[3];
 				if ($coord[5] > 0) echo " <span title='".$lang['pandore_jump_gate']."'>(".$lang['pandore_jump_gate_short'].")</span>";
 				echo "</a></td>\n\t</tr>\n";
 			}
