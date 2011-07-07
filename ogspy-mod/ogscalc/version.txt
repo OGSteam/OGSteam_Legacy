@@ -1,2 +1,3 @@
-OGSCalc
-0.5
+Calculatrice Ogamienne
+1.0.0
+Calculatrice Ogamienne,Calculatrice Ogamienne,ogscalc,ogscalc,ogscalc.php,1,0
