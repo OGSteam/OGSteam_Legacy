@@ -88,9 +88,8 @@ if ($is_ok == true)
 		$db->sql_query($insert_config."( '0', 'searchID', '1|2|3' )");
 
 
-		// Insertion de la liaison entre Xtense v2 et QuiMSonde (merci Paradoxx!)
-		// define("INSTALL_MOD_NAME",$mod_name);
-		// include("_xtense.php");
+		// Insertion de la liaison entre Xtense v2 et QuiMSonde
+
 		
 		// On regarde si la table xtense_callbacks existe :
 		$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
