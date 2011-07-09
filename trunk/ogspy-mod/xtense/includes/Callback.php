@@ -32,7 +32,7 @@ abstract class Callback {
 	}
 	
 	final public function validVersion() {
-		return version_compare(PLUGIN_VERSION, $this->version, '<=');
+		return version_compare(PLUGIN_VERSION, $this->version, '>=');
 	}
 	
 	final public function setRoot($root) {
