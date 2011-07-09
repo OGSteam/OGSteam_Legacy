@@ -47,7 +47,7 @@ if (version_compare($pub_toolbar_version, TOOLBAR_MIN_VERSION, '<')) {
 	$io->send(0, true);
 }
 
-if(version_compare($pub_mod_min_version, PLUGIN_VERSION, '<')) {
+if(version_compare($pub_mod_min_version, PLUGIN_VERSION, '>')) {
 	$io->set(array(
 		'type' => 'wrong version',
 		'target' => 'plugin',
