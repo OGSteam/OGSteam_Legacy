@@ -9,31 +9,32 @@ $menuFixe 	= getOpts($user_data['user_id'], 0);
 $eXcDebug	= getOpts($user_data['user_id'], 1);
 $nMsgParPage    = getOpts($user_data['user_id'], 2);
 
-$nombreLien = 8;
+//Plus d'ajout manuel => uniquement par xtense
+$nombreLien = 7;
 $title[1] =  "Mes messages de joueurs";
 $title[2] =  "Mes messages d'alliance";
 $title[3] =  "Recherche de messages";
 $title[4] =  "Statistiques sur les messages";
 $title[5] =  "Options de eXchange";
 $title[6] =  "Export BBCode";
-$title[7] =  "Ajouter un message";
-$title[8] =  "A propos / Changelog";
+//$title[7] =  "Ajouter un message";
+$title[7] =  "A propos / Changelog";
 $link[1] =  "user";
 $link[2] =  "ally";
 $link[3] =  "seek";
 $link[4] =  "stats";
 $link[5] =  "config";
 $link[6] =  "bbcode";
-$link[7] =  "add";
-$link[8] =  "about";
+//$link[7] =  "add";
+$link[7] =  "about";
 $image[1] =  "2";
 $image[2] =  "1";
 $image[3] =  "6";
 $image[4] =  "3";
 $image[5] =  "7";
 $image[6] =  "10";
-$image[7] =  "9";
-$image[8] =  "11";
+//$image[7] =  "9";
+$image[7] =  "11";
 
 if ($menuFixe  == 0)
 {
