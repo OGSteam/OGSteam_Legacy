@@ -17,6 +17,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 // Include
 include("qms_common.php");
 include(FOLDER_INCLUDE."/qms_main.php");
+define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
 $mod_folder = "quimsonde";
 $mod_name = "QuiMSonde";
@@ -101,8 +102,8 @@ $db->sql_query($insert_config."( '0', 'banniere', 'no' )");
 $db->sql_query($insert_config."( '0', 'imgmenu', 'no' )");
 $db->sql_query($insert_config."( '0', 'nbrapport', '2' )");
 $db->sql_query($insert_config."( '0', 'periode', '20' )");
-$db->sql_query($insert_config."( '0', 'time_start', '".($a-3600*24*30)."' )");
 $db->sql_query($insert_config."( '0', 'time_end', '".($a=time())."' )");
+$db->sql_query($insert_config."( '0', 'time_start', '".($a-3600*24*30)."' )");
 $db->sql_query($insert_config."( '1', 'search', 
 	'Recherche d\'Alliance<|>?action=ally&ally={alliance}&classement=pp&Rechercher<|>Alliance<|>0' )");
 $db->sql_query($insert_config."( '2', 'search', 
@@ -112,8 +113,38 @@ $db->sql_query($insert_config."( '3', 'search',
 $db->sql_query($insert_config."( '0', 'searchID', '1|2|3' )");
 
 
-// Insertion de la liaison entre Xtense v2 et QuiMSonde (merci Paradoxx!)
-define("INSTALL_MOD_NAME",$mod_name);
-include("_xtense.php");
+// Insertion de la liaison entre Xtense v2 et QuiMSonde
+
+
+// On regarde si la table xtense_callbacks existe :
+$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
+$result = $db->sql_query($query);
+// On récupère le n° d'id du mod
+$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='QuiMSonde' AND `active`='1' LIMIT 1";
+$result = $db->sql_query($query);
+$mod_id = $db->sql_fetch_row($result);
+$mod_id = $mod_id[0];
+
+if($db->sql_numrows($result) != 0)
+	{
+		//Bonne nouvelle le mod xtense 2 est installé !
+		//Maintenant on regarde si eXchange est dedans normalement il devrait pas mais on est jamais trop prudent...
+		$query = 'Select * From '.TABLE_XTENSE_CALLBACKS.' where mod_id = '.$mod_id.' ';
+		$result = $db->sql_query($query);
+		$nresult = $db->sql_numrows($result);
+		if($nresult == 0)
+		{
+			// Il est pas dedans alors on l'ajoute :
+			$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES 
+			('.$mod_id.', "qms_import_enemy_spy", "ennemy_spy", 1)';
+			$db->sql_query($query);		
+			echo("<script> alert('La compatibilité du mod Qui Me Sonde avec le mod Xtense2 est installée !') </script>");
+		}
+	}	
+else
+	{
+	//On averti qu'Xtense 2 n'est pas installé :
+	echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod Qui Me Sonde ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
+	}	
 
 ?>
