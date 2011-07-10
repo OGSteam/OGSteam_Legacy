@@ -147,18 +147,19 @@ function SimuConverter(args) {
 						11 : '#B000B0',//Sat.Solaire
 						12 : '#A099FF',//Colonisateur
 						13 : '#99FF99',//Extracteur
-						14 : '#FF99A0',//BFG
-						15 : '#99FFA0',//S.BFG
-						16 : '#99A0FF',//P-F.Canon
-						17 : '#9900FF',//D\u00E9flecteurs
-						18 : '#CCFFCC',//P-F.Ionique
-						19 : '#FFCC99',//A.M.D
-						20 : '#FF3333',//Ch.force
-						21 : '#FF9900',//Holochamp
-						22 : '#FF0000',//pertes
-						23 : '#FF0000',//d\u00E9truit
-						24 : '#ccffaf',//attaquant
-						25 : '#eec263',//d\u00E9fenseur
+						14 : '#663366',//Frelon
+						15 : '#FF99A0',//BFG
+						16 : '#99FFA0',//S.BFG
+						17 : '#99A0FF',//P-F.Canon
+						18 : '#9900FF',//D\u00E9flecteurs
+						19 : '#CCFFCC',//P-F.Ionique
+						20 : '#FFCC99',//A.M.D
+						21 : '#FF3333',//Ch.force
+						22 : '#FF9900',//Holochamp
+						23 : '#FF0000',//pertes
+						24 : '#FF0000',//d\u00E9truit
+						25 : '#ccffaf',//attaquant
+						26 : '#eec263',//d\u00E9fenseur
 						};
 	this.link="http://forum.e-univers.org/index.php?showtopic=9010";
 	
@@ -236,7 +237,7 @@ SimuConverter.prototype.setPlayer = function(num) {
 		p.technos[2]=parseFloat(document.getElementsByName("ca")[0].value);
 		
 		//units
-		for(var i = 0 ; i < 14 ; i++) {//ships
+		for(var i = 0 ; i < 15 ; i++) {//ships
 			var inputs = document.getElementsByName("a_"+(i+1));
 		//alert(inputs.length);
 			//alert(input.value);
@@ -263,7 +264,7 @@ SimuConverter.prototype.setPlayer = function(num) {
 		p.technos[2]=parseFloat(document.getElementsByName("cd")[0].value);
 		
 		//units
-		for(var i = 0 ; i < 14 ; i++) {//ships
+		for(var i = 0 ; i < 15 ; i++) {//ships
 			var inputs = document.getElementsByName("d_"+(i+1));
 			if(inputs.length>0) {
 				p.units[0][i] = inputs[0].value.ufTrimInt();
@@ -273,7 +274,7 @@ SimuConverter.prototype.setPlayer = function(num) {
 				p.units[1][i] = cell.innerHTML.ufTrimInt();
 			}
 		}
-		for(var i = 14 ; i < 22 ; i++) {//defense
+		for(var i = 15 ; i < 23 ; i++) {//defense
 			var inputs = document.getElementsByName("d_"+(i+87));
 			if(inputs.length>0) {
 				p.units[0][i] = inputs[0].value.ufTrimInt();
@@ -490,7 +491,7 @@ SimuConverter.prototype.createPlayerMessage = function(num,isStart)
 	}
 	
 	if(sum <= 0) {//d\u00E9truit
-		st += '\n[b][color='+this.colors[23]+']'+this.lang['destroyed']+' ![/color][/b]';
+		st += '\n[b][color='+this.colors[24]+']'+this.lang['destroyed']+' ![/color][/b]';
 	}
 	else {//sinon vaisseaux
 		for(var i in p.units[isStart]) {

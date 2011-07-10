@@ -4,7 +4,7 @@
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="rdf:#$WmLaT"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   em:maxVersion="6.0a1"
+                   em:maxVersion="8.0"
                    em:minVersion="2.0" />
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="{b66bc4c3-6d25-4a10-8c59-01daa9063052}"
