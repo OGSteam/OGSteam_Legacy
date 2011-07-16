@@ -232,7 +232,7 @@ cristal_heure[nb_planet+1] = 0;
 deut_heure[nb_planet+1] = 0;
 for (i=start;i<=nb_planet;i++) {
 	if (batimentsOGSpy[i][14] == 1) {
-		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100)*(Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100)*(Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.floor((donnee['rap_SS'][i]/100)* (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] + 140) / 6)))) * ingenieur); 
+		prod_energie = Math.round((Math.round((donnee['rap_SoP'][i]/100) * (Math.floor(20 * donnee['SoP'][i] * Math.pow(1.1, donnee['SoP'][i])))) + Math.round((donnee['rap_FR'][i]/100) * (Math.floor(30 * donnee['FR'][i] * Math.pow(1.05 + 0.01 * technologieNRJ, donnee['FR'][i])))) + Math.round((donnee['rap_SS'][i]/100) * (donnee['SS'][i] * Math.floor((batimentsOGSpy[i][7] * 1 + 140) / 6)))) * ingenieur); 
 		cons_energie = Math.ceil((donnee['rap_M'][i]/100)*(Math.ceil(10 * donnee['M'][i] * Math.pow(1.1, donnee['M'][i])))) + Math.ceil((donnee['rap_C'][i]/100)*(Math.ceil(10 * donnee['C'][i] * Math.pow(1.1, donnee['C'][i])))) + Math.ceil((donnee['rap_D'][i]/100)*(Math.ceil(20 * donnee['D'][i] * Math.pow(1.1, donnee['D'][i]))));
 	
         if (cons_energie == 0) cons_energie = 1;
