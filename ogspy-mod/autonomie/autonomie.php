@@ -62,15 +62,15 @@ function ressourcespetithangar($autonomieM,$autonomieC,$autonomieD,$user_buildin
 							{
 								$temps= $autonomieM[$i];
 							}
-				elseif($autonomieC[$i]<$autonomieM[$i] and $autonomieC[$i]<$autonomieD[$i])
-					{
-						$temps= $autonomieC[$i];
-					}
-				elseif($autonomieD[$i]<$autonomieM[$i] and $autonomieD[$i]<$autonomieC[$i])
-					{
-						$temps= $autonomieD[$i];
-					}
-				$result[$i]=($user_building[$i]['M_hour']+$user_building[$i]['C_hour']+$user_building[$i]['D_hour'])*$temps;
+						elseif($autonomieC[$i]<$autonomieM[$i] and $autonomieC[$i]<$autonomieD[$i])
+							{
+								$temps= $autonomieC[$i];
+							}
+						elseif($autonomieD[$i]<$autonomieM[$i] and $autonomieD[$i]<$autonomieC[$i])
+							{
+								$temps= $autonomieD[$i];
+							}
+						$result[$i]=($user_building[$i]['M_hour']+$user_building[$i]['C_hour']+$user_building[$i]['D_hour'])*$temps;
 					}
 			}
 		return $result;
@@ -93,20 +93,8 @@ function ressourcesgrandhangar($autonomieM,$autonomieC,$autonomieD,$user_buildin
 						if (empty($autonomieM[$i])) $autonomieM[$i] = 1;
 						if (empty($autonomieC[$i])) $autonomieC[$i] = 1;
 						if (empty($autonomieD[$i])) $autonomieD[$i] = 1;
-
-						if($autonomieM[$i]>$autonomieC[$i] and $autonomieM[$i]>$autonomieD[$i])
-							{
-								$temps= $autonomieM[$i];
-							}
-						elseif($autonomieC[$i]>$autonomieM[$i] and $autonomieC[$i]>$autonomieD[$i])
-							{
-								$temps= $autonomieC[$i];
-							}
-						elseif($autonomieD[$i]>$autonomieM[$i] and $autonomieD[$i]>$autonomieC[$i])
-							{
-								$temps= $autonomieD[$i];
-							}
-						$result[$i]=($user_building[$i]['M_hour']+$user_building[$i]['C_hour']+$user_building[$i]['D_hour'])*$temps;
+						
+						$result[$i]=($user_building[$i]['M_hour']*$autonomieM[$i]+$user_building[$i]['C_hour']*$autonomieC[$i]+$user_building[$i]['D_hour']*$autonomieD[$i]);
 					}
 			}
 		return $result;
