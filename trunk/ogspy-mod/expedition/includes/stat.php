@@ -45,7 +45,7 @@ else
 if($res['nombreExpRess'] != 0)
 {
 	$graphicRess = <<<GRAPH
-	<img src="index.php?action=graphic_pie&values=$res[sumMetal]_x_$res[sumCristal]_x_$res[sumDeuterium]_x_$res[sumAntiMat]&legend=Metal_x_Cristal_x_Deuterium_x_Anitimatiere&title=Proportion%20des%20ressources" alt="Pas de graphique disponible">
+	<img src="index.php?action=graphic_pie&values=$res[sumMetal]_x_$res[sumCristal]_x_$res[sumDeuterium]_x_$res[sumAntiMat]&legend=Metal_x_Cristal_x_Deuterium_x_Antimatiere&title=Proportion%20des%20ressources" alt="Pas de graphique disponible">
 GRAPH;
 }
 else
@@ -55,7 +55,7 @@ else
 if($res4month['nombreExpRess'] != 0)
 {
 	$graphicRess4month = <<<GRAPH
-	<img src="index.php?action=graphic_pie&values=$res4month[sumMetal]_x_$res4month[sumCristal]_x_$res4month[sumDeuterium]_x_$res4month[sumAntiMat]&legend=Metal_x_Cristal_x_Deuterium_x_Anitimatiere&title=Proportion%20des%20ressources%20pour%20le%20mois" alt="Pas de graphique disponible">
+	<img src="index.php?action=graphic_pie&values=$res4month[sumMetal]_x_$res4month[sumCristal]_x_$res4month[sumDeuterium]_x_$res4month[sumAntiMat]&legend=Metal_x_Cristal_x_Deuterium_x_Antimatiere&title=Proportion%20des%20ressources%20pour%20le%20mois" alt="Pas de graphique disponible">
 GRAPH;
 }
 else
