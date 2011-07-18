@@ -12,10 +12,6 @@
 	// = Calcul du classement de production miniere =
 	// ==============================================//
 	
-	// On appelle les ingénieur nécessaire.
-	$off_ingenieur = $user_data['off_ingenieur'];
-	$off_geologue = $user_data['off_geologue'];
-	
 	// On véréfie que le dépôt de ravitaillement fait activer sur l'univers.
 	$ddr = $server_config['ddr'];
 	
@@ -43,7 +39,7 @@
 				$planet = array(false, 'user_id' => '', 'planet_name' => '', 'coordinates' => '', 'fields' => '', 'fields_used' => '', 'temperature_min' => '', 'temperature_max' => '', 'Sat' => '',
 				'M' => 0, 'C' => 0, 'D' => 0, 'CES' => 0, 'CEF' => 0 ,
 				'M_percentage' => 0, 'C_percentage' => 0, 'D_percentage' => 0, 'CES_percentage' => 100, 'CEF_percentage' => 100, 'Sat_percentage' => 100);
-		$sql="select distinct u.user_id,user_name from ".TABLE_USER." u,".$table_prefix."user_building b where user_active and u.user_id=b.user_id";
+		$sql="select distinct u.user_id,user_name,off_geologue from ".TABLE_USER." u,".$table_prefix."user_building b where user_active and u.user_id=b.user_id";
 		$result = $db->sql_query($sql);
 
 		$nplayer=0;
@@ -52,6 +48,9 @@
 		{
 			$user_id=$player[0];
 			
+			$query_officer = $db->sql_query("SELECT `off_ingenieur`,`off_geologue` FROM ".TABLE_USER." WHERE user_id = ".$user_id);
+			list($off_ingenieur, $off_geologue) = $db->sql_fetch_row($query_officer);
+				
 			// Récupération des informations sur les mines du joueur
 			
 			$quet = mysql_query('SELECT planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, M_percentage, C_percentage, D_percentage, CES_percentage, CEF_percentage, Sat_percentage FROM '.TABLE_USER_BUILDING.' WHERE user_id = '.$user_id.' ORDER BY planet_id');
@@ -82,7 +81,7 @@
 				$user_building[$row['planet_id']][0] = true;
 
 				// calcul des productions
-				global $db, $off_ingenieur, $off_geologue;
+				global $db, $server_config;
 				require_once("includes/ogame.php");
 				
 				$metal_heure=0;
@@ -93,9 +92,8 @@
 				$deut_jour = 0;
 				$start = 101;
 				$nb_planet = find_nb_planete_user();
-				
 				for ($i=$start ; $i<=$start+$nb_planet-1 ; $i++)
-				{				
+				{	
 					$M = $user_building[$i]['M'];
 					$C = $user_building[$i]['C'];
 					$D = $user_building[$i]['D'];
@@ -114,7 +112,7 @@
 					$production_CEF = ( $CEF_per / 100 ) * ( production ("CEF", $CEF, $off_ingenieur,$temperature_max, $NRJ ));
 					$production_SAT = ( $SAT_per / 100 ) * ( production_sat ( $temperature_min, $temperature_max, $off_ingenieur ) * $SAT );
 					$prod_energie = $production_CES + $production_CEF + $production_SAT;
-					
+				
 					$consommation_M = ( $M_per / 100 ) * ( consumption ( "M", $M ));
 					$consommation_C = ( $C_per / 100 ) * ( consumption ( "C", $C ));
 					$consommation_D = ( $D_per / 100 ) * ( consumption ( "D", $D ));
