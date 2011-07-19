@@ -124,7 +124,7 @@
 
 					$metal_heure = $metal_heure + (( production ( "M", $M, $off_geologue )) * $ratio);
 					$cristal_heure = $cristal_heure + (( production ( "C", $C, $off_geologue )) * $ratio);
-					$deut_heure = $deut_heure  + ((( production ( "D", $D, $off_geologue, $temperature_max )) * $ratio) -  (consumption ("CEF", $CEF)));
+					$deut_heure = $deut_heure  + ((( production ( "D", $D, $off_geologue, $temperature_max )) * $ratio) -  ((consumption ("CEF", $CEF)) * ( $CEF_per / 100 )));
 			
 				}			
 				
