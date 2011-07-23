@@ -1,7 +1,19 @@
 <?php
-define("IN_SPYOGAME", true);
-require_once("common.php");
 
-$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active) VALUES ('Graviton','Graviton','graviton','graviton','graviton.php','0.5','1')";
-$db->sql_query($query);
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
+}
+
+$is_ok = false;
+$mod_folder = "graviton";
+$is_ok = install_mod ($mod_folder);
+
+if ($is_ok == true)
+	{
+		//Eventuelle Query
+	}
+else
+	{
+		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 ?>

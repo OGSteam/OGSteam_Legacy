@@ -1,11 +1,10 @@
 <?php
-/***************************************************************************
-*	filename	: graviton.php
-*	desc.		:
-*	Author		: Kal Nightmare - http://ogs.servebbs.net/
-*	created		: 25/07/2006
-*	modified	: 13/08/2006 12:47:19
-***************************************************************************/
+/**
+* graviton.php Fichier principal
+* @package MOD Graviton
+* @author Kal Nightmare
+* @link http://www.ogsteam.fr
+*/
 
 if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
@@ -15,11 +14,18 @@ require_once("views/page_header.php");
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='graviton' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
+//recuperaiton du dossier, et de la version
+$query = "SELECT root, version FROM `" . TABLE_MOD . "` WHERE `action`='graviton'";
+$result = $db->sql_fetch_assoc($db->sql_query($query));
+$dir = $result['root'];
+
 $user_empire = user_get_empire();
 $user_building = $user_empire["building"];
 $user_technology = $user_empire["technology"];
+$nb_planete = find_nb_planete_user();
+
 ?>
-<script src="mod/graviton/function.js"></script>
+<script <?php echo 'src="mod/'.$dir.'/function.js"'; ?> ></script>
 <script type="text/javascript">
 var batimentsOGSpy = new Array();
 Prod = new Array ();
@@ -48,34 +54,35 @@ echo "Ress['Usine']['".$ressource[$i]."'] = new Array;\n";
 echo "Ress['Total']['".$ressource[$i]."'] = new Array;\n";
 }
 
-$j=1;
-for ($i=1;$i<=9;$i++)
+$j = 1;
+for ($i=101;$i<=100+$nb_planete;$i++)
 {
 	if ($user_building[$i]['planet_name'] != '')
 	{
-		echo "batimentsOGSpy[".$i."]= new Array('".
+		echo "batimentsOGSpy[".$j."]= new Array('".
 			$user_building[$i]['planet_name']."','".
-			$user_building[$i]['temperature']."','".
+			floor(($user_building[$i]["temperature_max"] + $user_building[$i]["temperature_min"])/2)."','".
 			$user_building[$i]['CES']."','".
 			$user_building[$i]['CEF']."','".
 			$user_building[$i]['UdN']."','".
 			$user_building[$i]['CSp']."','".
 			$user_building[$i]['Sat']."','".
 			$user_building[$i]['Lab']."','".
-			$user_building[$i]['UdR']."');\n";
-				
-	} else {
-		echo "batimentsOGSpy[".$i."]= new Array('NC','-','-','-','-','-','-','-','-');\n";
+			$user_building[$i]['UdR']."',1);\n";
+		$j = $j + 1;
 	}
 }
+echo 'nb_planete = '.$nb_planete.';';
 if ($user_technology['Graviton'] <> '') {echo "graviton=".$user_technology['Graviton'].";\n";}
 else {echo "graviton=0;\n";}
+
 ?>
 function chargement ()
 {
 <?php
-for ($i=1;$i<=9;$i++)
+for ($i=1;$i<= $nb_planete;$i++)
 	{
+		
 		echo "document.getElementById('CES".$i."').value = batimentsOGSpy[".$i."][2];\n";
 		echo "document.getElementById('CEF".$i."').value = batimentsOGSpy[".$i."][3];\n";
 		echo "document.getElementById('UdN".$i."').value = batimentsOGSpy[".$i."][4];\n";
@@ -84,27 +91,28 @@ for ($i=1;$i<=9;$i++)
 		echo "document.getElementById('Lab".$i."').value = batimentsOGSpy[".$i."][7];\n";
 		echo "document.getElementById('UdR".$i."').value = batimentsOGSpy[".$i."][8];\n";
 	}
-	echo "document.getElementById('niv_graviton').value= graviton +1 ;\n";
+	echo "document.getElementById('niv_graviton').value= graviton + 1 ;\n";
 ?>
-verif_donnee ();
+
+verif_all ();
 }
-function verif_donnee() {
+function verif_all() {
+for (i=1;i<=nb_planete;i++) {
+verif_donnee(i);}}
+function verif_donnee(planete) {
 <?php 
  $bat2 = array('CES','CEF','UdN','CSp','Lab','UdR');
  $php = array(2,3,4,5,7,8);
  for ($b=0;$b<=5;$b++){
- 	for ($i=1;$i<=9;$i++){
-		 echo "if ((parseFloat(document.getElementById('".$bat2[$b].$i."').value) < parseFloat(batimentsOGSpy[".$i."][".$b."])) || (isNaN(parseFloat(document.getElementById('".$bat2[$b].$i."').value)) && parseFloat(document.getElementById('".$bat2[$b].$i."').value) != '-')) {document.getElementById('".$bat2[$b].$i."').value = batimentsOGSpy[".$i."][".$php[$b]."];}\n";
-	}
- }
- for ($i=1;$i<=9;$i++){
- 	echo "if ((isNaN(parseFloat(document.getElementById('Sat".$i."').value))) && (parseFloat(document.getElementById('Sat".$i."').value) != '-')) {document.getElementById('Sat".$i."').value = batimentsOGSpy[".$i."][6];}\n";
- }
-?>
+ 		 echo "if ((parseFloat(document.getElementById('".$bat2[$b]."' + planete).value) < parseFloat(batimentsOGSpy[planete][".$php[$b]."])) || (isNaN(parseFloat(document.getElementById('".$bat2[$b]."' + planete).value)) && parseFloat(document.getElementById('".$bat2[$b]."' + planete).value) != '-')) {document.getElementById('".$bat2[$b]."' + planete).value = batimentsOGSpy[planete][".$php[$b]."];}\n";
+ }?>
+ 	if ((isNaN(parseFloat(document.getElementById('Sat' + planete).value))) && (parseFloat(document.getElementById('Sat' + planete).value) != '-')) {document.getElementById('Sat' + planete).value = batimentsOGSpy[planete][6];}
+ 
+
  if ((parseFloat(document.getElementById('niv_graviton').value) == 0 ) || (isNaN(parseFloat(document.getElementById('niv_graviton').value)))) {	document.getElementById('niv_graviton').value = graviton +1;} 
-recup_donne ();
+recup_donne (planete);
 }
-function recup_donne(){
+function recup_donne(planete){
 niv_bat = new Array;
 niv_grav = parseFloat(document.getElementById('niv_graviton').value);
 <?php
@@ -112,80 +120,72 @@ $bat = array("'Lab'","'CES'","'CEF'","'Sat'","'UdN'","'UdR'","'CSp'");
 $bat2 = array('Lab','CES','CEF','Sat','UdN','UdR','CSp');
 for ($b=0;$b<=6;$b++){
 	echo "niv_bat[".$bat[$b]."] = new Array;\n";
-	for ($i=1;$i<=9;$i++){
-		echo "niv_bat[".$bat[$b]."][".$i."] = parseFloat(document.getElementById('".$bat2[$b].$i."').value);\n";
-	}
+	echo "niv_bat[".$bat[$b]."][planete] = parseFloat(document.getElementById('".$bat2[$b]."' + planete).value);\n";
 }
 ?>
-calcul ();
+calcul (planete);
 }
-function ecrire() {
-<?php 
-for ($i=1;$i<=9;$i++) {	
-	echo "if (batimentsOGSpy[".$i."][0] != 'NC') {\n";
-		echo "document.getElementById('CES_pro".$i."').innerHTML = Prod['CES'][".$i."];\n";
-		echo "document.getElementById('CEF_pro".$i."').innerHTML = Prod['CEF'][".$i."];\n";
-		echo "document.getElementById('Sat_pro".$i."').innerHTML = Prod['Sat'][".$i."];\n";
+function ecrire(planete) {
+	 	 document.getElementById('CES_pro' + planete).innerHTML = Prod['CES'][planete];
+		 document.getElementById('CEF_pro' + planete).innerHTML = Prod['CEF'][planete];
+		 document.getElementById('Sat_pro' + planete).innerHTML = Prod['Sat'][planete];
 		
-		echo "document.getElementById('NB_Sat".$i."').innerHTML =  format(Sat['nb_nec'][".$i."]);\n";
-		echo "document.getElementById('Sat_cristal".$i."').innerHTML =  format(Ress['Sat']['Cristal'][".$i."]);\n";
-		echo "document.getElementById('Sat_deut".$i."').innerHTML =  format(Ress['Sat']['Deut'][".$i."]);\n";
+		 document.getElementById('NB_Sat' + planete).innerHTML =  format(Sat['nb_nec'][planete]);
+		 document.getElementById('Sat_cristal' + planete).innerHTML =  format(Ress['Sat']['Cristal'][planete]);
+		 document.getElementById('Sat_deut' + planete).innerHTML =  format(Ress['Sat']['Deut'][planete]);
 //Laboratoire	
-		echo "document.getElementById('Lab_niv_manquant".$i."').innerHTML = (niv_lab[".$i."] - batimentsOGSpy[".$i."][7]);\n";
-		echo "document.getElementById('Lab_metal".$i."').innerHTML = format(Ress['Lab']['Metal'][".$i."]);\n";
-		echo "document.getElementById('Lab_cristal".$i."').innerHTML = format(Ress['Lab']['Cristal'][".$i."]);\n";
-		echo "document.getElementById('Lab_deut".$i."').innerHTML = format(Ress['Lab']['Deut'][".$i."]);\n";
-		echo "document.getElementById('lab_temps".$i."').innerHTML = format(Temps['Lab'][".$i."]);\n";
-		echo "document.getElementById('lab_temps_conv".$i."').innerHTML = conv_temps (Temps['Lab'][".$i."]);\n";
+		 document.getElementById('Lab_niv_manquant' + planete).innerHTML = (niv_lab[planete] - batimentsOGSpy[planete][7]);
+		 document.getElementById('Lab_metal' + planete).innerHTML = format(Ress['Lab']['Metal'][planete]);
+		 document.getElementById('Lab_cristal' + planete).innerHTML = format(Ress['Lab']['Cristal'][planete]);
+		 document.getElementById('Lab_deut' + planete).innerHTML = format(Ress['Lab']['Deut'][planete]);
+		 document.getElementById('lab_temps' + planete).innerHTML = format(Temps['Lab'][planete]);
+		 document.getElementById('lab_temps_conv' + planete).innerHTML = conv_temps (Temps['Lab'][planete]);
 //centrale		
-		echo "document.getElementById('Cen_metal".$i."').innerHTML = format(Ress['Centrale']['Metal'][".$i."]);\n";
-		echo "document.getElementById('Cen_cristal".$i."').innerHTML = format(Ress['Centrale']['Cristal'][".$i."]);\n";
-		echo "document.getElementById('Cen_deut".$i."').innerHTML = format(Ress['Centrale']['Deut'][".$i."]);\n";
-		echo "document.getElementById('Cen_temps".$i."').innerHTML = format(Temps['Centrale'][".$i."])+' s';\n";
-		echo "document.getElementById('Cen_temps_conv".$i."').innerHTML = conv_temps (Temps['Centrale'][".$i."]);\n";
+		 document.getElementById('Cen_metal' + planete).innerHTML = format(Ress['Centrale']['Metal'][planete]);
+		 document.getElementById('Cen_cristal' + planete).innerHTML = format(Ress['Centrale']['Cristal'][planete]);
+		 document.getElementById('Cen_deut' + planete).innerHTML = format(Ress['Centrale']['Deut'][planete]);
+		 document.getElementById('Cen_temps' + planete).innerHTML = format(Temps['Centrale'][planete])+' s';
+		 document.getElementById('Cen_temps_conv' + planete).innerHTML = conv_temps (Temps['Centrale'][planete]);
 //Usine
-		echo "document.getElementById('Usi_metal".$i."').innerHTML = format(Ress['Usine']['Metal'][".$i."]);\n";
-		echo "document.getElementById('Usi_cristal".$i."').innerHTML = format(Ress['Usine']['Cristal'][".$i."]);\n";
-		echo "document.getElementById('Usi_deut".$i."').innerHTML = format(Ress['Usine']['Deut'][".$i."]);\n";
-		echo "document.getElementById('Usi_temps".$i."').innerHTML = format(Temps['Usine'][".$i."])+' s';\n";
-		echo "document.getElementById('Usi_temps_conv".$i."').innerHTML = conv_temps (Temps['Usine'][".$i."]);\n";
+		 document.getElementById('Usi_metal' + planete).innerHTML = format(Ress['Usine']['Metal'][planete]);
+		 document.getElementById('Usi_cristal' + planete).innerHTML = format(Ress['Usine']['Cristal'][planete]);
+		 document.getElementById('Usi_deut' + planete).innerHTML = format(Ress['Usine']['Deut'][planete]);
+		 document.getElementById('Usi_temps' + planete).innerHTML = format(Temps['Usine'][planete])+' s';
+		 document.getElementById('Usi_temps_conv' + planete).innerHTML = conv_temps (Temps['Usine'][planete]);
 //Temps	Sat	
-		echo "document.getElementById('Sat_temps_un".$i."').innerHTML = format(Temps['Sat_un'][".$i."]) + ' s';\n";
-		echo "document.getElementById('Sat_temps".$i."').innerHTML = format(Temps['Sat'][".$i."]) + ' s';\n";
-		echo "document.getElementById('Sat_temps_conv".$i."').innerHTML = conv_temps (Temps['Sat'][".$i."]);\n";
+		 document.getElementById('Sat_temps_un' + planete).innerHTML = format(Temps['Sat_un'][planete]) + ' s';
+		 document.getElementById('Sat_temps' + planete).innerHTML = format(Temps['Sat'][planete]) + ' s';
+		 document.getElementById('Sat_temps_conv' + planete).innerHTML = conv_temps (Temps['Sat'][planete]);
 //Totale		
-		echo "document.getElementById('met_tot".$i."').innerHTML = format(Ress['Total']['Metal'][".$i."]);\n";
-		echo "document.getElementById('crist_tot".$i."').innerHTML = format(Ress['Total']['Cristal'][".$i."]);\n";
-		echo "document.getElementById('deut_tot".$i."').innerHTML = format(Ress['Total']['Deut'][".$i."]);\n";
-		echo "document.getElementById('temps_tot".$i."').innerHTML = format(Temps['Total'][".$i."]) + ' s';\n";
-		echo "document.getElementById('temps_tot_conv".$i."').innerHTML = conv_temps(Temps['Total'][".$i."]);\n";
-		
-		echo "}\n"; 
-
-
-} ?>
+		 document.getElementById('met_tot' + planete).innerHTML = format(Ress['Total']['Metal'][planete]);
+		 document.getElementById('crist_tot' + planete).innerHTML = format(Ress['Total']['Cristal'][planete]);
+		 document.getElementById('deut_tot'+ planete).innerHTML = format(Ress['Total']['Deut'][planete]);
+		 document.getElementById('temps_tot' + planete).innerHTML = format(Temps['Total'][planete]) + ' s';
+		 document.getElementById('temps_tot_conv' + planete).innerHTML = conv_temps(Temps['Total'][planete]);
 }
 window.onload = chargement;
 </script>
-<table width="100%">
+<?php $largeur=190+(106*$nb_planete)+106;
+echo "<table width=".$largeur." >";?>
 <tr>
-	<td class="c" colspan="10">Simulation Graviton niv <input type='text' id='niv_graviton' size='2' maxlength='2' onBlur="javascript:verif_donnee ()" value='1'> <input type="submit" value="Restaurer les données" onClick="javascript:chargement ()"></td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Simulation Graviton niv <input type='text' id='niv_graviton' size='2' maxlength='2' onBlur="javascript:verif_all ()" value='1'> <input type="submit" value="Restaurer les données" onClick="javascript:chargement()"></td>
 </tr>
 <tr>
-	<th><a>Nom</a></th>
+	<th width="190"><a>Nom</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=100+find_nb_planete_user() ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") $name = "&nbsp;";
 
-	echo "\t"."<th><a>".$name."</a></th>"."\n";
+	echo "\t"."<th width='106'><a>".$name."</a></th>"."\n";
 }
 ?>
+<th width="106">Simulation</th>
 </tr>
 <tr>
 	<th><a>Coordonnées</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=101 ; $i<=100+$nb_planete ; $i++) {
 	$coordinates = $user_building[$i]["coordinates"];
 	if ($coordinates == "") $coordinates = "&nbsp;";
 	else $coordinates = "[".$coordinates."]";
@@ -193,47 +193,50 @@ for ($i=1 ; $i<=9 ; $i++) {
 	echo "\t"."<th>".$coordinates."</th>"."\n";
 }
 ?>
+<th>0:00:00</th>
 </tr>
 <tr>
 	<th><a>Température</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
-	$temperature[$i] = $user_building[$i]["temperature"];
+for ($i=101 ; $i<=100+ $nb_planete ; $i++) {
+	$temperature[$i] = floor(($user_building[$i]["temperature_max"] + $user_building[$i]["temperature_min"])/2);
 	if ($temperature[$i] == "") $temperature[$i] =0 ;
 
 	echo "\t"."<th>".$temperature[$i]."</th>"."\n";
 }
 ?>
+<th><input type='text'  size='2' maxlength='2' <?php echo "id='temp".($nb_planete+1)."'  onBlur='javascript:verif_donnee (".($nb_planete+1).")'"; ?> value='0' disabled>
 </tr>
 <tr>
-	<td class="c" colspan="10">Bâtiments</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Bâtiments</td>
 </tr>
 <?php
 $bati = array('Lab','UdR','UdN','CSp','CES','CEF');
 $nom_bat=array('Laboratoire de recherche','Usine de robots','Usine de nanites','Chantier spatial','Centrale électrique solaire','Centrale électrique de fusion');
 for ($b=0;$b<=5;$b++) {
 	echo "<tr><th><a>".$nom_bat[$b]."</a></th>";
-	for ($i=1 ; $i<=9 ; $i++) {
-		echo "\t"."<th><input type='text' id='".$bati[$b].$i."' size='2' maxlength='2' onBlur=\"javascript:verif_donnee ()\" value='0'></th>"."\n";
+	for ($i=1 ; $i<=($nb_planete) ; $i++) {
+		echo "\t"."<th><input type='text' id='".$bati[$b].$i."' size='2' maxlength='2' onBlur=\"javascript:verif_donnee (".$i.")\" value='0'></th>"."\n";
 	}
-	echo "</tr>";
+		echo "\t"."<th><input type='text' id='".$bati[$b].($nb_planete + 1)."' size='2' maxlength='2' onBlur=\"javascript:verif_donnee (".($nb_planete + 1).")\" value='0' disabled></th>"."\n";
+		echo "</tr>";
 }
 ?>
 <tr>
 	<th><a>Satellite solaire</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
-	echo "\t"."<th><input type='text' id='Sat".$i."' size='5' maxlength='5' onBlur='javascript:verif_donnee ()' value='0'></th>"."\n";
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
+	echo "\t"."<th><input type='text' id='Sat".$i."' size='5' maxlength='5' onBlur='javascript:verif_donnee (".$i.")' value='0'></th>"."\n";
 }
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Production théorique d'énergie</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Production théorique d'énergie</td>
 </tr>
 <tr>
 	<th><a>Centrale électrique solaire</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='CES_pro".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -241,7 +244,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Centrale électrique de fusion</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='CEF_pro".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -249,18 +252,18 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Satellite solaire</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_pro".$i."'></span></font></th>"."\n";
 }
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Batiement nécessaire Laboratoire de recherche niv 12</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Bâtiments nécessaire Laboratoire de recherche niv 12</td>
 </tr>
 <tr>
 	<th><a>Nombre de niveau manquant</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Lab_niv_manquant".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -268,7 +271,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Lab_metal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -276,7 +279,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Lab_cristal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -284,7 +287,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Lab_deut".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -292,7 +295,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='lab_temps".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -300,21 +303,21 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='lab_temps_conv".$i."'></span></font></th>"."\n";
 	}
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Batiement</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Bâtiments</td>
 </tr>
 <tr>
-	<td class="c" colspan="10">Usine de nanites, usine de robots, chantier spatial</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Usine de nanites, usine de robots, chantier spatial</td>
 </tr>
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Usi_metal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -322,7 +325,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Usi_cristal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -330,7 +333,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Usi_deut".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -338,7 +341,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Usi_temps".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -346,18 +349,18 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Usi_temps_conv".$i."'></span></font></th>"."\n";
 	}
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Centrale électrique solaire, centrale électrique de fusion</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Centrale électrique solaire, centrale électrique de fusion</td>
 </tr>
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Cen_metal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -365,7 +368,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Cen_cristal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -373,7 +376,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Cen_deut".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -381,7 +384,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Cen_temps".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -389,18 +392,18 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Cen_temps_conv".$i."'></span></font></th>"."\n";
 	}
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Satellites nécessaires</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Satellites nécessaires</td>
 </tr>
 <tr>
 	<th><a>Nombres</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='NB_Sat".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -408,7 +411,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_cristal".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -416,7 +419,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_deut".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -424,7 +427,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps construction un satellite</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_temps_un".$i."'></span></font></th>"."\n";
 	
 }
@@ -433,7 +436,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_temps".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -442,19 +445,19 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='Sat_temps_conv".$i."'></span></font></th>"."\n";
 	}
 ?>
 </tr>
 <tr>
-	<td class="c" colspan="10">Ressources totales nécessaires</td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Ressources totales nécessaires</td>
 </tr>
 
 <tr>
 	<th><a>Métal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='met_tot".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -462,7 +465,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Cristal</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='crist_tot".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -470,7 +473,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Deutérium</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='deut_tot".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -478,7 +481,7 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='temps_tot".$i."'></span></font></th>"."\n";
 }
 ?>
@@ -487,14 +490,14 @@ for ($i=1 ; $i<=9 ; $i++) {
 <tr>
 	<th><a>Temps</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=1 ; $i<=($nb_planete) ; $i++) {
 	echo "\t"."<th><font color='lime'><span id='temps_tot_conv".$i."'></span></font></th>"."\n";
 	}
 ?>
-</tr>
-<tr><td colspan="10">
-<div align=center><font size=2>Graviton développé par <a href=mailto:kalnightmare@free.fr>Kal Nightmare</a> &copy;2006</font></div>
-</td></tr></table>
+</tr></table>
+<br/>
+<div align=center><font size=2>Graviton développé <?php echo $result['version']; ?> par <a href=mailto:kalnightmare@free.fr>Kal Nightmare</a> &copy;2006</font></div>
+
 <table>
 <tr><td>
 <?php
