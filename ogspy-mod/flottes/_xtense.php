@@ -44,7 +44,7 @@ define("TABLE_MOD_FLOTTES_ADM", $table_prefix."mod_flottes_admin");
 function flottes_import_fleet($fleet) {
 
     global $user_data;
-    dump($fleet);
+    //dump($fleet);
     return flottes_import($user_data['user_id'], $fleet['coords'], $fleet['planet_name'], $fleet['planet_type'], $fleet['fleet']);
 
 }
