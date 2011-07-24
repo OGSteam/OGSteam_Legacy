@@ -211,7 +211,14 @@ if(list($mod_id, $version) = $db->sql_fetch_row($result)) {
         // echo "1.08b";
         break;
 		
-		default:
+        CASE "1.10" :
+        $query = "UPDATE ".TABLE_MOD." SET version='".$vfinale."'  WHERE action='mod_flottes' AND version='".$version."'";
+        $db->sql_query($query);
+        $version=$vfinale;
+        // echo "1.10";
+        break;
+		
+        default:
 		$mod_folder = "flottes";
 		$mod_name = "flottes";
 		update_mod($mod_folder, $mod_name);

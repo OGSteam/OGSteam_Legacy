@@ -1,3 +1,7 @@
+Version 1.10
+- mise à niveau pour Ogspy 3.0.7
+- correction des index de boucle sur les id de planètes et lunes
+
 Version 1.08c
 - typo dans certains commentaires
 
