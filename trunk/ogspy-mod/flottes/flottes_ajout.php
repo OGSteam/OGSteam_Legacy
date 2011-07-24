@@ -28,7 +28,7 @@ $user_flottes = user_get_empire();
 $user_building = $user_flottes["building"];
 
 $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
-//echo $affplanet[0]." - ".$affplanet[1]." - ".$affplanet[2]." - ".$affplanet[3];
+//var_dump($nplapage, $affplanet[0], $affplanet[1], $affplanet[2], $affplanet[3], $user_building, $view, $pub_view);
 
 
 //require_once("parameters/lang_empire.php");
@@ -71,7 +71,15 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 $idp=0;
 $liste_planet='';
 
-for ($i=($view*$nplapage)+1 ; $i<=($view*$nplapage)+$nplapage ; $i++) {
+for ($i=0 ; $i<=$affplanet[1] ; $i++) {
+	if ($view == $i) {
+		$start = $view=="0" ? 101 : ($view*$nplapage)+1;
+	} 
+	else {
+		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
+	}
+
+for ($i=$start ; $i<=$start+$nplapage ; $i++) {
 	$liste_planet.=	'<th width="7%"><input name="planet_id" value='.$i.' type="radio" onclick="select_planet = autofill('.$i.');if (document.getElementById(\'empire\').checked == true) document.getElementById(\'building\').checked=true;" id="'.$i.'"></th>';
 	}
 
@@ -83,14 +91,6 @@ echo $liste_planet;
 <tr>
 	<th width="6%"><a>Nom</a></th>
 <?php
-for ($i=0 ; $i<=$affplanet[1] ; $i++) {
-	if ($view == $i) {
-		$start = $view=="0" ? 101 : ($view*$nplapage)+1;
-	} 
-	else {
-		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
-	}
-
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
