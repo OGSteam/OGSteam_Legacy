@@ -30,6 +30,7 @@ $user_building = $user_flottes["building"];
 $affplanet=compte_planet($user_data['user_id'],$nplapage,$gameselect);
 //var_dump($nplapage, $affplanet[0], $affplanet[1], $affplanet[2], $affplanet[3], $user_building, $view, $pub_view);
 
+$nb_planete = find_nb_planete_user();
 
 //require_once("parameters/lang_empire.php");
 
@@ -79,8 +80,11 @@ for ($i=0 ; $i<=$affplanet[1] ; $i++) {
 		$start = $view=="1" ? 201 : ($view*$nplapage)+1;
 	}
 
-for ($i=$start ; $i<=$start+$nplapage ; $i++) {
-	$liste_planet.=	'<th width="7%"><input name="planet_id" value='.$i.' type="radio" onclick="select_planet = autofill('.$i.');if (document.getElementById(\'empire\').checked == true) document.getElementById(\'building\').checked=true;" id="'.$i.'"></th>';
+for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
+	if ($i < ($nb_planete+$start))
+		$liste_planet.=	'<th width="7%"><input name="planet_id" value='.$i.' type="radio" onclick="select_planet = autofill('.$i.');if (document.getElementById(\'empire\').checked == true) document.getElementById(\'building\').checked=true;" id="'.$i.'"></th>';
+	else
+		$liste_planet.= '<th width="7%">&nbsp;</th>';
 	}
 
 echo $liste_planet;
@@ -92,8 +96,11 @@ echo $liste_planet;
 	<th width="6%"><a>Nom</a></th>
 <?php
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
-	$name = $user_building[$i]["planet_name"];
-	echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
+	if ($i < ($nb_planete+$start)) {
+		$name = $user_building[$i]["planet_name"];
+		echo "\t"."<th width='8%'><label for='".$i."'>".$name."</label></th>"."\n";
+	} else 
+		echo "\t<th width='8%'>&nbsp;</th>\n";
 }
 ?>
 </tr>
@@ -101,13 +108,16 @@ for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
 	<th><a>Coordonnées</a></th>
 <?php
 for ($i=$start ; $i<=$start+$nplapage-1 ; $i++) {
-	$il=$i;
-	$coordinates = $user_building[$i]["coordinates"];
-	if ($coordinates == "" || ($user_building[$i]["planet_name"] == "" && $view=="1")) $coordinates = "&nbsp;";
-	else $coordinates = "[".$coordinates."]";
-//	if ($view=="1") $il=$i+$nplapage;
-//		else $il=$i;
-	echo "\t"."<th><label for='".$il."'>".$coordinates."</label></th>"."\n";
+	if ($i < ($nb_planete+$start)) {
+		$il=$i;
+		$coordinates = $user_building[$i]["coordinates"];
+		if ($coordinates == "" || ($user_building[$i]["planet_name"] == "" && $view=="1")) $coordinates = "&nbsp;";
+		else $coordinates = "[".$coordinates."]";
+//		if ($view=="1") $il=$i+$nplapage;
+//			else $il=$i;
+		echo "\t"."<th><label for='".$il."'>".$coordinates."</label></th>"."\n";
+	} else
+		echo "\t<th>&nbsp;</th>\n";
 }
 
 ?>
