@@ -27,6 +27,8 @@ buttons_bar($pub_subaction);
 
 global $nbj;
 
+$nb_planete = find_nb_planete_user();
+
 // total points
 		$total=0;
 		$i=1;
@@ -75,52 +77,38 @@ if($result = $db->sql_query($request)) {
 		$TRA = $ligne[12];
 		$sat = $ligne[13];
 	}
-/*	$sat=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$sat += $user_building[$i]["Sat"];
-	}*/
-	$mic=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$mic += $user_defence[$i][$mic_lang];
-	}
-	$mip=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$mip += $user_defence[$i][$mip_lang];
+	
+	// On initialise tout à 0
+	$mic = $mip = $pb = $gb = $lm = $lle = $llo = $cg = $ai = $lp = 0;
+	
+	// Boucle pour les planètes
+	for ($i = 101 ; $i<=($nb_planete+100); $i++) {
+		$mic += $user_defence[$i][$mic_lang];
+		$mip += $user_defence[$i][$mip_lang];
+		$pb += $user_defence[$i][$pb_lang];
+		$gb += $user_defence[$i][$gb_lang];
+		$lm += $user_defence[$i][$lm_lang];
+		$lle += $user_defence[$i][$lle_lang];
+		$llo += $user_defence[$i][$llo_lang];
+		$cg += $user_defence[$i][$cg_lang];
+		$ai += $user_defence[$i][$ai_lang];
+		$lp += $user_defence[$i][$lp_lang];
 	}
 	
-	$pb=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$pb += $user_defence[$i][$pb_lang];
+	// Boucle pour les lunes
+	for ($i = 201 ; $i<=($nb_planete+100); $i++) {
+		$mic += $user_defence[$i][$mic_lang];
+		$mip += $user_defence[$i][$mip_lang];
+		$pb += $user_defence[$i][$pb_lang];
+		$gb += $user_defence[$i][$gb_lang];
+		$lm += $user_defence[$i][$lm_lang];
+		$lle += $user_defence[$i][$lle_lang];
+		$llo += $user_defence[$i][$llo_lang];
+		$cg += $user_defence[$i][$cg_lang];
+		$ai += $user_defence[$i][$ai_lang];
+		$lp += $user_defence[$i][$lp_lang];
 	}
-	$gb=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$gb += $user_defence[$i][$gb_lang];
-	}
-	$lm=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$lm += $user_defence[$i][$lm_lang];
-	}
-	$lle=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$lle += $user_defence[$i][$lle_lang];
-	}
-	$llo=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$llo += $user_defence[$i][$llo_lang];
-	}
-	$cg=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$cg += $user_defence[$i][$cg_lang];
-	}
-	$ai=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$ai += $user_defence[$i][$ai_lang];
-	}
-	$lp=0;
-	for ($i=1 ; $i<=18 ; $i++) {
-	$lp += $user_defence[$i][$lp_lang];
-	}
-	 
+
 ////// Nom du joueur In Game
 	$joueur=$user_data['user_stat_name'];
 //// heure locale
