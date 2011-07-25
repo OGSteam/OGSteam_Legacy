@@ -227,13 +227,13 @@ function calcul (i) {
  UdN[i] = Math.pow (2,(niv_bat['UdN'][i]));
  CSp[i] = 1 + parseFloat(niv_bat['CSp'][i]);
 	
- Temps['Lab'][i] = Math.floor (( ((Ress['Lab']['Metal'][i] + Ress['Lab']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60);
- Temps['Sat_un'][i] = Math.floor ((2000 / ((CSp[i]) * (UdN[i])) ) * 1.44);
+ Temps['Lab'][i] = Math.floor ((( ((Ress['Lab']['Metal'][i] + Ress['Lab']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60)/vitesse_uni);
+ Temps['Sat_un'][i] = Math.floor (((2000 / ((CSp[i]) * (UdN[i])) ) * 1.44)/vitesse_uni);
  Temps['Sat'][i] = Sat['nb_nec'][i] * Temps['Sat_un'][i];
- Temps['Centrale'][i] = 	Math.floor (( ((Ress['Centrale']['Metal'][i] + Ress['Centrale']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60);
- Temps['CSp'][i] = Math.floor (( ((Ress['CSp']['Metal'][i] + Ress['CSp']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60);
- Temps['UdN'][i] = temps_usine ('UdN',niv_bat['UdN'][i],i);
- Temps['UdR'][i] = temps_usine ('UdR',niv_bat['UdR'][i],i);
+ Temps['Centrale'][i] = 	Math.floor ((( ((Ress['Centrale']['Metal'][i] + Ress['Centrale']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60)/vitesse_uni);
+ Temps['CSp'][i] = Math.floor ((( ((Ress['CSp']['Metal'][i] + Ress['CSp']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60)/vitesse_uni);
+ Temps['UdN'][i] = temps_usine ('UdN',niv_bat['UdN'][i],i)/vitesse_uni;
+ Temps['UdR'][i] = temps_usine ('UdR',niv_bat['UdR'][i],i)/vitesse_uni;
  Temps['Usine'][i] = Temps['CSp'][i] + Temps['UdN'][i] + Temps['UdR'][i];
  
  Temps['Total'][i] = Temps['Lab'][i] + Temps['Sat'][i] + Temps['Centrale'][i] + Temps['Usine'][i];

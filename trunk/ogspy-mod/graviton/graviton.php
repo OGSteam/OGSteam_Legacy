@@ -23,7 +23,7 @@ $user_empire = user_get_empire();
 $user_building = $user_empire["building"];
 $user_technology = $user_empire["technology"];
 $nb_planete = find_nb_planete_user();
-
+($server_config['speed_uni'] > 0) ? $vitesse_uni = $server_config['speed_uni'] : $vitesse_uni = 1;
 ?>
 <script <?php echo 'src="mod/'.$dir.'/function.js"'; ?> ></script>
 <script type="text/javascript">
@@ -73,6 +73,7 @@ for ($i=101;$i<=100+$nb_planete;$i++)
 	}
 }
 echo 'nb_planete = '.$nb_planete.';';
+echo 'vitesse_uni = '.$vitesse_uni.';';
 if ($user_technology['Graviton'] <> '') {echo "graviton=".$user_technology['Graviton'].";\n";}
 else {echo "graviton=0;\n";}
 
