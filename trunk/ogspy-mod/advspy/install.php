@@ -2,18 +2,18 @@
 //includes ogspy
 //if (!defined("IN_SPYOGAME")) { define("IN_SPYOGAME", true); }
 if (!defined('IN_SPYOGAME')) die("install > IN_SPYOGAME = 0");
+
 require_once("common.php");
 global $db;
-
 //includes advspy (environement de base)
 define("IN_MOD_ADVSPY",TRUE);
 //ajout de advspy Ã  la liste des mods actifs.
 $is_ok = false;
 $mod_folder= "advspy";
-install_mod($mod_folder);
+$is_ok=install_mod($mod_folder);
 if ($is_ok == true)
   {
-$AdvSpyConfig['Settings']['AdvSpy_BasePath']="./mod/".$mod_folder."/";
+  $AdvSpyConfig['Settings']['AdvSpy_BasePath']="mod/advspy/";
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_config.php";
 
 //$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active)
@@ -56,9 +56,11 @@ $db->sql_query($query);
 //sauvegardes crÃ©es par dÃ©faut
 include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_DefaultSaves.php";
 $db->sql_query(AdvSpy_Config_GetSqlOfDefaultSaves($AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']));
+echo	"<script>alert('Pour éviter les erreurs dans le journal, vous devez configurez vos préférences administrateur et utlisateur. De plus chaque utilisateur doit configurer ces préférences utilisateurs.');</script>";
+
   }
 else
   {
-  echo  "<script>alert('DÃ©solÃ©, un problÃ¨me a eu lieu pendant l'installation, corrigez les problÃ¨mes survenue et rÃ©essayez.');</script>";
+  echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
   }
   ?>
