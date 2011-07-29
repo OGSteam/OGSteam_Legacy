@@ -5,7 +5,7 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 /// ajout modif inter
-define("FOLDER_LANG","mod/maj_visu/lang");
+define("FOLDER_LANG","mod/majvisu/lang");
 include(FOLDER_LANG."/lang_french.php");
 
 
@@ -16,7 +16,7 @@ require_once("views/page_header.php");
 
 
 
-$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='maj_visu' AND `active`='1' LIMIT 1";
+$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='majvisu' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
 
