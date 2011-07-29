@@ -1,2 +1,3 @@
 OCarto - Mips & Phalange
 1.1a
+ocartomips,OCarto - Mips & Phalange,ocartomips,ocartomips,index.php,1,0

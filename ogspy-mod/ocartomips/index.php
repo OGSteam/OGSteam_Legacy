@@ -1,20 +1,19 @@
 <?php
 
 
-
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) die("Non définis");
 
 require_once("views/page_header.php");
 
 /// ajout modif inter
-define("FOLDER_LANG","mod/OCartoMips/lang");
+define("FOLDER_LANG","mod/ocartomips/lang");
 include(FOLDER_LANG."/lang_french.php");
 
 
 
 
-$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='Ocarto' AND `active`='1' LIMIT 1";
-if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
+$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='ocartomips' AND `active`='1' LIMIT 1";
+if (!$db->sql_numrows($db->sql_query($query))) die("requete invalide");
 ?>
 
 <?php
@@ -24,9 +23,9 @@ $_GET['menu'] = 'Visualisation';
 
 <table style="">
 		<tr>
-			<th><strong><a href="?action=OCarto&menu=visualisation"><?php echo ''.$lang['omips_menu_visu'].'';?></a></strong></th>
-			<th><strong><a href="?action=OCarto&menu=Recherche"><?php echo ''.$lang['omips_menu_rech'].'';?></a></strong></th>
-			<th><strong><a href="?action=OCarto&menu=Apropos"><?php echo ''.$lang['omips_menu_aide'].'';?></a></strong></th>
+			<th><strong><a href="?action=ocartomips&menu=visualisation"><?php echo ''.$lang['omips_menu_visu'].'';?></a></strong></th>
+			<th><strong><a href="?action=ocartomips&menu=Recherche"><?php echo ''.$lang['omips_menu_rech'].'';?></a></strong></th>
+			<th><strong><a href="?action=ocartomips&menu=Apropos"><?php echo ''.$lang['omips_menu_aide'].'';?></a></strong></th>
 		</tr>
 </table>
 
@@ -693,7 +692,7 @@ $nb_total_p = ($nb_p_1 + $nb_p_2 + $nb_p_3 + $nb_p_4 + $nb_p_5 + $nb_p_6 + $nb_p
 <td colspan="8" class="c"><strong><?php echo''.$lang['omips_rech'].''; ?></strong></td>
 	</th>   
 			
-	<form method="post" action="index.php?action=Ocarto&menu=Resultat"> 
+	<form method="post" action="index.php?action=ocartomips&menu=Resultat"> 
 
 	<tr>
 <th><strong><?php echo''.$lang['omips_rech'].''; ?></strong></th>
