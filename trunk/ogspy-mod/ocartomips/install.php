@@ -1,11 +1,26 @@
 <?php
-if (!defined('IN_SPYOGAME')) {
-    die("Hacking attempt");
-}
+/**
+* install.php 
+* @package ocartomips
+* @author 
+* @update ianouf
+* @link http://www.ogsteam.fr
+*/
 
+//Ce fichier installe le module d'ocartomips
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
 global $db;
 
-$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active) VALUES ( 'OCarto - Mips', 'OCarto - Mips', 'OCarto', 'OCartoMips', 'index.php', '1.1a', '1')";
-
-$db->sql_query($query);
+$mod_folder = "ocartomips";
+$is_ok = install_mod ($mod_folder);
+if ($is_ok == true)
+	{
+		// Si besoin de creer des tables, à faire ici
+	}
+else
+	{
+		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 ?>

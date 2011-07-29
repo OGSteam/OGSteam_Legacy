@@ -63,7 +63,8 @@ $lang['omips_result_Chantier'] =				"Chantier S.";
   $lang['omips_apropos'] =				"A Propos";
   $lang['omips_apropos_help'] =
   				"	<tr><th style=\"text-align: left;\">
-Ce module a été entiérement écrit par <strong>Baton</strong>.<br><br>
+Ce module a été entiérement écrit par <strong>Baton</strong>.<br>
+Et mis à jour par <strong>Ianouf</strong>.<br><br>
 <strong>- Vous avez un probléme avec ce module ?</strong><br>
 Vous pouvez me contacter  par mail : Baton@hotmail.fr<br>
 Ou sur le forum support : <a href='http://ogametools.breizh-web.net/forum/'>Forum</a> <em>(Dans la partie OCarto - Mips 'Module pour OGspy')</em>.
