@@ -1,0 +1,3 @@
+Maj visu
+1.1a
+majvisu,Vue graphique de la galaxie,majvisu,majvisu,maj.php,1,0
