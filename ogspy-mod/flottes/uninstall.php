@@ -35,8 +35,8 @@ $db->sql_query($request);
 // Suppression de la liaison entre Xtense v2 et Flottes
 
 // On regarde si la table xtense_callbacks existe :
-$query = $db->sql_query('show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ');
-$result = $db->sql_numrows($query);
+$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
+$result = $db->sql_query($query);
 if($result != 0){
 
     // on regarde si Flottes est inscrit dedans

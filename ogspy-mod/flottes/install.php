@@ -86,7 +86,8 @@ if ($is_ok == true)
 		list($mod_id, $version) = $db->sql_fetch_row($resultid);
 	
 		// On regarde si la table xtense_callbacks existe :
-		$result = $db->sql_query('show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ');
+		$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
+		$result = $db->sql_query($query);
 		if($db->sql_numrows($result) != 0)
 			{
 	
