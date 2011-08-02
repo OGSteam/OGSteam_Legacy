@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 if(class_exists("Callback")){
 class Attaques_Callback extends Callback {
-        public $version = '2.3.9';
+        public $version = '2.3.10';
         public function attack_rc($rapport){
 			global $io;
 			if(attack_rc($rapport))
