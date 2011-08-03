@@ -1,0 +1,3 @@
+Hof_RC
+0.0.1
+Hof RC,Hall Of Fame RC,hofrc,hofrc,index.php,1,0
