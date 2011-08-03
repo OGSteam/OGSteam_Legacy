@@ -33,6 +33,7 @@ Ximplements(Xlocales, {
 	'system detected': 'Système solaire [$1:$2] détecté', // Galaxy, System
 	're detected': 'Rapport d\'espionnage détecté',
 	'rc detected': 'Rapport de combat détecté',
+	'res detected': 'Message de commerce détecté',
 	
 	'no researchs' : 'Aucune recherche à envoyer',
 	'no defenses' : 'Aucune défense à envoyer',
@@ -91,6 +92,7 @@ Ximplements(Xlocales, {
 	'success messages': 'Message correctement envoyé',
 	'success fleetSending': 'Départ de flotte correctement envoyé',
 	'success spy': 'Rapport d\'espionnage correctement envoyé',
+	'success res': 'Message de commerce correctement envoyé',
 	
 	'unknow response': 'Code réponse inconnu : "$1", data: "$2"', // code, content
 	

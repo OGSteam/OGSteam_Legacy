@@ -56,7 +56,7 @@
 <!ENTITY opt.msg.msg "Private messages">
 <!ENTITY opt.msg.ally_msg "Alliance messages">
 <!ENTITY opt.msg.expeditions "Expeditions">
-
+<!ENTITY opt.msg.res "Trade messages">
 
 <!-- testing options -->
 <!ENTITY opt.developers "Testers options">

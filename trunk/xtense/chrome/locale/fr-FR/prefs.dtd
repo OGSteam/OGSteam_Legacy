@@ -56,6 +56,7 @@
 <!ENTITY opt.msg.msg "Messages de joueurs">
 <!ENTITY opt.msg.ally_msg "Messages d'alliance">
 <!ENTITY opt.msg.expeditions "Expeditions">
+<!ENTITY opt.msg.res "Messages de commerce">
 
 <!--/ Options de dev /-->
 <!ENTITY opt.developers "Options pour testeurs">

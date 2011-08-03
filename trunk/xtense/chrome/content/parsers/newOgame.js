@@ -1285,6 +1285,76 @@ var XnewOgame = {
 			} else Xconsole('The message is not an expedition report');
 		}
 
+		// Commerce
+		if(Xprefs.getBool('msg-res-pref')) {
+			var m = subject.match(new RegExp(locales['trade message 1']));
+			var m2 = subject.match(new RegExp(locales['trade message 2']));
+						
+			// Livraison d'un ami sur une de mes planètes
+			if (m!=null) {
+				var message = Xpath.getStringValue(this.doc,paths.contents['livraison']).trim();
+				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos));				
+				Xconsole('Livraison du joueur ('+infos[1]+') sur ma planète ('+infos[2]+')');
+				
+				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livrées
+				Xconsole(ressourcesLivrees);
+				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantité de ressources livrées
+				Xconsole(ressources);
+				
+				var met = ressources[1].trim().replace('.','');
+				var cri = ressources[2].trim().replace('.','');
+				var deut = ressources[3].trim().replace('.','');
+				
+				data.type = 'trade';
+				data.trader = infos[1];
+				data.planet = infos[2];
+				data.metal = met.length > 0?met:0;				
+				data.cristal = cri.length > 0?cri:0;
+				data.deuterium = deut.length > 0?deut:0;
+						
+			} else if (m2!=null) { // Livraison sur la planète d'un ami
+				var message = Xpath.getStringValue(this.doc,paths.contents['livraison_me']).trim(); // Corps du message
+				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos_me)); // Infos sur la planète				 
+				var planeteLivraison = infos[1].trim(); // Planete sur laquelle la livraison à eu lieu
+				
+				// Récupération de mes planètes
+				var mesPlanetes = Xpath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['name_planete']);
+				var isMyPlanet=false;
+				
+				// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
+				if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
+				   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
+						var nom = mesPlanetes.snapshotItem(i).textContent.trim();
+						Xconsole('Nom='+nom+'|planeteLivraison='+planeteLivraison);
+						if(nom==planeteLivraison){
+							 isMyPlanet=true;
+							 break;
+						}	
+				   	}
+				}
+				
+				// Livraison sur une planète amie ? 
+				if(!isMyPlanet){
+					Xconsole('Livraison sur planete amie : ('+planeteLivraison+')');
+					var ressources = message.match(new RegExp(this.regexps.messages.trade_message_infos_me_res)); // Quantité de ressources livrées
+					
+					var met = ressources[1].trim().replace('.','');
+					var cri = ressources[2].trim().replace('.','');
+					var deut = ressources[3].trim().replace('.','');
+					
+					data.type = 'trade_me';
+					data.planet = planeteLivraison;
+					data.trader = 'ME';
+					data.metal = met.length > 0?met:0;				
+					data.cristal = cri.length > 0?cri:0;
+					data.deuterium = deut.length > 0?deut:0;
+				}
+				
+			}/* else {
+				 Xconsole('The message is not a trade message');	 
+			}*/
+		}
+		
 		// Aucun message
 		if(data.type == ''){
 			this.Tab.setStatus(Xl('no messages'), XLOG_NORMAL, {url: this.url});

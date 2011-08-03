@@ -112,6 +112,7 @@ persist="screenX screenY width" buttons="">
           <preference id="msg-msg-pref" name="Xtense.msg-msg" type="bool" />
           <preference id="msg-ally_msg-pref" name="Xtense.msg-ally_msg" type="bool" />
           <preference id="msg-expeditions-pref" name="Xtense.msg-expeditions" type="bool" />
+          <preference id="msg-res-pref" name="Xtense.msg-res-pref" type="bool" />
       </preferences> 
 		<groupbox>
 			<caption label="&opt.page;"/>
@@ -165,6 +166,7 @@ persist="screenX screenY width" buttons="">
 						<checkbox id="msg-rc" preference="msg-rc-pref" label="&opt.msg.rc;" flex="1" />
 						<checkbox id="msg-ennemy_spy" preference="msg-ennemy_spy-pref" label="&opt.msg.ennemy_spy;" flex="1" />
     					<checkbox id="msg-ally_msg" preference="msg-ally_msg-pref" label="&opt.msg.ally_msg;" flex="1" />
+    					<checkbox id="msg-res" preference="msg-res-pref" label="&opt.msg.res;" flex="1" />
 					</row>
 				</rows>
 			</grid>

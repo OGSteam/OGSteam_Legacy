@@ -33,6 +33,7 @@ Ximplements(Xlocales, {
 	'system detected': 'Solar system [$1:$2] detected', // Galaxy, System
 	're detected': 'Spy report detected',
 	'rc detected': 'Battle report detected',
+	'res detected': 'Trade message detected',
 	
 	'no researchs' : 'No research found',
 	'no defenses' : 'No defense found',
@@ -91,6 +92,7 @@ Ximplements(Xlocales, {
 	'success messages': 'Message sent',
 	'success fleetSending': 'Fleet departure sent',
 	'success spy': 'Spy report sent',
+	'success res': 'Trade message correctly sent',
 	
 	'unknow response': 'Unknown response code : "$1", data: "$2"', // code, content
 	
