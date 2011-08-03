@@ -14,6 +14,13 @@ global $db;
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='attaques' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
+echo"<fieldset><legend><b><font color='#0080FF'><u>Version 0.3.0a :</u></font></b></legend>";
+echo"<p align='left'><font size='2'><ul>";
+echo"<li>Mise à jour avec ogspy 3.0.7</li>";
+echo"</ul></font></p>";
+echo"</fieldset>";
+echo"<br>";
+
 echo"<fieldset><legend><b><font color='#0080FF'><u>Version 0.2a :</u></font></b></legend>";
 echo"<p align='left'><font size='2'><ul>";
 echo"<li>Correction d'erreur dans les pages 'restore' et 'compare'</li>";

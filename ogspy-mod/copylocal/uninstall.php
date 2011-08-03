@@ -14,7 +14,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 global $db,$table_prefix;
 
 //Suppression des paramètres de configuration et bbcodes
-$query="DELETE FROM ".TABLE_MOD." WHERE `action`='copylocal'";
-$db->sql_query($query);
+$mod_uninstall_name = "copylocal";
+uninstall_mod($mod_uninstall_name,$mod_uninstall_table);
 
 ?>

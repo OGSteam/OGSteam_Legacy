@@ -22,7 +22,16 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 global $db, $table_prefix;
 
 //on insère les données du mod, dans la table mod. Module réservé aux administrateurs
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active, admin_only) VALUES ('', 'Copie Locale', 'Copie Locale', 'copylocal', 'copy_local', 'index.php', '0.2a', '1', '1')";
-$db->sql_query($query);
+$is_ok = false;
+$mod_folder = "copylocal";
+$is_ok = install_mod ($mod_folder);
+if ($is_ok == true)
+	{
+		// On traite des données si necessaire
+	}
+else
+	{
+		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 
 ?>

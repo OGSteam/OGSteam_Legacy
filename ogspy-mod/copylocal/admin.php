@@ -26,9 +26,9 @@ if (isset($pub_submit))
     }
 }
 
-if (file_exists("mod/copy_local/config.php"))
+if (file_exists("mod/copylocal/config.php"))
    {
-       require_once("mod/copy_local/config.php");
+       require_once("mod/copylocal/config.php");
    }
 
 if (!isset($distant))

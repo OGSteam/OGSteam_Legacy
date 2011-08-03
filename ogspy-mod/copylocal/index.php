@@ -45,7 +45,7 @@ div.copy_box_background {
 //Définitions
 //global $db, $table_prefix, $prefixe;
 // Fonctions du module
-require_once("mod/copy_local/function.php");
+require_once("mod/copylocal/function.php");
 // Vérifie si l'utilisateur est Administrateur
 if (IsUserAdmin() == 0)
 {
@@ -62,9 +62,9 @@ if (!isset($pub_page))
 menu($pub_page);
 // Affichage du layer transparent
 echo"<div class='copy_box'><div class='copy_box_background'> </div> <div class='copy_box_contents'>";
-if (!file_exists("mod/copy_local/config.php"))
+if (!file_exists("mod/copylocal/config.php"))
 {
-   require_once("mod/copy_local/admin.php");
+   require_once("mod/copylocal/admin.php");
    exit;
 }
 //On affiche de la page demandée
@@ -80,7 +80,7 @@ else include("transfert.php");
 // Fin du layer transparent
 echo "</div></div>";
 // Version number at the bottom of the page
-require_once ("mod/copy_local/footer.php");
+require_once ("mod/copylocal/footer.php");
 echo "<br/>";
 //Insertion du bas de page d'OGSpy
 require_once("views/page_tail.php");
