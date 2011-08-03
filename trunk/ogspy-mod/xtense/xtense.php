@@ -950,6 +950,40 @@ switch ($pub_type){
 					);
 					$call->add('expedition', $expedition);
 				break;
+				
+				case 'trade': // LIVRAISONS AMIES
+					//Check::data(isset($line['trader'], $line['planet']), Check::planet_name($line['planet'], 1));
+					//Check::data(isset($line['trader'], $line['planet']), true);
+					$line['trader'] = Check::filterSpecialChars($line['trader']);
+					$line['planet'] = Check::filterSpecialChars($line['planet']);
+					
+					$trade = array(
+							'time' => $line['date'],
+							'planet' => $line['planet'],
+							'trader' => $line['trader'],
+							'metal' => $line['metal'],
+							'cristal' => $line['cristal'],
+							'deuterium' => $line['deuterium']
+					);
+					$call->add('trade', $trade);
+				break;
+				
+				case 'trade_me': // MES LIVRAISONS
+					//Check::data(isset($line['trader'], $line['planet']), Check::planet_name($line['planet'], 1));
+					//Check::data(isset($line['trader'], $line['planet']), true);
+					$line['trader'] = Check::filterSpecialChars($line['trader']);
+					$line['planet'] = Check::filterSpecialChars($line['planet']);
+					
+					$trade_me = array(
+							'time' => $line['date'],
+							'planet' => $line['planet'],
+							'trader' => $line['trader'],
+							'metal' => $line['metal'],
+							'cristal' => $line['cristal'],
+							'deuterium' => $line['deuterium']
+					);
+					$call->add('trade_me', $trade_me);
+				break;
 			}
 			
 			$io->set(array(

@@ -143,6 +143,8 @@ if ($page == 'mods') {
 		'msg' => 'Messages de joueurs',
 		'ally_msg' => 'Messages d\'alliances',
 		'expedition' => 'Rapports d\'expeditions',
+		'trade' => 'Livraisons Amies',
+		'trade_me' => 'Mes Livraisons',
 		'overview' => 'Vue générale',
 		'ennemy_spy' => 'Espionnages ennemis',
 		'system' => 'Systèmes solaires',
