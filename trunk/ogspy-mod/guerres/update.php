@@ -11,9 +11,9 @@
 //L'appel direct est interdit
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-//il y a juste à mettre à jour le version du mod
-$query  = "UPDATE ".TABLE_MOD." SET version='0.2f' WHERE action='guerres' LIMIT 1";
-$db->sql_query($query);
+$mod_folder = "guerres";
+$mod_name = "guerres";
+update_mod($mod_folder, $mod_name);
 
 
 ?>

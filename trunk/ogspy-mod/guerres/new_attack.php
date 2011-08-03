@@ -46,13 +46,15 @@ if ( (isset($pub_rapport)) && (isset($pub_guerre_id)) )
 	//Compatibilité IE/Firefox
 	$pub_rapport = str_replace("\t",' ',$pub_rapport);
 	//Compatibilité Ogame 0.76
-	$pub_rapport = str_replace(".","",$pub_rapport); 
-	
+	//$pub_rapport = str_replace(".","",$pub_rapport);
+	$pub_rapport = str_replace("-",' ',$pub_rapport);
+	$regex ="/^[\w]['&;]*[^0-9_-]{4,256}[\w][^0-9_-]$/x"; 
 	//On regarde si le rapport soumis est un RC
-    if (!preg_match('#Les\sflottes\ssuivantes\sse\ssont\saffrontées\sle\s(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2}) :#',$pub_rapport,$date))
+    if (!preg_match('#Les\sflottes\ssuivantes\ss\'aff#',$pub_rapport,$date))
+	//rontent\s((\d{2})\-(\d{2})\-(\d{4})\s(\d{2}):(\d{2}):(\d{2})):#',$pub_rapport,$date))
 	{
 		//On regarde si le rapport soumis est un rapport de reyclage
-		if(stristr($pub_rapport, 'recycleurs ont une capacité totale de') === FALSE)
+		if(stristr($regex,$pub_rapport, 'recycleurs ont une capacité totale de') === FALSE)
 		{
 			echo"<blink><font color='#FF0000'><big><big>Le rapport que vous avez soumis n'est pas un rapport de combat ou un rapport de recyclage valide !!!</big></big></font></blink><br><br>";
 		}
@@ -254,7 +256,7 @@ if (isset($pub_guerre))
 }
 
 echo"<hr width='325px'>";
-echo"<p align='center'>Mod Guerres | Version 0.2e | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
+echo"<p align='center'>Mod Guerres | Version ".$mod_version." | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
 
 //Insertion du bas de page d'OGSpy
 require_once("views/page_tail.php");

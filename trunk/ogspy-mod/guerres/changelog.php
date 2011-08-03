@@ -17,6 +17,15 @@ global $db;
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='guerres' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
+//Version 1.0.0
+echo"<fieldset><legend><b><font color='#0080FF'><u>Version 1.0.0 by Shad:</u></font></b></legend>";
+echo"<p align='left'>";
+echo"-Mise a jour des functions install, uninstall et update pour OGSpy 3.0.7<br>";
+echo"</p>";
+echo"</fieldset>";
+echo"<br>";
+echo"<br>";
+
 //Version 0.2e
 echo"<fieldset><legend><b><font color='#0080FF'><u>Version 0.2e :</u></font></b></legend>";
 echo"<p align='left'>";
@@ -79,7 +88,7 @@ echo"<br>";
 echo"<br>";
 
 echo"<hr width='325px'>";
-echo"<p align='center'>Mod Guerres | Version 0.2e | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
+echo"<p align='center'>Mod Guerres | Version ".$mod_version." | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
 
 //Insertion du bas de page d'OGSpy
 require_once("views/page_tail.php");
