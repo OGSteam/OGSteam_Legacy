@@ -1,2 +1,3 @@
 Guerres
-0.2f
+1.0.0
+Guerres,Guerres,guerres,guerres,index.php,1,0

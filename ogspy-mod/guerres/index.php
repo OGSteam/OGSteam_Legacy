@@ -15,6 +15,11 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='guerres' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
+//Récupération du numéro de version
+$filename = 'mod/guerres/version.txt';
+if (file_exists($filename)) $file = file($filename);
+$mod_version = trim($file[1]);
+	
 //Définitions
 global $db;
 global $table_prefix;

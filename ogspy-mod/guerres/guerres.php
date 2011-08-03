@@ -291,7 +291,7 @@ echo"</p>";
 echo"</fieldset><br><br>";
 
 echo"<hr width='325px'>";
-echo"<p align='center'>Mod Guerres | Version 0.2e | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
+echo"<p align='center'>Mod Guerres | Version ".$mod_version." | <a href='mailto:verite@ogsteam.fr'>Vérité</a> |© 2006</p>";
 
 //Insertion du bas de page d'OGSpy
 require_once("views/page_tail.php");
