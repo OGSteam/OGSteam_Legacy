@@ -83,7 +83,7 @@ function generate_config($localhost, $localuser, $localpwd, $localdb, $localpref
 	$id_php[] = '$distant["prefix"] = "'.$remoteprefix.'";';
 	$id_php[] = '';
 	$id_php[] = '?>';
-	if (!write_file("mod/copy_local/config.php", "w", $id_php)) {
+	if (!write_file("mod/copylocal/config.php", "w", $id_php)) {
 		die("Impossible de générer le fichier 'config.php', V&eacute;rifiez les droits en &eacute;criture sur le r&eacute;pertoire");
 	}
 	echo "<font color='lime'>Sauvegarde effectu&eacute;e</font>";

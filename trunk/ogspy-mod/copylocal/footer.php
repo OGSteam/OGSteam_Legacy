@@ -11,5 +11,6 @@
 echo "<hr width='325px'>";
 echo "<div class='copy_box'><div class='copy_box_background'> </div> <div class='copy_box_contents'>";
 echo "<p align='center'>Mod Copie Locale | Version 0.2a | <a href='mailto:ericc@ogsteam.fr'>ericc</a> |&copy; 2008<br /></p>";
+echo "<p align='center'>MAJ | Version 0.3.0 | Shad |&copy; 2011<br /></p>";
 echo "</div></div>";
 ?>

@@ -18,9 +18,9 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 initvar('dist_link' , 'loc_link' , 'distant_table' , 'local_table');
 
 //lire les paramètres de connexions
-if (file_exists("mod/copy_local/config.php"))
+if (file_exists("mod/copylocal/config.php"))
    {
-       require_once("mod/copy_local/config.php");
+       require_once("mod/copylocal/config.php");
    } else {
        die ("Vous devez entrer les paramètres de connexions avant !!");
    }
