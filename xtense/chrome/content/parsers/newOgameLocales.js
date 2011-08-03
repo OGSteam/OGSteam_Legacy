@@ -163,7 +163,9 @@ XnewOgame.locales = {
 			'fleet': 'Flotte',
 			'harvesting': 'exploitation du champ de débris',
 			'combat of': 'Rapport de combat',
-			'combat defence' : 'Bataille de'
+			'combat defence' : 'Bataille de',
+			'trade message 1' : 'Livraison de ressources par',
+			'trade message 2' : 'Arriv.*e sur une plan.*te'			
 		},
 		
 		'dates' : {

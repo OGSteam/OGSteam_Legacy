@@ -45,6 +45,8 @@ XnewOgame.Xpaths = {
 			'rc': '//div[@id="battlereport"]',
 			'rc_cdr': '//div[@class="note"]',
 			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+			'livraison': '//div[@class="note"]',
+			'livraison_me': '//div[@class="note"]'
 		},
 		spy : {
 			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
@@ -59,7 +61,8 @@ XnewOgame.Xpaths = {
 	},
 	
 	planetData : {
-		name: "id('selectedPlanetName')",
+		name : "id('selectedPlanetName')",
+		name_planete : "//span[@class='planet-name']",
 		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
 		coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
 	},
@@ -150,7 +153,12 @@ XnewOgame.regexps = {
 	moon : '=(\\d+)*',
 	
 	messages : {
-		ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%'
+		ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%',		
+		trade_message_infos : 'Une flotte .trang.re de (\\S+) livre des ressources . (\\S+) (\\S+) :',
+		trade_message_infos_me : 'Votre flotte atteint la plan.te (.*) (.*) et y livre les ressources suivantes',
+		trade_message_infos_res_livrees : '(.*)Vous aviez :',
+		trade_message_infos_res : 'M.tal : (.*) Cristal : (.*) Deut.rium : (.*)',
+		trade_message_infos_me_res : 'M.tal :(.*)Cristal:(.*)Deut.rium:(.*)'
 	},
 	spy : {
 		player : " '(.*)'\\)"
