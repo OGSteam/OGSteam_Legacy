@@ -21,46 +21,53 @@ $version = $version[0];
 
 //menu
 
-if ($pub_page != "Convertisseur" And (isset($pub_page))) {
+// 
+if ($pub_page == "Convertisseur" and (isset($pub_page))) {
+	echo "\t\t\t"."<th width='150'>";
+	echo "<a>Convertisseur</a>";
+	echo "</th>"."\n";
+} else {
 	echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=convertisseur&page=Convertisseur';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Convertisseur</font></a>";
 	echo "</td>"."\n";
 }
-else {
+
+if ($pub_page == "commerce") {
 	echo "\t\t\t"."<th width='150'>";
-	echo "<a>Convertisseur</a>";
+	echo "<a>Echanges effectués</a>";
 	echo "</th>"."\n";
+} else {
+	echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=convertisseur&page=commerce';\">";
+	echo "<a style='cursor:pointer'><font color='lime'>Echanges effectués</font></a>";
+	echo "</td>"."\n";
 }
 
-if ($pub_page != "historique") {
+if ($pub_page == "historique") {
+	echo "\t\t\t"."<th width='150'>";
+	echo "<a>Historique des versions</a>";
+	echo "</th>"."\n";
+} else {
 	echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=convertisseur&page=historique';\">";
 	echo "<a style='cursor:pointer'><font color='lime'>Historique des versions</font></a>";
 	echo "</td>"."\n";
 }
-else {
-	echo "\t\t\t"."<th width='150'>";
-	echo "<a>Historique des versions</a>";
-	echo "</th>"."\n";
-}
 
 //Si la page a afficher n'est pas définie, on affiche la première
 
-if (isset($pub_page))
-{
-}
-else
-{
+if (isset($pub_page)){
+} else {
 	$pub_page = "Convertisseur";
 }
 
-if ($pub_page == "Convertisseur")
-{
-	include("convertisseur.php");
+if ($pub_page == "Convertisseur"){
+	require_once("convertisseur.php");
 }
 
+if ($pub_page == "historique"){
+	require_once("historique.php");
+}
 
-if ($pub_page == "historique")
-{
-	include("historique.php");
+if ($pub_page == "commerce"){
+	require_once("commerces.php");
 }
 ?>
