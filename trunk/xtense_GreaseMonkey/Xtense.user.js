@@ -63,14 +63,14 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			// Serveur Univers
 			options+= '<img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/xtense.png" alt="Options Xtense"/>';
 			options+= '<br/><br/>';
-			options+= '<table>' +
+			options+= '<table style="width:675px;">' +
 					  '<colgroup><col width="25%"/><col width="25%"/><col width="25%"/><col width="25%"/></colgroup>' +
 					  '<tbody>' +
 					  '<tr>' +
-					  '<td><a onclick="displayOption(\'Xtense_serveurs\')"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/server.png"/><span style="font-size: 20px;"><b>&#160;Serveur</b></span></a></td>' +
-					  '<td><a onclick="displayOption(\'Xtense_pages\')"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/pages.png"/><span style="font-size: 20px;"><b>&#160;Pages</b></span></a></td>' +
-					  '<td>&#160;</td>' +
-					  '<td>&#160;</td>' +
+					  '<td align="center"><a onclick="displayOption(\'Xtense_serveurs\')" style="cursor:pointer;"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/server.png"/><span id="menu_servers" style="font-size: 20px; color: white;"><b>&#160;Serveur</b></span></a></td>' +
+					  '<td align="center"><a onclick="displayOption(\'Xtense_pages\')" style="cursor:pointer;"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/pages.png"/><span id="menu_pages" style="font-size: 20px; color: orange;"><b>&#160;Pages</b></span></a></td>' +
+					  '<td align="center"><a onclick="displayOption(\'Xtense_options\')" style="cursor:pointer;"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/conf.png"/><span id="menu_options" style="font-size: 20px; color: orange;"><b>&#160;Options</b></span></a></td>' +
+					  '<td align="center"><a onclick="displayOption(\'Xtense_about\')" style="cursor:pointer;"><img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/about.png"/><span id="menu_about" style="font-size: 20px; color: orange;"><b>&#160;A propos</b></span></a></td>' +
 					  '</tr>' +
 					  '</tbody>' +
 					  '</table>';
@@ -102,7 +102,7 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 			options+= '<tbody>';
 			options+= '<tr>';
-			options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
+			options+= '<td class="champ"><label class="styled textBeefy">Pagesy</label></td>';
 			options+= '<td class="value"><input class="speed" id="server1.url.plugin" value="'+GM_getValue('server1.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
 			options+= '</tr>';
 			options+= '</tbody></table>';
@@ -114,7 +114,7 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 			options+= '<tbody>';
 			options+= '<tr>';
-			options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
+			options+= '<td class="champ"><label class="styled textBeefy">Options</label></td>';
 			options+= '<td class="value"><input class="speed" id="server1.url.plugin" value="'+GM_getValue('server1.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
 			options+= '</tr>';
 			options+= '</tbody></table>';
@@ -126,7 +126,7 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 			options+= '<tbody>';
 			options+= '<tr>';
-			options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
+			options+= '<td class="champ"><label class="styled textBeefy">A propos</label></td>';
 			options+= '<td class="value"><input class="speed" id="server1.url.plugin" value="'+GM_getValue('server1.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
 			options+= '</tr>';
 			options+= '</tbody></table>';
@@ -144,13 +144,15 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			
 			var script = document.createElement('script');
 			script.setAttribute('type','text/javascript');
-			script.setAttribute('src',"http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/functions.js");
+			script.setAttribute('src',"http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/scripts/prefs.js");
 			escriptopt.appendChild(script);
 			
 			einhalt.parentNode.insertBefore(escriptopt,einhalt);
 						
 			document.getElementById("Xtense_serveurs").style.display="block";
 			document.getElementById("Xtense_pages").style.display="none";
+			document.getElementById("Xtense_options").style.display="none";
+			document.getElementById("Xtense_about").style.display="none";
 			
 			function enregistreOptionsXtense(){
 				var Xpath = {//node est facultatif
