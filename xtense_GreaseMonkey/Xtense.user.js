@@ -107,6 +107,30 @@ if((! reg.test(url)) || (new RegExp(/xtense=Options/)).test(url)){
 			options+= '</tr>';
 			options+= '</tbody></table>';
 			options+= '</div>';
+			// Options
+			options+= '<div id="Xtense_options">';
+			options += '<table id="Xtense_table_options" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
+			options += '<colgroup><col width="20%"/><col/></colgroup>';
+			options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
+			options+= '<tbody>';
+			options+= '<tr>';
+			options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
+			options+= '<td class="value"><input class="speed" id="server1.url.plugin" value="'+GM_getValue('server1.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
+			options+= '</tr>';
+			options+= '</tbody></table>';
+			options+= '</div>';
+			// A propos
+			options+= '<div id="Xtense_about">';
+			options += '<table id="Xtense_table_about" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
+			options += '<colgroup><col width="20%"/><col/></colgroup>';
+			options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
+			options+= '<tbody>';
+			options+= '<tr>';
+			options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
+			options+= '<td class="value"><input class="speed" id="server1.url.plugin" value="'+GM_getValue('server1.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
+			options+= '</tr>';
+			options+= '</tbody></table>';
+			options+= '</div>';
 			options+= '<br/><br/></div>'; //fin Tableau
 			
 			var einhalt=document.getElementById('inhalt');
