@@ -62,15 +62,15 @@ function livraison($trade){
 	
 	$retour = false;
 	// Verification de présence 
-    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade['time']." AND commerce_user_id = '".$user_data['user_id']."'AND commerce_planet = '".$trade['planet']."'";
+    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade['time']." AND commerce_user_id = '".$user_data['user_id']."'AND commerce_planet_coords = '".$trade['planet_coords']."'";
     $result = $db->sql_query($query);
 	$nb = mysql_num_rows($result);
 	
 	// Non enregistré	
 	if ($nb == 0){
         $query = "INSERT INTO " . TABLE_CONVERTISSEUR_COMMERCE ."" .
-        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_trader`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
-				"VALUES (NULL, '".$user_data['user_id']."', '".$trade['planet']."', '".htmlspecialchars($trade['trader'])."', " .
+        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_planet_coords`, `commerce_trader`, `commerce_trader_planet`, `commerce_trader_planet_coords`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
+				"VALUES (NULL, '".$user_data['user_id']."', '".$trade['planet']."', '".$trade['planet_coords']."', '".htmlspecialchars($trade['trader'])."', '".$trade['trader_planet']."', '".$trade['trader_planet_coords']."', ".
 				"'1', '".$trade['time']."', '" . $trade['metal']."', '".$trade['cristal']."', '".$trade['deuterium']."')";
         $db->sql_query($query);
         $retour = true;        
@@ -88,15 +88,15 @@ function livraison_me($trade_me) {
 	
 	$retour = false;
 	// Verification de présence 
-    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade_me['time']." AND commerce_user_id = ".$user_data['user_id']." AND commerce_planet = '".$trade_me['planet']."'";
+    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade_me['time']." AND commerce_user_id = ".$user_data['user_id']." AND commerce_planet_dest_coords = '".$trade_me['planet_dest_coords']."'";
     $result = $db->sql_query($query);
 	$nb = mysql_num_rows($result);
 	
 	// Non enregistré	
 	if ($nb == 0){
         $query = "INSERT INTO " . TABLE_CONVERTISSEUR_COMMERCE ."" .
-        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_trader`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
-				"VALUES (NULL, '".$user_data['user_id']."', '".$trade_me['planet']."', '".$trade_me['trader']."', " .
+        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_planet_coords`, `commerce_planet_dest`, `commerce_planet_dest_coords`, `commerce_trader`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
+				"VALUES (NULL, '".$user_data['user_id']."', '".$trade_me['planet']."', '".$trade_me['planet_coords']."', '".$trade_me['planet_dest']."', '".$trade_me['planet_dest_coords']."', '".$trade_me['trader']."', " .
 				"'0', '".$trade_me['time']."', '" . $trade_me['metal']."', '".$trade_me['cristal']."', '".$trade_me['deuterium']."')";
         $db->sql_query($query);
         $retour = true;        
