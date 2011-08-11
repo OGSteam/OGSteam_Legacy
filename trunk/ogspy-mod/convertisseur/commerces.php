@@ -92,11 +92,12 @@ function valid() {
 <table width='100%'>
 	<thead>
 		<tr>
-			<th colspan="5" align="center" style="font-size:14px; font-weight: bold; color:orange;">Mes Livraisons du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
+			<th colspan="6" align="center" style="font-size:14px; font-weight: bold; color:orange;">Mes Livraisons du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
 		</tr>
 		<tr>
 			<th align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Lieu de livraison</th>
+			<th align="center" style="font-size:12px; font-weight: bold;">D&eacute;part livraison</th>
+			<th align="center" style="font-size:12px; font-weight: bold;">Arriv&eacute;e livraison</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
@@ -105,19 +106,20 @@ function valid() {
 	<tbody>
 	<tr>
 		<?php
-		$query = "SELECT commerce_date, commerce_planet, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '0' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
+		$query = "SELECT commerce_date, commerce_planet, commerce_planet_coords, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '0' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
     	$result = $db->sql_query($query);
-    	while( list($commerce_date, $commerce_planet, $commerce_metal, $commerce_cristal, $commerce_deut) = $db->sql_fetch_row($result) ){
+    	while( list($commerce_date, $commerce_planet, $commerce_planet_coords, $commerce_planet_dest, $commerce_planet_dest_coords, $commerce_metal, $commerce_cristal, $commerce_deut) = $db->sql_fetch_row($result) ){
 			$commerce_date = strftime("%d %b %Y à %Hh%M", $commerce_date);
 			$commerce_metal = number_format($commerce_metal, 0, ',', ' ');
 			$commerce_cristal = number_format($commerce_cristal, 0, ',', ' ');
 			$commerce_deut = number_format($commerce_deut, 0, ',', ' ');
 			echo "<tr>";
-					echo "<th align='center'>".$commerce_date."</td>";
-					echo "<th align='center'>".$commerce_planet."</td>";
-					echo "<th align='center'>".$commerce_metal."</td>";
-					echo "<th align='center'>".$commerce_cristal."</td>";
-					echo "<th align='center'>".$commerce_deut."</td>";
+					echo "<th align='center'>".$commerce_date."</th>";
+					echo "<th align='center'>".$commerce_planet." (".$commerce_planet_coords.")</th>";
+					echo "<th align='center'>".$commerce_planet_dest." (".$commerce_planet_dest_coords.")</th>";
+					echo "<th align='center'>".$commerce_metal."</th>";
+					echo "<th align='center'>".$commerce_cristal."</th>";
+					echo "<th align='center'>".$commerce_deut."</th>";
 			echo "</tr>";
 		}
 		?>
@@ -129,12 +131,13 @@ function valid() {
 <table width='100%'>
 	<thead>
 		<tr>
-			<th colspan="6" align="center" style="font-size:14px; font-weight: bold; color:orange;">Livraisons Amies du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
+			<th colspan="7" align="center" style="font-size:14px; font-weight: bold; color:orange;">Livraisons Amies du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
 		</tr>
 		<tr>
 			<th align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Lieu de livraison</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Livreur</th>
+			<th align="center" style="font-size:12px; font-weight: bold;">Provenance</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
 			<th align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
@@ -143,20 +146,21 @@ function valid() {
 	<tbody>
 	<tr>
 		<?php
-		$query = "SELECT commerce_date, commerce_planet, commerce_trader, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '1' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
+		$query = "SELECT commerce_date, commerce_planet, commerce_planet_coords, commerce_trader, commerce_trader_planet, commerce_trader_planet_coords, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '1' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
     	$result = $db->sql_query($query);
-    	while( list($commerce_date, $commerce_planet, $commerce_trader, $commerce_metal, $commerce_cristal, $commerce_deut) = $db->sql_fetch_row($result) ){
+    	while( list($commerce_date, $commerce_planet, $commerce_planet_coords, $commerce_trader, $commerce_trader_planet, $commerce_trader_planet_coords, $commerce_metal, $commerce_cristal, $commerce_deut) = $db->sql_fetch_row($result) ){
 			$commerce_date = strftime("%d %b %Y à %Hh%M", $commerce_date);
 			$commerce_metal = number_format($commerce_metal, 0, ',', ' ');
 			$commerce_cristal = number_format($commerce_cristal, 0, ',', ' ');
 			$commerce_deut = number_format($commerce_deut, 0, ',', ' ');
 			echo "<tr>";
-					echo "<th align='center'>".$commerce_date."</td>";
-					echo "<th align='center'>".$commerce_planet."</td>";
-					echo "<th align='center'>".$commerce_trader."</td>";					
-					echo "<th align='center'>".$commerce_metal."</td>";
-					echo "<th align='center'>".$commerce_cristal."</td>";
-					echo "<th align='center'>".$commerce_deut."</td>";
+					echo "<th align='center'>".$commerce_date."</th>";
+					echo "<th align='center'>".$commerce_planet." (".$commerce_planet_coords.")</th>";
+					echo "<th align='center'>".$commerce_trader."</th>";
+					echo "<th align='center'>".$commerce_trader_planet." (".$commerce_trader_planet_coords.")</th>";
+					echo "<th align='center'>".$commerce_metal."</th>";
+					echo "<th align='center'>".$commerce_cristal."</th>";
+					echo "<th align='center'>".$commerce_deut."</th>";
 			echo "</tr>";
 		}
 		?>
