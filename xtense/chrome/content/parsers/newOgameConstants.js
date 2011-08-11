@@ -154,11 +154,11 @@ XnewOgame.regexps = {
 	
 	messages : {
 		ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%',		
-		trade_message_infos : 'Une flotte .trang.re de (\\S+) livre des ressources . (\\S+) (\\S+) :',
-		trade_message_infos_me : 'Votre flotte atteint la plan.te (.*) (.*) et y livre les ressources suivantes',
-		trade_message_infos_res_livrees : '(.*)Vous aviez :',
-		trade_message_infos_res : 'M.tal : (.*) Cristal : (.*) Deut.rium : (.*)',
-		trade_message_infos_me_res : 'M.tal :(.*)Cristal:(.*)Deut.rium:(.*)'
+		trade_message_infos : 'Une flotte .trang.re de (.*) [(](.*)\\[(\\d+:\\d+:\\d+)\\][)] a livr. des ressources . (.*) \\[(\\d+:\\d+:\\d+)\\]',
+		trade_message_infos_me : 'Votre flotte de la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] a atteint la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] et y a livr. les ressources suivantes',
+		trade_message_infos_res_livrees : '(.*)Vous aviez [:]',
+		trade_message_infos_res : 'tal(.*)Cristal(.*)Deut.rium(.*)',
+		trade_message_infos_me_res : 'tal(.*)Cristal(.*)Deut.rium(.*)'
 	},
 	spy : {
 		player : " '(.*)'\\)"

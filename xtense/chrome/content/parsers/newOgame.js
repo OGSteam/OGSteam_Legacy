@@ -1293,40 +1293,43 @@ var XnewOgame = {
 			// Livraison d'un ami sur une de mes planètes
 			if (m!=null) {
 				var message = Xpath.getStringValue(this.doc,paths.contents['livraison']).trim();
-				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos));				
-				Xconsole('Livraison du joueur ('+infos[1]+') sur ma planète ('+infos[2]+')');
+				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos));
 				
 				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livrées
-				Xconsole(ressourcesLivrees);
 				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantité de ressources livrées
-				Xconsole(ressources);
-				
-				var met = ressources[1].trim().replace('.','');
-				var cri = ressources[2].trim().replace('.','');
-				var deut = ressources[3].trim().replace('.','');
+
+				var met=ressources[1].trim().replace(' ','').replace('.','').replace(':','');
+				var cri=ressources[2].trim().replace(' ','').replace('.','').replace(':','');
+				var deut=ressources[3].trim().replace(' ','').replace('.','').replace(':','');
 				
 				data.type = 'trade';
-				data.trader = infos[1];
-				data.planet = infos[2];
+				data.trader = infos[1].trim();
+				data.trader_planet = infos[2].trim();
+				data.trader_planet_coords = infos[3].trim();
+				data.planet = infos[4].trim();
+				data.planet_coords = infos[5].trim();
 				data.metal = met.length > 0?met:0;				
 				data.cristal = cri.length > 0?cri:0;
 				data.deuterium = deut.length > 0?deut:0;
-						
+				
+				Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+				
 			} else if (m2!=null) { // Livraison sur la planète d'un ami
 				var message = Xpath.getStringValue(this.doc,paths.contents['livraison_me']).trim(); // Corps du message
-				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos_me)); // Infos sur la planète				 
-				var planeteLivraison = infos[1].trim(); // Planete sur laquelle la livraison à eu lieu
+				
+				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos_me)); // Infos sur la planète
+				var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison à eu lieu
 				
 				// Récupération de mes planètes
-				var mesPlanetes = Xpath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['name_planete']);
+				var mesPlanetes = Xpath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['coords']);
 				var isMyPlanet=false;
 				
 				// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
 				if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
 				   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
-						var nom = mesPlanetes.snapshotItem(i).textContent.trim();
-						Xconsole('Nom='+nom+'|planeteLivraison='+planeteLivraison);
-						if(nom==planeteLivraison){
+						var coord = mesPlanetes.snapshotItem(i).textContent.trim();
+						Xconsole('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
+						if(coord.search(planeteLivraison) > -1){
 							 isMyPlanet=true;
 							 break;
 						}	
@@ -1335,19 +1338,23 @@ var XnewOgame = {
 				
 				// Livraison sur une planète amie ? 
 				if(!isMyPlanet){
-					Xconsole('Livraison sur planete amie : ('+planeteLivraison+')');
 					var ressources = message.match(new RegExp(this.regexps.messages.trade_message_infos_me_res)); // Quantité de ressources livrées
 					
-					var met = ressources[1].trim().replace('.','');
-					var cri = ressources[2].trim().replace('.','');
-					var deut = ressources[3].trim().replace('.','');
+					var met=ressources[1].trim().replace(' ','').replace('.','').replace(':','');
+					var cri=ressources[2].trim().replace(' ','').replace('.','').replace(':','');
+					var deut=ressources[3].trim().replace(' ','').replace('.','').replace(':','');
 					
 					data.type = 'trade_me';
-					data.planet = planeteLivraison;
+					data.planet_dest = infos[3].trim();
+					data.planet_dest_coords = planeteLivraison;
+					data.planet = infos[1].trim();
+					data.planet_coords = infos[2].trim();
 					data.trader = 'ME';
 					data.metal = met.length > 0?met:0;				
 					data.cristal = cri.length > 0?cri:0;
 					data.deuterium = deut.length > 0?deut:0;
+					
+					Xconsole('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 				}
 				
 			}/* else {
