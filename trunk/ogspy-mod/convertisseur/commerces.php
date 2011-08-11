@@ -106,7 +106,7 @@ function valid() {
 	<tbody>
 	<tr>
 		<?php
-		$query = "SELECT commerce_date, commerce_planet, commerce_planet_coords, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '0' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
+		$query = "SELECT commerce_date, commerce_planet, commerce_planet_coords, commerce_planet_dest, commerce_planet_dest_coords, commerce_metal, commerce_cristal, commerce_deut  FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_user_id = ".$user_data['user_id']." AND commerce_type = '0' AND commerce_date BETWEEN ".$pub_date_from." and ".$pub_date_to."  ORDER BY ".$pub_order_by." ".$pub_sens."";
     	$result = $db->sql_query($query);
     	while( list($commerce_date, $commerce_planet, $commerce_planet_coords, $commerce_planet_dest, $commerce_planet_dest_coords, $commerce_metal, $commerce_cristal, $commerce_deut) = $db->sql_fetch_row($result) ){
 			$commerce_date = strftime("%d %b %Y à %Hh%M", $commerce_date);
