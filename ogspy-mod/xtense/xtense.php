@@ -959,8 +959,11 @@ switch ($pub_type){
 					
 					$trade = array(
 							'time' => $line['date'],
-							'planet' => $line['planet'],
 							'trader' => $line['trader'],
+							'trader_planet' => $line['trader_planet'],
+							'trader_planet_coords' => $line['trader_planet_coords'],
+							'planet' => $line['planet'],
+							'planet_coords' => $line['planet_coords'],
 							'metal' => $line['metal'],
 							'cristal' => $line['cristal'],
 							'deuterium' => $line['deuterium']
@@ -976,7 +979,10 @@ switch ($pub_type){
 					
 					$trade_me = array(
 							'time' => $line['date'],
+							'planet_dest' => $line['planet_dest'],
+							'planet_dest_coords' => $line['planet_dest_coords'],
 							'planet' => $line['planet'],
+							'planet_coords' => $line['planet_coords'],
 							'trader' => $line['trader'],
 							'metal' => $line['metal'],
 							'cristal' => $line['cristal'],
