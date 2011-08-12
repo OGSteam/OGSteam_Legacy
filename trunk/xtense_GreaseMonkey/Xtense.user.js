@@ -631,12 +631,10 @@ if(reg.test(url)){
 	log("Page galaxie !");	
 	if(Boolean(GM_getValue("handle.system"))){
 		var target = document.getElementById('galaxyContent');
-		target.removeEventListener("DOMNodeInserted", parseSystem_Inserted, false);
-		//target.removeEventListener("DOMContentLoad", parseSystem_Inserted, false);
-		target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
-		//target.addEventListener("DOMContentLoad", parseSystem_Inserted, false);
-		//Xpath.getSingleNode(document,"//input[@id='system_input']").value.addEventListener("change", alert("System change") , false);
-		
+		target.removeEventListener("DOMNodeInserted");
+		target.removeEventListener("DOMSubtreeModified");
+		//target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
+		target.addEventListener("DOMSubtreeModified", parseSystem_Inserted, false);
 	}
 }
 
@@ -646,22 +644,19 @@ if(reg.test(url)){
 if(isChrome){
 	function parseSystem_Inserted(event){
 		var doc = event.target.ownerDocument;
-		//alert("Système="+document.getElementById('system_input').value);
-		//var doc = event.originalTarget;
-		//var win = doc.getElementById('galaxyContent').win.document;
 		var paths = XtenseXpaths.galaxy;
 		var galaxy = Xpath.getSingleNode(document,"//input[@id='galaxy_input']").value;
 		var system = Xpath.getSingleNode(document,"//input[@id='system_input']").value;
-		log(Xl('system detected',galaxy,system));
-		setStatus(XLOG_NORMAL,Xl('system detected',galaxy,system));
-		//GM_setValue('lastAction','');
+		
 		if (GM_getValue('lastAction','') != 's:'+galaxy+':'+system){
 			var coords = [galaxy, system];
 			if (isNaN(coords[0]) || isNaN(coords[1])) {
 				log('invalid system'+' '+coords[0]+' '+coords[1]);
 				return;
 			}
-			
+			log(Xl('system detected',galaxy,system));
+			setStatus(XLOG_NORMAL,Xl('system detected',galaxy,system));
+		
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
 			//log(paths.rows+' '+rows.snapshotLength);
 			if(rows.snapshotLength > 0) {
