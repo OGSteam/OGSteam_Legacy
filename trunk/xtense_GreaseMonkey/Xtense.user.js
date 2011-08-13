@@ -409,7 +409,7 @@ if(isChrome){
 					}
 				}
 			}
-			setStatus(type,message);
+			setStatus(type,'['+data.execution+' ms] '+message);
 			//Request.Tab.setStatus(message, type, extra);
 		}
 	}
