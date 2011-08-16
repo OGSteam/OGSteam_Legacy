@@ -82,7 +82,7 @@ function attack_rc($rapport)
 		//Récupération des coordonnées des attaquants
 		$att=0;
 		$coords_attaquants = array();
-		while ($rapport['n'][$att]['type']!='D')
+		while ($rapport['n'][$att]['type']=='A')
 		{
 			$coords_attaquants[$att] = $rapport['n'][$att]['coords'];
 			$att++;
@@ -90,7 +90,7 @@ function attack_rc($rapport)
 		//Récupération des coordonnées des défenseurs
 		$def=0;
 		$coords_defenseurs = array();
-		while ($rapport['n'][$att+$def]['type']!='A')
+		while ((isset($rapport['n'][$att+$def])) && ($rapport['n'][$att+$def]['type']=='D'))
 		{
 			$coords_defenseurs[$def] = $rapport['n'][$att+$def]['coords'];
 			$def++;
