@@ -121,6 +121,7 @@ list($nbrjou)=$db->sql_fetch_row($result);
 <form method='post' action='?action=varAlly&subaction=ally#bilanJ<?php echo $tag ?>' name="bilanJ<?php echo $tag ?>" id="bilanJ<?php echo $tag ?>">
 <fieldset>
 Nombre de joueurs à afficher pour&nbsp;:<br />
+ Tous les membres <input type="text" name="membr<?php echo $tag ?>" value="<?php if(isset(${'pub_membr'.$tag})) echo ${'pub_membr'.$tag}; else echo '-1';?>"> <em>mettre 0 pour ne pas afficher</em><br />
  Les plus fortes évolutions <input type="text" name="evol<?php echo $tag ?>" value="<?php if(isset(${'pub_evol'.$tag})) echo ${'pub_evol'.$tag}; else echo $nbrjou;?>"> <em>(mettre 0 pour ne pas afficher)</em><br />
  Les plus gros gains de points <input type="text" name="pointsplus<?php echo $tag ?>" value="<?php if(isset(${'pub_pointsplus'.$tag})) echo ${'pub_pointsplus'.$tag}; else echo $nbrjou;?>"> <em>(mettre 0 pour ne pas afficher)</em><br />
  Les chutes <input type="text" name="chute<?php echo $tag ?>" value="<?php if(isset(${'pub_chute'.$tag})) echo ${'pub_chute'.$tag}; else echo '-1';?>"> <em>(pour afficher toutes les chutes mettre -1, 0 pour ne pas afficher)</em><br />
@@ -148,7 +149,27 @@ if(!isset(${'pub_tarea'.$tag})) ${'pub_tarea'.$tag} = 20;
 Evolution entre le [b]<?php echo isset($pub_dateMin) ? $pub_dateMin : date('d/m/Y H:i:s',$ex) ?>[/b] et le [b]<?php echo isset($pub_dateMax) ? $pub_dateMax : date('d/m/Y H:i:s',$new) ?> [<?php echo $tag; ?>][/b]
 
 <?php
-array_multisort($prc, SORT_DESC, $pts, SORT_ASC, $tblecart);
+// Tous les membres
+@array_multisort($prc, SORT, $pts, SORT, $tblecart);
+if(!isset(${'pub_membr'.$tag}) || ${'pub_membr'.$tag} == -1 ) ${'pub_membr'.$tag} = count($tblecart);
+
+
+if(${'pub_membr'.$tag} > 0) {
+	echo '[u]Tous les membres :[/u][list=1]
+';
+	$nbr = 0;
+	for($a=0; $a<${'pub_membr'.$tag}; $a++) {
+			echo "[*] [b]".$tblecart[$a]['joueur']."[/b] avec ".number_format($tblecart[$a]['ex'],0,'','.')."->".number_format($tblecart[$a]['new'],0,'','.')." [color=#FF9900](".number_format($tblecart[$a]['pts'],0,'','.')." points)[/color] soit [color=#FF9900]".$tblecart[$a]['prc']."%[/color]
+";
+	}
+	echo '[/list]
+';
+}
+?>
+
+
+<?php
+@array_multisort($prc, SORT_DESC, $pts, SORT_ASC, $tblecart);
 if(!isset(${'pub_evol'.$tag})) ${'pub_evol'.$tag} = $nbrjou;
 
 if(${'pub_evol'.$tag} > 0) {
@@ -162,7 +183,6 @@ if(${'pub_evol'.$tag} > 0) {
 ';
 }
 ?>
-
 
 <?php
 // Évolution pts
