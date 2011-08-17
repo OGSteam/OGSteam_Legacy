@@ -196,6 +196,7 @@ $lang['pandore_version_0.5'] = "- [Fix] Moon detection depending on language.<br
 	- [Fix] Error while recording while a rank have not been found.<br />
 	- [Fix] Bad display of rankings in the records.<br />
 	- [Fix] Impossible remove of records on some hosts.";
-	$lang['pandore_version_1.0.0'] = "- [Fix] Compatibility updated for OGSpy 3.0.7.<br />
+$lang['pandore_version_1.0.0'] = "- [Fix] Compatibility updated for OGSpy 3.0.7.<br />
 	- [Fix] Expedition Technology replaced by Astrophysics.<br />
 	- [Add] Add maximum planete permitted by Astrophysics.";
+?>
