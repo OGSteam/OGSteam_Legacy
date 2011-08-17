@@ -34,3 +34,4 @@ echo "<fieldset><legend><b><u>".$lang['pandore_version']." 0.2 :</u></b> <i>(".d
 echo "<fieldset><legend><b><u>".$lang['pandore_version']." 0.1 :</u></b> <i>(".date($lang['pandore_changelog_date_format'],mktime(0, 0, 0, 3, 19, 2008)).")</i></legend>
 <p align='left'><font size='2'>".$lang['pandore_version_0.1']."</br></font></p></fieldset>";
 echo "<br /><br />";
+?>
