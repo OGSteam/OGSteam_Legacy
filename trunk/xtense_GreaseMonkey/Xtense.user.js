@@ -47,6 +47,241 @@ if(isChrome){
 			return locale;
 		} catch (e) { alert(e); return false; }
 	}
+	var XtenseXpaths = {
+		metas : {
+			ogame_version: "//meta[@name='ogame-version']/@content",
+			timestamp: "//meta[@name='ogame-timestamp']/@content",
+			universe: "//meta[@name='ogame-universe']/@content",
+			language: "//meta[@name='ogame-language']/@content",
+			player_id: "//meta[@name='ogame-player-id']/@content",
+			player_name: "//meta[@name='ogame-player-name']/@content",
+			ally_id: "//meta[@name='ogame-alliance-id']/@content",
+			ally_name: "//meta[@name='ogame-alliance-name']/@content",
+			ally_tag: "//meta[@name='ogame-alliance-tag']/@content",
+			planet_id: "//meta[@name='ogame-planet-id']/@content",
+			planet_name: "//meta[@name='ogame-planet-name']/@content",
+			planet_coords: "//meta[@name='ogame-planet-coordinates']/@content",
+			planet_type: "//meta[@name='ogame-planet-type']/@content"
+		},
+		ally_members_list : {
+			rows : '//table[@class="members zebra bborder"]/tbody/tr',
+			player : 'td[1]',
+			rank : 'td[4]/span',
+			points : 'td[4]/span/@title',
+			coords : 'td[5]/a',
+			tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
+		},
+		
+		overview : {
+			cases : "//*[@id='diameterContentField']/span[2]",
+			temperatures : "//*[@id='temperatureContentField']/text()"
+		},
+		
+		galaxy : { 
+			rows : '//tr[@class="row"]',
+			position : 'td[@class="position"]/text()',
+			planetname : 'td[@class="planetname"]/text()',
+			planetname_l : 'td[@class="planetname"]/a/text()',
+			moon : 'td[@class="moon"]/a',
+			debris : 'descendant::li[@class="debris-content"]',
+			playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en gï¿½nï¿½ral, span pour joueur courant,
+			allytag : 'td[@class="allytag"]/span/text()',
+			status : 'descendant::span[@class="status"]',
+			activity : 'descendant::div[@id="TTPlanet"]/descendant::span[@class="spacing"]/text()',
+			player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
+			ally_id : 'descendant::a[@target="_ally"]/@href'
+		},
+		
+		levels : {
+			level : '//span[@class="level"]/text()'
+		},
+		
+		messages : {
+			from : '//tr[1]/td',
+			to : '//tr[2]/td',
+			subject : '//tr[3]/td',
+			date : '//tr[4]/td',
+			contents : {
+				'spy' : '//div[@class="note"]',
+				'msg': '//div[@class="note"]',
+				'ally_msg': '//div[@class="note"]',
+				'expedition': '//div[@class="note"]',
+				'rc': '//div[@id="battlereport"]',
+				'rc_cdr': '//div[@class="note"]',
+				'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+				'livraison': '//div[@class="note"]',
+				'livraison_me': '//div[@class="note"]'
+			},
+			spy : {
+				fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
+				moon : '//a[@class="buttonSave"]'
+			}
+		},
+		
+		parseTableStruct : {
+			units : "id('buttonz')//ul/li/div/div",
+			id : "a[starts-with(@id,'details')]",
+			number : "a/span"
+		},
+		
+		planetData : {
+			name : "id('selectedPlanetName')",
+			name_planete : "//span[@class='planet-name']",
+			coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
+			coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
+		},
+		
+		ranking : { 
+			time : '//div[@id="statisticsContent"]//div[@class="header"]/h3/text()',
+			who : '//input[@id="who"]/@value',
+			type : '//input[@id="type"]/@value',
+			
+			rows : 'id("ranks")/tbody/tr',
+			position : 'td[@class="position"]/text()',
+			player : {
+				playername : 'td[@class="name"]//a[contains(@href,"galaxy") and contains(@href,"system") and contains(@href,"position")]/text()',
+				allytag : 'td[@class="name"]//a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
+				points :  'td[@class="score"]/text()',
+				player_id : 'td[@class="sendmsg"]//a[contains(@href,"writemessage")]/@href',
+				ally_id : 'td[@class="name"]//a[contains(@target,"_ally")]/@href'
+			},
+			
+			ally : {
+				position_ally : 'td[1]/text()',
+				allytag : 'td[2]/a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
+				points :  'td[4]/text()',
+				members : 'td[5]/text()',
+				ally_id : 'td[2]/a[contains(@target,"_ally")]/@href'
+			}
+		},
+		
+		ressources : {
+			metal : "//span[@id='resources_metal']/text()",
+			cristal : "//span[@id='resources_crystal']/text()",
+			deuterium : "//span[@id='resources_deuterium']/text()",
+			antimatiere : "//span[@id='resources_darkmatter']/text()",
+			energie : "//span[@id='resources_energy']/text()"	
+		},
+		
+		rc : {
+			list_infos : '//td[@class="newBack"]/center',
+			list_rounds : '//div[@class="round_info"]',
+			infos: {
+				player : 'span[contains(@class, "name")]',
+				weapons : 'span[contains(@class, "weapons")]',
+				destroyed : 'span[contains(@class, "destroyed")]'
+			},
+			list_types : 'table/tbody/tr[1]/th',
+			list_values : 'table/tbody/tr[2]/td',
+			result : '//div[@id="combat_result"]',
+			combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
+		},
+		
+		writemessage : {
+			form : '//form[1]',
+			from : 'id("wrapper")/form/div/table/tbody/tr[1]/td',
+			to : 'id("wrapper")/form/div/table/tbody/tr[2]/td',
+			subject : 'id("wrapper")/form/div[1]/table/tbody/tr[3]/td/input',
+			date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
+			content : 'id("wrapper")/form/div[2]/div/textarea'
+		}
+	}
+	// Toutes les unites du jeu
+	// id : nom du champ dans la bdd
+	var XtenseDatabase = {
+		'resources': {601:'metal',602:'cristal',603:'deuterium',604:'energie'},
+		'buildings': { 1:'M', 2:'C', 3:'D', 4:'CES', 
+							12:'CEF', 14:'UdR', 15:'UdN', 
+							21:'CSp', 212:'Sat', 22:'HM', 23:'HC', 
+							24:'HD', 31:'Lab', 33:'Ter', 
+							34:'DdR', 44:'Silo', 41:'BaLu', 
+							42:'Pha', 43:'PoSa'
+							},
+		'researchs': { 106:'Esp', 108:'Ordi', 109:'Armes',
+							110:'Bouclier', 111:'Protection', 
+							113:'NRJ', 114:'Hyp', 115:'RC', 
+							117:'RI', 118:'PH', 120:'Laser', 
+							121:'Ions', 122:'Plasma', 123:'RRI', 
+							124: 'Astrophysique', 199:'Graviton'
+							},
+		'fleet': { 		202:'PT', 203:'GT', 204:'CLE', 205:'CLO',
+							206:'CR', 207:'VB', 208:'VC', 209:'REC', 
+							210:'SE', 211:'BMD', 212:'SAT', 213:'DST', 
+							214:'EDLM', 215:'TRA',
+							},
+		'defense': { 	401:'LM', 402:'LLE', 403:'LLO', 404:'CG',
+							405:'AI', 406:'LP', 407:'PB', 408:'GB', 
+							502:'MIC', 503:'MIP' 
+							}
+	}
+	
+	var XtenseRegexps = {
+		planetNameAndCoords : ' (.*) \\[(\\d+:\\d+:\\d+)\\]',
+		planetCoords : '\\[(\\d+:\\d+:\\d+)\\]',
+		userNameAndCoords : '(.*) \\[(\\d+:\\d+:\\d+)\\]',
+		userNameAndDestroyed : ' (.*) d.truit',
+		moon : '=(\\d+)*',
+		
+		messages : {
+			ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%',		
+			trade_message_infos : 'Une flotte .trang.re de (\\S+) livre des ressources . (\\S+) (\\S+) :',
+			trade_message_infos_me : 'Votre flotte atteint la plan.te (.*) (.*) et y livre les ressources suivantes',
+			trade_message_infos_res_livrees : '(.*)Vous aviez :',
+			trade_message_infos_res : 'M.tal : (.*) Cristal : (.*) Deut.rium : (.*)',
+			trade_message_infos_me_res : 'M.tal :(.*)Cristal:(.*)Deut.rium:(.*)'
+		},
+		spy : {
+			player : " '(.*)'\\)"
+		},
+		probability : ': (\\d+) %',
+		coords : '\\[(\\d+:\\d+:\\d+)\\]',
+		ally : 'Alliance \\[(.*)\\]',
+		
+		parseTableStruct : '<a[^>]*id="details(\\d+)"[^>]*>[\\D\\d]*?([\\d.]+[KMG]?)<\/span>[^<]*<\/span>[^<]*<\/a>'
+	}
+	
+	var XtenseMetas = {
+		getOgameVersion : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.ogame_version);	
+		},
+		getTimestamp : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.timestamp);	
+		},
+		getUniverse : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.universe);	
+		},
+		getLanguage : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.language);	
+		},
+		getPlayerId : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.player_id);	
+		},
+		getPlayerName : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.player_name);	
+		},
+		getAllyId : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.ally_id);	
+		},
+		getAllyName : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.ally_name);	
+		},
+		getAllyTag : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.ally_tag);	
+		},
+		getPlanetId : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.planet_id);	
+		},
+		getPlanetName : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.planet_name);	
+		},
+		getPlanetCoords : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.planet_coords);	
+		},
+		getPlanetType : function() {
+			return Xpath.getStringValue(document,XtenseXpaths.metas.planet_type);	
+		}
+	}
+	
 	Ximplements(Xlocales, {
 		'error start': 'ERREUR: ',
 		'http status 403': 'statut 403, Impossible d\'acceder au plugin Xtense.',
@@ -195,6 +430,76 @@ if(isChrome){
 		
 		'call messages': '-- Messages renvoyés par les appels'
 	});
+		
+	//**********************
+	//** Fonctions Xtense **
+	//**********************
+	var XtenseRequest = {
+		postedData : [],
+		loading : {},
+		data : {},
+		send : function (){
+			//if (! servers) servers = Xservers.list;
+			
+			//for (var i = 0, len = servers.length; i < len; i++){
+				//var server = servers[i];
+				var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(XtenseOptions.server_ids.user,'') + '&password=' + MD5(SHA1(GM_getValue(XtenseOptions.server_ids.password,''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData();
+				
+				//if (Xprefs.getBool('spy-debug')) postData += '&spy_debug=1';
+				//if (Xprefs.getBool('dev')) postData += '&dev=1';
+				//log("sending " + postData + " to " + GM_getValue(XtenseOptions.server_ids.url,'') + " from " + urlUnivers);
+				new Xajax(
+				{
+					url: GM_getValue(XtenseOptions.server_ids.url,''),
+					post: postData,
+					callback: null,
+					scope: this
+				});
+				
+				postedData = postData;
+				loading = true;
+				
+			//}
+		},		
+		call : function (Server, Response){
+			XtenseRequest.loading[Server.n] = false;
+			XtenseRequest.callback.apply(this.scope,[ this, Server, Response]);
+		},
+		set : function (name, value){
+			if (typeof name == 'string') this.data[name] = value; else {
+				for (var n = 0, len = arguments.length; n < len; n++){
+					for (var i in arguments[n]) this.data[i] = arguments[n][i];
+				}
+			}
+		},		
+		serializeObject : function (obj, parent, tab){
+			var retour = '';
+			var type = typeof obj;
+			if (type == 'object'){
+				for (var i in obj){
+					if (parent != '')
+					var str = parent + '[' + i + ']'; else var str = i;
+					var a = false;
+					// Patch pour Graphic Tools for Ogame
+					if (str.search("existsTOG") == - 1){
+						a = this.serializeObject(obj[i], str, tab);
+					}
+					if (a != false)
+					tab.push(a);
+				}
+				return false;
+			} else if (type == 'boolean')
+			retour = (obj == true? 1: 0); else retour = obj + '';
+			return parent + '=' + encodeURIComponent(retour).replace(new RegExp("(%0A)+", "g"), '%20').replace(new RegExp("(%09)+", "g"), '%20').replace(new RegExp("(%20)+", "g"), '%20');
+		},		
+		serializeData : function (){
+			var uri = '';
+			var tab =[];
+			this.serializeObject(this.data, '', tab);
+			uri = '&' + tab.join('&');
+			return uri;
+		}
+	}
 	function GM_getValue(key,defaultVal){
 		var retValue=null;
 		var keyStore = cookie+key;
@@ -245,7 +550,7 @@ if(isChrome){
 			node = node ? node : doc;
 			return doc.evaluate(xpath,node,null,XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 		}
-	}
+	}	
 	String.prototype.trim = function () {
 		return this.replace(/^\s*/, '').replace(/\s*$/, '');
 	}
@@ -259,7 +564,13 @@ if(isChrome){
 	String.prototype.trimZeros = function() {
 		return this.replace(/^0+/g,'');
 	}
-	
+	String.prototype.getInts = function (/*separator*/) {
+		/*if(typeof separator!="undefined")reg=new Regexp("[0-9("+separator+")]+","g");
+		else reg=new Regexp("[0-9("+separator+")]+","g");*/
+		var v = this.match(/[0-9][0-9.]*/g);
+		v.forEach(function (el, index, arr) { arr[index] = parseInt(el.replace(/\./g, '')); });
+		return v;
+	}
 	function Xajax(obj) {
 		var xhr = new XMLHttpRequest();
 		var callback = obj.callback || function(){};
@@ -620,15 +931,14 @@ if((new RegExp(/xtense=Options/)).test(url)){
 		}
 	}
 }
-// ******************
-// ** Page Galaxie **
 
-var reg = new RegExp(/(galaxy)/);
-if(!reg.test(url)){
+/* Page Autre que Galaxie */
+var regGalaxy = new RegExp(/(galaxy)/);
+if(!regGalaxy.test(url)){
 	GM_setValue('lastAction','');
 }
-if(reg.test(url)){
-	log("Page galaxie !");	
+/* Page Galaxie */
+if(regGalaxy.test(url)){
 	if(Boolean(GM_getValue("handle.system"))){
 		var target = document.getElementById('galaxyContent');
 		target.removeEventListener("DOMNodeInserted");
@@ -636,6 +946,33 @@ if(reg.test(url)){
 		//target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
 		target.addEventListener("DOMSubtreeModified", parseSystem_Inserted, false);
 	}
+}
+
+/* Page Overview */
+var regOverview = new RegExp(/(overview)/);
+if(regOverview.test(url)){	
+	var planetData = getPlanetData();
+	
+	var cases = Xpath.getStringValue(document,XtenseXpaths.overview.cases);
+	var temperatures = Xpath.getStringValue(document,XtenseXpaths.overview.temperatures);
+	var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+	var temperature_min = temperatures.match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
+	
+	var resources = getResources();
+	
+	XtenseRequest.set(
+		{
+			type: 'overview',
+			fields: cases,
+			temperature_min: temperature_min,
+			temperature_max: temperature_max,
+			ressources: resources
+		},
+		planetData
+	);
+		
+	XtenseRequest.set('lang',langUnivers);
+	XtenseRequest.send();
 }
 
 //************************
@@ -660,7 +997,7 @@ if(isChrome){
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
 			//log(paths.rows+' '+rows.snapshotLength);
 			if(rows.snapshotLength > 0) {
-				//var Request = new Request(null, null, null);
+				//var XtenseRequest = new XtenseRequest(null, null, null);
 				//log(rows.snapshotLength+' rows found');
 				var rowsData = [];
 				for (var i = 0; i < rows.snapshotLength ; i++) {
@@ -731,7 +1068,7 @@ if(isChrome){
 					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
 					rowsData[position]=r;
 				}
-				Request.set(
+				XtenseRequest.set(
 					{
 						row : rowsData,
 						galaxy : coords[0],
@@ -740,9 +1077,9 @@ if(isChrome){
 					}
 				);
 
-				Request.set('lang',langUnivers);
-				//Xdump(Request.data);
-				Request.send();
+				XtenseRequest.set('lang',langUnivers);
+				//Xdump(XtenseRequest.data);
+				XtenseRequest.send();
 				GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
 			}
 		}/* else {
@@ -756,239 +1093,25 @@ if(isChrome){
 	function parseNB(monText){
 	  return (monText.replace(/\./g,""));  
 	}
-		
-	//**********************
-	//** Fonctions Xtense **
-	//**********************
-	var Request = {
-		postedData : [],
-		loading : {},
-		data : {},
-		send : function (){
-			//if (! servers) servers = Xservers.list;
-			
-			//for (var i = 0, len = servers.length; i < len; i++){
-				//var server = servers[i];
-				var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(XtenseOptions.server_ids.user,'') + '&password=' + MD5(SHA1(GM_getValue(XtenseOptions.server_ids.password,''))) + '&univers=' + urlUnivers + Request.serializeData();
-				
-				//if (Xprefs.getBool('spy-debug')) postData += '&spy_debug=1';
-				//if (Xprefs.getBool('dev')) postData += '&dev=1';
-				//log("sending " + postData + " to " + GM_getValue(XtenseOptions.server_ids.url,'') + " from " + urlUnivers);
-				new Xajax(
-				{
-					url: GM_getValue(XtenseOptions.server_ids.url,''),
-					post: postData,
-					callback: null,
-					scope: this
-				});
-				
-				postedData = postData;
-				loading = true;
-				
-			//}
-		},		
-		call : function (Server, Response){
-			Request.loading[Server.n] = false;
-			Request.callback.apply(this.scope,[ this, Server, Response]);
-		},
-		set : function (name, value){
-			if (typeof name == 'string') this.data[name] = value; else {
-				for (var n = 0, len = arguments.length; n < len; n++){
-					for (var i in arguments[n]) this.data[i] = arguments[n][i];
-				}
-			}
-		},		
-		serializeObject : function (obj, parent, tab){
-			var retour = '';
-			var type = typeof obj;
-			if (type == 'object'){
-				for (var i in obj){
-					if (parent != '')
-					var str = parent + '[' + i + ']'; else var str = i;
-					var a = false;
-					// Patch pour Graphic Tools for Ogame
-					if (str.search("existsTOG") == - 1){
-						a = this.serializeObject(obj[i], str, tab);
-					}
-					if (a != false)
-					tab.push(a);
-				}
-				return false;
-			} else if (type == 'boolean')
-			retour = (obj == true? 1: 0); else retour = obj + '';
-			return parent + '=' + encodeURIComponent(retour).replace(new RegExp("(%0A)+", "g"), '%20').replace(new RegExp("(%09)+", "g"), '%20').replace(new RegExp("(%20)+", "g"), '%20');
-		},		
-		serializeData : function (){
-			var uri = '';
-			var tab =[];
-			this.serializeObject(this.data, '', tab);
-			uri = '&' + tab.join('&');
-			return uri;
-		}
-	}
 	
-	var XtenseXpaths = {
-		ally_members_list : {
-			rows : '//table[@class="members zebra bborder"]/tbody/tr',
-			player : 'td[1]',
-			rank : 'td[4]/span',
-			points : 'td[4]/span/@title',
-			coords : 'td[5]/a',
-			tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
-		},
-		
-		galaxy : { 
-			rows : '//tr[@class="row"]',
-			position : 'td[@class="position"]/text()',
-			planetname : 'td[@class="planetname"]/text()',
-			planetname_l : 'td[@class="planetname"]/a/text()',
-			moon : 'td[@class="moon"]/a',
-			debris : 'descendant::li[@class="debris-content"]',
-			playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en gï¿½nï¿½ral, span pour joueur courant,
-			allytag : 'td[@class="allytag"]/span/text()',
-			status : 'descendant::span[@class="status"]',
-			activity : 'descendant::div[@id="TTPlanet"]/descendant::span[@class="spacing"]/text()',
-			player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
-			ally_id : 'descendant::a[@target="_ally"]/@href'
-		},
-		
-		levels : {
-			level : '//span[@class="level"]/text()'
-		},
-		
-		messages : {
-			from : '//tr[1]/td',
-			to : '//tr[2]/td',
-			subject : '//tr[3]/td',
-			date : '//tr[4]/td',
-			contents : {
-				'spy' : '//div[@class="note"]',
-				'msg': '//div[@class="note"]',
-				'ally_msg': '//div[@class="note"]',
-				'expedition': '//div[@class="note"]',
-				'rc': '//div[@id="battlereport"]',
-				'rc_cdr': '//div[@class="note"]',
-				'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
-				'livraison': '//div[@class="note"]',
-				'livraison_me': '//div[@class="note"]'
-			},
-			spy : {
-				fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
-				moon : '//a[@class="buttonSave"]'
-			}
-		},
-		
-		parseTableStruct : {
-			units : "id('buttonz')//ul/li/div/div",
-			id : "a[starts-with(@id,'details')]",
-			number : "a/span"
-		},
-		
-		planetData : {
-			name : "id('selectedPlanetName')",
-			name_planete : "//span[@class='planet-name']",
-			coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
-			coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
-		},
-		
-		ranking : { 
-			time : '//div[@id="statisticsContent"]//div[@class="header"]/h3/text()',
-			who : '//input[@id="who"]/@value',
-			type : '//input[@id="type"]/@value',
-			
-			rows : 'id("ranks")/tbody/tr',
-			position : 'td[@class="position"]/text()',
-			player : {
-				playername : 'td[@class="name"]//a[contains(@href,"galaxy") and contains(@href,"system") and contains(@href,"position")]/text()',
-				allytag : 'td[@class="name"]//a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
-				points :  'td[@class="score"]/text()',
-				player_id : 'td[@class="sendmsg"]//a[contains(@href,"writemessage")]/@href',
-				ally_id : 'td[@class="name"]//a[contains(@target,"_ally")]/@href'
-			},
-			
-			ally : {
-				position_ally : 'td[1]/text()',
-				allytag : 'td[2]/a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
-				points :  'td[4]/text()',
-				members : 'td[5]/text()',
-				ally_id : 'td[2]/a[contains(@target,"_ally")]/@href'
-			}
-		},
-		
-		rc : {
-			list_infos : '//td[@class="newBack"]/center',
-			list_rounds : '//div[@class="round_info"]',
-			infos: {
-				player : 'span[contains(@class, "name")]',
-				weapons : 'span[contains(@class, "weapons")]',
-				destroyed : 'span[contains(@class, "destroyed")]'
-			},
-			list_types : 'table/tbody/tr[1]/th',
-			list_values : 'table/tbody/tr[2]/td',
-			result : '//div[@id="combat_result"]',
-			combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
-		},
-		
-		writemessage : {
-			form : '//form[1]',
-			from : 'id("wrapper")/form/div/table/tbody/tr[1]/td',
-			to : 'id("wrapper")/form/div/table/tbody/tr[2]/td',
-			subject : 'id("wrapper")/form/div[1]/table/tbody/tr[3]/td/input',
-			date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
-			content : 'id("wrapper")/form/div[2]/div/textarea'
+	/* Recuperation de données */
+	function getPlanetData() {
+		var planet_type = "";
+		if(XtenseMetas.getPlanetType() == 'moon'){
+			planet_type = '1';
+		} else {
+			planet_type = '0';
 		}
+		log("planet_name: "+XtenseMetas.getPlanetName()+", coords : "+XtenseMetas.getPlanetCoords()+", planet_type : "+planet_type);
+		return {planet_name: XtenseMetas.getPlanetName(), coords : XtenseMetas.getPlanetCoords(), planet_type : planet_type};
 	}
-	// Toutes les unites du jeu
-	// id : nom du champ dans la bdd
-	var XtenseDatabase = {
-		'resources': {601:'metal',602:'cristal',603:'deuterium',604:'energie'},
-		'buildings': { 1:'M', 2:'C', 3:'D', 4:'CES', 
-							12:'CEF', 14:'UdR', 15:'UdN', 
-							21:'CSp', 212:'Sat', 22:'HM', 23:'HC', 
-							24:'HD', 31:'Lab', 33:'Ter', 
-							34:'DdR', 44:'Silo', 41:'BaLu', 
-							42:'Pha', 43:'PoSa'
-							},
-		'researchs': { 106:'Esp', 108:'Ordi', 109:'Armes',
-							110:'Bouclier', 111:'Protection', 
-							113:'NRJ', 114:'Hyp', 115:'RC', 
-							117:'RI', 118:'PH', 120:'Laser', 
-							121:'Ions', 122:'Plasma', 123:'RRI', 
-							124: 'Astrophysique', 199:'Graviton'
-							},
-		'fleet': { 		202:'PT', 203:'GT', 204:'CLE', 205:'CLO',
-							206:'CR', 207:'VB', 208:'VC', 209:'REC', 
-							210:'SE', 211:'BMD', 212:'SAT', 213:'DST', 
-							214:'EDLM', 215:'TRA',
-							},
-		'defense': { 	401:'LM', 402:'LLE', 403:'LLO', 404:'CG',
-							405:'AI', 406:'LP', 407:'PB', 408:'GB', 
-							502:'MIC', 503:'MIP' 
-							}
-	}
-	
-	var XtenseRegexps = {
-		planetNameAndCoords : ' (.*) \\[(\\d+:\\d+:\\d+)\\]',
-		planetCoords : '\\[(\\d+:\\d+:\\d+)\\]',
-		userNameAndCoords : '(.*) \\[(\\d+:\\d+:\\d+)\\]',
-		userNameAndDestroyed : ' (.*) d.truit',
-		moon : '=(\\d+)*',
-		
-		messages : {
-			ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%',		
-			trade_message_infos : 'Une flotte .trang.re de (\\S+) livre des ressources . (\\S+) (\\S+) :',
-			trade_message_infos_me : 'Votre flotte atteint la plan.te (.*) (.*) et y livre les ressources suivantes',
-			trade_message_infos_res_livrees : '(.*)Vous aviez :',
-			trade_message_infos_res : 'M.tal : (.*) Cristal : (.*) Deut.rium : (.*)',
-			trade_message_infos_me_res : 'M.tal :(.*)Cristal:(.*)Deut.rium:(.*)'
-		},
-		spy : {
-			player : " '(.*)'\\)"
-		},
-		probability : ': (\\d+) %',
-		coords : '\\[(\\d+:\\d+:\\d+)\\]',
-		ally : 'Alliance \\[(.*)\\]',
-		
-		parseTableStruct : '<a[^>]*id="details(\\d+)"[^>]*>[\\D\\d]*?([\\d.]+[KMG]?)<\/span>[^<]*<\/span>[^<]*<\/a>'
+	function getResources(){		
+		var metal = Xpath.getStringValue(document,XtenseXpaths.ressources.metal).trimInt();
+	    var cristal = Xpath.getStringValue(document,XtenseXpaths.ressources.cristal).trimInt();
+	    var deut = Xpath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
+		var antimater = Xpath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
+	    var energy = Xpath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
+		log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
+		return Array(metal,cristal,deut,antimater,energy);
 	}
 }
