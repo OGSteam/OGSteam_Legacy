@@ -803,6 +803,10 @@ if((new RegExp(/xtense=Options/)).test(url)){
 			//alert("GM_getValue('handle.system','false'))="+(GM_getValue('handle.system','false')=='true')+"\n"+((GM_getValue('handle.system','false')=='true')?'checked="true" ':'checked="false" '));
 			options+= '<td class="value"><input class="speed" id="handle.system" checked="false" size="35" alt="24" type="checkbox"/></td>';
 			options+= '</tr>';
+			options+= '<tr>';
+			options+= '<td class="champ"><label class="styled textBeefy">Vue générale</label></td>';
+			options+= '<td class="value"><input class="speed" id="handle.overview" checked="false" size="35" alt="24" type="checkbox"/></td>';
+			options+= '</tr>';
 			options+= '</tbody></table>';
 			options+= '</div>';
 			// Options
@@ -950,29 +954,33 @@ if(regGalaxy.test(url)){
 
 /* Page Overview */
 var regOverview = new RegExp(/(overview)/);
-if(regOverview.test(url)){	
-	var planetData = getPlanetData();
+if(regOverview.test(url)){
+	setStatus(XLOG_NORMAL,Xl('overview detected'));
 	
-	var cases = Xpath.getStringValue(document,XtenseXpaths.overview.cases);
-	var temperatures = Xpath.getStringValue(document,XtenseXpaths.overview.temperatures);
-	var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
-	var temperature_min = temperatures.match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
-	
-	var resources = getResources();
-	
-	XtenseRequest.set(
-		{
-			type: 'overview',
-			fields: cases,
-			temperature_min: temperature_min,
-			temperature_max: temperature_max,
-			ressources: resources
-		},
-		planetData
-	);
+	if(Boolean(GM_getValue("handle.overview"))){
+		var planetData = getPlanetData();
 		
-	XtenseRequest.set('lang',langUnivers);
-	XtenseRequest.send();
+		var cases = Xpath.getStringValue(document,XtenseXpaths.overview.cases);
+		var temperatures = Xpath.getStringValue(document,XtenseXpaths.overview.temperatures);
+		var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+		var temperature_min = temperatures.match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
+		
+		var resources = getResources();
+		
+		XtenseRequest.set(
+			{
+				type: 'overview',
+				fields: cases,
+				temperature_min: temperature_min,
+				temperature_max: temperature_max,
+				ressources: resources
+			},
+			planetData
+		);
+			
+		XtenseRequest.set('lang',langUnivers);
+		XtenseRequest.send();
+	}
 }
 
 //************************
