@@ -1298,9 +1298,9 @@ var XnewOgame = {
 				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livrées
 				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantité de ressources livrées
 
-				var met=ressources[1].trim().replace(' ','').replace('.','').replace(':','');
-				var cri=ressources[2].trim().replace(' ','').replace('.','').replace(':','');
-				var deut=ressources[3].trim().replace(' ','').replace('.','').replace(':','');
+				var met=ressources[1].trimInt();
+				var cri=ressources[2].trimInt();
+				var deut=ressources[3].trimInt();
 				
 				data.type = 'trade';
 				data.trader = infos[1].trim();
@@ -1308,9 +1308,9 @@ var XnewOgame = {
 				data.trader_planet_coords = infos[3].trim();
 				data.planet = infos[4].trim();
 				data.planet_coords = infos[5].trim();
-				data.metal = met.length > 0?met:0;				
-				data.cristal = cri.length > 0?cri:0;
-				data.deuterium = deut.length > 0?deut:0;
+				data.metal = met;				
+				data.cristal = cri;
+				data.deuterium = deut;
 				
 				Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 				
@@ -1340,9 +1340,9 @@ var XnewOgame = {
 				if(!isMyPlanet){
 					var ressources = message.match(new RegExp(this.regexps.messages.trade_message_infos_me_res)); // Quantité de ressources livrées
 					
-					var met=ressources[1].trim().replace(' ','').replace('.','').replace(':','');
-					var cri=ressources[2].trim().replace(' ','').replace('.','').replace(':','');
-					var deut=ressources[3].trim().replace(' ','').replace('.','').replace(':','');
+					var met=ressources[1].trimInt();
+					var cri=ressources[2].trimInt();
+					var deut=ressources[3].trimInt();
 					
 					data.type = 'trade_me';
 					data.planet_dest = infos[3].trim();
@@ -1350,9 +1350,9 @@ var XnewOgame = {
 					data.planet = infos[1].trim();
 					data.planet_coords = infos[2].trim();
 					data.trader = 'ME';
-					data.metal = met.length > 0?met:0;				
-					data.cristal = cri.length > 0?cri:0;
-					data.deuterium = deut.length > 0?deut:0;
+					data.metal = met;				
+					data.cristal = cri;
+					data.deuterium = deut;
 					
 					Xconsole('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 				}
