@@ -47,6 +47,7 @@ if(isChrome){
 			return locale;
 		} catch (e) { alert(e); return false; }
 	}
+	
 	var XtenseXpaths = {
 		metas : {
 			ogame_version: "//meta[@name='ogame-version']/@content",
