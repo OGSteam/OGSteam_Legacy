@@ -1,1 +1,1 @@
-"reussi" 
+var toto = "reussi";
