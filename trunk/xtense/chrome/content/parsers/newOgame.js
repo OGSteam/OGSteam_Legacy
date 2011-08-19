@@ -900,17 +900,17 @@ var XnewOgame = {
 						var m = round.match(new RegExp(rcStrings['regxps']['time']));
 						if(m){
 							// Calcul heure d'ete => offset = -120 & heure d'hiver  => offset = -60
-							var diff = new Date(Date.UTC(m[3],(m[2]-1),m[1],m[4],m[5],m[6])).getTimezoneOffset();
+							var diff = new Date(Date.UTC(m[3], (m[2]-1), m[1], m[4], m[5], m[6])).getTimezoneOffset();
 							var correction = 0;
 							if(diff==-120){
 								correction = 2;
 							} else if(diff==-60){
 								correction = 1;
 							}
-							var date = (Date.UTC(m[3],(m[2]-1),m[1],(parseInt(m[4])-correction),m[5],m[6]))/1000;
+							var date = (Date.UTC(m[3], (m[2]-1), m[1], (parseInt(m[4].replace(new RegExp("0(\\d)"), "$1")) - correction), m[5], m[6])) / 1000;
 
 						} else {
-							var date = Math.ceil((new Date().getTime())/1000);
+							var date = Math.ceil((new Date().getTime()) / 1000);
 						}
 					} else {
 						var rnd = {};
