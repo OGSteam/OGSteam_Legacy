@@ -419,36 +419,6 @@ if(isChrome){
 				XtenseRequest.send();
 				GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
 			}
-		}/* else {
-			log("Système déjà traité !");
-		}*/
-	}
-}
-
-if(isChrome){
-	// converti un nombre de la forme xxx.xxx.xxx en xxxxxxxxx
-	function parseNB(monText){
-	  return (monText.replace(/\./g,""));  
-	}
-	
-	/* Recuperation de données */
-	function getPlanetData() {
-		var planet_type = "";
-		if(XtenseMetas.getPlanetType() == 'moon'){
-			planet_type = '1';
-		} else {
-			planet_type = '0';
 		}
-		log("planet_name: "+XtenseMetas.getPlanetName()+", coords : "+XtenseMetas.getPlanetCoords()+", planet_type : "+planet_type);
-		return {planet_name: XtenseMetas.getPlanetName(), coords : XtenseMetas.getPlanetCoords(), planet_type : planet_type};
-	}
-	function getResources(){		
-		var metal = Xpath.getStringValue(document,XtenseXpaths.ressources.metal).trimInt();
-	    var cristal = Xpath.getStringValue(document,XtenseXpaths.ressources.cristal).trimInt();
-	    var deut = Xpath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
-		var antimater = Xpath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
-	    var energy = Xpath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
-		log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
-		return Array(metal,cristal,deut,antimater,energy);
 	}
 }
