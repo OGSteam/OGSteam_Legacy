@@ -29,8 +29,8 @@ var nomScript = 'Xtense';
 var cookie = nomScript+"-"+numUnivers+"-";
 var callback = null;
 
+/* Fonctions, Constantes ... */
 if(isChrome){
-	
 	function Ximplements (object, implement) { for (var i in implement) object[i] = implement[i];}
 	function Xl(name) {
 		try {
@@ -56,8 +56,165 @@ if(isChrome){
 	/* Récupération des fonctions */
 	eval(getRessourceAsUrl('http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/data/XtenseFunctions.js'));
 }
-	
 
+
+/* Page Autre que Galaxie */
+var regGalaxy = new RegExp(/(galaxy)/);
+if(!regGalaxy.test(url)){
+	GM_setValue('lastAction','');
+}
+/* Page Galaxie */
+if(regGalaxy.test(url)){
+	if(Boolean(GM_getValue("handle.system"))){
+		var target = document.getElementById('galaxyContent');
+		target.removeEventListener("DOMNodeInserted");
+		target.removeEventListener("DOMSubtreeModified");
+		//target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
+		target.addEventListener("DOMSubtreeModified", parseSystem_Inserted, false);
+	}
+}
+
+/* Page Overview */
+var regOverview = new RegExp(/(overview)/);
+if(regOverview.test(url)){
+	setStatus(XLOG_NORMAL,Xl('overview detected'));
+	
+	if(Boolean(GM_getValue("handle.overview"))){
+		var planetData = getPlanetData();
+		
+		var cases = Xpath.getStringValue(document,XtenseXpaths.overview.cases);
+		var temperatures = Xpath.getStringValue(document,XtenseXpaths.overview.temperatures);
+		var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+		var temperature_min = temperatures.match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
+		
+		var resources = getResources();
+		
+		XtenseRequest.set(
+			{
+				type: 'overview',
+				fields: cases,
+				temperature_min: temperature_min,
+				temperature_max: temperature_max,
+				ressources: resources
+			},
+			planetData
+		);
+			
+		XtenseRequest.set('lang',langUnivers);
+		XtenseRequest.send();
+	}
+}
+
+//************************
+//** PARSINGS DES PAGES **
+//************************
+if(isChrome){
+	function parseSystem_Inserted(event){
+		var doc = event.target.ownerDocument;
+		var paths = XtenseXpaths.galaxy;
+		var galaxy = Xpath.getSingleNode(document,"//input[@id='galaxy_input']").value;
+		var system = Xpath.getSingleNode(document,"//input[@id='system_input']").value;
+		
+		if (GM_getValue('lastAction','') != 's:'+galaxy+':'+system){
+			var coords = [galaxy, system];
+			if (isNaN(coords[0]) || isNaN(coords[1])) {
+				log('invalid system'+' '+coords[0]+' '+coords[1]);
+				return;
+			}
+			log(Xl('system detected',galaxy,system));
+			setStatus(XLOG_NORMAL,Xl('system detected',galaxy,system));
+		
+			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
+			//log(paths.rows+' '+rows.snapshotLength);
+			if(rows.snapshotLength > 0) {
+				//var XtenseRequest = new XtenseRequest(null, null, null);
+				//log(rows.snapshotLength+' rows found');
+				var rowsData = [];
+				for (var i = 0; i < rows.snapshotLength ; i++) {
+					var row = rows.snapshotItem(i);
+					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'');
+					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'');
+					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
+					
+					if (player == '') {
+						log('row '+i+' has no player name');
+						continue;
+					}
+					if (name == '') {
+						if (name_l == '') {
+							log('row '+i+' has no planet name');
+							continue;
+						} else
+							name = name_l;
+					}
+					var position = Xpath.getNumberValue(doc,paths.position,row);
+					if(isNaN(position)) {
+						log('position '+position+' is not a number');
+						continue;
+					}
+
+					var moon = Xpath.getUnorderedSnapshotNodes(doc,paths.moon,row);
+					moon = moon.snapshotLength > 0 ? 1 : 0;
+					var status = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
+					if(status.snapshotLength>0){
+						status = status.snapshotItem(0);
+						status = status.textContent;
+						status = status.match(/\((.*)\)/);
+						status = status ? status[1] : "";
+						status = status.trimAll();
+					}
+					else status = "";
+					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
+					activity = activity.match(/: (.*)/);
+					if(activity)
+						activity = activity[1];
+					else activity = '';
+					var allytag = Xpath.getStringValue(doc,paths.allytag,row).trim();
+					var debris = [];
+					for(var j = 0; j < 2; j++) {
+						debris[XtenseDatabase['resources'][601+j]] = 0;
+					}
+					var debrisCells = Xpath.getUnorderedSnapshotNodes(doc,paths.debris,row);
+					for (var j = 0; j < debrisCells.snapshotLength ; j++) {
+						debris[XtenseDatabase['resources'][601+j]] = debrisCells.snapshotItem(j).innerHTML.trimInt();
+					}
+					
+					var player_id = Xpath.getStringValue(doc,paths.player_id,row).trim();
+					if (player_id != '' ) {
+						player_id = player_id.match(/\&to\=(.*)\&ajax/);
+						player_id = player_id[1];
+					}
+					else if(doc.cookie.match(/login_(.*)=U_/))
+						player_id = doc.cookie.match(/login_(.*)=U_/)[1]; 
+					
+					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
+					if (ally_id != '' ) {
+						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id[1];
+					}
+					else if (allytag)
+						ally_id = '-1';
+					
+					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
+					rowsData[position]=r;
+				}
+				XtenseRequest.set(
+					{
+						row : rowsData,
+						galaxy : coords[0],
+						system : coords[1],
+						type : 'system'
+					}
+				);
+
+				XtenseRequest.set('lang',langUnivers);
+				//Xdump(XtenseRequest.data);
+				XtenseRequest.send();
+				GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
+			}
+		}
+	}
+}
 
 // Ajout du Menu Options
 if (document.getElementById('playerName')){
@@ -261,164 +418,6 @@ if((new RegExp(/xtense=Options/)).test(url)){
 			escriptopt.style.width='670px';
 			einhalt.style.display='none';
 			einhalt.parentNode.insertBefore(escriptopt,einhalt);
-		}
-	}
-}
-
-/* Page Autre que Galaxie */
-var regGalaxy = new RegExp(/(galaxy)/);
-if(!regGalaxy.test(url)){
-	GM_setValue('lastAction','');
-}
-/* Page Galaxie */
-if(regGalaxy.test(url)){
-	if(Boolean(GM_getValue("handle.system"))){
-		var target = document.getElementById('galaxyContent');
-		target.removeEventListener("DOMNodeInserted");
-		target.removeEventListener("DOMSubtreeModified");
-		//target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
-		target.addEventListener("DOMSubtreeModified", parseSystem_Inserted, false);
-	}
-}
-
-/* Page Overview */
-var regOverview = new RegExp(/(overview)/);
-if(regOverview.test(url)){
-	setStatus(XLOG_NORMAL,Xl('overview detected'));
-	
-	if(Boolean(GM_getValue("handle.overview"))){
-		var planetData = getPlanetData();
-		
-		var cases = Xpath.getStringValue(document,XtenseXpaths.overview.cases);
-		var temperatures = Xpath.getStringValue(document,XtenseXpaths.overview.temperatures);
-		var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
-		var temperature_min = temperatures.match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
-		
-		var resources = getResources();
-		
-		XtenseRequest.set(
-			{
-				type: 'overview',
-				fields: cases,
-				temperature_min: temperature_min,
-				temperature_max: temperature_max,
-				ressources: resources
-			},
-			planetData
-		);
-			
-		XtenseRequest.set('lang',langUnivers);
-		XtenseRequest.send();
-	}
-}
-
-//************************
-//** PARSINGS DES PAGES **
-//************************
-if(isChrome){
-	function parseSystem_Inserted(event){
-		var doc = event.target.ownerDocument;
-		var paths = XtenseXpaths.galaxy;
-		var galaxy = Xpath.getSingleNode(document,"//input[@id='galaxy_input']").value;
-		var system = Xpath.getSingleNode(document,"//input[@id='system_input']").value;
-		
-		if (GM_getValue('lastAction','') != 's:'+galaxy+':'+system){
-			var coords = [galaxy, system];
-			if (isNaN(coords[0]) || isNaN(coords[1])) {
-				log('invalid system'+' '+coords[0]+' '+coords[1]);
-				return;
-			}
-			log(Xl('system detected',galaxy,system));
-			setStatus(XLOG_NORMAL,Xl('system detected',galaxy,system));
-		
-			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
-			//log(paths.rows+' '+rows.snapshotLength);
-			if(rows.snapshotLength > 0) {
-				//var XtenseRequest = new XtenseRequest(null, null, null);
-				//log(rows.snapshotLength+' rows found');
-				var rowsData = [];
-				for (var i = 0; i < rows.snapshotLength ; i++) {
-					var row = rows.snapshotItem(i);
-					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'');
-					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'');
-					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
-					
-					if (player == '') {
-						log('row '+i+' has no player name');
-						continue;
-					}
-					if (name == '') {
-						if (name_l == '') {
-							log('row '+i+' has no planet name');
-							continue;
-						} else
-							name = name_l;
-					}
-					var position = Xpath.getNumberValue(doc,paths.position,row);
-					if(isNaN(position)) {
-						log('position '+position+' is not a number');
-						continue;
-					}
-
-					var moon = Xpath.getUnorderedSnapshotNodes(doc,paths.moon,row);
-					moon = moon.snapshotLength > 0 ? 1 : 0;
-					var status = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
-					if(status.snapshotLength>0){
-						status = status.snapshotItem(0);
-						status = status.textContent;
-						status = status.match(/\((.*)\)/);
-						status = status ? status[1] : "";
-						status = status.trimAll();
-					}
-					else status = "";
-					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
-					activity = activity.match(/: (.*)/);
-					if(activity)
-						activity = activity[1];
-					else activity = '';
-					var allytag = Xpath.getStringValue(doc,paths.allytag,row).trim();
-					var debris = [];
-					for(var j = 0; j < 2; j++) {
-						debris[XtenseDatabase['resources'][601+j]] = 0;
-					}
-					var debrisCells = Xpath.getUnorderedSnapshotNodes(doc,paths.debris,row);
-					for (var j = 0; j < debrisCells.snapshotLength ; j++) {
-						debris[XtenseDatabase['resources'][601+j]] = debrisCells.snapshotItem(j).innerHTML.trimInt();
-					}
-					
-					var player_id = Xpath.getStringValue(doc,paths.player_id,row).trim();
-					if (player_id != '' ) {
-						player_id = player_id.match(/\&to\=(.*)\&ajax/);
-						player_id = player_id[1];
-					}
-					else if(doc.cookie.match(/login_(.*)=U_/))
-						player_id = doc.cookie.match(/login_(.*)=U_/)[1]; 
-					
-					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
-					if (ally_id != '' ) {
-						ally_id = ally_id.match(/allyid\=(.*)/);
-						ally_id = ally_id[1];
-					}
-					else if (allytag)
-						ally_id = '-1';
-					
-					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
-					rowsData[position]=r;
-				}
-				XtenseRequest.set(
-					{
-						row : rowsData,
-						galaxy : coords[0],
-						system : coords[1],
-						type : 'system'
-					}
-				);
-
-				XtenseRequest.set('lang',langUnivers);
-				//Xdump(XtenseRequest.data);
-				XtenseRequest.send();
-				GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
-			}
 		}
 	}
 }
