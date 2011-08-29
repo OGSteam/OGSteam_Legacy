@@ -3,7 +3,7 @@ if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 
 global $db, $table_prefix;
 $mod_folder = "pandore";
-$mod_name = "Pandore";
+$mod_name = "pandore";
 update_mod($mod_folder, $mod_name);
 
 // Créer la table d'enregistrements si besoin
