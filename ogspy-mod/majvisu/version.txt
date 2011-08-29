@@ -1,3 +1,3 @@
-Maj visu
-1.0.0
+majvisu
+1.2.0
 majvisu,Etat de l\'univers,majvisu,majvisu,maj.php,1,0
