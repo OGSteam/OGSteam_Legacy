@@ -63,7 +63,7 @@ XnewOgame.Xpaths = {
 	planetData : {
 		name : "id('selectedPlanetName')",
 		name_planete : "//span[@class='planet-name']",
-		coords : "//div[@class='smallplanet']//span[@class='planet-koords']",
+		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
 		coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
 	},
 	
