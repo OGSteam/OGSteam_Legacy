@@ -631,19 +631,29 @@ var XnewOgame = {
 					var row = rows.snapshotItem(i);
 					var name = Xpath.getStringValue(doc,paths.planetname,row).trim().replace(/\($/,'');
 					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'');
+					var name_tooltip = Xpath.getStringValue(doc,paths.planetname_tooltip,row).trim().replace(/\($/,'');
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
+					var player_tooltip = Xpath.getStringValue(doc,paths.playername_tooltip,row).trim();
 					
-					if (player == '') {
-						Xconsole('row '+i+' has no player name');
-						continue;
-					}
-					if (name == '') {
-						if (name_l == '') {
-							Xconsole('row '+i+' has no planet name');
+					if (player_tooltip == '') {
+						if (player == '') {
+							Xconsole('row '+i+' has no player name');
 							continue;
-						} else
-							name = name_l;
-					}
+						}
+					} else
+						player = player_tooltip;
+					
+					if (name_tooltip == '') {
+						if (name == '') {
+							if (name_l == '') {
+								Xconsole('row '+i+' has no planet name');
+								continue;
+							} else
+								name = name_l;
+						}
+					} else
+						name = name_tooltip;
+
 					var position = Xpath.getNumberValue(doc,paths.position,row);
 					if(isNaN(position)) {
 						Xconsole('position '+position+' is not a number');
@@ -652,6 +662,7 @@ var XnewOgame = {
 
 					var moon = Xpath.getUnorderedSnapshotNodes(doc,paths.moon,row);
 					moon = moon.snapshotLength > 0 ? 1 : 0;
+
 					var status = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
 					if(status.snapshotLength>0){
 						status = status.snapshotItem(0);
@@ -661,12 +672,15 @@ var XnewOgame = {
 						status = status.trimAll();
 					}
 					else status = "";
+
 					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
 					activity = activity.match(/: (.*)/);
 					if(activity)
 						activity = activity[1];
 					else activity = '';
+
 					var allytag = Xpath.getStringValue(doc,paths.allytag,row).trim();
+
 					var debris = [];
 					for(var j = 0; j < 2; j++) {
 						debris[XnewOgame.database['resources'][601+j]] = 0;
@@ -683,7 +697,7 @@ var XnewOgame = {
 					}
 					else if(doc.cookie.match(/login_(.*)=U_/))
 						player_id = doc.cookie.match(/login_(.*)=U_/)[1]; 
-					
+
 					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
 					if (ally_id != '' ) {
 						ally_id = ally_id.match(/allyid\=(.*)/);
