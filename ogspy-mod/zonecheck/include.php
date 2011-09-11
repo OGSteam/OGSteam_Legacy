@@ -426,11 +426,11 @@ function colorise ( $last_update, $changed ) {
   }
 
   //Coloration des colonisations
-  if ( ereg ( 'Colonisation', $changed ) ) {
-    if ( ereg ( '<font color="#([A-Z0-9]*)"', $changed, $regs ) )
-      $changed = ereg_replace ( 'Colonisation', '</font><font color="' . $color_colo . '">Colonisation</font><font color="#' . $regs[0] . '">', $changed );
+  if ( preg_match ( '/Colonisation/i', $changed ) ) {
+    if ( preg_match ( '/<font color="#([A-Z0-9]*)"/i', $changed, $regs ) )
+      $changed = preg_replace ( '/Colonisation/i', '</font><font color="' . $color_colo . '">Colonisation</font><font color="#' . $regs[0] . '">', $changed );
     else
-      $changed = ereg_replace ( 'Colonisation', '<font color="' . $color_colo . '">Colonisation</font>', $changed );
+      $changed = preg_replace ( '/Colonisation/i', '<font color="' . $color_colo . '">Colonisation</font>', $changed );
   }
 
   return array ( $color_update, $changed, $last_statut );
