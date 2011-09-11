@@ -1,10 +1,8 @@
 <?php
-if (!defined('IN_SPYOGAME')) {
-    die("Hacking attempt");
-}
-
-global $db;
-
-$query = "UPDATE ".TABLE_MOD." SET version='0.4e' WHERE `action`='recherche_plus'";
-$db->sql_query($query);
+if (!defined('IN_SPYOGAME')) die("Hacking Attemp!");
+ 
+//Fichier update
+$mod_folder = "rechercheplus";
+$mod_name = "Recherche Plus";
+update_mod($mod_folder, $mod_name);
 ?>

@@ -1,2 +1,3 @@
-Recherche plus
-0.4e
+Recherche Plus
+1.0.0
+rechercheplus,Recherche Plus,recherche_plus,rechercheplus,recherche_plus.php,1,0
