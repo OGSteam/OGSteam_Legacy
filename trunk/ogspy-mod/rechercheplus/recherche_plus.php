@@ -220,11 +220,11 @@ function plus_search() {
             }
 			if (isset($pub_ally_active) && $pub_ally_active) {
 				$ally_active = array();
-				$ally_active = $pub_allys!="" ? split(",", $pub_allys) : array("?");
+				$ally_active = $pub_allys!="" ? explode(",", $pub_allys) : array("?");
 			}
 			if (isset($pub_player_active) && $pub_player_active) {
 				$player_active = array();
-				$player_active = $pub_players!="" ? split(",", $pub_players) : array("?");
+				$player_active = $pub_players!="" ? explode(",", $pub_players) : array("?");
 			}
 			switch ($pub_rank_active) {
 				case "fleet": 

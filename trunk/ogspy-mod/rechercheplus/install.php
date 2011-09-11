@@ -2,9 +2,17 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
+$is_ok = false;
+$mod_folder = "rechercheplus";
+$is_ok = install_mod($mod_folder);
+if ($is_ok == true)
+{
+             // Si besoin de creer des tables, à faire ici
+}
+else
+{
+   echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+}
 
-global $db;
 
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('','Recherche plus','Recherche plus','recherche_plus','recherche_plus','recherche_plus.php','0.4e','1')";
-$db->sql_query($query);
 ?>
