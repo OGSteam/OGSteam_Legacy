@@ -1202,73 +1202,6 @@ function AdvSpy_GetSqlRequestFromBlockRecherche()
 {
     global $AdvSpyConfig, $lang, $BlockRecherche;
 
-/*
-//------------------------------------------------------------------
-    // rétro-compatibilité avec les 'vieux' ogspy
-    if ($AdvSpyConfig['OgspyConfig']['version'] < '3.05') {
-
-        $SqlRequest = "SELECT * FROM " . TABLE_SPY . "," . TABLE_UNIVERSE . "
-		WHERE `active`='1'
-		AND `spy_galaxy`=`galaxy`
-		AND `spy_system`=`system`
-		AND `spy_row`=`row`";
-        $SqlRequest .= "\nAND `spy_galaxy`>=" . $BlockRecherche['AdvSpy_GalaxyMin'];
-        $SqlRequest .= "\nAND `spy_galaxy`<=" . $BlockRecherche['AdvSpy_GalaxyMax'];
-        $SqlRequest .= "\nAND `spy_system`>=" . $BlockRecherche['AdvSpy_SystemMin'];
-        $SqlRequest .= "\nAND `spy_system`<=" . $BlockRecherche['AdvSpy_SystemMax'];
-        $SqlRequest .= "\nAND `spy_row`>=" . $BlockRecherche['AdvSpy_RowMin'];
-        $SqlRequest .= "\nAND `spy_row`<=" . $BlockRecherche['AdvSpy_RowMax'];
-        $SqlRequest .= "\nAND `datadate`>=";
-        $SqlRequest .= time() - ($BlockRecherche['AdvSpy_AgeMax']);
-
-        // Elements sondés
-        foreach ($lang['DicOgame']['SpyCatList'] as $Cat => $Catname) {
-            $name = $lang['DicOgame']['Text']['Spy'][$Cat];
-            if ($BlockRecherche['AdvSpy_Scanned_' . $Cat]) {
-                $SqlRequest .= "\nAND `rawdata` LIKE BINARY '%$name%'";
-            }
-        }
-
-        // Joueur inactif
-        if ($BlockRecherche['AdvSpy_OnlyInactif']) {
-            $SqlRequest .= "\nAND `status` LIKE '%i%'";
-        }
-
-        if ($BlockRecherche['AdvSpy_PlayerSearch']) {
-            $SqlRequest .= "\nAND `player` LIKE '%" . $BlockRecherche['AdvSpy_PlayerSearch'] .
-                "%'";
-        }
-
-        if ($BlockRecherche['AdvSpy_AllySearch']) {
-            $SqlRequest .= "\nAND `ally` LIKE '%" . $BlockRecherche['AdvSpy_AllySearch'] .
-                "%'";
-        }
-
-
-        // Criteres de flottes/def/batiments/tech
-
-        foreach ($lang['DicOgame']['SpyCatList'] as $Cat => $Catname) {
-            foreach ($lang['DicOgame'][$Cat] as $num => $valuesarray) {
-                $PostVar = $valuesarray['PostVar'];
-                $Name = $valuesarray['Name'];
-                if ($BlockRecherche['AdvSpy_' . $PostVar] == 'present') {
-                    $SqlRequest .= "\nAND `rawdata` LIKE BINARY '%" . $Name . "%'";
-                } elseif ($BlockRecherche['AdvSpy_' . $PostVar] == 'absent') {
-                    $SqlRequest .= "\nAND `rawdata` NOT LIKE BINARY '%" . $Name . "%'";
-                }
-            }
-        }
-
-        $SqlRequest .= " ORDER BY `datadate` DESC";
-
-        return $SqlRequest;
-
-    } // FIN rétro-compatibilité avec les 'vieux' ogspy
-
-//------------------------------------------------------------------
-*/
-    // 'nouveau' ogspy , nouvelle requete !
-
     //if ($AdvSpyConfig['OgspyConfig']['version'] >= '3.05') {
     if (1) {
         // champs des nouvaux RE :
@@ -1288,11 +1221,21 @@ function AdvSpy_GetSqlRequestFromBlockRecherche()
         (merci Gorn pour le CONCAT() :] )
         * */
 
-
+/*
         $SqlRequest = "SELECT p.* , u.* FROM " . $AdvSpyConfig['Settings']['AdvSpy_TablePrefix'] .
             "parsedspy as p," . TABLE_UNIVERSE . " as u
 WHERE p.active='1'
 AND p.coordinates=CONCAT(u.galaxy,':',u.system,':',u.row)";
+*/
+
+
+    	// SELECT * FROM A INNER JOIN B ON B.id = A.foo
+
+    	$SqlRequest = "SELECT * FROM " . $AdvSpyConfig['Settings']['AdvSpy_TablePrefix'] . "parsedspy".
+    		" as p INNER JOIN " . TABLE_UNIVERSE . " as u ON p.coordinates=CONCAT(u.galaxy,':',u.system,':',u.row)
+WHERE p.active='1'";
+
+
 
         $SqlRequest .= "\nAND u.galaxy>=" . $BlockRecherche['AdvSpy_GalaxyMin'];
         $SqlRequest .= "\nAND u.galaxy<=" . $BlockRecherche['AdvSpy_GalaxyMax'];
@@ -1995,9 +1938,7 @@ function AdvSpy_Options_GetValue($OptionVar, $ForceUnlock = 0, $ForceAdmin = 0)
  * @access public
  * @return void
  **/
-function AdvSpy_Options_SetValue($OptionVar, $OptionValue, $level = 'User', $locked =
-    0)
-{
+function AdvSpy_Options_SetValue($OptionVar, $OptionValue, $level = 'User', $locked = 0) {
     global $AdvSpyConfig, $lang;
     /*
     $lang['Options'][$OptionVar]['Name']='xx';
