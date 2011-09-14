@@ -102,8 +102,7 @@ function AdvSpy_START()
 
 
     // On fais l'évaluation des POST maintenant : Total de l'ensemble des criteres de recherche (et de tris, de simulation...)
-    $BlockRecherche = AdvSpy_CalcBlockRechercheFromPosts(AdvSpy_GetBlankBlockRecherche
-        ());
+    $BlockRecherche = AdvSpy_CalcBlockRechercheFromPosts(AdvSpy_GetBlankBlockRecherche());
 
 
     // Un peut de javascript pour plus tard ...
@@ -734,9 +733,17 @@ function AdvSpy_CalcBlockRechercheFromPosts($BlockRecherche)
 
     $BlockRechercheCalcule = $BlockRecherche;
     foreach ($BlockRecherche as $postname => $defaultvalue) {
-        if (isset($pub_{$postname})) {
-            $PostValue = '';
-            $PostValue = $pub_{$postname};
+
+
+// chhé pas ki a fais ça mais ça casse tout ...
+
+//        if (isset($pub_{$postname})) {
+//            $PostValue = '';
+//            $PostValue = $pub_{$postname};
+
+       	if (array_key_exists($postname,$_POST)) {
+       		$PostValue='';
+       		$PostValue=$_POST[$postname];
 
             //ici se joue la securité et la correction d'erreurs ... (en fait ya pas de correction pour le moment, juste des flics)
             // le die est un peut hard mais au moin ca met les points sur les i.  En général y a pas de faux positifs.
@@ -1189,12 +1196,14 @@ function AdvSpy_AddZeroToNum($num, $minlenght)
 /**
  *
  * @access public
- * @return void 
+ * @return void
  **/
 function AdvSpy_GetSqlRequestFromBlockRecherche()
 {
     global $AdvSpyConfig, $lang, $BlockRecherche;
 
+/*
+//------------------------------------------------------------------
     // rétro-compatibilité avec les 'vieux' ogspy
     if ($AdvSpyConfig['OgspyConfig']['version'] < '3.05') {
 
@@ -1256,10 +1265,12 @@ function AdvSpy_GetSqlRequestFromBlockRecherche()
 
     } // FIN rétro-compatibilité avec les 'vieux' ogspy
 
-
+//------------------------------------------------------------------
+*/
     // 'nouveau' ogspy , nouvelle requete !
 
-    if ($AdvSpyConfig['OgspyConfig']['version'] >= '3.05') {
+    //if ($AdvSpyConfig['OgspyConfig']['version'] >= '3.05') {
+    if (1) {
         // champs des nouvaux RE :
         // id_spy 	planet_name 	coordinates 	metal 	cristal 	deuterium 	energie
         // activite 	M 	C 	D 	CES 	CEF 	UdR 	UdN 	CSp 	HM 	HC 	HD
@@ -1280,7 +1291,7 @@ function AdvSpy_GetSqlRequestFromBlockRecherche()
 
         $SqlRequest = "SELECT p.* , u.* FROM " . $AdvSpyConfig['Settings']['AdvSpy_TablePrefix'] .
             "parsedspy as p," . TABLE_UNIVERSE . " as u
-WHERE p.active='1' 
+WHERE p.active='1'
 AND p.coordinates=CONCAT(u.galaxy,':',u.system,':',u.row)";
 
         $SqlRequest .= "\nAND u.galaxy>=" . $BlockRecherche['AdvSpy_GalaxyMin'];
@@ -1639,6 +1650,7 @@ function AdvSpy_SaveLoad_GetSaveArrayFromBlockRecherche($BlockRecherche)
                 $SaveArray["AdvSpy_" . $valuesarray['PostVar'] . "_Min"] = $BlockRecherche["AdvSpy_" .
                     $valuesarray['PostVar'] . "_Min"];
                 $SaveArray["AdvSpy_" . $valuesarray['PostVar'] . "_Max"] = $BlockRecherche["AdvSpy_" .
+
                     $valuesarray['PostVar'] . "_Max"];
             }
         }
@@ -1680,7 +1692,7 @@ function AdvSpy_SaveLoad_GetSaveArrayFromBlockRecherche($BlockRecherche)
 /**
  *
  * @access public
- * @return void 
+ * @return void
  **/
 function AdvSpy_log($message, $type = "Info")
 {
@@ -1737,7 +1749,7 @@ function AdvSpy_SaveLoad_GetHtmlSaveRadioList($SaveList, $RadioName =
 /**
  *
  * @access public
- * @return void 
+ * @return void
  **/
 function AdvSpy_SaveLoad_GetHtmlSaveInfo($SaveData, $ShowOnlyDiffs = 0)
 {
@@ -2065,6 +2077,7 @@ function AdvSpy_Options_GetHtmlFormatedValue($Value = '', $Type)
 
 /**
  * la partie chargement des "Options"
+
  * @access public
  * @return void
  **/
