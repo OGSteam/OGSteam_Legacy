@@ -95,10 +95,10 @@ $AdvSpyConfig['Settings']['ListeAgeMax']=array(
 												60*60*12, // 12 heures
 												60*60*24, // 1 jour
 												60*60*24*2, // 2 jours
-												60*60*24*3, 
+												60*60*24*3,
 												60*60*24*7, // une semaine
 												60*60*24*7*2, // deux semaines
-												60*60*24*7*3, 
+												60*60*24*7*3,
 												60*60*24*7*4, // 4 semaine (1 mois)
 												60*60*24*7*8, // 2 mois
 												60*60*24*7*12, // 3 mois
@@ -212,14 +212,14 @@ $lang['DicOgame']['Text']['Spy']['deut']="Deutérium:";
 $lang['DicOgame']['Text']['Spy']['energie']="Energie:";
 $lang['DicOgame']['Text']['Spy']['Fleet']="Flotte";
 $lang['DicOgame']['Text']['Spy']['Def']="Défense";
-$lang['DicOgame']['Text']['Spy']['Buildings']="Bà¢timents";
+$lang['DicOgame']['Text']['Spy']['Buildings']="Bâtiments";
 $lang['DicOgame']['Text']['Spy']['Tech']="Recherche";
 $lang['DicOgame']['Text']['Spy']['end']="Probabilité de destruction de la flotte d'espionnage :";
 
 
 
 //pas touche
-$lang['DicOgame']['SpyCatList']=array('Fleet'=>'Flottes','Def'=>'Défenses','Buildings'=>'Bà¢timents','Tech'=>'Recherches');
+$lang['DicOgame']['SpyCatList']=array('Fleet'=>'Flottes','Def'=>'Défenses','Buildings'=>'Bâtiments','Tech'=>'Recherches');
 
 
 // ================================================================
@@ -246,6 +246,7 @@ $lang['DicOgame']['Buildings'][4]['PostVar']='b_fusion';
 $lang['DicOgame']['Buildings'][4]['OgsName']='CEF';
 
 //$lang['DicOgame']['Buildings'][5]['Name']="Usine de robots";
+
 $lang['DicOgame']['Buildings'][5]['PostVar']='b_robot';
 $lang['DicOgame']['Buildings'][5]['OgsName']='UdR';
 
@@ -338,6 +339,7 @@ $lang['DicOgame']['Tech'][8]['OgsName']='RI';
 
 //$lang['DicOgame']['Tech'][9]['Name']="Propulsion hyperespace";
 $lang['DicOgame']['Tech'][9]['PostVar']='t_phyper';
+
 $lang['DicOgame']['Tech'][9]['OgsName']='PH';
 
 //$lang['DicOgame']['Tech'][10]['Name']="Technologie Laser";
@@ -358,7 +360,7 @@ $lang['DicOgame']['Tech'][13]['OgsName']='RRI';
 
 //$lang['DicOgame']['Tech'][14]['Name']="Technologie Expéditions";
 $lang['DicOgame']['Tech'][14]['PostVar']='t_expeditions';
-$lang['DicOgame']['Tech'][14]['OgsName']='Expeditions';
+$lang['DicOgame']['Tech'][14]['OgsName']='Astrophysique';
 
 //$lang['DicOgame']['Tech'][15]['Name']="Technologie Graviton";
 $lang['DicOgame']['Tech'][15]['PostVar']='t_graviton';
@@ -662,7 +664,7 @@ $lang['FlatSpyElements']['Indice_PR']['Name']='Indice Patate/Ressources';
 
 $AdvSpyConfig['version']['advspy']='0.00';
 $VersionFilePath=$AdvSpyConfig['Settings']['AdvSpy_BasePath']."version.txt";
-if (file_exists($VersionFilePath)) { 
+if (file_exists($VersionFilePath)) {
 	$file = file($VersionFilePath);
 	$AdvSpyConfig['version']['advspy']=trim(@$file[1]);
 }
@@ -834,24 +836,24 @@ foreach($lang['DicOgame']['SpyCatList'] as $Cat=>$Catname){
 	foreach($lang['DicOgame'][$Cat] as $num=>$valuesarray){
 		if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar']]['Name']=$valuesarray['Name']; }
 		$lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar']]['Type']='*ipa';
-		
+
 		if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar'].'_Min']['Name']=$valuesarray['Name'].' Min'; }
 		$lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar'].'_Min']['Type']='*integer';
-		
+
 		if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar'].'_Max']['Name']=$valuesarray['Name'].' Max'; }
 		$lang['BlockRechercheElements']['AdvSpy_'.$valuesarray['PostVar'].'_Max']['Type']='*integer';
 
 		if (strpos($valuesarray['PostVar'],'f_') === 0) {
 			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]['Name']='[Simulateur]Attaque '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_atk_'.$valuesarray['PostVar']]['Type']='*integer';
-			
+
 			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]Défense '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Type']='*integer';
 		}
 		if (strpos($valuesarray['PostVar'],'d_') === 0) {
 			if (isset($valuesarray['Name'])) { $lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]Défense '.$valuesarray['Name'].''; }
 			$lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Type']='*integer';
-		}		
+		}
 	}
 }
 
