@@ -1909,36 +1909,20 @@ function AdvSpy_PrintHtml_Tab_Administration(){
 
 	if (!$AdvSpyConfig['UserIsAdmin']) { return "Repasse quand tu seras admin ou co-admin"; }
 
-
+/*
 	// $AdvSpyConfig['Settings']['AdvSpy_AutoUpdate_MasterURL']="http://kilops2.free.fr/og/AdvSpy/";
 	$AdvSpy_LastVersionFileName="lastversion.txt";
 	//$AdvSpyConfig['version']['advspy']
 	$AdvSpy_RemoteVersion=0;
 	if ($file = @file($AdvSpyConfig['Settings']['AdvSpy_AutoUpdate_MasterURL'].$AdvSpy_LastVersionFileName)) { $AdvSpy_RemoteVersion=trim(@$file[0]); }
+*/
 
 	print "<div class='box'><div class='box_background'> </div> <div class='box_contents'>";
 	print "<fieldset style=\"padding: 10px;\"><legend><b> Mise À  jour : </b></legend>";
 	print "Votre version de AdvSpy : ".$AdvSpyConfig['version']['advspy']."<br/>";
-	print "Dèrnière version disponible : ".$AdvSpy_RemoteVersion."<br/>";
+	print "Dèrnière version disponible : <a href=\"http://update.ogsteam.fr/mods/download.php#advspy\" target=\"_blank\">ici</a> (faites click droit / nouvel onglet)<br/>";
 
-	if ($AdvSpy_RemoteVersion == $AdvSpyConfig['version']['advspy']) {
-		print "<font color=\"green\">OK</font>";
 
-	} else {
-		if ($AdvSpy_RemoteVersion==0) {
-			print "Erreur pendant la recherche de mise À  jour<br/>";
-			print "Vous pouvez verifier la dernière version disponible via le mod \"Mise À  jour de [MOD]\"<br/>
-			Ou bien visiter le <a href=\"http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte\" target=\"_blank\">Topic officiel</a><br/>";
-		}
-		else {
-			if ($AdvSpy_RemoteVersion != $AdvSpyConfig['version']['advspy']) {
-				print "<font color=\"red\">Vous devriez mettre À  jour le mod !<br/>";
-				print "<blink><a href=\"http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte\" target=\"_blank\">TOPIC OFFICIEL</a></blink>";
-				print "</font>";
-			}
-		}
-
-	}
 	print "</fieldset></div></div>";
 
 	print "\n<br/>\n";
@@ -2555,7 +2539,9 @@ function AdvSpy_PrintHtml_Tab_Options(){
 
 	print '</tr>';
 
+	//foreach($AdvSpyConfig['Options'] as $OptionVar=>$OptionProp){
 	foreach($lang['Options'] as $OptionVar=>$OptionProp){
+
 		print "<tr>";
 		print "<td align=\"left\" style=\"text-align:left;\" class=\"f\">".$OptionProp['Name'].' '.AdvSpy_GetHtml_OgspyTooltipImage($OptionProp['Name'],$OptionProp['Desc']).' : </td>';
 
