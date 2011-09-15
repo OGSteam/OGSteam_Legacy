@@ -140,7 +140,7 @@ $AdvSpyConfig['Settings']['EnableLog']=TRUE;
 
 // TRUE = Affiche les messages supplémentaires de débug visibles dans la parte 'Administration' (donc reservé aux admins).
 // FALSE = (défaut) Désactivé car inutile sauf si vous etes développeurs/curieux.
-$AdvSpyConfig['Settings']['EnableDebug']=TRUE;
+$AdvSpyConfig['Settings']['EnableDebug']=FALSE;
 
 // Préfixe des tables de la base de données ()
 if (@TABLE_USER) { $AdvSpyConfig['Settings']['AdvSpy_TablePrefix']=substr(TABLE_USER, 0, strlen(TABLE_USER)-4); }
@@ -358,8 +358,8 @@ $lang['DicOgame']['Tech'][12]['OgsName']='Plasma';
 $lang['DicOgame']['Tech'][13]['PostVar']='t_reseau';
 $lang['DicOgame']['Tech'][13]['OgsName']='RRI';
 
-//$lang['DicOgame']['Tech'][14]['Name']="Technologie Expéditions";
-$lang['DicOgame']['Tech'][14]['PostVar']='t_expeditions';
+//$lang['DicOgame']['Tech'][14]['Name']="Technologie Astrophysique";
+$lang['DicOgame']['Tech'][14]['PostVar']='t_astro';
 $lang['DicOgame']['Tech'][14]['OgsName']='Astrophysique';
 
 //$lang['DicOgame']['Tech'][15]['Name']="Technologie Graviton";

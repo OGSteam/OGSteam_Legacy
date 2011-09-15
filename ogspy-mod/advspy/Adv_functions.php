@@ -84,21 +84,21 @@ function AdvSpy_START()
     //}
 
 
-    // la partie chargement des "Options" à faire relativement tôt
-    $Current_Edition_Target = -1;
-    if ((isset($pub_AdvSpy_OptionsTarget)) && ($AdvSpyConfig['UserIsAdmin'])) {
-        if (is_numeric($pub_AdvSpy_OptionsTarget)) {
-            $Current_Edition_Target = $pub_AdvSpy_OptionsTarget;
-        }
-    }
+	// la partie chargement des "Options" à faire relativement tôt
+	$Current_Edition_Target=-1;
+	if ((array_key_exists('AdvSpy_OptionsTarget',$_POST)) AND ($AdvSpyConfig['UserIsAdmin']) ) {
+		if (is_numeric($_POST['AdvSpy_OptionsTarget'])) { $Current_Edition_Target=$_POST['AdvSpy_OptionsTarget']; }
+	}
 
 
-    AdvSpy_Options_ImportFromDB($Current_Edition_Target);
-
-    if (@$pub_ChercherOK == $lang['UI_Lang']['BT_OptSubmit']) {
-        AdvSpy_Options_ReadPostedOptions();
-        AdvSpy_Options_ExportToDB($Current_Edition_Target);
-    }
+	AdvSpy_Options_ImportFromDB($Current_Edition_Target);
+	if (isset($_POST['ChercherOK']))
+	{
+		if ($_POST['ChercherOK']==$lang['UI_Lang']['BT_OptSubmit']) {
+			AdvSpy_Options_ReadPostedOptions();
+			AdvSpy_Options_ExportToDB($Current_Edition_Target);
+		}
+	}
 
 
     // On fais l'évaluation des POST maintenant : Total de l'ensemble des criteres de recherche (et de tris, de simulation...)
@@ -2155,45 +2155,41 @@ function AdvSpy_Options_ExportToDB($UserId = -1)
 }
 
 
-function AdvSpy_Options_ReadPostedOptions()
-{
-    global $AdvSpyConfig, $lang;
+function AdvSpy_Options_ReadPostedOptions(){
+	global $AdvSpyConfig,$lang;
 
-    //-1 = Current user
-    //0 = Admin
-    //1+ = user x
+	//-1 = Current user
+	//0 = Admin
+	//1+ = user x
 
-    $Current_Edition_Target = -1;
-    if ((isset($pubAdvSpy_OptionsTarget)) and ($AdvSpyConfig['UserIsAdmin']))
-        if (is_numeric($pub_AdvSpy_OptionsTarget))
-            $Current_Edition_Target = $pub_AdvSpy_OptionsTarget;
+	$Current_Edition_Target=-1;
+	if ((isset($_POST['AdvSpy_OptionsTarget'])) AND ($AdvSpyConfig['UserIsAdmin']) ) {
+		if (is_numeric($_POST['AdvSpy_OptionsTarget'])) { $Current_Edition_Target=$_POST['AdvSpy_OptionsTarget']; }
+	}
 
-    foreach ($lang['Options'] as $OptionVar => $OptionProp) {
-        if (isset($pub_AdvSpy_Options_{$OptionVar})) {
-            $PostedOption = $pub_AdvSpy_Options_{$OptionVar};
-            if (AdvSpy_CheckVarAgainstTypeMask($PostedOption, $OptionProp['Type'])) {
-                if ($Current_Edition_Target == 0) {
-                    if ($AdvSpyConfig['UserIsAdmin']) {
+	foreach($lang['Options'] as $OptionVar=>$OptionProp){
+		if (isset($_POST["AdvSpy_Options_$OptionVar"])) {
+			$PostedOption=$_POST["AdvSpy_Options_$OptionVar"];
+			if (AdvSpy_CheckVarAgainstTypeMask($PostedOption,$OptionProp['Type'])) {
+				if ($Current_Edition_Target==0) {
+					if ($AdvSpyConfig['UserIsAdmin']) {
 
-                        $AdminLock = 0;
-                        if (isset($pub_AdvSpy_Options_LockAdmin_{$OptionVar})) {
-                            if ($pub_AdvSpy_Options_LockAdmin_{$OptionVar} == 'ON') {
-                                $AdminLock = 1;
-                            } else {
-                                $AdminLock = 0;
-                            }
-                        }
-                        //print "-$AdminLock-";
-                        AdvSpy_Options_SetValue($OptionVar, $PostedOption, 'Admin', $AdminLock);
-                    }
-                } elseif ($Current_Edition_Target == -1) {
-                    AdvSpy_Options_SetValue($OptionVar, $PostedOption, 'User');
-                } elseif ($Current_Edition_Target >= 1) {
-                    AdvSpy_Options_SetValue($OptionVar, $PostedOption, 'User');
-                }
-            }
-        }
-    }
+						$AdminLock=0;
+						if (isset($_POST["AdvSpy_Options_LockAdmin_".$OptionVar])) {
+							if ($_POST["AdvSpy_Options_LockAdmin_".$OptionVar]=='ON') { $AdminLock=1;
+							} else { $AdminLock=0; }
+						}
+						//print "-$AdminLock-";
+						AdvSpy_Options_SetValue($OptionVar,$PostedOption,'Admin',$AdminLock);
+					}
+				} elseif ($Current_Edition_Target==-1) {
+					AdvSpy_Options_SetValue($OptionVar,$PostedOption,'User');
+				} elseif ($Current_Edition_Target>=1) {
+					AdvSpy_Options_SetValue($OptionVar,$PostedOption,'User');
+				}
+			}
+		}
+	}
 
 }
 

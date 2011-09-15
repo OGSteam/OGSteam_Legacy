@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------------------------
+﻿---------------------------------------------------------------------------------------------------
 ---------------------------------------Changelog pour AdvSpy---------------------------------------
 ---------------------------------------------------------------------------------------------------
 (+) = Ajout de fonction/option
@@ -6,7 +6,13 @@
 (-) = Bug corrigé
 (!) = Bug non corrigé
 
--AdvSpy- v1.0.0
+
+-AdvSpy- v0.9.8
+(*) Corrections de tous les bugs connus dû au passage à OGSpy v3.0.7
+(*) La technologie Astrophysique remplace Expédition
+
+
+-AdvSpy- v0.9.7
 (*) Mise a jour des fonctions d'install, uninstall et update
 
 -AdvSpy- v0.9.5

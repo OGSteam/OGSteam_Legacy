@@ -70,7 +70,7 @@ $lang['DicOgame']['Tech'][10]['Name']="Technologie Laser";
 $lang['DicOgame']['Tech'][11]['Name']="Technologie Ions";
 $lang['DicOgame']['Tech'][12]['Name']="Technologie Plasma";
 $lang['DicOgame']['Tech'][13]['Name']="Réseau de recherche intergalactique";
-$lang['DicOgame']['Tech'][14]['Name']="Technologie Expéditions";
+$lang['DicOgame']['Tech'][14]['Name']="Technologie Astrophysique";
 $lang['DicOgame']['Tech'][15]['Name']="Technologie Graviton";
 
 // ================================================================
@@ -233,7 +233,7 @@ foreach($lang['DicOgame']['SpyCatList'] as $Cat=>$Catname){
 		}
 		if (strpos($valuesarray['PostVar'],'d_') === 0) {
 			$lang['BlockRechercheElements']['AdvSpy_Sim_def_'.$valuesarray['PostVar']]['Name']='[Simulateur]Défense '.$valuesarray['Name'].'';
-		}		
+		}
 	}
 }
 
@@ -409,29 +409,29 @@ $lang['UI_Lang']['Tab_FrontPage_Help9']="Bon raids à vous !";
 
 $lang['UI_Lang']['ClipboardCopyAlert_Title']="** Informations sur la compatibilité entre Firefox et l'autocopie";
 
-$lang['UI_Lang']['ClipboardCopyAlert_Text']="La fonction de copie automatique est compatible Internet Explorer et Firefox 
+$lang['UI_Lang']['ClipboardCopyAlert_Text']="La fonction de copie automatique est compatible Internet Explorer et Firefox
 (probablement d'autres navigateurs basés sur Netscape également).
-<p>Sous Internet Explorer pas de configuration nécessaire (à part activer le java 
+<p>Sous Internet Explorer pas de configuration nécessaire (à part activer le java
 script).</p><br/>
-<p>Sous Firefox, le navigateur est configuré par défaut pour refuser toute sorte 
+<p>Sous Firefox, le navigateur est configuré par défaut pour refuser toute sorte
 d'accés aux données locales (dont le presse papier).<br>
-La manipulation suivante vous permet d'activer ces accés : à chaque script un 
+La manipulation suivante vous permet d'activer ces accés : à chaque script un
 message vous demande si vous donnez l'autorisation à ce script de s'exécuter.<br>
-Vous avez la possibilité de cocher &quot;Toujours accepter les scripts de ce site...&quot; 
+Vous avez la possibilité de cocher &quot;Toujours accepter les scripts de ce site...&quot;
 pour ne pas voir ce message à chaque copie de rapport d'espionnage.</p>
 <ol>
-	<li><a href='about:blank' target='_new'>Ouvrez une nouvelle fenêtre</a> : <font face=\"Fixedsys\">Ctrl + N</font>&nbsp;&nbsp; 
+	<li><a href='about:blank' target='_new'>Ouvrez une nouvelle fenêtre</a> : <font face=\"Fixedsys\">Ctrl + N</font>&nbsp;&nbsp;
 	-&nbsp; Ou un nouvel Onglet : <font face=\"Fixedsys\">Ctrl + T</font></li>
-	<li>Tapez cette adresse puis 'Go' : <b> <font face=\"Fixedsys\">about:config</font></b> (comme n'importe quelle 
+	<li>Tapez cette adresse puis 'Go' : <b> <font face=\"Fixedsys\">about:config</font></b> (comme n'importe quelle
 	adresse de site)</li>
 	<li>En haut de cette page, dans la zone de recherche tapez : <b>
 	<font face=\"Fixedsys\">signed</font></b></li>
-	<li>Maintenant vous ne voyez qu'une seule ligne appelée '<font face=\"Fixedsys\">signed.applets.codebase_principal_support</font>' 
+	<li>Maintenant vous ne voyez qu'une seule ligne appelée '<font face=\"Fixedsys\">signed.applets.codebase_principal_support</font>'
 	avec comme valeure : 'false' (ou faux)</li>
-	<li>Double-cliquez sur cette ligne : le texte se met en gras et la valeur 
+	<li>Double-cliquez sur cette ligne : le texte se met en gras et la valeur
 	deviens 'true' (ou vrais).</li>
-	<li>Voilà ! Vous pouvez fermer cette fenêtre, maintenant un message vous 
-	demanderas avant d'exécuter les scripts, vous donnant la possibilité 
+	<li>Voilà ! Vous pouvez fermer cette fenêtre, maintenant un message vous
+	demanderas avant d'exécuter les scripts, vous donnant la possibilité
 	d'accepter ou de refuser.</li>
 </ol>";
 
