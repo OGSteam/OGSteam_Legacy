@@ -2021,7 +2021,7 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 
 	if ($FlatSpyRepportAdvanced['Raided']) {
 		print "<br/><br/><a style=\"cursor:pointer\" onclick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");\">
-		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\" alt='[R]' title='Cette planète est signalé comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ).' /></a>\n";
+		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/raid.gif\" border=\"0\" alt='[R]' title='Cette planète est signalé comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ).' /></a>\n";
 	} else {
 		print "<br/><br/><a style=\"cursor:pointer\" onclick=\"AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");\">
 		<img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/raid.png\" border=\"0\" alt='[R]' title='Signaler votre raid. (Aucun depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." )' /></a>\n";
@@ -2120,7 +2120,7 @@ function AdvSpy_PrintHtmlSearchResult($FlatSpyRepportAdvanced){
 	}
 
 	if ($FlatSpyRepportAdvanced['Raided']) {
-	    print "<td align=\"center\" width=\"20\" class=\"b\"><a onClick='AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");' style='cursor:pointer;' title='Cette planète est signalée comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ) .'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."raid.gif\" border=\"0\"/></a></td>";
+	    print "<td align=\"center\" width=\"20\" class=\"b\"><a onClick='AdvSpy_PopRaid(".$FlatSpyRepportAdvanced['spy_id'].",".$FlatSpyRepportAdvanced['spy_galaxy'].",".$FlatSpyRepportAdvanced['spy_system'].",".$FlatSpyRepportAdvanced['spy_row'].",".$FlatSpyRepportAdvanced['lune'].");' style='cursor:pointer;' title='Cette planète est signalée comme raidée ".$FlatSpyRepportAdvanced['Raided']." fois (depuis ".strip_tags(AdvSpy_duration($BlockRecherche['AdvSpy_RaidAgeMax']))." ) .'><img src=\"".$AdvSpyConfig['Settings']['AdvSpy_BasePath']."images/raid.gif\" border=\"0\"/></a></td>";
 	}
 
 
@@ -2474,9 +2474,11 @@ function AdvSpy_PrintHtml_Tab_Options(){
 
 	if ($AdvSpyConfig['UserIsAdmin']) {
 
-		if (isset($pub_AdvSpy_OptionsTarget))
-			if (is_numeric($pub_AdvSpy_OptionsTarget))
-				$Current_Edition_Target = $pub_AdvSpy_OptionsTarget;
+		if (isset($_POST['AdvSpy_OptionsTarget'])) {
+			if (is_numeric($_POST['AdvSpy_OptionsTarget'])) {
+				$Current_Edition_Target=$_POST['AdvSpy_OptionsTarget'];
+			}
+		}
 
 		print "<select id=\"AdvSpy_OptionsTarget\" name=\"AdvSpy_OptionsTarget\" size=\"1\">\n";
 
@@ -2545,31 +2547,41 @@ function AdvSpy_PrintHtml_Tab_Options(){
 		print "<tr>";
 		print "<td align=\"left\" style=\"text-align:left;\" class=\"f\">".$OptionProp['Name'].' '.AdvSpy_GetHtml_OgspyTooltipImage($OptionProp['Name'],$OptionProp['Desc']).' : </td>';
 
-		print '<td align="center" class="b">'.AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_Config'],$OptionProp['Type']).'</td>';
-		print '<td align="center" class="b">'.AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_Admin'],$OptionProp['Type']).'</td>';
+		print '<td align="center" class="b">';
+		print AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_Config'],$OptionProp['Type']);
+		print '</td>';
+
+		print '<td align="center" class="b">';
+		print AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_Admin'],$OptionProp['Type']);
+		print '</td>';
+
 
 		if (isset($OptionProp['Value_Admin_IsLocked'])) {
 			if ($OptionProp['Value_Admin_IsLocked']) {
-				print '<td align="center" class="b">'."<img border=\"0\" src=\"./mod/advspy/lock.png\" title=\"Verrouillé\"/>".'</td>';
+				print '<td align="center" class="b">'."<img border=\"0\" src=\"./mod/advspy/images/lock.png\" title=\"Verrouillé\"/>".'</td>';
 			} else {
 				print '<td align="center" ></td>';
 			}
+		} else {
+			print '<td align="center" ></td>';
 		}
 
 
-		print '<td align="center" class="b">'.AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_User'],$OptionProp['Type']).'</td>';
+		print '<td align="center" class="b">';
+		print AdvSpy_Options_GetHtmlFormatedValue(@$OptionProp['Value_User'],$OptionProp['Type']);
+		print '</td>';
 
-		print '<td align="center" class="b">'.AdvSpy_Options_GetHtmlFormatedValue(AdvSpy_Options_GetValue($OptionVar),$OptionProp['Type']).'</td>';
+		print '<td align="center" class="b">';
+		print AdvSpy_Options_GetHtmlFormatedValue(AdvSpy_Options_GetValue($OptionVar),$OptionProp['Type']);
+		print '</td>';
+
 
 		print '<td>';
-
-
 		if ($Current_Edition_Target=='0') {
 			print AdvSpy_GetHtml_FormElementByType($OptionProp['Type'],'AdvSpy_Options_'.$OptionVar,AdvSpy_Options_GetValue($OptionVar,0,1));
 		} else {
 			print AdvSpy_GetHtml_FormElementByType($OptionProp['Type'],'AdvSpy_Options_'.$OptionVar,AdvSpy_Options_GetValue($OptionVar,1));
 		}
-
 		print '</td>';
 
 
@@ -2580,7 +2592,7 @@ function AdvSpy_PrintHtml_Tab_Options(){
 				if (@$OptionProp['Value_Admin_IsLocked']) { $selected='checked'; }
 				$Name='AdvSpy_Options_LockAdmin_'.$OptionVar;
 				print "<input type=\"checkbox\" value=\"ON\" name=\"$Name\" id=\"$Name\"/ $selected>";
-				print "<label for=\"".$Name."\" style=\"cursor: pointer;\" title=\"Verrouiller la valeur Â´AdminÂ´ et forcer tous les utilisateurs À  utiliser cette option pour leurs recherches.\"><font size=\"1\">Admin Lock</font></label>";
+				print "<label for=\"".$Name."\" style=\"cursor: pointer;\" title=\"Verrouiller la valeur ´Admin´ et forcer tous les utilisateurs à utiliser cette option pour leurs recherches.\"><font size=\"1\">Admin Lock</font></label>";
 				print '</td>';
 			}
 		}

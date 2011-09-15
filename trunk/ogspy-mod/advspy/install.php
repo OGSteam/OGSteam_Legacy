@@ -52,7 +52,7 @@ if ($is_ok == true)
 	//sauvegardes defaut
 	include $AdvSpyConfig['Settings']['AdvSpy_BasePath']."Adv_DefaultSaves.php";
 	$db->sql_query(AdvSpy_Config_GetSqlOfDefaultSaves($AdvSpyConfig['Settings']['AdvSpy_TableName_SaveLoad']));
-	echo	"<script>alert('Pour éviter les erreurs dans le journal, vous devez configurez vos préférences administrateur et utlisateur. De plus chaque utilisateur doit configurer ces préférences utilisateurs.');</script>";
+	//echo	"<script>alert('Pour éviter les erreurs dans le journal, vous devez configurez vos préférences administrateur et utlisateur. De plus chaque utilisateur doit configurer ces préférences utilisateurs.');</script>";
 
 }
 else

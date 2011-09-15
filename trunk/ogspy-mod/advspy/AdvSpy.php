@@ -55,21 +55,21 @@ if (file_exists("mod/advspy/lang/lang_FR/AdvSpy.php")) require_once("mod/advspy/
 if (file_exists("mod/advspy/lang/lang_FR/AdvSpy.php")) require("mod/advspy/lang/lang_FR/AdvSpy.php");
 
 //versions concomitantes
-$AdvSpyConfig['version']['ogspy']='3.7';
+$AdvSpyConfig['version']['ogspy']='3.0.7';
 $AdvSpyConfig['version']['ogame']='[FR]2.22';
 
 if(isset($pub_RaidAlert_Row) && isset($pub_RaidAlert_System) && isset($pub_RaidAlert_Galaxy))
 {
-	if ( ($AdvSpy_RaidAlert_Galaxy = $pub_RaidAlert_Galaxy) 
-		&& ($AdvSpy_RaidAlert_System = $pub_RaidAlert_System) 
-		&& ($AdvSpy_RaidAlert_Row = $pub_RaidAlert_Row)) 
+	if ( ($AdvSpy_RaidAlert_Galaxy = $pub_RaidAlert_Galaxy)
+		&& ($AdvSpy_RaidAlert_System = $pub_RaidAlert_System)
+		&& ($AdvSpy_RaidAlert_Row = $pub_RaidAlert_Row))
 	{
 		if (isset($pub_RaidAlert_Lune)) $AdvSpy_RaidAlert_Lune = $pub_RaidAlert_Lune;
 		else $AdvSpy_RaidAlert_Lune='';
 		AdvSpy_RaidAlert_START($AdvSpy_RaidAlert_Galaxy,$AdvSpy_RaidAlert_System,$AdvSpy_RaidAlert_Row,$AdvSpy_RaidAlert_Lune);
 	}
-} 
-else 
+}
+else
 {
 	require_once("views/page_header.php");
 	AdvSpy_START();
