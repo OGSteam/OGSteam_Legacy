@@ -1508,7 +1508,12 @@ function galaxy_reportspy_show() {
 	if (intval($pub_galaxy) < 1 || intval($pub_galaxy) > intval($server_config['num_of_galaxies']) || intval($pub_system) < 1 || intval($pub_system) > intval($server_config['num_of_systems']) || intval($pub_row) < 1 || intval($pub_row) > 15) {
 		return false;
 	}
-
+	
+	$request_astre_name = "select name from ".TABLE_UNIVERSE." where galaxy = ".intval($pub_galaxy)." and system = ".intval($pub_system)." and row = ".intval($pub_row);
+	$result_astre_name = $db->sql_query($request_astre_name);
+	$astre_name = $db->sql_fetch_assoc ($result_astre_name); //Récupère le nom de la planète
+	
+	//RE planète
 	$request = "select id_spy, user_name, dateRE";
 	$request .= " from ".TABLE_PARSEDSPY." left join ".TABLE_USER." on user_id = sender_id";
 	if (!isset($pub_spy_id)) {
@@ -1517,7 +1522,7 @@ function galaxy_reportspy_show() {
 	else {
 		$request .= " where id_spy = ".intval($pub_spy_id);
 	}
-	$request .= " and BaLu<=0 and Pha<=0 and PoSa<=0 and planet_name not like '%(Lune)%'";
+	$request .= " and BaLu<=0 and Pha<=0 and PoSa<=0 and planet_name='".$astre_name['name']."'";
 	$request .= " order by dateRE desc LIMIT 1";
 	$result = $db->sql_query($request);
 
@@ -1535,7 +1540,7 @@ function galaxy_reportspy_show() {
 	else {
 		$request .= " where id_spy = ".intval($pub_spy_id);
 	}
-	$request .= " and ((M<=0 and C<=0 and D<=0 and CES<=0 and CEF<=0 and UdN<=0 and Lab<=0 and Ter<=0 and Silo<=0) or planet_name like '%(Lune)%')";
+	$request .= " and M<=0 and C<=0 and D<=0 and CES<=0 and CEF<=0 and UdN<=0 and Lab<=0 and Ter<=0 and Silo<=0 and not planet_name='".$astre_name['name']."'";
 	$request .= " order by dateRE desc LIMIT 1";
 	$result = $db->sql_query($request);
 
