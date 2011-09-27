@@ -84,7 +84,8 @@ if ($search && $error == 0) {
 		while ($rapport = mysql_fetch_assoc($res)) {
 			$d = 0;
 			$j = $i;
-			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0) //C'est une lune
+			echo $coordonnees[$i][1]." <=> ".$rapport[planet_name]."<br />";
+			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0 && $rapport['planet_name'] != $coordonnees[$i][1]) //C'est une lune
 				$j += count($coordonnees); //Pour mettre les rapports de lune après ceux des planètes
 			$coordonnees[$i][5] = $rapport['PoSa'];
 			foreach ($rapport as $key => $value) {
@@ -524,8 +525,8 @@ if ($search && $error == 0) {
 		for ($i = 0; $i < count($coordonnees); $i++) {
 			$k = Array(0,0);
 			for ($j = 0; isset($rapports) && $j < count($rapports); $j++) {
-				if (isset($rapports[$j]) && $rapports[$j]["coordinates"] == $coordonnees[$i][0] && substr($rapports[$j]["planet_name"], 0, 10) == substr($coordonnees[$i][1], 0, 10)) $k[0] = 1;
-				if (isset($rapports[$j + count($coordonnees)]) && $rapports[$j + count($coordonnees)]["coordinates"] == $coordonnees[$i][0] && substr($rapports[$j + count($coordonnees)]["planet_name"], 0, 10) == substr($coordonnees[$i][3], 0, 10)) $k[1] = 1;
+				if (isset($rapports[$j]) && $rapports[$j]["coordinates"] == $coordonnees[$i][0] && $rapports[$j]["planet_name"] == $coordonnees[$i][1]) $k[0] = 1;
+				if (isset($rapports[$j + count($coordonnees)]) && $rapports[$j + count($coordonnees)]["coordinates"] == $coordonnees[$i][0] && $rapports[$j + count($coordonnees)]["planet_name"] == $coordonnees[$i][3]) $k[1] = 1;
 			}
 			if ($k[0] == 0) echo "[".$coordonnees[$i][0]."] ";
 			if ($k[1] == 0 && $coordonnees[$i][3]) echo "[".$coordonnees[$i][0]."&nbsp;".$lang['pandore_moon']."] ";
