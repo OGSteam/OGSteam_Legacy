@@ -84,7 +84,6 @@ if ($search && $error == 0) {
 		while ($rapport = mysql_fetch_assoc($res)) {
 			$d = 0;
 			$j = $i;
-			echo $coordonnees[$i][1]." <=> ".$rapport[planet_name]."<br />";
 			if ($rapport['M'] <= 0 && $rapport['C'] <= 0 && $rapport['D'] <= 0 && $rapport['CES'] <= 0 && $rapport['CEF'] <= 0 && $rapport['UdN'] <= 0 && $rapport['Lab'] <= 0 && $rapport['Ter'] <= 0 && $rapport['Silo'] <= 0 && $rapport['planet_name'] != $coordonnees[$i][1]) //C'est une lune
 				$j += count($coordonnees); //Pour mettre les rapports de lune après ceux des planètes
 			$coordonnees[$i][5] = $rapport['PoSa'];
