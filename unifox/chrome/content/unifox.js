@@ -62,6 +62,7 @@ function uf_adjustPages(event)	{
 			//domain = uf_getDomain(doc);
 			var functions = new Array(
 				
+				uf_changeLog,
 				uf_addDebrisColor,
 				uf_colorizePrivates,
 				uf_bbCode,
@@ -311,7 +312,8 @@ function uf_updateXMLs() {
 //**************************************************************************
 function uf_updateJSONs() {
 	var xmlReq = new XMLHttpRequest();
-	xmlReq.open("GET", "http://jormund.free.fr/e-univers/ufUniverses.js", true);
+	//xmlReq.open("GET", "http://jormund.free.fr/e-univers/ufUniverses.js", true);
+	xmlReq.open("GET", "chrome://unifox/content/resources/js/ufUniverses.js", true);
 	//xmlReq.open("GET", "http://svn.ogsteam.fr/Unifox/ufUniverses.xml", true);
 	xmlReq.onload = uf_processJSONUpdateResponse;
 	xmlReq.pref = "ufUniverses";
@@ -319,10 +321,18 @@ function uf_updateJSONs() {
 	
 	//ufDump(xmlReq);
 	var xmlReq = new XMLHttpRequest();
-	xmlReq.open("GET", "http://jormund.free.fr/e-univers/ufUnits.js", true);
+	xmlReq.open("GET", "chrome://unifox/content/resources/js/ufUnits.js", true);
+	//xmlReq.open("GET", "http://jormund.free.fr/e-univers/ufUnits.js", true);
 	//xmlReq.open("GET", "http://svn.ogsteam.fr/Unifox/ufUnits.xml", true);
 	xmlReq.onload = uf_processJSONUpdateResponse;
 	xmlReq.pref = "ufUnits";
+	xmlReq.send(null);
+	
+	// Par Max485 pour savoir quel est la mise a jour actuel sur la version
+	var xmlReq = new XMLHttpRequest();
+	xmlReq.open("GET", "http://unifox.fserv.fr/version.txt", true);
+	xmlReq.onload = uf_processJSONUpdateResponse;
+	xmlReq.pref = "versionMAJ";
 	xmlReq.send(null);
 }
 
@@ -484,6 +494,7 @@ function ufFindParentDocument(document) {
 
 //*****************************************************************************************
 String.prototype.trim = function() {
+
   var x=this;
   x=x.replace(/^\s*|\s*$/g,"");
   return x;
@@ -679,6 +690,53 @@ function uf_doubleParseInt(string) {
 //*****************************************************************************************
 // Features functions
 //*****************************************************************************************
+function uf_changeLog(document) // Fonction permettant d'afficher la page de ChangeLog dans le menu du jeu, ainsi que les possibilité de mises a jour 
+{
+	var viewUniFox = ufEval("id('menuPlanete')/table/tbody/tr[1]/td/div", document).snapshotItem(0); // On recupere la barre bleu au dessus de la planete
+	
+	unifoxChangeLog = document.createElement('a'); // On crée un lien
+	unifoxChangeLog.innerHTML = 'UniFox ' + version; // On rempli le contenu pour le lien
+	unifoxChangeLog.href = 'http://unifox.fserv.fr/changelog.php';
+	unifoxChangeLog.title = 'Cliquer ici pour voir les differentes versions'; // Texte vu au survol du lien
+	unifoxChangeLog.target = '_blank'; // Pour ouvrir dans un nouvel onglet
+	viewUniFox.appendChild(unifoxChangeLog);
+	
+	baliseBr = document.createElement('br');
+	viewUniFox.appendChild(baliseBr);
+	
+	unifoxMAJ = document.createElement('a'); // On crée un lien
+	
+	versionMAJ = ufGetPref('versionMAJ', false);
+	
+	if( ! versionMAJ ) // Si la version n'a pas été recuperé
+	{
+		// Si le numero de version actuel n'a pas été recuperé
+		unifoxMAJ.innerHTML = '<font color="darkorange">Version inconnu</font>';
+	}
+	else if( ! versionMAJ.match(new RegExp('^[0-9.]*', '') ) ) // Dans le cas ou ce n'est pas le numero de version qui a été recuperé (Dans le cas ou le fichier n'existe pas, et qu'on tombe sur une erreur 404)
+	{
+		// Si le numero de version actuel n'a pas été recuperé
+		unifoxMAJ.innerHTML = '<font color="darkorange">Version inconnu</font>';
+	}
+	else
+	{
+		if( ! checkIfLastVersionInstalled( version, versionMAJ ) )
+		{
+			// Dans le cas ou le joueur n'a pas la derniere version
+			unifoxMAJ.innerHTML = '<font color="red">MAJ Dispo</font>';
+			unifoxMAJ.href = 'http://unifox.fserv.fr/UniFox_v1.5.X.php';
+			unifoxMAJ.title = 'Cliquer pour t\u00E9l\u00E9charger la derni\u00E8re version (V ' + versionMAJ + ')';
+		}
+		else
+		{
+			// Si le joueur a la derniere version
+			unifoxMAJ.innerHTML = '<font color="green">Version a jour</font>';
+		}
+	}
+	
+	viewUniFox.appendChild(unifoxMAJ);
+}
+
 function uf_fleetReturnTime2(document,interval)
 {
 if(document)
@@ -688,6 +746,7 @@ try{
 var obj = ufEval( '//span[@class="return_time"]', document);
 for ( var i = 0; i < obj.snapshotLength; i++) {//pour chaque bouton retour
 		var span=obj.snapshotItem(i);
+
 		//on récupère l'heure de départ
 		var startTime = parseInt(span.getAttribute('start'));
 		
@@ -955,6 +1014,7 @@ function uf_addDebrisColor(document) {
 				ind=omo.indexOf("<th>");//début de la case suivante
 				omo = omo.substr(ind);
 				ind = omo.indexOf("</th>");//fin de la case avec le nombre
+
 				total+=uf_parseInt(omo.substr(0,ind));
 				ufLog("cdr:"+i+" "+total+" "+omo);
 			}
@@ -1368,6 +1428,7 @@ var td=doc.createElement('td');
 td.setAttribute('colspan','6');
 td.setAttribute('class','c');
 tr.appendChild(td);
+
 table = doc.createElement('table');
 td.appendChild(table);
 tr = doc.createElement('tr');
@@ -2201,6 +2262,7 @@ try {
 				add=false;
 				}
 			else{
+
 				saving+=tab[i];//sinon on "recole les morceaux"
 				}
 			if(i!=tab.length-1)saving+="/";
@@ -3443,7 +3505,8 @@ var center=table2.parentNode.parentNode;
 	//setTimeout('alert("ok");',500);
 	var script = doc.createElement("script");
 	script.setAttribute("language", "javascript");
-	script.innerHTML="Infov();dateArrivee("+interval+");";
+	//script.innerHTML="Infov();dateArrivee("+interval+");";
+	script.innerHTML="setTimeout('Infov()', 1000); setTimeout('dateArrivee("+interval+")', 1000);";
 	table2.appendChild(script);
 	}
 }

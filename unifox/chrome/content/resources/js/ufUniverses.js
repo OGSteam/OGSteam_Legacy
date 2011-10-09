@@ -19,40 +19,47 @@
 					"vortex" : 5,
 					"speed" : 10
 				},
-				2 : {
+				/*2 : {
 					"url" : "beta2.e-univers.org",
 					"name" : "Ephemera",
-					"value" : 2,
+					"value" : 6,
 					"vortex" : 8,
 					"speed" : 30
-				},
+				},*/
 				3 : {
 					"url" : "beta3.e-univers.org",
 					"name" : "Beta 3",
-					"value" : 3,
+					"value" : 2,
 					"vortex" : 2,
 					"speed" : 1
 				},
 				4 : {
 					"url" : "beta4.e-univers.org",
 					"name" : "Beta 4",
-					"value" : 4,
+					"value" : 3,
 					"vortex" : 4,
 					"speed" : 5
 				},
 				5 : {
 					"url" : "beta5.e-univers.org",
 					"name" : "Beta 5",
-					"value" : 5,
+					"value" : 4,
 					"vortex" : 3,
 					"speed" : 10
 				},
 				6 : {
 					"url" : "beta6.e-univers.org",
 					"name" : "Beta 6",
-					"value" : 6,
+					"value" : 5,
 					"vortex" : 2,
 					"speed" : 1
+				},
+				7 : {
+					"url" : "beta7.e-univers.org",
+					"name" : "B7 - Ultima",
+					"value" : 6,
+					"vortex" : 5,
+					"speed" : 10
 				},
 				/*7 : {
 					"url" : "ephemera.e-univers.org",
@@ -98,16 +105,17 @@
 				3 : {
 					"url" : "libra.projet42.org",
 					"name" : "Univers Libra",
-					"value" : 4,
+					"value" : 3,
 					"vortex" : 3,
 					"speed" : 10
-				}/*,
+				},
 				4 : {
-					"url" : "alfa.projet42.org",
-					"name" : "Univers Alfa",
-					"value" : 3,
-					"vortex" : 6
-				}*/
+					"url" : "noel.projet42.org",
+					"name" : "Univers Noel",
+					"value" : 4,
+					"vortex" : 7,
+					"speed" : 25
+				}
 			}
 		}
 	}

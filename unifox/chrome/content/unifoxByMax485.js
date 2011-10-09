@@ -65,6 +65,8 @@ function uf_Max485(document)
 								'simu_agrandir_zones_saisi' : true,
 								'messages_afficher_lien_sur_RC_pour_formater' : true,
 								'afficher_pourcentage_points' : true,
+								'ajouter_somme_all_planetes' : true,
+								'calculProduction_all_planetes' : true,
 							};
 
 		ufSetCharPref('E-UniverS_Compil_Options', uneval(array_options) );
@@ -169,6 +171,13 @@ function uf_Max485(document)
 				ufLog('ufM - Debut Execution => VUEGLOBAL_ajouter_somme_all_planetes');
 				VUEGLOBAL_ajouter_somme_all_planetes(document); // Permet de faire la somme des ressources de toutes les planetes sur la Vue Globale
 				ufLog('ufM - Fin Execution => VUEGLOBAL_ajouter_somme_all_planetes');
+			}
+			
+			if( options['calculProduction_all_planetes'] == true )
+			{
+				ufLog('ufM - Debut Execution => VUEGLOBAL_calculProduction_all_planetes');
+				VUEGLOBAL_calculProduction_all_planetes(document); // Permet de faire la somme des productions de toutes les planetes sur la Vue Globale
+				ufLog('ufM - Fin Execution => VUEGLOBAL_calculProduction_all_planetes');
 			}
 		}
 		else if(action == 'messages') // Si on est sur la page des messages
@@ -562,7 +571,7 @@ function CHANTIER_agrandir_zones_saisi(document)
 				inp[0].setAttribute('maxlength','10');
 				inp[0].setAttribute('size','12');
 			}
-		}
+		}VUEGLOBAL_calculProduction_all_planetes(document); 
 	}
 }
 
@@ -733,7 +742,7 @@ function MESSAGES_afficher_form_pour_envoye_message_alli_et_lien_sur_chaque_mess
 		
 		if(cell.innerHTML.indexOf('(alliance)') >- 1)
 		{
-			cell.innerHTML+="<a href='?action=alliance&subaction=messagealliance'><img alt='Envoyer un message ï¿½ l\'alliance' src='http://www.project2501.org/skins/skin_bleu/img/m.gif' ";
+			cell.innerHTML+="<a href='?action=alliance&subaction=messagealliance'><img alt='Envoyer un message a l\'alliance' src='http://skins.e-univers.org/skin_bleu/img/m.gif'> ";
 		}
 	}
 	
@@ -945,6 +954,7 @@ function MESSAGES_mettre_un_lien_sur_les_coords(document)
 	for(var i = 0 ; i < snap.snapshotLength ; i++ ) {
 		var cell = snap.snapshotItem(i);
 		if(cell.innerHTML.match(reg)) {
+
 			//alert(cell.innerHTML.match(reg));
 			cell.innerHTML = cell.innerHTML.replace(reg,"<a href='?action=galaxie&amp;galaxiec=$1&amp;systemec=$2'>\[$1:$2:$3\]</a>");
 		}
@@ -1139,6 +1149,96 @@ function VUEGLOBAL_ajouter_somme_all_planetes(document)
 	row=rows.snapshotItem(9);
 	cell = document.createElement('th');
 	cell.innerHTML=uf_addFormat(total);
+	row.appendChild(cell);
+}
+
+function VUEGLOBAL_calculProduction_all_planetes(document)
+{
+	/*
+		Fonction créer par Jormund pour le calcul des ressources et modifier par Max485 pour la prod
+
+	*/
+	
+	var rows=ufEval("id('divpage')/table/tbody/tr",document);
+	
+	var total=0;
+	
+	for(var i=5;i<8;i++)
+	{
+		var row=rows.snapshotItem(i);
+		var cells=row.getElementsByTagName('th');
+		var nb=0;
+		
+		for(var j=1;j<cells.length;j++)
+		{
+			string = cells[j].innerHTML;
+			string = string.replace(/\D/g,'');
+			
+			//alert(cells[j].innerHTML);
+			nb+= string ? parseInt(string) : 0;
+		}
+		
+		var cell = document.createElement('th');
+		total+=nb;
+		cell.innerHTML=uf_addFormat(nb);
+		cell.id = 'cell'+i;
+		row.appendChild(cell);
+		
+		// Pour enregistrer la prod dans un champ caché
+		inputProd = document.createElement('input');
+		inputProd.id = 'input'+i;
+		inputProd.value = nb;
+		inputProd.type = 'hidden'
+		row.appendChild(inputProd);
+	}
+	row=rows.snapshotItem(4);
+	cell = document.createElement('th');
+	cell.innerHTML=uf_addFormat(total);
+	cell.id = 'cell4';
+	row.appendChild(cell);
+	
+	// Pour enregistrer la prod dans un champ caché
+	inputProd = document.createElement('input');
+	inputProd.id = 'input4';
+	inputProd.value = total;
+	inputProd.type = 'hidden'
+	row.appendChild(inputProd);
+		
+	// Pour afficher un select, pour choisir, seconde, minute, heure, jour, semaine
+	row = rows.snapshotItem(3);
+	cell = document.createElement('th');
+	select = document.createElement('select');
+	select.innerHTML = 
+					  // Seconde
+					  '<option onclick="document.getElementById(\'cell4\').innerHTML = addFormat(Math.round(document.getElementById(\'input4\').value / 3600)); document.getElementById(\'cell5\').innerHTML = addFormat(Math.round(document.getElementById(\'input5\').value / 3600)); document.getElementById(\'cell6\').innerHTML = addFormat(Math.round(document.getElementById(\'input6\').value / 3600)); document.getElementById(\'cell7\').innerHTML = addFormat(Math.round(document.getElementById(\'input7\').value / 3600));">Seconde</option>'
+					  // Minute
+					  +'<option onclick="document.getElementById(\'cell4\').innerHTML = addFormat(Math.round(document.getElementById(\'input4\').value / 60)); document.getElementById(\'cell5\').innerHTML = addFormat(Math.round(document.getElementById(\'input5\').value / 60)); document.getElementById(\'cell6\').innerHTML = addFormat(Math.round(document.getElementById(\'input6\').value / 60)); document.getElementById(\'cell7\').innerHTML = addFormat(Math.round(document.getElementById(\'input7\').value / 60));">Minute</option>'
+					  // Heure
+					  +'<option onclick="document.getElementById(\'cell4\').innerHTML = addFormat(document.getElementById(\'input4\').value); document.getElementById(\'cell5\').innerHTML = addFormat(document.getElementById(\'input5\').value); document.getElementById(\'cell6\').innerHTML = addFormat(document.getElementById(\'input6\').value); document.getElementById(\'cell7\').innerHTML = addFormat(document.getElementById(\'input7\').value);" selected>Heure</option>'
+					  // Jour
+					  +'<option onclick="document.getElementById(\'cell4\').innerHTML = addFormat(Math.round(document.getElementById(\'input4\').value * 24)); document.getElementById(\'cell5\').innerHTML = addFormat(Math.round(document.getElementById(\'input5\').value * 24)); document.getElementById(\'cell6\').innerHTML = addFormat(Math.round(document.getElementById(\'input6\').value * 24)); document.getElementById(\'cell7\').innerHTML = addFormat(Math.round(document.getElementById(\'input7\').value * 24));">Jour</option>'
+					  // Semaine
+					  +'<option onclick="document.getElementById(\'cell4\').innerHTML = addFormat(Math.round(document.getElementById(\'input4\').value * 168)); document.getElementById(\'cell5\').innerHTML = addFormat(Math.round(document.getElementById(\'input5\').value * 168)); document.getElementById(\'cell6\').innerHTML = addFormat(Math.round(document.getElementById(\'input6\').value * 168)); document.getElementById(\'cell7\').innerHTML = addFormat(Math.round(document.getElementById(\'input7\').value * 168));">Semaine</option>'
+					  ;
+	cell.appendChild(select)
+	
+	// On place la fonction permettant de mettre en forme les chiffres
+	script = document.createElement('script');
+	script.type='text/javascript';
+	script.innerHTML += 
+						'function addFormat(str)'
+						+'{'
+						+'	var separator = \' \';'
+						+'	if(arguments.length==2)separator=arguments[1];'
+						+'	str += \'\';'
+						+'	var rgx = /(\\d+)(\\d{3})/;' // Il y a deux \ uniquement car la fonction est encapsulé dans du code JS qui lui supprimes les \ donc pour lui dire que c'est un caractere comme un autrre on l'echappe avec \ .
+						+'	while (rgx.test(str)) {'
+						+'		str = str.replace(rgx, \'$1\' + separator + \'$2\');'
+						+'	}'
+						+'	return str;'
+						+'}'
+						;
+	cell.appendChild(script);					
 	row.appendChild(cell);
 }
 

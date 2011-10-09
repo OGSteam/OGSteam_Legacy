@@ -686,6 +686,7 @@
 				<groupbox id="VueGlobaleGbox">
 					<caption label="&unifox.prefs.ufM.vue_globale;"/>
 					<checkbox id="ufM_ajouter_somme_all_planetes" label="&unifox.prefs.ufM.calc_ress_platform;"/>
+					<checkbox id="ufM_calculProduction_all_planetes" label="&unifox.prefs.ufM.calc_prod_platform;"/>
 				</groupbox>
 				<groupbox id="StatsGbox">
 					<caption label="&unifox.prefs.ufM.stats;"/>

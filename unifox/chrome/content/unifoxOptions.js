@@ -16,6 +16,7 @@ function ufM_editXUL(action, doc)
 							'messages_colorer_message_flotte_amical',
 							'simu_afficher_renta_defenseur',
 							'ajouter_somme_all_planetes',
+							'calculProduction_all_planetes',
 							'changer_planete_avec_fleche_haut_et_bas',
 							'envoyer_formulaire_via_touche_enterInConverto',
 							'envoyer_formulaire_via_touche_enterInFlotte',
