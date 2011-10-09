@@ -169,6 +169,82 @@ for(var i in nodeNames)
 	}
 return result;
 }*/
+
+
+
+// Fonction permettant de mettre sous forme de tableau un numero de version
+function parseVersionString(str) 
+{
+	if (typeof(str) != 'string') 
+	{ 
+		return false; 
+	}
+	
+	var x = str.split('.');
+	
+	// parse from string or default to 0 if can't parse
+	var maj = parseInt(x[0]) || 0;
+	var min = parseInt(x[1]) || 0;
+	var pat = parseInt(x[2]) || 0;    
+	var spat = parseInt(x[3]) || 0;
+
+	return {
+		major: maj,
+		minor: min,
+		patch: pat,
+		spatch: spat
+	}
+}
+
+/*
+	Fonction permettant de savoir si la derniere version est installé ou non
+	@return true => Dans ce cas la derniere version est installer
+	@return false => Dans ce cas ce n'est pas la derniere version qui est installé
+*/
+function checkIfLastVersionInstalled(versionInstaller, derniereVersion)
+{
+	versionActuel = parseVersionString(versionInstaller);
+	derniereVersion = parseVersionString(derniereVersion);
+	
+	if(versionActuel.major < derniereVersion.major) // On verifie le premier nombre
+	{
+		return false;
+	}
+	else
+	{
+		// Dans le cas ou le premier nombre est a jour
+		if(versionActuel.minor < derniereVersion.minor) // On verifie le deuxieme nombre
+		{
+			return false;
+		}
+		else
+		{
+			// Dans le cas ou le deuxieme nombre est a jour
+			if(versionActuel.patch < derniereVersion.patch) // On verifie le troisieme nombre
+			{
+				return false;
+			}
+			else
+			{
+				// Dans le cas ou le troisieme nombre est a jour
+				if(versionActuel.spatch < derniereVersion.spatch) // On verifie le quatrieme nombre
+				{
+					return false;
+				}
+				else
+				{
+					// Dans le cas ou le quatrieme nombre est a jour, alors la version est a jour
+					return true;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
 function ufEncrypt(str,mask)
 {
 var str2="";

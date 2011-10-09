@@ -326,6 +326,8 @@
  "Vue Globale">
  <!ENTITY unifox.prefs.ufM.calc_ress_platform
  "Calculer le nombre de ressources a quai">
+ <!ENTITY unifox.prefs.ufM.calc_prod_platform
+ "Calculer la production de l'empire">
  <!ENTITY unifox.prefs.ufM.stats
  "Classement">
  <!ENTITY unifox.prefs.ufM.change_hundred_with_LEFT_and_RIGHT

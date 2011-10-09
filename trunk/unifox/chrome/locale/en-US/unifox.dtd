@@ -326,6 +326,8 @@
  "Overview">
  <!ENTITY unifox.prefs.ufM.calc_ress_platform
  "Calculate the number of resources dock">
+ <!ENTITY unifox.prefs.ufM.calc_prod_platform
+ "Calculate the production of the empire">
  <!ENTITY unifox.prefs.ufM.stats
  "Ranking">
  <!ENTITY unifox.prefs.ufM.change_hundred_with_LEFT_and_RIGHT
