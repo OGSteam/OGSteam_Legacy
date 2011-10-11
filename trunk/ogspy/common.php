@@ -10,7 +10,7 @@
  */
 
 if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
+  die("Hacking attempt");
 }
 // PHP5 with register_long_arrays off?
 if (!isset($HTTP_POST_VARS) && isset($_POST))
@@ -32,15 +32,15 @@ if (!isset($HTTP_POST_VARS) && isset($_POST))
 
 //Récupération des paramètres de connexion à la base de données
 if (file_exists("parameters/id.php")) {
-	require_once("parameters/id.php");
+  require_once("parameters/id.php");
 }
 else {
-	if (!defined("OGSPY_INSTALLED") && !defined("INSTALL_IN_PROGRESS") && !defined("UPGRADE_IN_PROGRESS")) {
-		header("Location: install/index.php");
-		exit();
-	}
-	elseif ( file_exists ( '../parameters/id.php' ) )
-	    require_once ( '../parameters/id.php' );
+  if (!defined("OGSPY_INSTALLED") && !defined("INSTALL_IN_PROGRESS") && !defined("UPGRADE_IN_PROGRESS")) {
+    header("Location: install/index.php");
+    exit();
+  }
+  elseif ( file_exists ( '../parameters/id.php' ) )
+      require_once ( '../parameters/id.php' );
 }
 
 //Appel des fonctions
@@ -74,33 +74,24 @@ foreach ($_POST as $secvalue) {
 
 //Connexion à la base de donnnées
 if (!defined("INSTALL_IN_PROGRESS")) {
-	$db = false;
-	if (is_array($db_host)) {
-		for ($i=0 ; $i<sizeof($db_host) ; $i++) {
-			$db = new sql_db($db_host[$i], $db_user[$i], $db_password[$i], $db_database[$i]);
-			if ($db->db_connect_id) {
-				break;
-			}
-		}
-	}
-	else {
-		$db = new sql_db($db_host, $db_user, $db_password, $db_database);
-	}
+    // appel de l instance en cours
+    $db  = sql_db::getInstance($db_host, $db_user, $db_password, $db_database);  
+    
+    if (!$db->db_connect_id) {
+    die("Impossible de se connecter à la base de données");
+  }
+    
 
-	if (!$db->db_connect_id) {
-		die("Impossible de se connecter à la base de données");
-	}
+  //Récupération et encodage de l'adresse ip
+  $user_ip = $_SERVER['REMOTE_ADDR'];
+  $user_ip = encode_ip($user_ip);
 
-	//Récupération et encodage de l'adresse ip
-	$user_ip = $_SERVER['REMOTE_ADDR'];
-	$user_ip = encode_ip($user_ip);
+  init_serverconfig();
 
-	init_serverconfig();
-
-	if (!defined("UPGRADE_IN_PROGRESS")) {
-		session();
-		maintenance_action();
-	}
+  if (!defined("UPGRADE_IN_PROGRESS")) {
+    session();
+    //maintenance_action();
+  }
 }
 
 //BBClone
@@ -110,7 +101,7 @@ define("COUNTER", _BBCLONE_DIR."mark_page.php");
 if (is_readable(COUNTER)) include_once(COUNTER);
 
 if (MODE_DEBUG) {
-	error_reporting(E_ALL);
+  error_reporting(E_ALL);
 }
 
 if (isset ( $server_config["log_phperror"] ) && $server_config["log_phperror"] == 1 )set_error_handler('ogspy_error_handler');
