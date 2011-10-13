@@ -94,7 +94,7 @@ function error_sql($message) {
 */
 function installation_db($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password, $sgbd_tableprefix, $admin_username, $admin_password, $admin_password2, $num_of_galaxies, $num_of_systems) {
 	global $pub_directory;
-	$db = new sql_db($sgbd_server, $sgbd_username, $sgbd_password, $sgbd_dbname);
+	$db  = sql_db::getInstance($sgbd_server, $sgbd_username, $sgbd_password, $sgbd_dbname);
 	if (!$db->db_connect_id) error_sql("Impossible de se connecter à la base de données");
 
 	//Création de la structure de la base de données
