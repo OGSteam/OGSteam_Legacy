@@ -10,7 +10,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 global $db;
 global $table_prefix;
-define("TABLE_recycleurs", $table_prefix."recycleurs");
+define("TABLE_RECYCLEURS", $table_prefix."recycleurs");
 
 // On commence par récupérer les champs
 if(isset($pub_galaxie)) $galaxie=$pub_galaxie;
@@ -50,9 +50,10 @@ else $nombrerecy="";
 
 
 // on écrit la requête sql
-$query = "INSERT INTO " . TABLE_recycleurs . "(`id` , `user_name` , `galaxie` , `systeme` , `position` , `porte` , `nombrerecy` , `time`) VALUES ('', '" . $user_data['user_name'] . "', '$galaxie', '$systeme', '$position', '$porte', '$nombrerecy', " . time() . ")";
- $db->sql_query($query);
+$query = "INSERT INTO " . TABLE_RECYCLEURS . "(`id` , `user_name` , `galaxie` , `systeme` , `position` , `porte` , `nombrerecy` , `time`) VALUES ('', '" . $user_data['user_name'] . "', '$galaxie', '$systeme', '$position', '$porte', '$nombrerecy', " . time() . ")";
+log_('mod',$query);
+$db->sql_query($query);
  	
-redirection("index.php?action=recycleurs&subaction=recycleurs");
+redirection("index.php?action=recycleurs&sub_action=recycleurs");
 
 ?> 

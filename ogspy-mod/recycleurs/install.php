@@ -13,21 +13,21 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 global $db, $table_prefix;
 $is_ok = false;
-$mod_folder = "recycleur";
+$mod_folder = "recycleurs";
 $is_ok = install_mod ($mod_folder);
 if ($is_ok == true)
 	{
-		define("TABLE_recycleurs", $table_prefix."recycleurs");
-		define("TABLE_phalanges", $table_prefix."phalanges");
+		define("TABLE_RECYCLEURS", $table_prefix."recycleurs");
+		define("TABLE_PHALANGES", $table_prefix."phalanges");
 		
-		$query="DROP TABLE IF EXISTS ".TABLE_phalanges."";
+		$query="DROP TABLE IF EXISTS ".TABLE_PHALANGES."";
 		$db->sql_query($query);
 
-		$query="DROP TABLE IF EXISTS ".TABLE_recycleurs."";
+		$query="DROP TABLE IF EXISTS ".TABLE_RECYCLEURS."";
 		$db->sql_query($query);
 
 
-		$query = "CREATE TABLE ".TABLE_recycleurs." (
+		$query = "CREATE TABLE ".TABLE_RECYCLEURS." (
 			`id` INT NOT NULL AUTO_INCREMENT ,
 			`user_name` VARCHAR( 255 ) NOT NULL default '0',
 			`galaxie` VARCHAR( 1 ) NOT NULL ,
@@ -40,7 +40,7 @@ if ($is_ok == true)
 		)";
 		$db->sql_query($query);
 
-		$query = "CREATE TABLE ".TABLE_phalanges." (
+		$query = "CREATE TABLE ".TABLE_PHALANGES." (
 			`id` INT NOT NULL AUTO_INCREMENT ,
 			`user_name` VARCHAR( 255 ) NOT NULL default '0',
 			`galaxie` VARCHAR( 1 ) NOT NULL ,
