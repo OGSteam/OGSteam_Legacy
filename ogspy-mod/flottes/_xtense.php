@@ -35,7 +35,7 @@ if(class_exists("Callback")){
 
 // TEST XTENSE2
 global $xtense_version, $table_prefix;
-$xtense_version = "2.3.8";
+$xtense_version = "2.3.9";
 
 // Definitions
 define("TABLE_MOD_FLOTTES", $table_prefix."mod_flottes");
