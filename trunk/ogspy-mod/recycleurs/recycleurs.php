@@ -12,15 +12,12 @@ die("Hacking attempt");
 
 ?>
 
-
-<center>________________________________________</center>
-
 <div id="recy" name="recy"> 
 	<form method="POST" action="index.php?action=recycleurs&sub_action=add"> 
 	<table  align="center"><tr><td> 
 		<table width="450" style="border:2px #003399 solid;" cellpadding="3"> 
 			
-				<td align="center" class="c" colspan="4">Formulaire d'envoie des recycleurs</td> 
+				<td align="center" class="c" colspan="4">Formulaire d'envoi des recycleurs</td> 
 			<tr> 
 				<th align="center">Coordonnées :</th> 
 				<th align="center">
@@ -43,7 +40,6 @@ die("Hacking attempt");
 		</td></tr></table> 
 	</form> 
 </div> 
-<center>________________________________________</center>
 <?php
 for ( $i = 1; $i < $nb_galaxies; $i++) {
 	echo '<center>
@@ -79,8 +75,7 @@ for ( $i = 1; $i < $nb_galaxies; $i++) {
 			echo '<td></tr></td>';
 		}
 	}
-	echo '</tr></table><br><br>
-	<center>____________________________________________________________________________</center><br><br>';
+	echo '</tr></table><br><br>';
 }
 
 

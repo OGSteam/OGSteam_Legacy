@@ -12,7 +12,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 global $db;
 global $table_prefix;
-define("TABLE_phalanges", $table_prefix."phalanges");
+define("TABLE_PHALANGES", $table_prefix."phalanges");
 
 
 
@@ -22,12 +22,12 @@ else $id="";
 
 
 // on écrit la requête sql
-    $query = "DELETE from " .TABLE_phalanges. " where id=$id";
+    $query = "DELETE from " .TABLE_PHALANGES. " where id=$id";
    
     //insertion formulaire table
  $db->sql_query($query);
  
- redirection("index.php?action=recycleurs&subaction=phalanges");
+ redirection("index.php?action=recycleurs&sub_action=phalanges");
 
 
 ?>

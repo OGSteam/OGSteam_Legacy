@@ -27,7 +27,7 @@ else $raz="";
      $query = "DELETE from " .TABLE_recycleurs. "";
  $db->sql_query($query);
  
- redirection("index.php?action=recycleurs&subaction=admin");
+ redirection("index.php?action=recycleurs&sub_action=admin");
 
 
 ?>
