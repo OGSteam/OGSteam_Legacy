@@ -1,24 +1,17 @@
-<?php
-if (!defined('IN_SPYOGAME')) die("Hacking attempt");
-
-global $server_config;
-
-require_once("mod/decolonisation/lang/lang_fr.php");
-//if (file_exists("mod/decolonisation/lang/lang_".$server_config['language'].".php")) require_once("mod/decolonisation/lang/lang_".$server_config['language'].".php");
-
-// Ajout du module dans la table des mod de OGSpy
+<?php 
+if (!defined('IN_SPYOGAME')) die("Hacking Attempt!");
+ 
+//Fichier install
 $is_ok = false;
 $mod_folder = "decolonisation";
-$is_ok = install_mod($mod_folder);
+$is_ok = install_mod ($mod_folder);
+//et si tu as pris la fonction boléenne faut que je rajoute sae
 if ($is_ok == true)
-	{
-		//si besoin de creer des tables, a faire ici
-	}
+{
+             // Si besoin de creer des tables, à faire ici
+}
 else
-	{
-		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
-	}
-
-
-
+{
+   echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+}
 ?>

@@ -2,11 +2,11 @@
 /***************************************************************************
 *	filename	: lang_fr.php
 *	package		: Mod Decolonization
-*	version		: 0.7d
+*	version		: 0.7c
 *	desc.			: Liste des chaines pour la langue Française.
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 11/08/2006
-*	modified	: 09:39 05/09/2009
+*	modified	: 01:50 01/06/2009
 ***************************************************************************/
 
 // Direct call prohibited (do not translate this one !!)
@@ -26,8 +26,8 @@ $lang['decolo_percent'] = "Pourcentage des points";
 $lang['decolo_other'] = "Autre";
 $lang['decolo_graph'] = "Proportion en points des differentes plan&egrave;tes";
 $lang['decolo_graph_alt'] = "Pas de graphique disponible";
-$lang['decolo_created_by'] = "Mod D&eacute;colonisation v"./*$mod_version*/"%1\$s"." d&eacute;velopp&eacute; par "./*$creator_name*/"%2\$s"." modifi&eacute; par "./*$modifier_name*/"%3\$s";
-$lang['decolo_changelog'] = "Voir le "./*$changelog_link*/"%1\$s"."ChangeLog</a> ou "./*$forum_link*/"%2\$s"."plus d'informations</a>";
+$lang['decolo_created_by'] = "Mod D&eacute;colonisation v"./*$mod_version*/"%1\$s d&eacute;velopp&eacute; par "./*$creator_name*/"%2\$s modifi&eacute; par "./*$modifier_name*/"%3\$s";
+$lang['decolo_changelog'] = "Voir le "./*$changelog_link*/"%1\$sChangeLog</a> ou "./*$forum_link*/"%2\$splus d'informations</a>";
 
 // Buildings
 $lang['decolo_buildings_points'] = "Points B&acirc;timents";
@@ -35,21 +35,21 @@ $lang['decolo_moon_buildings_points'] = "Points B&acirc;timents Lune";
 $lang['decolo_building_M'] = "Mine de m&eacute;tal";
 $lang['decolo_building_C'] = "Mine de cristal";
 $lang['decolo_building_D'] = "Synth&eacute;tiseur de deut&eacute;rium";
-$lang['decolo_building_CES'] = "Centrale &eacute;lectrique solaire";
-$lang['decolo_building_CEF'] = "Centrale &eacute;lectrique de fusion";
-$lang['decolo_building_UdR'] = "Usine de robots";
-$lang['decolo_building_UdN'] = "Usine de nanites";
-$lang['decolo_building_CSp'] = "Chantier spatial";
-$lang['decolo_building_HM'] = "Hangar de m&eacute;tal";
-$lang['decolo_building_HC'] = "Hangar de cristal";
-$lang['decolo_building_HD'] = "R&eacute;servoir de deut&eacute;rium";
-$lang['decolo_building_Lab'] = "Laboratoire de recherche";
-$lang['decolo_building_Ter'] = "Terraformeur";
-$lang['decolo_building_Silo'] = "Silo de missiles";
-$lang['decolo_building_DdR'] = "D&eacute;p&ocirc;t de ravitaillement";
-$lang['decolo_building_BaLu'] = "Base lunaire";
-$lang['decolo_building_Pha'] = "Phalange de capteur";
-$lang['decolo_building_PoSa'] = "Porte de saut spatial";
+$lang['decolo_building_SoP'] = "Centrale &eacute;lectrique solaire";
+$lang['decolo_building_FR'] = "Centrale &eacute;lectrique de fusion";
+$lang['decolo_building_RF'] = "Usine de robots";
+$lang['decolo_building_NF'] = "Usine de nanites";
+$lang['decolo_building_S'] = "Chantier spatial";
+$lang['decolo_building_MS'] = "Hangar de m&eacute;tal";
+$lang['decolo_building_CS'] = "Hangar de cristal";
+$lang['decolo_building_DT'] = "R&eacute;servoir de deut&eacute;rium";
+$lang['decolo_building_RL'] = "Laboratoire de recherche";
+$lang['decolo_building_T'] = "Terraformeur";
+$lang['decolo_building_ML'] = "Silo de missiles";
+$lang['decolo_building_AD'] = "D&eacute;p&ocirc;t de ravitaillement";
+$lang['decolo_building_LB'] = "Base lunaire";
+$lang['decolo_building_SPh'] = "Phalange de capteur";
+$lang['decolo_building_JG'] = "Porte de saut spatial";
 
 // Solar Satellite
 $lang['decolo_SS'] = "Satellite solaire";
@@ -57,21 +57,19 @@ $lang['decolo_SS'] = "Satellite solaire";
 // Defense
 $lang['decolo_defense_points'] = "Points D&eacute;fense";
 $lang['decolo_moon_defense_points'] = "Points D&eacute;fense Lune";
-$lang['decolo_defense_LM'] = "Lanceur de missiles";
-$lang['decolo_defense_LLE'] = "Artillerie laser l&eacute;g&egrave;re";
-$lang['decolo_defense_LLO'] = "Artillerie laser lourde";
-$lang['decolo_defense_CG'] = "Canon de Gauss";
-$lang['decolo_defense_AI'] = "Artillerie &agrave; ions";
-$lang['decolo_defense_LP'] = "Lanceur de plasma";
-$lang['decolo_defense_PB'] = "Petit bouclier";
-$lang['decolo_defense_GB'] = "Grand bouclier";
-$lang['decolo_defense_MIC'] = "Missile Interception";
-$lang['decolo_defense_MIP'] = "Missile Interplan&eacute;taire";
-
+$lang['decolo_defense_ML'] = "Lanceur de missiles";
+$lang['decolo_defense_LL'] = "Artillerie laser l&eacute;g&egrave;re";
+$lang['decolo_defense_HL'] = "Artillerie laser lourde";
+$lang['decolo_defense_GC'] = "Canon de Gauss";
+$lang['decolo_defense_IC'] = "Artillerie &agrave; ions";
+$lang['decolo_defense_PC'] = "Lanceur de plasma";
+$lang['decolo_defense_SSD'] = "Petit bouclier";
+$lang['decolo_defense_LSD'] = "Grand bouclier";
+$lang['decolo_defense_ABM'] = "Missile Interception";
+$lang['decolo_defense_IM'] = "Missile Interplan&eacute;taire";
 
 // Changelog
 $lang['decolo_back'] = "Retour";
-$lang['decolo_date_format'] = "d/m/y";
 $lang['decolo_version'] = "Version";
 $lang['decolo_legend'] = "[Fix] : supression d'un bug<br />".
 	"[Add] : rajout d'une fonction<br />".
@@ -97,7 +95,4 @@ $lang['decolo_version_0.6'] = "- [Fix] Correction d'erreurs.<br />".
 $lang['decolo_version_0.7b'] = "- [Imp] Internationalisation.";
 $lang['decolo_version_0.7c'] = "- [Fix] D&eacute;p&ocirc;t de Ravitaillement sur les lunes.<br />".
 	"- [Imp] Am&eacute;lioration du code.";
-$lang['decolo_version_0.7.5'] = "- [Fix] r&eacute;&eacute;criture du mod<br />".
-	"- [Fix] mise a niveau pour ogspy 3.0.7<br />".
-"- [Imp] utilisation des fonctions d ogspy pour calcul des couts batiments.<br />";
 ?>
