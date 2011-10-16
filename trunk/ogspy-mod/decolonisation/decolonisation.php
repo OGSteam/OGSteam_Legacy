@@ -9,8 +9,6 @@
 *	modified	: 01:50 01/06/2009
 ***************************************************************************/
 
-//error_reporting(E_ALL);
-
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 $filename = "mod/decolonisation/version.txt";
