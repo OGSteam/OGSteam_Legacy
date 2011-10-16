@@ -2,11 +2,11 @@
 /***************************************************************************
 *	filename	: lang_en.php
 *	package		: Mod Decolonization
-*	version		: 0.7d
+*	version		: 0.7c
 *	desc.			: List of strings for the English language.
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 11/08/2006
-*	modified	: 09:39 05/09/2009
+*	modified	: 01:50 01/06/2009
 ***************************************************************************/
 
 // Direct call prohibited (do not translate this one !!)
@@ -26,8 +26,8 @@ $lang['decolo_percent'] = "Percentage Points";
 $lang['decolo_other'] = "Other";
 $lang['decolo_graph'] = "Proportion of points on each planets";
 $lang['decolo_graph_alt'] = "No graphics available";
-$lang['decolo_created_by'] = "Mod Decolonization v"./*$mod_version*/"%1\$s"." developed by "./*$creator_name*/"%2\$s"." modified by "./*$modifier_name*/"%3\$s";
-$lang['decolo_forum'] = "See the "./*$changelog_link*/"%1\$s"."ChangeLog</a> or "./*$forum_link*/"%2\$s"."more information</a>";
+$lang['decolo_created_by'] = "Mod Decolonization v"./*$mod_version*/"%1\$s developed by "./*$creator_name*/"%2\$s modified by "./*$modifier_name*/"%3\$s";
+$lang['decolo_forum'] = "See the "./*$changelog_link*/"%1\$sChangeLog</a> or "./*$forum_link*/"%2\$ssmore information</a>";
 
 // Buildings
 $lang['decolo_buildings_points'] = "Buildings Points";
@@ -70,7 +70,6 @@ $lang['decolo_defense_IM'] = "Interplanetary missile";
 
 // Changelog
 $lang['decolo_back'] = "Back";
-$lang['decolo_date_format'] = "m/d/y";
 $lang['decolo_version'] = "Version";
 $lang['decolo_legend'] = "[Fix] : fixing a bug<br />".
 	"[Add] : adding a new function<br />".
