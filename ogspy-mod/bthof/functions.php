@@ -159,7 +159,7 @@
     if ($OGSpy_Table == "bthof_flottes")
       {
       // Controle de l'existance du mod flottes et de son activation.
-      $query = "SELECT active FROM `".TABLE_MOD."` WHERE `title`='Flottes'";
+      $query = "SELECT active FROM `".TABLE_MOD."` WHERE `title`='flottes'";
       $result = $db->sql_query($query);
       $modflotte = $db->sql_fetch_row($result);
       if ($modflotte[0] != "1")
