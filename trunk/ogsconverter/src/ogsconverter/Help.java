@@ -97,7 +97,7 @@ public class Help extends JFrame implements ActionListener {
 		JScrollPane scrollpane = new JScrollPane();
 		scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		JTextArea t = new JTextArea(
-				"Help!\n\nAide en ligne: http://www.ogsteam.fr/devteam/wiki/OgsConverter/Help\n\nI. Rapports compatibles:\n\n - Rapport de Bataille (seul, plusieurs avec ou sans recyclage).\n"
+				"Help!\n\nAide en ligne: http://ogsteam.fr/\n\nI. Rapports compatibles:\n\n - Rapport de Bataille (seul, plusieurs avec ou sans recyclage).\n"
 						+ " - Rapport de Recyclage.\n - Rapport d'Espionnage.\n - Page membres de l'alliance.\n - Votre empire.\n\n\n"
 						+ "II. Comment faire la conversion:\n\nJe copie le rapport dans l'onglet converter et \n"
 						+ "je vais cliquer sur le bouton \"convertir\"\n\n\n III. Config:\n\n"
@@ -115,7 +115,7 @@ public class Help extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(help)) {
-			Main.openurl("http://www.ogsteam.fr/devteam/wiki/OgsConverter/Help");
+			Main.openurl("http://ogsteam.fr/");
 		}
 	}
 
