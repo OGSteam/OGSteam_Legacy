@@ -8,7 +8,7 @@
 	get : ally att|text(20)||Alliance de l'attaquant?
 [/option]
 
-[center]Les flottes suivantes se sont affrontées le[b] [date] [/b]:
+[center]Les flottes suivantes s'affrontent[b] [date] [/b]:
 
 /*
  * "repeat attackers" sera répété autant de fois qu'il y a d'attaquants
