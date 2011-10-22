@@ -949,7 +949,7 @@ public class Fenetre extends JFrame implements WindowListener, ActionListener, M
 
 		if (!windowevent.getSource().equals(this))
 			return;
-
+/*//Controle de Mise à jour désactivé car serveur indisponible
 		try {
 			if (Configuration.getConfig("config.ini", "MAJ").equals("1")) {
 				Thread t = new Thread() {
@@ -974,7 +974,7 @@ public class Fenetre extends JFrame implements WindowListener, ActionListener, M
 		} catch (Exception e) {
 			ExceptionAlert.createExceptionAlert(e);
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	public void windowClosed(WindowEvent windowevent) {
