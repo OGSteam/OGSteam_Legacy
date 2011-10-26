@@ -48,7 +48,7 @@ $speed_uni = $server_config['speed_uni'];
 $ddr = $server_config['ddr'];
 $astro_strict = $server_config['astro_strict'];
 $config_cache = $server_config['config_cache'];
-$mod_cache = $server_config['$mod_cache'];
+$mod_cache = $server_config['mod_cache'];
 ?>
 
 <table width="100%">
@@ -185,12 +185,12 @@ $mod_cache = $server_config['$mod_cache'];
 	<th><input name="regenere_cache" type="checkbox" value="0" /></th>
 </tr>
 <tr>
-	<th width="60%">Durée de conservation du cache "config" </a></th>
-	<th><input type="text" name="config_cache" maxlength="4" size="5" value="<?php echo $config_cache;?>"></th>
+	<th width="60%">Durée de conservation du cache "config" <?php echo help("config_cache");?> <br /><div class="z"><i>(Attention, peut impacter la mise a jour des statitistiques du serveur et le ratio .. )</i></div></a></th>
+	<th><input type="text" name="config_cache" maxlength="10" size="10" value="<?php echo $config_cache;?>"></th>
 </tr>
 <tr>
-	<th width="60%">Durée de conservation du cache "mod" </a></th>
-	<th><input type="text" name="mod_cache" maxlength="4" size="5" value="<?php echo $mod_cache;?>"></th>
+	<th width="60%">Durée de conservation du cache "mod" <?php echo help("mod_cache");?></a></th>
+	<th><input type="text" name="mod_cache" maxlength="10" size="10" value="<?php echo $mod_cache;?>"></th>
 </tr>
 
 <tr>

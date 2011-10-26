@@ -87,7 +87,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
   $user_ip = $_SERVER['REMOTE_ADDR'];
   $user_ip = encode_ip($user_ip);
 
-  init_serverconfig();
+ init_serverconfig();
 
   if (!defined("UPGRADE_IN_PROGRESS")) {
     session();
