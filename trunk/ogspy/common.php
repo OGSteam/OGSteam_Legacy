@@ -54,6 +54,7 @@ require_once("includes/sessions.php");
 require_once("includes/help.php");
 require_once("includes/mod.php");
 require_once("includes/ogame.php");
+require_once("includes/cache.php");
 
 //Récupération des valeur GET, POST, COOKIE
 @import_request_variables('GP', "pub_");

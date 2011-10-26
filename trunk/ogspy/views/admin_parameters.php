@@ -176,11 +176,21 @@ $astro_strict = $server_config['astro_strict'];
 }
 ?>
 <tr>
+	<td class="c" colspan="2">Options de cache</td>
+</tr>
+<tr>	
+    <th>régénérer tous les fichiers caches<br /><div class="z"><i>(Surveillez vos journaux.. peut prendre beaucoup de place)</i></div></th>
+	<th><input name="regenere_cache" type="checkbox" value="0" /></th>
+	</tr>
+
+
+<tr>
 	<td class="c" colspan="2">Options de debuggage et de journalisation</td>
 </tr>
 <tr>
-	<th>Enregistrement des erreurs php<br /><div class="z"><i>(Surveillez vos journaux.. peut prendre beaucoup de place)</i></div></th>
+    <th>Enregistrement des erreurs php<br /><div class="z"><i>(Surveillez vos journaux.. peut prendre beaucoup de place)</i></div></th>
 	<th><input name="log_phperror" type="checkbox" value="1" <?php echo $log_phperror;?>></th>
+
 </tr>
 <tr>
 	<td>&nbsp;</td>
