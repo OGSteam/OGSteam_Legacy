@@ -606,15 +606,24 @@ switch ($ogsversion) {
 		$up_to_date = true;
 		break;
 		
+	case '3.0.7':
+		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.0.8' WHERE config_name = 'version'";
+		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('config_cache', '3600')";
+		$requests[] = "INSERT IGNORE INTO ".TABLE_CONFIG." (config_name, config_value) VALUES ('mod_cache', '604800')";
+        $ogsversion = '3.0.8';
+		$up_to_date = true;
+		break;
+		
 	default:
 	die("Aucune mise … jour n'est disponible");
 }
+
 
 foreach ($requests as $request) {
 	$db->sql_query($request);
 }
 
-if ( $ogsversion == '3.0.7' && function_exists ( 'import_RE' ) )
+if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) )
   import_RE();
 ?>
 	<h3 align='center'><font color='yellow'>Mise à jour du serveur OGSpy vers la version <?php echo $ogsversion;?> effectuée avec succès</font></h3>

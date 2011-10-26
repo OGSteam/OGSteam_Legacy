@@ -20,6 +20,7 @@ define("IN_SPYOGAME", true);
 require_once("common.php");
 
 
+
 /**
  * Repère de début de traitement par OGSpy
  * @name $php_start

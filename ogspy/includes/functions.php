@@ -183,16 +183,25 @@ function password_generator()
 }
 /**
  * Initialisation du tableau de confifuration $server_config
+ * TODO : temps de validité du cache
  */
 function init_serverconfig()
 {
     global $server_config;
+    
+      
+    // Load cached config
+    $filename = 'cache/cache_config.php';
 
-    $request = "select * from " . TABLE_CONFIG;
-    $result = mysql_query($request);
-
-    while (list($name, $value) = mysql_fetch_row($result)) {
-        $server_config[$name] = stripslashes($value);
+    if (file_exists($filename)) {
+        include 'cache/cache_config.php';
+               
+    }
+    else
+    {
+        generate_config_cache();
+        require 'cache/cache_config.php';
+               
     }
 }
 
@@ -341,8 +350,9 @@ function set_server_view()
         mysql_real_escape_string($pub_register_forum) .
         "' where config_name = 'register_forum'";
     $db->sql_query($request);
-
-
+    
+    // mise a jour des caches avec les mofids
+    generate_config_cache();
     log_("set_server_view");
     redirection("index.php?action=administration&subaction=affichage");
 }
@@ -627,6 +637,8 @@ function set_serverconfig()
         " where config_name = 'speed_uni'";
     $db->sql_query($request);
 
+    // mise a jour des caches avec les mofids
+    generate_config_cache();
     log_("set_serverconfig");
     redirection("index.php?action=administration&subaction=parameter");
 }
