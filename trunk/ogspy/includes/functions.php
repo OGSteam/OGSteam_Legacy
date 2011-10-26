@@ -188,22 +188,25 @@ function password_generator()
 function init_serverconfig()
 {
     global $server_config;
-    
-      
+         
     // Load cached config
     $filename = 'cache/cache_config.php';
 
     if (file_exists($filename)) {
         include 'cache/cache_config.php';
-               
+        // regeneration si besoin
+        if ( (filemtime($filename) + $server_config['config_cache'] ) < time() ) { generate_config_cache(); }
+        echo filemtime($filename)  ;  
+        echo $filename ." a été modifié le : " . date ("F d Y H:i:s.", filemtime($filename));  
     }
     else
     {
+        
         generate_config_cache();
-        /// file exist pour bug upgrade to latest
-        if (file_exists( 'cache/cache_config.php')){require_once 'cache/cache_config.php'; }
-                   
+        include 'cache/cache_config.php';
     }
+           
+    
 }
 
 function set_server_view()
@@ -366,7 +369,8 @@ function set_serverconfig()
         $pub_reason, $pub_ally_protection, $pub_url_forum, $pub_max_keeprank, $pub_keeprank_criterion,
         $pub_max_keepspyreport, $pub_servername, $pub_allied, $pub_disable_ip_check, $pub_num_of_galaxies,
         $pub_num_of_systems, $pub_log_phperror, $pub_block_ratio, $pub_ratio_limit, $pub_speed_uni,
-        $pub_ddr, $pub_astro_strict;
+        $pub_ddr, $pub_astro_strict, $pub_config_cache, $pub_mod_cache;
+        
 
     if (!isset($pub_num_of_galaxies))
         $pub_num_of_galaxies = intval($server_config['num_of_galaxies']);
@@ -385,7 +389,8 @@ function set_serverconfig()
         "Char") || !check_var($pub_max_keepspyreport, "Num") || !check_var(stripslashes
         ($pub_servername), "Text") || !check_var($pub_allied, "Special", "#^[\w\s,\.\-]+$#") ||
         !check_var($pub_disable_ip_check, "Num") || !check_var($pub_num_of_galaxies,
-        "Galaxies") || !check_var($pub_num_of_systems, "Galaxies")) {
+        "Galaxies") || !check_var($pub_num_of_systems, "Galaxies")|| !check_var($pub_config_cache, "Num") || 
+        !check_var($pub_mod_cache, "Num") ) {
         redirection("index.php?action=message&id_message=errordata&info");
     }
     if ($user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
@@ -397,7 +402,7 @@ function set_serverconfig()
         !isset($pub_max_keeplog) || !isset($pub_default_skin) || !isset($pub_reason) ||
         !isset($pub_ally_protection) || !isset($pub_url_forum) || !isset($pub_max_keeprank) ||
         !isset($pub_keeprank_criterion) || !isset($pub_max_keepspyreport) || !isset($pub_servername) ||
-        !isset($pub_allied)) {
+        !isset($pub_allied) || !isset($pub_mod_cache) || !isset($pub_config_cache)) {
         redirection("index.php?action=message&id_message=setting_serverconfig_failed&info");
     }
 
@@ -637,6 +642,18 @@ function set_serverconfig()
     $request = "update " . TABLE_CONFIG . " set config_value = " . $pub_speed_uni .
         " where config_name = 'speed_uni'";
     $db->sql_query($request);
+    
+     //
+    $request = "update " . TABLE_CONFIG . " set config_value = " . $pub_mod_cache .
+        " where config_name = 'mod_cache'";
+    $db->sql_query($request);
+    
+     //
+    $request = "update " . TABLE_CONFIG . " set config_value = " . $pub_config_cache .
+        " where config_name = 'config_cache'";
+    $db->sql_query($request);
+    
+    
 
     // mise a jour des caches avec les mofids
     generate_config_cache();

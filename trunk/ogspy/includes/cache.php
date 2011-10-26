@@ -47,9 +47,10 @@ function generate_config_cache()
      
      // on recupere quand meme les infos 
      // droit au dossier non-bloquant
-     while (list($name, $value) = mysql_fetch_row($result)) {
-        $server_config[$name] = stripslashes($value);
-    }
+while (list($name, $value) = mysql_fetch_row($result)) {
+       $server_config[$name] = stripslashes($value);
+   return $server_config ;
+  }
      
 
 

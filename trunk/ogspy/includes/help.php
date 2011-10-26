@@ -43,6 +43,8 @@ $help["ratio_block"] = "Vous avez un ratio inferieur au seuil, vous ne pouvez pa
 $help["profile_speed_uni"] = "Indiquez le multiplicateur de vitesse de votre univers (1 par défaut)";
 $help["profile_ddr"] = "Cocher si le dépôt de ravitaillement est présent dans votre univers";
 $help["astro_strict"] = "Cocher si l'univers est ancien. Cela permet d'avoir 9 planetes sans avoir la technologie astrophysique correspondante.";
+$help["config_cache"] = "Durée de vie du cache config en seconde.";
+$help["mod_cache"] = "Durée de vie du cache mod en seconde..";
 
 /**
 * Création d'un lien d'aide en popup sur image
