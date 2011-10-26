@@ -193,19 +193,19 @@ function init_serverconfig()
     $filename = 'cache/cache_config.php';
 
     if (file_exists($filename)) {
-        include 'cache/cache_config.php';
+        include $filename;
         // regeneration si besoin
         if ( (filemtime($filename) + $server_config['config_cache'] ) < time() ) { generate_config_cache(); }
-        echo filemtime($filename)  ;  
-        echo $filename ." a été modifié le : " . date ("F d Y H:i:s.", filemtime($filename));  
+        //debug :
+        //echo filemtime($filename)  ;  
+        //echo $filename ." a été modifié le : " . date ("F d Y H:i:s.", filemtime($filename));  
     }
     else
     {
-        
         generate_config_cache();
-        include 'cache/cache_config.php';
-    }
-           
+       
+          }
+          
     
 }
 
