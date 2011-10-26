@@ -28,7 +28,7 @@ function generate_config_cache()
     while ($cur_config_item = $db->sql_fetch_row($result))
 	$output[$cur_config_item[0]] = stripslashes($cur_config_item[1]);
     	
-     $fh = @fopen('cache/cache_config.php', 'wb');
+    $fh = @fopen('cache/cache_config.php', 'wb');
 	if (!$fh) { 
 	           if (!defined('UPGRADE_IN_PROGRESS'))
                     {
@@ -45,16 +45,7 @@ function generate_config_cache()
         
     }	
      
-     // on recupere quand meme les infos 
-     // droit au dossier non-bloquant
-while (list($name, $value) = mysql_fetch_row($result)) {
-       $server_config[$name] = stripslashes($value);
-   return $server_config ;
-  }
-     
-
-
-}
+    }
 
 
 /**
@@ -65,6 +56,9 @@ function generate_all_cache()
         generate_config_cache();
         
 }
+
+
+
 
 
 

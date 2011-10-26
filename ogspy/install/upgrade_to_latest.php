@@ -632,11 +632,14 @@ foreach ($requests as $request) {
 	$db->sql_query($request);
 }
 
-if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) )
-  import_RE();
+if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) ) {
+    import_RE(); 
+    }
   
-// on regenere les fichiers caches
-generate_all_cache()
+// on supprime tous les fichiers du cache
+// pour prendre en compte toutes les modifications
+$files = glob('../cache/*.php');
+foreach ($files as $filename){unlink($filename);}  
 
   
 ?>
