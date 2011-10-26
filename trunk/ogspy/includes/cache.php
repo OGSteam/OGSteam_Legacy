@@ -53,6 +53,11 @@ function generate_config_cache()
  */
 function generate_all_cache()
 {
+        //'on supprime tous les fichier php du dossier cache'
+        $files = glob('cache/*.php');
+        foreach ($files as $filename){unlink($filename);}  
+        
+        // on les génére a nouveau
         generate_config_cache();
         
 }
