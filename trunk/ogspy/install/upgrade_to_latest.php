@@ -21,6 +21,15 @@ define("UPGRADE_IN_PROGRESS", true);
 
 require_once("../common.php");
 
+// on réinitialise la sequense config
+// evite d utiliser le cache ( qui sera périmé ))
+$request = "select * from " . TABLE_CONFIG;
+$result = mysql_query($request);
+ while (list($name, $value) = mysql_fetch_row($result)) {
+        $server_config[$name] = stripslashes($value);
+    }
+    
+
 $request = "SELECT config_value FROM ".TABLE_CONFIG." WHERE config_name = 'version'";
 $result = $db->sql_query($request);
 list($ogsversion) = $db->sql_fetch_row($result);
@@ -625,6 +634,11 @@ foreach ($requests as $request) {
 
 if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) )
   import_RE();
+  
+// on regenere les fichiers caches
+generate_all_cache()
+
+  
 ?>
 	<h3 align='center'><font color='yellow'>Mise à jour du serveur OGSpy vers la version <?php echo $ogsversion;?> effectuée avec succès</font></h3>
 	<center>
