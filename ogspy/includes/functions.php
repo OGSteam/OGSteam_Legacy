@@ -202,10 +202,12 @@ function init_serverconfig()
     }
     else
     {
-        generate_config_cache();
-       
+        generate_config_cache(); 
+        if (file_exists($filename)) { 
+        include $filename; // on reinjecte le fichier s'il existe'
+                }
+        
           }
-          
     
 }
 
