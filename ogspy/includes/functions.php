@@ -200,8 +200,9 @@ function init_serverconfig()
     else
     {
         generate_config_cache();
-        require 'cache/cache_config.php';
-               
+        /// file exist pour bug upgrade to latest
+        if (file_exists( 'cache/cache_config.php')){require_once 'cache/cache_config.php'; }
+                   
     }
 }
 

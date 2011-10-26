@@ -262,6 +262,15 @@ function log_ ($parameter, $option=0) {
 		}
 		$line = $member." récupère le classement ".$typerank." du ".$date;
 		break;
+        
+        /* ----------- cache ----------- */
+        case 'erreur_config_cache' :
+		$line = $member." Impossible d écrire sur le fichier donfig_cache. Vérifier les droits d acces au dossier  \'cache\' ";
+		break;
+
+	   case 'erreur_mod_cache' :
+		$line = $member." Impossible d écrire sur le fichier mod_cache. Vérifier les droits d acces au dossier  \'cache\' ";
+		break;
 
 		/* ----------------------------------------- */
 
