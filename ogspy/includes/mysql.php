@@ -119,9 +119,11 @@ class sql_db {
 * Fermeture de la BDD
 */
   function sql_close() {
-  // désactivé => singleton
-  // $result = @mysql_close($this->db_connect_id);
-   
+		unset($this->result);
+		$result = @mysql_close($this->db_connect_id); //deconnection
+		self::$_instance=false;
+
+
   }
 /**
 * Requête SQL
