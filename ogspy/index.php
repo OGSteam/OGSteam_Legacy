@@ -67,20 +67,21 @@ if (strstr($_SERVER['HTTP_USER_AGENT'], "OGSClient") === false) {
 		exit();
 	}
 	
-	if ($pub_action <> '') {
-        $query = "SELECT root, link, admin_only FROM ".TABLE_MOD." WHERE active = '1' AND action = '".mysql_real_escape_string($pub_action)."'";
-        $result = $db->sql_query($query);
-        if ($db->sql_numrows($result) && ratio_is_ok()) {
-            $val = $db->sql_fetch_assoc($result);
-			if ($val['admin_only'] == 1 && $user_data["user_admin"] == 0 && $user_data["user_coadmin"] == 0){
+       
+    
+    if ($pub_action <> '' && isset($cache_mod[$pub_action])) {
+        if (ratio_is_ok()){
+          if ($cache_mod[$pub_action]['admin_only'] == 1 && $user_data["user_admin"] == 0 && $user_data["user_coadmin"] == 0){
 				redirection("index.php?action=message&id_message=forbidden&info");
 			}
             else {
-				require_once("mod/".$val['root']."/".$val['link']);
+				require_once("mod/".$cache_mod[$pub_action]['root']."/".$cache_mod[$pub_action]['link']);
             	exit();
-			}
+			}  
+            
         }
-    }
+       }
+
 
 	switch ($pub_action) {
 		//----------------------------------------//

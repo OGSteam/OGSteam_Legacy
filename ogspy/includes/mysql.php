@@ -58,6 +58,7 @@ class sql_db {
     private static $_instance = false; //(singleton)
   var $db_connect_id;
   var $result;
+  var $nb_requete = 0;
     
 /**
 * recuperation de l instance en cours, ou création le cas echeant
@@ -153,7 +154,8 @@ class sql_db {
     }
 
     $sql_timing += benchmark() - $sql_start;
-
+    
+    $this->nb_requete += 1;
     return $this->result;
   }
 /**
@@ -169,6 +171,7 @@ class sql_db {
     else {
       return false;
     }
+    
   }
 /**
 * Récupération d'un tableau associatif d'une ligne d'enregistrement
@@ -238,5 +241,15 @@ class sql_db {
 
     return $result;
   }
+  
+ /**
+* renvoie le nombre de requete
+*/
+  function sql_nb_requete() {
+    
+    return $this->nb_requete;
+  }
+  
+  
 }
 ?>

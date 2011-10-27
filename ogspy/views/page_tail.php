@@ -12,6 +12,7 @@ if (!defined('IN_SPYOGAME')) {
 
 $php_end = benchmark();
 $php_timing = $php_end - $php_start - $sql_timing;
+$nb_requete = $db->nb_requete;
 $db->sql_close(); // fermeture de la connexion à la base de données 
 ?>
 	</td>
@@ -31,7 +32,7 @@ if (is_array($ogspy_phperror) && count($ogspy_phperror)) {
 		<center>
 			<font size="2">
 				<i><b><a href="http://board.ogsteam.fr" target="_blank">OGSpy</a></b> is an <b>OGSteam Software</b> &copy; 2011</i><br />v <?php echo $server_config["version"];?><br />
-				<i>Temps de génération <?php echo round($php_timing+$sql_timing, 3);?> sec (<b>PHP</b> : <?php echo round($php_timing, 3);?> / <b>SQL</b> : <?php echo round($sql_timing, 3);?>)<br /></i>
+				<i>Temps de génération <?php echo round($php_timing+$sql_timing, 3);?> sec (<b>PHP</b> : <?php echo round($php_timing, 3);?> / <b>SQL</b> : <?php echo round($sql_timing, 3);?>) [ <?php echo $nb_requete;?> requéte(s) ]<br /></i>
 			</font>
 		</center>
 	</td>

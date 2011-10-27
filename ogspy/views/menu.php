@@ -133,10 +133,10 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 <!-- Emplacement mod /-->
 <?php
 if (ratio_is_ok()) {
-$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '0' order by position, title";
-$result = $db->sql_query($request);
-if ($db->sql_numrows($result)) {
-	while ($val = $db->sql_fetch_assoc($result)) echo '<tr><td><div align="center"><a href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></div></td></tr>'."\n";
+foreach( $cache_mod as $val ){
+    if ($val['admin_only'] != '1'){
+    echo '<tr><td><div align="center"><a href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></div></td></tr>'."\n";
+     }
 }
 } else echo '<tr><td><div align="center"><font color="red">Mods<br />inaccessibles&nbsp;'.help("ratio_block").'</font></div></td></tr>'."\n";
 ?>
@@ -144,11 +144,10 @@ if ($db->sql_numrows($result)) {
 <!-- Emplacement mod  admin/-->
 <?php
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
-$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '1' order by position, title";
-$result = $db->sql_query($request);
-if ($db->sql_numrows($result)) {
-	echo '<tr><td><div align="center"><img src="'.$link_css.'/gfx/user-menu.jpg" width="110" height="19"></div></td></tr>'."\n";
-	while ($val = $db->sql_fetch_assoc($result)) echo '<tr><td><div align="center"><a href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></div></td></tr>'."\n";
+foreach( $cache_mod as $val ){
+    if ($val['admin_only'] == '1'){
+    echo '<tr><td><div align="center"><a href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></div></td></tr>'."\n";
+     }
 }
 }
 ?>
