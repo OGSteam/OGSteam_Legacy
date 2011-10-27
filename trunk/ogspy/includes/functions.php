@@ -182,8 +182,34 @@ function password_generator()
     return $password;
 }
 /**
+ * Initialisation du tableau de confifuration $cache_mod
+ */
+function init_mod_cache()
+{
+    global $cache_mod , $server_config;
+           
+    // Load cached config
+    $filename = 'cache/cache_mod.php';
+
+    if (file_exists($filename)) {
+        include $filename;
+        // regeneration si besoin
+        if ( (filemtime($filename) + $server_config['mod_cache'] ) < time() ) { generate_mod_cache(); }
+        
+    }
+    else
+    {
+        generate_mod_cache(); 
+        if (file_exists($filename)) { 
+        include $filename; // on reinjecte le fichier s'il existe'
+                }
+        
+          }
+
+}
+
+/**
  * Initialisation du tableau de confifuration $server_config
- * TODO : temps de validité du cache
  */
 function init_serverconfig()
 {
@@ -196,9 +222,7 @@ function init_serverconfig()
         include $filename;
         // regeneration si besoin
         if ( (filemtime($filename) + $server_config['config_cache'] ) < time() ) { generate_config_cache(); }
-        //debug :
-        //echo filemtime($filename)  ;  
-        //echo $filename ." a été modifié le : " . date ("F d Y H:i:s.", filemtime($filename));  
+        
     }
     else
     {

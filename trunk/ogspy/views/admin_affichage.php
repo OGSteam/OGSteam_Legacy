@@ -21,6 +21,7 @@ if ($user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 	redirection("index.php?action=message&id_message=forbidden&info");
 }
 
+/// pourquoi donc deux requetes identiques ????
 $mod_user = $db->sql_query("SELECT root, link, admin_only, title FROM ".TABLE_MOD." WHERE active = '1' ORDER BY position");
 $mod_admin = $db->sql_query("SELECT root, link, admin_only, title FROM ".TABLE_MOD." WHERE active = '1' ORDER BY position");
 

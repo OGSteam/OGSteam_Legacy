@@ -205,6 +205,7 @@ function mod_install () {
 		$result = $db->sql_query($request);
 		list($title) = $db->sql_fetch_row($result);
 		log_("mod_install", $title);
+        generate_mod_cache();
 	
 	redirection("index.php?action=administration&subaction=mod");
 }
@@ -277,7 +278,7 @@ function mod_update () {
 		list($title) = $db->sql_fetch_row($result);
 		log_("mod_update", $title);
 	}
-
+    generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -305,6 +306,7 @@ function mod_uninstall () {
 	$db->sql_query($request);
 
 	log_("mod_uninstall", $title);
+    generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -324,7 +326,7 @@ function mod_active () {
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_active", $title);
-
+generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -344,7 +346,7 @@ function mod_disable () {
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_disable", $title);
-
+    generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -365,7 +367,7 @@ function mod_admin () {
 	list($title) = $db->sql_fetch_row($result);
 
 	log_("mod_admin", $title);
-
+    generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -384,7 +386,7 @@ function mod_normal () {
 	list($title) = $db->sql_fetch_row($result);
 
 	log_("mod_normal", $title);
-
+    generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 
@@ -427,7 +429,7 @@ function mod_sort ($order) {
 	$result = $db->sql_query($request);
 	list($title) = $db->sql_fetch_row($result);
 	log_("mod_order", $title);
-	
+	generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
 /**

@@ -46,6 +46,47 @@ function generate_config_cache()
     }	
      
     }
+    
+    
+/**
+ * Genere le fichier mod
+ * 
+ */
+function generate_mod_cache()
+{
+	global $db , $table_prefix ,$server_config;
+    
+   $query = "SELECT action ,  menu ,  root, link, admin_only FROM ".TABLE_MOD." WHERE active = '1' order by position, title";
+   $result = $db->sql_query($query);
+   
+    while ($row = $db->sql_fetch_assoc($result)) {
+    $mod[$row['action']] = $row;
+    }
+  
+    $fh = @fopen('cache/cache_mod.php', 'wb');
+	if (!$fh) { 
+	           if (!defined('UPGRADE_IN_PROGRESS'))
+                    {
+                    	echo '<p>Impossible d écrire sur le fichier cache. Vérifier les droits d acces au dossier  \'cache\' </p>';  
+                        log_("erreur_mod_cache"); 
+                    }
+
+	               }
+	else
+    {
+     	fwrite($fh, '<?php'."\n\n".'define(\'OGSPY_MOD_LOADED\', 1);'."\n\n".'$cache_mod = '.var_export($mod, true).';'."\n\n".'?>');
+
+	fclose($fh);   
+        
+    }	
+     
+    }
+  
+  
+  
+   
+    
+    
 
 
 /**
@@ -59,6 +100,7 @@ function generate_all_cache()
         
         // on les génére a nouveau
         generate_config_cache();
+        generate_mod_cache;
         
 }
 
