@@ -55,7 +55,7 @@ function DieSQLError($query){
 * Classe d'accès MySQL
 */
 class sql_db {
-    private static $_instance = false; //(singleton)
+  private static $_instance = false; //(singleton)
   var $db_connect_id;
   var $result;
   var $nb_requete = 0;
@@ -246,8 +246,21 @@ class sql_db {
 * renvoie le nombre de requete
 */
   function sql_nb_requete() {
+        return $this->nb_requete;
+  }
+  
+ /**
+* Protège les caractères spéciaux SQL
+*/
+  function sql_escape_string($str) {
+    if(isset($str)) {
+     return  mysql_real_escape_string($str);
+    }
+    else {
+      return false;
+    }
     
-    return $this->nb_requete;
+    
   }
   
   

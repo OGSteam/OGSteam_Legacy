@@ -233,10 +233,10 @@ function galaxy_search() {
 			$select = "select count(*)";
 			$request = " from ".TABLE_UNIVERSE." left join ".TABLE_USER;
 			$request .= " on last_update_user_id = user_id";
-			$request .= " where player like '".mysql_real_escape_string($search)."'";
+			$request .= " where player like '". $db->sql_escape_string($search)."'";
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -254,10 +254,10 @@ function galaxy_search() {
 			$select = "select count(*)";
 			$request = " from ".TABLE_UNIVERSE." left join ".TABLE_USER;
 			$request .= " on last_update_user_id = user_id";
-			$request .= " where ally like '".mysql_real_escape_string($search)."'";
+			$request .= " where ally like '". $db->sql_escape_string($search)."'";
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -275,10 +275,10 @@ function galaxy_search() {
 			$select = "select count(*)";
 			$request = " from ".TABLE_UNIVERSE." left join ".TABLE_USER;
 			$request .= " on last_update_user_id = user_id";
-			$request .= " where name like '".mysql_real_escape_string($search)."'";
+			$request .= " where name like '". $db->sql_escape_string($search)."'";
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -345,7 +345,7 @@ function galaxy_search() {
 			}
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -381,7 +381,7 @@ function galaxy_search() {
 			}
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -420,7 +420,7 @@ function galaxy_search() {
 			}
 			if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
 				foreach ($ally_protection as $v) {
-					$request .= " and ally <> '".mysql_real_escape_string($v)."'";
+					$request .= " and ally <> '". $db->sql_escape_string($v)."'";
 				}
 			}
 
@@ -1122,12 +1122,12 @@ function galaxy_add_system ($galaxy, $system, $row, $moon, $name, $ally, $player
 		if (preg_match("#I#", $values)) $status .= "I";
 
 		//Mise à jour
-		$request = "update ".TABLE_UNIVERSE." set ally = '".mysql_real_escape_string($ally)."', player = '".mysql_real_escape_string($player)."', moon = '".$moon."', name = '".mysql_real_escape_string($name)."', status = '".$status."', last_update = '".$timestamp."', last_update_user_id = ".$user_data["user_id"];
+		$request = "update ".TABLE_UNIVERSE." set ally = '". $db->sql_escape_string($ally)."', player = '". $db->sql_escape_string($player)."', moon = '".$moon."', name = '". $db->sql_escape_string($name)."', status = '".$status."', last_update = '".$timestamp."', last_update_user_id = ".$user_data["user_id"];
 		$request .= " where galaxy = '".$galaxy."' and system = ".$system." and row = '".$row."'";
 		$db->sql_query($request) or $error = true;
 		if ($db->sql_affectedrows() == 0) {
 			$request = "insert ignore into ".TABLE_UNIVERSE." (galaxy, system, row, moon, name, ally, player, status, last_update, last_update_user_id)";
-			$request .= " values ('".$galaxy."', ".$system.", '".$row."', '".$moon."', '".mysql_real_escape_string($name)."', '".mysql_real_escape_string($ally)."', '".mysql_real_escape_string($player)."', '".$status."', ".$timestamp.", ".$user_data["user_id"].")";
+			$request .= " values ('".$galaxy."', ".$system.", '".$row."', '".$moon."', '". $db->sql_escape_string($name)."', '". $db->sql_escape_string($ally)."', '". $db->sql_escape_string($player)."', '".$status."', ".$timestamp.", ".$user_data["user_id"].")";
 			$db->sql_query($request) or $error = true;
 		}
 		if ($moon == 0) {
@@ -1138,7 +1138,7 @@ function galaxy_add_system ($galaxy, $system, $row, $moon, $name, $ally, $player
 		if ($error) return false;
 
 		if ($player != "") {
-			$request = "insert into ".TABLE_UNIVERSE_TEMPORARY." (player, ally, status, timestamp) values ('".mysql_real_escape_string($player)."', '".mysql_real_escape_string($ally)."', '".mysql_real_escape_string($status)."', '".$timestamp."')";
+			$request = "insert into ".TABLE_UNIVERSE_TEMPORARY." (player, ally, status, timestamp) values ('". $db->sql_escape_string($player)."', '". $db->sql_escape_string($ally)."', '". $db->sql_escape_string($status)."', '".$timestamp."')";
 			$db->sql_query($request);
 		}
 		else {
@@ -1439,7 +1439,7 @@ function galaxy_add_spy($galaxy, $system, $row, $planet, $timestamp, $report, $p
 
 	$spy_added = array();
 	$request = "insert into ".TABLE_SPY." (spy_galaxy, spy_system, spy_row, sender_id, datadate, rawdata)".
-	" values ('$galaxy', '$system', '$row', ".$user_data["user_id"].", '$timestamp', '".mysql_real_escape_string($report)."')";
+	" values ('$galaxy', '$system', '$row', ".$user_data["user_id"].", '$timestamp', '". $db->sql_escape_string($report)."')";
 	if ($db->sql_query($request, false)) {
 		$request = "select spy_id from ".TABLE_SPY;
 		$request .= " where active = '1'";
@@ -1470,13 +1470,13 @@ function galaxy_add_spy($galaxy, $system, $row, $planet, $timestamp, $report, $p
 
 		if ($timestamp > $last_update) {
 			$request = "update ".TABLE_UNIVERSE." set last_update = '".$timestamp."', last_update_user_id = ".$user_data["user_id"];
-			if (!$moon) $request .= ", name = '".mysql_real_escape_string($planet)."'";
+			if (!$moon) $request .= ", name = '". $db->sql_escape_string($planet)."'";
 			$request .= " where galaxy = '".$galaxy."' and system = ".$system." and row = '".$row."'";
 			$db->sql_query($request);
 
 			if ($db->sql_affectedrows() == 0) {
 				$request = "insert ignore into ".TABLE_UNIVERSE." (galaxy, system, row, name, last_update, last_update_user_id)";
-				$request .= " values ('".$galaxy."', ".$system.", '".$row."', '".mysql_real_escape_string($planet)."', ".$timestamp.", ".$user_data["user_id"].")";
+				$request .= " values ('".$galaxy."', ".$system.", '".$row."', '". $db->sql_escape_string($planet)."', ".$timestamp.", ".$user_data["user_id"].")";
 				$db->sql_query($request);
 			}
 		}
@@ -1713,7 +1713,7 @@ function galaxy_ImportRanking_player($ranktype){
 
 			$request = "insert ignore into ".$ranktable;
 			$request .= " (datadate, rank, player, ally, points, sender_id)";
-			$request .= " values ('".$timestamp."', '".$rank."', '".mysql_real_escape_string($playername)."', '".mysql_real_escape_string($allytag)."','".$points."', '".$user_data["user_id"]."')";
+			$request .= " values ('".$timestamp."', '".$rank."', '". $db->sql_escape_string($playername)."', '". $db->sql_escape_string($allytag)."','".$points."', '".$user_data["user_id"]."')";
 			$db->sql_query($request);
 		}
 
@@ -1830,7 +1830,7 @@ function galaxy_ImportRanking_ally($ranktype){
 
 			$request = "insert ignore into ".$ranktable;
 			$request .= " (datadate, rank, ally, number_member, points, points_per_member, sender_id)";
-			$request .= " values ('".$timestamp."', '".$rank."', '".mysql_real_escape_string($allytag)."','".$number_member."','".$points."','".$points_per_member."', '".$user_data["user_id"]."')";
+			$request .= " values ('".$timestamp."', '".$rank."', '". $db->sql_escape_string($allytag)."','".$number_member."','".$points."','".$points_per_member."', '".$user_data["user_id"]."')";
 			$db->sql_query($request);
 		}
 
@@ -2117,7 +2117,7 @@ function galaxy_show_ranking_player() {
 	$request .= " from ".$table[$i]["tablename"]." left join ".TABLE_USER;
 	$request .= " on sender_id = user_id";
 	$request .= " where rank between ".$limit_down." and ".$limit_up;
-	$request .= isset($last_ranking) ? " and datadate = ".mysql_real_escape_string($last_ranking) : "";
+	$request .= isset($last_ranking) ? " and datadate = ". $db->sql_escape_string($last_ranking) : "";
 	$request .= " order by rank";
 	$result = $db->sql_query($request);
 
@@ -2143,8 +2143,8 @@ function galaxy_show_ranking_player() {
 			$request = "select rank, player, ally, points, user_name";
 			$request .= " from ".$table[$i]["tablename"]." left join ".TABLE_USER;
 			$request .= " on sender_id = user_id";
-			$request .= " where player = '".mysql_real_escape_string(key($ranking))."'";
-			$request .= isset($last_ranking) ? " and datadate = ".mysql_real_escape_string($last_ranking) : "";
+			$request .= " where player = '". $db->sql_escape_string(key($ranking))."'";
+			$request .= isset($last_ranking) ? " and datadate = ". $db->sql_escape_string($last_ranking) : "";
 			$request .= " order by rank";
 			$result = $db->sql_query($request);
 
@@ -2245,7 +2245,7 @@ function galaxy_show_ranking_ally() {
 	$request .= " from ".$table[$i]["tablename"]." left join ".TABLE_USER;
 	$request .= " on sender_id = user_id";
 	$request .= " where rank between ".$limit_down." and ".$limit_up;
-	$request .= isset($last_ranking) ? " and datadate = ".mysql_real_escape_string($last_ranking) : "";
+	$request .= isset($last_ranking) ? " and datadate = ". $db->sql_escape_string($last_ranking) : "";
 	$request .= " order by ".$pub_order_by2;
 	$result = $db->sql_query($request);
 
@@ -2271,8 +2271,8 @@ function galaxy_show_ranking_ally() {
 			$request = "select rank, ally, number_member, points, points_per_member, user_name";
 			$request .= " from ".$table[$i]["tablename"]." left join ".TABLE_USER;
 			$request .= " on sender_id = user_id";
-			$request .= " where ally = '".mysql_real_escape_string(key($ranking))."'";
-			$request .= isset($last_ranking) ? " and datadate = ".mysql_real_escape_string($last_ranking) : "";
+			$request .= " where ally = '". $db->sql_escape_string(key($ranking))."'";
+			$request .= isset($last_ranking) ? " and datadate = ". $db->sql_escape_string($last_ranking) : "";
 			$request .= " order by rank";
 			$result = $db->sql_query($request);
 
@@ -2305,7 +2305,7 @@ function galaxy_show_ranking_unique_player($player, $last = false) {
 
 	$request = "select datadate, rank, points";
 	$request .= " from ".TABLE_RANK_PLAYER_POINTS;
-	$request .= " where player = '".mysql_real_escape_string($player)."'";
+	$request .= " where player = '". $db->sql_escape_string($player)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points) = $db->sql_fetch_row($result)) {
@@ -2315,7 +2315,7 @@ function galaxy_show_ranking_unique_player($player, $last = false) {
 
 	$request = "select datadate, rank, points";
 	$request .= " from ".TABLE_RANK_PLAYER_FLEET;
-	$request .= " where player = '".mysql_real_escape_string($player)."'";
+	$request .= " where player = '". $db->sql_escape_string($player)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points) = $db->sql_fetch_row($result)) {
@@ -2325,7 +2325,7 @@ function galaxy_show_ranking_unique_player($player, $last = false) {
 
 	$request = "select datadate, rank, points";
 	$request .= " from ".TABLE_RANK_PLAYER_RESEARCH;
-	$request .= " where player = '".mysql_real_escape_string($player)."'";
+	$request .= " where player = '". $db->sql_escape_string($player)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points) = $db->sql_fetch_row($result)) {
@@ -2346,7 +2346,7 @@ function galaxy_show_ranking_unique_ally($ally, $last = false) {
 
 	$request = "select datadate, rank, points, number_member, points_per_member";
 	$request .= " from ".TABLE_RANK_ALLY_POINTS;
-	$request .= " where ally = '".mysql_real_escape_string($ally)."'";
+	$request .= " where ally = '". $db->sql_escape_string($ally)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points, $number_member, $points_per_member) = $db->sql_fetch_row($result)) {
@@ -2357,7 +2357,7 @@ function galaxy_show_ranking_unique_ally($ally, $last = false) {
 
 	$request = "select datadate, rank, points, number_member, points_per_member";
 	$request .= " from ".TABLE_RANK_ALLY_FLEET;
-	$request .= " where ally = '".mysql_real_escape_string($ally)."'";
+	$request .= " where ally = '". $db->sql_escape_string($ally)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points, $number_member, $points_per_member) = $db->sql_fetch_row($result)) {
@@ -2368,7 +2368,7 @@ function galaxy_show_ranking_unique_ally($ally, $last = false) {
 
 	$request = "select datadate, rank, points, number_member, points_per_member";
 	$request .= " from ".TABLE_RANK_ALLY_RESEARCH;
-	$request .= " where ally = '".mysql_real_escape_string($ally)."'";
+	$request .= " where ally = '". $db->sql_escape_string($ally)."'";
 	$request .= " order by datadate desc";
 	$result = $db->sql_query($request);
 	while (list($datadate, $rank, $points, $number_member, $points_per_member) = $db->sql_fetch_row($result)) {
@@ -2491,12 +2491,12 @@ function galaxy_getranking($lines, $datatype) {
 		if (preg_match("#player#", $datatype)) {
 			$request = "insert ignore into ".$ranktable;
 			$request .= " (datadate, rank, player, ally, points, sender_id)";
-			$request .= " values (".$timestamp.", ".key($ranking).", '".mysql_real_escape_string($rankline["player"])."', '".mysql_real_escape_string($rankline["ally"])."',".$rankline["points"].", ".$user_data["user_id"].")";
+			$request .= " values (".$timestamp.", ".key($ranking).", '". $db->sql_escape_string($rankline["player"])."', '". $db->sql_escape_string($rankline["ally"])."',".$rankline["points"].", ".$user_data["user_id"].")";
 		}
 		else{
 			$request = "insert ignore into ".$ranktable;
 			$request .= " (datadate, rank, ally, number_member, points, points_per_member, sender_id)";
-			$request .= " values (".$timestamp.", ".key($ranking).", '".mysql_real_escape_string($rankline["ally"])."', ".$rankline["number_member"].", ".$rankline["points"].", ".$rankline["points_per_member"].", ".$user_data["user_id"].")";
+			$request .= " values (".$timestamp.", ".key($ranking).", '". $db->sql_escape_string($rankline["ally"])."', ".$rankline["number_member"].", ".$rankline["points"].", ".$rankline["points_per_member"].", ".$user_data["user_id"].")";
 		}
 		$db->sql_query($request);
 
@@ -3512,7 +3512,7 @@ function insert_RE ( $rawRE, $sender_id = -1 )
 					if ( $parsedRE['dateRE'] > $last_update )
 					{
 						$request = 'UPDATE ' . TABLE_UNIVERSE . ' SET last_update = ' . $parsedRE['dateRE'] . ', last_update_user_id = ' . 
-							$user_data['user_id'] . ', name = "' . mysql_real_escape_string ( $parsedRE['planet_name'] ) . '" WHERE galaxy = ' . 
+							$user_data['user_id'] . ', name = "' . $db->sql_escape_string ( $parsedRE['planet_name'] ) . '" WHERE galaxy = ' . 
 							$galaxy . ' AND system = ' . $system . ' AND row = ' . $row;
 						$db->sql_query ( $request );
 					}

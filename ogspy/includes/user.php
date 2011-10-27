@@ -78,7 +78,7 @@ function user_login()
         redirection("index.php?action=message&id_message=errorfatal&info");
     } else {
         $request = "select user_id, user_active from " . TABLE_USER .
-            " where user_name = '" . mysql_real_escape_string($pub_login) .
+            " where user_name = '" .  $db->sql_escape_string($pub_login) .
             "' and user_password = '" . md5(sha1($pub_password)) . "'";
         $result = $db->sql_query($request);
         if (list($user_id, $user_active) = $db->sql_fetch_row($result)) {
@@ -135,7 +135,7 @@ function user_ogs_login()
 
     if (isset($pub_name, $pub_pass)) {
         $request = "select user_id, user_active from " . TABLE_USER .
-            " where user_name = '" . mysql_real_escape_string($pub_name) .
+            " where user_name = '" .  $db->sql_escape_string($pub_name) .
             "' and user_password = '" . md5(sha1($pub_pass)) . "'";
         $result = $db->sql_query($request);
         if (list($user_id, $user_active) = $db->sql_fetch_row($result)) {
@@ -438,7 +438,7 @@ function member_user_set()
 
     //Contrôle que le pseudo ne soit pas déjà utilisé
     $request = "select * from " . TABLE_USER . " where user_name = '" .
-        mysql_real_escape_string($pub_pseudo) . "' and user_id <> " . $user_id;
+         $db->sql_escape_string($pub_pseudo) . "' and user_id <> " . $user_id;
     $result = $db->sql_query($request);
     if ($db->sql_numrows($result) != 0) {
         redirection("index.php?action=message&id_message=member_modifyuser_failed_pseudolocked&info");
@@ -479,7 +479,7 @@ function user_set_general($user_id, $user_name = null, $user_password = null, $u
 
     //Pseudo et mot de passe
     if (!empty($user_name))
-        $update .= "user_name = '" . mysql_real_escape_string($user_name) . "'";
+        $update .= "user_name = '" .  $db->sql_escape_string($user_name) . "'";
     if (!empty($user_password))
         $update .= ((strlen($update) > 0) ? ", " : "") . "user_password = '" . md5(sha1
             ($user_password)) . "'";
@@ -502,7 +502,7 @@ function user_set_general($user_id, $user_name = null, $user_password = null, $u
         if (strlen($user_skin) > 0 && substr($user_skin, strlen($user_skin) - 1) != "/")
             $user_skin .= "/";
         $update .= ((strlen($update) > 0) ? ", " : "") . "user_skin = '" .
-            mysql_real_escape_string($user_skin) . "'";
+             $db->sql_escape_string($user_skin) . "'";
     }
 
     //Désactivation de la vérification de l'adresse ip
@@ -762,13 +762,13 @@ function user_create()
     } else {
         $password = password_generator();
     }
-    //$request = "select user_id from ".TABLE_USER." where user_name = '".mysql_real_escape_string($pub_pseudo)."'";
+    //$request = "select user_id from ".TABLE_USER." where user_name = '". $db->sql_escape_string($pub_pseudo)."'";
     $request = "select user_id from " . TABLE_USER . " where user_name = '" . $pub_pseudo .
         "'";
     $result = $db->sql_query($request);
     if ($db->sql_numrows($result) == 0) {
         //$request = "insert into ".TABLE_USER." (user_name, user_password, user_regdate, user_active)".
-        //" values ('".mysql_real_escape_string($pub_pseudo)."', '".md5(sha1($password))."', ".time().", '1')";
+        //" values ('". $db->sql_escape_string($pub_pseudo)."', '".md5(sha1($password))."', ".time().", '1')";
         $request = "insert into " . TABLE_USER .
             " (user_name, user_password, user_regdate, user_active)" . " values ('" . $pub_pseudo .
             "', '" . md5(sha1($password)) . "', " . time() . ", '1')";
@@ -1362,7 +1362,7 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
         $request = "insert into " . TABLE_USER_BUILDING .
             " (user_id, planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
         $request .= " values (" . $user_data["user_id"] . ", " . $planet_id . ", '" .
-            mysql_real_escape_string($planet_name) . "', '" . $coordinates_ok . "', " . $fields .
+             $db->sql_escape_string($planet_name) . "', '" . $coordinates_ok . "', " . $fields .
             ", " . $temperature_min . ", " . $satellite . ", " . $buildings["M"] . ", " . $buildings["C"] .
             "," . $buildings["D"] . ", " . $buildings["CES"] . ", " . $buildings["CEF"] .
             ", " . $buildings["UdR"] . ", " . $buildings["UdN"] . ", " . $buildings["CSp"] .
@@ -1375,7 +1375,7 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
         $request = "insert into " . TABLE_USER_BUILDING .
             " (user_id, planet_id, planet_name, coordinates, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSP, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa)";
         $request .= " values (" . $user_data["user_id"] . ", " . $planet_id . ", '" .
-            mysql_real_escape_string($planet_name) . "', '" . $coordinates_ok . "', " . $fields .
+             $db->sql_escape_string($planet_name) . "', '" . $coordinates_ok . "', " . $fields .
             ", " . $temperature_max . ", " . $satellite . ", " . $buildings["M"] . ", " . $buildings["C"] .
             "," . $buildings["D"] . ", " . $buildings["CES"] . ", " . $buildings["CEF"] .
             ", " . $buildings["UdR"] . ", " . $buildings["UdN"] . ", " . $buildings["CSp"] .
@@ -1386,7 +1386,7 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
         $db->sql_query($request);
     } else {
         $request = "update " . TABLE_USER_BUILDING . " set planet_name = '" .
-            mysql_real_escape_string($planet_name) . "', coordinates = '" . $coordinates_ok .
+             $db->sql_escape_string($planet_name) . "', coordinates = '" . $coordinates_ok .
             "', `fields` = " . $fields . ", temperature_min = " . $temperature_min .
             ", temperature_max = " . $temperature_max . ", Sat = " . $satellite .
             " where user_id = " . $user_data["user_id"] . " and planet_id = " . $planet_id;
@@ -1537,7 +1537,7 @@ function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates
         $db->sql_query($request);
     } else {
         $request = "update " . TABLE_USER_BUILDING . " set planet_name = '" .
-            mysql_real_escape_string($planet_name) . "', coordinates = '" . $coordinates_ok .
+             $db->sql_escape_string($planet_name) . "', coordinates = '" . $coordinates_ok .
             "', `fields` = " . $fields . ", temperature_min = " . $temperature_min .
             ", temperature_max = " . $temperature_max . ", Sat = " . $satellite .
             " where user_id = " . $user_data["user_id"] . " and planet_id = " . $planet_id;
@@ -2016,12 +2016,12 @@ function usergroup_create()
     }
 
     $request = "select group_id from " . TABLE_GROUP . " where group_name = '" .
-        mysql_real_escape_string($pub_groupname) . "'";
+         $db->sql_escape_string($pub_groupname) . "'";
     $result = $db->sql_query($request);
 
     if ($db->sql_numrows($result) == 0) {
         $request = "insert into " . TABLE_GROUP . " (group_name)" . " values ('" .
-            mysql_real_escape_string($pub_groupname) . "')";
+             $db->sql_escape_string($pub_groupname) . "')";
         $db->sql_query($request);
         $group_id = $db->sql_insertid();
 
@@ -2164,7 +2164,7 @@ function usergroup_setauth()
     log_("modify_usergroup", $pub_group_id);
 
     $request = "update " . TABLE_GROUP;
-    $request .= " set group_name = '" . mysql_real_escape_string($pub_group_name) .
+    $request .= " set group_name = '" .  $db->sql_escape_string($pub_group_name) .
         "',";
     $request .= " server_set_system = '" . intval($pub_server_set_system) .
         "', server_set_spy = '" . intval($pub_server_set_spy) . "', server_set_rc = '" .

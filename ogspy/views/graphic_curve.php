@@ -63,7 +63,7 @@ $dates2 = array();
 
 $request = "select player, datadate, ".$graph[1];
 $request .= " from ".$table;
-$request .= " where (player = '".mysql_escape_string($player)."' or player = '".mysql_escape_string($player_comp)."')";
+$request .= " where (player = '".$db->sql_escape_string($player)."' or player = '".$db->sql_escape_string($player_comp)."')";
 $request .= " and datadate between ".$start." and ".$end;
 $request .= " order by datadate asc";
 $result = $db->sql_query($request, false, false);

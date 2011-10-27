@@ -14,6 +14,13 @@
 define("IN_SPYOGAME", true);
 
 //define("MODE_DEBUG", true);
+
+ $mtime = microtime();
+    $mtime = explode(" ", $mtime);
+    $mtime = $mtime[1] + $mtime[0];
+
+   $php_start=   $mtime;
+
 /**
  * Tout les includes se font à partir de là
  */
@@ -25,7 +32,7 @@ require_once("common.php");
  * Repère de début de traitement par OGSpy
  * @name $php_start
  */
-$php_start = benchmark();
+//$php_start = benchmark();
 $sql_timing = 0;
 
 /**
