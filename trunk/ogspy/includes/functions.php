@@ -333,9 +333,7 @@ function set_server_view()
     $db->sql_query($request);
 
     //
-    $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_nb_colonnes_ally) .
-        "' where config_name = 'nb_colonnes_ally'";
+    $request = "update " . TABLE_CONFIG . " set config_value = '" .$db->sql_escape_string($pub_nb_colonnes_ally) ."' where config_name = 'nb_colonnes_ally'";
     $db->sql_query($request);
 
 
@@ -343,7 +341,7 @@ function set_server_view()
     $color_ally = implode("_", $array);
     //
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($color_ally) . "' where config_name = 'color_ally'";
+         $db->sql_escape_string($color_ally) . "' where config_name = 'color_ally'";
     $db->sql_query($request);
 
     //
@@ -371,13 +369,13 @@ function set_server_view()
 
     //
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_register_alliance) .
+         $db->sql_escape_string($pub_register_alliance) .
         "' where config_name = 'register_alliance'";
     $db->sql_query($request);
 
     //
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_register_forum) .
+         $db->sql_escape_string($pub_register_forum) .
         "' where config_name = 'register_forum'";
     $db->sql_query($request);
     
@@ -568,13 +566,13 @@ function set_serverconfig()
     if (substr($pub_default_skin, strlen($pub_default_skin) - 1) != "/")
         $pub_default_skin .= "/";
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_default_skin) .
+         $db->sql_escape_string($pub_default_skin) .
         "' where config_name = 'default_skin'";
     $db->sql_query($request);
 
     //
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_reason) . "' where config_name = 'reason'";
+         $db->sql_escape_string($pub_reason) . "' where config_name = 'reason'";
     $db->sql_query($request);
 
     //
@@ -582,7 +580,7 @@ function set_serverconfig()
         $pub_ally_protection = substr($pub_ally_protection, 0, strlen($pub_ally_protection) -
             1);
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_ally_protection) .
+         $db->sql_escape_string($pub_ally_protection) .
         "' where config_name = 'ally_protection'";
     $db->sql_query($request);
 
@@ -590,7 +588,7 @@ function set_serverconfig()
     if ($pub_url_forum != "" && !preg_match("#^http://#", $pub_url_forum))
         $pub_url_forum = "http://" . $pub_url_forum;
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_url_forum) . "' where config_name = 'url_forum'";
+         $db->sql_escape_string($pub_url_forum) . "' where config_name = 'url_forum'";
     $db->sql_query($request);
 
     //
@@ -607,7 +605,7 @@ function set_serverconfig()
     if ($pub_keeprank_criterion != "quantity" && $pub_keeprank_criterion != "day")
         $pub_keeprank_criterion = "quantity";
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_keeprank_criterion) .
+         $db->sql_escape_string($pub_keeprank_criterion) .
         "' where config_name = 'keeprank_criterion'";
     $db->sql_query($request);
 
@@ -623,14 +621,14 @@ function set_serverconfig()
 
     //
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_servername) . "' where config_name = 'servername'";
+         $db->sql_escape_string($pub_servername) . "' where config_name = 'servername'";
     $db->sql_query($request);
 
     //
     if (substr($pub_allied, strlen($pub_allied) - 1) == ",")
         $pub_allied = substr($pub_allied, 0, strlen($pub_allied) - 1);
     $request = "update " . TABLE_CONFIG . " set config_value = '" .
-        mysql_real_escape_string($pub_allied) . "' where config_name = 'allied'";
+         $db->sql_escape_string($pub_allied) . "' where config_name = 'allied'";
     $db->sql_query($request);
 
     //
@@ -1270,7 +1268,7 @@ function install_mod($mod_folder)
     $check = "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] .
         "'";
     $query_check = $db->sql_query($check);
-    $result_check = mysql_num_rows($query_check);
+    $result_check = $db->sql_numrows($query_check);
 
     if ($result_check != 0) {
     } else

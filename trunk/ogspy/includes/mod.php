@@ -170,7 +170,7 @@ function mod_install () {
     $check = "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] .
         "'";
     $query_check = $db->sql_query($check);
-    $result_check = mysql_num_rows($query_check);
+    $result_check = $db->sql_numrows($query_check);
 
     if ($result_check != 0) { 
    

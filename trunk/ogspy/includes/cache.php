@@ -22,7 +22,7 @@ function generate_config_cache()
 	global $db , $table_prefix ,$server_config;
     
     $request = "select * from " . TABLE_CONFIG;
-    $result = mysql_query($request);
+    $result = $db->sql_query($request);
     
     // Output config as PHP code
     while ($cur_config_item = $db->sql_fetch_row($result))
