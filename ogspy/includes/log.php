@@ -272,6 +272,12 @@ function log_ ($parameter, $option=0) {
 		$line = $member." Impossible d écrire sur le fichier mod_cache. Vérifier les droits d acces au dossier  \'cache\' ";
 		break;
 
+		  /* ----------- cache ----------- */
+       
+	   case 'key' :
+		$line = $member." Impossible de retrouver le fichier key.php. Vérifier les droits d acces au dossier  \'parameters\' ";
+		break;
+
 		/* ----------------------------------------- */
 
 		case 'check_var' :

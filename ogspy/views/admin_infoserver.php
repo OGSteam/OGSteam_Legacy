@@ -8,25 +8,24 @@
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
+    die("Hacking attempt");
 }
 
 if ($user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
-	redirection("index.php?action=message&id_message=forbidden&info");
+    redirection("index.php?action=message&id_message=forbidden&info");
 }
 
 //Statistiques concernant la base de données
 $db_size_info = db_size_info();
 if ($db_size_info["Server"] == $db_size_info["Total"]) {
-	$db_size_info = $db_size_info["Server"];
-}
-else {
-	$db_size_info = $db_size_info["Server"]." sur ".$db_size_info["Total"];
+    $db_size_info = $db_size_info["Server"];
+} else {
+    $db_size_info = $db_size_info["Server"] . " sur " . $db_size_info["Total"];
 }
 
 //Statistiques concernant les fichiers journal
 $log_size_info = log_size_info();
-$log_size_info = $log_size_info["size"]." ".$log_size_info["type"];
+$log_size_info = $log_size_info["size"] . " " . $log_size_info["type"];
 
 //Statistisques concernant l'univers
 $galaxy_statistic = galaxy_statistic();
@@ -46,146 +45,200 @@ $spyexport_ogs = 0;
 $rankimport_ogs = 0;
 $rankexport_ogs = 0;
 $rankimport_server = 0;
+$key = 'unknow';
+$paths = 'unknow';
+$since = 0;
 
-$request = "select statistic_name, statistic_value from ".TABLE_STATISTIC;
+if (defined("OGSPY_KEY")) {
+    if (check_var($serveur_key, 'Text')) {
+        $key = $serveur_key;
+    }
+
+$paths = str_replace("views", "index.php", __dir__);
+    if (check_var($serveur_date, 'Num')) {
+        $since = $serveur_date;
+    }
+
+}
+else {
+echo 'Fichier key.php introuvable !!! ', 
+log_("key"); 
+}
+
+
+$request = "select statistic_name, statistic_value from " . TABLE_STATISTIC;
 $result = $db->sql_query($request);
 while (list($statistic_name, $statistic_value) = $db->sql_fetch_row($result)) {
-	switch ($statistic_name) {
-		case "connection_server":	$connection_server = $statistic_value;		break;
-		case "connection_ogs":		$connection_ogs = $statistic_value;			break;
+    switch ($statistic_name) {
+        case "connection_server":
+            $connection_server = $statistic_value;
+            break;
+        case "connection_ogs":
+            $connection_ogs = $statistic_value;
+            break;
 
-		case "planetimport_server":	$planetimport_server = $statistic_value;	break;
-		case "spyimport_server":	$spyimport_server = $statistic_value;		break;
+        case "planetimport_server":
+            $planetimport_server = $statistic_value;
+            break;
+        case "spyimport_server":
+            $spyimport_server = $statistic_value;
+            break;
 
-		case "planetimport_ogs":	$planetimport_ogs = $statistic_value;		break;
-		case "planetexport_ogs":	$planetexport_ogs = $statistic_value;		break;
+        case "planetimport_ogs":
+            $planetimport_ogs = $statistic_value;
+            break;
+        case "planetexport_ogs":
+            $planetexport_ogs = $statistic_value;
+            break;
 
-		case "spyimport_ogs":		$spyimport_ogs = $statistic_value;			break;
-		case "spyexport_ogs":		$spyexport_ogs = $statistic_value;			break;
+        case "spyimport_ogs":
+            $spyimport_ogs = $statistic_value;
+            break;
+        case "spyexport_ogs":
+            $spyexport_ogs = $statistic_value;
+            break;
 
-		case "rankimport_ogs":		$rankimport_ogs = $statistic_value;			break;
-		case "rankexport_ogs":		$rankexport_ogs = $statistic_value;			break;
-		case "rankimport_server":	$rankimport_server = $statistic_value;		break;
-	}
+        case "rankimport_ogs":
+            $rankimport_ogs = $statistic_value;
+            break;
+        case "rankexport_ogs":
+            $rankexport_ogs = $statistic_value;
+            break;
+        case "rankimport_server":
+            $rankimport_server = $statistic_value;
+            break;
+    }
 }
 
 //on compte le nombre de personnes en ligne
-$connectes_req = $db->sql_query("SELECT COUNT(session_ip) FROM ".TABLE_SESSIONS);
-list ($connectes) = $db->sql_fetch_row ($connectes_req);
+$connectes_req = $db->sql_query("SELECT COUNT(session_ip) FROM " .
+    TABLE_SESSIONS);
+list($connectes) = $db->sql_fetch_row($connectes_req);
 
 //Personne en ligne
 $online = session_whois_online();
 
 
 //Vérification version installée et envoi de statistiques
-preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*)?#", $server_config["version"], $current_version);
-@list($current_version, $head_revision, $minor_revision, $extension_revision) = $current_version;
+preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*)?#", $server_config["version"],
+    $current_version);
+@list($current_version, $head_revision, $minor_revision, $extension_revision) =
+    $current_version;
 
 $errno = 0;
 $errstr = $version_info = '';
 
-	//proxy patch by Cerber 
-//based on http://us2.php.net/manual/en/function.fsockopen.php#58196 
-//vrai si on doit passer par un proxy, faux sinon 
-$proxy_use  = FALSE; 
-//Nom du serveur de proxy 
-$proxy_name = 'proxy'; 
-//port utilisé par le serveur proxy 
-$proxy_port = 3128; 
-//utilisateur du proxy 
-$proxy_user = ''; 
-//mot de passe de l'utilisateur 
-$proxy_pass = ''; 
+//proxy patch by Cerber
+//based on http://us2.php.net/manual/en/function.fsockopen.php#58196
+//vrai si on doit passer par un proxy, faux sinon
+$proxy_use = false;
+//Nom du serveur de proxy
+$proxy_name = 'proxy';
+//port utilisé par le serveur proxy
+$proxy_port = 3128;
+//utilisateur du proxy
+$proxy_user = '';
+//mot de passe de l'utilisateur
+$proxy_pass = '';
 
-//Adresse du serveur a contacter 
+//Adresse du serveur a contacter
 $url_server = "update.ogsteam.fr";
-//port du serveur spécifié en hard dans le code 
+//port du serveur spécifié en hard dans le code
 
-$fsock = FALSE; 
-if($proxy_use){ 
-	//on utlise le proxy 
-	$fsock = @fsockopen($proxy_name, $proxy_port, $errno, $errstr, 3); 
-}else{ 
-	//pas de proxy 
-	$fsock = @fsockopen($url_server, 80, $errno, $errstr, 3); 
-} 
-
-if ($fsock) { 
-	//paramètres de la requete
-	$link = "/ogspy/latest.php";
-	$link .= "?version=".$server_config["version"];
-
-	$link .= "&connection_server=".$connection_server;
-	$link .= "&connection_ogs=".$connection_ogs;
-
-	$link .= "&planetimport_server=".$planetimport_server;
-	$link .= "&spyimport_server=".$spyimport_server;
-
-	$link .= "&planetimport_ogs=".$planetimport_ogs;
-	$link .= "&planetexport_ogs=".$planetexport_ogs;
-
-	$link .= "&spyimport_ogs=".$spyimport_ogs;
-	$link .= "&spyexport_ogs=".$spyexport_ogs;
-
-	$link .= "&rankimport_ogs=".$rankimport_ogs;
-	$link .= "&rankexport_ogs=".$rankexport_ogs;
-	$link .= "&rankimport_server=".$rankimport_server;
-  
-	if($proxy_use){ 
-		//si on passe par le proxy ==> requête sauce proxy 
-
-		//création de l'url réellement recherchée 
-		$request_url = "http://$url_server:80$link"; 
-		//appel de l'url via le proxy 
-		@fputs($fsock, "GET $request_url HTTP/1.0\r\nHost: $proxy_name\r\n"); 
-		if(isset($proxy_user) && $proxy_user!=''){ 
-		//ajout du login + pass si dispo 
-		@fputs($fsock, "Proxy-Authorization: Basic ". base64_encode ("$proxy_user:$proxy_pass")."\r\n"); 
-		} 
-		//demande de cloture de connexion 
-		@fputs($fsock, "Connection: close\r\n\r\n"); 
-	}else{ 
-		//pas de proxy ==> code standard 
-		@fputs($fsock, "GET ".$link." HTTP/1.1\r\n"); 
-		@fputs($fsock, "HOST: ".$url_server."\r\n"); 
-		@fputs($fsock, "Connection: close\r\n\r\n"); 
-	} 
-
-	$get_info = false;
-	while (!@feof($fsock)) {
-		if ($get_info) {
-			$version_info .= @fread($fsock, 1024);
-		}
-		else {
-			if (@fgets($fsock, 1024) == "\r\n") {
-				$get_info = true;
-			}
-		}
-	}
-	@fclose($fsock);
-	if (preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*){0,1}#", $version_info, $version_info)) {
-
-		@list($latest_version, $latest_head_revision, $latest_minor_revision, $latest_extension_revision) = $version_info;
-		$version_info = $latest_version;
-
-		if ( version_compare ( $latest_head_revision.'.'.$latest_minor_revision.'.'.$latest_extension_revision, $head_revision.'.'.$minor_revision.'.'.$extension_revision , '<=') ) {
-			$version_info = "<font color='lime'><b>Votre serveur OGSpy est à jour.</b></font>";
-			/*$version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;*/
-		}
-		else {
-			$version_info = "<blink><b><font color='red'>Votre serveur OGSpy n'est pas à jour.</font></blink>";
-			$version_info .= "<br />Rendez vous sur le  <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>".$latest_version."</b>";
-		}
-	}
-	else {
-		$version_info = "<blink><b><font color='orange'>Une incohérence a été rencontrée avec le serveur de contrôle de version.</font></blink>";
-		$version_info .= "<br />Consulter le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour en connaître la raison.</b>";
-	}
+$fsock = false;
+if ($proxy_use) {
+    //on utlise le proxy
+    $fsock = @fsockopen($proxy_name, $proxy_port, $errno, $errstr, 3);
+} else {
+    //pas de proxy
+    $fsock = @fsockopen($url_server, 80, $errno, $errstr, 3);
 }
-else {
-	$version_info = "<blink><b><font color='orange'>Impossible de récupérer le numéro de la dernière version car le lien n'a pas pu être établie avec le serveur de contrôle.</font></blink>";
-	$version_info .= "<br />Il se peut que ce soit votre hébergeur qui n'autorise pas cette action.";
-	$version_info .= "<br />Il vous faudra consulter régulièrement le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour prendre connaissance des nouvelles versions.</b>";
+
+if ($fsock) {
+    //paramètres de la requete
+    $link = "/ogspy/latest.php";
+    $link .= "?version=" . $server_config["version"];
+
+    $link .= "&connection_server=" . $connection_server;
+    $link .= "&connection_ogs=" . $connection_ogs;
+
+    $link .= "&planetimport_server=" . $planetimport_server;
+    $link .= "&spyimport_server=" . $spyimport_server;
+
+    $link .= "&planetimport_ogs=" . $planetimport_ogs;
+    $link .= "&planetexport_ogs=" . $planetexport_ogs;
+
+    $link .= "&spyimport_ogs=" . $spyimport_ogs;
+    $link .= "&spyexport_ogs=" . $spyexport_ogs;
+
+    $link .= "&rankimport_ogs=" . $rankimport_ogs;
+    $link .= "&rankexport_ogs=" . $rankexport_ogs;
+    $link .= "&rankimport_server=" . $rankimport_server;
+
+    // clef unique
+    $link .= "&serveur_paths=" . $paths;
+    $link .= "&serveur_since=" . $since;
+    $link .= "&serveur_key=" . $key;
+    
+    
+   
+
+    if ($proxy_use) {
+        //si on passe par le proxy ==> requête sauce proxy
+
+        //création de l'url réellement recherchée
+        $request_url = "http://$url_server:80$link";
+        //appel de l'url via le proxy
+        @fputs($fsock, "GET $request_url HTTP/1.0\r\nHost: $proxy_name\r\n");
+        if (isset($proxy_user) && $proxy_user != '') {
+            //ajout du login + pass si dispo
+            @fputs($fsock, "Proxy-Authorization: Basic " . base64_encode("$proxy_user:$proxy_pass") .
+                "\r\n");
+        }
+        //demande de cloture de connexion
+        @fputs($fsock, "Connection: close\r\n\r\n");
+    } else {
+        //pas de proxy ==> code standard
+        @fputs($fsock, "GET " . $link . " HTTP/1.1\r\n");
+        @fputs($fsock, "HOST: " . $url_server . "\r\n");
+        @fputs($fsock, "Connection: close\r\n\r\n");
+    }
+
+    $get_info = false;
+    while (!@feof($fsock)) {
+        if ($get_info) {
+            $version_info .= @fread($fsock, 1024);
+        } else {
+            if (@fgets($fsock, 1024) == "\r\n") {
+                $get_info = true;
+            }
+        }
+    }
+    @fclose($fsock);
+    if (preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*){0,1}#", $version_info, $version_info)) {
+
+        @list($latest_version, $latest_head_revision, $latest_minor_revision, $latest_extension_revision) =
+            $version_info;
+        $version_info = $latest_version;
+
+        if (version_compare($latest_head_revision . '.' . $latest_minor_revision . '.' .
+            $latest_extension_revision, $head_revision . '.' . $minor_revision . '.' . $extension_revision,
+            '<=')) {
+            $version_info = "<font color='lime'><b>Votre serveur OGSpy est à jour.</b></font>";
+            /*$version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;*/
+        } else {
+            $version_info = "<blink><b><font color='red'>Votre serveur OGSpy n'est pas à jour.</font></blink>";
+            $version_info .= "<br />Rendez vous sur le  <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>" .
+                $latest_version . "</b>";
+        }
+    } else {
+        $version_info = "<blink><b><font color='orange'>Une incohérence a été rencontrée avec le serveur de contrôle de version.</font></blink>";
+        $version_info .= "<br />Consulter le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour en connaître la raison.</b>";
+    }
+} else {
+    $version_info = "<blink><b><font color='orange'>Impossible de récupérer le numéro de la dernière version car le lien n'a pas pu être établie avec le serveur de contrôle.</font></blink>";
+    $version_info .= "<br />Il se peut que ce soit votre hébergeur qui n'autorise pas cette action.";
+    $version_info .= "<br />Il vous faudra consulter régulièrement le <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour prendre connaissance des nouvelles versions.</b>";
 }
 ?>
 
@@ -195,39 +248,47 @@ else {
 	<td class="c" width="25%">Statistiques</td><td class="c" width="25%">Valeur</td>
 </tr>
 <tr>
-	<th><a>Nombre de membres</a></th><th><?php echo $users_info;?></th>
-	<th><a>Nombre de planètes répertoriées libres</a></th><th><?php echo formate_number($galaxy_statistic["nb_planets_free"]);?></th>
+	<th><a>Nombre de membres</a></th><th><?php echo $users_info; ?></th>
+	<th><a>Nombre de planètes répertoriées libres</a></th><th><?php echo
+formate_number($galaxy_statistic["nb_planets_free"]); ?></th>
 </tr>
 <tr>
-	<th><a>Nombre de planètes répertoriées</a></th><th><?php echo formate_number($galaxy_statistic["nb_planets"]);?></th>
-	<th rowspan="2"><a>Espace occupé par la base de données</a></th><th><?php echo $db_size_info;?></th>
+	<th><a>Nombre de planètes répertoriées</a></th><th><?php echo formate_number($galaxy_statistic["nb_planets"]); ?></th>
+	<th rowspan="2"><a>Espace occupé par la base de données</a></th><th><?php echo
+$db_size_info; ?></th>
 </tr>
 <tr>
-	<th><a>Espace occupé par les logs</a></th><th><?php echo $log_size_info;?></th>
+	<th><a>Espace occupé par les logs</a></th><th><?php echo $log_size_info; ?></th>
 	<th><a href="index.php?action=db_optimize"><i>Optimiser la base de données</i></a></th>
 </tr>
 <tr>
-	<th><a>Nombre de session ouvertes</a></th><th><?php echo $connectes; ?><a href="index.php?action=drop_sessions"> (vider <?php echo help("drop_sessions"); ?>)</th>
+	<th><a>Nombre de session ouvertes</a></th><th><?php echo $connectes; ?><a href="index.php?action=drop_sessions"> (vider <?php echo
+help("drop_sessions"); ?>)</th>
 	<th colspan='2'><form action="index.php" method="get"><input type="hidden" name="action" value="import_RE"><input type="submit" value="Mettre &agrave; jour les rapports d'espionnage"></form></th>
 </tr>
 <tr>
 	<th colspan='4'>&nbsp;</th>
 </tr>
 <tr>
-	<th><a>Connexions [Serveur]</a></th><th><?php echo formate_number($connection_server);?></th>
-	<th><a>Connexions [OGS]</a></th><th><?php echo formate_number($connection_ogs);?></th>
+	<th><a>Connexions [Serveur]</a></th><th><?php echo formate_number($connection_server); ?></th>
+	<th><a>Connexions [OGS]</a></th><th><?php echo formate_number($connection_ogs); ?></th>
 </tr>
 <tr>
-	<th><a>Planètes [Serveur]</a></th><th><?php echo formate_number($planetimport_server);?> importations</th>
-	<th><a>Planètes [OGS]</a></th><th><?php echo formate_number($planetimport_ogs);?> importations - <?php echo formate_number($planetexport_ogs);?> exportations</th>
+	<th><a>Planètes [Serveur]</a></th><th><?php echo formate_number($planetimport_server); ?> importations</th>
+	<th><a>Planètes [OGS]</a></th><th><?php echo formate_number($planetimport_ogs); ?> importations - <?php echo
+formate_number($planetexport_ogs); ?> exportations</th>
 </tr>
 <tr>
-	<th><a>Rapports espionnage [Serveur]</a></th><th><?php echo formate_number($spyimport_server);?> importations</th>
-	<th><a>Rapports espionnage [OGS]</a></th><th><?php echo formate_number($spyimport_ogs);?> importations - <?php echo formate_number($spyexport_ogs);?> exportations</th>
+	<th><a>Rapports espionnage [Serveur]</a></th><th><?php echo formate_number($spyimport_server); ?> importations</th>
+	<th><a>Rapports espionnage [OGS]</a></th><th><?php echo formate_number($spyimport_ogs); ?> importations - <?php echo
+formate_number($spyexport_ogs); ?> exportations</th>
 </tr>
 <tr>
-	<th><a>Classement (nombre de lignes) [Serveur]</a></th><th><?php echo formate_number($rankimport_server);?> importations</th>
-	<th><a>Classement (nombre de lignes) [OGS]</a></th><th><?php echo formate_number($rankimport_ogs);?> importations - <?php echo formate_number($rankexport_ogs);?> exportations</th>
+	<th><a>Classement (nombre de lignes) [Serveur]</a></th><th><?php echo
+formate_number($rankimport_server); ?> importations</th>
+	<th><a>Classement (nombre de lignes) [OGS]</a></th><th><?php echo
+formate_number($rankimport_ogs); ?> importations - <?php echo
+formate_number($rankexport_ogs); ?> exportations</th>
 </tr>
 <!--<tr>
 	<th><a>Rapports de combats [Serveur]</a></th><th>x importations</th>
@@ -247,7 +308,7 @@ else {
 	<td class="c">Information de version</td>
 </tr>
 <tr>
-	<th style="text-align:left"><?php echo $version_info;?></th>
+	<th style="text-align:left"><?php echo $version_info; ?></th>
 </tr>
 </table>
 <br />
@@ -260,19 +321,20 @@ else {
 </tr>
 <?php
 foreach ($online as $v) {
-	$user = $v["user"];
-	if ( $v['time_start'] == 0 ) $v['time_start'] = $v["time_lastactivity"];
-	$time_start = strftime("%d %b %Y %H:%M:%S", $v["time_start"]);
-	$time_lastactivity =  strftime("%d %b %Y %H:%M:%S", $v["time_lastactivity"]);
-	$ip = $v["ip"];
-	$ogs = $v["ogs"] == 1 ? "(OGS)" : "";
+    $user = $v["user"];
+    if ($v['time_start'] == 0)
+        $v['time_start'] = $v["time_lastactivity"];
+    $time_start = strftime("%d %b %Y %H:%M:%S", $v["time_start"]);
+    $time_lastactivity = strftime("%d %b %Y %H:%M:%S", $v["time_lastactivity"]);
+    $ip = $v["ip"];
+    $ogs = $v["ogs"] == 1 ? "(OGS)" : "";
 
-	echo "<tr>";
-	echo "\t"."<th width='25%'>".$user." ".$ogs."</th>";
-	echo "\t"."<th width='25%'>".$time_start."</th>";
-	echo "\t"."<th width='25%'>".$time_lastactivity."</th>";
-	echo "\t"."<th width='25%'>".$ip."</th>";
-	echo "</tr>";
+    echo "<tr>";
+    echo "\t" . "<th width='25%'>" . $user . " " . $ogs . "</th>";
+    echo "\t" . "<th width='25%'>" . $time_start . "</th>";
+    echo "\t" . "<th width='25%'>" . $time_lastactivity . "</th>";
+    echo "\t" . "<th width='25%'>" . $ip . "</th>";
+    echo "</tr>";
 }
 ?>
 </table>

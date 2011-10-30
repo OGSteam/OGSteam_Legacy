@@ -185,7 +185,7 @@ function generate_id($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password,
 		die("Echec installation, impossible de générer le fichier 'parameters/id.php'");
 	}
 
-	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy 3.0.7 effectuée avec succès</font></h3>";
+	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy 3.0.8 effectuée avec succès</font></h3>";
 	echo "<center>";
 	echo "<b>Pensez à supprimer le dossier 'install'</b><br />";
 	echo "<a href='../index.php'>Retour</a>";
@@ -246,7 +246,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 	<td align="center">
 		<table width="800">
 		<tr>
-			<td colspan="2" align="center"><font size="3"><b>Bienvenue à l'installation d'OGSpy version 3.0.7</b></font></td>
+			<td colspan="2" align="center"><font size="3"><b>Bienvenue à l'installation d'OGSpy version 3.0.8</b></font></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">&nbsp;</td>
