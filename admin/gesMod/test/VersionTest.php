@@ -1,7 +1,7 @@
 <?php
 require_once 'PHPUnit/Framework.php';
 require_once 'common.php';
-
+// test
 class ExceptionTest extends PHPUnit_Framework_TestCase {
     public function testValidVersion() {
 		$version = new Version('project-1.0.0');
