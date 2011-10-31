@@ -1,10 +1,10 @@
 <?php
 /***************************************************************************
-*	filename	: admin_members.php
+*	filename	: admin_infoserver.php
 *	desc.		:
 *	Author		: Kyser - http://ogsteam.fr/
 *	created		: 16/12/2005
-*	modified	: 30/07/2006 00:00:00
+*	modified	: 31/10/2011 18:51:00
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) {
@@ -156,7 +156,7 @@ if ($proxy_use) {
 
 if ($fsock) {
     //paramètres de la requete
-    $link = "/ogspy/latest.php";
+    $link = "/ogspy/latest2.php";
     $link .= "?version=" . $server_config["version"];
 
     $link .= "&connection_server=" . $connection_server;
@@ -176,9 +176,9 @@ if ($fsock) {
     $link .= "&rankimport_server=" . $rankimport_server;
 
     // clef unique
-    $link .= "&serveur_paths=" . $paths;
-    $link .= "&serveur_since=" . $since;
-    $link .= "&serveur_key=" . $key;
+    //$link .= "&server_paths=" . $paths;
+    $link .= "&server_since=" . $since;
+    $link .= "&server_key=" . $key;
     
     
    
@@ -225,7 +225,7 @@ if ($fsock) {
             $latest_extension_revision, $head_revision . '.' . $minor_revision . '.' . $extension_revision,
             '<=')) {
             $version_info = "<font color='lime'><b>Votre serveur OGSpy est à jour.</b></font>";
-            /*$version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;*/
+            $version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;
         } else {
             $version_info = "<blink><b><font color='red'>Votre serveur OGSpy n'est pas à jour.</font></blink>";
             $version_info .= "<br />Rendez vous sur le  <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>" .
