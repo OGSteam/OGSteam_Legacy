@@ -1340,8 +1340,7 @@ function generate_key()
     }
     $key = crypto($pass);
     // création du path
-    $dossierParent = __DIR__;
-    $path = str_replace("\includes", "\index.php", $dossierParent);
+    $path = $_SERVER["SCRIPT_FILENAME"];;
 
 
     $key_php[] = '<?php';

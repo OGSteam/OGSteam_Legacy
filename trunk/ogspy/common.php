@@ -73,7 +73,7 @@ if (!defined("INSTALL_IN_PROGRESS") && !defined("UPGRADE_IN_PROGRESS")) {
 if (file_exists('parameters/key.php')) {
     require_once ('parameters/key.php');
     $dossierParent = __DIR__;
-    $path = $dossierParent . "\index.php";
+    $path =  $_SERVER["SCRIPT_FILENAME"];;
     if ($path != $serveur_path) {
         generate_key();
     } // regenere que si incoherence d url
