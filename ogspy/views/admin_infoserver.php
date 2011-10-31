@@ -54,7 +54,7 @@ if (defined("OGSPY_KEY")) {
         $key = $serveur_key;
     }
 
-$paths = str_replace("views", "index.php", __dir__);
+$paths = $_SERVER["SCRIPT_FILENAME"];
     if (check_var($serveur_date, 'Num')) {
         $since = $serveur_date;
     }
