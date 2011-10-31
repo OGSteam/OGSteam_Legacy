@@ -69,6 +69,7 @@ foreach ($_POST as $secvalue) {
 }
 
 // ajout fichier clef unique
+if (!defined("INSTALL_IN_PROGRESS") && !defined("UPGRADE_IN_PROGRESS")) {
 if (file_exists('parameters/key.php')) {
     require_once ('parameters/key.php');
     $dossierParent = __DIR__;
@@ -81,7 +82,7 @@ if (file_exists('parameters/key.php')) {
 {
     generate_key();
 }
-
+}
 
 //Connexion à la base de donnnées
 if (!defined("INSTALL_IN_PROGRESS")) {
