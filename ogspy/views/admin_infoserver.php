@@ -156,7 +156,7 @@ if ($proxy_use) {
 
 if ($fsock) {
     //paramètres de la requete
-    $link = "/ogspy/latest2.php";
+    $link = "/ogspy/latest.php";
     $link .= "?version=" . $server_config["version"];
 
     $link .= "&connection_server=" . $connection_server;
@@ -176,7 +176,7 @@ if ($fsock) {
     $link .= "&rankimport_server=" . $rankimport_server;
 
     // clef unique
-    //$link .= "&server_paths=" . $paths;
+    /*$link .= "&server_paths=" . $paths;*/
     $link .= "&server_since=" . $since;
     $link .= "&server_key=" . $key;
     
@@ -225,7 +225,7 @@ if ($fsock) {
             $latest_extension_revision, $head_revision . '.' . $minor_revision . '.' . $extension_revision,
             '<=')) {
             $version_info = "<font color='lime'><b>Votre serveur OGSpy est à jour.</b></font>";
-            $version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;
+            /*$version_info .='Latest_Head: '.$latest_head_revision.' Minor: '.$latest_minor_revision.' Ext: '.$latest_extension_revision.' vs Head:'.$head_revision.' Minor: '.$minor_revision.' Ext: '.$extension_revision;*/
         } else {
             $version_info = "<blink><b><font color='red'>Votre serveur OGSpy n'est pas à jour.</font></blink>";
             $version_info .= "<br />Rendez vous sur le  <a href='http://board.ogsteam.fr' target='_blank'>forum</a> dédié au support d'OGSpy pour récupérer la dernière version : <font color='red'>" .
