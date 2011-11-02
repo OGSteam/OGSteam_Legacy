@@ -153,7 +153,7 @@ if ($proxy_use) {
 
 if ($fsock) {
     //paramètres de la requete
-    $link = "/ogspy/latest.php";
+    $link = "/ogspy/latest2.php";
     $link .= "?version=" . $server_config["version"];
 
     $link .= "&connection_server=" . $connection_server;
