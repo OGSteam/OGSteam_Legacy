@@ -51,7 +51,7 @@ if (!defined('IN_SPYOGAME')) {
 	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/24.png"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Capi</font></a><br />
-		<center><b>Testeur<br />
+		<center><b>Développeur / Testeur<br />
 		<font color="orange">Capi capi, capo...</font></b></center><br />
 	</td>
 </tr>
@@ -82,7 +82,7 @@ if (!defined('IN_SPYOGAME')) {
 <tr> 
 	<td width="100" height="100" align="center" valign="middle">&nbsp;</td> 
 	<td class="l"> 
-		&nbsp;<b><font color="Yellow" size="2">santory2</font></b><br /> 
+		&nbsp;<b><font color="Yellow" size="2">Superbox</font></b><br /> 
 		<center><b>Développeur</b></center><br /> 
 	</td> 
 </tr> 
@@ -122,13 +122,13 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/logo.png" height="75" width="100"></td> 
 	<td class="l"><br />
 		<center><b>Equipe de test OGSpy 3.02</b></center><br />
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/logo.png" height="75" width="100"></td> 
 	<td class="l">
 		&nbsp;<b><font color="Yellow" size="2">Equipe de test OGSpy 3.0.7</font></b><br />
 		<center><b>Noumaïos - Peuchy - Superbox</b></center><br />
