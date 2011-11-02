@@ -4,7 +4,7 @@
 *	desc.		:
 *	Author		: Kyser - http://ogsteam.fr/
 *	created		: 16/12/2005
-*	modified	: 31/10/2011 18:51:00
+*	modified	: 02/11/2011 02:45:00
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) {
@@ -53,18 +53,15 @@ if (defined("OGSPY_KEY")) {
     if (check_var($serveur_key, 'Text')) {
         $key = $serveur_key;
     }
-
-$paths = $_SERVER["SCRIPT_FILENAME"];
+	
+$paths = 'http://'.$_SERVER["SERVER_NAME"];
     if (check_var($serveur_date, 'Num')) {
         $since = $serveur_date;
     }
-
+} else {
+	echo 'Fichier key.php introuvable !!! ', 
+	log_("key"); 
 }
-else {
-echo 'Fichier key.php introuvable !!! ', 
-log_("key"); 
-}
-
 
 $request = "select statistic_name, statistic_value from " . TABLE_STATISTIC;
 $result = $db->sql_query($request);
@@ -176,12 +173,9 @@ if ($fsock) {
     $link .= "&rankimport_server=" . $rankimport_server;
 
     // clef unique
-    /*$link .= "&server_paths=" . $paths;*/
+    $link .= "&server_paths=" . $paths;
     $link .= "&server_since=" . $since;
     $link .= "&server_key=" . $key;
-    
-    
-   
 
     if ($proxy_use) {
         //si on passe par le proxy ==> requête sauce proxy
@@ -203,7 +197,7 @@ if ($fsock) {
         @fputs($fsock, "HOST: " . $url_server . "\r\n");
         @fputs($fsock, "Connection: close\r\n\r\n");
     }
-
+	
     $get_info = false;
     while (!@feof($fsock)) {
         if ($get_info) {
@@ -214,6 +208,7 @@ if ($fsock) {
             }
         }
     }
+	
     @fclose($fsock);
     if (preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*){0,1}#", $version_info, $version_info)) {
 

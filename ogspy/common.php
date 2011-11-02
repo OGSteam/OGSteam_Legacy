@@ -72,7 +72,7 @@ foreach ($_POST as $secvalue) {
 if (!defined("INSTALL_IN_PROGRESS") && !defined("UPGRADE_IN_PROGRESS")) {
 if (file_exists('parameters/key.php')) {
     require_once ('parameters/key.php');
-    $dossierParent = __DIR__;
+    $dossierParent = (__FILE__);
     $path =  $_SERVER["SCRIPT_FILENAME"];;
     if ($path != $serveur_path) {
         generate_key();
