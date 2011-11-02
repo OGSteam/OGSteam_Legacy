@@ -27,7 +27,13 @@ if (!defined('IN_SPYOGAME')) {
 	<td class="c">Description</td>
 </tr>
 <tr>
-	<th>3.07</th>
+	<th>3.0.8</th>
+	<th style="text-align:left">
+	- 
+  </th>
+</tr>
+<tr>
+	<th>3.0.7</th>
 	<th style="text-align:left">
     - Remplacement de la technologie Expéditions par Astrophysique<br />
 	  - Support d'un nombre de planètes supérieur à 9(Désormais lié à la Technologie Astrophysique)<br />
@@ -39,13 +45,13 @@ if (!defined('IN_SPYOGAME')) {
   </th>
 </tr>
 <tr>
-	<th>3.06</th>
+	<th>3.0.6</th>
 	<th style="text-align:left">
     - Non Publiée<br />
 	</th>
 </tr>
 <tr>
-	<th>3.05</th>
+	<th>3.0.5</th>
 	<th style="text-align:left">
     - Compatibilité avec OGame 0.78c<br />
     - Depots de ravitaillement (optionnel)<br />
