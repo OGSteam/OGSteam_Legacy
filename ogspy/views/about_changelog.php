@@ -29,7 +29,13 @@ if (!defined('IN_SPYOGAME')) {
 <tr>
 	<th>3.0.8</th>
 	<th style="text-align:left">
-	- 
+- Affichage RE vue galaxie : affichage de 2 RE : 1 de planète, et 1 de lune, si il(s) existe(nt)<br />
+- Modification accés à la base de donnée.<br />
+- Mise en place d'un systeme de mise en cache.<br />
+- Attribution d'un identifiant unique pour chaque installation.<br />
+- Suppression de tous les appels directs à la base de donnée.<br />
+- Supression des fichiers obsolétes.<br />
+- Correctifs bugs divers
   </th>
 </tr>
 <tr>
