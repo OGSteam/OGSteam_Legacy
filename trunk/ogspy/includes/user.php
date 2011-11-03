@@ -2198,10 +2198,10 @@ function usergroup_member($group_id)
 
     $usergroup_member = array();
 
-    $request = "select u.user_id, user_name from " . TABLE_USER . " u, " .
-        TABLE_USER_GROUP . " g";
+    $request = "select u.user_id, u.user_name from " . TABLE_USER . " as  u, " .
+        TABLE_USER_GROUP . " as g";
     $request .= " where u.user_id = g.user_id";
-    $request .= " and group_id = " . intval($group_id);
+    $request .= " and g.group_id = " . intval($group_id);
     $request .= " order by user_name";
     $result = $db->sql_query($request);
     while ($row = $db->sql_fetch_assoc()) {
