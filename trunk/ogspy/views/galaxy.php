@@ -27,10 +27,15 @@ $system_up = (($system-1) > intval($server_config['num_of_systems'])) ? intval($
 
 $favorites = galaxy_getfavorites();
 
-$request_usergroup = $db->sql_query("SELECT server_show_positionhided FROM ".TABLE_GROUP." WHERE group_id = (SELECT group_id FROM ".TABLE_USER_GROUP." WHERE user_id = '".$user_data['user_id']."')");
-$usergroup_data = $db->sql_fetch_assoc($request_usergroup);
-if (($server_config["portee_missil"] != "0" && $server_config["portee_missil"] != "") && ($usergroup_data["server_show_positionhided"] != "0" && $usergroup_data["server_show_positionhided"] != "")) $missil = portee_missiles($galaxy,$system);
-else $missil = "";
+$missil = "";
+$request_usergroup = $db->sql_query("SELECT u.group_id, u.user_id, g.group_id, g.server_show_positionhided FROM ".TABLE_GROUP." AS g, ".TABLE_USER_GROUP." AS u WHERE g.server_show_positionhided >0 AND g.group_id = u.group_id AND u.user_id = '1' LIMIT 1 ");
+if ($db->sql_numrows($request_usergroup)){
+   if (($server_config["portee_missil"] != "0" && $server_config["portee_missil"] != "")){
+        $missil = portee_missiles($galaxy,$system);
+       } 
+    
+}
+
 
 require_once("views/page_header.php");
 ?>
