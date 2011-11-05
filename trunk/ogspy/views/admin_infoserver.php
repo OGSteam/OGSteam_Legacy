@@ -140,8 +140,7 @@ $proxy_user = '';
 $proxy_pass = '';
 
 //Adresse du serveur a contacter
-//$url_server = "update.ogsteam.fr";
-$url_server = "www.capix.org";
+$url_server = "update.ogsteam.fr";
 //port du serveur spécifié en hard dans le code
 
 $fsock = false;
@@ -155,7 +154,7 @@ if ($proxy_use) {
 
 if ($fsock) {
     //paramètres de la requete
-    $link = "/latest2.php";
+    $link = "/ogspy/latest2.php";
     $link .= "?version=" . $server_config["version"];
 	
 	$link .= "&nb_users=" .$users_info;
