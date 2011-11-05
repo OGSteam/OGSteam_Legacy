@@ -48,6 +48,7 @@ $rankimport_server = 0;
 $key = 'unknow';
 $paths = 'unknow';
 $since = 0;
+$nb_users = 0;
 
 if (defined("OGSPY_KEY")) {
     if (check_var($serveur_key, 'Text')) {
@@ -139,7 +140,8 @@ $proxy_user = '';
 $proxy_pass = '';
 
 //Adresse du serveur a contacter
-$url_server = "update.ogsteam.fr";
+//$url_server = "update.ogsteam.fr";
+$url_server = "www.capix.org";
 //port du serveur spécifié en hard dans le code
 
 $fsock = false;
@@ -153,8 +155,10 @@ if ($proxy_use) {
 
 if ($fsock) {
     //paramètres de la requete
-    $link = "/ogspy/latest2.php";
+    $link = "/latest2.php";
     $link .= "?version=" . $server_config["version"];
+	
+	$link .= "&nb_users=" .$users_info;
 
     $link .= "&connection_server=" . $connection_server;
     $link .= "&connection_ogs=" . $connection_ogs;
@@ -176,7 +180,7 @@ if ($fsock) {
     $link .= "&server_paths=" . $paths;
     $link .= "&server_since=" . $since;
     $link .= "&server_key=" . $key;
-
+echo $link;
     if ($proxy_use) {
         //si on passe par le proxy ==> requête sauce proxy
 
