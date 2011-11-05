@@ -35,7 +35,8 @@ if (!defined('IN_SPYOGAME')) {
 - Attribution d'un identifiant unique pour chaque installation.<br />
 - Suppression de tous les appels directs à la base de donnée.<br />
 - Supression des fichiers obsolétes.<br />
-- Correctifs bugs divers
+- Mise en conformité des pseudos ingame
+- Correctifs divers
   </th>
 </tr>
 <tr>
