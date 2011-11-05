@@ -347,7 +347,7 @@ function member_user_set()
         !check_var($pub_new_password, "Text") || !check_var($pub_new_password2,
         "CharNum") || !check_var($pub_galaxy, "Num") || !check_var($pub_system, "Num") ||
         !check_var($pub_skin, "URL") || !check_var($pub_disable_ip_check, "Num") || !
-        check_var($pub_pseudo_ingame, "Text")) {
+        check_var($pub_pseudo_ingame, "Pseudo_ingame")) {
         redirection("index.php?action=message&id_message=errordata&info");
     }
 
