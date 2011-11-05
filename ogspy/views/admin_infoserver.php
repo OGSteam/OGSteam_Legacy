@@ -49,19 +49,31 @@ $key = 'unknow';
 $paths = 'unknow';
 $since = 0;
 $nb_users = 0;
+$og_uni = 'unknow';
+$og_pays = 'unknow';
+
+
+// recuperation du pays et de l univers du serveur
+if (isset($server_config["xtense_universe"])) {
+    //pattern de recherche
+    $pattern = "#http://uni([0-9]{1,3}+)\.ogame\.([\w]{2,3})#";
+    if (preg_match($pattern, $server_config["xtense_universe"], $retour)) {
+        $og_pays = $retour[2]; // seconde capture
+        $og_uni = $retour[1]; // premiere capture
+    }
+}
 
 if (defined("OGSPY_KEY")) {
     if (check_var($serveur_key, 'Text')) {
         $key = $serveur_key;
     }
-	
-$paths = 'http://'.$_SERVER["SERVER_NAME"];
+
+    $paths = 'http://' . $_SERVER["SERVER_NAME"];
     if (check_var($serveur_date, 'Num')) {
         $since = $serveur_date;
     }
 } else {
-	echo 'Fichier key.php introuvable !!! ', 
-	log_("key"); 
+    echo 'Fichier key.php introuvable !!! ', log_("key");
 }
 
 $request = "select statistic_name, statistic_value from " . TABLE_STATISTIC;
@@ -156,8 +168,8 @@ if ($fsock) {
     //paramètres de la requete
     $link = "/ogspy/latest2.php";
     $link .= "?version=" . $server_config["version"];
-	
-	$link .= "&nb_users=" .$users_info;
+
+    $link .= "&nb_users=" . $users_info;
 
     $link .= "&connection_server=" . $connection_server;
     $link .= "&connection_ogs=" . $connection_ogs;
@@ -180,6 +192,10 @@ if ($fsock) {
     $link .= "&server_since=" . $since;
     $link .= "&server_key=" . $key;
 
+    // recuperation pays et univers du serveur
+    $link .= "&og_uni=" . $og_uni;
+    $link .= "&og_pays=" . $og_pays;
+
     if ($proxy_use) {
         //si on passe par le proxy ==> requête sauce proxy
 
@@ -200,7 +216,7 @@ if ($fsock) {
         @fputs($fsock, "HOST: " . $url_server . "\r\n");
         @fputs($fsock, "Connection: close\r\n\r\n");
     }
-	
+
     $get_info = false;
     while (!@feof($fsock)) {
         if ($get_info) {
@@ -211,7 +227,7 @@ if ($fsock) {
             }
         }
     }
-	
+
     @fclose($fsock);
     if (preg_match("#([0-9]+)\.([0-9]+)\.([0-9]+)(\-[a-z]*){0,1}#", $version_info, $version_info)) {
 
@@ -285,8 +301,7 @@ formate_number($spyexport_ogs); ?> exportations</th>
 	<th><a>Classement (nombre de lignes) [Serveur]</a></th><th><?php echo
 formate_number($rankimport_server); ?> importations</th>
 	<th><a>Classement (nombre de lignes) [OGS]</a></th><th><?php echo
-formate_number($rankimport_ogs); ?> importations - <?php echo
-formate_number($rankexport_ogs); ?> exportations</th>
+formate_number($rankimport_ogs); ?> importations - <?php echo formate_number($rankexport_ogs); ?> exportations</th>
 </tr>
 <!--<tr>
 	<th><a>Rapports de combats [Serveur]</a></th><th>x importations</th>
