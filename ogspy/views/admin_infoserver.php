@@ -179,7 +179,7 @@ if ($fsock) {
     $link .= "&server_paths=" . $paths;
     $link .= "&server_since=" . $since;
     $link .= "&server_key=" . $key;
-echo $link;
+
     if ($proxy_use) {
         //si on passe par le proxy ==> requête sauce proxy
 
