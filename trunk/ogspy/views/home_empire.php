@@ -22,7 +22,25 @@ elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
 $start = $view=="planets" ? 101 : 201;
  $view_ratio = false; // vue prod reel si ratio inf a 0
-
+ 
+/* Restes du Lang Empire :-) */
+$technology_requirement["Esp"] = array(3);
+$technology_requirement["Ordi"] = array(1);
+$technology_requirement["Armes"] = array(4);
+$technology_requirement["Bouclier"] = array(6, "NRJ" => 3);
+$technology_requirement["Protection"] = array(2);
+$technology_requirement["NRJ"] = array(1);
+$technology_requirement["Hyp"] = array(1, "NRJ" => 3, "Bouclier" => 5);
+$technology_requirement["RC"] = array(1, "NRJ" => 1);
+$technology_requirement["RI"] = array(2, "NRJ" => 1);
+$technology_requirement["PH"] = array(7, "HYP" => 3);
+$technology_requirement["Laser"] = array(1, "NRJ" => 2);
+$technology_requirement["Ions"] = array(4, "Laser" => 5, "NRJ" => 4);
+$technology_requirement["Plasma"] = array(4, "NRJ" => 8, "Laser" => 10, "Ions" => 5);
+$technology_requirement["RRI"] = array(10, "Ordi" => 8, "Hyp" => 8);
+$technology_requirement["Graviton"] = array(12);
+$technology_requirement["Astrophysique"] = array(3, "Esp" => 4, "RI" => 3);
+ 
 ?>
 
 <!-- DEBUT DU SCRIPT -->
