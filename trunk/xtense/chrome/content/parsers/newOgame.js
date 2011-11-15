@@ -203,7 +203,7 @@ var XnewOgame = {
 				case 'statistics':	return 'ranking';
 				case 'defense':		return 'defense';
 				case 'shipyard':	return 'fleet';
-				//case 'fleet1':	return 'fleet';
+				case 'fleet1':	return 'fleet';
 				case 'alliance':	return 'ally_list';
 				case 'showmessage':	return 'messages';
 				case 'combatreport': return 'rc';
@@ -576,11 +576,9 @@ var XnewOgame = {
 		   		}
 		   	}
 		}
-		
-		Request.set(this.getPlanetData());
-		Request.set(
-			{
-				"CLE": tabLevel[0],
+		var req = "";
+		if(tabLevel.length == 14){
+			req={"CLE": tabLevel[0],
 				"CLO": tabLevel[1],
 				"CR": tabLevel[2],
 				"VB": tabLevel[3],
@@ -592,10 +590,26 @@ var XnewOgame = {
 				"GT": tabLevel[9],
 				"VC": tabLevel[10],
 				"REC": tabLevel[11],
-				"SE": tabLevel[12],
-				"SAT": tabLevel[13]
-			}
-		);
+				"SE": tabLevel[12], 
+				"SAT": tabLevel[13]};
+		} else {
+			req={"CLE": tabLevel[0],
+				"CLO": tabLevel[1],
+				"CR": tabLevel[2],
+				"VB": tabLevel[3],
+				"TRA": tabLevel[4],
+				"BMD": tabLevel[5],
+				"DST": tabLevel[6],
+				"EDLM": tabLevel[7],
+				"PT": tabLevel[8],
+				"GT": tabLevel[9],
+				"VC": tabLevel[10],
+				"REC": tabLevel[11],
+				"SE": tabLevel[12]};
+		}
+		
+		Request.set(this.getPlanetData());
+		Request.set(req);
 		
 		return Request;
 	},
