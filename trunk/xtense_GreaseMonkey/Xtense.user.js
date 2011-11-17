@@ -196,13 +196,13 @@ function handle_current_page(){
 
 var regGalaxy = new RegExp(/(galaxy)/);
 var regOverview = new RegExp(/(overview)/);
+var regResearch = new RegExp(/(research)/);
 var regOption = new RegExp(/(xtense=Options)/);
 if(regOption.test(url))			{ log("Page Options détectée");setStatus(XLOG_NORMAL,"Page Options détectée");displayOptions();}
 else if(regGalaxy.test(url))  	{ log("Page Galaxie détectée");setStatus(XLOG_NORMAL,"Page Galaxie détectée");parse_galaxy();}
 else if(regOverview.test(url))	{ log("Page Overview détectée");setStatus(XLOG_NORMAL,"Page Overview détectée");parse_overview();}
-
-
-
+else if(regResearch.test(url))	{ parse_researchs();}
+else { setStatus(XLOG_NORMAL,Xl('unknow page'));}
 }
 
 /* ****************************** Fin Main ********************************/
@@ -221,16 +221,15 @@ function parse_galaxy(){
 			target.removeEventListener("DOMNodeInserted");
 			//target.removeEventListener("DOMSubtreeModified");
 			target.removeEventListener("DOMContentLoaded");
-			target.addEventListener("DOMNodeInserted", parseSystem_Inserted, false);
+			target.addEventListener("DOMNodeInserted", parse_galaxy_system_inserted, false);
 			//target.addEventListener("DOMSubtreeModified", parseSystem_Inserted, false);			
-			target.addEventListener("DOMContentLoaded", parseSystem_Inserted, false);		
+			target.addEventListener("DOMContentLoaded", parse_galaxy_system_inserted, false);		
 		}
 	}
 }
 
-
 /* Fonction appelée lors d'évenement sur le changement du contenu galaxie */
-function parseSystem_Inserted(event){
+function parse_galaxy_system_inserted(event){
 	var doc = event.target.ownerDocument;
 	var paths = XtenseXpaths.galaxy;
 	var galaxy = XPath.getSingleNode(document,"//input[@id='galaxy_input']").value;
@@ -365,7 +364,48 @@ function parse_overview(){
 		XtenseRequest.set('lang',langUnivers);
 		XtenseRequest.send();
 	}
-	setStatus(XLOG_SUCCESS,Xlang.success_home_updated);
+	//setStatus(XLOG_SUCCESS,Xlang.success_home_updated);
+}
+
+/* Page Recherche */
+function parse_researchs(){		
+		setStatus(XLOG_NORMAL, Xl('researchs detected'));
+		
+		XtenseRequest.set('type', 'researchs');
+		var levels = XPath.getOrderedSnapshotNodes(document,XtenseXpaths.levels.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		
+		XtenseRequest.set(getPlanetData());
+		XtenseRequest.set(
+			{
+				"NRJ": tabLevel[0],
+				"Laser": tabLevel[1],
+				"Ions": tabLevel[2],
+				"Hyp": tabLevel[3],
+				"Plasma": tabLevel[4],
+				"RC": tabLevel[5],
+				"RI": tabLevel[6],
+				"PH": tabLevel[7],
+				"Esp": tabLevel[8], 
+				"Ordi": tabLevel[9],
+				"Astrophysique": tabLevel[10],
+				"RRI": tabLevel[11],
+				"Graviton": tabLevel[12],
+				"Armes": tabLevel[13],
+				"Bouclier": tabLevel[14],
+				"Protection": tabLevel[15]
+			}
+		);
+		XtenseRequest.send();
 }
 
 //************************
