@@ -189,7 +189,7 @@ displayXtense();
 checkMaJ();
 setStatus(XLOG_NORMAL,Xlang.toolbar_activated);
 handle_current_page();
-exit();
+//exit();
 
 /* ****************************** Gestion des pages affichées **********************************************/
 function handle_current_page(){
