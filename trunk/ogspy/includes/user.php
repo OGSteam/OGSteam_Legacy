@@ -1274,9 +1274,24 @@ function user_set_all_empire_resync_planet()
         $i++;
 
     }
-
+    
+    /// on lance le resync moon que si lune
+    $request = "select planet_id ";
+    $request .= " from " . TABLE_USER_BUILDING;
+    $request .= " where user_id = " . $user_data["user_id"];
+    $request .= " and planet_id > 199";
+    $request .= " order by planet_id";
+    $result = $db->sql_query($request);
+ 
+     if ($db->sql_numrows($result) != 0) {
+       
     // on remet en ordre moon
     user_set_all_empire_resync_moon();
+    // todo : passer le result en paramettre ...
+       
+       
+    }
+
 }
 
 function user_set_building($data, $planet_id, $planet_name, $fields, $coordinates,
