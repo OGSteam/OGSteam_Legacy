@@ -200,9 +200,9 @@ var regStation = new RegExp(/(station)/);
 if(regOption.test(url))			{ displayOptions();}
 else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
 else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='true'){parse_overview();}}
-else if(regResearch.test(url))	{ if(GM_getValue("handle.researchs",'false')=='true'){parse_researchs();}}
-else if(regBuildings.test(url))	{ if(GM_getValue("handle.buildings",'false')=='true'){parse_buildings();}}
-else if(regStation.test(url))	{ if(GM_getValue("handle.station,'false'")=='true'){parse_station();}}
+else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true'){parse_researchs();}}
+else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true'){parse_buildings();}}
+else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'){parse_station();}}
 else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -745,6 +745,7 @@ function displayOptions(){
 		if(checkboxOptions.snapshotLength > 0){
 			for(var j=0;j<checkboxOptions.snapshotLength;j++){
 				var checkbox = checkboxOptions.snapshotItem(j);
+				//log('GM_setValue('+checkbox.id+' , '+checkbox.checked+');');
 				GM_setValue(checkbox.id , checkbox.checked);
 				
 			}
