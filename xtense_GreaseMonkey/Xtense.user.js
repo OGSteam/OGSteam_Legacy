@@ -198,11 +198,11 @@ var regBuildings = new RegExp(/(resources)/);
 var regStation = new RegExp(/(station)/);
 
 if(regOption.test(url))			{ displayOptions();}
-else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
-else if(regOverview.test(url))	{ if(GM_getValue('handle.overview')=='true'){parse_overview();}}
-else if(regResearch.test(url))	{ if(GM_getValue("handle.researchs")=='true'){parse_researchs();}}
-else if(regBuildings.test(url))	{ if(GM_getValue("handle.buildings")=='true'){parse_buildings();}}
-else if(regStation.test(url))	{ if(GM_getValue("handle.station")=='true'){parse_station();}}
+else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
+else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='true'){parse_overview();}}
+else if(regResearch.test(url))	{ if(GM_getValue("handle.researchs",'false')=='true'){parse_researchs();}}
+else if(regBuildings.test(url))	{ if(GM_getValue("handle.buildings",'false')=='true'){parse_buildings();}}
+else if(regStation.test(url))	{ if(GM_getValue("handle.station,'false'")=='true'){parse_station();}}
 else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -609,13 +609,13 @@ function displayOptions(){
 	var handle_buildings = ' ';
 	var handle_station = ' ';
 		
-	log('handle.system='+GM_getValue('handle.system')+";"+'handle.overview='+GM_getValue('handle.overview')+";"+'handle.researchs='+GM_getValue('handle.researchs')+";"+'handle.buildings='+GM_getValue('handle.buildings')+";"+'handle.station='+GM_getValue('handle.station'));
+	log('handle.system='+GM_getValue('handle.system','false')+";"+'handle.overview='+GM_getValue('handle.overview','false')+";"+'handle.researchs='+GM_getValue('handle.researchs','false')+";"+'handle.buildings='+GM_getValue('handle.buildings','false')+";"+'handle.station='+GM_getValue('handle.station','false'));
 	// Récupérations des préférences
-	if(GM_getValue('handle.system') && GM_getValue('handle.system')=='true'){handle_system += 'checked';}
-	if(GM_getValue('handle.overview') && GM_getValue('handle.overview')=='true'){handle_overview += 'checked';}
-	if(GM_getValue('handle.researchs') && GM_getValue('handle.researchs')=='true'){handle_researchs += 'checked';}
-	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings')=='true'){handle_buildings += 'checked';}
-	if(GM_getValue('handle.station') && GM_getValue('handle.station')=='true'){handle_station += 'checked';}
+	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
+	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}
+	if(GM_getValue('handle.researchs') && GM_getValue('handle.researchs','false')=='true'){handle_researchs += 'checked';}
+	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings','false')=='true'){handle_buildings += 'checked';}
+	if(GM_getValue('handle.station') && GM_getValue('handle.station','false')=='true'){handle_station += 'checked';}
 		
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
 	// Serveur Univers
