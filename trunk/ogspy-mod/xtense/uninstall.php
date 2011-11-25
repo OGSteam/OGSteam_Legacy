@@ -18,6 +18,6 @@ uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 require_once("mod/{$root}/includes/config.php");
 
 $db->sql_query('DELETE FROM '.TABLE_CONFIG.' WHERE config_name LIKE "xtense_%"');
-
+generate_config_cache();
 
 ?>

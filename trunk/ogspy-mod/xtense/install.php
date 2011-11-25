@@ -86,7 +86,7 @@ if ($is_ok == true)
 			('xtense_plugin_root', '0'),
 			('xtense_spy_autodelete', '1')
 		");
-
+		generate_config_cache();
 		$db->sql_query("REPLACE INTO ".TABLE_XTENSE_GROUPS." (`group_id`, `system`, `ranking`, `empire`, `messages`) VALUES
 			('1', '1', '1', '1', '1')");
 		
