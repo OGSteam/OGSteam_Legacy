@@ -61,7 +61,7 @@ if ($page == 'config') {
 		}
 		
 		$db->sql_query('REPLACE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES ("xtense_universe", "'.$universe.'"), ("xtense_keep_log", "'.$keep_log.'")'.$replace);
-		
+		generate_config_cache();
 		$server_config['xtense_keep_log'] = $keep_log;
 		$server_config['xtense_universe'] = $universe;
 		
@@ -73,6 +73,7 @@ if ($page == 'config') {
 			if (move_plugin()) {
 				$server_config['xtense_plugin_root'] = 1;
 				$db->sql_query('REPLACE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES ("xtense_plugin_root", "1")');
+				generate_config_cache();
 			}
 			$action = 'move';
 		}
