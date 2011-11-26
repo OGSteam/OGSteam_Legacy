@@ -148,6 +148,7 @@ if (isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']
 			$result2 = $db->sql_query($query2);
 			$query3 = "UPDATE ".TABLE_MOD." SET position='".$place_voulue."' WHERE id = '".$_POST['id']."' ";
 			$result3 = $db->sql_query($query3);
+            generate_mod_cache();
 		}
 		break;
 		case "Descendre":
@@ -160,6 +161,7 @@ if (isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']
 			$result2 = $db->sql_query($query2);
 			$query3 = "UPDATE ".TABLE_MOD." SET position = '".$place_voulue."' WHERE id = '".$_POST['id']."' ";
 			$result = $db->sql_query($query3);
+             generate_mod_cache();
 		}
 		break;
 		case "Deplacer":
@@ -184,7 +186,8 @@ if (isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']
 					}
 				}
 			$query = "UPDATE ".TABLE_MOD." SET position = '".$_POST['place_voulue']."' WHERE id = '".$_POST['id']."' ";
-			$result = $db->sql_query($query);	
+			$result = $db->sql_query($query);
+             generate_mod_cache();	
 			}
 		}
 		break;	
@@ -192,6 +195,7 @@ if (isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']
 		if ($_POST['menu'] != '') {
 		$query = "UPDATE ".TABLE_MOD." SET menu='".$_POST['menu']."' WHERE id = '".$_POST['id']."' ";
 		$result = $db->sql_query($query);}
+         generate_mod_cache();
 		break;
 	}
 }
@@ -208,5 +212,6 @@ if ($direction='bas') $position = $position + 1;
 if ($direction='haut') $position = $position - 1;
 $query2 = "UPDATE ".TABLE_MOD." SET position = '".$position."' WHERE id = '".$val['id']."' ";
 $result2 = $db->sql_query($query2);}
+ generate_mod_cache();
 }
 ?>
