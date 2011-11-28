@@ -349,7 +349,6 @@ function jsspecialchars($s) {
 					// Variable de concaténation pour les attaquants et techno
 					$template .= "\n".'Attaquant '.$color_player_att . $player_att . $color_bal . $color_alliance. ' ['.$ally_att.']'. $color_bal . " \n";
 					$template .= 'Armes: '. $color_techno. $Armes_att. ' % '. $color_bal. ' Bouclier: '. $color_techno .$Bouclier_att. ' % '. $color_bal. ' Coque: '. $color_techno. $Protection_att. ' % ' . $color_bal . "\n";
-					
 					foreach ($key_ships as $key_att_first => $ship_att_first)
 						{
 							if (isset($$key_att_first) && $$key_att_first > 0 ) 
@@ -360,7 +359,7 @@ function jsspecialchars($s) {
 								}
 						}
 		 
-				}	
+				}
 				
 			// On récupère la flotte défensive du premier round
 			$query_round_defense_first = $db->sql_query("SELECT player, coordinates, Armes, Bouclier, Protection, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SAT, SUM(DST), SUM(EDLM), SUM(TRA), LM, LLE, LLO, CG, AI, LP, PB, GB FROM ".TABLE_ROUND_DEFENSE." WHERE id_rcround=".$id_rcround." GROUP BY player");
@@ -384,11 +383,12 @@ function jsspecialchars($s) {
 				
 					$key_def_first = '';
 					$ship_def_first = 0;
-		
+					$vivant_def_first_round = false;
 					foreach ($key_ships as $key_def_first => $ship_def_first) 
 						{
 							if (isset($$key_def_first) && $$key_def_first > 0) 
 								{
+									$vivant_def_first_round = true;
 									// Variable de concaténation de toute les flottes de la partie défence
 									$template .= "\t" . $ship_def_first ." ". number_format($$key_def_first,0,',','.').$color_bal."\n";
 								}
@@ -398,13 +398,18 @@ function jsspecialchars($s) {
 						{
 							if (isset($$key_def_first) && $$key_def_first > 0) 
 								{
+									$vivant_def_first_round = true;
 									// Variable de concaténation de toute les défences du défenceur
 									$template .= "\t" . $def_def_first ." ". number_format($$key_def_first,0,',','.').$color_bal."\n";
 								}
 						}
+					if ($vivant_def_first_round == false) 
+							{
+								// Variable de concaténation si le défenseur détruit
+								$template .= $color_detruit . 'Vide' . $color_bal . " \n";
+							}
 				}
-
-		
+				
 			// On détermine le dernier round
 			$query_last_RCRound = $db->sql_query("SELECT id_rcround FROM ".TABLE_PARSEDRCROUND." WHERE id_rc=".$id_RC." AND numround=".$nb_rounds);
 			list($id_last_rcround_attack) = $db->sql_fetch_row($query_last_RCRound);
@@ -440,9 +445,9 @@ function jsspecialchars($s) {
 								if (isset($$key_att_last) && $$key_att_last > 0) 
 									{
 										$vivant_att = true;
-										
+										$lost_units = lost_unit ($player_att, $$key_att_last, $key_att_last, $id_rcround, "att");
 										// Variable de concaténation pour des flottes
-										$template .= "\t" . $ship_att_last ." ". number_format($$key_att_last,0,',','.').$color_bal."\n";
+										$template .= "\t" . $ship_att_last ." ". number_format($$key_att_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
 									}
 							}
 						// Si la variable revient false il affichera détruit.
@@ -470,9 +475,9 @@ function jsspecialchars($s) {
 								if (isset($$key_def_last) && $$key_def_last > 0) 
 									{
 										$vivant_def = true;
-										
+										$lost_units = lost_unit ($player_att, $$key_att_last, $key_att_last, $id_rcround, "def");
 										// Variable de concaténation pour les flottes des défenseurs
-										$template .= "\t" . $ship_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal."\n";
+										$template .= "\t" . $ship_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
 									}
 							}
 						foreach ($key_defs as $key_def_last => $def_def_last) 
@@ -587,10 +592,32 @@ function jsspecialchars($s) {
 				{
 					$template.= "\n\n"."[/color][url='http://www.ogsteam.fr/'][size=7][color=#ffffff]Mod HofRC by Shad (OGSteam)[/color][/size][/url][/center]";
 				}
-			
+
 			return $template;
+			
 	}
 
+/**************************************************************************/
+	
+	function lost_unit ($player_name, $alive_unit, $key, $id_rcround, $cat)
+		{
+			global $db, $table_prefix;
+			if ($cat == "att")
+				{
+					$table_cat = TABLE_ROUND_ATTACK;
+				}
+			elseif ($cat == "def")
+				{
+					$table_cat = TABLE_ROUND_DEFENSE;
+				}
+			$query_round_key = $db->sql_query("SELECT SUM(".$key.") FROM ".$table_cat." WHERE id_rcround=".$id_rcround." AND player='".$player_name."' GROUP BY player");
+			WHILE (list($result_key) = $db->sql_fetch_row($query_round_key))
+			$lost_unit = $result_key - $alive_unit;
+			
+			$result_lost_unit = "( -".number_format($lost_unit,0,',','.')." )";
+	
+		return $result_lost_unit;
+		}
 /**************************************************************************/
 	
 	function set_color_fleet ($PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $SAT, $DEST, $EDLM, $TRA)
