@@ -87,13 +87,13 @@ $lang['DicOgame']['Fleet'][8]['Name']='Sonde espionnage';
 $lang['DicOgame']['Fleet'][9]['Name']='Bombardier';
 $lang['DicOgame']['Fleet'][10]['Name']='Satellite solaire';
 $lang['DicOgame']['Fleet'][11]['Name']='Destructeur';
-$lang['DicOgame']['Fleet'][12]['Name']='étoile de la mort';
+$lang['DicOgame']['Fleet'][12]['Name']='Étoile de la mort';
 $lang['DicOgame']['Fleet'][13]['Name']='Traqueur';
 
 // ================================================================
 // ==============DEFENSES==========================================
 $lang['DicOgame']['Def'][0]['Name']='Lanceur de missiles';
-$lang['DicOgame']['Def'][1]['Name']='Artillerie laser légére';
+$lang['DicOgame']['Def'][1]['Name']='Artillerie laser légère';
 $lang['DicOgame']['Def'][2]['Name']='Artillerie laser lourde';
 $lang['DicOgame']['Def'][3]['Name']='Canon de Gauss';
 $lang['DicOgame']['Def'][4]['Name']='Artillerie à ions';
