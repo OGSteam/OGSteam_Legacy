@@ -30,7 +30,6 @@ if ($_GET["create"] == 'ok')
 	{
 		$nb_enregistrement = $db->sql_query("SELECT count(*) from `".TABLE_HOFRC_TITLE."`");
 		$numero = (mysql_result($nb_enregistrement,0) + 1);
-		var_dump($numero);
 		$db->sql_query("UPDATE `".TABLE_HOFRC_INFO_RC."` SET `publicated` = '1' WHERE ".TABLE_HOFRC_INFO_RC.".`id_rc`  = '".$id_rc."'");
 		$db->sql_query("INSERT INTO `".TABLE_HOFRC_TITLE."` (`id`, `id_rc`, `board_url`, `title`) VALUES ('".$numero."', '".$id_rc."', '', '".$_POST['title']."')");
 		$id = $db->sql_query("SELECT `id` FROM `".TABLE_HOFRC_TITLE."` ORDER BY id DESC LIMIT 0,1");

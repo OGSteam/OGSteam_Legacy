@@ -923,7 +923,7 @@ function jsspecialchars($s) {
 			// On détermine qui est le vainqeur pour savoir par la suite s'il s'agit d'un groupée
 			if (($Nb_Att == 1) || ($Nb_Def == 1))
 				{
-					// Maintenant que l'on sait qu'il s'agit d'une victoire solo on détermine quel de catégorie il s'agit.
+					// Maintenant que l'on sait qu'il s'agit d'une victoire solo on détermine de quel catégorie il s'agit.
 					if(($set_hofrc_config["size_initial"] < $cdr && $cdr < $set_hofrc_config["size_courant"]) && ($set_hofrc_config["start_universe"] < $dateRc && $dateRC < $set_hofrc_config["end_initial_solo"]))
 						{
 							$check_initial_solo = $db->sql_query("SELECT `id_rc` FROM ".TABLE_HOFRC_INFO_RC." WHERE `id_rc` = ".$id_RC);
@@ -1159,15 +1159,15 @@ function jsspecialchars($s) {
 			define('TABLE_HOFRC_DEFENSE',$table_prefix.'hofrc_defence');
 			define('TABLE_HOFRC_INFO_RC',$table_prefix.'hofrc_info_rc');
 			
-			// On sélectionne les info du rc dans la table parsedRC
-			$query_parsedrc = $db->sql_query("SELECT dateRC, coordinates, nb_rounds, victoire, pertes_A, pertes_D, gain_M, gain_C, gain_D, debris_M, debris_C, lune FROM ".TABLE_PARSEDRC." WHERE id_rc=".$id_RC);
-			list($dateRC, $coordinates, $nb_rounds, $victoire, $pertes_A, $pertes_D, $gain_M, $gain_C, $gain_D, $debris_M, $debris_C, $lune) = $db->sql_fetch_row($query_parsedrc);
-			$db->sql_query("INSERT INTO `".TABLE_HOFRC_INFO_RC."` (`id`, `id_rc`, `Daterc`, `type_hof`, `coordinates`, `victoire`, `nb_rounds`, `metal_taken`, `cristal_taken`, `deut_taken`, `metal_cdr`, `cristal_cdr`, `lost_attack`, `lost_defence`, `lune`) VALUES ('', '".$id_RC."', '".$dateRC."', '".$type."', '".$coordinates."', '".$victoire."', '".$nb_rounds."', '".$gain_M."', '".$gain_C."', '".$gain_D."', '".$debris_M."', '".$debris_C."', '".$pertes_A."', '".$pertes_D."', '".$lune."')");
-			
 			// On sélectionne les id des round pour le rc dans la table parsedRCROUND
 			$query_parsedrcround_first = $db->sql_query("SELECT id_rcround FROM ".TABLE_PARSEDRCROUND." WHERE id_rc = ".$id_RC." AND numround = 1 ");
 			list($id_rcround_first) = $db->sql_fetch_row($query_parsedrcround_first);
 			
+			// On sélectionne les info du rc dans la table parsedRC
+			$query_parsedrc = $db->sql_query("SELECT dateRC, coordinates, nb_rounds, victoire, pertes_A, pertes_D, gain_M, gain_C, gain_D, debris_M, debris_C, lune FROM ".TABLE_PARSEDRC." WHERE id_rc=".$id_RC);
+			list($dateRC, $coordinates, $nb_rounds, $victoire, $pertes_A, $pertes_D, $gain_M, $gain_C, $gain_D, $debris_M, $debris_C, $lune) = $db->sql_fetch_row($query_parsedrc);
+			$db->sql_query("INSERT INTO `".TABLE_HOFRC_INFO_RC."` (`id`, `id_rc`, `id_rcround`, `Daterc`, `type_hof`, `coordinates`, `victoire`, `nb_rounds`, `metal_taken`, `cristal_taken`, `deut_taken`, `metal_cdr`, `cristal_cdr`, `lost_attack`, `lost_defence`, `lune`) VALUES ('', '".$id_RC."', '".$id_rcround_first."', '".$dateRC."', '".$type."', '".$coordinates."', '".$victoire."', '".$nb_rounds."', '".$gain_M."', '".$gain_C."', '".$gain_D."', '".$debris_M."', '".$debris_C."', '".$pertes_A."', '".$pertes_D."', '".$lune."')");
+						
 			//On va récupérer caractéristiques des attaquant du premier round
 			$query_attack = $db->sql_query("SELECT `player`, `coordinates`, `Armes`, `Bouclier`, `Protection`, SUM(`PT`), SUM(`GT`), SUM(`CLE`), SUM(`CLO`), SUM(`CR`), SUM(`VB`), SUM(`VC`), SUM(`REC`), SUM(`SE`), SUM(`BMD`), SUM(`DST`), SUM(`EDLM`), SUM(`TRA`) FROM `".TABLE_ROUND_ATTACK."` WHERE `id_rcround` = ".$id_rcround_first." group by `player`"); ;
 			WHILE (list($player_att, $coordinates_att, $Armes_att, $Bouclier_att, $Protection_att, $PT_att, $GT_att, $CLE_att, $CLO_att, $CR_att, $VB_att, $VC_att, $REC_att, $SE_att, $BMD_att, $DST_att, $EDLM_att, $TRA_att) = $db->sql_fetch_row($query_attack))
