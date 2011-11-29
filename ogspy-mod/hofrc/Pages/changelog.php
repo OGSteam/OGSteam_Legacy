@@ -20,27 +20,6 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 <table style='width:60%'  align='center'>
 	<!-- Amélioration -->
 	<tr style='line-height : 20px; vertical-align : center;'>
-		<td class='c' style='text-align : center; color : #0080FF;'>Amélioration du mod</td>
-	</tr>
-		<tr>
-			<td style='background-color : #273234; Cellpadding=50px; text-align : left;'>
-				<fieldset>
-					<legend>
-						<b>
-							<font color='#0080FF'><u>Version a venir</u></font>
-						</b>
-					</legend>
-					<ul>
-						<li>Gestion pour l'édition des RP</li>
-						<li>Afficher la quantité de flotte perdue.</li>
-						<li>Convertion en mode graphique.</li>
-						<li>Créer un bilan des raids dans la page convert.</li>
-						<li>Creer une image pour forum qui affichera le bilan de la journée pour chaque joueur.</li>
-					</ul>
-				</fieldset>
-			</td>
-		</tr>
-	<tr style='line-height : 20px; vertical-align : center;'>
 		<td class='c' style='text-align : center; color : #0080FF;'>Version</td>
 	</tr>
 		<tr>
