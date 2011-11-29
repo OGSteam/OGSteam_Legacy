@@ -12,7 +12,7 @@ var VERSION = "2.3.10.9";
 var PLUGIN_REQUIRED = "2.3.10";
 var callback = null;
 var Xlang = {};
-
+var XtenseLocales = { };
 
 //Variables globales pour la mise à jour.
 var start_time = (new Date()).getTime();
@@ -110,18 +110,23 @@ function log(message){
 	console.log(nomScript+" says : "+message);
 }	
 function setStatus(type,message){
-	if(type==XLOG_SUCCESS){
-		document.getElementById("xtense.icone").src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKACXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
-	} else if(type==XLOG_NORMAL){
-		document.getElementById("xtense.icone").src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKAAm/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
-	} else if(type==XLOG_WARNING){
-		document.getElementById("xtense.icone").src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP+HBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
-	} else if(type==XLOG_ERROR){
-		document.getElementById("xtense.icone").src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
+	if(icone!=null){
+		if(type==XLOG_SUCCESS){
+			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKACXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+		} else if(type==XLOG_NORMAL){
+			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKAAm/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+		} else if(type==XLOG_WARNING){
+			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP+HBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+		} else if(type==XLOG_ERROR){
+			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+		} else {
+			icone.src=urlIcone;
+		}
+		icone.title=message;
 	} else {
-		document.getElementById("xtense.icone").src=urlIcone;
+		log(message);
 	}
-	document.getElementById("xtense.icone").title=message;
 }//Gestion de l'icone
 
 //Requete Ajax
@@ -151,6 +156,7 @@ function Xajax(obj) {
 
 }
 
+// Fonctions récupérant les messages de retours
 function Xl(name) {
 		try {
 			if (!Xlang[name]) {
@@ -164,13 +170,16 @@ function Xl(name) {
 			}
 			return locale;
 		} catch (e) { alert(e); return false; }
-	}
+}
+
+// Fonctions permettant de connaitre les locales du jeu suivant la langue (FR,ENG, ...)
+function l(id){
+	return XtenseLocales[XtenseMetas.getLanguage()][id];
+} 
+
 // Fonction SHA et MD5
 
 eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('l 3Q(w){l P(n,s){e 2w=(n<<s)|(n>>>(32-s));f 2w};l 2z(1w){e 1c="";e i;e 2d;e 1Y;J(i=0;i<=6;i+=2){2d=(1w>>>(i*4+4))&1X;1Y=(1w>>>(i*4))&1X;1c+=2d.1N(16)+1Y.1N(16)}f 1c};l 1a(1w){e 1c="";e i;e v;J(i=7;i>=0;i--){v=(1w>>>(i*4))&1X;1c+=v.1N(16)}f 1c};l 1K(q){q=q.2q(/\\r\\n/g,"\\n");e u="";J(e n=0;n<q.T;n++){e c=q.L(n);Y(c<X){u+=M.N(c)}1e Y((c>2k)&&(c<2r)){u+=M.N((c>>6)|2s);u+=M.N((c&1b)|X)}1e{u+=M.N((c>>12)|2t);u+=M.N(((c>>6)&1b)|X);u+=M.N((c&1b)|X)}}f u};e 1E;e i,j;e W=2o 1L(3B);e 1r=2i;e 1x=2j;e 1i=2f;e 1h=2g;e 1B=3F;e A,B,C,D,E;e K;w=1K(w);e O=w.T;e S=2o 1L();J(i=0;i<O-3;i+=4){j=w.L(i)<<24|w.L(i+1)<<16|w.L(i+2)<<8|w.L(i+3);S.1j(j)}3G(O%4){1Q 0:i=3T;1M;1Q 1:i=w.L(O-1)<<24|3r;1M;1Q 2:i=w.L(O-2)<<24|w.L(O-1)<<16|2F;1M;1Q 3:i=w.L(O-3)<<24|w.L(O-2)<<16|w.L(O-1)<<8|2n;1M}S.1j(i);2p((S.T%16)!=14)S.1j(0);S.1j(O>>>29);S.1j((O<<3)&R);J(1E=0;1E<S.T;1E+=16){J(i=0;i<16;i++)W[i]=S[1E+i];J(i=16;i<=2h;i++)W[i]=P(W[i-3]^W[i-8]^W[i-14]^W[i-16],1);A=1r;B=1x;C=1i;D=1h;E=1B;J(i=0;i<=19;i++){K=(P(A,5)+((B&C)|(~B&D))+E+W[i]+3c)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=20;i<=39;i++){K=(P(A,5)+(B^C^D)+E+W[i]+3s)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=3U;i<=2N;i++){K=(P(A,5)+((B&C)|(B&D)|(C&D))+E+W[i]+2V)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=2Y;i<=2h;i++){K=(P(A,5)+(B^C^D)+E+W[i]+2R)&R;E=D;D=C;C=P(B,30);B=A;A=K}1r=(1r+A)&R;1x=(1x+B)&R;1i=(1i+C)&R;1h=(1h+D)&R;1B=(1B+E)&R}e K=1a(1r)+1a(1x)+1a(1i)+1a(1h)+1a(1B);f K.2v()}l 33(q){l 1v(1z,2c){f(1z<<2c)|(1z>>>(32-2c))}l h(1W,1U){e 1V,1T,1d,1f,18;1d=(1W&2a);1f=(1U&2a);1V=(1W&1O);1T=(1U&1O);18=(1W&2u)+(1U&2u);Y(1V&1T){f(18^2a^1d^1f)}Y(1V|1T){Y(18&1O){f(18^3a^1d^1f)}1e{f(18^1O^1d^1f)}}1e{f(18^1d^1f)}}l F(x,y,z){f(x&y)|((~x)&z)}l G(x,y,z){f(x&z)|(y&(~z))}l H(x,y,z){f(x^y^z)}l I(x,y,z){f(y^(x|(~z)))}l o(a,b,c,d,x,s,U){a=h(a,h(h(F(b,c,d),x),U));f h(1v(a,s),b)};l t(a,b,c,d,x,s,U){a=h(a,h(h(G(b,c,d),x),U));f h(1v(a,s),b)};l m(a,b,c,d,x,s,U){a=h(a,h(h(H(b,c,d),x),U));f h(1v(a,s),b)};l p(a,b,c,d,x,s,U){a=h(a,h(h(I(b,c,d),x),U));f h(1v(a,s),b)};l 2e(q){e Z;e 1C=q.T;e 26=1C+8;e 2m=(26-(26%2l))/2l;e 1P=(2m+1)*16;e V=1L(1P-1);e 1y=0;e Q=0;2p(Q<1C){Z=(Q-(Q%4))/4;1y=(Q%4)*8;V[Z]=(V[Z]|(q.L(Q)<<1y));Q++}Z=(Q-(Q%4))/4;1y=(Q%4)*8;V[Z]=V[Z]|(2n<<1y);V[1P-2]=1C<<3;V[1P-1]=1C>>>29;f V};l 1q(1z){e 1S="",1R="",27,1t;J(1t=0;1t<=3;1t++){27=(1z>>>(1t*8))&3u;1R="0"+27.1N(16);1S=1S+1R.3w(1R.T-2,2)}f 1S};l 1K(q){q=q.2q(/\\r\\n/g,"\\n");e u="";J(e n=0;n<q.T;n++){e c=q.L(n);Y(c<X){u+=M.N(c)}1e Y((c>2k)&&(c<2r)){u+=M.N((c>>6)|2s);u+=M.N((c&1b)|X)}1e{u+=M.N((c>>12)|2t);u+=M.N(((c>>6)&1b)|X);u+=M.N((c&1b)|X)}}f u};e x=1L();e k,2b,1Z,25,28,a,b,c,d;e 1o=7,1m=12,1n=17,1p=22;e 1I=5,1J=9,1k=14,1u=20;e 1g=4,1A=11,1F=16,1D=23;e 1s=6,1l=10,1G=15,1H=21;q=1K(q);x=2e(q);a=2i;b=2j;c=2f;d=2g;J(k=0;k<x.T;k+=16){2b=a;1Z=b;25=c;28=d;a=o(a,b,c,d,x[k+0],1o,2B);d=o(d,a,b,c,x[k+1],1m,2C);c=o(c,d,a,b,x[k+2],1n,2E);b=o(b,c,d,a,x[k+3],1p,2G);a=o(a,b,c,d,x[k+4],1o,2H);d=o(d,a,b,c,x[k+5],1m,2I);c=o(c,d,a,b,x[k+6],1n,2K);b=o(b,c,d,a,x[k+7],1p,2L);a=o(a,b,c,d,x[k+8],1o,3j);d=o(d,a,b,c,x[k+9],1m,3k);c=o(c,d,a,b,x[k+10],1n,2O);b=o(b,c,d,a,x[k+11],1p,2P);a=o(a,b,c,d,x[k+12],1o,2U);d=o(d,a,b,c,x[k+13],1m,2T);c=o(c,d,a,b,x[k+14],1n,2W);b=o(b,c,d,a,x[k+15],1p,31);a=t(a,b,c,d,x[k+1],1I,34);d=t(d,a,b,c,x[k+6],1J,35);c=t(c,d,a,b,x[k+11],1k,36);b=t(b,c,d,a,x[k+0],1u,38);a=t(a,b,c,d,x[k+5],1I,3b);d=t(d,a,b,c,x[k+10],1J,3d);c=t(c,d,a,b,x[k+15],1k,3e);b=t(b,c,d,a,x[k+4],1u,3g);a=t(a,b,c,d,x[k+9],1I,3i);d=t(d,a,b,c,x[k+14],1J,3l);c=t(c,d,a,b,x[k+3],1k,3m);b=t(b,c,d,a,x[k+8],1u,3n);a=t(a,b,c,d,x[k+13],1I,3o);d=t(d,a,b,c,x[k+2],1J,3q);c=t(c,d,a,b,x[k+7],1k,3t);b=t(b,c,d,a,x[k+12],1u,3x);a=m(a,b,c,d,x[k+5],1g,3y);d=m(d,a,b,c,x[k+8],1A,3z);c=m(c,d,a,b,x[k+11],1F,3C);b=m(b,c,d,a,x[k+14],1D,3E);a=m(a,b,c,d,x[k+1],1g,3H);d=m(d,a,b,c,x[k+4],1A,3I);c=m(c,d,a,b,x[k+7],1F,3K);b=m(b,c,d,a,x[k+10],1D,3L);a=m(a,b,c,d,x[k+13],1g,3M);d=m(d,a,b,c,x[k+0],1A,3N);c=m(c,d,a,b,x[k+3],1F,3P);b=m(b,c,d,a,x[k+6],1D,3S);a=m(a,b,c,d,x[k+9],1g,2x);d=m(d,a,b,c,x[k+12],1A,2A);c=m(c,d,a,b,x[k+15],1F,2D);b=m(b,c,d,a,x[k+2],1D,2M);a=p(a,b,c,d,x[k+0],1s,2Q);d=p(d,a,b,c,x[k+7],1l,2S);c=p(c,d,a,b,x[k+14],1G,2Z);b=p(b,c,d,a,x[k+5],1H,37);a=p(a,b,c,d,x[k+12],1s,3f);d=p(d,a,b,c,x[k+3],1l,3D);c=p(c,d,a,b,x[k+10],1G,3p);b=p(b,c,d,a,x[k+1],1H,3v);a=p(a,b,c,d,x[k+8],1s,3A);d=p(d,a,b,c,x[k+15],1l,3J);c=p(c,d,a,b,x[k+6],1G,3O);b=p(b,c,d,a,x[k+13],1H,2y);a=p(a,b,c,d,x[k+4],1s,2J);d=p(d,a,b,c,x[k+11],1l,2X);c=p(c,d,a,b,x[k+2],1G,3h);b=p(b,c,d,a,x[k+9],1H,3R);a=h(a,2b);b=h(b,1Z);c=h(c,25);d=h(d,28)}e K=1q(a)+1q(b)+1q(c)+1q(d);f K.2v()}',62,243,'||||||||||||||var|return||AddUnsigned||||function|HH||FF|II|string|||GG|utftext||msg|||||||||||||for|temp|charCodeAt|String|fromCharCode|msg_len|rotate_left|lByteCount|0x0ffffffff|word_array|length|ac|lWordArray||128|if|lWordCount|||||||||lResult||cvt_hex|63|str|lX8|else|lY8|S31|H3|H2|push|S23|S42|S12|S13|S11|S14|WordToHex|H0|S41|lCount|S24|RotateLeft|val|H1|lBytePosition|lValue|S32|H4|lMessageLength|S34|blockstart|S33|S43|S44|S21|S22|Utf8Encode|Array|break|toString|0x40000000|lNumberOfWords|case|WordToHexValue_temp|WordToHexValue|lY4|lY|lX4|lX|0x0f|vl|BB||||||CC|lNumberOfWords_temp1|lByte|DD||0x80000000|AA|iShiftBits|vh|ConvertToWordArray|0x98BADCFE|0x10325476|79|0x67452301|0xEFCDAB89|127|64|lNumberOfWords_temp2|0x80|new|while|replace|2048|192|224|0x3FFFFFFF|toLowerCase|t4|0xD9D4D039|0x4E0811A1|lsb_hex|0xE6DB99E5|0xD76AA478|0xE8C7B756|0x1FA27CF8|0x242070DB|0x08000|0xC1BDCEEE|0xF57C0FAF|0x4787C62A|0xF7537E82|0xA8304613|0xFD469501|0xC4AC5665|59|0xFFFF5BB1|0x895CD7BE|0xF4292244|0xCA62C1D6|0x432AFF97|0xFD987193|0x6B901122|0x8F1BBCDC|0xA679438E|0xBD3AF235|60|0xAB9423A7||0x49B40821||MD5|0xF61E2562|0xC040B340|0x265E5A51|0xFC93A039|0xE9B6C7AA||0xC0000000|0xD62F105D|0x5A827999|0x2441453|0xD8A1E681|0x655B59C3|0xE7D3FBC8|0x2AD7D2BB|0x21E1CDE6|0x698098D8|0x8B44F7AF|0xC33707D6|0xF4D50D87|0x455A14ED|0xA9E3E905|0xFFEFF47D|0xFCEFA3F8|0x0800000|0x6ED9EBA1|0x676F02D9|255|0x85845DD1|substr|0x8D2A4C8A|0xFFFA3942|0x8771F681|0x6FA87E4F|80|0x6D9D6122|0x8F0CCC92|0xFDE5380C|0xC3D2E1F0|switch|0xA4BEEA44|0x4BDECFA9|0xFE2CE6E0|0xF6BB4B60|0xBEBFBC70|0x289B7EC6|0xEAA127FA|0xA3014314|0xD4EF3085|SHA1|0xEB86D391|0x4881D05|0x080000000|40'.split('|'),0,{}))
-
-
-
 
 /* ****************************** Fin Fonctions Utiles ********************************/
 
@@ -196,6 +205,10 @@ var regOption = new RegExp(/(xtense=Options)/);
 var regResearch = new RegExp(/(research)/);
 var regBuildings = new RegExp(/(resources)/);
 var regStation = new RegExp(/(station)/);
+var regShipyard = new RegExp(/(shipyard)/);
+var regFleet1 = new RegExp(/(fleet1)/);
+var regDefense = new RegExp(/(defense)/);
+var regMessages = new RegExp(/(showmessage)/);
 
 if(regOption.test(url))			{ displayOptions();}
 else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
@@ -203,6 +216,9 @@ else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='tru
 else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true'){parse_researchs();}}
 else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true'){parse_buildings();}}
 else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'){parse_station();}}
+else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true'){parse_shipyard();}}
+else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true'){parse_defense();}}
+else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}}
 else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -383,48 +399,8 @@ function parse_overview(){
 	
 	}
 }
-/* Page Recherche */
-function parse_researchs(){		
-		setStatus(XLOG_NORMAL, Xl('researchs_detected'));
-		
-			XtenseRequest.set('type', 'researchs');
-			var levels = XPath.getOrderedSnapshotNodes(document,XtenseXpaths.levels.level,null);
-			var tabLevel = new Array();
-			
-			if(levels.snapshotLength > 0){
-			   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
-			   		var level = levels.snapshotItem(lvl).nodeValue.trim();
-			   		if(level!=""){
-			   			tabLevel.push(level);
-			   		}
-			   	}
-			}
-			
-			XtenseRequest.set(getPlanetData());
-			XtenseRequest.set(
-				{
-					"NRJ": tabLevel[0],
-					"Laser": tabLevel[1],
-					"Ions": tabLevel[2],
-					"Hyp": tabLevel[3],
-					"Plasma": tabLevel[4],
-					"RC": tabLevel[5],
-					"RI": tabLevel[6],
-					"PH": tabLevel[7],
-					"Esp": tabLevel[8], 
-					"Ordi": tabLevel[9],
-					"Astrophysique": tabLevel[10],
-					"RRI": tabLevel[11],
-					"Graviton": tabLevel[12],
-					"Armes": tabLevel[13],
-					"Bouclier": tabLevel[14],
-					"Protection": tabLevel[15]
-				}
-			);
-			XtenseRequest.send();
-			//setStatus(XLOG_SUCCESS,Xl('success_research'));
-}
-/* Page Batiments */
+
+/* Page Buildings */
 function parse_buildings() {
 	setStatus(XLOG_NORMAL, Xl('buildings_detected'));
 	
@@ -462,7 +438,7 @@ function parse_buildings() {
 	XtenseRequest.send();
 }
 
-/* Page Installations */
+/* Page Stations */
 function parse_station() {
 	setStatus(XLOG_NORMAL,Xl('installations_detected'));
 		var paths = XtenseXpaths.levels;
@@ -503,9 +479,627 @@ function parse_station() {
 		XtenseRequest.send();
 }
 
-//************************
-//** Options            **
-//************************
+/* Page Researchs */
+function parse_researchs(){		
+		setStatus(XLOG_NORMAL, Xl('researchs_detected'));
+		
+			XtenseRequest.set('type', 'researchs');
+			var levels = XPath.getOrderedSnapshotNodes(document,XtenseXpaths.levels.level,null);
+			var tabLevel = new Array();
+			
+			if(levels.snapshotLength > 0){
+			   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+			   		var level = levels.snapshotItem(lvl).nodeValue.trim();
+			   		if(level!=""){
+			   			tabLevel.push(level);
+			   		}
+			   	}
+			}
+			
+			XtenseRequest.set(getPlanetData());
+			XtenseRequest.set(
+				{
+					"NRJ": tabLevel[0],
+					"Laser": tabLevel[1],
+					"Ions": tabLevel[2],
+					"Hyp": tabLevel[3],
+					"Plasma": tabLevel[4],
+					"RC": tabLevel[5],
+					"RI": tabLevel[6],
+					"PH": tabLevel[7],
+					"Esp": tabLevel[8], 
+					"Ordi": tabLevel[9],
+					"Astrophysique": tabLevel[10],
+					"RRI": tabLevel[11],
+					"Graviton": tabLevel[12],
+					"Armes": tabLevel[13],
+					"Bouclier": tabLevel[14],
+					"Protection": tabLevel[15]
+				}
+			);
+			XtenseRequest.send();
+			//setStatus(XLOG_SUCCESS,Xl('success_research'));
+}
+
+/* Page Shipyard */
+function parse_shipyard(){
+	setStatus(XLOG_NORMAL, Xl('fleet_detected'));
+	
+	var paths = XtenseXpaths.levels;
+	XtenseRequest.set('type', 'fleet');
+	var levels = XPath.getOrderedSnapshotNodes(document,paths.level,null);
+	var tabLevel = new Array();
+	
+	if(levels.snapshotLength > 0){
+	   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+	   		var level = levels.snapshotItem(lvl).nodeValue.trim().replace(".", "");
+	   		if(level!=""){
+	   			tabLevel.push(level);
+	   		}
+	   	}
+	}
+	var req = "";
+	if(tabLevel.length == 14){
+		req={"CLE": tabLevel[0],
+			"CLO": tabLevel[1],
+			"CR": tabLevel[2],
+			"VB": tabLevel[3],
+			"TRA": tabLevel[4],
+			"BMD": tabLevel[5],
+			"DST": tabLevel[6],
+			"EDLM": tabLevel[7],
+			"PT": tabLevel[8],
+			"GT": tabLevel[9],
+			"VC": tabLevel[10],
+			"REC": tabLevel[11],
+			"SE": tabLevel[12], 
+			"SAT": tabLevel[13]};
+	} else {
+		req={"CLE": tabLevel[0],
+			"CLO": tabLevel[1],
+			"CR": tabLevel[2],
+			"VB": tabLevel[3],
+			"TRA": tabLevel[4],
+			"BMD": tabLevel[5],
+			"DST": tabLevel[6],
+			"EDLM": tabLevel[7],
+			"PT": tabLevel[8],
+			"GT": tabLevel[9],
+			"VC": tabLevel[10],
+			"REC": tabLevel[11],
+			"SE": tabLevel[12]};
+	}
+	
+	XtenseRequest.set(getPlanetData());
+	XtenseRequest.set(req);
+	XtenseRequest.send();
+}
+
+/* Page Defense */
+function parse_defense(){		
+	setStatus(XLOG_NORMAL,Xl('defense_detected'));
+	
+		var paths = XtenseXpaths.levels;
+		
+		XtenseRequest.set('type', 'defense');
+		var levels = XPath.getOrderedSnapshotNodes(document,paths.level,null);
+		var tabLevel = new Array();
+		
+		if(levels.snapshotLength > 0){
+		   	for(var lvl=0;lvl<levels.snapshotLength;lvl++){
+		   		var level = levels.snapshotItem(lvl).nodeValue.trim().replace(".", "");
+		   		if(level!=""){
+		   			tabLevel.push(level);
+		   		}
+		   	}
+		}
+		
+		XtenseRequest.set(getPlanetData());
+		XtenseRequest.set(
+			{
+				"LM": tabLevel[0],
+				"LLE": tabLevel[1],
+				"LLO": tabLevel[2],
+				"CG": tabLevel[3],
+				"AI": tabLevel[4],
+				"LP": tabLevel[5],
+				"PB": tabLevel[6],
+				"GB": tabLevel[7],
+				"MIC": tabLevel[8],
+				"MIP": tabLevel[9]
+			}
+		);
+		
+		XtenseRequest.send();
+}
+
+/* Page Battle Report */
+function parseRc() {
+	var paths = XtenseXpaths.rc;
+	
+	var rcStrings = l('combat report');
+	var data = {};
+	var rnds = {};
+	var rslt = {};
+
+	var infos = XPath.getOrderedSnapshotNodes(document,paths.list_infos);
+	if(infos.snapshotLength > 0){
+		//Heure et rounds
+		var rounds = XPath.getOrderedSnapshotNodes(document,paths.list_rounds);
+		var nbrounds = rounds.snapshotLength;
+		if(nbrounds > 0){
+			for(var div=0;div<nbrounds;div++){
+				var round = rounds.snapshotItem(div).textContent.trim();
+				
+				if(div == 0){
+					var m = round.match(new RegExp(rcStrings['regxps']['time']));
+					if(m){
+						// Calcul heure d'ete => offset = -120 & heure d'hiver  => offset = -60
+						var diff = new Date(Date.UTC(m[3], (m[2]-1), m[1], m[4], m[5], m[6])).getTimezoneOffset();
+						var correction = 0;
+						if(diff==-120){
+							correction = 2;
+						} else if(diff==-60){
+							correction = 1;
+						}
+						var date = (Date.UTC(m[3], (m[2]-1), m[1], (parseInt(m[4].replace(new RegExp("0(\\d)"), "$1")) - correction), m[5], m[6])) / 1000;
+
+					} else {
+						var date = Math.ceil((new Date().getTime()) / 1000);
+					}
+				} else {
+					var rnd = {};
+					for (var i in rcStrings['regxps']['round']) {
+						var m = round.match(new RegExp(rcStrings['regxps']['round'][i]));
+						if(m)
+							rnd[i] = m[1].replace(/\./g, '');
+					}
+					rnds[div] = rnd;
+				}
+			}
+		}
+
+		//Vaisseaux/Défenses/Joueur/Coordonnées/Technos
+		var rc_temp = eval(GM_getValue('rc-temp')); //Coordonnées de destination
+	   	for(var table=0;table<infos.snapshotLength;table++){
+			var dat = {};
+			var val = {};
+			var weap = {};
+			var info = infos.snapshotItem(table);
+			var nbJoueurs=infos.snapshotLength/nbrounds;
+			
+			//Nombre d'unités
+			var values = XPath.getOrderedSnapshotNodes(document,paths.list_values, info);
+			if(values.snapshotLength > 0){
+				for(var td=1;td<values.snapshotLength;td++){
+					var value = values.snapshotItem(td).textContent.trim();
+					if(value){
+						val[td] = value.replace(/\./g, '');
+					}
+				}
+			}
+			
+			//Type de l'unité
+			var types = XPath.getOrderedSnapshotNodes(document,paths.list_types, info);
+			if(types.snapshotLength > 0){
+				for(var th=1;th<types.snapshotLength;th++){
+					var type = types.snapshotItem(th).textContent.trim();
+					if(type){
+						for (var i in rcStrings['units']) {
+							for (var j in rcStrings['units'][i]) {
+								var typ = type.match(new RegExp(rcStrings['units'][i][j]));
+								if (typ)
+									dat[this.database[i][j]] = val[th];
+							}
+						}
+					}
+				}
+			}
+
+			//Nom joueur et coordonnées
+			var dest = 0;
+			var player = XPath.getStringValue(document,paths.infos.player,info).trim(); //Joueur non détruit
+			if (player.length==0) { //Dans ce cas, joueur détruit
+				player = XPath.getStringValue(document,paths.infos.destroyed,info).trim();
+				dest=1;
+			}
+			if (!dest)
+				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+			else
+				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.userNameAndDestroyed));
+			if(m){
+				var player = m[1];
+				if (!dest)
+					var coords = m[2];
+				else
+					var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; //Joueur détruit, on récupère ses coordonnées lorsqu'il était encore vivant
+				var type = "A";
+			} else {
+				if(!dest)
+					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+				else
+					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.userNameAndDestroyed));
+				
+				if(m){
+					var player = m[1];
+					if (!dest)
+						var coords = m[2];
+					else {
+						if (rc_temp != "")
+							var coords = rc_temp.coords; //Si défenseur où à lieu le raid est détruit au 1er tour
+						else
+							var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; // Si ce n'est pas le 1er round
+					}
+					rc_temp = "";
+				} else {
+					var player = "";
+					var coords = "";
+				}
+				var type = "D";
+			}
+			
+			//Technos
+			var weapons = XPath.getStringValue(document,paths.infos.weapons,info).trim();
+			for (var i in rcStrings['regxps']['weapons']) {
+				var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
+				if(m)
+					weap[i] = m[1].replace(/\./g, '');
+				else { //Joueur détruit
+					if ((table-nbJoueurs)<0) //Défenseur où à lieu le raid détruit au 1er tour -> technos inutiles
+						weap[i] = 0;
+					else
+						weap[i] = data[(table-nbJoueurs)%nbJoueurs]['weapons'][i]; //On récupère ses technos lorsqu'il était encore vivant
+				}
+			}
+			
+			if(coords != "")
+				data[table] = {player : player, coords : coords, type : type, weapons : weap, content : dat};
+		}
+		
+		//Pillages/Pertes/Cdr/Lune
+		var result = XPath.getStringValue(document,paths.result).trim();
+		if (result.match(new RegExp(rcStrings['regxps']['nul'], 'gi')))
+			var win = "N";
+		else if (result.match(new RegExp(rcStrings['regxps']['attack_win'], 'gi')))
+			var win = "A";
+		else
+			var win = "D";
+
+		if(result.match(new RegExp(rcStrings['regxps']['moon'], 'gi')))
+			var moon = 1;
+		else
+			var moon = 0;
+		
+		if(result.match(new RegExp(rcStrings['regxps']['moonprob'], 'gi')))
+			var moonprob = result.match(new RegExp(rcStrings['regxps']['moonprob']))[1];
+		else
+			var moonprob = 0;
+		
+		for (var i in rcStrings['regxps']['result']) {
+			var m = result.match(new RegExp(rcStrings['regxps']['result'][i]));
+			if(m)
+				rslt[i] = m[1].replace(/\./g, '');
+			else
+				rslt[i] = 0;
+		}
+
+		//Texte entier du raid, brut
+		var rounds = XPath.getOrderedSnapshotNodes(document,paths.combat_round);
+		var round = -1;
+		if(rounds.snapshotLength > 0){
+			round = rounds.snapshotItem(0).textContent.trim();
+		}
+
+		XtenseRequest.set(
+			{
+				type: 'rc',
+				date: date,
+				win: win,
+				count: nbrounds,
+				result: rslt,
+				moon: moon,
+				moonprob : moonprob,
+				rounds: rnds,
+				n: data,
+				rawdata: round
+			}
+		);
+		
+		XtenseRequest.send();
+	}
+}
+
+/* Page Messages */
+function parse_messages(){
+	setStatus(XLOG_NORMAL,Xl('messages_detected'));
+	
+	var paths = XtenseXpaths.messages;
+	var data = {};		
+	var from = XPath.getStringValue(document,paths.from).trim();
+	var to = XPath.getStringValue(document,paths.to).trim();
+	var subject = XPath.getStringValue(document,paths.subject).trim();
+	var date = XPath.getStringValue(document,paths.date).trim();
+	var locales = l('messages');
+	
+	data.date = XtenseParseDate(date,l('dates')['messages']);
+	data.type = '';
+	
+	// Messages de joueurs
+	if(GM_getValue('handle.msg.msg')) {
+		if (document.getElementById('melden')) { // si bouton "reporter", c'est un mp
+			var m = from.match(new RegExp(XtenseRegexps.userNameAndCoords));
+			if(m) {
+				var userName = m[1];
+				var coords = m[2];
+			}
+			var contentNode = XPath.getSingleNode(document,paths.contents['msg']);
+			var message = contentNode.getElementsByTagName('p')[0].innerHTML.trim();
+			var ladate = data.date
+			
+			//correctif : pas de date 
+			// si on procede comme suit : on redefini la variable data et on perd "date"
+			//data = {type:'msg', from: userName, coords: coords, subject: subject, message: message};
+				data.type = 'msg';
+				data.from = userName;
+				data.coords = coords;
+				data.subject = subject;
+				data.message = message;
+			// fin correctif	
+			
+			
+			
+		}
+	}
+	
+	// Messages d'alliance
+	if(GM_getValue('handle.msg.ally')) {
+		var m = from.match(new RegExp(XtenseRegexps.ally));
+		if(m){
+			var contentNode = XPath.getSingleNode(document,paths.contents['ally_msg']);
+			var message = contentNode.innerHTML;
+			data.type = 'ally_msg';
+			data.from = m[1];
+			data.tag = m[1];
+			data.message = message;
+		}
+	}
+	
+	// Espionnages perso
+	if(GM_getValue('handle.msg.spy')) {
+		var m = subject.match(new RegExp(locales['espionage of']+XtenseRegexps.planetNameAndCoords));
+		if(m){
+			setStatus(XLOG_NORMAL,Xl('re_detected'));
+			
+			var contentNode = XPath.getSingleNode(document,paths.contents['spy']);
+			var content = contentNode.innerHTML;
+			
+			data.planetName = m[1];
+			data.coords = m[2];
+			
+			m = content.match(new RegExp(locales['unespionage prob']+XtenseRegexps.probability));
+			if(m)
+				data.proba = m[1];
+			
+			data.activity = 0;
+			m = content.match(new RegExp(locales['activity']));
+			if (m)
+				data.activity = m[1];
+			
+			Ximplements(data, parse_spy_report(content));		
+			data.type = 'spy';
+		}
+	}
+	/*
+	// Espionnages ennemis
+	 if(Xprefs.getBool('msg-ennemy_spy')) {
+		if(subject.match(new RegExp(locales['espionnage action']))) {
+			var contentNode = XPath.getSingleNode(document,paths.contents['ennemy_spy']);
+			var rawdata = contentNode.textContent.trim();
+			var m = rawdata.match(new RegExp(XtenseRegexps.messages.ennemy_spy));
+
+			if(m){
+				data.type = 'ennemy_spy';
+				data.from = m[1];
+				data.to = m[2];
+				data.proba = m[3];
+			}
+		} else Xconsole('The message is not an ennemy spy');
+	}
+	
+	//RC
+	if(Xprefs.getBool('msg-rc')) {
+		var m = subject.match(new RegExp(locales['combat of']));
+		if (m!=null){
+			var rapport = XPath.getStringValue(document,paths.contents['rc']).trim();
+			var m2 = rapport.match(new RegExp(locales['combat defence']+XtenseRegexps.planetNameAndCoords));
+			if (m2)
+				Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+		}
+	}
+	
+	// Recyclages
+	if(Xprefs.getBool('msg-rc_cdr')) {
+		if(from.match(new RegExp(locales['fleet'])) 
+					&& subject.match(new RegExp(locales['harvesting']))) {
+		 	var m = subject.match(new RegExp(XtenseRegexps.coords));
+			if(m) {
+				var coords = m[1];
+				var contentNode = XPath.getSingleNode(document,paths.contents['rc_cdr']);
+				var message = XPath.getStringValue(document,paths.contents['rc_cdr']).trim();
+				var nums = message.getInts();
+				data.type ='rc_cdr';
+				data.coords = coords;
+				data.nombre = nums[0];
+				data.M_recovered = nums[4];
+				data.C_recovered = nums[5];
+				data.M_total = nums[2];
+				data.C_total = nums[3];
+			}
+		} else Xconsole('The message is not a harvesting report');
+	}
+	
+	// Expeditions
+	if(Xprefs.getBool('msg-expeditions')) {
+		var m = subject.match(new RegExp(locales['expedition result']+XtenseRegexps.planetCoords));
+		var m2 = from.match(new RegExp(locales['fleet command']));
+		
+		if (m2!=null && m!=null) {
+			var coords = m[1];
+			var contentNode = XPath.getSingleNode(document,paths.contents['expedition']);
+			var message = XPath.getStringValue(document,paths.contents['expedition']).trim();
+			data.type = 'expedition';
+			data.coords = coords;
+			data.content = message;
+		} else Xconsole('The message is not an expedition report');
+	}
+
+	// Commerce
+	if(Xprefs.getBool('msg-res-pref')) {
+		var m = subject.match(new RegExp(locales['trade message 1']));
+		var m2 = subject.match(new RegExp(locales['trade message 2']));
+					
+		// Livraison d'un ami sur une de mes planètes
+		if (m!=null) {
+			var message = XPath.getStringValue(document,paths.contents['livraison']).trim();
+			var infos = message.match(new RegExp(XtenseRegexps.messages.trade_message_infos));
+			
+			var ressourcesLivrees = message.match(new RegExp(XtenseRegexps.messages.trade_message_infos_res_livrees)); // ressources livrées
+			var ressources = ressourcesLivrees[1].match(new RegExp(XtenseRegexps.messages.trade_message_infos_res)); // Quantité de ressources livrées
+
+			var met=ressources[1].trimInt();
+			var cri=ressources[2].trimInt();
+			var deut=ressources[3].trimInt();
+			
+			data.type = 'trade';
+			data.trader = infos[1].trim();
+			data.trader_planet = infos[2].trim();
+			data.trader_planet_coords = infos[3].trim();
+			data.planet = infos[4].trim();
+			data.planet_coords = infos[5].trim();
+			data.metal = met;				
+			data.cristal = cri;
+			data.deuterium = deut;
+			
+			Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+			
+		} else if (m2!=null) { // Livraison sur la planète d'un ami
+			var message = XPath.getStringValue(document,paths.contents['livraison_me']).trim(); // Corps du message
+			
+			var infos = message.match(new RegExp(XtenseRegexps.messages.trade_message_infos_me)); // Infos sur la planète
+			var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison à eu lieu
+			
+			// Récupération de mes planètes
+			var mesPlanetes = XPath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['coords']);
+			var isMyPlanet=false;
+			
+			// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
+			if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
+			   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
+					var coord = mesPlanetes.snapshotItem(i).textContent.trim();
+					Xconsole('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
+					if(coord.search(planeteLivraison) > -1){
+						 isMyPlanet=true;
+						 break;
+					}	
+			   	}
+			}
+			
+			// Livraison sur une planète amie ? 
+			if(!isMyPlanet){
+				var ressources = message.match(new RegExp(XtenseRegexps.messages.trade_message_infos_me_res)); // Quantité de ressources livrées
+				
+				var met=ressources[1].trimInt();
+				var cri=ressources[2].trimInt();
+				var deut=ressources[3].trimInt();
+				
+				data.type = 'trade_me';
+				data.planet_dest = infos[3].trim();
+				data.planet_dest_coords = planeteLivraison;
+				data.planet = infos[1].trim();
+				data.planet_coords = infos[2].trim();
+				data.trader = 'ME';
+				data.metal = met;				
+				data.cristal = cri;
+				data.deuterium = deut;
+				
+				Xconsole('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+			}
+			
+		}
+	}*/
+	
+	// Aucun message
+	if(data.type == ''){
+		setStatus(XLOG_NORMAL,Xl('no_messages'));
+		return false;
+	} else {
+		XtenseRequest.set('data', data);
+		XtenseRequest.set('type', 'messages');
+		XtenseRequest.send();
+	}
+}
+
+function getElementInSpyReport(RE,elem) {
+	var num = -1;
+	var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//recupere le nombre le plus proche apres le texte
+	var m = reg.exec(RE);
+	
+	if(m)
+		num = m[1].trimInt();
+
+	return num;
+}
+	
+/* Page Enemy Spy */
+function parse_spy_report(RE) {
+	setStatus(XLOG_NORMAL,Xl('re_detected'));
+	var paths = XtenseXpaths.messages.spy;
+	
+	var spyStrings = l('spy reports');
+	var locales = l('messages');
+	var data = {};
+	var typs = [];
+	var res = new Array();
+	
+	var isMoon = false;
+	//if(data['BaLu'] > 0) isMoon = true; //si il y a une base lunaire, alors c'est une lune
+	var moonNode = XPath.getSingleNode(document, paths.moon);
+
+	isMoon = (moonNode.href).match(new RegExp(locales['moon'] + XtenseRegexps.moon))[1] == '3' ? true : false;
+	var playerName = RE.match(new RegExp(XtenseRegexps.spy.player))[1];
+	
+	var types = XPath.getOrderedSnapshotNodes(document,paths.fleetdefbuildings);
+	if(types.snapshotLength > 0){
+	   	for(var table=0;table<types.snapshotLength;table++){
+			var type = types.snapshotItem(table).textContent.trim();
+	   		if(type)
+				typs.push(type);
+	   	}
+	}
+
+	for (var i in spyStrings['units']) {
+		for(var k=0; k<typs.length; k++){
+			if(typs[k].match(new RegExp(spyStrings['groups'][i], 'gi'))){
+				for (var j in spyStrings['units'][i]) {
+					var m = getElementInSpyReport(RE,spyStrings['units'][i][j]);
+					if(m != -1)
+						data[XtenseDatabase[i][j]] = m;
+					else
+						data[XtenseDatabase[i][j]] = 0;
+				}
+			}
+		}
+	}
+	
+	return {
+		content: data,
+		playerName: playerName,
+		moon: isMoon
+	};
+}
+
+//********** Options **********/
+
 
 function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
@@ -608,15 +1202,25 @@ function displayOptions(){
 	var handle_researchs = ' ';
 	var handle_buildings = ' ';
 	var handle_station = ' ';
-		
-	log('handle.system='+GM_getValue('handle.system','false')+";"+'handle.overview='+GM_getValue('handle.overview','false')+";"+'handle.researchs='+GM_getValue('handle.researchs','false')+";"+'handle.buildings='+GM_getValue('handle.buildings','false')+";"+'handle.station='+GM_getValue('handle.station','false'));
+	var handle_shipyard = ' ';
+	var handle_defense = ' ';
+	var handle_msg_msg = ' ';
+	var handle_msg_ally = ' ';
+	var handle_msg_spy = ' ';
+					
+	//log('handle.system='+GM_getValue('handle.system','false')+";"+'handle.overview='+GM_getValue('handle.overview','false')+";"+'handle.researchs='+GM_getValue('handle.researchs','false')+";"+'handle.buildings='+GM_getValue('handle.buildings','false')+";"+'handle.station='+GM_getValue('handle.station','false'));
 	// Récupérations des préférences
-	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
-	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}
-	if(GM_getValue('handle.researchs') && GM_getValue('handle.researchs','false')=='true'){handle_researchs += 'checked';}
+	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}	
 	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings','false')=='true'){handle_buildings += 'checked';}
 	if(GM_getValue('handle.station') && GM_getValue('handle.station','false')=='true'){handle_station += 'checked';}
-		
+	if(GM_getValue('handle.researchs') && GM_getValue('handle.researchs','false')=='true'){handle_researchs += 'checked';}
+	if(GM_getValue('handle.shipyard') && GM_getValue('handle.shipyard','false')=='true'){handle_shipyard += 'checked';}
+	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
+	if(GM_getValue('handle.defense') && GM_getValue('handle.defense','false')=='true'){handle_defense += 'checked';}
+	if(GM_getValue('handle.msg.msg') && GM_getValue('handle.msg.msg','false')=='true'){handle_msg_msg += 'checked';}
+	if(GM_getValue('handle.msg.ally') && GM_getValue('handle.msg.ally','false')=='true'){handle_msg_ally += 'checked';}
+	if(GM_getValue('handle.msg.spy') && GM_getValue('handle.msg.spy','false')=='true'){handle_msg_spy += 'checked';}
+					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
 	// Serveur Univers
 	options+= '<img src="http://svn.ogsteam.fr/trunk/xtense_GreaseMonkey/images/xtense.png" alt="Options Xtense"/>';
@@ -656,28 +1260,55 @@ function displayOptions(){
 	// Pages
 	options+= '<div id="Xtense_pages">';
 	options+= '<table id="Xtense_table_pages" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
-	options+= '<colgroup><col width="20%"/><col/></colgroup>';
+	options+= '<colgroup><col width="30%"/><col/><col width="30%"/><col/><col width="30%"/><col/></colgroup>';
 	options+= '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 	options+= '<tbody>';
 	options+= '<tr>';
+	options+= '<td colspan="6"><label class="styled textBeefy">Envoi des données</label></td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Vue générale</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.overview" size="35" alt="24" type="checkbox"'+ handle_overview +'/></td>';
-	options+= '</tr>';
-	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Bâtiments</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.buildings" size="35" alt="24" type="checkbox"'+ handle_buildings +'/></td>';
-	options+= '</tr>';
-	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Installations</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.station" size="35" alt="24" type="checkbox"'+ handle_station +'/></td>';
-	options+= '</tr>';	
-	options+= '<tr>';
-	options+= '<td class="champ"><label class="styled textBeefy">Systemes solaires</label></td>';
-	options+= '<td class="value"><input class="speed" id="handle.system" size="35" alt="24" type="checkbox"'+ handle_system +'/></td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Recherches</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.researchs" size="35" alt="24" type="checkbox"'+ handle_researchs +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Flotte</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.shipyard" size="35" alt="24" type="checkbox"'+ handle_shipyard +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Défense</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.defense" size="35" alt="24" type="checkbox"'+ handle_defense +'/></td>';
+	options+= '</tr>';	
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Systemes solaires</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.system" size="35" alt="24" type="checkbox"'+ handle_system +'/></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6"><label class="styled textBeefy">Envoi des messages</label></td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Messages de joueurs</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.msg" size="35" alt="24" type="checkbox"'+ handle_msg_msg +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Messages d\'alliance</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.ally" size="35" alt="24" type="checkbox"'+ handle_msg_ally +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Rapports d\'espionnage</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.spy" size="35" alt="24" type="checkbox"'+ handle_msg_spy +'/></td>';	
 	options+= '</tr>';
 	options+= '</tbody></table>';
 	options+= '</div>';
@@ -763,7 +1394,7 @@ function displayOptions(){
 function Ximplements (object, implement) { for (var i in implement) object[i] = implement[i];}
 
 function initLocales(){
-
+	if(isChrome){
     Ximplements(Xlang, {
         'error_start' : 'ERREUR: ',
         'http_status_403' : 'statut 403, Impossible d\'acceder au plugin Xtense.',
@@ -887,6 +1518,7 @@ function initLocales(){
         'success_ally_list' : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
         'success_messages' : 'Message correctement envoyé',
         'success_fleetSending' : 'Départ de flotte correctement envoyé',
+        'success_fleet' : 'Départ de flotte correctement envoyé',
         'success_spy' : 'Rapport d\'espionnage correctement envoyé',
         'success_res' : 'Message de commerce correctement envoyé',
 		'success_research' : 'Mise à jour des technologies effectuée ($1)',
@@ -899,10 +1531,443 @@ function initLocales(){
         'page_labo' : 'Laboratoire',
         'page_defense' : 'Défense',
         'page_fleet' : 'Flotte',
-        'page_fleetSending' : 'Départ de flotte',
+        'page_fleetSending' : 'Flotte',
         //
         //'PM':'MP',
         'call_messages' : '-- Messages renvoyés par les appels'});
+	} else if(isFirefox){
+		Xlang = {
+        error_start : 'ERREUR: ',
+        http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
+        http_status_404: 'statut 404, Plugin Xtense introuvable, vÃ©rifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
+        http_status_500: 'statut 500: Erreur interne au serveur.',
+        http_timeout: 'Le serveur n\'a pas rÃ©pondu Ã  temps. Verifiez que votre hÃ©bergeur ne rencontre pas des problÃªmes de reseau.',
+        http_status_unknown : 'statut http inconnu: ',
+        //
+        incorrect_response : 'RÃ©ponse incorrecte',
+        empty_response : 'RÃ©ponse du plugin vide',
+        invalid_response : 'Impossible de rÃ©cupÃ©rer les donnÃ©es envoyÃ©es par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
+        //
+        php_version : 'La version PHP de votre hÃ©bergement n\'est pas assez rÃ©cente. Xtense requiert au minimum la version 5.1 de PHP.',
+        error_occurs : 'Une erreur est survenue',
+        wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir Ãªtre utilisÃ©e avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre Ã  jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
+        wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la mÃªme version que celle du plugin installÃ©',
+        wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre Ã  jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
+        server_active: 'le serveur OGSpy est pour le moment dÃ©sactivÃ©',
+        plugin_connections: 'Connexions au plugin Xtense dÃ©sactivÃ©es',
+        plugin_config: 'Plugin Xtense non configurÃ© par votre administrateur, impossible de l\'utiliser',
+        plugin_univers: 'NumÃ©ro d\'univers d\'Ogame invalide sur cet OGSpy',
+        username: 'Le compte "$1" est inconnu. Attention Ã  la casse (diffÃ©rence Majuscules / minuscules)', // Username
+        password: 'Votre mot de passe n\'est pas bon. Attention Ã  la casse (diffÃ©rence Majuscules / minuscules)',
+        user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
+        //
+        informations : 'Informations',
+        server_name : 'Nom du serveur OGSpy', // Server name
+        version : 'Version', // version
+        grant_all : 'Vous possÃ©dez tous les droits pour utiliser Xtense',
+        grant_nothing : 'Vous ne possÃ©dez aucune autorisation quant Ã  l\'import de donnÃ©es sur votre OGSpy',
+        //
+        grant_can : 'pouvez',
+        grant_cannot : 'ne pouvez pas',
+        grant_system : 'Vous $1 ajouter des systÃªmes solaires', // can / cannot
+        grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
+        grant_empire : 'Vous $1 mettre Ã  jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
+        grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
+        //
+        checking_end : 'VERIFICATION TERMINEE',
+        checking_errors : 'Une ou plusieurs erreurs sont survenues, vous pouvez soit retourner Ã  la fenetre des options ou alors fermer cette fenetre sans prendre en compte les erreurs.',
+        checking_success : 'Aucune erreur Ã  signaler, vous pouvez fermer les options',
+        //
+        connecting : 'Connexion en cours : ', // Server url
+        checking_server : 'Verification du serveur OGSpy nÂ°$1', // Server number
+        toolbar_activated : 'Barre d\'outils activÃ©e',
+        toolbar_deactivated : 'Barre d\'outils dÃ©sactivÃ©e',
+        //
+        ogspy_menu_tooltip: 'Connexion automatique au serveur OGSpy',
+        //
+        fatal_error : 'Une erreur critique est survenue et a arrÃªtÃ© l\'exÃ©cution de Xtense',
+        parsing_error : 'Une erreur critique est survenue lors de la rÃ©cupÃ©ration des donnÃ©es de la page',
+        //
+        no_ogspy_server: 'Aucun serveur',
+        no_server : 'Aucun serveur disponible pour cet univers',
+        unknow_page: 'Page inconnue',
+        activate : 'Activer',
+        deactivate : 'Desactiver',
+        wait_send: 'En attente de l\'envoi manuel des donnÃ©es',
+        unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
+        //
+        overview_detected: 'Vue gÃ©nÃ©rale dÃ©tectÃ©e',
+        buildings_detected: 'Batiments dÃ©tectÃ©s',
+        installations_detected: 'Installations dÃ©tectÃ©s',
+        researchs_detected: 'Recherches dÃ©tectÃ©s',
+        fleet_detected: 'Flotte dÃ©tectÃ©e',
+        defense_detected: 'DÃ©fenses dÃ©tectÃ©s',
+        messages_detected: 'Page de messages dÃ©tectÃ©e',
+        ranking_detected: 'Statistiques $2 des $1 dÃ©tectÃ©es', // Primary type (ally/player), Secondary type (points, research, fleet)
+        ally_list_detected: 'Liste des joueurs de l\'alliance dÃ©tectÃ©e',
+        system_detected: 'SystÃ¨me solaire dÃ©tectÃ©: ', // Galaxy, System
+        re_detected: 'Rapport d\'espionnage dÃ©tectÃ©',
+        rc_detected: 'Rapport de combat dÃ©tectÃ©',
+        res_detected: 'Message de commerce dÃ©tectÃ©',
+        //
+        no_researchs : 'Aucune recherche Ã  envoyer',
+        no_defenses : 'Aucune dÃ©fense Ã  envoyer',
+        no_buildings : 'Aucun bÃ¢timent Ã  envoyer',
+        no_fleet : 'Pas de flotte Ã  envoyer',
+        //
+        ranking_player: 'joueurs',
+        ranking_ally: 'alliances',
+        ranking_points: 'points',
+        ranking_fleet: 'flotte',
+        ranking_research: 'recherches',
+        ranking_defense: 'dÃ©fense',
+        ranking_buildings: 'bÃ¢timents',
+        //
+        invalid_system : 'SystÃªme solaire non pris en compte',
+        invalid_ranking : 'Page des statistiques invalide',
+        invalid_rc : 'Rapport de combat invalide (Contact perdu)',
+        no_ranking : 'Aucun classement Ã  envoyer',
+        no_messages : 'Aucun message Ã  envoyer',
+        impossible_ranking : 'Impossible de rÃ©cupÃ©rer le classement alliance suivant les points par membre',
+        // Responses
+        response_start: 'Serveur $1 : ', // Serveur number
+        http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
+        response_hack : 'Les donnÃ©es envoyÃ©es ont Ã©tÃ© refusÃ©es par le plugin Xtense',
+        //
+        error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez rÃ©cente',
+        error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
+        error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la mÃªme version que celle du plugin installÃ©',
+        error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
+        error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
+        error_username: 'Pseudo invalide',
+        error_password: 'Mot de passe invalide',
+        error_user_active: 'Votre compte est inactif',
+        error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planÃªte',
+        error_plugin_connections: 'Connexions au plugin Xtense non autorisÃ©es',
+        error_plugin_config: 'Plugin Xtense non configurÃ© par votre administrateur, impossible de l\'utiliser',
+        error_plugin_univers: 'NumÃ©ro d\'univers d\'Ogame invalide sur cet OGSpy',
+        error_grant_start: 'Vous ne possÃ©dez pas les autorisations nÃ©cessaires pour envoyer ',
+        error_grant_empire: 'des pages de votre empire (BÃ¢timents, Laboratoire...)',
+        error_grant_messages: 'des messages',
+        error_grant_system: 'des systÃªmes solaires',
+        error_grant_ranking: 'des classements',
+        //
+        success_home_updated : 'Espace personnel mis Ã  jour ($1)', // Page name
+        success_system : 'Mise Ã  jour du systÃ¨me solaire effectuÃ©e', // Galaxy, System
+        success_ranking : 'Classement $2 des $1 ($3-$4) mis Ã  jour', // Primary type, secondary type, offset min, offset max
+        success_rc : 'Rapport de combat envoyÃ©',
+        success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyÃ©e', // TAG
+        success_messages : 'Message correctement envoyÃ©',
+        success_fleetSending : 'DÃ©part de flotte correctement envoyÃ©',
+        success_spy : 'Rapport d\'espionnage correctement envoyÃ©',
+        success_res : 'Message de commerce correctement envoyÃ©',
+		success_research : 'Mise Ã  jour des technologies effectuÃ©e',
+        //
+        unknow_response: 'Code rÃ©ponse inconnu : "$1", data: "$2"', // code, content
+        //
+        page_overview: 'Vue gÃ©nÃ©rale',
+        page_buildings: 'BÃ¢timents',
+        page_installations: 'Installations',
+        page_labo: 'Laboratoire',
+        page_defense: 'DÃ©fense',
+        page_fleet: 'Flotte',
+        page_fleetSending: 'DÃ©part de flotte',
+        //
+        //'PM':'MP',
+        call_messages : '-- Messages renvoyÃ©s par les appels'
+    };  
+	}
+	Ximplements(XtenseLocales , {
+	'fr': {
+		'spy reports' : {
+			'groups' : {
+				'resources': 'Ressources',
+				'buildings': 'Bâtiment',
+				'defense':  'Défense',
+				'fleet': 'Flottes',
+				'researchs': 'Recherche'
+			},
+			'units' : {
+				'resources': {
+					601:'Métal:',
+					602:'Cristal',
+					603:'Deutérium',
+					604:'Energie'
+				},
+				'buildings' : { 
+					1 : 'Mine de métal',						
+					2 : 'Mine de cristal', 
+					3 : 'Synthétiseur de deutérium', 
+					4 : 'Centrale électrique solaire', 				
+					12 : 'Centrale électrique de fusion', 
+					14 : 'Usine de robots', 
+					15 : 'Usine de nanites', 			
+					21 : 'Chantier spatial', 
+					22 : 'Hangar de métal', 
+					23 : 'Hangar de cristal', 			
+					24 : 'Réservoir de deutérium', 
+					31 : 'Laboratoire de recherche', 
+					33 : 'Terraformeur', 				
+					34 : 'Dépôt de ravitaillement', 
+					44 : 'Silo de missiles', 
+					41 : 'Base lunaire', 		
+					42 : 'Phalange de capteur', 
+					43 : 'Porte de saut spatial'
+				},
+				'researchs' :  { 
+					106 : 'Technologie Espionnage', 
+					108 : 'Technologie Ordinateur', 
+					109 : 'Technologie Armes',		
+					110 : 'Technologie Bouclier', 
+					111 : 'Technologie Protection des vaisseaux spatiaux', 		
+					113 : 'Technologie Energie', 
+					114 : 'Technologie Hyperespace', 
+					115 : 'Réacteur à combustion', 			
+					117 : 'Réacteur à impulsion', 
+					118 : 'Propulsion hyperespace', 
+					120 : 'Technologie Laser', 	
+					121 : 'Technologie Ions', 
+					122 : 'Technologie Plasma', 
+					123 : 'Réseau de recherche intergalactique', 		
+					124 : 'Astrophysique',
+					199 : 'Technologie Graviton'
+				},
+				'fleet' :  { 		
+					202 : 'Petit transporteur', 
+					203 : 'Grand transporteur', 
+					204 : 'Chasseur léger', 
+					205 : 'Chasseur lourd',		
+					206 : 'Croiseur', 
+					207 : 'Vaisseau de bataille', 
+					208 : 'Vaisseau de colonisation', 
+					209 : 'Recycleur', 				
+					210 : 'Sonde d`espionnage', 
+					211 : 'Bombardier', 
+					212 : 'Satellite solaire', 
+					213 : 'Destructeur', 		
+					214 : 'Étoile de la mort', 
+					215 : 'Traqueur',
+				},	
+				'defense' :  { 	
+					401 : 'Lanceur de missiles', 
+					402 : 'Artillerie laser légère', 
+					403 : 'Artillerie laser lourde', 
+					404 : 'Canon de Gauss',			
+					405 : 'Artillerie à ions', 
+					406 : 'Lanceur de plasma', 
+					407 : 'Petit bouclier', 
+					408 : 'Grand bouclier', 			
+					502 : 'Missile d`interception', 
+					503 : 'Missile Interplanétaire'
+				}
+			}
+		},
+		
+		'combat report' : {
+			'units' : {
+				'fleet' :  { 		
+					202 : 'P.transp.', 
+					203 : 'G.transp.', 
+					204 : 'Ch.léger', 
+					205 : 'Ch.lourd',		
+					206 : 'Croiseur', 
+					207 : 'V.bataille', 
+					208 : 'Vaisseau de colonisation', 
+					209 : 'Recycleur', 				
+					210 : 'Sonde', 
+					211 : 'Bombardier', 
+					212 : 'Sat.sol.', 
+					213 : 'Destr.', 		
+					214 : 'Rip', 
+					215 : 'Traqueur',
+				},	
+				'defense' :  { 	
+					401 : 'Missile', 
+					402 : 'L.léger.', 
+					403 : 'L.lourd', 
+					404 : 'Can.Gauss',			
+					405 : 'Art.ions', 
+					406 : 'Lanc.plasma', 
+					407 : 'P.bouclier', 
+					408 : 'G.bouclier'
+				}
+			},
+			'regxps' : {
+				'time' : 'Les flottes suivantes s\'affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
+				'round' : {
+					'a_nb' : 'La flotte attaquante tire (.*) fois ',
+					'a_shoot' : 'avec une force totale de (.*) sur le défenseur.',
+					'd_bcl' : 'Les boucliers du défenseur absorbent (.*) points de dommage.',
+					'd_nb' : 'La flotte de défense tire (.*) fois',
+					'd_shoot' : 'sur l\'attaquant avec une force de (.*). Les boucliers',
+					'a_bcl' : ' de l\'attaquant absorbent (.*) points de dommage.'
+				},
+				'result' : {
+					'win_metal' : 'Il emporte (.*) unités de métal',
+					'win_cristal' : ', (.*) unités de cristal',
+					'win_deut' : 'et (.*) unités de deutérium.',
+					'a_lost' : 'L\'attaquant a perdu au total (.*) unités.',
+					'd_lost' : 'Le défenseur a perdu au total (.*) unités.',
+					'deb_metal' : 'Un champ de débris contenant (.*) de métal',
+					'deb_cristal' : ' et (.*) de cristal se forme dans l\'orbite de la planète.'
+				},
+				'weapons' : {
+					'arm' : 'Armes: (\\d+)%',
+					'bcl' : 'Bouclier: (\\d+)%',
+					'coq' : 'Coques: (\\d+)%'
+				},
+				'moon' : 'formant ainsi une lune',
+				'moonprob' : 'une lune est de (\\d+) %',
+				'attack' : 'Attaquant',
+				'defense' : 'Défenseur',
+				'nul' : 'match nul',
+				'attack_win' : 'L`attaquant a gagné la bataille'
+			}
+			
+		},
+		
+		'messages' : {
+			'espionage of': 'Rapport d`espionnage de',
+			'unespionage prob': 'Probabilité de contre-espionnage ',
+			'activity': '(\\d+)</font> dernières minutes',
+			'moon' : 'type',
+			'espionnage action' : 'Activité d\`espionnage',
+			'fleet command' : 'Tour de contrôle',
+			'expedition result' : 'Résultat de l`expédition ',
+			'fleet': 'Flotte',
+			'harvesting': 'exploitation du champ de débris',
+			'combat of': 'Rapport de combat',
+			'combat defence' : 'Bataille de',
+			'trade message 1' : 'Livraison de ressources par',
+			'trade message 2' : 'Arriv.*e sur une plan.*te'			
+		},
+		
+		'dates' : {
+			'messages' : {
+				regexp: '(\\d+).(\\d+).(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
+				fields: { 
+					year: 3,
+					month:2,
+					day:1,
+					hour:4,
+					min:5,
+					sec:6 
+				}
+			}
+		}
+	},
+	
+	'en': {
+		'spy reports' : {
+			'groups' : {
+				'resources': 'Resources',
+				'buildings': 'Buildings',
+				'defense':  'Defense',
+				'fleet': 'Fleet',
+				'researchs': 'Research'
+			},
+			'units' : {
+				'resources': {
+					601:'Metal',
+					602:'Crystal',
+					603:'Deuterium',
+					604:'Energy'
+				},
+				'buildings' : { 
+					1 : 'Metal Mine',						
+					2 : 'Crystal Mine', 
+					3 : 'Deuterium Synthesizer', 
+					4 : 'Solar Plant', 				
+					12 : 'Fusion Reactor', 
+					14 : 'Robotics Factory', 
+					15 : 'Nanite Factory', 			
+					21 : 'Shipyard', 
+					22 : 'Metal Storage', 
+					23 : 'Crystal Storage', 			
+					24 : 'Deuterium Tank', 
+					31 : 'Research Lab', 
+					33 : 'Terraformer', 				
+					34 : 'Alliance Depot', 
+					44 : 'Missile Silo', 
+					41 : 'Lunar Base', 		
+					42 : 'Sensor Phalanx', 
+					43 : 'Jump Gate'
+				},
+				'researchs' :  { 
+					106 : 'Espionage Technology', 
+					108 : 'Computer Technology', 
+					109 : 'Weapons Technology',		
+					110 : 'Shielding Technology', 
+					111 : 'Armour Technology', 		
+					113 : 'Energy Technology', 
+					114 : 'Hyperspace Technology', 
+					115 : 'Combustion Drive', 			
+					117 : 'Impulse Drive', 
+					118 : 'Hyperspace Drive', 
+					120 : 'Laser Technology', 	
+					121 : 'Ion Technology', 
+					122 : 'Plasma Technology', 
+					123 : 'Intergalactic Research Network', 		
+					124 : 'Expedition Technology',
+					199 : 'Graviton Technology'
+				},
+				'fleet' :  { 		
+					202 : 'Small Cargo', 
+					203 : 'Large Cargo', 
+					204 : 'Light Fighter', 
+					205 : 'Heavy Fighter',		
+					206 : 'Cruiser', 
+					207 : 'Battleship', 
+					208 : 'Colony Ship', 
+					209 : 'Recycler', 				
+					210 : 'Espionage Probe', 
+					211 : 'Bomber', 
+					212 : 'Solar Satellite', 
+					213 : 'Destroyer', 		
+					214 : 'Deathstar', 
+					215 : 'Battlecruiser',
+				},	
+				'defense' :  { 	
+					401 : 'Rocket Launcher', 
+					402 : 'Light Laser', 
+					403 : 'Heavy Laser', 
+					404 : 'Gauss Cannon',			
+					405 : 'Ion Cannon', 
+					406 : 'Plasma Turret', 
+					407 : 'Small Shield Dome', 
+					408 : 'Large Shield Dome', 			
+					502 : 'Anti-Ballistic Missiles', 
+					503 : 'Interplanetary Missiles'
+				}
+			}
+		},
+		
+		
+		'dates' : {
+			'messages' : {
+				regexp: '(\\d+)-(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
+				fields: { 
+					year: -1,
+					month:1,
+					day:2,
+					hour:3,
+					min:4,
+					sec:5 
+				}
+			}
+		},
+		
+		'messages' : {
+			'espionage of': 'Espionage report of',
+			'espionage prob': 'Chance of counter-espionage',
+			'fleet command' : 'Fleet Command',
+			'expedition result' : 'Expedition Result \\[(\\d+:\\d+:\\d+)\\]',
+			'espionnage action' : 'Espionage action',
+			'fleet': 'Fleet',
+			'harvesting': 'Harvesting report from DF'
+		}
+	}
+});
 }
 
 function initParsers(){
@@ -1308,12 +2373,14 @@ function handleResponse(Response) {
 			else if (code == 'system')				message = Xl('success_system', data.galaxy, data.system);
 			else if (code == 'home updated' && data.page=='labo')			message = Xl('success_home_updated', Xl('page_labo',data.page));
 			else if (code == 'home updated' && data.page=='buildings')			message = Xl('success_home_updated', Xl('page_buildings',data.page));
-			/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);
+			else if (code == 'home updated' && data.page=='fleet')		message = Xl('success_home_updated', Xl('page_fleet',data.page));
+			else if (code == 'home updated' && data.page=='defense')		message = Xl('success_home_updated', Xl('page_defense',data.page));
 			else if (code == 'rc')					message = Xl('success_rc');
-			else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
 			else if (code == 'messages')			message = Xl('success_messages');
+			/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);			
+			else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
 			else if (code == 'spy') 				message = Xl('success_spy');
-			else if (code == 'fleetSending')		message = Xl('success_fleetSending');*/
+			*/
 			else 									message = Xl('unknow_response', code, Response.content);
 		//}
 		
@@ -1371,4 +2438,27 @@ function getResources(){
     var energy = XPath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
 	log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 	return Array(metal,cristal,deut,antimater,energy);
+}
+function XtenseParseDate(dateString,handler) {
+	var date = new Date();
+	var m = dateString.match(new RegExp(handler.regexp));
+	var time = new Date();
+	if(m) {
+		if(handler.fields.year!=-1)
+			time.setYear(m[handler.fields.year]);
+		if(handler.fields.month!=-1)
+			time.setMonth(m[handler.fields.month]*1-1);
+		//Xconsole('month:'+m[handler.fields.month]+'|'+parseInt(m[handler.fields.month].trimZeros()));
+		if(handler.fields.day!=-1)
+			time.setDate(m[handler.fields.day]);
+		if(handler.fields.hour!=-1)
+			time.setHours(m[handler.fields.hour]);
+		if(handler.fields.min!=-1)
+			time.setMinutes(m[handler.fields.min]);
+		if(handler.fields.sec!=-1)
+			time.setSeconds(m[handler.fields.sec]);
+	}
+	//Xconsole(m+' | '+time);
+	time =  Math.floor(time.getTime()/1000);//division par 1000 pour un timestamp php
+	return time;
 }
