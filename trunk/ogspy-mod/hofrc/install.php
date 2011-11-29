@@ -123,7 +123,7 @@ if ($is_ok == true)
 			
 			$query = "CREATE TABLE `".TABLE_HOFRC_RP."` ("
 			."  `id` int(11) NOT NULL auto_increment,"
-			."  `id_rc` tinyint(1) NOT NULL default '1' COMMENT 'id du hof',"
+			."  `id_rc` int(11) NOT NULL default '1' COMMENT 'id du hof',"
 			."	title int(11) NOT NULL default '0',"
 			."	rp LONGTEXT NOT NULL,"
 			."	beetween int(11) NOT NULL default '0',"
@@ -188,9 +188,9 @@ if ($is_ok == true)
 			
 			$query = "CREATE TABLE `".TABLE_HOFRC_TITLE."` ("
 			."  `id` int(11) NOT NULL default '0',"
-			."  `id_rc` tinyint(1) NOT NULL default '1' COMMENT 'id du hof',"
+			."  `id_rc` int(11) NOT NULL default '1' COMMENT 'id du hof',"
 			."	board_url varchar(255) NOT NULL default '0',"
-			."	title int(11) NOT NULL default '0',"
+			."	title  varchar(255) NOT NULL default '0',"
 			."	pillage varchar(255) NOT NULL default '0',"
 			."  PRIMARY KEY  (`id`)"
 			."  ) COMMENT='Information pour la création de l\'image'";

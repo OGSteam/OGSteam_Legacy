@@ -103,15 +103,15 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 					while ($historique_title = $db->sql_fetch_assoc($query_historique))
 						{
 							$picture_title = "mod/hofrc/Output/".$historique_title['id'].".png";
-							if (!empty($historique_title['BOARD_URL']))
+							if (!empty($historique_title['board_url']))
 								{
 									if ($type == "preview")
 										{
-											$historique_picture .= "<a href=".$historique_title['BOARD_URL']."><img src=".$picture_title."></a><br>";
+											$historique_picture .= "<a href=".$historique_title['board_url']."><img src=".$picture_title."></a><br>";
 										}
 									elseif ($type == "bbcode")
 										{
-											$historique_picture .= "[url=".$historique_title['BOARD_URL']."][img=".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$picture_title."][/img][/url]<br>";
+											$historique_picture .= "[url=".$historique_title['board_url']."][img=".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$picture_title."][/img][/url]<br>";
 										}
 								}
 						}
@@ -1310,7 +1310,7 @@ function jsspecialchars($s) {
 				}// Regarde si le fichier existe ou non  
 			
 			// $list_hof = $db->sql_query("SELECT `id`, `id_rc`, `BOARD_URL`, `TITLE` FROM ".TABLE_HOFRC_TITLE);
-			$query_title = $db->sql_query("SELECT `id`, `id_rc`, `BOARD_URL`, `TITLE` FROM ".TABLE_HOFRC_TITLE." ORDER BY id");
+			$query_title = $db->sql_query("SELECT `id`, `id_rc`, `BOARD_URL`, `title` FROM ".TABLE_HOFRC_TITLE." ORDER BY id");
 			while ($title = mysql_fetch_assoc($query_title))
 				{
 					$color_txt_1 = explode(",",$color_txt_1_RGB);
