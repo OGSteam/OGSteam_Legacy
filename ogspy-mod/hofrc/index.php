@@ -8,13 +8,9 @@
  */
 	
 	if (!defined ('IN_SPYOGAME'))		die("Hacking attempt");
-	
-	
-
 	if (!isset ($table_prefix))		global $table_prefix;
 	if (!isset ($icon_display))		global $icon_display;
-	
-	
+		
 	$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='hofrc' AND `active`='1' LIMIT 1";
 	if (!$db->sql_numrows($db->sql_query($query)))
 		die("Hacking attempt");
@@ -23,6 +19,7 @@
 	if ($pub_subaction !== "preview" && $pub_subaction !== "temp")
 		{
 		require_once("views/page_header.php");
+		require_once('mod/hofrc/Pages/include.php');
 	?>
 	<table width="100%">
 <tr  align="center">
@@ -133,10 +130,8 @@ switch ($pub_subaction) {
 	</td>
 </tr>
 </table>
+<br><br><br>
 <?php	
-// et maintenant, il faut afficher l'image, sauf s'il y a eu des erreurs...
-// Modification du header
-
-
-			require_once("views/page_tail.php");
+page_footer();
+require_once("views/page_tail.php");
 ?>
