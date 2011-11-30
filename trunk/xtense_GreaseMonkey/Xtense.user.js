@@ -21,8 +21,8 @@ var XtenseLocales = { };
 var start_time = (new Date()).getTime();
 var freqMaj = 23 * 3600;
 
-//Variables globales pour les status
-const XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5; //Type d'erreur
+//Variables globales pour les status - Type d'erreur
+const XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5;
 
 
 // Navigateurs
@@ -47,6 +47,13 @@ if(!GM_getValue){
             return defaultVal;
         }
         return retValue;
+    }
+    function GM_exist(key){
+        var retValue = localStorage.getItem(key);
+        if (!retValue ){
+        	return false;
+        }
+        return true;
     }    
     function GM_setValue(key,value) 
     {
@@ -162,7 +169,7 @@ function Xl(name) {
 			return locale;
 		} catch (e) { alert(e); return false; }
 }
-// Permetde connaitre les locales du jeu suivant la langue (FR,ENG, ...)
+// Permet de connaitre les locales du jeu suivant la langue (FR,ENG, ...)
 function l(id){
 	return XtenseLocales[XtenseMetas.getLanguage()][id];
 }
@@ -204,6 +211,9 @@ initLocales();
 displayXtense();
 //displayInfoXtense();
 checkMaJ();
+if(GM_exist('server.check') && GM_getValue('server.check','false')=='true') {
+	XtenseRequest.check();
+} 
 setStatus(XLOG_NORMAL,Xl('toolbar_activated'));
 handle_current_page();
 //exit !!
@@ -225,7 +235,7 @@ var regMessages = new RegExp(/(showmessage)/);
 
 if(regOption.test(url))			{ displayOptions();}
 else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
-else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='true'){parse_overview();}}
+else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='true'){get_planet_details();}}
 else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true'){parse_researchs();}}
 else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true'){parse_buildings();}}
 else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'){parse_station();}}
@@ -312,19 +322,31 @@ function parse_galaxy_system_inserted(event){
 				if (player_id != '' ) {
 					player_id = player_id.match(/\&to\=(.*)\&ajax/);
 					player_id = player_id[1];
+				//} else if(doc.cookie.match(/login_(.*)=U_/)){
+				} else if(playerName){
+					//player_id = doc.cookie.match(/login_(.*)=U_/)[1];
+					player_id = XtenseMetas.getPlayerId();  
 				}
-				else if(doc.cookie.match(/login_(.*)=U_/))
-					player_id = doc.cookie.match(/login_(.*)=U_/)[1]; 
-				
-				var ally_id = XPath.getStringValue(doc,paths.ally_id,row).trim();
-				if (ally_id != '' ) {
-					ally_id = ally_id.match(/allyid\=(.*)/);
-					ally_id = ally_id[1];
+				var allyid = XPath.getStringValue(doc,paths.ally_id,row).trim();
+				if (allyid != '' ) {
+					allyid = allyid.match(/allyid\=(.*)/);
+					allyid = allyid[1];
+				} else if (allytag) {
+					//ally_id = '-1';
+					allyid = XtenseMetas.getAllyId();
 				}
-				else if (allytag)
-					ally_id = '-1';
+				var allyplace = XPath.getStringValue(doc,paths.ally_place,row).trim();
+				if (allyplace != '' ) {
+					allyplace = allyplace.match(/Place\: (.*)/);
+					allyplace = allyplace[1];
+				}
+				var allymembers = XPath.getStringValue(doc,paths.ally_members,row).trim();
+				if (allymembers != '' ) {
+					allymembers = allymembers.match(/Membres\: (.*)/);
+					allymembers = allymembers[1];
+				}
 				
-				var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
+				var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:allyid,ally_tag:allytag,ally_place:allyplace,ally_members:allymembers,debris:debris,activity:activity};
 				rowsData[position]=r;
 			}
 			XtenseRequest.set(
@@ -344,37 +366,38 @@ function parse_galaxy_system_inserted(event){
 }
 
 /* Page Overview */
-function parse_overview(){
-	setStatus(XLOG_NORMAL,Xl('overview_detected'));
-	if(typeof( delaytodisplay_overview ) != "undefined") { clearInterval(delaytodisplay_overview);} //Supression du setinterval si il existe
+function parse_overview(event){
+	var doc = event.target.ownerDocument;
+	//if(typeof( delaytodisplay_overview ) != "undefined") { clearInterval(delaytodisplay_overview);} //Supression du setinterval si il existe
 	
-	if(XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != ""){
-	
+	if(XPath.getStringValue(doc,XtenseXpaths.overview.temperatures) != null && XPath.getStringValue(doc,XtenseXpaths.overview.temperatures) != ""){
 		var planetData = getPlanetData();
-		var cases = XPath.getStringValue(document,XtenseXpaths.overview.cases.trimInt());
-		var temperatures = XPath.getStringValue(document,XtenseXpaths.overview.temperatures);
+		if (GM_getValue('lastAction','') != 'planet_name:'+planetData.planet_name){
+			var cases = XPath.getStringValue(doc,XtenseXpaths.overview.cases).trimInt();
+			var temperatures = XPath.getStringValue(doc,XtenseXpaths.overview.temperatures);
+			var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
+			var temperature_min = temperatures.match(/(-?\d+)/)[1];
+			var resources = getResources();
 			
-		var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
-		var temperature_min = temperatures.match(/(-?\d+)/)[1];
-		var resources = getResources();
-		
-		XtenseRequest.set(
-			{
-				type: 'overview',
-				fields: cases,
-				temperature_min: temperature_min,
-				temperature_max: temperature_max,
-				ressources: resources
-			},
-			planetData
-		);
-			
-		XtenseRequest.set('lang',langUnivers);
-		XtenseRequest.send();
-	}else{
+			XtenseRequest.set(
+				{
+					type: 'overview',
+					fields: cases,
+					temperature_min: temperature_min,
+					temperature_max: temperature_max,
+					ressources: resources
+				},
+				planetData
+			);
+				
+			XtenseRequest.set('lang',langUnivers);
+			XtenseRequest.send();
+			GM_setValue('lastAction','planet_name:'+planetData.planet_name);
+		}
+	}/*else{
 		delaytodisplay_overview = setInterval( parse_overview, 20); // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
 	
-	}
+	}*/
 }
 
 /* Page Buildings */
@@ -866,9 +889,9 @@ function parse_messages(){
 			data.type = 'spy';
 		}
 	}
-	/*
+	
 	// Espionnages ennemis
-	 if(Xprefs.getBool('msg-ennemy_spy')) {
+	 if(GM_getValue('handle.msg.ennemy.spy')) {
 		if(subject.match(new RegExp(locales['espionnage action']))) {
 			var contentNode = XPath.getSingleNode(document,paths.contents['ennemy_spy']);
 			var rawdata = contentNode.textContent.trim();
@@ -880,9 +903,9 @@ function parse_messages(){
 				data.to = m[2];
 				data.proba = m[3];
 			}
-		} else Xconsole('The message is not an ennemy spy');
+		}
 	}
-	
+	/*
 	//RC
 	if(Xprefs.getBool('msg-rc')) {
 		var m = subject.match(new RegExp(locales['combat of']));
@@ -1111,6 +1134,42 @@ function get_galaxycontent(){
 	}
 
 }
+function get_planet_details(){	
+	setStatus(XLOG_NORMAL,Xl('overview_detected'));
+	
+	if (isChrome) //Pour Chrome :-)
+	{	
+		/* Page Overview */
+		log("In get_planet_details()");
+		var target = document.getElementById('scoreContentField');
+		//target.removeEventListener("DOMNodeInserted");
+		//target.removeEventListener("DOMContentLoaded");
+		target.addEventListener("DOMNodeInserted", parse_overview, false);		
+		//target.addEventListener("DOMContentLoaded", parse_overview, false);		
+
+	}else{// Pour Firefox Notamment
+
+		function safeWrap(f)
+		{
+			return function()
+			{
+				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
+			};
+		}
+		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
+		
+		unsafeWindow.$("#planetDetails").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		{
+			//l'url de la requête ajax contient page=galaxyContent
+			if (settings.url.indexOf("page=planetDetails") == -1) return;
+
+			parse_overview();
+			
+		}));
+
+	}
+
+}
 /********************** Fin Utilities des Parsings **********************/
 
 
@@ -1128,7 +1187,9 @@ function displayOptions(){
 	var handle_msg_msg = ' ';
 	var handle_msg_ally = ' ';
 	var handle_msg_spy = ' ';
-					
+	var handle_msg_ennemy_spy = ' ';	
+	var server_check = ' ';
+						
 	//log('handle.system='+GM_getValue('handle.system','false')+";"+'handle.overview='+GM_getValue('handle.overview','false')+";"+'handle.researchs='+GM_getValue('handle.researchs','false')+";"+'handle.buildings='+GM_getValue('handle.buildings','false')+";"+'handle.station='+GM_getValue('handle.station','false'));
 	// Récupérations des préférences
 	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}	
@@ -1141,6 +1202,9 @@ function displayOptions(){
 	if(GM_getValue('handle.msg.msg') && GM_getValue('handle.msg.msg','false')=='true'){handle_msg_msg += 'checked';}
 	if(GM_getValue('handle.msg.ally') && GM_getValue('handle.msg.ally','false')=='true'){handle_msg_ally += 'checked';}
 	if(GM_getValue('handle.msg.spy') && GM_getValue('handle.msg.spy','false')=='true'){handle_msg_spy += 'checked';}
+	if(GM_getValue('handle.msg.ennemy.spy') && GM_getValue('handle.msg.ennemy.spy','false')=='true'){handle_msg_ennemy_spy += 'checked';}
+	
+	if(!GM_exist('server.check') || GM_getValue('server.check','false')=='true'){server_check += 'checked';}
 					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
 	// Serveur Univers
@@ -1175,6 +1239,10 @@ function displayOptions(){
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Mot de passe</label></td>';
 	options+= '<td class="value"><input class="speed" id="server.pwd" value="'+GM_getValue('server.pwd','mot de passe')+'" size="35" alt="24" type="password"/></td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Initialiser le serveur ?</label></td>';
+	options+= '<td class="value"><input class="speed" id="server.check" size="35" alt="24" type="checkbox"'+ server_check +'/></td>';
 	options+= '</tr>';
 	options+= '</tbody></table>';
 	options+= '</div>';			
@@ -1230,7 +1298,16 @@ function displayOptions(){
 	options+= '<td class="value"><input class="speed" id="handle.msg.ally" size="35" alt="24" type="checkbox"'+ handle_msg_ally +'/></td>';
 	options+= '<td class="champ"><label class="styled textBeefy">Rapports d\'espionnage</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.msg.spy" size="35" alt="24" type="checkbox"'+ handle_msg_spy +'/></td>';	
+	options+= '</tr>';	
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Espionnages ennemis</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.ennemy.spy" size="35" alt="24" type="checkbox"'+ handle_msg_ennemy_spy +'/></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
 	options+= '</tr>';
+	
 	options+= '</tbody></table>';
 	options+= '</div>';
 	// Options
@@ -1459,8 +1536,8 @@ ally_members_list : {
 },
 
 overview : {
-	cases : ".//*[@id='diameterContentField']/span[2]",
-	temperatures : "//*[@id=\'temperatureContentField\']/text()"
+	cases : "//*[@id='diameterContentField']/span[2]/text()",
+	temperatures : "//*[@id='temperatureContentField']/text()"
 },
 
 galaxy : { 
@@ -1475,7 +1552,9 @@ galaxy : {
 	status : "descendant::span[@class=\'status\']",
 	activity : "descendant::div[@id=\'TTPlanet\']/descendant::span[@class=\'spacing\']/text()",
 	player_id : "descendant::a[contains(@href,\'writemessage\')]/@href",
-	ally_id : "descendant::a[@target=\'_ally\']/@href"
+	ally_id : "descendant::a[@target='_ally']/@href",
+	ally_place : "td[@class='allytag']//li[@class='rank']/text()",
+	ally_members : "td[@class='allytag']//li[@class='members']/text()"	
 },
 
 levels : {
@@ -1734,7 +1813,21 @@ function initOGSpyCommunication (){
 			this.serializeObject(this.data, '', tab);
 			uri = '&' + tab.join('&');
 			return uri;
-		}
+		},
+		check : function(isCheck){
+			var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(XtenseOptions.server_ids.user,'') + '&password=' + MD5(SHA1(GM_getValue(XtenseOptions.server_ids.password,''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData()+(GM_getValue('server.check','false')=='true'?'&server_check=1':'');
+				//log("sending " + postData + " to " + GM_getValue(XtenseOptions.server_ids.url,'') + " from " + urlUnivers);
+				new Xajax(
+				{
+					url: GM_getValue(XtenseOptions.server_ids.url,''),
+					post: postData,
+					callback: null,
+					scope: this
+				});
+				
+				postedData = postData;
+				loading = true;
+		}		
 	}
 
 
@@ -1744,6 +1837,7 @@ function handleResponse(Response) {
 	log(Response.content);
 	//if (Server.cached()) var message_start = '"'+Server.name+'" : ';
 	//else var message_start = Xl('response start', Server.n+1);
+	var message_start = '"'+GM_getValue('server.name','')+'" : ';
 	
 	//var extra = {Request: Request, Server: Server, Response: Response, page: Request.data.type};
 	if (Response.status != 200) {
@@ -1752,18 +1846,18 @@ function handleResponse(Response) {
 		else if (Response.status == 500) 	log(Xl('http_status_500'));
 		else if (Response.status == 0)		log(Xl('http_timeout'));
 		else 								log(Xl('http_status_unknow', Response.status));
-	} else {
+	} else {		
 		var type = XLOG_SUCCESS;
 		
-		/*if (Response.content == '') {
-			Request.Tab.setStatus(message_start + Xl('empty response'), XLOG_ERROR, extra);
+		if (Response.content == '') {
+			setStatus(XLOG_ERROR, message_start + Xl('empty_response') + extra);
 			return;
 		}
 		
 		if (Response.content == 'hack') {
-			Request.Tab.setStatus(message_start + Xl('response hack'), XLOG_ERROR, extra);
+			setStatus(XLOG_ERROR, message_start + Xl('response_hack') + extra);
 			return;
-		}*/
+		}
 		
 		var data = {};
 		if (Response.content.match(/^\(\{.*\}\)$/g)){
@@ -1777,77 +1871,80 @@ function handleResponse(Response) {
 				log("full response:"+escape(Response.content));
 			} else {
 				// Message d'erreur
-				/*Request.Tab.setStatus(message_start + Xl('invalid response'), XLOG_ERROR, extra);
-				if (Xprefs.getBool('debug')) {
-					throw_plugin_error(Response, Server);
-				}*/
+				setStatus(XLOG_ERROR, message_start + Xl('invalid_response') + extra);
 				return;
 			}
 		}
-		
-		var message = '';
-		var code = data.type;
-		//log('Code='+code)
-		/*if (data.status == 0) {
-			type = XLOG_ERROR;
-			if (code == 'wrong version') {
-				if (data.target == 'plugin') 			message = Xl('error wrong version plugin', Xtense.PLUGIN_REQUIRED, data.version); 
-				else if (data.target == 'xtense.php') 	message = Xl('error wrong version xtense.php');
-				else 									message = Xl('error wrong version toolbar', data.version, Xtense.VERSION);
+		if(data.servername==null){
+			var message = '';
+			var code = data.type;
+			//log('Code='+code)
+			if (data.status == 0) {
+				type = XLOG_ERROR;
+				if (code == 'wrong version') {
+					if (data.target == 'plugin') 			message = Xl('error wrong version plugin', Xtense.PLUGIN_REQUIRED, data.version); 
+					else if (data.target == 'xtense.php') 	message = Xl('error wrong version xtense.php');
+					else 									message = Xl('error wrong version toolbar', data.version, Xtense.VERSION);
+				}
+				else if (code == 'php version')			message = Xl('error php version', data.version);
+				else if (code == 'server active') 		message = Xl('error server active', data.reason);
+				else if (code == 'username') 			message = Xl('error username');
+				else if (code == 'password') 			message = Xl('error password');
+				else if (code == 'user active') 		message = Xl('error user active');
+				else if (code == 'home full')			message = Xl('error home full');
+				else if (code == 'plugin connections')	message = Xl('error plugin connections');
+				else if (code == 'plugin config')		message = Xl('error plugin config');
+				else if (code == 'plugin univers')		message = Xl('error plugin univers');
+				else if (code == 'grant') 				message = Xl('error grant start') + Xl('error grant '+ data.access);
+				else 									message = Xl('unknow response', code, Response.content);
+			} else {
+				if (code == 'home updated' && data.page=='overview') 			message = Xl('success_home_updated', Xl('page_overview',data.page));
+				else if (code == 'system')				message = Xl('success_system', data.galaxy, data.system);
+				else if (code == 'home updated' && data.page=='labo')			message = Xl('success_home_updated', Xl('page_labo',data.page));
+				else if (code == 'home updated' && data.page=='buildings')			message = Xl('success_home_updated', Xl('page_buildings',data.page));
+				else if (code == 'home updated' && data.page=='fleet')		message = Xl('success_home_updated', Xl('page_fleet',data.page));
+				else if (code == 'home updated' && data.page=='defense')		message = Xl('success_home_updated', Xl('page_defense',data.page));
+				else if (code == 'rc')					message = Xl('success_rc');
+				else if (code == 'messages')			message = Xl('success_messages');
+				/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);			
+				else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
+				else if (code == 'spy') 				message = Xl('success_spy');
+				*/
+				else 									message = Xl('unknow_response', code, Response.content);
 			}
-			else if (code == 'php version')			message = Xl('error php version', data.version);
-			else if (code == 'server active') 		message = Xl('error server active', data.reason);
-			else if (code == 'username') 			message = Xl('error username');
-			else if (code == 'password') 			message = Xl('error password');
-			else if (code == 'user active') 		message = Xl('error user active');
-			else if (code == 'home full')			message = Xl('error home full');
-			else if (code == 'plugin connections')	message = Xl('error plugin connections');
-			else if (code == 'plugin config')		message = Xl('error plugin config');
-			else if (code == 'plugin univers')		message = Xl('error plugin univers');
-			else if (code == 'grant') 				message = Xl('error grant start') + Xl('error grant '+ data.access);
-			else 									message = Xl('unknow response', code, Response.content);
-		} else {*/
-			if (code == 'home updated' && data.page=='overview') 			message = Xl('success_home_updated', Xl('page_overview',data.page));
-			else if (code == 'system')				message = Xl('success_system', data.galaxy, data.system);
-			else if (code == 'home updated' && data.page=='labo')			message = Xl('success_home_updated', Xl('page_labo',data.page));
-			else if (code == 'home updated' && data.page=='buildings')			message = Xl('success_home_updated', Xl('page_buildings',data.page));
-			else if (code == 'home updated' && data.page=='fleet')		message = Xl('success_home_updated', Xl('page_fleet',data.page));
-			else if (code == 'home updated' && data.page=='defense')		message = Xl('success_home_updated', Xl('page_defense',data.page));
-			else if (code == 'rc')					message = Xl('success_rc');
-			else if (code == 'messages')			message = Xl('success_messages');
-			/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);			
-			else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
-			else if (code == 'spy') 				message = Xl('success_spy');
-			*/
-			else 									message = Xl('unknow_response', code, Response.content);
-		//}
-		
-		//if (Xprefs.getBool('display-execution-time') && data.execution) message = '['+data.execution+' ms] '+ message_start + message;
-		//if (Xprefs.getBool('display-new-messages') && typeof data.new_messages!='undefined') Request.Tab.setNewPMStatus (data.new_messages, Server);
-		
-		if (data.calls) {
-			// Merge the both objects
-			//var calls = extra.calls = data.calls;
-			var calls = data.calls;
-			calls.status = 'success';
 			
-			if (calls.warning.length > 0) calls.status = 'warning';
-			if (calls.error.length > 0) calls.status = 'error';
+			//if (Xprefs.getBool('display-execution-time') && data.execution) message = '['+data.execution+' ms] '+ message_start + message;
+			//if (Xprefs.getBool('display-new-messages') && typeof data.new_messages!='undefined') Request.Tab.setNewPMStatus (data.new_messages, Server);
+			//message = '['+data.execution+' ms] '+ message_start + message;
 			
-			// Calls messages
-			if (data.call_messages) {
-				calls.messages = {success: [], warning: [], error: []};
+			if (data.calls) {
+				// Merge the both objects
+				//var calls = extra.calls = data.calls;
+				var calls = data.calls;
+				calls.status = 'success';
 				
-				// Affichage des messages dans l'ordre : success, warning, error
-				for (var i = 0, len = data.call_messages.length; i < len; i++) {
-					calls.messages[data.call_messages[i].type].push(data.call_messages[i].mod + ' : ' +data.call_messages[i].message);
+				if (calls.warning.length > 0) calls.status = 'warning';
+				if (calls.error.length > 0) calls.status = 'error';
+				
+				// Calls messages
+				if (data.call_messages) {
+					calls.messages = {success: [], warning: [], error: []};
+					
+					// Affichage des messages dans l'ordre : success, warning, error
+					for (var i = 0, len = data.call_messages.length; i < len; i++) {
+						calls.messages[data.call_messages[i].type].push(data.call_messages[i].mod + ' : ' +data.call_messages[i].message);
+					}
 				}
 			}
+			setStatus(type,'['+data.execution+' ms] ' + message_start + message);
+			//Request.Tab.setStatus(message, type, extra);
+		} else {
+			GM_setValue('server.name',data.servername);
+			log(data.servername);
 		}
-		setStatus(type,'['+data.execution+' ms] '+message);
-		//Request.Tab.setStatus(message, type, extra);
 	}
 }
+
 /************ FIN PARSERS & Communication OGSPY *************************/
 
 /************************ Locales & Lang ********************************/
@@ -2443,7 +2540,7 @@ function getPlanetData() {
 	} else {
 		planet_type = '0';
 	}
-	log("planet_name: "+XtenseMetas.getPlanetName()+", coords : "+XtenseMetas.getPlanetCoords()+", planet_type : "+planet_type);
+	//log("planet_name: "+XtenseMetas.getPlanetName()+", coords : "+XtenseMetas.getPlanetCoords()+", planet_type : "+planet_type);
 	return {planet_name: XtenseMetas.getPlanetName(), coords : XtenseMetas.getPlanetCoords(), planet_type : planet_type};
 }
 // Permet de savoir si c'est une lune
@@ -2461,7 +2558,7 @@ function getResources(){
     var deut = XPath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
 	var antimater = XPath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
     var energy = XPath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
-	log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
+	//log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 	return Array(metal,cristal,deut,antimater,energy);
 }
 /********************* Fin Utilities Ogame ******************************/
