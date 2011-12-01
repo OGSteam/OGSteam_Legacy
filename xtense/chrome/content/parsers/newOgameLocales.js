@@ -119,23 +119,23 @@ XnewOgame.locales = {
 				}
 			},
 			'regxps' : {
-				'time' : 'Les flottes suivantes s\'affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
+				'time' : 'Les flottes suivantes s`affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
 				'round' : {
 					'a_nb' : 'La flotte attaquante tire (.*) fois ',
 					'a_shoot' : 'avec une force totale de (.*) sur le défenseur.',
 					'd_bcl' : 'Les boucliers du défenseur absorbent (.*) points de dommage.',
 					'd_nb' : 'La flotte de défense tire (.*) fois',
-					'd_shoot' : 'sur l\'attaquant avec une force de (.*). Les boucliers',
-					'a_bcl' : ' de l\'attaquant absorbent (.*) points de dommage.'
+					'd_shoot' : 'sur l`attaquant avec une force de (.*). Les boucliers',
+					'a_bcl' : ' de l`attaquant absorbent (.*) points de dommage.'
 				},
 				'result' : {
 					'win_metal' : 'Il emporte (.*) unités de métal',
 					'win_cristal' : ', (.*) unités de cristal',
 					'win_deut' : 'et (.*) unités de deutérium.',
-					'a_lost' : 'L\'attaquant a perdu au total (.*) unités.',
+					'a_lost' : 'L`attaquant a perdu au total (.*) unités.',
 					'd_lost' : 'Le défenseur a perdu au total (.*) unités.',
 					'deb_metal' : 'Un champ de débris contenant (.*) de métal',
-					'deb_cristal' : ' et (.*) de cristal se forme dans l\'orbite de la planète.'
+					'deb_cristal' : ' et (.*) de cristal se forme dans l`orbite de la planète.'
 				},
 				'weapons' : {
 					'arm' : 'Armes: (\\d+)%',
