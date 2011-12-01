@@ -1279,8 +1279,7 @@ var XnewOgame = {
 		
 		// Recyclages
 		if(Xprefs.getBool('msg-rc_cdr')) {
-			if(from.match(new RegExp(locales['fleet'])) 
-						&& subject.match(new RegExp(locales['harvesting']))) {
+			if(from.match(new RegExp(locales['fleet'])) && subject.match(new RegExp(locales['harvesting']))) {
 			 	var m = subject.match(new RegExp(this.regexps.coords));
 				if(m) {
 					var coords = m[1];
@@ -1290,8 +1289,8 @@ var XnewOgame = {
 					data.type ='rc_cdr';
 					data.coords = coords;
 					data.nombre = nums[0];
-					data.M_recovered = nums[4];
-					data.C_recovered = nums[5];
+					data.M_recovered = nums[7];
+					data.C_recovered = nums[8];
 					data.M_total = nums[2];
 					data.C_total = nums[3];
 				}
