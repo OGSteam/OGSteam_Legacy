@@ -31,6 +31,7 @@ if ($db->sql_numrows($result) != 0) {
 	//echo "<script>alert('".$lang['xtense_gone']."')</script>";
 	}
 }
+// todo supp le cache
 //echo "<script>alert(".$lang['xtense_gone'].")</script>";
 
 $mod_uninstall_name = "bigbrother";
@@ -39,7 +40,7 @@ $mod_uninstall_table = TABLE_PLAYER.','.TABLE_STORY_PLAYER.' ,'.TABLE_STORY_ALLY
 // remise en etat de la base :
 //joueur
 $requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_POINTS." DROP id_player ";
-$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_FLEET." DROP id_player ";
+$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_FLEET." DROP id_player ";
 $requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_RESEARCH." DROP id_player ";
 //alliance
 $requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_POINTS." DROP id_ally ";

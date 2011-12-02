@@ -98,7 +98,7 @@ function addsystem($system)
     //  var_dump($system);
     $sql = new sql();
     $sql->start_transaction();
-    $sql->create_cache_player();
+    $cache = $sql->get_all_cache_player();
     $tab_player[] = 0;
     $time = time();
     for ($i = 1; $i < 16; $i++) {
@@ -107,7 +107,8 @@ function addsystem($system)
 
                 if ($system['data'][$i]['ally_id'] != -1) { // on va attendre que grease monkey soit compatible avec id alliance ... comme ca la base sera saine meme si moins complete
                     /// on instancie l objet joueur
-                    $player = player::get_player_by_system($system['data'][$i], $time);
+                    if (!isset($cache[$system['data'][$i]['player_id']])){$cache[$system['data'][$i]['player_id']] = null;}
+                    $player = player::get_player_by_system($system['data'][$i], $time, $cache[$system['data'][$i]['player_id']]);
                     // o verifie les differents traitements sql a faire
                     if ($player->get_must_update() == true) {
                         $sql->insert_player_value($player->insert_new_player());
