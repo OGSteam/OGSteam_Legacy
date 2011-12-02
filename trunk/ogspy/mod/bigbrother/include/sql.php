@@ -69,7 +69,7 @@ class sql
 
         // si des modifs sont intervenus, on doit refaire le cache a la fin de la transaction ...
         if ($cache_player == true) {
-            create_cache_player();
+            $this->create_cache_player();
         }
     }
 
@@ -86,20 +86,20 @@ class sql
     }
 
 
-    public static function get_all_player()
-    {
-        global $db;
-
-        $data = null;
-
-        $requete = "select * from " . TABLE_PLAYER . "  ;";
-        $result = $db->sql_query($requete);
-
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $data[$row['id']] = $row;
-        }
-        return $data;
-    }
+  //  public static function get_all_player()
+//    {
+//        global $db;
+//
+//        $data = null;
+//
+//        $requete = "select * from " . TABLE_PLAYER . "  ;";
+//        $result = $db->sql_query($requete);
+//
+//        while ($row = $db->sql_fetch_assoc($result)) {
+//            $data[$row['id']] = $row;
+//        }
+//        return $data;
+//    }
 
 
     public static function find_table_rank_player($type)
@@ -120,7 +120,7 @@ class sql
     }
 
 
-    private function create_cache_player()
+    private static function create_cache_player()
     {
 
 
@@ -151,13 +151,13 @@ class sql
         return $data;
     }
 
-    public function get_all_cache_player()
+    public static function get_all_cache_player()
     {
         $path = MOD_URL . 'cache/player.php';
 
         if (!file_exists($path)) {
             // on crée le cache et on renvoit les donnée
-            $retour = create_cache_player();
+            $retour = self::create_cache_player();
             return $retour;
 
         } else { // le cche existe, on l inclus

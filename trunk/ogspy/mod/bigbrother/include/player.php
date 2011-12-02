@@ -23,7 +23,7 @@ class player
     }
 
     // renvoi le joueur avec les informations provenant d une ligne d un systeme
-    public static function get_player_by_system($row, $date)
+    public static function get_player_by_system($row, $date,$cache)
     {
 
         // xtense envoi des id nul
@@ -37,13 +37,13 @@ class player
         // on créé l objet
         $instance = new player($id_player, $name_player, $id_ally, $status, $date);
         // routine pour savoir quel update / insert faire
-        $instance->save();
+        $instance->save($cache);
 
         return $instance;
     }
 
     // renvoi le joueur avec les informations provenant d une ligne d un systeme
-    public static function get_player_by_rank($row, $date)
+    public static function get_player_by_rank($row, $date,$cache)
     {
         // xtense envoi des id nul
         if (!is_numeric($row['ally_id'])) {
@@ -55,37 +55,68 @@ class player
         $status = 'x'; //on ne le connait pas ...
         $instance = new player($id_player, $name_player, $id_ally, $status, $date);
         // routine pour savoir quel update / insert faire
-        $instance->save();
+        $instance->save($cache);
         return $instance;
     }
 
 
-    private function save()
+    private function save($cache)
     {
         global $db;
-        $requete = "select * from " . TABLE_PLAYER . " WHERE id = " . $this->_id_player .
-            " ;";
-        $result = $db->sql_query($requete);
-        if ($db->sql_numrows($result) == 0) {
-            // pas de resultat on ajoute le tout neuf joueur
-            $this->_must_update = true;
-
-        } else {
-            while ($data = mysql_fetch_array($result)) {
-                // update si valeur differente
-                if ($this->_name_player != $data['name_player'] || $this->_id_ally != $data['id_ally'] ||
-                    ($this->_status != $data['status'] && $this->_status != 'x')) {
+        
+       // var_dump($cache);
+        if (!isset($cache['id']))
+        {
+                         $this->_must_update = true;
+                    }
+                    else
+                    
+                    {
+                      if ($this->_name_player != $cache['name_player'] || $this->_id_ally != $cache['id_ally'] ||
+                    ($this->_status != $cache['status'] && $this->_status != 'x')) {
                     // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
                     // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
 
                     $this->_must_update = true;
                     $this->_must_historique = true; // on prépare l update a suivre
-                    $this->historique($data['name_player'], $data['id_ally'], $data['status']);
+                    $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
 
-                }
-
-            }
-        }
+                }  
+                        
+                        
+                        
+                    }
+        
+        
+        
+        
+        
+        
+        
+        
+//       $requete = "select * from " . TABLE_PLAYER . " WHERE id = " . $this->_id_player .
+//        //    " ;";
+//        $result = $db->sql_query($requete);
+//        if ($db->sql_numrows($result) == 0) {
+//            // pas de resultat on ajoute le tout neuf joueur
+//           
+//
+//        } else {
+//            while ($data = mysql_fetch_array($result)) {
+//                // update si valeur differente
+//                if ($this->_name_player != $data['name_player'] || $this->_id_ally != $data['id_ally'] ||
+//                    ($this->_status != $data['status'] && $this->_status != 'x')) {
+//                    // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
+//                    // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
+//
+//                    $this->_must_update = true;
+//                    $this->_must_historique = true; // on prépare l update a suivre
+//                    $this->historique($data['name_player'], $data['id_ally'], $data['status']);
+//
+//                }
+//
+//            }
+//        }
     }
 
 
