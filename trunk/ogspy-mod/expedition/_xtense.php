@@ -69,7 +69,7 @@ function eXpedition_analyse_moi_ce_rapport($uid, $galaxy, $systeme, $timestmp, $
 	$eXpXtense2Debug = false;
 	// Tout d'abord si il a été soumis un RExp :
 	$regExVaiss =    	"#Votre\sflotte\ss`est\sagrandie,\svoici\sles\snouveaux\svaisseaux\squi\ss`y\ssont\sjoints\s:(.+)#";
-	$regExRess =		"#L'attaquant\sobtient\s(\S+)\s(\d+)#";
+	$regExRess =		"#L`attaquant\sobtient\s(\S+)\s(\d+)#";
 	$regExMarchand1 = 	"#liste\sde\sclients\sprivil.gi.s#";
 	$regExMarchand2 = 	"#dans\svotre\sempire\sun\srepr.sentant\scharg.\sde\sressources\s.\s.changer#";
 	// on enleve les séparateurs
