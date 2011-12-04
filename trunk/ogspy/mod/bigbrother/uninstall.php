@@ -3,12 +3,11 @@
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
-global $db, $table_prefix;
-define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
-define("TABLE_PLAYER", $table_prefix . "bigb_player");
-define("TABLE_ALLY", $table_prefix . "bigb_ally");
-define("TABLE_STORY_PLAYER", $table_prefix . "bigb_story_player");
-define("TABLE_STORY_ALLY", $table_prefix . "bigb_story_ally");
+// fichier commun
+require_once ("mod/bigbrother/common.php");
+
+// Xtense
+define("TABLE_XTENSE_CALLBACKS", $table_prefix . "xtense_callbacks");
 
 
 // On récupère l'id du mod pour xtense...
@@ -35,21 +34,24 @@ if ($db->sql_numrows($result) != 0) {
 //echo "<script>alert(".$lang['xtense_gone'].")</script>";
 
 $mod_uninstall_name = "bigbrother";
-$mod_uninstall_table = TABLE_PLAYER.','.TABLE_STORY_PLAYER.' ,'.TABLE_STORY_ALLY.' ,'.TABLE_ALLY;
+$mod_uninstall_table = TABLE_PLAYER.','.TABLE_STORY_PLAYER.' ,'.TABLE_STORY_ALLY.' ,'.TABLE_ALLY.' ,'.TABLE_UNI.' ,'.TABLE_RPR.' ,'.TABLE_RPF.' ,'.TABLE_RPP;
+
+
+
 
 // remise en etat de la base :
 //joueur
-$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_POINTS." DROP id_player ";
-$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_FLEET." DROP id_player ";
-$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_RESEARCH." DROP id_player ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_POINTS." DROP id_player ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_FLEET." DROP id_player ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_PLAYER_RESEARCH." DROP id_player ";
 //alliance
-$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_POINTS." DROP id_ally ";
-$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_FLEET." DROP id_ally ";
-$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_RESEARCH." DROP id_ally ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_POINTS." DROP id_ally ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_FLEET." DROP id_ally ";
+//$requests[] = "ALTER TABLE ".TABLE_RANK_ALLY_RESEARCH." DROP id_ally ";
 
 //modif system solaire
-$requests[] = "ALTER TABLE ".TABLE_UNIVERSE." DROP id_ally "; // null => pas encore mis a jour 0 pas d alliance -1 alliance du detenteur de compte ogspy 
-$requests[] = "ALTER TABLE ".TABLE_UNIVERSE." DROP id_player";
+//$requests[] = "ALTER TABLE ".TABLE_UNIVERSE." DROP id_ally "; // null => pas encore mis a jour 0 pas d alliance -1 alliance du detenteur de compte ogspy 
+//$requests[] = "ALTER TABLE ".TABLE_UNIVERSE." DROP id_player";
 
 //config
 $requests[] = "DELETE FROM ".TABLE_CONFIG." WHERE config_name = 'bigbrother'";

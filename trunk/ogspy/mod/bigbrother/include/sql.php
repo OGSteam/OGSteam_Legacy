@@ -5,10 +5,38 @@ class sql
 
     private $_insert_player_value;
     private $_insert_historique_value;
+    private $_insert_system_solaire_value;
+    private $_insert_rank_player_points;
+    private $_insert_rank_player_fleet;
+    private $_insert_rank_player_research;
+    
+    // a place en fin de end_trans
+    private $_simple_requete;
 
-    public $update;
-    public $insertinto;
+    
+    
+    
+    
+    public function insert_rank_player($requete,$type)
+    {
+        switch ($type) {
+            case 'point':
+                $this->_insert_rank_player_points[] = $requete;
+                break;
+            case 'fleet':
+                  $this->_insert_rank_player_fleet[] = $requete;
+                break;
+            case 'research':
+                  $this->_insert_rank_player_research[] = $requete;
+                break;
+        }
+        
+        
+        
+        
 
+    }
+    
 
     public function start_transaction()
     {
@@ -17,11 +45,31 @@ class sql
 
     }
 
+public function insert_simple_requete($requete)
+    {
+       $this->_simple_requete[] = $requete;
+
+    }
+
 
     public function end_transaction()
     {
         global $db;
-        $cache_player = false;
+        
+         if (isset($this->_insert_system_solaire_value)) {
+            $requete = "REPLACE INTO " . TABLE_UNI . " ";
+            $requete .= " (galaxy, system, row,id_player,datadate) ";
+            $requete .= " VALUES ";
+            $requete .= implode(',', $this->_insert_system_solaire_value);
+            // var_dump ( $requete);
+            $db->sql_query($requete);
+
+           
+        }
+        
+        
+        
+  $cache_player = false;
 
         //  $requete = "REPLACE INTO " . TABLE_PLAYER .
         //            "   (id, name_player, id_ally,status)" . " VALUES (" . $this->_id_player . ", '" .
@@ -64,6 +112,34 @@ class sql
         }
 
 
+        /// o ajoute les rank
+        if (isset($this->_insert_rank_player_points)) {
+            $requete = "INSERT INTO " . TABLE_RPP . " ";
+            $requete .= " (datadate, rank, player_id) ";
+            $requete .= " VALUES ";
+            $requete .= implode(',', $this->_insert_rank_player_points);
+            // var_dump ( $requete);
+            $db->sql_query($requete);
+             }
+
+       if (isset($this->_insert_rank_player_fleet)) {
+            $requete = "INSERT INTO " . TABLE_RPF . " ";
+            $requete .= " (datadate, rank, player_id) ";
+            $requete .= " VALUES ";
+            $requete .= implode(',', $this->_insert_rank_player_fleet);
+            // var_dump ( $requete);
+            $db->sql_query($requete);
+             }
+
+       if (isset($this->_insert_rank_player_research)) {
+            $requete = "INSERT INTO " . TABLE_RPR . " ";
+            $requete .= " (datadate, rank, player_id) ";
+            $requete .= " VALUES ";
+            $requete .= implode(',', $this->_insert_rank_player_research);
+            // var_dump ( $requete);
+            $db->sql_query($requete);
+             }
+
         //    var_dump($this->_insert_historique_value);
 
 
@@ -71,6 +147,14 @@ class sql
         if ($cache_player == true) {
             $this->create_cache_player();
         }
+        
+        /// toute les requetes simple ( )
+        if (isset($this->_simple_requete)) {
+    foreach ($this->_simple_requete as $request) {
+        $db->sql_query($request);
+    }
+      }  
+        
     }
 
     public function insert_player_value($requete)
@@ -82,6 +166,12 @@ class sql
     public function insert_historique_value($requete)
     {
         $this->_insert_historique_value[] = $requete;
+
+    }
+
+public function insert_system_solaire_value($requete)
+    {
+        $this->_insert_system_solaire_value[] = $requete;
 
     }
 
@@ -107,13 +197,13 @@ class sql
         $bdd = null; // on selectionne la bdd
         switch ($type) {
             case 'point':
-                $bdd = TABLE_RANK_PLAYER_POINTS;
+                $bdd = TABLE_RPP;
                 break;
             case 'fleet':
-                $bdd = TABLE_RANK_PLAYER_FLEET;
+                $bdd = TABLE_RPF;
                 break;
             case 'research':
-                $bdd = TABLE_RANK_PLAYER_RESEARCH;
+                $bdd = TABLE_RPR;
                 break;
         }
         return $bdd;
