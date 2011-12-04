@@ -33,67 +33,35 @@ if ($security == true) {
         " id_ally INT(7) NOT NULL ," . " name varchar(30) NOT NULL ," .
         " tag varchar(30) NOT NULL ," . " url varchar(50) NOT NULL ," .
         " datadate int(11) NOT NULL default '0'," . " KEY (`id_ally`)" . ")";
-        
-        
-        // creation de la table uni
-       $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_UNI . " (" .
-        " galaxy enum('1','2','3','4','5','6','7','8','9') NOT NULL ," . 
-        " system smallint(3) NOT NULL ," . 
+
+
+    // creation de la table uni
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_UNI . " (" .
+        " galaxy enum('1','2','3','4','5','6','7','8','9') NOT NULL ," .
+        " system smallint(3) NOT NULL ," .
         " `row` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15') NOT NULL ," .
-        " id_player INT(7) NOT NULL ," .
-         " datadate int(11) NOT NULL default '0'," .
-         " UNIQUE KEY univers (galaxy,system,`row`)".")";
-        
-        
-        
-  // creation de la table rpp
-       $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPP . " (" .
-        " datadate int(11) NOT NULL default '0'," . 
-        " rank INT(6) NOT NULL ," . 
-        " `player_id` INT(7) NOT NULL , " .
-        " KEY (`player_id` )" .")";
-        
-        
+        " id_player INT(7) NOT NULL ," . " id_ally INT(7) NOT NULL ," .
+        " datadate int(11) NOT NULL default '0'," .
+        " UNIQUE KEY univers (galaxy,system,`row`)" . ")";
+
+
+    // creation de la table rpp
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPP . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `player_id` INT(7) NOT NULL , " . " KEY (`player_id` )" . ")";
+
+
     // creation de la table rpf
-       $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPF . " (" .
-        " datadate int(11) NOT NULL default '0'," . 
-        " rank INT(6) NOT NULL ," . 
-        " `player_id` INT(7) NOT NULL , " .
-        " KEY (`player_id` )" .")";
-        
-        
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPF . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `player_id` INT(7) NOT NULL , " . " KEY (`player_id` )" . ")";
+
+
     // creation de la table rps
-       $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPR . " (" .
-        " datadate int(11) NOT NULL default '0'," . 
-        " rank INT(6) NOT NULL ," . 
-        " `player_id` INT(7) NOT NULL , " .
-        " KEY (`player_id` )" .")";
-        
-        
-        
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPR . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `player_id` INT(7) NOT NULL , " . " KEY (`player_id` )" . ")";
 
-        
-
-//    // ajout des id dans stat :
-//    //joueur
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_PLAYER_POINTS .
-//        " ADD id_player INT(7) NOT NULL default '0'";
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_PLAYER_FLEET .
-//        " ADD id_player INT(7) NOT NULL default '0'";
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_PLAYER_RESEARCH .
-//        " ADD id_player INT(7) NOT NULL default '0'";
-//    //alliance
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_ALLY_POINTS .
-//        " ADD id_ally INT(7) NOT NULL default '0'";
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_ALLY_FLEET .
-//        " ADD id_ally INT(7) NOT NULL default '0'";
-//    $requests[] = "ALTER TABLE " . TABLE_RANK_ALLY_RESEARCH .
-//        " ADD id_ally INT(7) NOT NULL default '0'";
-//
-//    //modif system solaire
-//    $requests[] = "ALTER TABLE " . TABLE_UNIVERSE . " ADD id_ally INT(7)"; // null => pas encore mis a jour 0 pas d alliance -1 alliance du detenteur de compte ogspy
-//    $requests[] = "ALTER TABLE " . TABLE_UNIVERSE .
-//        " ADD id_player INT(7) NOT NULL default '0'";
 
     // date d installation ( debut d historisation)
     $requests[] = "INSERT IGNORE INTO " . TABLE_CONFIG .

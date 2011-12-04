@@ -93,12 +93,12 @@ function addsystem($system)
     $tab_player[] = 0;
     $time = time();
     for ($i = 1; $i < 16; $i++) {
-       
+
         if (isset($system['data'][$i]['player_id']) && is_numeric($system['data'][$i]['player_id'])) {
 
             if ($system['data'][$i]['ally_id'] != -1) { // on va attendre que grease monkey soit compatible avec id alliance ... comme ca la base sera saine meme si moins complete
-                
-                 ////////////// PARTIE JOUEUR UPDATE / INSERT JOUEUR : HISTORISATION  \\\\\\\\\\\\\\\\\\\\\\\
+
+                ////////////// PARTIE JOUEUR UPDATE / INSERT JOUEUR : HISTORISATION  \\\\\\\\\\\\\\\\\\\\\\\
                 if (!in_array($system['data'][$i]['player_id'], $tab_player)) { // on ne cherche pas si deja mis a jour
 
 
@@ -120,36 +120,26 @@ function addsystem($system)
                     $tab_player[] = $system['data'][$i]['player_id']; // on sauvegarde les index
 
                 }
-                
-                   ////////////// FIN JOUEUR UPDATE / INSERT JOUEUR : HISTORISATION  \\\\\\\\\\\\\\\\\\\\\\\
 
-                     ////////////// UPDATE UNI AVEC ID JOUEUR ET ALLIANCE  \\\\\\\\\\\\\\\\\\\\\\\\\\\
-            
-            $sql->insert_system_solaire_value(system::get_system_by_row($system['data'][$i]['player_id'],$system['galaxy'],$system['system'],$i,$time));
-             //$sql->insert_system_solaire_value("(" . $system['galaxy'] . ", '" . $system['system'] . "', '" .$i . "',  '" . $system['data'][$i]['player_id'] . "' ,  '" . $time . "' )");
-            
-            
-//            " galaxy enum('1','2','3','4','5','6','7','8','9') NOT NULL ," . 
-//        " system smallint(3) NOT NULL ," . 
-//        " `row` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15') NOT NULL ," .
-//        " id_player INT(7) NOT NULL ," .
-//         " datadate int(11) NOT NULL default '0'," .
-//         " UNIQUE KEY univers (galaxy,system,`row`)".")";
+                ////////////// FIN JOUEUR UPDATE / INSERT JOUEUR : HISTORISATION  \\\\\\\\\\\\\\\\\\\\\\\
 
-        ////////////// FIN UPDATE UNI AVEC ID JOUEUR ET ALLIANCE  \\\\\\\\\\\\\\\\\\\\\\\
-                
-                
-                
-                
+                ////////////// UPDATE UNI AVEC ID JOUEUR ET ALLIANCE  \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+                $sql->insert_system_solaire_value(system::get_system_by_row($system['data'][$i]['player_id'],
+                    $system['data'][$i]['ally_id'], $system['galaxy'], $system['system'], $i, $time));
+
+
+                ////////////// FIN UPDATE UNI AVEC ID JOUEUR ET ALLIANCE  \\\\\\\\\\\\\\\\\\\\\\\
+
+
             }
         }
-     
+
     }
-    $sql->insert_simple_requete(system::get_clean_up_system($system['galaxy'],$system['system'],$time));
+    $sql->insert_simple_requete(system::get_clean_up_system($system['galaxy'], $system['system'],
+        $time));
     $sql->end_transaction();
-    // var_dump($sql->_insert_player_value);
-    //$sql->get_all_cache_player();
-    //var_dump($system);
+
     return true;
 
 }
@@ -179,8 +169,8 @@ function abstract_rankplayer($ranking, $type)
                 if ($player->get_must_historique() == true) {
                     $sql->insert_historique_value($player->get_requete_historique());
                 }
-                
-                $sql->insert_rank_player($player->update_rank($type, $rank),$type);
+
+                $sql->insert_rank_player($player->update_rank($type, $rank), $type);
                 //$player->update_rank($type, $rank);
                 $player = null;
 
