@@ -12,6 +12,7 @@ class player
     private $_requete_historique;
 
 
+
     // constructeur privé
     private function __construct($id_player, $name_player, $id_ally, $status, $date)
     {
@@ -72,8 +73,8 @@ class player
                     else
                     
                     {
-                      if ($this->_name_player != $cache['name_player'] || $this->_id_ally != $cache['id_ally'] ||
-                    ($this->_status != $cache['status'] && $this->_status != 'x')) {
+                      if ($this->_name_player != $cache['name_player'] || $this->_id_ally != $cache['id_ally']) 
+                {
                     // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
                     // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
 
@@ -81,7 +82,16 @@ class player
                     $this->_must_historique = true; // on prépare l update a suivre
                     $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
 
-                }  
+                } 
+                else
+                {
+                    if      ($this->_status != $cache['status'] && $this->_status != 'x')
+                    {
+                        $this->_must_update = true; 
+                    }
+                    
+                    
+                } 
                         
                         
                         
@@ -122,16 +132,23 @@ class player
 
     public function update_rank($type, $rank)
     {
-        global $db;
-        $bdd = null;
+      
+        
+         $retour = "(" . $this->_date . ", '" . $rank . "', '" . $this->_id_player . "' )";
+        return $retour;
+        
+        
+        //$bdd = null;
         // on selectionne la bdd
-        $bdd = sql::find_table_rank_player($type);
+       // $bdd = sql::find_table_rank_player($type);
 
         // mise a jour ( le nom est une securite supp : non necessaire)
-        $requete = "UPDATE  " . $bdd . " set   id_player = '" . $this->_id_player .
-            "'  WHERE  datadate = '" . $this->_date . "' AND rank = '" . $rank .
-            "' AND player = '" . $this->_name_player . "' ";
-        $db->sql_query($requete);
+       // $requete = "UPDATE  " . $bdd . " set   id_player = '" . $this->_id_player .
+        //    "'  WHERE  datadate = '" . $this->_date . "' AND rank = '" . $rank .
+         //   "' AND player = '" . $this->_name_player . "' ";
+        //$db->sql_query($requete);
+        
+        
         // var_dump($requete);
         // $this->sql->set_insert($requete);
 
@@ -162,7 +179,7 @@ class player
     public function update()
     {
 
-        insert_new_player();
+        $this->insert_new_player();
 
     }
 
