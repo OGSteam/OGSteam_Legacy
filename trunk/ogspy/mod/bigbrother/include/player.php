@@ -12,7 +12,6 @@ class player
     private $_requete_historique;
 
 
-
     // constructeur privé
     private function __construct($id_player, $name_player, $id_ally, $status, $date)
     {
@@ -24,7 +23,7 @@ class player
     }
 
     // renvoi le joueur avec les informations provenant d une ligne d un systeme
-    public static function get_player_by_system($row, $date,$cache)
+    public static function get_player_by_system($row, $date, $cache)
     {
 
         // xtense envoi des id nul
@@ -44,7 +43,7 @@ class player
     }
 
     // renvoi le joueur avec les informations provenant d une ligne d un systeme
-    public static function get_player_by_rank($row, $date,$cache)
+    public static function get_player_by_rank($row, $date, $cache)
     {
         // xtense envoi des id nul
         if (!is_numeric($row['ally_id'])) {
@@ -64,96 +63,42 @@ class player
     private function save($cache)
     {
         global $db;
-        
-       // var_dump($cache);
-        if (!isset($cache['id']))
-        {
-                         $this->_must_update = true;
-                    }
-                    else
-                    
-                    {
-                      if ($this->_name_player != $cache['name_player'] || $this->_id_ally != $cache['id_ally']) 
-                {
-                    // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
-                    // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
 
+        // var_dump($cache);
+        if (!isset($cache['id'])) {
+            $this->_must_update = true;
+        } else {
+            if ($this->_name_player != $cache['name_player'] || $this->_id_ally != $cache['id_ally']) {
+                // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
+                // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
+
+                $this->_must_update = true;
+                $this->_must_historique = true; // on prépare l update a suivre
+                $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
+
+            } else {
+                if ($this->_status != $cache['status'] && $this->_status != 'x') {
                     $this->_must_update = true;
-                    $this->_must_historique = true; // on prépare l update a suivre
-                    $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
+                }
 
-                } 
-                else
-                {
-                    if      ($this->_status != $cache['status'] && $this->_status != 'x')
-                    {
-                        $this->_must_update = true; 
-                    }
-                    
-                    
-                } 
-                        
-                        
-                        
-                    }
-        
-        
-        
-        
-        
-        
-        
-        
-//       $requete = "select * from " . TABLE_PLAYER . " WHERE id = " . $this->_id_player .
-//        //    " ;";
-//        $result = $db->sql_query($requete);
-//        if ($db->sql_numrows($result) == 0) {
-//            // pas de resultat on ajoute le tout neuf joueur
-//           
-//
-//        } else {
-//            while ($data = mysql_fetch_array($result)) {
-//                // update si valeur differente
-//                if ($this->_name_player != $data['name_player'] || $this->_id_ally != $data['id_ally'] ||
-//                    ($this->_status != $data['status'] && $this->_status != 'x')) {
-//                    // explication : ( $this->_status != $data['status'] && $this->_status != 'x')
-//                    // on cnsidere qu il y a une modif pour statut que si on peut !! si maj par rank c impossible d ou le x
-//
-//                    $this->_must_update = true;
-//                    $this->_must_historique = true; // on prépare l update a suivre
-//                    $this->historique($data['name_player'], $data['id_ally'], $data['status']);
-//
-//                }
-//
-//            }
-//        }
+
+            }
+
+
+        }
+
+
     }
 
 
     public function update_rank($type, $rank)
     {
-      
-        
-         $retour = "(" . $this->_date . ", '" . $rank . "', '" . $this->_id_player . "' )";
+
+
+        $retour = "(" . $this->_date . ", '" . $rank . "', '" . $this->_id_player .
+            "' )";
         return $retour;
-        
-        
-        //$bdd = null;
-        // on selectionne la bdd
-       // $bdd = sql::find_table_rank_player($type);
 
-        // mise a jour ( le nom est une securite supp : non necessaire)
-       // $requete = "UPDATE  " . $bdd . " set   id_player = '" . $this->_id_player .
-        //    "'  WHERE  datadate = '" . $this->_date . "' AND rank = '" . $rank .
-         //   "' AND player = '" . $this->_name_player . "' ";
-        //$db->sql_query($requete);
-        
-        
-        // var_dump($requete);
-        // $this->sql->set_insert($requete);
-
-
-        //datadate 	rank 	player 	ally 	points 	sender_id 	id_player
     }
 
 
@@ -164,13 +109,6 @@ class player
             _id_ally . "',  '" . $this->_status . "' )";
 
         return $retour;
-
-
-        //  $requete = "REPLACE INTO " . TABLE_PLAYER .
-        //            "   (id, name_player, id_ally,status)" . " VALUES (" . $this->_id_player . ", '" .
-        //            $this->_name_player . "', '" . $this->_id_ally . "',  '" . $this->_status .
-        //            "' )";
-        //        $db->sql_query($requete);
 
 
     }
@@ -186,11 +124,7 @@ class player
     // mise en historique de ses anciennes valeurs
     private function historique($player_name, $id_ally, $status)
     {
-        //              $query = "INSERT INTO " . TABLE_STORY_PLAYER .
-        //            " (id_player, name_player, id_ally,status,datadate)" . " VALUES (" . $this->
-        //            _id_player . ", '" . $player_name . "', '" . $id_ally . "',  '" . $status .
-        //            "',  " . $this->_date . ")";
-        //        $db->sql_query($query);
+
         $this->_requete_historique = "(" . $this->_id_player . ", '" . $player_name .
             "', '" . $id_ally . "',  '" . $status . "',  " . $this->_date . ")";
 
@@ -216,6 +150,7 @@ class player
 }
 
 //}
+
 
 
 

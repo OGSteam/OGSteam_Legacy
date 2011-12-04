@@ -9,34 +9,28 @@ class sql
     private $_insert_rank_player_points;
     private $_insert_rank_player_fleet;
     private $_insert_rank_player_research;
-    
+
     // a place en fin de end_trans
     private $_simple_requete;
 
-    
-    
-    
-    
-    public function insert_rank_player($requete,$type)
+
+    public function insert_rank_player($requete, $type)
     {
         switch ($type) {
             case 'point':
                 $this->_insert_rank_player_points[] = $requete;
                 break;
             case 'fleet':
-                  $this->_insert_rank_player_fleet[] = $requete;
+                $this->_insert_rank_player_fleet[] = $requete;
                 break;
             case 'research':
-                  $this->_insert_rank_player_research[] = $requete;
+                $this->_insert_rank_player_research[] = $requete;
                 break;
         }
-        
-        
-        
-        
+
 
     }
-    
+
 
     public function start_transaction()
     {
@@ -45,9 +39,9 @@ class sql
 
     }
 
-public function insert_simple_requete($requete)
+    public function insert_simple_requete($requete)
     {
-       $this->_simple_requete[] = $requete;
+        $this->_simple_requete[] = $requete;
 
     }
 
@@ -55,29 +49,20 @@ public function insert_simple_requete($requete)
     public function end_transaction()
     {
         global $db;
-        
-         if (isset($this->_insert_system_solaire_value)) {
+
+        if (isset($this->_insert_system_solaire_value)) {
             $requete = "REPLACE INTO " . TABLE_UNI . " ";
-            $requete .= " (galaxy, system, row,id_player,datadate) ";
+            $requete .= " (galaxy, system, row,id_player,id_ally,datadate) ";
             $requete .= " VALUES ";
             $requete .= implode(',', $this->_insert_system_solaire_value);
             // var_dump ( $requete);
             $db->sql_query($requete);
 
-           
+
         }
-        
-        
-        
-  $cache_player = false;
 
-        //  $requete = "REPLACE INTO " . TABLE_PLAYER .
-        //            "   (id, name_player, id_ally,status)" . " VALUES (" . $this->_id_player . ", '" .
-        //            $this->_name_player . "', '" . $this->_id_ally . "',  '" . $this->_status .
-        //            "' )";
-        //        $db->sql_query($requete);
 
-        //	$db->sql_query('REPLACE INTO '.$table.' ('.$fields.') VALUES '.implode(',', $query));
+        $cache_player = false;
 
 
         /// o ajoute les insert player value
@@ -91,14 +76,6 @@ public function insert_simple_requete($requete)
 
             $cache_player = true;
         }
-
-
-        //   $query = "INSERT INTO " . TABLE_STORY_PLAYER .
-        //            " (id_player, name_player, id_ally,status,datadate)" . " VALUES (" . $this->
-        //            _id_player . ", '" . $player_name . "', '" . $id_ally . "',  '" . $status .
-        //            "',  " . $this->_date . ")";
-        //        $db->sql_query($query);
-
 
         /// o ajoute les insert historique value
         if (isset($this->_insert_historique_value)) {
@@ -120,25 +97,25 @@ public function insert_simple_requete($requete)
             $requete .= implode(',', $this->_insert_rank_player_points);
             // var_dump ( $requete);
             $db->sql_query($requete);
-             }
+        }
 
-       if (isset($this->_insert_rank_player_fleet)) {
+        if (isset($this->_insert_rank_player_fleet)) {
             $requete = "INSERT INTO " . TABLE_RPF . " ";
             $requete .= " (datadate, rank, player_id) ";
             $requete .= " VALUES ";
             $requete .= implode(',', $this->_insert_rank_player_fleet);
             // var_dump ( $requete);
             $db->sql_query($requete);
-             }
+        }
 
-       if (isset($this->_insert_rank_player_research)) {
+        if (isset($this->_insert_rank_player_research)) {
             $requete = "INSERT INTO " . TABLE_RPR . " ";
             $requete .= " (datadate, rank, player_id) ";
             $requete .= " VALUES ";
             $requete .= implode(',', $this->_insert_rank_player_research);
             // var_dump ( $requete);
             $db->sql_query($requete);
-             }
+        }
 
         //    var_dump($this->_insert_historique_value);
 
@@ -147,14 +124,14 @@ public function insert_simple_requete($requete)
         if ($cache_player == true) {
             $this->create_cache_player();
         }
-        
+
         /// toute les requetes simple ( )
         if (isset($this->_simple_requete)) {
-    foreach ($this->_simple_requete as $request) {
-        $db->sql_query($request);
-    }
-      }  
-        
+            foreach ($this->_simple_requete as $request) {
+                $db->sql_query($request);
+            }
+        }
+
     }
 
     public function insert_player_value($requete)
@@ -169,27 +146,11 @@ public function insert_simple_requete($requete)
 
     }
 
-public function insert_system_solaire_value($requete)
+    public function insert_system_solaire_value($requete)
     {
         $this->_insert_system_solaire_value[] = $requete;
 
     }
-
-
-  //  public static function get_all_player()
-//    {
-//        global $db;
-//
-//        $data = null;
-//
-//        $requete = "select * from " . TABLE_PLAYER . "  ;";
-//        $result = $db->sql_query($requete);
-//
-//        while ($row = $db->sql_fetch_assoc($result)) {
-//            $data[$row['id']] = $row;
-//        }
-//        return $data;
-//    }
 
 
     public static function find_table_rank_player($type)
