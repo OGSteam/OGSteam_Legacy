@@ -23,6 +23,10 @@ switch ($pub_subaction) {
         require (MOD_URL . "view/recherche.php");
         break;
 
+case 'player':
+        require (MOD_URL . "view/player.php");
+        break;
+
 
     default:
         require (MOD_URL . "view/index.php");
@@ -125,4 +129,21 @@ function player_actif($type)
     return $db->sql_numrows($result);
 
 }
+
+
+function convert_status($status)
+{
+    if ($status == 'x'){ return "Non renseigné" ;}else { return $status;}
+    
+    
+}
+
+function convert_ally($id_ally)
+{
+    if ($id_ally == null || $id_ally == 0 ){ return "sans alliance" ;}else { return 'id : '.$id_ally;}
+    
+    
+}
+
+
 ?>
