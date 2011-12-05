@@ -157,7 +157,7 @@ function abstract_rankplayer($ranking, $type)
     //var_dump($ranking_player_points);
     for ($i = 0; $i < 100; $i++) {
         if (isset($ranking['data'][$i])) {
-            if ($ranking['data'][$i]['player_id'] != -1) {
+            if ($ranking['data'][$i]['ally_id'] != -1) {
                 if (!isset($cache[$ranking['data'][$i]['player_id']])) {
                     $cache[$ranking['data'][$i]['player_id']] = null;
                 }

@@ -77,8 +77,14 @@ class player
                 $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
 
             } else {
-                if ($this->_status != $cache['status'] && $this->_status != 'x') {
-                    $this->_must_update = true;
+                if ($this->_status != $cache['status'] && $cache['status'] == 'x') {
+                    $this->_must_update = true;}
+                    else 
+                    {
+                         $this->_must_update = true;
+                     $this->_must_historique = true; // on prépare l update a suivre
+                $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
+
                 }
 
 
