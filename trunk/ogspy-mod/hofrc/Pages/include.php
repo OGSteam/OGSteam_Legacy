@@ -347,6 +347,7 @@ function jsspecialchars($s) {
 					$ship_att_first = 0;
 					
 					// Variable de concaténation pour les attaquants et techno
+					$template_type_att .= "^/".$player_att."^$";
 					$template .= "\n".'Attaquant '.$color_player_att . $player_att . $color_bal . $color_alliance. ' ['.$ally_att.']'. $color_bal . " \n";
 					$template .= 'Armes: '. $color_techno. $Armes_att. ' % '. $color_bal. ' Bouclier: '. $color_techno .$Bouclier_att. ' % '. $color_bal. ' Coque: '. $color_techno. $Protection_att. ' % ' . $color_bal . "\n";
 					foreach ($key_ships as $key_att_first => $ship_att_first)
@@ -356,11 +357,13 @@ function jsspecialchars($s) {
 									// Variable de concaténation de toute les flottes de la partie attaque
 									
 									$template .= "\t" . $ship_att_first ." ". number_format($$key_att_first,0,',','.').$color_bal."\n";
+									$template_type_att .= ", ".$key_att_first;
 								}
 						}
+					$template_type_att .= "---";
 		 
 				}
-				
+					
 			// On récupère la flotte défensive du premier round
 			$query_round_defense_first = $db->sql_query("SELECT player, coordinates, Armes, Bouclier, Protection, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SAT, SUM(DST), SUM(EDLM), SUM(TRA), LM, LLE, LLO, CG, AI, LP, PB, GB FROM ".TABLE_ROUND_DEFENSE." WHERE id_rcround=".$id_rcround." GROUP BY player");
 			WHILE (list($player_def, $coordinates_def, $Armes_def, $Bouclier_def, $Protection_def, $PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $SAT, $DST, $EDLM, $TRA, $LM, $LLE, $LLO, $CG, $AI, $LP, $PB, $GB) = $db->sql_fetch_row($query_round_defense_first))
@@ -378,6 +381,7 @@ function jsspecialchars($s) {
 						}
 					
 					// Variable ce concaténation pour les défenseurs et techno
+					$template_type_def .= "^/".$player_def."^$";
 					$template .= "\n".'Défenseur '. $color_player_def. $player_def. $color_bal. $color_alliance.' ['.$ally_def.']'. $color_bal. "\n";
 					$template .=  'Armes: '. $color_techno. $Armes_def.' % '. $color_bal. ' Bouclier: '. $color_techno. $Bouclier_def. ' % '. $color_bal. ' Coque: '. $color_techno. $Protection_def. ' % '. $color_bal. "\n";
 				
@@ -391,6 +395,7 @@ function jsspecialchars($s) {
 									$vivant_def_first_round = true;
 									// Variable de concaténation de toute les flottes de la partie défence
 									$template .= "\t" . $ship_def_first ." ". number_format($$key_def_first,0,',','.').$color_bal."\n";
+									$template_type_def .= ", ".$key_def_first;
 								}
 						}
 					
@@ -401,6 +406,7 @@ function jsspecialchars($s) {
 									$vivant_def_first_round = true;
 									// Variable de concaténation de toute les défences du défenceur
 									$template .= "\t" . $def_def_first ." ". number_format($$key_def_first,0,',','.').$color_bal."\n";
+									$template_type_def .= ", ".$key_def_first;
 								}
 						}
 					if ($vivant_def_first_round == false) 
@@ -408,6 +414,7 @@ function jsspecialchars($s) {
 								// Variable de concaténation si le défenseur détruit
 								$template .= $color_detruit . 'Vide' . $color_bal . " \n";
 							}
+					$template_type_def .= "---";
 				}
 				
 			// On détermine le dernier round
@@ -428,78 +435,108 @@ function jsspecialchars($s) {
 					$template.= "\n\n";
 				}
 
-			
+
 			// On récupère les flottes après le combat
-				$query_round_attack_last = $db->sql_query("SELECT player, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SUM(DST), SUM(EDLM), SUM(TRA) FROM ".TABLE_ROUND_ATTACK." WHERE id_rcround=".$id_last_rcround." GROUP BY player");
-				WHILE (list($player_att,$PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $DST, $EDLM, $TRA) = $db->sql_fetch_row($query_round_attack_last))
-					{
-						// Variable de concaténation pour les attaquants
-						$template .= "\n".'Attaquant '.$color_player_att . $player_att . $color_bal. "\n";
+				$query_player_attack_last = $db->sql_query ("SELECT player FROM ".TABLE_ROUND_ATTACK." WHERE id_rcround=".$id_last_rcround." GROUP BY player" );
+				WHILE (list($player_attack_list) = $db->sql_fetch_row($query_player_attack_last))
+					{	
+						// On nettoie les noms des joueurs des metacaractère et nous voila partie dans un beau bordel -_-'
+						$player_attack_list_format = preg_replace('#(\(|\)|\#|\!|\^|\$|\(|\)|\[|\]|\{|\}|\?|\+|\*|\.|\\|\|)#', 'Xespace_symboleX$1', $player_attack_list);
+						// Ogspy n'accepte pas le $1 à cause du \ donc j'ai mis un espace que l'on supprime
+						$player_attack_list_format2 = preg_replace('#(Xespace_symboleX)#', '\\', $player_attack_list_format);
+						// Obligé d'utilisé le preg_match_all pour trouver les flottes du joueurs, on part dans les array. Super je m'éclate.
+						preg_match_all('#\^/('.$player_attack_list_format2.')\^\$,(.+)---#isU', $template_type_att, $select_fleet_attack);
 						
-						$key_att_last = '';
-						$ship_att_last = 0;
-						$vivant_att = false;
-					
-						foreach ($key_ships as $key_att_last => $ship_att_last) 
+                        
+						$query_round_attack_last = $db->sql_query("SELECT player, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SUM(DST), SUM(EDLM), SUM(TRA) FROM ".TABLE_ROUND_ATTACK." WHERE id_rcround=".$id_last_rcround." AND player='".$player_attack_list."'  GROUP BY player");
+						WHILE (list($player_att, $PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $DST, $EDLM, $TRA) = $db->sql_fetch_row($query_round_attack_last))
 							{
-								if (isset($$key_att_last) && $$key_att_last > 0) 
+								// Variable de concaténation pour les attaquants
+								$template .= "\n".'Attaquant '.$color_player_att . $player_att . $color_bal. "\n";
+								$key_att_last = '';
+								$ship_att_last = 0;
+								$vivant_att = false;
+								//on controle qu'il reste un vaisseaux
+								$sum_att = $PT + $GT + $CLE + $CLO + $CR + $VB + $VC + $REC + $SE + $BMD + $DST + $EDLM + $TRA;
+								
+								foreach ($key_ships as $key_att_last => $ship_att_last)
 									{
-										$vivant_att = true;
-										$lost_units = lost_unit ($player_att, $$key_att_last, $key_att_last, $id_rcround, "att");
-										// Variable de concaténation pour des flottes
-										$template .= "\t" . $ship_att_last ." ". number_format($$key_att_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
+										if (isset($sum_att) && $sum_att > 0) 
+											{
+												$vivant_att = true;
+												if(preg_match("#".$key_att_last."#",$select_fleet_attack[2][0]))
+												{
+												$lost_units = lost_unit ($player_att, $$key_att_last, $key_att_last, $id_rcround, "att");
+												// Variable de concaténation pour des flottes
+												$template .= "\t" . $ship_att_last ." ". number_format($$key_att_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
+												}
+											}
 									}
-							}
-						// Si la variable revient false il affichera détruit.
-						if ($vivant_att == false) 
-							{
-							// Variable de concaténation si l'attaquant détruit
-							$template .= $color_detruit . 'Détruit' . $color_bal . " \n\n";								
+								// Si la variable revient false il affichera détruit.
+								if ($vivant_att == false) 
+									{
+									// Variable de concaténation si l'attaquant détruit
+									$template .= $color_detruit . 'Détruit' . $color_bal . " \n\n";								
+									}
 							}
 					}
-				
 				// On recupère les flottes de défenses après le combat
-				$query_round_defense_last = $db->sql_query("SELECT player, coordinates, Armes, Bouclier, Protection, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SAT, SUM(DST), SUM(EDLM), SUM(TRA), LM, LLE, LLO, CG, AI, LP, PB, GB FROM ".TABLE_ROUND_DEFENSE." WHERE id_rcround=".$id_last_rcround." GROUP BY player");
-				WHILE (list($player_def, $coordinates_def, $Armes_def, $Bouclier_def, $Protection_def, $PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $SAT, $DST, $EDLM, $TRA, $LM, $LLE, $LLO, $CG, $AI, $LP, $PB, $GB) = $db->sql_fetch_row($query_round_defense_last))
-					{
-						// Variable de concaténation pour les défenseurs
-						$template .= "\n".'Défenseur '. $color_player_def. $player_def. $color_bal."\n";
+				$query_player_def_last = $db->sql_query ("SELECT player FROM ".TABLE_ROUND_DEFENSE." WHERE id_rcround=".$id_last_rcround." GROUP BY player" );
+				WHILE (list($player_def_list) = $db->sql_fetch_row($query_player_def_last))
+					{	
+						// On nettoie les noms des joueurs des metacaractère et nous voila partie dans un beau bordel -_-'
+						$player_def_list_format = preg_replace('#(\(|\)|\#|\!|\^|\$|\(|\)|\[|\]|\{|\}|\?|\+|\*|\.|\\|\|)#', 'Xespace_symboleX$1', $player_def_list);
+						// Ogspy n'accepte pas le $1 à cause du \ donc j'ai mis un espace que l'on supprime
+						$player_def_list_format2 = preg_replace('#(Xespace_symboleX)#', '\\', $player_def_list_format);
+						// Obligé d'utilisé le preg_match_all pour trouver les flottes du joueurs, on part dans les array. Super je m'éclate.
+						preg_match_all('#\^/('.$player_def_list_format2.')\^\$,(.+)---#isU', $template_type_def, $select_fleet_def);
 						
-						$key_def_last = '';
-						$ship_def_last = 0;
-						$vivant_def = false;
-						
+						$query_round_defense_last = $db->sql_query("SELECT player, SUM(PT), SUM(GT), SUM(CLE), SUM(CLO), SUM(CR), SUM(VB), SUM(VC), SUM(REC), SUM(SE), SUM(BMD), SAT, SUM(DST), SUM(EDLM), SUM(TRA), LM, LLE, LLO, CG, AI, LP, PB, GB FROM ".TABLE_ROUND_DEFENSE." WHERE id_rcround=".$id_last_rcround." AND player='".$player_def_list."'  GROUP BY player");
+						WHILE (list($player_def, $PT, $GT, $CLE, $CLO, $CR, $VB, $VC, $REC, $SE, $BMD, $SAT, $DST, $EDLM, $TRA, $LM, $LLE, $LLO, $CG, $AI, $LP, $PB, $GB) = $db->sql_fetch_row($query_round_defense_last))
+							{
+								// Variable de concaténation pour les défenseurs
+								$template .= "\n".'Défenseur '. $color_player_def. $player_def. $color_bal."\n";
+								$key_def_last = '';
+								$ship_def_last = 0;
+								$vivant_def_fleet = false;
+								$vivant_def = false;
+								$sum_def_fleet = $PT + $GT + $CLE + $CLO + $CR + $VB + $VC + $REC + $SE + $BMD + $SAT + $DST + $EDLM + $TRA;
+								$sum_def = $LM + $LLE + $LLO + $CG + $AI + $LP + $PB + $GB;
 				
-						foreach ($key_ships as $key_def_last => $ship_def_last) 
-							{
-								if (isset($$key_def_last) && $$key_def_last > 0) 
+								foreach ($key_ships as $key_def_last => $ship_def_last) 
 									{
-										$vivant_def = true;
-										$lost_units = lost_unit ($player_att, $$key_att_last, $key_att_last, $id_rcround, "def");
-										// Variable de concaténation pour les flottes des défenseurs
-										$template .= "\t" . $ship_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
+										if (isset($sum_def_fleet) && $sum_def_fleet > 0) 
+											{
+												$vivant_def_fleet = true;
+												
+												if(preg_match("#".$key_def_last."#",$select_fleet_def[2][0]))
+													{
+														$lost_units = lost_unit ($player_def, $$key_def_last, $key_def_last, $id_rcround, "def");
+														// Variable de concaténation pour les flottes des défenseurs
+														$template .= "\t" . $ship_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal." ".$color_perte_fleet_def.$lost_units.$color_bal."\n";
+													}
+											}
 									}
-							}
-						foreach ($key_defs as $key_def_last => $def_def_last) 
-							{
-								if (isset($$key_def_last) && $$key_def_last > 0) 
+								foreach ($key_defs as $key_def_last => $def_def_last) 
 									{
-										$vivant_def = true;
-										
-										// Variable de concaténation pour la défense du défenseur
-										$template .= "\t" . $def_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal."\n";
-									}
+										if (isset($sum_def) && $sum_def > 0) 
+											{
+												$vivant_def = true;
+												if(preg_match("#".$key_def_last."#",$select_fleet_def[2][0]))
+													{
+														// Variable de concaténation pour la défense du défenseur
+														$template .= "\t" . $def_def_last ." ". number_format($$key_def_last,0,',','.').$color_bal."\n";
+													}
+											}
+								}
 							}
-							
-						if ($vivant_def == false) 
+						if ($vivant_def_fleet == false && $vivant_def == false) 
 							{
 								// Variable de concaténation si le défenseur détruit
 								$template .= $color_detruit . 'Détruit' . $color_bal . " \n";
 							}
-				
-				
-				}
-			
+						
+					}
 			// Variable de concaténation pour afficher une séparation
 			if ($type == "bbcode")
 				{
