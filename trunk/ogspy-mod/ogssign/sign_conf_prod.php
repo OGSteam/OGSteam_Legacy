@@ -103,12 +103,12 @@ $param_sign = $db->sql_fetch_assoc($result);
 // création de l'adresse de la signature
 $url_sign = $full_url_sign = '';
 if (!empty($param_sign['pseudo_ig'])) {
-	$url_sign = 'mod/ogssign/'.$param_sign['pseudo_ig'].'.P.png';
+	$url_sign = 'mod/'.$folder.'/'.$param_sign['pseudo_ig'].'.P.png';
 	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9) . $url_sign);
 }
 
 // dossier des fonds
-$dir_src_fonds = 'mod/ogssign/fonds/prod';
+$dir_src_fonds = 'mod/'.$folder.'/fonds/prod';
 
 // vérification de l'existence du mod production (qui permet d'affiner les % des mines)
 // mais il n'est pas nécessaire de l'avoir pour que la signature fonctionne

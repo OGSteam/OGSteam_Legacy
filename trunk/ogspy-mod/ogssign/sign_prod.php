@@ -22,7 +22,7 @@ global $db;
 $off_ingenieur = $user_data['off_ingenieur'];
 $off_geologue = $user_data['off_geologue'];
 $start = 101;
-$nb_planet = $start + find_nb_planete_user() - 1;
+$nb_planet = find_nb_planete_user();
 $user_id = $param_sign['user_id'];	// pour la sign_prod
 $nom_u = $param_sign['pseudo_ig'];
 // on met le fond par défaut, si le fond demandé n'existe pas
@@ -116,9 +116,10 @@ if (!file_exists($fichier_stats) || filemtime($fichier_stats)+48*3600 < time()) 
 			if ($ratio > 1) $ratio = 1;
 
 			// calcul de la production horaire
-			$metal_heure = $metal_heure + ( 20 + round (($M_per/100) * $ratio * ( production ( "M", $M, $off_geologue ))));
-			$cristal_heure = $cristal_heure + ( 10 + round (( $C_per/100 ) * $ratio * ( production ( "C", $C, $off_geologue ))));
-			$deut_heure = $deut_heure  + (( round (( $D_per/100) * $ratio * ( production ( "D", $D, $off_geologue, $temperature_max )))) -  consumption ("CEF", $CEF));
+			$metal_heure = $metal_heure + (( production ( "M", $M, $off_geologue )) * $ratio);
+			$cristal_heure = $cristal_heure + (( production ( "C", $C, $off_geologue )) * $ratio);
+			$deut_heure = $deut_heure  + ((( production ( "D", $D, $off_geologue, $temperature_max )) * $ratio) -  ((consumption ("CEF", $CEF)) * ( $CEF_per / 100 )));
+			
 		}
 	}
 
