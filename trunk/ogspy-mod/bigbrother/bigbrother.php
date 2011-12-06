@@ -23,7 +23,11 @@ switch ($pub_subaction) {
         require (MOD_URL . "view/recherche.php");
         break;
 
-case 'player':
+    case 'fil':
+        require (MOD_URL . "view/fil.php");
+        break;
+
+    case 'player':
         require (MOD_URL . "view/player.php");
         break;
 
@@ -47,6 +51,7 @@ function create_menu()
             <tr align="center">
                 <?php create_sub_menu("index"); ?>
                 <?php create_sub_menu("recherche"); ?>
+                <?php create_sub_menu("fil"); ?>
                 <?php create_sub_menu("apropos"); ?>
             </tr>
         </tbody>

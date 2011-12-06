@@ -75,16 +75,10 @@ if (isset($pub_recherche) && $pub_string_search != "") {
 
     }
 
-//  echo '$pub_type_search = ' . $pub_type_search . '<br />';
-//    echo '$pub_temps = ' . $pub_temps . '<br />';
-//    echo '$pub_string_search = ' . $pub_string_search . '<br />';
+
 
 
 }
-
-
-//%".$pub_string_search."%
-
 
 
 
