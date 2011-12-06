@@ -118,7 +118,7 @@ if (!isset($pub_quoifaire) || $pub_quoifaire <> 'Tester le module') {
 	$result_user = $db->sql_query($query);
 
 	// début de l'adresse des signatures
-	$debut_full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)) . 'mod/OGSign/';
+	$debut_full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)) . 'mod/ogssign/';
 	?>
 
 	<!-- UNIVERS -->
@@ -188,7 +188,7 @@ if (!isset($pub_quoifaire) || $pub_quoifaire <> 'Tester le module') {
 		while ($param_sign_user = $db->sql_fetch_assoc($result_user)) {
 			echo "\n\t",'<tr>',"\n\t\t",'<th style="-moz-opacity: 1; filter: alpha(opacity=100); /*suppression de la transparence éventuelle*/">'
 			// donc on affiche les signatures en question
-			,"\n\t\t",'<img src="mod/OGSign/',$param_sign_user['pseudo_ig'],'.png" alt="signature du joueur ',$param_sign_user['pseudo_ig'],'" title="',$param_sign_user['pseudo_ig'],'"><br />'
+			,"\n\t\t",'<img src="mod/ogssign/',$param_sign_user['pseudo_ig'],'.png" alt="signature du joueur ',$param_sign_user['pseudo_ig'],'" title="',$param_sign_user['pseudo_ig'],'"><br />'
 			// réaffichage de l'adresse
 			,"\n\t\t",'<input type="text" value="',$debut_full_url_sign,$param_sign_user['pseudo_ig'],'.png" size="70" readonly="readonly" onClick="this.focus(); this.select();" style="text-align: center;"></th>'
 			// et on propose de les supprimer
