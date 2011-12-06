@@ -1,4 +1,7 @@
 <?php
+if (!defined('IN_SPYOGAME'))
+    die("Hacking attempt");
+    
 $total = player_count("total");
 $actif = player_count("actif");
 $attente = player_count("attente");
