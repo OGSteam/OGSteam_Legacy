@@ -10,9 +10,6 @@
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgame.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameLocales.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/newOgameConstants.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-Univers.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-UniversLocales.js"/>
-	<script type="application/x-javascript" src="chrome://xtense2/content/parsers/E-UniversConstants.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/Servers.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/ServerItem.js"/>
 	<script type="application/x-javascript" src="chrome://xtense2/content/Request.js"/>

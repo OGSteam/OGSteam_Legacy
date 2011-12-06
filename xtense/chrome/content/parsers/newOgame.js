@@ -1239,6 +1239,7 @@ var XnewOgame = {
 				m = content.match(new RegExp(locales['unespionage prob']+this.regexps.probability));
 				if(m)
 					data.proba = m[1];
+				else data.proba = 0;
 				
 				data.activity = 0;
 				m = content.match(new RegExp(locales['activity']));
