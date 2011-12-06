@@ -104,7 +104,7 @@ $param_sign = $db->sql_fetch_assoc($result);
 $url_sign = $full_url_sign = '';
 if (!empty($param_sign['pseudo_ig'])) {
 	$url_sign = 'mod/'.$folder.'/'.$param_sign['pseudo_ig'].'.P.png';
-	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9) . $url_sign);
+	$full_url_sign = str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9).$url_sign);
 }
 
 // dossier des fonds
