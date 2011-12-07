@@ -1,16 +1,16 @@
-/**
+ï»¿/**
  * @author Unibozu
  * @license GNU/GPL
  */
 
 Ximplements(Xlocales, {
-	'toolbar activated': 'Barre d\'outils activée',
-	'toolbar deactivated': 'Barre d\'outils désactivée',
+	'toolbar activated': 'Barre d\'outils activÃ©e',
+	'toolbar deactivated': 'Barre d\'outils dÃ©sactivÃ©e',
 	
 	'ogspy menu tooltip': 'Connexion automatique au serveur OGSpy',
 	
-	'fatal error': 'Une erreur critique est survenue et a arrêté l\'exécution de Xtense',
-	'parsing error': 'Une erreur critique est survenue lors de la récupération des données de la page',
+	'fatal error': 'Une erreur critique est survenue et a arrÃªtÃ© l\'exÃ©cution de Xtense',
+	'parsing error': 'Une erreur critique est survenue lors de la rÃ©cupÃ©ration des donnÃ©es de la page',
 	
 	'no ogspy server': 'Aucun serveur',
 	//'no ogame page': 'Page ogame non pris en compte',
@@ -18,42 +18,42 @@ Ximplements(Xlocales, {
 	'unknow page': 'Page inconnue',
 	'activate': 'Activer',
 	'deactivate': 'Desactiver',
-	'wait send': 'En attente de l\'envoi manuel des données',
+	'wait send': 'En attente de l\'envoi manuel des donnÃ©es',
 	'unavailable parser lang': 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
 	
-	'overview detected': 'Vue générale détectée',
-	'buildings detected': 'Batiments détectés',
-	'installations detected': 'Installations détectés',
-	'researchs detected': 'Recherches détectés',
-	'fleet detected': 'Flotte détectée',
-	'defense detected': 'Défenses détectés',
-	'messages detected': 'Page de messages détectée',
-	'ranking detected': 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
-	'ally_list detected': 'Liste des joueurs de l\'alliance détectée',
-	'system detected': 'Système solaire [$1:$2] détecté', // Galaxy, System
-	're detected': 'Rapport d\'espionnage détecté',
-	'rc detected': 'Rapport de combat détecté',
-	'res detected': 'Message de commerce détecté',
+	'overview detected': 'Vue gÃ©nÃ©rale dÃ©tectÃ©e',
+	'buildings detected': 'Batiments dÃ©tectÃ©s',
+	'installations detected': 'Installations dÃ©tectÃ©s',
+	'researchs detected': 'Recherches dÃ©tectÃ©s',
+	'fleet detected': 'Flotte dÃ©tectÃ©e',
+	'defense detected': 'DÃ©fenses dÃ©tectÃ©s',
+	'messages detected': 'Page de messages dÃ©tectÃ©e',
+	'ranking detected': 'Statistiques $2 des $1 dÃ©tectÃ©es', // Primary type (ally/player), Secondary type (points, research, fleet)
+	'ally_list detected': 'Liste des joueurs de l\'alliance dÃ©tectÃ©e',
+	'system detected': 'SystÃ¨me solaire [$1:$2] dÃ©tectÃ©', // Galaxy, System
+	're detected': 'Rapport d\'espionnage dÃ©tectÃ©',
+	'rc detected': 'Rapport de combat dÃ©tectÃ©',
+	'res detected': 'Message de commerce dÃ©tectÃ©',
 	
-	'no researchs' : 'Aucune recherche à envoyer',
-	'no defenses' : 'Aucune défense à envoyer',
-	'no buildings' : 'Aucun bâtiment à envoyer',
-	'no fleet' : 'Pas de flotte à envoyer',
+	'no researchs' : 'Aucune recherche Ã  envoyer',
+	'no defenses' : 'Aucune dÃ©fense Ã  envoyer',
+	'no buildings' : 'Aucun bÃ¢timent Ã  envoyer',
+	'no fleet' : 'Pas de flotte Ã  envoyer',
 	
 	'ranking player': 'joueurs',
 	'ranking ally': 'alliances',
 	'ranking points': 'points',
 	'ranking fleet': 'flotte',
 	'ranking research': 'recherches',
-	'ranking defense': 'défense',
-	'ranking buildings': 'bâtiments',
+	'ranking defense': 'dÃ©fense',
+	'ranking buildings': 'bÃ¢timents',
 	
-	'invalid system': 'Système solaire non pris en compte',
+	'invalid system': 'SystÃ¨me solaire non pris en compte',
 	'invalid ranking': 'Page des statistiques invalide',
 	'invalid rc': 'Rapport de combat invalide (Contact perdu)',
-	'no ranking': 'Aucun classement à envoyer',
-	'no messages': 'Aucun message à envoyer',
-	'impossible ranking': 'Impossible de récupérer le classement alliance suivant les points par membre',
+	'no ranking': 'Aucun classement Ã  envoyer',
+	'no messages': 'Aucun message Ã  envoyer',
+	'impossible ranking': 'Impossible de rÃ©cupÃ©rer le classement alliance suivant les points par membre',
 	
 	// Responses
 	'response start': 'Serveur $1 : ', // Serveur number
@@ -62,49 +62,49 @@ Ximplements(Xlocales, {
 	'http status 500': 'Erreur 500, Erreur interne au serveur',
 	'http timeout': 'Impossible de contacter le serveur OGSpy cible',
 	'http status unknow': 'Code d\'erreur Inconnu $1', // Http status
-	'empty response': 'Réponse du plugin vide',
-	'invalid response': 'Réponse inconnue du plugin (activez le debug pour voir le contenu)',
-	'response hack': 'Les données envoyées ont été refusées par le plugin Xtense',
+	'empty response': 'RÃ©ponse du plugin vide',
+	'invalid response': 'RÃ©ponse inconnue du plugin (activez le debug pour voir le contenu)',
+	'response hack': 'Les donnÃ©es envoyÃ©es ont Ã©tÃ© refusÃ©es par le plugin Xtense',
 	
-	'error php version': 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
+	'error php version': 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez rÃ©cente',
 	'error wrong version plugin': 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
-	'error wrong version xtense.php': 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+	'error wrong version xtense.php': 'Votre fichier xtense.php n\'a pas la mÃªme version que celle du plugin installÃ©',
 	'error wrong version toolbar': 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
 	'error server active': 'Serveur OGSpy inactif (Raison: $1)', // reason
 	'error username': 'Pseudo invalide',
 	'error password': 'Mot de passe invalide',
 	'error user active': 'Votre compte est inactif',
-	'error home full': 'Votre espace personnel est plein, impossible de rajouter une nouvelle planète',
-	'error plugin connections': 'Connexions au plugin Xtense non autorisées',
-	'error plugin config': 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-	'error plugin univers': 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-	'error grant start': 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
-	'error grant empire': 'des pages de votre empire (Bâtiments, Laboratoire...)',
+	'error home full': 'Votre espace personnel est plein, impossible de rajouter une nouvelle planÃ¨te',
+	'error plugin connections': 'Connexions au plugin Xtense non autorisÃ©es',
+	'error plugin config': 'Plugin Xtense non configurÃ© par votre administrateur, impossible de l\'utiliser',
+	'error plugin univers': 'NumÃ©ro d\'univers d\'Ogame invalide sur cet OGSpy',
+	'error grant start': 'Vous ne possÃ©dez pas les autorisations nÃ©cessaires pour envoyer ',
+	'error grant empire': 'des pages de votre empire (BÃ¢timents, Laboratoire...)',
 	'error grant messages': 'des messages',
-	'error grant system': 'des systèmes solaires',
+	'error grant system': 'des systÃ¨mes solaires',
 	'error grant ranking': 'des classements',
 	
-	'success home updated': 'Espace personnel mis à jour ($1)', // Page name
-	'success system': 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
-	'success ranking': 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
-	'success rc': 'Rapport de combat envoyé',
-	'success ally_list': 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
-	'success messages': 'Message correctement envoyé',
-	'success fleetSending': 'Départ de flotte correctement envoyé',
-	'success spy': 'Rapport d\'espionnage correctement envoyé',
-	'success res': 'Message de commerce correctement envoyé',
+	'success home updated': 'Espace personnel mis Ã  jour ($1)', // Page name
+	'success system': 'Mise Ã  jour du systÃ¨me solaire [$1:$2] effectuÃ©e', // Galaxy, System
+	'success ranking': 'Classement $2 des $1 ($3-$4) mis Ã  jour', // Primary type, secondary type, offset min, offset max
+	'success rc': 'Rapport de combat envoyÃ©',
+	'success ally_list': 'Liste des joueurs de l\'alliance [$1] correctement envoyÃ©e', // TAG
+	'success messages': 'Message correctement envoyÃ©',
+	'success fleetSending': 'DÃ©part de flotte correctement envoyÃ©',
+	'success spy': 'Rapport d\'espionnage correctement envoyÃ©',
+	'success res': 'Message de commerce correctement envoyÃ©',
 	
-	'unknow response': 'Code réponse inconnu : "$1", data: "$2"', // code, content
+	'unknow response': 'Code rÃ©ponse inconnu : "$1", data: "$2"', // code, content
 	
-	'page overview': 'Vue générale',
-	'page buildings': 'Bâtiments',
+	'page overview': 'Vue gÃ©nÃ©rale',
+	'page buildings': 'BÃ¢timents',
 	'page installations': 'Installations',
 	'page labo': 'Laboratoire',
-	'page defense': 'Défense',
+	'page defense': 'DÃ©fense',
 	'page fleet': 'Flotte',
-	'page fleetSending': 'Départ de flotte',
+	'page fleetSending': 'DÃ©part de flotte',
 	
 	//'PM':'MP',
 	
-	'call messages': '-- Messages renvoyés par les appels'
+	'call messages': '-- Messages renvoyÃ©s par les appels'
 });
