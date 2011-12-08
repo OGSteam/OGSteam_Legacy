@@ -19,7 +19,7 @@ if ($security == true) {
 
     // Creation table alliance
     $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_ALLY . " (" .
-        " id INT(7) NOT NULL ," . " name varchar(30) NOT NULL ," . " tag varchar(30)," .
+        " id INT(7) NOT NULL ," . " name varchar(30) ," . " tag varchar(30)," .
         " url varchar(50)," . "UNIQUE (`id`)" . ")";
 
     // Creation table player story
@@ -40,7 +40,8 @@ if ($security == true) {
         " galaxy enum('1','2','3','4','5','6','7','8','9') NOT NULL ," .
         " system smallint(3) NOT NULL ," .
         " `row` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15') NOT NULL ," .
-        " id_player INT(7) NOT NULL ," . " id_ally INT(7) NOT NULL ," .
+        " id_player INT(7) NOT NULL ," .
+        // " id_ally INT(7) NOT NULL ," . => inutile puisque doublon d infos avec table joueur
         " datadate int(11) NOT NULL default '0'," .
         " UNIQUE KEY univers (galaxy,system,`row`)" . ")";
 
@@ -61,6 +62,24 @@ if ($security == true) {
     $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RPR . " (" .
         " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
         " `player_id` INT(7) NOT NULL , " . " KEY (`player_id` )" . ")";
+
+
+    // creation de la table rpp
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RAP . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `ally_id` INT(7) NOT NULL , " . " KEY (`ally_id` )" . ")";
+
+
+    // creation de la table rpf
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RAF . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `ally_id` INT(7) NOT NULL , " . " KEY (`ally_id` )" . ")";
+
+
+    // creation de la table rps
+    $requests[] = "CREATE TABLE IF NOT EXISTS " . TABLE_RAR . " (" .
+        " datadate int(11) NOT NULL default '0'," . " rank INT(6) NOT NULL ," .
+        " `ally_id` INT(7) NOT NULL , " . " KEY (`ally_id` )" . ")";
 
 
     // date d installation ( debut d historisation)

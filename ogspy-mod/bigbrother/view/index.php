@@ -1,12 +1,14 @@
 <?php
 if (!defined('IN_SPYOGAME'))
     die("Hacking attempt");
-    
+
 $total = player_count("total");
 $actif = player_count("actif");
 $attente = player_count("attente");
 $rip = $total - $actif - $attente; /// si valeur négative pb avec jointure ....
-
+$total_ally = ally_count("total");
+$actif_ally = ally_count("actif");
+$rip_ally = $total_ally - $actif_ally;
 
 
 
@@ -25,19 +27,19 @@ $rip = $total - $actif - $attente; /// si valeur négative pb avec jointure ....
 <td  width="250"  class="b"  >Nombre de joueur Total :</td>
 <td width="50" class="b"  ><?php echo $total; ?></td>
 <td  width="250" class="b"  >Nombre de ally Total :</td>
-<td width="50" class="b"  >en dev</td>
+<td width="50" class="b"  ><?php echo $total_ally; ?></td>
 </tr>
 <tr>
 <td  width="250"  class="b"  >Nombre de joueur actif :</td>
 <td width="50" class="b"  ><?php echo $actif; ?></td>
 <td  width="250" class="b"  >Nombre de ally actif :</td>
-<td width="50" class="b"  >en dev</td>
+<td width="50" class="b"  ><?php echo $actif_ally; ?></td>
 </tr>
 <tr>
 <td  width="250"  class="b"  >Nombre de joueur disparu :</td>
 <td width="50" class="b"  ><?php echo $rip; ?></td>
 <td  width="250" class="b"  >Nombre de ally disparu : ( ou non renseigné )</td>
-<td width="50" class="b"  >en dev</td>
+<td width="50" class="b"  ><?php echo $rip_ally; ?></td>
 </tr>
 <tr>
 <td  width="250"  class="b"  >Nombre de joueur en attente :</td>

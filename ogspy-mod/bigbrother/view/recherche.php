@@ -1,8 +1,8 @@
 <?php
 if (!defined('IN_SPYOGAME'))
     die("Hacking attempt");
-    
-    
+
+
 if (isset($pub_recherche) && $pub_string_search != "") {
     $type = $db->sql_escape_string($pub_type_search);
     $temps = $db->sql_escape_string($pub_temps);
@@ -23,22 +23,23 @@ if (isset($pub_recherche) && $pub_string_search != "") {
 
             $affichage = '<br /><table>';
             $affichage .= '<tr>';
-            $affichage .=  '<td width="200" class="c">Nom</td>';
-            $affichage .=  '<td width="50" class="c">Id</td>';
-            $affichage .=  '	</tr>';
+            $affichage .= '<td width="200" class="c">Nom</td>';
+            $affichage .= '<td width="50" class="c">Id</td>';
+            $affichage .= '	</tr>';
 
             $result = $db->sql_query($requete);
 
 
             while ($row = $db->sql_fetch_assoc($result)) {
-                $affichage .=  '<tr>';
-                $affichage .=  '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=player&id=' . $row['id'] . '">' . $row['name_player'] . '</a></td>';
-                $affichage .=  '<td width="50" class="b">' . $row['id'] . '</td>';
-                $affichage .=  '	</tr>';
+                $affichage .= '<tr>';
+                $affichage .= '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=player&id=' .
+                    $row['id'] . '">' . $row['name_player'] . '</a></td>';
+                $affichage .= '<td width="50" class="b">' . $row['id'] . '</td>';
+                $affichage .= '	</tr>';
 
 
             }
-            $affichage .=  '</table>';
+            $affichage .= '</table>';
 
         } else {
             //  liste joueur de tous les temps
@@ -49,33 +50,29 @@ if (isset($pub_recherche) && $pub_string_search != "") {
 
             $affichage = '<br /><table>';
             $affichage .= '<tr>';
-            $affichage .=  '<td width="200" class="c">Nom</td>';
-            $affichage .=  '<td width="50" class="c">Id</td>';
-            $affichage .=  '	</tr>';
+            $affichage .= '<td width="200" class="c">Nom</td>';
+            $affichage .= '<td width="50" class="c">Id</td>';
+            $affichage .= '	</tr>';
 
             $result = $db->sql_query($requete);
 
 
             while ($row = $db->sql_fetch_assoc($result)) {
-                $affichage .=  '<tr>';
-                $affichage .=  '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=player&id=' . $row['id'] . '">' . $row['name_player'] . '</a></td>';
-                $affichage .=  '<td width="50" class="b">' . $row['id_player'] . '</td>';
-                $affichage .=  '	</tr>';
+                $affichage .= '<tr>';
+                $affichage .= '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=player&id=' .
+                    $row['id'] . '">' . $row['name_player'] . '</a></td>';
+                $affichage .= '<td width="50" class="b">' . $row['id_player'] . '</td>';
+                $affichage .= '	</tr>';
 
 
             }
-            $affichage .=  '</table>';
-
-            
-            
+            $affichage .= '</table>';
 
 
         }
 
 
     }
-
-
 
 
 }

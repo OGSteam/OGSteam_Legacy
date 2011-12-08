@@ -8,6 +8,9 @@ define("TABLE_STORY_ALLY", $table_prefix . "bigb_story_ally");
 define("TABLE_RPP", $table_prefix . "bigb_rank_player_points");
 define("TABLE_RPF", $table_prefix . "bigb_rank_player_fleet");
 define("TABLE_RPR", $table_prefix . "bigb_rank_player_research");
+define("TABLE_RAP", $table_prefix . "bigb_rank_ally_points");
+define("TABLE_RAF", $table_prefix . "bigb_rank_ally_fleet");
+define("TABLE_RAR", $table_prefix . "bigb_rank_ally_research");
 define("TABLE_UNI", $table_prefix . "bigb_uni");
 
 //chemin

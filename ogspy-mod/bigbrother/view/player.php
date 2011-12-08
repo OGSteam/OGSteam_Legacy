@@ -5,20 +5,7 @@ if (!defined('IN_SPYOGAME'))
  $id = $db->sql_escape_string($pub_id);
  $first_date= $server_config['bigbrother'];
 if ( is_numeric($id)){
-    
-  //  Colonne 	Type 	Interclassement 	Attributs 	Null 	Défaut 	Extra 	Action
-//	id_player 	int(7) 			Non 	Aucun 		Affiche les valeurs distinctes 	Modifier 	Supprimer 	Primaire 	Unique 	Index 	Texte entier
-//	name_player 	varchar(30) 	latin1_swedish_ci 		Non 	Aucun 		Affiche les valeurs distinctes 	Modifier 	Supprimer 	Primaire 	Unique 	Index 	Texte entier
-//	id_ally 	int(7) 			Oui 	NULL 		Affiche les valeurs distinctes 	Modifier 	Supprimer 	Primaire 	Unique 	Index 	Texte entier
-//	status 	varchar(6) 	latin1_swedish_ci 		Oui 	NULL 		Affiche les valeurs distinctes 	Modifier 	Supprimer 	Primaire 	Unique 	Index 	Texte entier
-//	datadate 	int(11) 			Non 	0 		Affiche les valeurs distinctes 	Modifier 	Supprimer 	Primaire 	Unique 	Index 	Texte entier
-//    
-//    
-    
-    
-   
-     
-     
+         
         $requete = "select * from " . TABLE_PLAYER . "";
         $requete .= " where id = '" . $id . "' ";
                 
@@ -62,7 +49,7 @@ if ( is_numeric($id)){
             $affichage .=  '<td colspan="4" class="c">Historique du joueur</td>';
             $affichage .=  '	</tr>';
             $affichage .= '<tr>';
-            $affichage .=  '<td width="150" class="c">jusqu \'au</td>';
+            $affichage .=  '<td width="150" class="c">jusqu au</td>';
             $affichage .=  '<td width="100" class="c">Nom</td>';
             $affichage .=  '<td width="100" class="c">status</td>';
             $affichage .=  '<td width="100" class="c">alliance</td>';
@@ -97,8 +84,138 @@ if ( is_numeric($id)){
     
     
     
+    //////// recuperation des classement \\\\
+    
+    $ranking = array();
+    $arraydate = array();
+    //datadate 	rank 	player Croissant 	ally 	points
+    $request = "SELECT R.datadate,  R.rank, R.points , R.player, R.ally , BIG.player_id ";
+    $request .= " FROM ".TABLE_RANK_PLAYER_POINTS." as R ";
+	$request .=  " INNER JOIN " . TABLE_RPP . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.player_id = '".$id."' ";
+    //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+       	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["general"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
+		$arraydate[]=$datadate;
+	}
+    
+      $request = "SELECT R.datadate,  R.rank, R.points , R.player, R.ally , BIG.player_id ";
+    $request .= " FROM ".TABLE_RANK_PLAYER_FLEET." as R ";
+	$request .=  " INNER JOIN " . TABLE_RPF . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.player_id = '".$id."' ";
+    //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+      	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["fleet"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
+			$arraydate[]=$datadate;
+	}
+    
+    
+     $request = "SELECT R.datadate,  R.rank, R.points , R.player, R.ally , BIG.player_id ";
+    $request .= " FROM ".TABLE_RANK_PLAYER_RESEARCH." as R ";
+	$request .=  " INNER JOIN " . TABLE_RPR . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.player_id = '".$id."' ";
+    //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+        	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["research"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
+			$arraydate[]=$datadate;
+	}
+    
+
+    
+    
+
+
+    
+    
+    
+    
     
     
 }
 
 ?>
+<br />
+<table>
+<tr>
+	<td colspan="13" class="c">Historique du classement joueur</td>
+</tr>
+<tr>
+	<td  class="c">Date</td>
+	<td colspan="4" class="c">Pts Général</td>
+	<td colspan="4" class="c">Pts Flotte</td>
+	<td colspan="4" class="c">Pts Recherche</td>
+</tr>
+<?php
+$arraydate = array_unique ($arraydate);
+ksort($arraydate);
+for ($i = 0; $i < count($arraydate); $i++) {
+    echo '<tr>';
+	echo '<th>'.strftime("%d %b %Y %H:%M:%S", $arraydate[$i]).'</th>';
+//	echo '<td class="b">'.$ranking[$arraydate[$i]]['general']['player'].'</td>';
+//	echo '<td class="b">'.$ranking[$arraydate[$i]]['general']['player'].'</td>';
+if (isset($ranking[$arraydate[$i]]['general']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate[$i]]['general']['player']).'</td>';
+echo '<th>'.($ranking[$arraydate[$i]]['general']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['general']['rank']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate[$i]]['general']['points']).'</th>';
+}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>';  
+echo '<th></th>';
+  echo '<th></th>';  
+}
+if (isset($ranking[$arraydate[$i]]['fleet']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate[$i]]['fleet']['player']).'</td>';
+echo '<th>'.($ranking[$arraydate[$i]]['fleet']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['fleet']['rank']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate[$i]]['fleet']['points']).'</th>';
+}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>';  
+  echo '<th></th>';
+  echo '<th></th>';  
+
+}
+if (isset($ranking[$arraydate[$i]]['research']['rank']))
+{
+	echo '<td class="c">'.($ranking[$arraydate[$i]]['research']['player']).'</td>';
+	echo '<th>'.($ranking[$arraydate[$i]]['research']['ally']).'</th>';
+	echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['research']['rank']).'</td>';
+	echo '<th>'.formate_number($ranking[$arraydate[$i]]['research']['points']).'</th>';
+}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>'; 
+  echo '<th></th>';
+  echo '<th></th>';  
+ 
+}
+	echo '</tr>';
+  
+  
+  
+  
+}
+
+
+
+
+
+
+?>
+</table>
+<?php
+
