@@ -1399,10 +1399,9 @@ function jsspecialchars($s) {
 	function page_footer() {
 		global $db;
 		//Récupére le numéro de version du mod
-		$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'hofrc\'';
+		$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'Hof RC\'';
 		$result = $db->sql_query($request);
 		list($version) = $db->sql_fetch_row($result);
 		echo '<div>HofRC (v'.$version.') créé par Shad</div>';
-		echo '<div>Remise à jour pour OGSpy 3.0.7 - Shad</div>';
 }
 ?>
