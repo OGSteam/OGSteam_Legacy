@@ -9,9 +9,86 @@ if (isset($pub_recherche) && $pub_string_search != "") {
     $string = $db->sql_escape_string($pub_string_search);
 
     if ($pub_type_search == 'ally') {
-        echo '<br />';
-        echo 'Non implémenté<br />';
-        echo '<br />';
+      
+          if ($temps == 'now') {
+              // liste ally  actuelle
+                $requete = "select id ,	tag from " . TABLE_ALLY . "";
+            $requete .= " where tag like '%" . $string . "%' ";
+
+
+            $affichage = '<br /><table>';
+            $affichage .= '<tr>';
+            $affichage .= '<td width="200" class="c">tag</td>';
+            $affichage .= '<td width="50" class="c">Id</td>';
+            $affichage .= '	</tr>';
+
+            $result = $db->sql_query($requete);
+
+
+            while ($row = $db->sql_fetch_assoc($result)) {
+                $affichage .= '<tr>';
+                $affichage .= '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=ally&id=' .
+                    $row['id'] . '">' . $row['tag'] . '</a></td>';
+                $affichage .= '<td width="50" class="b">' . $row['id'] . '</td>';
+                $affichage .= '	</tr>';
+
+
+            }
+            $affichage .= '</table>';
+
+
+
+            
+            
+            }
+            else
+            {
+              
+              // liste ally  actuelle
+                $requete = "select id_ally ,	tag from " . TABLE_STORY_ALLY . "";
+            $requete .= " where tag like '%" . $string . "%' ";
+
+
+            $affichage = '<br /><table>';
+            $affichage .= '<tr>';
+            $affichage .= '<td width="200" class="c">tag</td>';
+            $affichage .= '<td width="50" class="c">Id</td>';
+            $affichage .= '	</tr>';
+
+            $result = $db->sql_query($requete);
+
+
+            while ($row = $db->sql_fetch_assoc($result)) {
+                $affichage .= '<tr>';
+                $affichage .= '<td width="200" class="b"><a href="index.php?action=bigbrother&subaction=ally&id=' .
+                    $row['id'] . '">' . $row['tag'] . '</a></td>';
+                $affichage .= '<td width="50" class="b">' . $row['id_ally'] . '</td>';
+                $affichage .= '	</tr>';
+
+
+            }
+            $affichage .= '</table>';
+
+
+
+            
+              
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     } else {
@@ -87,19 +164,19 @@ if (isset($pub_recherche) && $pub_string_search != "") {
 			<td colspan="4" class="c">Recherche</td>
 		</tr>
 		<tr>
-			<th><input type="radio" checked="" value="player" name="type_search"></th>
+			<th><input type="radio" <?php if ($pub_type_search == 'player'){echo 'checked';}?> value="player" name="type_search"></th>
 			<th>Joueur</th>
 			<th rowspan="2"><input type="text" value="<?php echo $string; ?>" size="25" maxlength="25" name="string_search"></th>
             <th rowspan="2">
                 <select name="temps">
-            		<option value="now">actuellement</option>
-                    <option value="story">historique</option>
+            		<option value="now" <?php if ($temps == 'now'){echo 'SELECTED ';}?> >actuellement</option>
+                    <option value="story" <?php if ($temps == 'story'){echo 'SELECTED ';}?> >historique</option>
                 </select>
             </th>
             
 		</tr>
 		<tr>
-			<th><input type="radio" value="ally" name="type_search"></th>
+			<th><input type="radio" <?php if ($pub_type_search == 'ally'){echo 'checked';}?> value="ally" name="type_search"></th>
 			<th>Alliance</th>
 		</tr>
 		
