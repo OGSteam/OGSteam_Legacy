@@ -551,12 +551,12 @@ function jsspecialchars($s) {
 			if ($victoire == "A")
 				{	
 					// Variable de concaténation si le défenseur gagne la bataille
-					$template .= "\n". 'L\'attaquant a remporter la battaille ! Il emporte '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_M,$color_seuil_pillage,$type).$color_bal.' unités de métal, '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_C,$color_seuil_pillage,$type).$color_bal.' unités de cristal et '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_D,$color_seuil_pillage,$type).$color_bal.' de deutérium.'."\n";
+					$template .= "\n". 'L\'attaquant a remporté la battaille ! Il emporte '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_M,$color_seuil_pillage,$type).$color_bal.' unités de métal, '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_C,$color_seuil_pillage,$type).$color_bal.' unités de cristal et '.format_number($color_ressources_piller_min,$color_ressources_piller_max,$gain_D,$color_seuil_pillage,$type).$color_bal.' de deutérium.'."\n";
 				}
 			 elseif ($victoire == "D")
 				{
 					// Variable de concaténation si le défenseur gagne la bataille
-					$template .= "\n".'Le défenseur a gagné la bataille !'."\n";
+					$template .= "\n".'Le défenseur a remporté la bataille !'."\n";
 				
 				}
 			elseif ($victoire == "N")
@@ -621,7 +621,8 @@ function jsspecialchars($s) {
 		
 			// Variable de concaténation du résultat du combat et de la rentabilité
 			$template .= "\n".'L\'attaquant a perdu au total '.format_number($color_pertes_min_att,$color_pertes_max_att,$pertes_A,$color_seuil_pertes,$type).$color_bal.' unités.'."\n";
-			$template .= 'Le défenseur a perdu au total '.format_number($color_pertes_min_def,$color_pertes_max_def,$pertes_D,$color_seuil_pertes,$type).$color_bal.' unités.'. "\n";		$template .= 'Un champ de débris contenant '.format_number($color_debris_min,$color_debris_max,$debris_M,$color_seuil_cdr,$type).$color_bal.' unités de métal et '.format_number($color_debris_min,$color_debris_max,$debris_C,$color_seuil_cdr,$type).$color_bal.' unités de cristal.'."\n\n";
+			$template .= 'Le défenseur a perdu au total '.format_number($color_pertes_min_def,$color_pertes_max_def,$pertes_D,$color_seuil_pertes,$type).$color_bal.' unités.'. "\n";		
+			$template .= 'Un champ de débris contenant '.format_number($color_debris_min,$color_debris_max,$debris_M,$color_seuil_cdr,$type).$color_bal.' unités de métal et '.format_number($color_debris_min,$color_debris_max,$debris_C,$color_seuil_cdr,$type).$color_bal.' unités de cristal.'."\n\n";
 			$template .= 'Rentabilité'."\n";
 			$template .= 'Attaquant avec/sans recyclage : '.format_number($color_renta_min,$color_renta_max,$renta_Att_cdr,$renta_Att_cdr,$type).$color_bal.' / '.format_number($color_renta_min,$color_renta_max,$renta_Att,$renta_Att_cdr,$type).$color_bal."\n";
 			$template .= 'Défenseur avec/sans recyclage : '.format_number($color_renta_min,$color_renta_max,$renta_Def_cdr,0,$type).$color_bal.' / '.format_number($color_renta_min,$color_renta_max,$renta_Def,0,$type).$color_bal."\n";
