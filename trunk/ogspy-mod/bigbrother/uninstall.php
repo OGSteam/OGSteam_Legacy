@@ -3,7 +3,7 @@
 
 if (!defined('IN_SPYOGAME'))
     die("Hacking attempt");
-
+global $db, $table_prefix;
 // fichier commun
 require_once ("mod/bigbrother/common.php");
 
@@ -34,6 +34,7 @@ if ($db->sql_numrows($result) != 0) {
 
 
 $mod_uninstall_name = "bigbrother";
+//$mod_uninstall_table = ;
 
 $requests[] = "DROP TABLE IF EXISTS  " . TABLE_PLAYER . "; ";
 $requests[] = "DROP TABLE IF EXISTS  " . TABLE_STORY_PLAYER . "; ";
@@ -43,10 +44,15 @@ $requests[] = "DROP TABLE IF EXISTS  " . TABLE_UNI . " ;";
 $requests[] = "DROP TABLE IF EXISTS  " . TABLE_RPR . "; ";
 $requests[] = "DROP TABLE IF EXISTS  " . TABLE_RPF . "; ";
 $requests[] = "DROP TABLE IF EXISTS  " . TABLE_RPP . " ;";
+$requests[] = "DROP TABLE IF EXISTS  " . TABLE_RAR . "; ";
+$requests[] = "DROP TABLE IF EXISTS  " . TABLE_RAF . "; ";
+$requests[] = "DROP TABLE IF EXISTS  " . TABLE_RAP . " ;";
+
 
 //config
 $requests[] = "DELETE FROM " . TABLE_CONFIG .
     " WHERE config_name = 'bigbrother'";
+
 
 // on injecte toutes les requetes
 foreach ($requests as $request) {
@@ -56,6 +62,7 @@ foreach ($requests as $request) {
 
 // le cache :
 generate_config_cache();
+
 uninstall_mod($mod_uninstall_name, $mod_uninstall_table);
 
 ?>

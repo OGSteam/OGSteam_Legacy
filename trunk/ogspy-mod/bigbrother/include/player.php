@@ -1,6 +1,8 @@
 <?php
+if (!defined('IN_SPYOGAME'))
+    exit;
 class player
-{ 
+{
     private $_id_player;
     private $_name_player;
     private $_id_ally;
@@ -83,17 +85,16 @@ class player
                     if ($this->_status != $cache['status'] && $this->_status == 'x') {
 
                     } else {
-                        if ($this->_status == $cache['status'] && $this->_name_player == $cache['name_player'] && $this->_id_ally == $cache['id_ally']) {
-                             $this->_must_update = false;
-                        $this->_must_historique = false;
+                        if ($this->_status == $cache['status'] && $this->_name_player == $cache['name_player'] &&
+                            $this->_id_ally == $cache['id_ally']) {
+                            $this->_must_update = false;
+                            $this->_must_historique = false;
+                        } else {
+
+                            $this->_must_update = true;
+                            $this->_must_historique = true; // on prépare l update a suivre
+                            $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
                         }
-                        else
-                        {
-                        
-                        $this->_must_update = true;
-                        $this->_must_historique = true; // on prépare l update a suivre
-                        $this->historique($cache['name_player'], $cache['id_ally'], $cache['status']);
-}
                     }
 
 
@@ -165,6 +166,9 @@ class player
 }
 
 //}
+
+
+
 
 
 

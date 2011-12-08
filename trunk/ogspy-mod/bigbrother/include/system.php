@@ -1,5 +1,6 @@
 <?php
-
+if (!defined('IN_SPYOGAME'))
+    exit;
 class system
 {
 
@@ -8,7 +9,7 @@ class system
         $time)
     {
         $retour = "(" . $galaxy . ",'" . $system . "', '" . $row . "',  '" . $id .
-            "' ,  '" . $id_ally . "' ,  '" . $time . "' )";
+            "'  ,  '" . $time . "' )";
         return $retour;
 
     }

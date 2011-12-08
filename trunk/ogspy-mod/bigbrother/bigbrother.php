@@ -6,8 +6,13 @@ require_once ("views/page_header.php");
 // fichier commun
 require_once ("mod/bigbrother/common.php");
 
+//inclusion des cache
+$cache_player = sql::get_all_cache_player();
+$cache_ally = sql::get_all_cache_ally();
+
 
 create_menu();
+
 
 switch ($pub_subaction) {
 
@@ -29,6 +34,10 @@ switch ($pub_subaction) {
 
     case 'player':
         require (MOD_URL . "view/player.php");
+        break;
+
+    case 'ally':
+        require (MOD_URL . "view/ally.php");
         break;
 
 
@@ -113,6 +122,36 @@ function player_count($type)
 }
 
 
+function ally_count($type)
+{
+    global $db;
+    $retour = 0;
+
+
+    switch ($type) {
+        case 'total':
+            $requete = "select * from " . TABLE_ALLY . " ";
+            $requete .= "";
+            break;
+
+
+        case 'actif':
+
+            $requete = "SELECT DISTINCT id_ally  from " . TABLE_PLAYER . " ";
+            $requete .= "JOIN " . TABLE_UNI . " ";
+            $requete .= "ON " . TABLE_UNI . ".id_player = " . TABLE_PLAYER . ".id ";
+            $requete .= "where " . TABLE_PLAYER . ".id_ally != 0  ";
+
+            $requete .= " GROUP BY " . TABLE_PLAYER . ".id_ally ";
+            break;
+
+    }
+    $result = $db->sql_query($requete);
+    return $db->sql_numrows($result);
+
+}
+
+
 function player_actif($type)
 {
     global $db;
@@ -138,16 +177,32 @@ function player_actif($type)
 
 function convert_status($status)
 {
-    if ($status == 'x'){ return "Non renseigné" ;}else { return $status;}
-    
-    
+    if ($status == 'x') {
+        return "Non renseigné";
+    } else {
+        return $status;
+    }
+
+
 }
 
 function convert_ally($id_ally)
 {
-    if ($id_ally == null || $id_ally == 0 ){ return "sans alliance" ;}else { return 'id : '.$id_ally;}
-    
-    
+    global $cache_ally;
+    if ($id_ally == null || $id_ally == 0) {
+        return "sans alliance";
+    }
+    if (isset($cache_ally[$id_ally]['tag'])) {
+        $retour = '<a href="index.php?action=bigbrother&subaction=ally&id=' . $id_ally .
+            '">' . $cache_ally[$id_ally]["tag"] . '</a>';
+
+
+        return $retour;
+    } else {
+        return "id " . $id_ally . " Non renseigné";
+    }
+
+
 }
 
 
