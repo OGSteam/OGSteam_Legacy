@@ -52,11 +52,11 @@ else {
 	echo "</th>";
 }
 
-if ($pub_subaction != "rp") {
-	echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=hofrc&subaction=rp';\">";
-	echo "<a style='cursor:pointer'><font color='lime'>Rôle Play</font></a>";
-	echo "</td>";
-}
+// if ($pub_subaction != "rp") {
+	// echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=hofrc&subaction=rp';\">";
+	// echo "<a style='cursor:pointer'><font color='lime'>Rôle Play</font></a>";
+	// echo "</td>";
+// }
 else {
 	echo "\t\t\t"."<th width='150'>";
 	echo "<a>Rôle Play</a>";
@@ -106,9 +106,9 @@ switch ($pub_subaction) {
 	require_once("Pages/gestion.php");
 	break;
 
-	case "rp" :
-	require_once("Pages/rp.php");
-	break;
+	// case "rp" :
+	// require_once("Pages/rp.php");
+	// break;
 	
 	case "admin" :
 	require_once("Pages/admin.php");
