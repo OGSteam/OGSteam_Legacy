@@ -62,6 +62,11 @@ if ($_POST["config_universe"])
 		$new_config_size_normal = str_replace(" ", "", $_POST["config_size_normal"]);
 		$new_config_size_avance = str_replace(" ", "", $_POST["config_size_avance"]);
 		$new_config_size_stratege = str_replace(" ", "", $_POST["config_size_stratege"]);
+		$new_config_size_expert = str_replace(" ", "", $_POST["config_size_expert"]);
+		$new_config_size_guerrier = str_replace(" ", "", $_POST["config_size_guerrier"]);
+		$new_config_size_devastateur = str_replace(" ", "", $_POST["config_size_devastateur"]);
+		$new_config_size_champion = str_replace(" ", "", $_POST["config_size_champion"]);
+		$new_config_size_legendaire = str_replace(" ", "", $_POST["config_size_legendaire"]);
 		$new_end_initial_solo = mktime(0, 0, 0, $_POST["month_config_end_initial_solo"], $_POST["day_config_end_initial_solo"], $_POST["year_config_end_initial_solo"]);
 		$new_end_initial_groupe = mktime(0, 0, 0, $_POST["month_config_end_initial_groupe"], $_POST["day_config_end_initial_groupe"], $_POST["year_config_end_initial_groupe"]);
 		$new_end_courant_solo = mktime(0, 0, 0, $_POST["month_config_end_courant_solo"], $_POST["day_config_end_courant_solo"], $_POST["year_config_end_courant_solo"]);
@@ -75,7 +80,7 @@ if ($_POST["config_universe"])
 		$new_end_stratege_solo = mktime(0, 0, 0, $_POST["month_config_end_stratege_solo"], $_POST["day_config_end_stratege_solo"], $_POST["year_config_end_stratege_solo"]);
 		$new_end_stratege_groupe = mktime(0, 0, 0, $_POST["month_config_end_stratege_groupe"], $_POST["day_config_end_stratege_groupe"], $_POST["year_config_end_stratege_groupe"]);
 		
-		post_config ($new_start_universe, $new_config_size_initial, $new_config_size_courant, $new_config_size_basic, $new_config_size_normal, $new_config_size_avance, $new_config_size_stratege, $new_end_initial_solo, $new_end_initial_groupe, $new_end_courant_solo, $new_end_courant_groupe, $new_end_basic_solo, $new_end_basic_groupe, $new_end_normal_solo, $new_end_normal_groupe, $new_end_avance_solo, $new_end_avance_groupe, $new_end_stratege_solo, $new_end_stratege_groupe);
+		post_config ($new_start_universe, $new_config_size_initial, $new_config_size_courant, $new_config_size_basic, $new_config_size_normal, $new_config_size_avance, $new_config_size_stratege, $new_config_size_expert, $new_config_size_guerrier, $new_config_size_devastateur, $new_config_size_champion, $new_config_size_legendaire, $new_end_initial_solo, $new_end_initial_groupe, $new_end_courant_solo, $new_end_courant_groupe, $new_end_basic_solo, $new_end_basic_groupe, $new_end_normal_solo, $new_end_normal_groupe, $new_end_avance_solo, $new_end_avance_groupe, $new_end_stratege_solo, $new_end_stratege_groupe);
 	
 	}
 
@@ -123,6 +128,11 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 			$config_size_normal = number_format($hofrc_config["size_normal"],0, ',', ' ');
 			$config_size_avance = number_format($hofrc_config["size_avance"],0, ',', ' ');
 			$config_size_stratege = number_format($hofrc_config["size_stratege"],0, ',', ' ');
+			$config_size_expert = number_format($hofrc_config["size_expert"],0, ',', ' ');
+			$config_size_guerrier = number_format($hofrc_config["size_guerrier"],0, ',', ' ');
+			$config_size_devastateur = number_format($hofrc_config["size_devastateur"],0, ',', ' ');
+			$config_size_champion = number_format($hofrc_config["size_champion"],0, ',', ' ');
+			$config_size_legendaire = number_format($hofrc_config["size_legendaire"],0, ',', ' ');
 			$day_config_end_initial_solo = date("j",$hofrc_config["end_initial_solo"]);
 			$month_config_end_initial_solo = date("m",$hofrc_config["end_initial_solo"]);
 			$year_config_end_initial_solo = date("Y",$hofrc_config["end_initial_solo"]);
@@ -181,22 +191,22 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 						<span style="text-align:center";><a align="center">Début de l'univers : </a><input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_start_universe;?>" name="day_start_universe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_start_universe;?>" name="month_start_universe" /> / <input style="width: 40px; text-align: center;" type="text" value="<?php echo $year_start_universe;?>" name="year_start_universe" /></span><br><br>
 							<a style="margin-right:82px;">CDR en solo</a><a style="text-align:right; margin-right:20px">CDR en groupé</a><br>
 							<!-- Configuration INITIAL SOLO -->
-							<a>CDR Initial :</a> <input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_initial;?>" name="config_size_initial" /> de débris.
+							<a>CDR Initial <?php echo infobulle("Permet de désactivé les hofs initial sur certains univers.");?>: </a> <input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_initial;?>" name="config_size_initial" /> de débris.
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_initial_solo;?>" name="day_config_end_initial_solo" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_initial_solo;?>" name="month_config_end_initial_solo" /> / <input style="width: 40px; text-align: center; margin-right:50px" type="text" value="<?php echo $year_config_end_initial_solo;?>" name="year_config_end_initial_solo" />
 							<!-- Configuration INITIAL GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_initial_groupe;?>" name="day_config_end_initial_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_initial_groupe;?>" name="month_config_end_initial_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px" type="text" value="<?php echo $year_config_end_initial_groupe;?>" name="year_config_end_initial_groupe" /><br>
 							<!-- Configuration COURANT SOLO -->
-							<a>CDR Courant : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_courant;?>" name="config_size_courant" /> de débris.
+							<a>CDR Courant <?php echo infobulle("Permet de désactivé les hofs courant sur certains univers.");?>: </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_courant;?>" name="config_size_courant" /> de débris.
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_courant_solo;?>" name="day_config_end_courant_solo" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_courant_solo;?>" name="month_config_end_courant_solo" /> / <input style="width: 40px; text-align: center; margin-right:50px;" type="text" value="<?php echo $year_config_end_courant_solo;?>" name="year_config_end_courant_solo" />
 							<!-- Configuration COURANT GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_courant_groupe;?>" name="day_config_end_courant_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_courant_groupe;?>" name="month_config_end_courant_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px;" type="text" value="<?php echo $year_config_end_courant_groupe;?>" name="year_config_end_courant_groupe" /><br>
 							<!-- Configuration BASIC SOLO -->
-							<a>CDR Basic : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_basic;?>" name="config_size_basic" /> de débris.
+							<a>CDR Basic <?php echo infobulle("Permet de désactivé les hofs basic sur certains univers.");?>: </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_basic;?>" name="config_size_basic" /> de débris.
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_basic_solo;?>" name="day_config_end_basic_solo" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_basic_solo;?>" name="month_config_end_basic_solo" /> / <input style="width: 40px; text-align: center; margin-right:50px;" type="text" value="<?php echo $year_config_end_basic_solo;?>" name="year_config_end_basic_solo" />
 							<!--Configuration BASIC GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_basic_groupe;?>" name="day_config_end_basic_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_basic_groupe;?>" name="month_config_end_basic_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px;" type="text" value="<?php echo $year_config_end_basic_groupe;?>" name="year_config_end_basic_groupe" /><br>
 							<!-- Configuration NORMAL SOLO -->
-							<a>CDR Normal : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_normal;?>" name="config_size_normal" /> de débris.
+							<a>CDR Normal <?php echo infobulle("Permet de désactivé les hofs normal sur certains univers.");?>: </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_normal;?>" name="config_size_normal" /> de débris.
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_normal_solo;?>" name="day_config_end_normal_solo" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_normal_solo;?>" name="month_config_end_normal_solo" /> / <input style="width: 40px; text-align: center; margin-right:50px;" type="text" value="<?php echo $year_config_end_normal_solo;?>" name="year_config_end_normal_solo" />
 							<!--Configuration NORMAL GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_normal_groupe;?>" name="day_config_end_normal_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_normal_groupe;?>" name="month_config_end_normal_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px;" type="text" value="<?php echo $year_config_end_normal_groupe;?>" name="year_config_end_normal_groupe" /><br>
@@ -206,11 +216,21 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 							<!-- Configuration AVANCE GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_avance_groupe;?>" name="day_config_end_avance_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_avance_groupe;?>" name="month_config_end_avance_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px;" type="text" value="<?php echo $year_config_end_avance_groupe;?>" name="year_config_end_avance_groupe" /></br>
 							<!-- Configuration STRATEGE SOLO -->
-							<a>CDR Stratège <?php echo infobulle("Permet de désactivé les hofs avancés sur certains univers.");?>: </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_stratege;?>" name="config_size_stratege" /> de débris.
+							<a>CDR Stratège <?php echo infobulle("Permet de désactivé les hofs stratège sur certains univers.");?>: </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_stratege;?>" name="config_size_stratege" /> de débris.
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_stratege_solo;?>" name="day_config_end_stratege_solo" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_stratege_solo;?>" name="month_config_end_stratege_solo" /> / <input style="width: 40px; text-align: center; margin-right:50px;" type="text" value="<?php echo $year_config_end_stratege_solo;?>" name="year_config_end_stratege_solo" />
 							<!-- Configuration STRATEGE GROUPE -->
 							<input style="width: 20px; text-align: center;" type="text" value="<?php echo $day_config_end_stratege_groupe;?>" name="day_config_end_stratege_groupe" /> / <input style="width: 20px; text-align: center;" type="text" value="<?php echo $month_config_end_stratege_groupe;?>" name="month_config_end_stratege_groupe" /> / <input style="width: 40px; text-align: center; margin-right:10px;" type="text" value="<?php echo $year_config_end_stratege_groupe;?>" name="year_config_end_stratege_groupe" /></br></br>
-						
+							<!-- Configuration EXPERT -->
+							<a>CDR Expert : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_expert;?>" name="config_size_expert" /> de débris.
+							<!-- Configuration GUERRIER -->
+							<a>CDR Guerrier : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_guerrier;?>" name="config_size_guerrier" /> de débris.</br></br>
+							<!-- Configuration DEVASTATEUR -->
+							<a>CDR Devastateur : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_devastateur;?>" name="config_size_devastateur" /> de débris.
+							<!-- Configuration CHAMPION -->
+							<a>CDR Champion : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_champion;?>" name="config_size_champion" /> de débris.</br></br>
+							<!-- Configuration LEGENDAIRE -->
+							<a>CDR Légendaire : </a><input style="width: 20%; text-align: center;" type="text" value="<?php echo $config_size_legendaire;?>" name="config_size_legendaire" /> de débris.</br></br>
+							
 							<input align="center" type="submit" name="config_universe" value="Envoyer">
 					</form>
 				</p>

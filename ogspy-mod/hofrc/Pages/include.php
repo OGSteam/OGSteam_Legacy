@@ -44,7 +44,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
 /**************************************************************************/
 // Fonction pour traiter le post de la configuration de l'univers
-	function post_config ($new_start_universe, $config_size_initial, $config_size_courant, $config_size_basic, $config_size_normal, $config_size_avance, $config_size_stratege, $new_end_initial_solo, $new_end_initial_groupe, $new_end_courant_solo, $new_end_courant_groupe, $new_end_basic_solo, $new_end_basic_groupe, $new_end_normal_solo, $new_end_normal_groupe, $new_end_avance_solo, $new_end_avance_groupe, $new_end_stratege_solo, $new_end_stratege_groupe)
+	function post_config ($new_start_universe, $config_size_initial, $config_size_courant, $config_size_basic, $config_size_normal, $config_size_avance, $config_size_stratege, $config_size_expert, $config_size_guerrier, $config_size_devastateur, $config_size_champion, $config_size_legendaire, $new_end_initial_solo, $new_end_initial_groupe, $new_end_courant_solo, $new_end_courant_groupe, $new_end_basic_solo, $new_end_basic_groupe, $new_end_normal_solo, $new_end_normal_groupe, $new_end_avance_solo, $new_end_avance_groupe, $new_end_stratege_solo, $new_end_stratege_groupe)
 		{
 			global $db, $table_prefix;
 			define('TABLE_HOFRC_CONFIG',$table_prefix.'hofrc_config');
@@ -56,6 +56,11 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_normal."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_normal'");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_avance."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_avance'");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_stratege."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_stratege'");
+			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_expert."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_expert'");
+			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_guerrier."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'guerrier'");
+			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_devastateur."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'devastateur'");
+			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_champion."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_champion'");
+			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$config_size_legendaire."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'size_legendaire'");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$new_end_initial_solo."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'end_initial_solo'");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$new_end_initial_groupe."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'end_initial_groupe'");
 			$db->sql_query("UPDATE `".TABLE_HOFRC_CONFIG."` SET `config_value` = '".$new_end_courant_solo."' WHERE ".TABLE_HOFRC_CONFIG.".`config_name`  = 'end_courant_solo'");
