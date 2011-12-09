@@ -7,7 +7,6 @@ global $db, $table_prefix;
 // fichier commun
 require_once ("mod/bigbrother/common.php");
 
-
 $security = false;
 $mod_folder = "bigbrother";
 $security = install_mod($mod_folder);
@@ -92,10 +91,11 @@ if ($security == true) {
         $db->sql_query($request);
     }
 
-
+ 
     // le cache :
     generate_config_cache();
-
+   
+   
 
 }
 ?>
