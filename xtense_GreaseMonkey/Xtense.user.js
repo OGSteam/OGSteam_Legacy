@@ -112,16 +112,32 @@ function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
 	if(icone!=null){
 		if(type==XLOG_SUCCESS){
-			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKACXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			if(document.getElementById('messagebox') || document.getElementById('combatreport')){
+				icone.src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOwwAADsMBx2+oZAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNtCDrVoAAADeSURBVDhPnZLbDoIwDIa3GWGMxdPtTECdF+ID+2S+DVp3xLExSCD5Q2jXr3/LcCMf3afv32jFA+j7ROf2Dqt0sXUJQEgJg27SHBLXfyxulgDQC0EoDYtjBtpa+OQIviB042PewSxAKOshJC4OxzAORGPtJPOpcYxN9x7n3QiM70D9wbz0Tubyi8V+qTQLWuh+dH8l7yID0J1rJezy+VECAAsO6wLivnlwN1InkYPoIpkdTcU8CBMCWgubnssjoIwr1VBQBkVZDdoWJRCyGQljbPO0slB+OHVru/P9ofsBDq4pvQ3QWXEAAAAASUVORK5CYII%3D";
+			} else { 	
+				icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKACXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			}
 		} else if(type==XLOG_NORMAL){
-			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKAAm/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			if(document.getElementById('messagebox') || document.getElementById('combatreport')){
+				icone.src="data:image/gif;base64,R0lGODlhEAAQAPcAAAAAAAEBAQACAAECAgICAwUGBwYHCQAIAAAKAAAMAAYICQYICggKCwgKDAoMDgARABsfJBsgJBsiJBskJBwgJBwgJQAm/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAQABAAAAhyAP9VGEiwYEGBBhMqrDChoYQKEhoutEDRwoSKFipESEix4cWMGhNK6EgxIQSDGUEOpFDBAYCXMAFYiEmTZsUDNWtaeDAzZ0wLCF72rBmUogAACSj6xCizIswBA3zmbMBggYGrBQhoJRDAgAIA/6TS/BcQADs=";
+			} else { 	
+				icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKAAm/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			}
 		} else if(type==XLOG_WARNING){
-			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP+HBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			if(document.getElementById('messagebox') || document.getElementById('combatreport')){
+				icone.src="data:image/gif;base64,R0lGODlhEAAQAPcAAAAAAAEBAQACAAECAgICAwUGBwYHCQAIAAAKAAAMAAYICQYICggKCwgKDAoMDgARABsfJBsgJBsiJBskJBwgJBwgJf+HBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAQABAAAAhyAP9VGEiwYEGBBhMqrDChoYQKEhoutEDRwoSKFipESEix4cWMGhNK6EgxIQSDGUEOpFDBAYCXMAFYiEmTZsUDNWtaeDAzZ0wLCF72rBmUogAACSj6xCizIswBA3zmbMBggYGrBQhoJRDAgAIA/6TS/BcQADs=";
+			} else { 	
+				icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP+HBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			}
 		} else if(type==XLOG_ERROR){
-			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
-		} else {
+			if(document.getElementById('messagebox') || document.getElementById('combatreport')){
+				icone.src="data:image/gif;base64,R0lGODlhEAAQAPcAAAAAAAEBAQACAAECAgICAwUGBwYHCQAIAAAKAAAMAAYICQYICggKCwgKDAoMDgARABsfJBsgJBsiJBskJBwgJBwgJf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAQABAAAAhyAP9VGEiwYEGBBhMqrDChoYQKEhoutEDRwoSKFipESEix4cWMGhNK6EgxIQSDGUEOpFDBAYCXMAFYiEmTZsUDNWtaeDAzZ0wLCF72rBmUogAACSj6xCizIswBA3zmbMBggYGrBQhoJRDAgAIA/6TS/BcQADs=";
+			} else { 	
+				icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
+			}
+		}/* else {
 			icone.src=urlIcone;
-		}
+		}*/
 		icone.title=message;
 	} else {
 		log(message);
@@ -220,6 +236,7 @@ handle_current_page();
 /***************************** Fin Main *********************************/
 
 /************************ Gestion des pages *****************************/
+
 function handle_current_page(){
 
 var regGalaxy = new RegExp(/(galaxy)/);
@@ -232,6 +249,8 @@ var regShipyard = new RegExp(/(shipyard)/);
 var regFleet1 = new RegExp(/(fleet1)/);
 var regDefense = new RegExp(/(defense)/);
 var regMessages = new RegExp(/(showmessage)/);
+var regCombatreport = new RegExp(/(combatreport)/);
+var regAlliance = new RegExp(/(alliance)/);
 
 if(regOption.test(url))			{ displayOptions();}
 else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
@@ -242,12 +261,14 @@ else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'
 else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true'){parse_shipyard();}}
 else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true'){parse_defense();}}
 else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}}
+else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')=='true'){parse_rc();}}
+else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false')=='true'){GM_setValue('lastAction','');get_ally_content();}}
 else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
 /************************ PARSINGS DES PAGES  ***************************/
 
-/* Fonction appelée lors d'évenement sur le changement du contenu galaxie */
+/* Fonction appelée lors d'évenement sur le chargement du contenu galaxie */
 function parse_galaxy_system_inserted(event){
 	//log("In parse_galaxy_system_inserted()");
 	var doc = event.target.ownerDocument;
@@ -362,6 +383,170 @@ function parse_galaxy_system_inserted(event){
 			GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
 		}
 		get_galaxycontent();
+	}
+}
+
+/* Fonction appelée lors d'évenement sur le chargement de la page d'alliance */
+function parse_ally_inserted(event) {
+		try {
+			//log("last_action="+GM_getValue('lastAction',''));
+			if (GM_getValue('lastAction','') != 'ally_list'){
+				setStatus(XLOG_NORMAL,Xl('ally_list_detected'));
+				
+				var doc = event.target.ownerDocument;
+				var paths = XtenseXpaths.ally_members_list;
+				var rows = XPath.getOrderedSnapshotNodes(document,paths.rows);
+				var rowsData = [];
+				
+				log(rows.snapshotLength+" membres à envoyer !");
+				
+				for (var i = 0; i < rows.snapshotLength; i++) {
+					var row = rows.snapshotItem(i);
+					var player = XPath.getStringValue(document,paths.player,row).trim();
+					var points = XPath.getStringValue(document,paths.points,row).trimInt();
+					var rank = XPath.getStringValue(document,paths.rank,row).trimInt();
+					var coords = XPath.getStringValue(document,paths.coords,row).trim();
+					coords = coords.match(new RegExp(XtenseRegexps.coords))[1];
+					
+					var r = {player:player,points:points,coords:coords,rank:rank};
+					rowsData[i]=r;
+				}
+	
+				if(rowsData.length > 0){
+					//XnewOgame.Tab.setStatus(Xl('ally_list detected'), XLOG_NORMAL, {url: this.url});
+					var tag = XPath.getStringValue(document,paths.tag);
+					XtenseRequest.set(
+						{
+							n : rowsData,
+							type : 'ally_list',
+							tag : tag
+						}
+					);
+					XtenseRequest.set('lang', langUnivers);
+					XtenseRequest.send();
+					GM_setValue('lastAction','ally_list')
+				}
+				get_ally_content();
+			}
+		} catch (e) {
+			throw_error(e);
+		}
+}
+
+/* Fonction appelée lors d'évenement sur le chargement des classements */
+function parse_ranking_inserted(event) {		
+	try {
+		var doc = event.target.ownerDocument;
+		var win = doc.getElementById('statisticsContent').win;
+		
+		var paths = XnewOgame.Xpaths.ranking;
+		
+		var timeText = Xpath.getStringValue(doc,paths.time).trim();
+		timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
+
+		var time = new Date();
+		time.setHours((Math.floor(time.getHours())/8)*8);
+		time.setMinutes(0);
+		time.setSeconds(0);
+		if(timeText) {
+			time.setYear(timeText[3]);
+			time.setMonth(parseInt(timeText[2].trimZeros())-1);
+			time.setDate(timeText[1]);
+			time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
+		}
+		
+		time =  Math.floor(time.getTime()/1000);
+		var type = new Array();
+		type[0] = Xpath.getStringValue(doc,paths.who);
+		type[1] = Xpath.getStringValue(doc,paths.type);
+		type[0] = type[0] != '' ? type[0] : 'player';
+		type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
+
+		var length = 0;
+		var rows = Xpath.getOrderedSnapshotNodes(doc,paths.rows,null);
+		var offset = 0;
+		
+		var Request = XnewOgame.newRequest();
+		if(rows.snapshotLength > 0){
+			var rowsData = [];
+			for (var i = 1; i < rows.snapshotLength; i++) {
+				var row = rows.snapshotItem(i);
+				var n = null;
+				if (type[0] == 'player') {
+					n = Xpath.getStringValue(doc,paths.position,row).trimInt();
+				} else if(type[0] == 'ally') {
+					n = Xpath.getStringValue(doc,paths.ally.position_ally,row).trimInt();
+				}
+				if (i == 1) {
+					offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
+				}
+				if (type[0] == 'player') {
+					var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
+					var ally = Xpath.getStringValue(doc,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
+					var points = Xpath.getStringValue(doc,paths.player.points,row).trimInt();
+					var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
+					var ally_id = Xpath.getStringValue(doc,paths.player.ally_id,row).trim();
+					
+					if (player_id != '' ) {
+						player_id = player_id.match(/\&to\=(.*)\&ajax/);
+						player_id = player_id[1];
+					}
+					else if(doc.cookie.match(/login_(.*)=U_/))
+						player_id = doc.cookie.match(/login_(.*)=U_/)[1];
+					
+					if (ally_id != '' ) {
+						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id[1];
+					}
+					else if (ally)
+						ally_id = '-1';
+					
+					var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+					rowsData[n]=r;
+					length ++;
+				} else if(type[0] == 'ally') {
+					var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim();
+					var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
+					moy = members[1];
+					members = members[0];
+					var points = Xpath.getStringValue(doc,paths.ally.points,row).trimInt();
+					var ally_id = Xpath.getStringValue(doc,paths.ally.ally_id,row).trim();
+					
+					if (ally_id != '' ) {
+						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id[1];
+					}
+					else if (ally)
+						ally_id = '-1';
+					
+					var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
+					rowsData[n]=r;
+					length ++;
+				}
+			}
+			
+			if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){
+				//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
+				if (offset != 0 && length != 0) {
+					Request.set(
+						{
+							n : rowsData,
+							type : 'ranking',
+							offset : offset,
+							type1 : type[0],
+							type2 : type[1],
+							time: time
+						}
+					);
+					
+					Request.set('lang',XnewOgame.lang);
+					Request.send(XnewOgame.servers);
+				}
+				this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
+			}
+		}
+	} catch (e) {
+		throw_error(e);
 	}
 }
 
@@ -614,7 +799,7 @@ function parse_defense(){
 }
 
 /* Page Battle Report */
-function parseRc() {
+function parse_rc() {
 	var paths = XtenseXpaths.rc;
 	
 	var rcStrings = l('combat report');
@@ -689,7 +874,7 @@ function parseRc() {
 							for (var j in rcStrings['units'][i]) {
 								var typ = type.match(new RegExp(rcStrings['units'][i][j]));
 								if (typ)
-									dat[this.database[i][j]] = val[th];
+									dat[XtenseDatabase[i][j]] = val[th];
 							}
 						}
 					}
@@ -704,9 +889,9 @@ function parseRc() {
 				dest=1;
 			}
 			if (!dest)
-				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.planetNameAndCoords));
+				var m = player.match(new RegExp(rcStrings['regxps']['attack']+XtenseRegexps.planetNameAndCoords));
 			else
-				var m = player.match(new RegExp(rcStrings['regxps']['attack']+this.regexps.userNameAndDestroyed));
+				var m = player.match(new RegExp(rcStrings['regxps']['attack']+XtenseRegexps.userNameAndDestroyed));
 			if(m){
 				var player = m[1];
 				if (!dest)
@@ -716,9 +901,9 @@ function parseRc() {
 				var type = "A";
 			} else {
 				if(!dest)
-					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.planetNameAndCoords));
+					var m = player.match(new RegExp(rcStrings['regxps']['defense']+XtenseRegexps.planetNameAndCoords));
 				else
-					var m = player.match(new RegExp(rcStrings['regxps']['defense']+this.regexps.userNameAndDestroyed));
+					var m = player.match(new RegExp(rcStrings['regxps']['defense']+XtenseRegexps.userNameAndDestroyed));
 				
 				if(m){
 					var player = m[1];
@@ -905,20 +1090,19 @@ function parse_messages(){
 			}
 		}
 	}
-	/*
+	
 	//RC
-	if(Xprefs.getBool('msg-rc')) {
+	if(GM_getValue('handle.msg.rc')) {
 		var m = subject.match(new RegExp(locales['combat of']));
 		if (m!=null){
 			var rapport = XPath.getStringValue(document,paths.contents['rc']).trim();
 			var m2 = rapport.match(new RegExp(locales['combat defence']+XtenseRegexps.planetNameAndCoords));
-			if (m2)
-				Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+			if (m2) GM_setValue('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
 		}
 	}
 	
 	// Recyclages
-	if(Xprefs.getBool('msg-rc_cdr')) {
+	if(GM_getValue('handle.msg.rc.cdr')) {
 		if(from.match(new RegExp(locales['fleet'])) 
 					&& subject.match(new RegExp(locales['harvesting']))) {
 		 	var m = subject.match(new RegExp(XtenseRegexps.coords));
@@ -935,11 +1119,11 @@ function parse_messages(){
 				data.M_total = nums[2];
 				data.C_total = nums[3];
 			}
-		} else Xconsole('The message is not a harvesting report');
+		}
 	}
 	
 	// Expeditions
-	if(Xprefs.getBool('msg-expeditions')) {
+	if(GM_getValue('handle.msg.expeditions')) {
 		var m = subject.match(new RegExp(locales['expedition result']+XtenseRegexps.planetCoords));
 		var m2 = from.match(new RegExp(locales['fleet command']));
 		
@@ -950,11 +1134,11 @@ function parse_messages(){
 			data.type = 'expedition';
 			data.coords = coords;
 			data.content = message;
-		} else Xconsole('The message is not an expedition report');
+		}
 	}
 
 	// Commerce
-	if(Xprefs.getBool('msg-res-pref')) {
+	if(GM_getValue('handle.msg.commerce')) {
 		var m = subject.match(new RegExp(locales['trade message 1']));
 		var m2 = subject.match(new RegExp(locales['trade message 2']));
 					
@@ -980,7 +1164,7 @@ function parse_messages(){
 			data.cristal = cri;
 			data.deuterium = deut;
 			
-			Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+			log('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 			
 		} else if (m2!=null) { // Livraison sur la planète d'un ami
 			var message = XPath.getStringValue(document,paths.contents['livraison_me']).trim(); // Corps du message
@@ -989,14 +1173,15 @@ function parse_messages(){
 			var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison à eu lieu
 			
 			// Récupération de mes planètes
-			var mesPlanetes = XPath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['coords']);
+			var mesPlanetes = XPath.getOrderedSnapshotNodes(window.parent.parent.document,this.Xpaths.planetData['coords']);
 			var isMyPlanet=false;
+			log("J'ai "+mesPlanetes.snapshotLength+" planètes");
 			
 			// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
 			if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
 			   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
 					var coord = mesPlanetes.snapshotItem(i).textContent.trim();
-					Xconsole('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
+					log('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
 					if(coord.search(planeteLivraison) > -1){
 						 isMyPlanet=true;
 						 break;
@@ -1022,11 +1207,10 @@ function parse_messages(){
 				data.cristal = cri;
 				data.deuterium = deut;
 				
-				Xconsole('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+				log('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 			}
-			
 		}
-	}*/
+	}
 	
 	// Aucun message
 	if(data.type == ''){
@@ -1099,7 +1283,7 @@ function getElementInSpyReport(RE,elem) {
 }
 
 /************************ Utilities des Parsings ************************/
-/* Fonction permettant de parser lorsque la vue galaxie est chargée */
+/* Fonction ajoutant lancant le parsing de la vue galaxie quand celle-ci est chargée */
 function get_galaxycontent(){	
 	if (isChrome) //Pour Chrome :-)
 	{	
@@ -1134,6 +1318,79 @@ function get_galaxycontent(){
 	}
 
 }
+
+/* Fonction ajoutant lancant le parsing de la vue alliance quand celle-ci est chargée */
+function get_ally_content(){	
+	if (isChrome) //Pour Chrome :-)
+	{	
+		/* Page Galaxie */
+		log("In get_ally_content()");
+		var target = document.getElementById('inhalt');
+		//target.removeEventListener("DOMNodeInserted");
+		//target.removeEventListener("DOMContentLoaded");
+		target.addEventListener("DOMNodeInserted", parse_ally_inserted, false);		
+		target.addEventListener("DOMContentLoaded", parse_ally_inserted, false);		
+
+	}else{// Pour Firefox Notamment
+
+		function safeWrap(f)
+		{
+			return function()
+			{
+				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
+			};
+		}
+		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
+		
+		unsafeWindow.$("#galaxyContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		{
+			//l'url de la requête ajax contient page=galaxyContent
+			if (settings.url.indexOf("page=galaxyContent") == -1) return;
+
+			parse_ally_inserted();
+			
+		}));
+
+	}
+
+}
+
+/* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
+function get_ally_content(){	
+	if (isChrome) //Pour Chrome :-)
+	{	
+		/* Page Galaxie */
+		log("In get_ally_content()");
+		var target = document.getElementById('inhalt');
+		//target.removeEventListener("DOMNodeInserted");
+		//target.removeEventListener("DOMContentLoaded");
+		target.addEventListener("DOMNodeInserted", parse_ally_inserted, false);		
+		target.addEventListener("DOMContentLoaded", parse_ally_inserted, false);		
+
+	}else{// Pour Firefox Notamment
+
+		function safeWrap(f)
+		{
+			return function()
+			{
+				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
+			};
+		}
+		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
+		
+		unsafeWindow.$("#galaxyContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		{
+			//l'url de la requête ajax contient page=galaxyContent
+			if (settings.url.indexOf("page=galaxyContent") == -1) return;
+
+			parse_ally_inserted();
+			
+		}));
+
+	}
+
+}
+
 function get_planet_details(){	
 	setStatus(XLOG_NORMAL,Xl('overview_detected'));
 	
@@ -1176,7 +1433,7 @@ function get_planet_details(){
 /**************************** Options ***********************************/
 // Affiche les Options Xtense
 function displayOptions(){
-	// Variables
+	// Variables recupération des pages
 	var handle_overview = ' ';
 	var handle_system = ' ';
 	var handle_researchs = ' ';
@@ -1184,13 +1441,21 @@ function displayOptions(){
 	var handle_station = ' ';
 	var handle_shipyard = ' ';
 	var handle_defense = ' ';
+	var handle_alliance = ' ';
+	
+	// Variables recupération des messages
 	var handle_msg_msg = ' ';
 	var handle_msg_ally = ' ';
 	var handle_msg_spy = ' ';
-	var handle_msg_ennemy_spy = ' ';	
+	var handle_msg_ennemy_spy = ' ';
+	var handle_msg_rc = ' ';
+	var handle_msg_rc_cdr = ' ';
+	var handle_msg_expeditions = ' ';
+	var handle_msg_commerce = ' ';
+	
+	// Variable propre à xtense
 	var server_check = ' ';
-						
-	//log('handle.system='+GM_getValue('handle.system','false')+";"+'handle.overview='+GM_getValue('handle.overview','false')+";"+'handle.researchs='+GM_getValue('handle.researchs','false')+";"+'handle.buildings='+GM_getValue('handle.buildings','false')+";"+'handle.station='+GM_getValue('handle.station','false'));
+	
 	// Récupérations des préférences
 	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}	
 	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings','false')=='true'){handle_buildings += 'checked';}
@@ -1199,10 +1464,15 @@ function displayOptions(){
 	if(GM_getValue('handle.shipyard') && GM_getValue('handle.shipyard','false')=='true'){handle_shipyard += 'checked';}
 	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
 	if(GM_getValue('handle.defense') && GM_getValue('handle.defense','false')=='true'){handle_defense += 'checked';}
+	if(GM_getValue('handle.alliance') && GM_getValue('handle.alliance','false')=='true'){handle_alliance += 'checked';}
+	
 	if(GM_getValue('handle.msg.msg') && GM_getValue('handle.msg.msg','false')=='true'){handle_msg_msg += 'checked';}
 	if(GM_getValue('handle.msg.ally') && GM_getValue('handle.msg.ally','false')=='true'){handle_msg_ally += 'checked';}
 	if(GM_getValue('handle.msg.spy') && GM_getValue('handle.msg.spy','false')=='true'){handle_msg_spy += 'checked';}
 	if(GM_getValue('handle.msg.ennemy.spy') && GM_getValue('handle.msg.ennemy.spy','false')=='true'){handle_msg_ennemy_spy += 'checked';}
+	if(GM_getValue('handle.msg.rc') && GM_getValue('handle.msg.rc','false')=='true'){handle_msg_rc += 'checked';}
+	if(GM_getValue('handle.msg.expeditions') && GM_getValue('handle.msg.expeditions','false')=='true'){handle_msg_expeditions += 'checked';}
+	if(GM_getValue('handle.msg.commerce') && GM_getValue('handle.msg.commerce','false')=='true'){handle_msg_commerce += 'checked';}
 	
 	if(!GM_exist('server.check') || GM_getValue('server.check','false')=='true'){server_check += 'checked';}
 					
@@ -1277,8 +1547,8 @@ function displayOptions(){
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Systemes solaires</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.system" size="35" alt="24" type="checkbox"'+ handle_system +'/></td>';
-	options+= '<td class="champ"></td>';
-	options+= '<td class="value"></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Liste des membres de l\'alliance</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.alliance" size="35" alt="24" type="checkbox"'+ handle_alliance +'/></td>';
 	options+= '<td class="champ"></td>';
 	options+= '<td class="value"></td>';
 	options+= '</tr>';
@@ -1302,8 +1572,16 @@ function displayOptions(){
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Espionnages ennemis</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.msg.ennemy.spy" size="35" alt="24" type="checkbox"'+ handle_msg_ennemy_spy +'/></td>';
-	options+= '<td class="champ"></td>';
-	options+= '<td class="value"></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Rapports de combat</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.rc" size="35" alt="24" type="checkbox"'+ handle_msg_rc +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Rapports de recyclage</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.rc.cdr" size="35" alt="24" type="checkbox"'+ handle_msg_rc_cdr +'/></td>';
+	options+= '</tr>';	
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Expéditions</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.expeditions" size="35" alt="24" type="checkbox"'+ handle_msg_expeditions +'/></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Livraisons de commerce</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.msg.commerce" size="35" alt="24" type="checkbox"'+ handle_msg_commerce +'/></td>';
 	options+= '<td class="champ"></td>';
 	options+= '<td class="value"></td>';
 	options+= '</tr>';
@@ -1390,8 +1668,8 @@ function displayOptions(){
 /* Affichage d'Xtense dans le menu */
 function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
-    if (document.getElementById('playerName')){
-	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
+    if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
+		var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
     
         var aff_option ='<li><span class="menu_icon"><a href="http://board.ogsteam.fr" target="blank_" ><img id="xtense.icone" class="mouseSwitch" src="'+icone+'" height="29" width="38"></span><a class="menubutton " href="'+url+'&xtense=Options" accesskey="" target="_self">';
         aff_option += '<span class="textlabel">Xtense</span></a></li>';
@@ -1409,6 +1687,44 @@ function displayXtense(){
         var tableau = document.createElement("span");
         tableau.innerHTML = aff_option;
         document.getElementById('optionXtense').insertBefore(tableau, document.getElementById('optionXtense').firstChild);
+    } else if(document.getElementById('messagebox')){ // Dans les messages ?
+    	var toolbarMessage = XPath.getSingleNode(document,"//div[@id='messagebox']//ul[contains(@class,'toolbar')]");
+    	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
+        
+        var liXtense = document.createElement("li");
+        var aXtense = document.createElement("a");
+        aXtense.setAttribute("href", "http://board.ogsteam.fr");
+        aXtense.setAttribute("target", "blank_");
+        
+        var imgXtense = document.createElement("img");
+        imgXtense.setAttribute("id", "xtense.icone");
+        imgXtense.setAttribute("src", icone);
+        imgXtense.setAttribute("height", "16");
+        imgXtense.setAttribute("width", "16");
+        
+        aXtense.appendChild(imgXtense);
+        liXtense.appendChild(aXtense);
+        
+        toolbarMessage.appendChild(liXtense);
+    } else if(document.getElementById('combatreport')){ // Dans un rc ?
+    	var roundInfo = XPath.getSingleNode(document,"//*[@id='combatreport']//div[contains(@class,'round_info')]");
+    	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
+        
+        var pXtense = document.createElement("p");
+        var aXtense = document.createElement("a");
+        aXtense.setAttribute("href", "http://board.ogsteam.fr");
+        aXtense.setAttribute("target", "blank_");
+        
+        var imgXtense = document.createElement("img");
+        imgXtense.setAttribute("id", "xtense.icone");
+        imgXtense.setAttribute("src", icone);
+        imgXtense.setAttribute("height", "16");
+        imgXtense.setAttribute("width", "16");
+        
+        aXtense.appendChild(imgXtense);
+        pXtense.appendChild(aXtense);
+        
+        roundInfo.appendChild(pXtense);
     }
 }
 /* Affichage d'elements à ajouter à la page pour Xtense (MaJ, Envois manuels, ...)*/
@@ -1527,7 +1843,7 @@ metas : {
 	planet_type: "//meta[@name=\'ogame-planet-type\']/@content"
 },
 ally_members_list : {
-	rows : "//table[@class=\'members zebra bborder\']/tbody/tr",
+	rows : "//table[@id='member-list']/tbody/tr",
 	player : "td[1]",
 	rank : "td[4]/span",
 	points : "td[4]/span/@title",
@@ -1905,11 +2221,11 @@ function handleResponse(Response) {
 				else if (code == 'home updated' && data.page=='fleet')		message = Xl('success_home_updated', Xl('page_fleet',data.page));
 				else if (code == 'home updated' && data.page=='defense')		message = Xl('success_home_updated', Xl('page_defense',data.page));
 				else if (code == 'rc')					message = Xl('success_rc');
+				else if (code == 'rc_cdr')					message = Xl('success_rc_cdr');				
 				else if (code == 'messages')			message = Xl('success_messages');
 				/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);			
-				else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
+				*/else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
 				else if (code == 'spy') 				message = Xl('success_spy');
-				*/
 				else 									message = Xl('unknow_response', code, Response.content);
 			}
 			
@@ -2075,6 +2391,7 @@ function initLocales(){
         'success_system' : 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
         'success_ranking' : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
         'success_rc' : 'Rapport de combat envoyé',
+        'success_rc_cdr' : 'Rapport de recyclage envoyé',
         'success_ally_list' : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
         'success_messages' : 'Message correctement envoyé',
         'success_fleetSending' : 'Départ de flotte correctement envoyé',
