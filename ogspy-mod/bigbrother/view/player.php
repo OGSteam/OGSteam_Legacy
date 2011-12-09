@@ -87,7 +87,7 @@ if ( is_numeric($id)){
     //////// recuperation des classement \\\\
     
     $ranking = array();
-    $arraydate = array();
+    $arraydates = array();
     //datadate 	rank 	player Croissant 	ally 	points
     $request = "SELECT R.datadate,  R.rank, R.points , R.player, R.ally , BIG.player_id ";
     $request .= " FROM ".TABLE_RANK_PLAYER_POINTS." as R ";
@@ -98,7 +98,7 @@ if ( is_numeric($id)){
 	$result = $db->sql_query($request);
        	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
 		$ranking[$datadate]["general"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
-		$arraydate[]=$datadate;
+		$arraydates[]=$datadate;
 	}
     
       $request = "SELECT R.datadate,  R.rank, R.points , R.player, R.ally , BIG.player_id ";
@@ -110,7 +110,7 @@ if ( is_numeric($id)){
 	$result = $db->sql_query($request);
       	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
 		$ranking[$datadate]["fleet"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
-			$arraydate[]=$datadate;
+			$arraydates[]=$datadate;
 	}
     
     
@@ -123,7 +123,7 @@ if ( is_numeric($id)){
 	$result = $db->sql_query($request);
         	while (list($datadate ,$rank, $points, $player , $ally) = $db->sql_fetch_row($result)) {
 		$ranking[$datadate]["research"] = array("rank" => $rank, "points" => $points,"player" => $player, "ally" => $ally);
-			$arraydate[]=$datadate;
+			$arraydates[]=$datadate;
 	}
     
 
@@ -152,19 +152,23 @@ if ( is_numeric($id)){
 	<td colspan="4" class="c">Pts Recherche</td>
 </tr>
 <?php
-$arraydate = array_unique ($arraydate);
-ksort($arraydate);
-for ($i = 0; $i < count($arraydate); $i++) {
-    echo '<tr>';
-	echo '<th>'.strftime("%d %b %Y %H:%M:%S", $arraydate[$i]).'</th>';
-//	echo '<td class="b">'.$ranking[$arraydate[$i]]['general']['player'].'</td>';
-//	echo '<td class="b">'.$ranking[$arraydate[$i]]['general']['player'].'</td>';
-if (isset($ranking[$arraydate[$i]]['general']['rank']))
+
+$arraydates = array_unique ($arraydates);
+sort($arraydates);
+
+
+foreach($arraydates AS $arraydate)
 {
-echo '<td class="c">'.($ranking[$arraydate[$i]]['general']['player']).'</td>';
-echo '<th>'.($ranking[$arraydate[$i]]['general']['ally']).'</th>';
-echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['general']['rank']).'</td>';
-echo '<th>'.formate_number($ranking[$arraydate[$i]]['general']['points']).'</th>';
+    echo '<tr>';
+	echo '<th>'.strftime("%d %b %Y %H:%M:%S", $arraydate).'</th>';
+//	echo '<td class="b">'.$ranking[$arraydate]['general']['player'].'</td>';
+//	echo '<td class="b">'.$ranking[$arraydate]['general']['player'].'</td>';
+if (isset($ranking[$arraydate]['general']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate]['general']['player']).'</td>';
+echo '<th>'.($ranking[$arraydate]['general']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate]['general']['rank']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate]['general']['points']).'</th>';
 }
 else
 {
@@ -173,12 +177,12 @@ else
 echo '<th></th>';
   echo '<th></th>';  
 }
-if (isset($ranking[$arraydate[$i]]['fleet']['rank']))
+if (isset($ranking[$arraydate]['fleet']['rank']))
 {
-echo '<td class="c">'.($ranking[$arraydate[$i]]['fleet']['player']).'</td>';
-echo '<th>'.($ranking[$arraydate[$i]]['fleet']['ally']).'</th>';
-echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['fleet']['rank']).'</td>';
-echo '<th>'.formate_number($ranking[$arraydate[$i]]['fleet']['points']).'</th>';
+echo '<td class="c">'.($ranking[$arraydate]['fleet']['player']).'</td>';
+echo '<th>'.($ranking[$arraydate]['fleet']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate]['fleet']['rank']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate]['fleet']['points']).'</th>';
 }
 else
 {
@@ -188,12 +192,12 @@ else
   echo '<th></th>';  
 
 }
-if (isset($ranking[$arraydate[$i]]['research']['rank']))
+if (isset($ranking[$arraydate]['research']['rank']))
 {
-	echo '<td class="c">'.($ranking[$arraydate[$i]]['research']['player']).'</td>';
-	echo '<th>'.($ranking[$arraydate[$i]]['research']['ally']).'</th>';
-	echo '<td class="b">'.formate_number($ranking[$arraydate[$i]]['research']['rank']).'</td>';
-	echo '<th>'.formate_number($ranking[$arraydate[$i]]['research']['points']).'</th>';
+	echo '<td class="c">'.($ranking[$arraydate]['research']['player']).'</td>';
+	echo '<th>'.($ranking[$arraydate]['research']['ally']).'</th>';
+	echo '<td class="b">'.formate_number($ranking[$arraydate]['research']['rank']).'</td>';
+	echo '<th>'.formate_number($ranking[$arraydate]['research']['points']).'</th>';
 }
 else
 {

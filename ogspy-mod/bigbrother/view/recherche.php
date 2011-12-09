@@ -69,25 +69,8 @@ if (isset($pub_recherche) && $pub_string_search != "") {
             }
             $affichage .= '</table>';
 
-
-
-            
-              
+     
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -164,7 +147,7 @@ if (isset($pub_recherche) && $pub_string_search != "") {
 			<td colspan="4" class="c">Recherche</td>
 		</tr>
 		<tr>
-			<th><input type="radio" <?php if ($pub_type_search == 'player'){echo 'checked';}?> value="player" name="type_search"></th>
+			<th><input type="radio" <?php if ($pub_type_search == 'player' || !isset($pub_type_search)){echo 'checked';}?> value="player" name="type_search"></th>
 			<th>Joueur</th>
 			<th rowspan="2"><input type="text" value="<?php echo $string; ?>" size="25" maxlength="25" name="string_search"></th>
             <th rowspan="2">

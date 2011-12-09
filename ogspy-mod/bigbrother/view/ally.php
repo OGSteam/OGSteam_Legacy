@@ -115,4 +115,149 @@ if (is_numeric($id)) {
 
 
 
+//datadate 	rank 	ally 	number_member 	points 	points_per_member 	sender_id
+
+
+
+  //////// recuperation des classement \\\\
+    
+    $ranking = array();
+    $arraydates = array();
+    //datadate 	rank 	player Croissant 	ally 	points
+    $request = "SELECT R.datadate ,	R.rank ,	R.ally ,	R.number_member ,	R.points , 	R.points_per_member ,  BIG.ally_id ";
+    $request .= " FROM ".TABLE_RANK_ALLY_POINTS." as R ";
+	$request .=  " INNER JOIN " . TABLE_RAP . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.ally_id = '".$id."' ";
+    //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+       	while (list($datadate,$rank,$ally,$number_member,$points ,$points_per_member) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["general"] = array("rank" => $rank, "ally" => $ally, "nb" => $number_member,"point" => $points, "points_per_member" => $points_per_member);
+		$arraydates[]=$datadate;
+	}
+
+    $request = "SELECT R.datadate ,	R.rank ,	R.ally ,	R.number_member ,	R.points , 	R.points_per_member ,  BIG.ally_id ";
+   $request .= " FROM ".TABLE_RANK_ALLY_FLEET." as R ";
+	$request .=  " INNER JOIN " . TABLE_RAF . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.ally_id = '".$id."' ";
+   //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+      	 	while (list($datadate,$rank,$ally,$number_member,$points ,$points_per_member) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["fleet"] =  array("rank" => $rank, "ally" => $ally, "nb" => $number_member,"point" => $points, "points_per_member" => $points_per_member);
+			$arraydates[]=$datadate;
+	}
+    
+    
+  $request = "SELECT R.datadate ,	R.rank ,	R.ally ,	R.number_member ,	R.points , 	R.points_per_member ,  BIG.ally_id ";
+      $request .= " FROM ".TABLE_RANK_ALLY_RESEARCH." as R ";
+	$request .=  " INNER JOIN " . TABLE_RAR . " as BIG ";
+    $request .=  "ON BIG.datadate = R.datadate and  BIG.rank = R.rank  ";
+    $request .=  " WHERE  BIG.ally_id = '".$id."' ";
+    //	$request .=  " AND  R.datadate > '".$first_date."' ";
+	$result = $db->sql_query($request);
+        	 	while (list($datadate,$rank,$ally,$number_member,$points ,$points_per_member) = $db->sql_fetch_row($result)) {
+		$ranking[$datadate]["research"] =   array("rank" => $rank, "ally" => $ally, "nb" => $number_member,"point" => $points, "points_per_member" => $points_per_member);
+			$arraydates[]=$datadate;
+	}
+    
+
+    
+    
+
+
 ?>
+
+<br />
+<table>
+<tr>
+	<td colspan="13" class="c">Historique du classement alliance</td>
+</tr>
+<tr>
+	<td  class="c">Date</td>
+	<td colspan="5" class="c">Pts Général</td>
+	<td colspan="5" class="c">Pts Flotte</td>
+	<td colspan="5" class="c">Pts Recherche</td>
+</tr>
+<?php
+
+$arraydates = array_unique ($arraydates);
+sort($arraydates);
+
+
+foreach($arraydates AS $arraydate)
+{
+    echo '<tr>';
+	echo '<th>'.strftime("%d %b %Y %H:%M:%S", $arraydate).'</th>';
+//	echo '<td class="b">'.$ranking[$arraydate]['general']['player'].'</td>';
+//	echo '<td class="b">'.$ranking[$arraydate]['general']['player'].'</td>';
+if (isset($ranking[$arraydate]['general']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate]['general']['rank']).'</td>';
+echo '<th>'.($ranking[$arraydate]['general']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate]['general']['nb']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate]['general']['point']).'</th>';
+echo '<th>'.formate_number($ranking[$arraydate]['general']['points_per_member']).'</th>';
+
+}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>';  
+echo '<th></th>';
+  echo '<th></th>';  
+  echo '<th></th>';  
+}
+if (isset($ranking[$arraydate]['fleet']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate]['fleet']['rank']).'</td>';
+echo '<th>'.($ranking[$arraydate]['fleet']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate]['fleet']['nb']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate]['fleet']['point']).'</th>';
+echo '<th>'.formate_number($ranking[$arraydate]['fleet']['points_per_member']).'</th>';
+}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>';  
+  echo '<th></th>';
+  echo '<th></th>';  
+ echo '<th></th>';  
+
+}
+if (isset($ranking[$arraydate]['research']['rank']))
+{
+echo '<td class="c">'.($ranking[$arraydate]['research']['rank']).'</td>';
+echo '<th>'.($ranking[$arraydate]['research']['ally']).'</th>';
+echo '<td class="b">'.formate_number($ranking[$arraydate]['research']['nb']).'</td>';
+echo '<th>'.formate_number($ranking[$arraydate]['research']['point']).'</th>';
+echo '<th>'.formate_number($ranking[$arraydate]['research']['points_per_member']).'</th>';}
+else
+{
+  echo '<th></th>';
+  echo '<th></th>'; 
+  echo '<th></th>';
+  echo '<th></th>';  
+   echo '<th></th>';  
+
+ 
+}
+	echo '</tr>';
+  
+  
+  
+  
+}
+
+
+
+
+
+
+?>
+</table>
+<?php
+
+
+
+
