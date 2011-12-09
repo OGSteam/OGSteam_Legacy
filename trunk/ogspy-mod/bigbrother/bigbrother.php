@@ -61,7 +61,7 @@ function create_menu()
                 <?php create_sub_menu("index"); ?>
                 <?php create_sub_menu("recherche"); ?>
                 <?php create_sub_menu("fil"); ?>
-                <?php create_sub_menu("apropos"); ?>
+                <?php //create_sub_menu("apropos"); ?>
             </tr>
         </tbody>
     </table>
