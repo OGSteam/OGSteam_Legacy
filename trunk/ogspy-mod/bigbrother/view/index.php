@@ -48,9 +48,31 @@ $rip_ally = $total_ally - $actif_ally;
 <td width="50" class="b"  ></td>
 </tr>
 </table>
+<br />
 
 
+ <?php
+          
+            $requete = "select COUNT(" . TABLE_PLAYER . ".id) as compteur," . TABLE_PLAYER . ".status from " . TABLE_PLAYER . " ";
+            $requete .= "JOIN " . TABLE_UNI . " ";
+            $requete .= "ON " . TABLE_UNI . ".id_player = " . TABLE_PLAYER . ".id ";
+            $requete .= " GROUP BY " . TABLE_PLAYER . ".status ";
 
-<?php
+    $result = $db->sql_query($requete);
+    $legend = null;
+    $value = null;
+    
+     while ($row = $db->sql_fetch_assoc($result)) {
+        if ($row['status'] == ""){
+            $row['status'] = 'Actif';
+        }
+        $legend[]=$row['status'] ;
+        $value[]= $row['compteur'];
+        
+        }
+
+
 
 ?>
+
+<img src='index.php?action=graphic_pie&values=<?php echo implode("_x_",$value);?>&legend=<?php echo implode("_x_",$legend);?>&title=Dernière répartition des joueurs actifs' alt='pas de graphique disponible'/>
