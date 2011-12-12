@@ -254,13 +254,13 @@ var regAlliance = new RegExp(/(alliance)/);
 
 if(regOption.test(url))			{ displayOptions();}
 else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
-else if(regOverview.test(url))	{ if(GM_getValue('handle.overview','false')=='true'){get_planet_details();}}
+else if(regOverview.test(url))	{ savePlanets(); if(GM_getValue('handle.overview','false')=='true'){get_planet_details();}}
 else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true'){parse_researchs();}}
 else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true'){parse_buildings();}}
 else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'){parse_station();}}
 else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true'){parse_shipyard();}}
 else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true'){parse_defense();}}
-else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}}
+else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}} 
 else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')=='true'){parse_rc();}}
 else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false')=='true'){GM_setValue('lastAction','');get_ally_content();}}
 else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
@@ -1173,14 +1173,16 @@ function parse_messages(){
 			var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison à eu lieu
 			
 			// Récupération de mes planètes
-			var mesPlanetes = XPath.getOrderedSnapshotNodes(window.parent.parent.document,this.Xpaths.planetData['coords']);
+			//var mesPlanetes = XPath.getOrderedSnapshotNodes(window.parent.document,XtenseXpaths.planetData['coords']);
+			var mesPlanetes = GM_getValue('my.planets','').split(';');
+			
 			var isMyPlanet=false;
-			log("J'ai "+mesPlanetes.snapshotLength+" planètes");
+			log("J'ai "+mesPlanetes.length+" planètes");
 			
 			// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
-			if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
-			   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
-					var coord = mesPlanetes.snapshotItem(i).textContent.trim();
+			if(mesPlanetes!=null && mesPlanetes.length > 0){
+			   	for(var i=0;i<mesPlanetes.length;i++){
+					var coord = mesPlanetes[i];
 					log('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
 					if(coord.search(planeteLivraison) > -1){
 						 isMyPlanet=true;
@@ -1908,7 +1910,7 @@ parseTableStruct : {
 planetData : {
 	name : "id(\'selectedPlanetName\')",
 	name_planete : "//span[@class=\'planet-name\']",
-	coords : "//div[@class=\'smallplanet\']/a[contains(@class,\'active\') or @href=\'#\']/span[@class=\'planet-koords\']",
+	coords : "//span[@class=\'planet-koords\']",
 	coords_unique_planet : "//div[@class=\'smallplanet\']/a[contains(@class,\'\') or @href=\'#\']/span[@class=\'planet-koords\']"
 },
 
@@ -1976,11 +1978,11 @@ writemessage : {
         
         messages : {
             ennemy_spy : '\\[(\\d+:\\d+:\\d+)\\][^\\]]*\\[(\\d+:\\d+:\\d+)\\][^%\\d]*([\\d]+)[^%\\d]*%',		
-            trade_message_infos : 'Une flotte .trang.re de (\\S+) livre des ressources . (\\S+) (\\S+) :',
-            trade_message_infos_me : 'Votre flotte atteint la plan.te (.*) (.*) et y livre les ressources suivantes',
-            trade_message_infos_res_livrees : '(.*)Vous aviez :',
-            trade_message_infos_res : 'M.tal : (.*) Cristal : (.*) Deut.rium : (.*)',
-            trade_message_infos_me_res : 'M.tal :(.*)Cristal:(.*)Deut.rium:(.*)'
+			trade_message_infos : 'Une flotte .trang.re de (.*) [(](.*)\\[(\\d+:\\d+:\\d+)\\][)] a livr. des ressources . (.*) \\[(\\d+:\\d+:\\d+)\\]',
+			trade_message_infos_me : 'Votre flotte de la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] a atteint la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] et y a livr. les ressources suivantes',
+			trade_message_infos_res_livrees : '(.*)Vous aviez [:]',
+			trade_message_infos_res : 'tal(.*)Cristal(.*)Deut.rium(.*)',
+			trade_message_infos_me_res : 'tal(.*)Cristal(.*)Deut.rium(.*)'
         },
         spy : {
             player : " '(.*)'\\)"
@@ -2868,6 +2870,18 @@ function isMoon() {
 		return false;
 	}
 }
+// Permet de stocker les planètes du joueur
+function savePlanets(){
+	var mesPlanetes = XPath.getOrderedSnapshotNodes(document,XtenseXpaths.planetData['coords'])
+	var pls = "";
+	if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
+	   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
+			pls += mesPlanetes.snapshotItem(i).textContent.trim()+((i<(mesPlanetes.snapshotLength - 1))?";":"");
+		}
+	}
+	GM_setValue('my.planets',pls);
+}
+
 // Récupération des ressources d'une planète
 function getResources(){		
 	var metal = XPath.getStringValue(document,XtenseXpaths.ressources.metal).trimInt();
