@@ -39,10 +39,13 @@ if (is_numeric($id)) {
     // recherche joueur ancien
     $requete = "select * from " . TABLE_STORY_PLAYER . "";
     $requete .= " where id_ally = '" . $id . "' ";
+    
     $result = $db->sql_query($requete);
     $nb_req_2 = $db->sql_numrows($result);
     while ($row = $db->sql_fetch_assoc($result)) {
-
+        // nous n'affichons que si n est plus dans l alliance
+        if ($cache_player[$row['id_player']]['id_ally']!= $row['id_ally'] )
+        {
         $tab[$i][2] = strftime("%d %b %Y %H:%M:%S", $row['datadate']);
         if ($row['name_player'] == $cache_player[$row['id_player']]['name_player']) {
             $add = "";
@@ -68,15 +71,16 @@ if (is_numeric($id)) {
 
 
         $i++;
+        }
     }
 
-    $nb_row = max($nb_req_1, $nb_req_2);
+    $nb_row = max($nb_req_1, $i);
 
 
     $affichage .= '<tr>';
     $affichage .= '<td colspan="2" class="c">Joueurs référencés (' . $nb_req_1 .
         ')</td>';
-    $affichage .= '<td colspan="4" class="c">Anciennement dans l alliance (' . $nb_req_2 .
+    $affichage .= '<td colspan="4" class="c">Anciennement dans l alliance (' . $i .
         ')</td>';
     $affichage .= '</tr>';
 
