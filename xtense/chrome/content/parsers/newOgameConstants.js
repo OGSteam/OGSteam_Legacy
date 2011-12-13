@@ -72,25 +72,25 @@ XnewOgame.Xpaths = {
 	
 	ranking : { 
 		time : '//div[@id="statisticsContent"]//div[@class="header"]/h3/text()',
-		who : '//input[@id="who"]/@value',
-		type : '//input[@id="type"]/@value',
+		who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
+		type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
 		
 		rows : 'id("ranks")/tbody/tr',
 		position : 'td[@class="position"]/text()',
 		player : {
-			playername : 'td[@class="name"]//a[contains(@href,"galaxy") and contains(@href,"system") and contains(@href,"position")]/text()',
-			allytag : 'td[@class="name"]//a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
-			points :  'td[@class="score"]/text()',
-			player_id : 'td[@class="sendmsg"]//a[contains(@href,"writemessage")]/@href',
-			ally_id : 'td[@class="name"]//a[contains(@target,"_ally")]/@href'
+			playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
+			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
+			points :  "td[@class=\'score\']/text()",
+			player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
+			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 		},
 		
 		ally : {
-			position_ally : 'td[1]/text()',
-			allytag : 'td[2]/a[contains(@href,"alliance") or contains(@href,"ainfo.php?allyid")]/text()',
-			points :  'td[4]/text()',
-			members : 'td[5]/text()',
-			ally_id : 'td[2]/a[contains(@target,"_ally")]/@href'
+			position_ally : "td[contains(@class,\'position\')]/a/text()",
+			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
+			points :  "td[6]/text()",
+			members : "td[5]/text()",
+			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 		}
 	},
 	

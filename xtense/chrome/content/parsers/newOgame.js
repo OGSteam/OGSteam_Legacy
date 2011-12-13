@@ -200,7 +200,7 @@ var XnewOgame = {
 				case 'station':		return 'station';
 				case 'research':	return 'researchs';
 				case 'galaxy':		return 'system';
-				case 'statistics':	return 'ranking';
+				case 'highscore':	return 'ranking';
 				case 'defense':		return 'defense';
 				case 'shipyard':	return 'fleet';
 				case 'fleet1':	return 'fleet';
@@ -772,6 +772,7 @@ var XnewOgame = {
 			type[0] = Xpath.getStringValue(doc,paths.who);
 			type[1] = Xpath.getStringValue(doc,paths.type);
 			type[0] = type[0] != '' ? type[0] : 'player';
+			type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
 			type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
 	
 			var length = 0;
@@ -817,7 +818,7 @@ var XnewOgame = {
 						rowsData[n]=r;
 						length ++;
 					} else if(type[0] == 'ally') {
-						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim();
+						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
 						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
 						moy = members[1];
 						members = members[0];
