@@ -252,7 +252,7 @@ function handle_current_page(){
 	var regMessages = new RegExp(/(showmessage)/);
 	var regCombatreport = new RegExp(/(combatreport)/);
 	var regAlliance = new RegExp(/(alliance)/);
-	var regStats = new RegExp(/(statistics)/);
+	var regStats = new RegExp(/(highscore)/);
 	
 	if(regOption.test(url)){ displayOptions();}
 	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
@@ -366,7 +366,7 @@ function parse_galaxy_system_inserted(event){
 					allymembers = allymembers.match(/Membres\: (.*)/);
 					allymembers = allymembers[1];
 				}
-				log('row '+i+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon+',player_name:'+player+',status:'+status+',ally_id:'+allyid+',ally_tag:'+allytag+',ally_place:'+allyplace+',ally_members:'+allymembers+',debris:'+debris+',activity:'+activity);	
+log('row '+i+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon+',player_name:'+player+',status:'+status+',ally_id:'+allyid+',ally_tag:'+allytag+',ally_place:'+allyplace+',ally_members:'+allymembers+',debris:'+debris+',activity:'+activity);	
 				var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:allyid,ally_tag:allytag,ally_place:allyplace,ally_members:allymembers,debris:debris,activity:activity};
 				rowsData[position]=r;
 			}
@@ -457,15 +457,16 @@ function parse_ranking_inserted(event) {
 		type[0] = XPath.getStringValue(document,paths.who);
 		type[1] = XPath.getStringValue(document,paths.type);
 		type[0] = type[0] != '' ? type[0] : 'player';
-		type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
-
+		type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
+		type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];		
+		
 		var length = 0;
 		var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
 		var offset = 0;
-		
+log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',nombreLignes:'+rows.snapshotLength);
 		if(rows.snapshotLength > 0){
 			var rowsData = [];
-			for (var i = 1; i < rows.snapshotLength; i++) {
+			for (var i = 0; i < rows.snapshotLength; i++) {
 				var row = rows.snapshotItem(i);
 				var n = null;
 				if (type[0] == 'player') {
@@ -498,12 +499,12 @@ function parse_ranking_inserted(event) {
 					}
 					else if (ally)
 						ally_id = '-1';
-					
+log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);					
 					var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
 					rowsData[n]=r;
 					length ++;
 				} else if(type[0] == 'ally') {
-					var ally = XPath.getStringValue(document,paths.ally.allytag,row).trim();
+					var ally = XPath.getStringValue(document,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
 					var members = XPath.getStringValue(document,paths.ally.members,row).getInts();
 					moy = members[1];
 					members = members[0];
@@ -516,7 +517,7 @@ function parse_ranking_inserted(event) {
 					}
 					else if (ally)
 						ally_id = '-1';
-					
+log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
 					var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
 					rowsData[n]=r;
 					length ++;
@@ -1369,7 +1370,7 @@ function get_ranking_content(){
 	if (isChrome) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
-		var target = document.getElementById('statisticsContent');
+		var target = document.getElementById('stat_list_content');
 		//target.removeEventListener("DOMNodeInserted");
 		//target.removeEventListener("DOMContentLoaded");
 		target.addEventListener("DOMNodeInserted", parse_ranking_inserted, false);		
@@ -1954,25 +1955,25 @@ planetData : {
 
 ranking : { 
 	time : "//div[@id=\'statisticsContent\']//div[@class=\'header\']/h3/text()",
-	who : "//input[@id=\'who\']/@value",
-	type : "//input[@id=\'type\']/@value",
+	who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
+	type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
 	
 	rows : "id(\'ranks\')/tbody/tr",
 	position : "td[@class=\'position\']/text()",
 	player : {
-		playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\') and contains(@href,\'position\')]/text()",
-		allytag : "td[@class=\'name\']//a[contains(@href,\'alliance\') or contains(@href,\'ainfo.php?allyid\')]/text()",
+		playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
+		allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
 		points :  "td[@class=\'score\']/text()",
 		player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
 		ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 	},
 	
 	ally : {
-		position_ally : "td[1]/text()",
-		allytag : "td[2]/a[contains(@href,\'alliance\') or contains(@href,\'ainfo.php?allyid\')]/text()",
-		points :  "td[4]/text()",
+		position_ally : "td[contains(@class,\'position\')]/a/text()",
+		allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
+		points :  "td[6]/text()",
 		members : "td[5]/text()",
-		ally_id : "td[2]/a[contains(@target,\'_ally\')]/@href"
+		ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 	}
 },
 
