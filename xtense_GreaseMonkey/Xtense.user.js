@@ -22,7 +22,7 @@ var start_time = (new Date()).getTime();
 var freqMaj = 23 * 3600;
 
 //Variables globales pour les status - Type d'erreur
-const XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5;
+const XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5, XLOG_SEND = 6;
 
 
 // Navigateurs
@@ -106,7 +106,7 @@ function err(type, message)
                }, 0);
 } 	
 function log(message){
-	console.log(nomScript+" says : "+message);
+	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -135,6 +135,8 @@ function setStatus(type,message){
 			} else { 	
 				icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWp0otKLXzceJRvxrMMNTJteTcjBbUMCcPPqzUtzr98BXQEIHkx4cM3CiAMjLowTxeLBih8LdgyApmQAkR9Trmz5cWbEnSeHHhwAM1XJo0V7Pr04tejNhD9zxkmYdmLWiEtfXixbsO7dhbsOACAAOPCuChYkSF7AAIHn0CU/H3AAQdd/EyREiPDAgfcG4MMzJQDPwDuABxDSXxeoIcOFCxbiU5hPv8J8+xTsY8Cwvr///wCuFxAAOw==";
 			}
+		} else if(type==XLOG_SEND){	
+			icone.src="data:image/gif;base64,R0lGODlhJgAdAPcAAAAAAAECAgYHCQYICQcICgcJCwcKCwkKCwkJDAkLDQkLDgkMDQoMDgoMDwoNEAsOEQwPEAwPEQ0PEgwQEg8SFQ8SFhATFhAUFxEVGBIVGRIWGRYaHhcbHxoeIhsfIxsgIxsgJBwgJBwgJR0hJh0iJx8kKR8lKiAjKDU4Oh57AyeAAymCCjOHCjaHCDuLDzOHFTSJGDaIGzyLED2MET+NEkCNEkGOE0KOFEOPFUaPGEmRG1GXIVeYKFubKV6fOlygPGKdMGOfMWSeMWWfMmagM2ihNGujN2miOW6jOG+lPXCmPl+hQ2KjRmalSGilRnSrT3yvVYGzWoCzYYK1Z4W2ZoW2aom4a4q4bIu5bYy5bY25bo66b5C8dJbBgJfCgpjCg57FiKHGiqLGi6THjKXIjajKkKrLkavLkqvMkqzMk63NlLDOlgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAP8ALAAAAAAmAB0AAAj/AP8JNCGioMGDCBOaEMiwocMSCSNKFGHig8OL/whO3HjwwwaMDTdwHCmCxEeQAkWSlEii4EmUGzogREGzpsGaKA6CEPESpMqCLQvaNHhCBE2dIHpi/Jnw6EGnBkEkRZly4lCjORGG4En13wYPB0c8zWrUoBIhB5Ve/LrxKFkRR6LwMKjW4YYNSZAUAVKkLxEiQ4YIAUK4MBQzT3KI4FC3IYENRtaoMaOmcpo0aNCcMcO5cxkuYZy02DCgKwAAQdRssbKltRYtWbBcsUK7NhUpU778UAHANIAeZciEIUN8zBgxyMMoXw6mipcmL0773qEDhwsc2G/YqEFjhgwX4MH7lujCBMbp3lTPq1eP4nzN0yyWxFDve7379vfbr0hxPgB6lPbdZx9NAf4HUoEEDpjgevXl956DATaonn8FVihhfxVaSNUAAAiQ4YfndaXAAgmMWIABBKSoYoUpDnAAAl39M4EEEUTwgAM4NqDjjgzoyACOADwAwZAxCqRBBhdcYMGSFDTpZAVNQkkBlBhgUOSVWGapZZEBAQA7";
 		}/* else {
 			icone.src=urlIcone;
 		}*/
@@ -225,9 +227,8 @@ initOGSpyCommunication();
 initParsers();
 initLocales();    
 displayXtense();
-//displayInfoXtense();
 checkMaJ();
-if(GM_exist('server.check') && GM_getValue('server.check','false')=='true') {
+if(GM_exist('server.check') && GM_getValue('server.check','false')=='true') { // Initialisation du serveur demandée ? 
 	XtenseRequest.check();
 } 
 setStatus(XLOG_NORMAL,Xl('toolbar_activated'));
@@ -238,32 +239,34 @@ handle_current_page();
 /************************ Gestion des pages *****************************/
 
 function handle_current_page(){
-
-var regGalaxy = new RegExp(/(galaxy)/);
-var regOverview = new RegExp(/(overview)/);
-var regOption = new RegExp(/(xtense=Options)/);
-var regResearch = new RegExp(/(research)/);
-var regBuildings = new RegExp(/(resources)/);
-var regStation = new RegExp(/(station)/);
-var regShipyard = new RegExp(/(shipyard)/);
-var regFleet1 = new RegExp(/(fleet1)/);
-var regDefense = new RegExp(/(defense)/);
-var regMessages = new RegExp(/(showmessage)/);
-var regCombatreport = new RegExp(/(combatreport)/);
-var regAlliance = new RegExp(/(alliance)/);
-
-if(regOption.test(url))			{ displayOptions();}
-else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();}}
-else if(regOverview.test(url))	{ savePlanets(); if(GM_getValue('handle.overview','false')=='true'){get_planet_details();}}
-else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true'){parse_researchs();}}
-else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true'){parse_buildings();}}
-else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true'){parse_station();}}
-else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true'){parse_shipyard();}}
-else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true'){parse_defense();}}
-else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}} 
-else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')=='true'){parse_rc();}}
-else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false')=='true'){GM_setValue('lastAction','');get_ally_content();}}
-else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
+	// Expressions régulières des pages
+	var regGalaxy = new RegExp(/(galaxy)/);
+	var regOverview = new RegExp(/(overview)/);
+	var regOption = new RegExp(/(xtense=Options)/);
+	var regResearch = new RegExp(/(research)/);
+	var regBuildings = new RegExp(/(resources)/);
+	var regStation = new RegExp(/(station)/);
+	var regShipyard = new RegExp(/(shipyard)/);
+	var regFleet1 = new RegExp(/(fleet1)/);
+	var regDefense = new RegExp(/(defense)/);
+	var regMessages = new RegExp(/(showmessage)/);
+	var regCombatreport = new RegExp(/(combatreport)/);
+	var regAlliance = new RegExp(/(alliance)/);
+	var regStats = new RegExp(/(statistics)/);
+	
+	if(regOption.test(url)){ displayOptions();}
+	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false')=='true' || GM_getValue('manual.send','false')=='true'){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}} 
+	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')=='true'){parse_rc();}}
+	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
+	else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
 /************************ PARSINGS DES PAGES  ***************************/
@@ -313,9 +316,9 @@ function parse_galaxy_system_inserted(event){
 					continue;
 				}
 	
-				var moon = XPath.getUnorderedSnapshotNodes(doc,paths.moon,row);
+				var moon = XPath.getUnorderedSnapshotNodes(document,paths.moon,row);
 				moon = moon.snapshotLength > 0 ? 1 : 0;
-				var status = XPath.getUnorderedSnapshotNodes(doc,paths.status,row);
+				var status = XPath.getUnorderedSnapshotNodes(document,paths.status,row);
 				if(status.snapshotLength>0){
 					status = status.snapshotItem(0);
 					status = status.textContent;
@@ -324,22 +327,22 @@ function parse_galaxy_system_inserted(event){
 					status = status.trimAll();
 				}
 				else status = "";
-				var activity = XPath.getStringValue(doc,paths.activity,row).trim();
+				var activity = XPath.getStringValue(document,paths.activity,row).trim();
 				activity = activity.match(/: (.*)/);
 				if(activity)
 					activity = activity[1];
 				else activity = '';
-				var allytag = XPath.getStringValue(doc,paths.allytag,row).trim();
+				var allytag = XPath.getStringValue(document,paths.allytag,row).trim();
 				var debris = [];
 				for(var j = 0; j < 2; j++) {
 					debris[XtenseDatabase['resources'][601+j]] = 0;
 				}
-				var debrisCells = XPath.getUnorderedSnapshotNodes(doc,paths.debris,row);
+				var debrisCells = XPath.getUnorderedSnapshotNodes(document,paths.debris,row);
 				for (var j = 0; j < debrisCells.snapshotLength ; j++) {
 					debris[XtenseDatabase['resources'][601+j]] = debrisCells.snapshotItem(j).innerHTML.trimInt();
 				}
 				
-				var player_id = XPath.getStringValue(doc,paths.player_id,row).trim();
+				var player_id = XPath.getStringValue(document,paths.player_id,row).trim();
 				if (player_id != '' ) {
 					player_id = player_id.match(/\&to\=(.*)\&ajax/);
 					player_id = player_id[1];
@@ -348,7 +351,7 @@ function parse_galaxy_system_inserted(event){
 					//player_id = doc.cookie.match(/login_(.*)=U_/)[1];
 					player_id = XtenseMetas.getPlayerId();  
 				}
-				var allyid = XPath.getStringValue(doc,paths.ally_id,row).trim();
+				var allyid = XPath.getStringValue(document,paths.ally_id,row).trim();
 				if (allyid != '' ) {
 					allyid = allyid.match(/allyid\=(.*)/);
 					allyid = allyid[1];
@@ -356,17 +359,14 @@ function parse_galaxy_system_inserted(event){
 					//ally_id = '-1';
 					allyid = XtenseMetas.getAllyId();
 				}
-				var allyplace = XPath.getStringValue(doc,paths.ally_place,row).trim();
-				if (allyplace != '' ) {
-					allyplace = allyplace.match(/Place\: (.*)/);
-					allyplace = allyplace[1];
-				}
-				var allymembers = XPath.getStringValue(doc,paths.ally_members,row).trim();
+				var allyplace = XPath.getStringValue(document,paths.ally_place,row).trim();
+
+				var allymembers = XPath.getStringValue(document,paths.ally_members,row).trim();
 				if (allymembers != '' ) {
 					allymembers = allymembers.match(/Membres\: (.*)/);
 					allymembers = allymembers[1];
 				}
-				
+				log('row '+i+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon+',player_name:'+player+',status:'+status+',ally_id:'+allyid+',ally_tag:'+allytag+',ally_place:'+allyplace+',ally_members:'+allymembers+',debris:'+debris+',activity:'+activity);	
 				var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:allyid,ally_tag:allytag,ally_place:allyplace,ally_members:allymembers,debris:debris,activity:activity};
 				rowsData[position]=r;
 			}
@@ -393,12 +393,12 @@ function parse_ally_inserted(event) {
 			if (GM_getValue('lastAction','') != 'ally_list'){
 				setStatus(XLOG_NORMAL,Xl('ally_list_detected'));
 				
-				var doc = event.target.ownerDocument;
+				//var doc = event.target.ownerDocument;
 				var paths = XtenseXpaths.ally_members_list;
 				var rows = XPath.getOrderedSnapshotNodes(document,paths.rows);
 				var rowsData = [];
 				
-				log(rows.snapshotLength+" membres à envoyer !");
+				//log(rows.snapshotLength+" membres à envoyer !");
 				
 				for (var i = 0; i < rows.snapshotLength; i++) {
 					var row = rows.snapshotItem(i);
@@ -436,12 +436,9 @@ function parse_ally_inserted(event) {
 /* Fonction appelée lors d'évenement sur le chargement des classements */
 function parse_ranking_inserted(event) {		
 	try {
-		var doc = event.target.ownerDocument;
-		var win = doc.getElementById('statisticsContent').win;
+		var paths = XtenseXpaths.ranking;
 		
-		var paths = XnewOgame.Xpaths.ranking;
-		
-		var timeText = Xpath.getStringValue(doc,paths.time).trim();
+		var timeText = XPath.getStringValue(document,paths.time).trim();
 		timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
 
 		var time = new Date();
@@ -457,42 +454,43 @@ function parse_ranking_inserted(event) {
 		
 		time =  Math.floor(time.getTime()/1000);
 		var type = new Array();
-		type[0] = Xpath.getStringValue(doc,paths.who);
-		type[1] = Xpath.getStringValue(doc,paths.type);
+		type[0] = XPath.getStringValue(document,paths.who);
+		type[1] = XPath.getStringValue(document,paths.type);
 		type[0] = type[0] != '' ? type[0] : 'player';
 		type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
 
 		var length = 0;
-		var rows = Xpath.getOrderedSnapshotNodes(doc,paths.rows,null);
+		var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
 		var offset = 0;
 		
-		var Request = XnewOgame.newRequest();
 		if(rows.snapshotLength > 0){
 			var rowsData = [];
 			for (var i = 1; i < rows.snapshotLength; i++) {
 				var row = rows.snapshotItem(i);
 				var n = null;
 				if (type[0] == 'player') {
-					n = Xpath.getStringValue(doc,paths.position,row).trimInt();
+					n = XPath.getStringValue(document,paths.position,row).trimInt();
 				} else if(type[0] == 'ally') {
-					n = Xpath.getStringValue(doc,paths.ally.position_ally,row).trimInt();
+					n = XPath.getStringValue(document,paths.ally.position_ally,row).trimInt();
 				}
 				if (i == 1) {
 					offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
 				}
+				//setStatus(XLOG_NORMAL,Xl('ranking_detected'));
+				
 				if (type[0] == 'player') {
-					var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
-					var ally = Xpath.getStringValue(doc,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
-					var points = Xpath.getStringValue(doc,paths.player.points,row).trimInt();
-					var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
-					var ally_id = Xpath.getStringValue(doc,paths.player.ally_id,row).trim();
+					var name = XPath.getStringValue(document,paths.player.playername,row).trim();
+					var ally = XPath.getStringValue(document,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
+					var points = XPath.getStringValue(document,paths.player.points,row).trimInt();
+					var player_id = XPath.getStringValue(document,paths.player.player_id,row).trim();
+					var ally_id = XPath.getStringValue(document,paths.player.ally_id,row).trim();
 					
 					if (player_id != '' ) {
 						player_id = player_id.match(/\&to\=(.*)\&ajax/);
 						player_id = player_id[1];
 					}
-					else if(doc.cookie.match(/login_(.*)=U_/))
-						player_id = doc.cookie.match(/login_(.*)=U_/)[1];
+					else if(document.cookie.match(/login_(.*)=U_/))
+						player_id = document.cookie.match(/login_(.*)=U_/)[1];
 					
 					if (ally_id != '' ) {
 						ally_id = ally_id.match(/allyid\=(.*)/);
@@ -505,12 +503,12 @@ function parse_ranking_inserted(event) {
 					rowsData[n]=r;
 					length ++;
 				} else if(type[0] == 'ally') {
-					var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim();
-					var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
+					var ally = XPath.getStringValue(document,paths.ally.allytag,row).trim();
+					var members = XPath.getStringValue(document,paths.ally.members,row).getInts();
 					moy = members[1];
 					members = members[0];
-					var points = Xpath.getStringValue(doc,paths.ally.points,row).trimInt();
-					var ally_id = Xpath.getStringValue(doc,paths.ally.ally_id,row).trim();
+					var points = XPath.getStringValue(document,paths.ally.points,row).trimInt();
+					var ally_id = XPath.getStringValue(document,paths.ally.ally_id,row).trim();
 					
 					if (ally_id != '' ) {
 						ally_id = ally_id.match(/allyid\=(.*)/);
@@ -525,10 +523,11 @@ function parse_ranking_inserted(event) {
 				}
 			}
 			
-			if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){
-				//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
+			if(GM_setValue('lastAction','') != 'r:'+type[0]+':'+type[1]+':'+offset){				
+				setStatus(XLOG_NORMAL,Xl('ranking_detected', Xl('ranking_'+type[0]), Xl('ranking_'+type[1])));
+				GM_setValue('lastAction','r:'+type[0]+':'+type[1]+':'+offset);
 				if (offset != 0 && length != 0) {
-					Request.set(
+					XtenseRequest.set(
 						{
 							n : rowsData,
 							type : 'ranking',
@@ -539,10 +538,11 @@ function parse_ranking_inserted(event) {
 						}
 					);
 					
-					Request.set('lang',XnewOgame.lang);
-					Request.send(XnewOgame.servers);
+					XtenseRequest.set('lang',langUnivers);
+					XtenseRequest.send();
 				}
-				this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
+				
+				//get_ranking_content();
 			}
 		}
 	} catch (e) {
@@ -1011,7 +1011,7 @@ function parse_messages(){
 	
 	// Messages de joueurs
 	if(GM_getValue('handle.msg.msg')) {
-		if (document.getElementById('melden')) { // si bouton "reporter", c'est un mp
+		if (XPath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
 			var m = from.match(new RegExp(XtenseRegexps.userNameAndCoords));
 			if(m) {
 				var userName = m[1];
@@ -1284,6 +1284,13 @@ function getElementInSpyReport(RE,elem) {
 	return num;
 }
 
+/* Fonction d'envoi manuel */
+function manual_send(){	
+	GM_setValue('manual.send','true');
+	displayXtense();
+	setStatus(XLOG_SEND,Xl('wait_send'));
+}
+
 /************************ Utilities des Parsings ************************/
 /* Fonction ajoutant lancant le parsing de la vue galaxie quand celle-ci est chargée */
 function get_galaxycontent(){	
@@ -1358,16 +1365,15 @@ function get_ally_content(){
 }
 
 /* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
-function get_ally_content(){	
+function get_ranking_content(){	
 	if (isChrome) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
-		log("In get_ally_content()");
-		var target = document.getElementById('inhalt');
+		var target = document.getElementById('statisticsContent');
 		//target.removeEventListener("DOMNodeInserted");
 		//target.removeEventListener("DOMContentLoaded");
-		target.addEventListener("DOMNodeInserted", parse_ally_inserted, false);		
-		target.addEventListener("DOMContentLoaded", parse_ally_inserted, false);		
+		target.addEventListener("DOMNodeInserted", parse_ranking_inserted, false);		
+		target.addEventListener("DOMContentLoaded", parse_ranking_inserted, false);		
 
 	}else{// Pour Firefox Notamment
 
@@ -1380,19 +1386,19 @@ function get_ally_content(){
 		}
 		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
 		
-		unsafeWindow.$("#galaxyContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		unsafeWindow.$("#statisticsContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
 		{
 			//l'url de la requête ajax contient page=galaxyContent
-			if (settings.url.indexOf("page=galaxyContent") == -1) return;
+			if (settings.url.indexOf("page=statisticsContent") == -1) return;
 
-			parse_ally_inserted();
+			parse_ranking_inserted();
 			
 		}));
 
 	}
 
 }
-
+/* Fonction ajoutant lancant le parsing de la vue générale quand celle-ci est chargée */
 function get_planet_details(){	
 	setStatus(XLOG_NORMAL,Xl('overview_detected'));
 	
@@ -1435,6 +1441,10 @@ function get_planet_details(){
 /**************************** Options ***********************************/
 // Affiche les Options Xtense
 function displayOptions(){
+	// Variables : Serveur
+	var server_check = ' ';
+		
+	// Variables : Pages
 	// Variables recupération des pages
 	var handle_overview = ' ';
 	var handle_system = ' ';
@@ -1444,6 +1454,7 @@ function displayOptions(){
 	var handle_shipyard = ' ';
 	var handle_defense = ' ';
 	var handle_alliance = ' ';
+	var handle_stats = ' ';
 	
 	// Variables recupération des messages
 	var handle_msg_msg = ' ';
@@ -1455,10 +1466,13 @@ function displayOptions(){
 	var handle_msg_expeditions = ' ';
 	var handle_msg_commerce = ' ';
 	
-	// Variable propre à xtense
-	var server_check = ' ';
+	// Variables : Options
+	var opt_debug_mode = ' ';
 	
-	// Récupérations des préférences
+	// Récupération des préférences  : Serveur
+	if(!GM_exist('server.check') || GM_getValue('server.check','false')=='true'){server_check += 'checked';}
+	
+	// Récupération des préférences  : Pages
 	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}	
 	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings','false')=='true'){handle_buildings += 'checked';}
 	if(GM_getValue('handle.station') && GM_getValue('handle.station','false')=='true'){handle_station += 'checked';}
@@ -1467,6 +1481,7 @@ function displayOptions(){
 	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
 	if(GM_getValue('handle.defense') && GM_getValue('handle.defense','false')=='true'){handle_defense += 'checked';}
 	if(GM_getValue('handle.alliance') && GM_getValue('handle.alliance','false')=='true'){handle_alliance += 'checked';}
+	if(GM_getValue('handle.stats') && GM_getValue('handle.stats','false')=='true'){handle_stats += 'checked';}
 	
 	if(GM_getValue('handle.msg.msg') && GM_getValue('handle.msg.msg','false')=='true'){handle_msg_msg += 'checked';}
 	if(GM_getValue('handle.msg.ally') && GM_getValue('handle.msg.ally','false')=='true'){handle_msg_ally += 'checked';}
@@ -1476,7 +1491,9 @@ function displayOptions(){
 	if(GM_getValue('handle.msg.expeditions') && GM_getValue('handle.msg.expeditions','false')=='true'){handle_msg_expeditions += 'checked';}
 	if(GM_getValue('handle.msg.commerce') && GM_getValue('handle.msg.commerce','false')=='true'){handle_msg_commerce += 'checked';}
 	
-	if(!GM_exist('server.check') || GM_getValue('server.check','false')=='true'){server_check += 'checked';}
+	// Récupération des préférences  : Options
+	if(GM_getValue('debug.mode') && GM_getValue('debug.mode','false')=='true'){opt_debug_mode += 'checked';}
+		
 					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
 	// Serveur Univers
@@ -1518,14 +1535,14 @@ function displayOptions(){
 	options+= '</tr>';
 	options+= '</tbody></table>';
 	options+= '</div>';			
-	// Pages
+	/*---------------------------- Pages -----------------------------------------------*/
 	options+= '<div id="Xtense_pages">';
 	options+= '<table id="Xtense_table_pages" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
 	options+= '<colgroup><col width="30%"/><col/><col width="30%"/><col/><col width="30%"/><col/></colgroup>';
-	options+= '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
+	options+= '<thead><tr><th class="Xtense_th" colspan="3" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 	options+= '<tbody>';
 	options+= '<tr>';
-	options+= '<td colspan="6"><label class="styled textBeefy">Envoi des données</label></td>';
+	options+= '<td  style="color: white; font-size: 14px; font-weight: bold;">Envoi des données</td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
@@ -1551,14 +1568,14 @@ function displayOptions(){
 	options+= '<td class="value"><input class="speed" id="handle.system" size="35" alt="24" type="checkbox"'+ handle_system +'/></td>';
 	options+= '<td class="champ"><label class="styled textBeefy">Liste des membres de l\'alliance</label></td>';
 	options+= '<td class="value"><input class="speed" id="handle.alliance" size="35" alt="24" type="checkbox"'+ handle_alliance +'/></td>';
-	options+= '<td class="champ"></td>';
-	options+= '<td class="value"></td>';
+	options+= '<td class="champ"><label class="styled textBeefy">Tous classements</label></td>';
+	options+= '<td class="value"><input class="speed" id="handle.stats" size="35" alt="24" type="checkbox"'+ handle_stats +'/></td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
 	options+= '</tr>';
 	options+= '<tr>';
-	options+= '<td colspan="6"><label class="styled textBeefy">Envoi des messages</label></td>';
+	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">Envoi des messages</td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
@@ -1590,19 +1607,32 @@ function displayOptions(){
 	
 	options+= '</tbody></table>';
 	options+= '</div>';
-	// Options
+	/*---------------------------- Options -----------------------------------------------*/
 	options+= '<div id="Xtense_options">';
 	options += '<table id="Xtense_table_options" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
-	options += '<colgroup><col width="20%"/><col/></colgroup>';
-	options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
+	options+= '<colgroup><col width="30%"/><col/><col width="30%"/><col/><col width="30%"/><col/></colgroup>';
+	options += '<thead><tr><th class="Xtense_th" colspan="3" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 	options+= '<tbody>';
-	/*options+= '<tr>';
-	options+= '<td class="champ"><label class="styled textBeefy">Options</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue('server.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
-	options+= '</tr>';*/
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">Options Diverses</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Mode débogage</label></td>';
+	options+= '<td class="value"><input class="speed" id="debug.mode" size="35" alt="24" type="checkbox"'+ opt_debug_mode +'/></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '</tr>';
 	options+= '</tbody></table>';
 	options+= '</div>';
-	// A propos
+	/*---------------------------- A propos -----------------------------------------------*/
 	options+= '<div id="Xtense_about">';
 	options += '<table id="Xtense_table_about" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;">';
 	options += '<colgroup><col width="20%"/><col/></colgroup>';
@@ -1670,25 +1700,32 @@ function displayOptions(){
 /* Affichage d'Xtense dans le menu */
 function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
+    
+    // Page classique
     if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
 		var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
     
-        var aff_option ='<li><span class="menu_icon"><a href="http://board.ogsteam.fr" target="blank_" ><img id="xtense.icone" class="mouseSwitch" src="'+icone+'" height="29" width="38"></span><a class="menubutton " href="'+url+'&xtense=Options" accesskey="" target="_self">';
-        aff_option += '<span class="textlabel">Xtense</span></a></li>';
+    	var aAttrs = "";    
+    	var urlIcone = "";var onClick=null;
+    	if(GM_getValue('manual.send','false')=='true'){
+    		aAttrs = 'onClick="window.location.reload()" target="_self"';
+    	} else {
+    		aAttrs='href="http://board.ogsteam.fr" target="blank_" ';
+    	}
+    
+        var aff_option ='<span class="menu_icon"><a '+aAttrs+'><img id="xtense.icone" class="mouseSwitch" src="'+icone+'" height="29" width="38"></span><a class="menubutton " href="'+url+'&xtense=Options" accesskey="" target="_self">';
+        aff_option += '<span class="textlabel">Xtense</span></a>';
     
     
-        var sp1 = document.createElement("span");
-        sp1.setAttribute("id", "optionXtense");
-        var sp1_content = document.createTextNode('');
-        sp1.appendChild(sp1_content);				
+        var li1 = document.createElement("li");
+        li1.setAttribute("id", "optionXtense");
+        li1.innerHTML=aff_option;				
     
-        var sp2 = document.getElementById('menuTable').getElementsByTagName('li')[Math.min(10,document.getElementById('menuTable').getElementsByTagName('li').length-1)];
-    
-        parentDiv = sp2.parentNode;
-        parentDiv.insertBefore(sp1, sp2.nextSibling);
-        var tableau = document.createElement("span");
-        tableau.innerHTML = aff_option;
-        document.getElementById('optionXtense').insertBefore(tableau, document.getElementById('optionXtense').firstChild);
+    	var menuAlliance = XPath.getSingleNode(document,"//*[@id='menuTable']/li[contains(a/@href,'page=alliance')]");
+    	if(document.getElementById('optionXtense')!=null){
+    		document.getElementById('menuTable').removeChild(document.getElementById('optionXtense'));
+    	}
+    	menuAlliance.parentNode.insertBefore(li1, menuAlliance.nextSibling);
     } else if(document.getElementById('messagebox')){ // Dans les messages ?
     	var toolbarMessage = XPath.getSingleNode(document,"//div[@id='messagebox']//ul[contains(@class,'toolbar')]");
     	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
@@ -1871,7 +1908,7 @@ galaxy : {
 	activity : "descendant::div[@id=\'TTPlanet\']/descendant::span[@class=\'spacing\']/text()",
 	player_id : "descendant::a[contains(@href,\'writemessage\')]/@href",
 	ally_id : "descendant::a[@target='_ally']/@href",
-	ally_place : "td[@class='allytag']//li[@class='rank']/text()",
+	ally_place : "td[@class='allytag']//li[@class='rank']/a/text()",
 	ally_members : "td[@class='allytag']//li[@class='members']/text()"	
 },
 
@@ -1884,6 +1921,7 @@ messages : {
 	to : "//tr[2]/td",
 	subject : "//tr[3]/td",
 	date : "//tr[4]/td",
+	reply : "//*[contains(@class,'toolbar')]/li[contains(@class,'reply')]",
 	contents : {
 		"spy" : "//div[@class=\'note\']",
 		"msg": "//div[@class=\'note\']",
@@ -2200,21 +2238,21 @@ function handleResponse(Response) {
 			if (data.status == 0) {
 				type = XLOG_ERROR;
 				if (code == 'wrong version') {
-					if (data.target == 'plugin') 			message = Xl('error wrong version plugin', Xtense.PLUGIN_REQUIRED, data.version); 
-					else if (data.target == 'xtense.php') 	message = Xl('error wrong version xtense.php');
-					else 									message = Xl('error wrong version toolbar', data.version, Xtense.VERSION);
+					if (data.target == 'plugin') 			message = Xl('error_wrong_version_plugin', Xtense.PLUGIN_REQUIRED, data.version); 
+					else if (data.target == 'xtense.php') 	message = Xl('error_wrong_version_xtense.php');
+					else 									message = Xl('error_wrong_version_toolbar', data.version, Xtense.VERSION);
 				}
-				else if (code == 'php version')			message = Xl('error php version', data.version);
-				else if (code == 'server active') 		message = Xl('error server active', data.reason);
-				else if (code == 'username') 			message = Xl('error username');
-				else if (code == 'password') 			message = Xl('error password');
-				else if (code == 'user active') 		message = Xl('error user active');
-				else if (code == 'home full')			message = Xl('error home full');
-				else if (code == 'plugin connections')	message = Xl('error plugin connections');
-				else if (code == 'plugin config')		message = Xl('error plugin config');
-				else if (code == 'plugin univers')		message = Xl('error plugin univers');
-				else if (code == 'grant') 				message = Xl('error grant start') + Xl('error grant '+ data.access);
-				else 									message = Xl('unknow response', code, Response.content);
+				else if (code == 'php version')			message = Xl('error_php_version', data.version);
+				else if (code == 'server active') 		message = Xl('error_server_active', data.reason);
+				else if (code == 'username') 			message = Xl('error_username');
+				else if (code == 'password') 			message = Xl('error_password');
+				else if (code == 'user active') 		message = Xl('error_user_active');
+				else if (code == 'home full')			message = Xl('error_home_full');
+				else if (code == 'plugin connections')	message = Xl('error_plugin_connections');
+				else if (code == 'plugin config')		message = Xl('error_plugin_config');
+				else if (code == 'plugin univers')		message = Xl('error_plugin_univers');
+				else if (code == 'grant') 				message = Xl('error_grant_start') + Xl('error grant '+ data.access);
+				else 									message = Xl('unknow_response', code, Response.content);
 			} else {
 				if (code == 'home updated' && data.page=='overview') 			message = Xl('success_home_updated', Xl('page_overview',data.page));
 				else if (code == 'system')				message = Xl('success_system', data.galaxy, data.system);
@@ -2225,8 +2263,8 @@ function handleResponse(Response) {
 				else if (code == 'rc')					message = Xl('success_rc');
 				else if (code == 'rc_cdr')					message = Xl('success_rc_cdr');				
 				else if (code == 'messages')			message = Xl('success_messages');
-				/*else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);			
-				*/else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
+				else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking_'+data.type1), Xl('ranking_'+data.type2), data.offset, data.offset+99);			
+				else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
 				else if (code == 'spy') 				message = Xl('success_spy');
 				else 									message = Xl('unknow_response', code, Response.content);
 			}
@@ -2870,8 +2908,8 @@ function isMoon() {
 		return false;
 	}
 }
-// Permet de stocker les planètes du joueur
-function savePlanets(){
+// Permet de stocker les planètes du joueur connecté
+function save_my_planets_coords(){
 	var mesPlanetes = XPath.getOrderedSnapshotNodes(document,XtenseXpaths.planetData['coords'])
 	var pls = "";
 	if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
