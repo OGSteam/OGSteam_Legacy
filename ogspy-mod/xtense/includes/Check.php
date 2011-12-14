@@ -30,7 +30,7 @@ abstract class Check {
 	}
 	
 	static function player_status($string) {
-		return preg_match('!^[snfdvbiI]*$!', $string);//fdvbiI en français, snvbiI in english
+		return preg_match('!^[snfdvbiIoph]*$!', $string);//fdvbiIoph en français, snvbiIoph in english
 	}
 	
 	static function ally_tag($string) {
