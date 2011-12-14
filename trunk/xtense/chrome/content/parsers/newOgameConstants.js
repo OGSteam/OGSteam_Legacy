@@ -54,7 +54,7 @@ XnewOgame.Xpaths = {
 		to : '//tr[2]/td',
 		subject : '//tr[3]/td',
 		date : '//tr[4]/td',
-		reply : "//*[contains(@class,'toolbar')]/li[contains(@class,'reply')]",
+		reply : '//li[contains(@class,"reply")]',
 		contents : {
 			'spy' : '//div[@class="note"]',
 			'msg': '//div[@class="note"]',
