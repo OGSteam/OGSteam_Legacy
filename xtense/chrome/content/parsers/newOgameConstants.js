@@ -4,6 +4,21 @@
  */
 
 XnewOgame.Xpaths = {
+	metas : {
+		ogame_version: "//meta[@name=\'ogame-version\']/@content",
+		timestamp: "//meta[@name=\'ogame-timestamp\']/@content",
+		universe: "//meta[@name=\'ogame-universe\']/@content",
+		language: "//meta[@name=\'ogame-language\']/@content",
+		player_id: "//meta[@name=\'ogame-player-id\']/@content",
+		player_name: "//meta[@name=\'ogame-player-name\']/@content",
+		ally_id: "//meta[@name=\'ogame-alliance-id\']/@content",
+		ally_name: "//meta[@name=\'ogame-alliance-name\']/@content",
+		ally_tag: "//meta[@name=\'ogame-alliance-tag\']/@content",
+		planet_id: "//meta[@name=\'ogame-planet-id\']/@content",
+		planet_name: "//meta[@name=\'ogame-planet-name\']/@content",
+		planet_coords: "//meta[@name=\'ogame-planet-coordinates\']/@content",
+		planet_type: "//meta[@name=\'ogame-planet-type\']/@content"
+	},
 	ally_members_list : {
 		rows : '//table[@class="members zebra bborder"]/tbody/tr',
 		player : 'td[1]',
@@ -71,12 +86,13 @@ XnewOgame.Xpaths = {
 	},
 	
 	ranking : { 
-		time : '//div[@id="statisticsContent"]//div[@class="header"]/h3/text()',
+		date : "//div[@id=\'OGameClock\']/text()",
+		time : "//div[@id=\'OGameClock\']/span/text()",
 		who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
 		type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
 		
-		rows : 'id("ranks")/tbody/tr',
-		position : 'td[@class="position"]/text()',
+		rows : "id(\'ranks\')/tbody/tr",
+		position : "td[@class=\'position\']/a/text()",
 		player : {
 			playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
 			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
@@ -87,7 +103,7 @@ XnewOgame.Xpaths = {
 		
 		ally : {
 			position_ally : "td[contains(@class,\'position\')]/a/text()",
-			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
+			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
 			points :  "td[6]/text()",
 			members : "td[5]/text()",
 			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
