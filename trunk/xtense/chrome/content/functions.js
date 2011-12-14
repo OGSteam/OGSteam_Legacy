@@ -506,3 +506,45 @@ var Xpath = {//node est facultatif
 		return doc.evaluate(xpath,node,null,XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 	}
 }
+
+var XtenseMetas = {
+	getOgameVersion : function(metas) {
+		return Xpath.getStringValue(document,metas.ogame_version);	
+	},
+	getTimestamp : function(metas) {
+		return Xpath.getStringValue(document,metas.timestamp);	
+	},
+	getUniverse : function(metas) {
+		return Xpath.getStringValue(document,metas.universe);	
+	},
+	getLanguage : function(metas) {
+		return Xpath.getStringValue(document,metas.language);	
+	},
+	getPlayerId : function(metas) {
+		return Xpath.getStringValue(document,metas.player_id);	
+	},
+	getPlayerName : function(metas) {
+		return Xpath.getStringValue(document,metas.player_name);	
+	},
+	getAllyId : function(metas) {
+		return Xpath.getStringValue(document,metas.ally_id);	
+	},
+	getAllyName : function(metas) {
+		return Xpath.getStringValue(document,metas.ally_name);	
+	},
+	getAllyTag : function(metas) {
+		return Xpath.getStringValue(document,metas.ally_tag);	
+	},
+	getPlanetId : function(metas) {
+		return Xpath.getStringValue(document,metas.planet_id);	
+	},
+	getPlanetName : function(metas) {
+		return Xpath.getStringValue(document,metas.planet_name);	
+	},
+	getPlanetCoords : function(metas) {
+		return Xpath.getStringValue(document,metas.planet_coords);	
+	},
+	getPlanetType : function(metas) {
+		return Xpath.getStringValue(document,metas.planet_type);	
+	}
+}

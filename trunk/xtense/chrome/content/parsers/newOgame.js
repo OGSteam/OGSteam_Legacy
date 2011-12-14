@@ -750,11 +750,12 @@ var XnewOgame = {
 		try {
 			var doc = event.target.ownerDocument;
 			var win = doc.getElementById('stat_list_content').win;
-
+			
 			var paths = XnewOgame.Xpaths.ranking;
 			
-			var timeText = Xpath.getStringValue(doc,paths.time).trim();
-			timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
+			var timeText = Xpath.getStringValue(doc,paths.date).trim();
+			timeText += ";"+Xpath.getStringValue(doc,paths.time).trim();
+			timeText = timeText.match(/(\d+).(\d+).(\d+);(\d+):\d+:\d+/);
 
 			var time = new Date();
 			time.setHours((Math.floor(time.getHours())/8)*8);
@@ -766,8 +767,8 @@ var XnewOgame = {
 				time.setDate(timeText[1]);
 				time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
 			}
+			
 			time =  Math.floor(time.getTime()/1000);
-
 			var type = new Array();
 			type[0] = Xpath.getStringValue(doc,paths.who);
 			type[1] = Xpath.getStringValue(doc,paths.type);
@@ -782,7 +783,7 @@ var XnewOgame = {
 			var Request = XnewOgame.newRequest();
 			if(rows.snapshotLength > 0){
 				var rowsData = [];
-				for (var i = 1; i < rows.snapshotLength; i++) {
+				for (var i = 0; i < rows.snapshotLength; i++) {
 					var row = rows.snapshotItem(i);
 					var n = null;
 					if (type[0] == 'player') {
@@ -810,10 +811,11 @@ var XnewOgame = {
 						if (ally_id != '' ) {
 							ally_id = ally_id.match(/allyid\=(.*)/);
 							ally_id = ally_id[1];
+						} else if (ally){
+							//ally_id = '-1';
+							ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
 						}
-						else if (ally)
-							ally_id = '-1';
-						
+//Xconsole('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
 						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
 						rowsData[n]=r;
 						length ++;
@@ -828,10 +830,11 @@ var XnewOgame = {
 						if (ally_id != '' ) {
 							ally_id = ally_id.match(/allyid\=(.*)/);
 							ally_id = ally_id[1];
+						} else if (ally){
+							//ally_id = '-1';
+							ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
 						}
-						else if (ally)
-							ally_id = '-1';
-						
+//Xconsole('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
 						var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
 						rowsData[n]=r;
 						length ++;
