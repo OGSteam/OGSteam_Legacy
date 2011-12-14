@@ -1189,7 +1189,7 @@ var XnewOgame = {
 		
 		// Messages de joueurs
 		if(Xprefs.getBool('msg-msg')) {
-			if (Xpath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
+			if (Xpath.getOrderedSnapshotNodes(this.doc, paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
 				var m = from.match(new RegExp(this.regexps.userNameAndCoords));
 				if(m) {
 					var userName = m[1];
