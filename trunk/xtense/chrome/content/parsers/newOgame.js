@@ -741,7 +741,7 @@ var XnewOgame = {
 	},
 
 	parseRanking : function() {
-		var target = this.doc.getElementById('statisticsContent');
+		var target = this.doc.getElementById('stat_list_content');
 		target.win = this.win;
 		target.addEventListener("DOMNodeInserted", this.parseRanking_Inserted, true);		
 	},
@@ -749,8 +749,8 @@ var XnewOgame = {
 	parseRanking_Inserted : function (event) {		
 		try {
 			var doc = event.target.ownerDocument;
-			var win = doc.getElementById('statisticsContent').win;
-			
+			var win = doc.getElementById('stat_list_content').win;
+
 			var paths = XnewOgame.Xpaths.ranking;
 			
 			var timeText = Xpath.getStringValue(doc,paths.time).trim();
@@ -766,8 +766,8 @@ var XnewOgame = {
 				time.setDate(timeText[1]);
 				time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
 			}
-			
 			time =  Math.floor(time.getTime()/1000);
+
 			var type = new Array();
 			type[0] = Xpath.getStringValue(doc,paths.who);
 			type[1] = Xpath.getStringValue(doc,paths.type);
@@ -1186,7 +1186,7 @@ var XnewOgame = {
 		
 		// Messages de joueurs
 		if(Xprefs.getBool('msg-msg')) {
-			if (XPath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
+			if (Xpath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
 				var m = from.match(new RegExp(this.regexps.userNameAndCoords));
 				if(m) {
 					var userName = m[1];
