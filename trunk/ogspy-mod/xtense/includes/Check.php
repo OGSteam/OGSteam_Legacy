@@ -33,6 +33,10 @@ abstract class Check {
 		return preg_match('!^[snfdvbiIoph]*$!', $string);//fdvbiIoph en français, snvbiIoph in english
 	}
 	
+	static function player_status_forbidden($string) { //Le status "point d'honneur (ph)" est subjectif
+		return preg_match('!^[ph]*$!', $string);
+	}
+	
 	static function ally_tag($string) {
 		//return preg_match('!^[A-Z0-9\\ ._-]{0,8}$!i', $string);
 		return preg_match('!.{0,8}!i', $string);
