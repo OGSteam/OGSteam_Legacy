@@ -491,7 +491,7 @@ switch ($pub_type){
 						continue;
 
 					$data[$i] = $line;
-				} 
+				}
 				else {
 					$delete[] = $i;
 					$data[$i] = array(
@@ -507,12 +507,13 @@ switch ($pub_type){
 			}
 		
 			foreach ($data as $row => $v) {
+				$statusTemp = (Check::player_status_forbidden($v['status']) ? "" : quote($v['status'])); //On élimine les status qui sont subjectifs
 				if(!isset($update[$row]))
 					$db->sql_query('INSERT INTO '.TABLE_UNIVERSE.' (galaxy, system, row, name, player, ally, status, last_update, last_update_user_id, moon)
-						VALUES ('.$galaxy.', '.$system.', '.$row.', "'.quote($v['planet_name']).'", "'.quote($v['player_name']).'", "'.quote($v['ally_tag']).'", "'.quote($v['status']).'", '.$time.', '.$user_data['user_id'].', "'.quote($v['moon']).'")');
+						VALUES ('.$galaxy.', '.$system.', '.$row.', "'.quote($v['planet_name']).'", "'.quote($v['player_name']).'", "'.quote($v['ally_tag']).'", "'.$statusTemp.'", '.$time.', '.$user_data['user_id'].', "'.quote($v['moon']).'")');
 				else {
 					$db->sql_query(
-						'UPDATE '.TABLE_UNIVERSE.' SET name = "'.quote($v['planet_name']).'", player = "'.quote($v['player_name']).'", ally = "'.quote($v['ally_tag']).'", status = "'.quote($v['status']).'", moon = "'.$v['moon'].'", last_update = '.$time.', last_update_user_id = '.$user_data['user_id']
+						'UPDATE '.TABLE_UNIVERSE.' SET name = "'.quote($v['planet_name']).'", player = "'.quote($v['player_name']).'", ally = "'.quote($v['ally_tag']).'", status = "'.$statusTemp.'", moon = "'.$v['moon'].'", last_update = '.$time.', last_update_user_id = '.$user_data['user_id']
 						.' WHERE galaxy = '.$galaxy.' AND system = '.$system.' AND row = '.$row
 					);
 				}
