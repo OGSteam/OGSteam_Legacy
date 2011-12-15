@@ -7,7 +7,7 @@
 
 define('IN_SPYOGAME', true);
 define('IN_XTENSE', true);
-error_reporting(E_ALL);
+
 date_default_timezone_set(date_default_timezone_get());
 
 if (preg_match('#mod#', getcwd())) chdir('../../');
