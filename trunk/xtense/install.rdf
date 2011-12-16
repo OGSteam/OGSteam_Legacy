@@ -6,6 +6,7 @@
     <em:name>Xtense for Firefox</em:name>
     <em:version>2.3.14</em:version>
     <em:creator>OGSteam</em:creator>
+    <em:iconURL>chrome://xtense2/skin/icon.png</em:iconURL>    
   	<em:developer>Jedinight</em:developer>
     <em:contributor>Machine</em:contributor>
     <em:contributor>Shad</em:contributor>
