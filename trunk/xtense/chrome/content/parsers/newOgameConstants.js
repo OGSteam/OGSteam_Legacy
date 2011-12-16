@@ -90,6 +90,7 @@ XnewOgame.Xpaths = {
 		time : "//div[@id=\'OGameClock\']/span/text()",
 		who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
 		type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
+		subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
 		
 		rows : "id(\'ranks\')/tbody/tr",
 		position : "td[@class=\'position\']/a/text()",
