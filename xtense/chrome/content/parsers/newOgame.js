@@ -1227,7 +1227,7 @@ var XnewOgame = {
 			var m = from.match(new RegExp(XnewOgame.regexps.ally));
 			if(m){
 				var contentNode = Xpath.getSingleNode(this.doc,paths.contents['ally_msg']);
-				var message = contentNode.innerHTML;
+				var message = contentNode.innerHTML.replace(new RegExp(this.regexps.ally_msg_player_name, "g"), "$1");
 				data.type = 'ally_msg';
 				data.from = m[1];
 				data.tag = m[1];
