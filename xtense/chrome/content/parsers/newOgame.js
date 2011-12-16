@@ -773,9 +773,10 @@ var XnewOgame = {
 			var type = new Array();
 			type[0] = Xpath.getStringValue(doc,paths.who);
 			type[1] = Xpath.getStringValue(doc,paths.type);
-			type[0] = type[0] != '' ? type[0] : 'player';
+			type[2] = Xpath.getStringValue(doc,paths.subnav_fleet);
+			type[0] = (type[0] != '') ? type[0] : 'player';
 			type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
-			type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];
+			type[1] = (type[1] != '') ? type[1] : 'points';
 	
 			var length = 0;
 			var rows = Xpath.getOrderedSnapshotNodes(doc,paths.rows,null);
@@ -857,7 +858,13 @@ var XnewOgame = {
 						);
 						
 						Request.set('lang',XnewOgame.lang);
-						Request.send(XnewOgame.servers);
+						/*	Le if est temporaire : sert de filtre pour ne pas envoyer les sous-classements militaires (construit, détruit, perdu et points honorifiques)
+						 *	On envoie seulement le classement militaire "de base" (quand aucune sous-categorie n'est selectionnée)
+						 *	Devra être supprimé quand les tables pour stocker les nouveaux classements auront été crées,
+						 *	et que le type[2] sera pris en compte pour l'insertion des classements
+						*/
+						if (type[2] == '')
+							Request.send(XnewOgame.servers);
 					}
 					this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
 				}
