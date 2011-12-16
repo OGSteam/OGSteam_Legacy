@@ -186,6 +186,7 @@ XnewOgame.regexps = {
 	probability : ': (\\d+) %',
 	coords : '\\[(\\d+:\\d+:\\d+)\\]',
 	ally : 'Alliance \\[(.*)\\]',
+	ally_msg_player_name : '<a href.*>(.*)</a>',
 	
 	parseTableStruct : '<a[^>]*id="details(\\d+)"[^>]*>[\\D\\d]*?([\\d.]+[KMG]?)<\/span>[^<]*<\/span>[^<]*<\/a>'
 }
