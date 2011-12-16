@@ -40,7 +40,7 @@ XnewOgame.Xpaths = {
 		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
 		allytag : 'td[@class="allytag"]/span/text()',
 		status : 'descendant::span[@class="status"]',
-		activity : 'descendant::div[@id="TTPlanet"]/descendant::span[@class="spacing"]/text()',
+		activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 		ally_id : 'descendant::a[@target="_ally"]/@href'
 	},

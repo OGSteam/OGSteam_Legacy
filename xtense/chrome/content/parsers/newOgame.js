@@ -688,11 +688,12 @@ var XnewOgame = {
 					else status = "";
 
 					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
-					activity = activity.match(/: (.*)/);
-					if(activity)
+					//activity = activity.match(/: (.*)/);
+					/*if(activity)
 						activity = activity[1];
-					else activity = '';
-
+					else activity = '';*/
+					if(!activity) activity='';
+					
 					var allytag = Xpath.getStringValue(doc,paths.allytag,row).trim();
 
 					var debris = [];
