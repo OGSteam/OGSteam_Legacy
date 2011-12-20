@@ -647,12 +647,16 @@ var XnewOgame = {
 					var name_l = Xpath.getStringValue(doc,paths.planetname_l,row).trim().replace(/\($/,'');
 					var name_tooltip = Xpath.getStringValue(doc,paths.planetname_tooltip,row).trim().replace(/\($/,'');
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
+					var player2 = Xpath.getStringValue(doc,paths.playername2,row).trim();
 					var player_tooltip = Xpath.getStringValue(doc,paths.playername_tooltip,row).trim();
 					
 					if (player_tooltip == '') {
 						if (player == '') {
-							Xconsole('row '+i+' has no player name');
-							continue;
+							if (player2 == '') {
+								Xconsole('row '+i+' has no player name');
+								continue;
+							} else
+								player = player2;
 						}
 					} else
 						player = player_tooltip;
