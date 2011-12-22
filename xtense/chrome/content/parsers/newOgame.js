@@ -828,8 +828,7 @@ var XnewOgame = {
 					} else if(type[0] == 'ally') {
 						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
 						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
-						moy = members[1];
-						members = members[0];
+						var moy = Xpath.getStringValue(doc,paths.ally.points_moy,row).replace("|.", "").trimInt();
 						var points = Xpath.getStringValue(doc,paths.ally.points,row).trimInt();
 						var ally_id = Xpath.getStringValue(doc,paths.ally.ally_id,row).trim();
 						
