@@ -106,8 +106,9 @@ XnewOgame.Xpaths = {
 		ally : {
 			position_ally : "td[contains(@class,\'position\')]/a/text()",
 			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
-			points :  "td[6]/text()",
 			members : "td[5]/text()",
+			points :  "td[6]/text()",
+			points_moy :  "td[6]/@title",
 			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 		}
 	},
