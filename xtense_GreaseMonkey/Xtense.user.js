@@ -2239,9 +2239,9 @@ function handleResponse(Response) {
 			if (data.status == 0) {
 				type = XLOG_ERROR;
 				if (code == 'wrong version') {
-					if (data.target == 'plugin') 			message = Xl('error_wrong_version_plugin', Xtense.PLUGIN_REQUIRED, data.version); 
+					if (data.target == 'plugin') 			message = Xl('error_wrong_version_plugin', PLUGIN_REQUIRED, data.version); 
 					else if (data.target == 'xtense.php') 	message = Xl('error_wrong_version_xtense.php');
-					else 									message = Xl('error_wrong_version_toolbar', data.version, Xtense.VERSION);
+					else 									message = Xl('error_wrong_version_toolbar', data.version, VERSION);
 				}
 				else if (code == 'php version')			message = Xl('error_php_version', data.version);
 				else if (code == 'server active') 		message = Xl('error_server_active', data.reason);
