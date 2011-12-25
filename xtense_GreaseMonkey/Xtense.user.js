@@ -1489,6 +1489,7 @@ function displayOptions(){
 	if(GM_getValue('handle.msg.spy') && GM_getValue('handle.msg.spy','false')=='true'){handle_msg_spy += 'checked';}
 	if(GM_getValue('handle.msg.ennemy.spy') && GM_getValue('handle.msg.ennemy.spy','false')=='true'){handle_msg_ennemy_spy += 'checked';}
 	if(GM_getValue('handle.msg.rc') && GM_getValue('handle.msg.rc','false')=='true'){handle_msg_rc += 'checked';}
+	if(GM_getValue('handle.msg.rc.cdr') && GM_getValue('handle.msg.rc.cdr','false')=='true'){handle.msg.rc.cdr += 'checked';}
 	if(GM_getValue('handle.msg.expeditions') && GM_getValue('handle.msg.expeditions','false')=='true'){handle_msg_expeditions += 'checked';}
 	if(GM_getValue('handle.msg.commerce') && GM_getValue('handle.msg.commerce','false')=='true'){handle_msg_commerce += 'checked';}
 	
