@@ -471,6 +471,7 @@ log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',nombreLignes:'+rows.snaps
 				var n = null;
 				if (type[0] == 'player') {
 					n = XPath.getStringValue(document,paths.position,row).trimInt();
+					log('Rang: '+n);
 				} else if(type[0] == 'ally') {
 					n = XPath.getStringValue(document,paths.ally.position_ally,row).trimInt();
 				}
@@ -1960,7 +1961,7 @@ ranking : {
 	type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
 	
 	rows : "id(\'ranks\')/tbody/tr",
-	position : "td[@class=\'position\']/text()",
+	position : "td[@class=\'position\']/a[contains(@name,'position')]/text()",
 	player : {
 		playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
 		allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
