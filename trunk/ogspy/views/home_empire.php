@@ -243,7 +243,7 @@ if (((find_nb_planete_user() > $astro )||(find_nb_moon_user() >  $astro))&&($use
 echo '<tr>';
 echo '	<td class="c" colspan="';
 print ($nb_planete <10)?'10':($nb_planete +1) ; 
-echo '">Une incohérence a était trouvé dans votre espace personnel<br />';
+echo '">Une incohérence a été trouvée dans votre espace personnel<br />';
 print (find_nb_planete_user() > $astro )?'En rapport avec le nombre de vos planetes<br />':'' ; 
 print (find_nb_moon_user() > $astro )?'En rapport avec le nombre de vos lunes<br />':'' ; 
 echo ' </td>';
