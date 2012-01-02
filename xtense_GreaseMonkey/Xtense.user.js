@@ -8,11 +8,11 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.1";
+var VERSION = "2.3.14.2";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
-var cookie = nomScript+"-"+numUnivers+"-";
+
 
 var Xlang = {};
 var XtenseLocales = { };
@@ -22,20 +22,20 @@ var start_time = (new Date()).getTime();
 var freqMaj = 23 * 3600;
 
 //Variables globales pour les status - Type d'erreur
-const XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5, XLOG_SEND = 6;
+var XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5, XLOG_SEND = 6;
 
 
 // Navigateurs
-var isFirefox = (window.navigator.userAgent.indexOf('Firefox') > -1 ) ? true : false;
-var isChrome = (window.navigator.userAgent.indexOf('Chrome') > -1 ) ? true : false;
+var isFirefox = (window.navigator.userAgent.indexOf('Firefox') > -1) ? true : false;
+var isChrome = (window.navigator.userAgent.indexOf('Chrome') > -1) ? true : false;
 var isTamper = false;
 
 // Variables globales données ogame
-var url=location.href;// Adresse en cours sur la barre d'outils
+var url = location.href;// Adresse en cours sur la barre d'outils
 var urlUnivers = url.match(new RegExp('(.*)\/game'))[1];
 var numUnivers = urlUnivers.match(new RegExp('uni(.*).ogame'))[1];
 var langUnivers = urlUnivers.match(new RegExp('ogame.(.*)'))[1];
-
+var cookie = nomScript + "-" + numUnivers + "-";
 
 /*********************** Compatibilité Chrome ***************************/
 if(isChrome){
@@ -59,7 +59,7 @@ if(isChrome){
     {
         localStorage.setItem(key, value);
     }    
-    function GM_deleteValue(value) 
+    function GM_deleteValue(value)
     {
         localStorage.removeItem(value);
     }    
@@ -69,10 +69,11 @@ if(isChrome){
     }
 }else if(isFirefox){
     function GM_exist(key){
-        var retValue = GM_getValue(key,'NaN') ;
+        //inutile car implicite dans la fonction GM
+        /*var retValue = GM_getValue(key,'NaN') ;
         if (retValue == 'NaN' ){
         	return false;
-        }
+        }*/
         return true;
     }   
 }
@@ -115,6 +116,7 @@ function err(type, message)
 } 	
 function log(message){
 	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
+    console.log(nomScript+" says : "+message); 
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -281,8 +283,8 @@ function handle_current_page(){
 
 /* Fonction appelée lors d'évenement sur le chargement du contenu galaxie */
 function parse_galaxy_system_inserted(event){
-	//log("In parse_galaxy_system_inserted()");
-	var doc = event.target.ownerDocument;
+	log("In parse_galaxy_system_inserted()");
+	//var doc = event.target.ownerDocument;
 	var paths = XtenseXpaths.galaxy; //Référence Xpaths
 	var galaxy = XPath.getSingleNode(document,"//input[@id='galaxy_input']").value; //Récupération Galaxie
 	var system = XPath.getSingleNode(document,"//input[@id='system_input']").value; //Récupération SS
@@ -355,7 +357,7 @@ function parse_galaxy_system_inserted(event){
 					player_id = player_id.match(/\&to\=(.*)\&ajax/);
 					player_id = player_id[1];
 				//} else if(doc.cookie.match(/login_(.*)=U_/)){
-				} else if(playerName){
+				} else if(player){
 					//player_id = doc.cookie.match(/login_(.*)=U_/)[1];
 					player_id = XtenseMetas.getPlayerId();  
 				}
@@ -1303,10 +1305,10 @@ function manual_send(){
 /************************ Utilities des Parsings ************************/
 /* Fonction ajoutant lancant le parsing de la vue galaxie quand celle-ci est chargée */
 function get_galaxycontent(){	
+log("In get_galaxycontent()");
 	if (isChrome) //Pour Chrome :-)
-	{	
-		/* Page Galaxie */
-		log("In get_galaxycontent()");
+	{	/* Page Galaxie */
+		
 		var target = document.getElementById('galaxyContent');
 		//target.removeEventListener("DOMNodeInserted");
 		//target.removeEventListener("DOMContentLoaded");
@@ -1358,12 +1360,12 @@ function get_ally_content(){
 				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
 			};
 		}
-		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
+		//la division dans lequel le résultat de la requête ajax est placé a l'id inhalt
 		
-		unsafeWindow.$("#galaxyContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		unsafeWindow.$("#inhalt").ajaxSuccess(safeWrap(function(e,xhr,settings)
 		{
-			//l'url de la requête ajax contient page=galaxyContent
-			if (settings.url.indexOf("page=galaxyContent") == -1) return;
+			//l'url de la requête ajax contient page=inhalt
+			if (settings.url.indexOf("page=inhalt") == -1) return;
 
 			parse_ally_inserted();
 			
@@ -1479,30 +1481,31 @@ function displayOptions(){
 	var opt_debug_mode = ' ';
 	
 	// Récupération des préférences  : Serveur
-	if(!GM_exist('server.check') || GM_getValue('server.check','false')=='true'){server_check += 'checked';}
+	if(GM_getValue('server.check','false')){server_check += 'checked';}
 	
 	// Récupération des préférences  : Pages
-	if(GM_getValue('handle.overview') && GM_getValue('handle.overview','false')=='true'){handle_overview += 'checked';}	
-	if(GM_getValue('handle.buildings') && GM_getValue('handle.buildings','false')=='true'){handle_buildings += 'checked';}
-	if(GM_getValue('handle.station') && GM_getValue('handle.station','false')=='true'){handle_station += 'checked';}
-	if(GM_getValue('handle.researchs') && GM_getValue('handle.researchs','false')=='true'){handle_researchs += 'checked';}
-	if(GM_getValue('handle.shipyard') && GM_getValue('handle.shipyard','false')=='true'){handle_shipyard += 'checked';}
-	if(GM_getValue('handle.system') && GM_getValue('handle.system','false')=='true'){handle_system += 'checked';}
-	if(GM_getValue('handle.defense') && GM_getValue('handle.defense','false')=='true'){handle_defense += 'checked';}
-	if(GM_getValue('handle.alliance') && GM_getValue('handle.alliance','false')=='true'){handle_alliance += 'checked';}
-	if(GM_getValue('handle.stats') && GM_getValue('handle.stats','false')=='true'){handle_stats += 'checked';}
+	if(GM_getValue('handle.overview','false')){handle_overview += 'checked';}
+    
+	if(GM_getValue('handle.buildings','false')){handle_buildings += 'checked';}
+	if(GM_getValue('handle.station','false')){handle_station += 'checked';}
+	if(GM_getValue('handle.researchs','false')){handle_researchs += 'checked';}
+	if(GM_getValue('handle.shipyard','false')){handle_shipyard += 'checked';}
+	if(GM_getValue('handle.system','false')){handle_system += 'checked';}
+	if(GM_getValue('handle.defense','false')){handle_defense += 'checked';}
+	if(GM_getValue('handle.alliance','false')){handle_alliance += 'checked';}
+	if(GM_getValue('handle.stats','false')){handle_stats += 'checked';}
 	
-	if(GM_getValue('handle.msg.msg') && GM_getValue('handle.msg.msg','false')=='true'){handle_msg_msg += 'checked';}
-	if(GM_getValue('handle.msg.ally') && GM_getValue('handle.msg.ally','false')=='true'){handle_msg_ally += 'checked';}
-	if(GM_getValue('handle.msg.spy') && GM_getValue('handle.msg.spy','false')=='true'){handle_msg_spy += 'checked';}
-	if(GM_getValue('handle.msg.ennemy.spy') && GM_getValue('handle.msg.ennemy.spy','false')=='true'){handle_msg_ennemy_spy += 'checked';}
-	if(GM_getValue('handle.msg.rc') && GM_getValue('handle.msg.rc','false')=='true'){handle_msg_rc += 'checked';}
-	if(GM_getValue('handle.msg.rc.cdr') && GM_getValue('handle.msg.rc.cdr','false')=='true'){handle_msg_rc_cdr += 'checked';}
-	if(GM_getValue('handle.msg.expeditions') && GM_getValue('handle.msg.expeditions','false')=='true'){handle_msg_expeditions += 'checked';}
-	if(GM_getValue('handle.msg.commerce') && GM_getValue('handle.msg.commerce','false')=='true'){handle_msg_commerce += 'checked';}
+	if(GM_getValue('handle.msg.msg','false')){handle_msg_msg += 'checked';}
+	if(GM_getValue('handle.msg.ally','false')){handle_msg_ally += 'checked';}
+	if(GM_getValue('handle.msg.spy','false')){handle_msg_spy += 'checked';}
+	if(GM_getValue('handle.msg.ennemy.spy','false')) {handle_msg_ennemy_spy += 'checked';}
+	if(GM_getValue('handle.msg.rc','false')){handle_msg_rc += 'checked';}
+	if(GM_getValue('handle.msg.rc.cdr','false')){handle_msg_rc_cdr += 'checked';}
+	if(GM_getValue('handle.msg.expeditions','false')){handle_msg_expeditions += 'checked';}
+	if(GM_getValue('handle.msg.commerce','false')){handle_msg_commerce += 'checked';}
 	
 	// Récupération des préférences  : Options
-	if(GM_getValue('debug.mode') && GM_getValue('debug.mode','false')=='true'){opt_debug_mode += 'checked';}
+	if(GM_getValue('debug.mode','false')){opt_debug_mode += ' checked';}
 		
 					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
@@ -1655,7 +1658,7 @@ function displayOptions(){
 	options+= '</tbody></table>';
 	options+= '</div>';
 	options+= '<br/><br/></div>'; //fin Tableau
-	
+    
 	var einhalt=document.getElementById('inhalt');
 	var escriptopt=document.createElement('div');
 	escriptopt.id='xtenseScriptOpt';
@@ -1761,7 +1764,7 @@ function displayXtense(){
         
         var pXtense = document.createElement("p");
         var aXtense = document.createElement("a");
-        aXtense.setAttribute("href", "http://board.ogsteam.fr");
+        aXtense.setAttribute("href", "http://www.ogsteam.fr");
         aXtense.setAttribute("target", "blank_");
         
         var imgXtense = document.createElement("img");
@@ -2464,144 +2467,146 @@ function initLocales(){
         'call_messages' : '-- Messages renvoyés par les appels'});
 	} else if(isFirefox){
 		Xlang = {
-        error_start : 'ERREUR: ',
-        http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
-        http_status_404: 'statut 404, Plugin Xtense introuvable, vÃ©rifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
-        http_status_500: 'statut 500: Erreur interne au serveur.',
-        http_timeout: 'Le serveur n\'a pas rÃ©pondu Ã  temps. Verifiez que votre hÃ©bergeur ne rencontre pas des problÃªmes de reseau.',
-        http_status_unknown : 'statut http inconnu: ',
-        //
-        incorrect_response : 'RÃ©ponse incorrecte',
-        empty_response : 'RÃ©ponse du plugin vide',
-        invalid_response : 'Impossible de rÃ©cupÃ©rer les donnÃ©es envoyÃ©es par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
-        //
-        php_version : 'La version PHP de votre hÃ©bergement n\'est pas assez rÃ©cente. Xtense requiert au minimum la version 5.1 de PHP.',
-        error_occurs : 'Une erreur est survenue',
-        wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir Ãªtre utilisÃ©e avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre Ã  jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
-        wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la mÃªme version que celle du plugin installÃ©',
-        wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre Ã  jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
-        server_active: 'le serveur OGSpy est pour le moment dÃ©sactivÃ©',
-        plugin_connections: 'Connexions au plugin Xtense dÃ©sactivÃ©es',
-        plugin_config: 'Plugin Xtense non configurÃ© par votre administrateur, impossible de l\'utiliser',
-        plugin_univers: 'NumÃ©ro d\'univers d\'Ogame invalide sur cet OGSpy',
-        username: 'Le compte "$1" est inconnu. Attention Ã  la casse (diffÃ©rence Majuscules / minuscules)', // Username
-        password: 'Votre mot de passe n\'est pas bon. Attention Ã  la casse (diffÃ©rence Majuscules / minuscules)',
-        user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
-        //
-        informations : 'Informations',
-        server_name : 'Nom du serveur OGSpy', // Server name
-        version : 'Version', // version
-        grant_all : 'Vous possÃ©dez tous les droits pour utiliser Xtense',
-        grant_nothing : 'Vous ne possÃ©dez aucune autorisation quant Ã  l\'import de donnÃ©es sur votre OGSpy',
-        //
-        grant_can : 'pouvez',
-        grant_cannot : 'ne pouvez pas',
-        grant_system : 'Vous $1 ajouter des systÃªmes solaires', // can / cannot
-        grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
-        grant_empire : 'Vous $1 mettre Ã  jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
-        grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
-        //
-        checking_end : 'VERIFICATION TERMINEE',
-        checking_errors : 'Une ou plusieurs erreurs sont survenues, vous pouvez soit retourner Ã  la fenetre des options ou alors fermer cette fenetre sans prendre en compte les erreurs.',
-        checking_success : 'Aucune erreur Ã  signaler, vous pouvez fermer les options',
-        //
-        connecting : 'Connexion en cours : ', // Server url
-        checking_server : 'Verification du serveur OGSpy nÂ°$1', // Server number
-        toolbar_activated : 'Barre d\'outils activÃ©e',
-        toolbar_deactivated : 'Barre d\'outils dÃ©sactivÃ©e',
-        //
-        ogspy_menu_tooltip: 'Connexion automatique au serveur OGSpy',
-        //
-        fatal_error : 'Une erreur critique est survenue et a arrÃªtÃ© l\'exÃ©cution de Xtense',
-        parsing_error : 'Une erreur critique est survenue lors de la rÃ©cupÃ©ration des donnÃ©es de la page',
-        //
-        no_ogspy_server: 'Aucun serveur',
-        no_server : 'Aucun serveur disponible pour cet univers',
-        unknow_page: 'Page inconnue',
-        activate : 'Activer',
-        deactivate : 'Desactiver',
-        wait_send: 'En attente de l\'envoi manuel des donnÃ©es',
-        unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
-        //
-        overview_detected: 'Vue gÃ©nÃ©rale dÃ©tectÃ©e',
-        buildings_detected: 'Batiments dÃ©tectÃ©s',
-        installations_detected: 'Installations dÃ©tectÃ©s',
-        researchs_detected: 'Recherches dÃ©tectÃ©s',
-        fleet_detected: 'Flotte dÃ©tectÃ©e',
-        defense_detected: 'DÃ©fenses dÃ©tectÃ©s',
-        messages_detected: 'Page de messages dÃ©tectÃ©e',
-        ranking_detected: 'Statistiques $2 des $1 dÃ©tectÃ©es', // Primary type (ally/player), Secondary type (points, research, fleet)
-        ally_list_detected: 'Liste des joueurs de l\'alliance dÃ©tectÃ©e',
-        system_detected: 'SystÃ¨me solaire dÃ©tectÃ©: ', // Galaxy, System
-        re_detected: 'Rapport d\'espionnage dÃ©tectÃ©',
-        rc_detected: 'Rapport de combat dÃ©tectÃ©',
-        res_detected: 'Message de commerce dÃ©tectÃ©',
-        //
-        no_researchs : 'Aucune recherche Ã  envoyer',
-        no_defenses : 'Aucune dÃ©fense Ã  envoyer',
-        no_buildings : 'Aucun bÃ¢timent Ã  envoyer',
-        no_fleet : 'Pas de flotte Ã  envoyer',
-        //
-        ranking_player: 'joueurs',
-        ranking_ally: 'alliances',
-        ranking_points: 'points',
-        ranking_fleet: 'flotte',
-        ranking_research: 'recherches',
-        ranking_defense: 'dÃ©fense',
-        ranking_buildings: 'bÃ¢timents',
-        //
-        invalid_system : 'SystÃªme solaire non pris en compte',
-        invalid_ranking : 'Page des statistiques invalide',
-        invalid_rc : 'Rapport de combat invalide (Contact perdu)',
-        no_ranking : 'Aucun classement Ã  envoyer',
-        no_messages : 'Aucun message Ã  envoyer',
-        impossible_ranking : 'Impossible de rÃ©cupÃ©rer le classement alliance suivant les points par membre',
-        // Responses
-        response_start: 'Serveur $1 : ', // Serveur number
-        http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
-        response_hack : 'Les donnÃ©es envoyÃ©es ont Ã©tÃ© refusÃ©es par le plugin Xtense',
-        //
-        error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez rÃ©cente',
-        error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
-        error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la mÃªme version que celle du plugin installÃ©',
-        error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
-        error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
-        error_username: 'Pseudo invalide',
-        error_password: 'Mot de passe invalide',
-        error_user_active: 'Votre compte est inactif',
-        error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planÃªte',
-        error_plugin_connections: 'Connexions au plugin Xtense non autorisÃ©es',
-        error_plugin_config: 'Plugin Xtense non configurÃ© par votre administrateur, impossible de l\'utiliser',
-        error_plugin_univers: 'NumÃ©ro d\'univers d\'Ogame invalide sur cet OGSpy',
-        error_grant_start: 'Vous ne possÃ©dez pas les autorisations nÃ©cessaires pour envoyer ',
-        error_grant_empire: 'des pages de votre empire (BÃ¢timents, Laboratoire...)',
-        error_grant_messages: 'des messages',
-        error_grant_system: 'des systÃªmes solaires',
-        error_grant_ranking: 'des classements',
-        //
-        success_home_updated : 'Espace personnel mis Ã  jour ($1)', // Page name
-        success_system : 'Mise Ã  jour du systÃ¨me solaire effectuÃ©e', // Galaxy, System
-        success_ranking : 'Classement $2 des $1 ($3-$4) mis Ã  jour', // Primary type, secondary type, offset min, offset max
-        success_rc : 'Rapport de combat envoyÃ©',
-        success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyÃ©e', // TAG
-        success_messages : 'Message correctement envoyÃ©',
-        success_fleetSending : 'DÃ©part de flotte correctement envoyÃ©',
-        success_spy : 'Rapport d\'espionnage correctement envoyÃ©',
-        success_res : 'Message de commerce correctement envoyÃ©',
-		success_research : 'Mise Ã  jour des technologies effectuÃ©e',
-        //
-        unknow_response: 'Code rÃ©ponse inconnu : "$1", data: "$2"', // code, content
-        //
-        page_overview: 'Vue gÃ©nÃ©rale',
-        page_buildings: 'BÃ¢timents',
-        page_installations: 'Installations',
-        page_labo: 'Laboratoire',
-        page_defense: 'DÃ©fense',
-        page_fleet: 'Flotte',
-        page_fleetSending: 'DÃ©part de flotte',
-        //
-        //'PM':'MP',
-        call_messages : '-- Messages renvoyÃ©s par les appels'
+			error_start : 'ERREUR: ',
+		    http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
+		    http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
+		    http_status_500: 'statut 500: Erreur interne au serveur.',
+		    http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
+		    http_status_unknown : 'statut http inconnu: ',
+		    //
+		    incorrect_response : 'Réponse incorrecte',
+		    empty_response : 'Réponse du plugin vide',
+		    invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
+		    //
+		    php_version : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
+		    error_occurs : 'Une erreur est survenue',
+		    wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
+		    wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+		    wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
+		    server_active: 'le serveur OGSpy est pour le moment désactivé',
+		    plugin_connections: 'Connexions au plugin Xtense désactivées',
+		    plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+		    plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+		    username: 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
+		    password: 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
+		    user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
+		    //
+		    informations : 'Informations',
+		    server_name : 'Nom du serveur OGSpy', // Server name
+		    version : 'Version', // version
+		    grant_all : 'Vous possédez tous les droits pour utiliser Xtense',
+		    grant_nothing : 'Vous ne possédez aucune autorisation quant à l\'import de données sur votre OGSpy',
+		    //
+		    grant_can : 'pouvez',
+		    grant_cannot : 'ne pouvez pas',
+		    grant_system : 'Vous $1 ajouter des systêmes solaires', // can / cannot
+		    grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
+		    grant_empire : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
+		    grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
+		    //
+		    checking_end : 'VERIFICATION TERMINEE',
+		    checking_errors : 'Une ou plusieurs erreurs sont survenues, vous pouvez soit retourner à la fenetre des options ou alors fermer cette fenetre sans prendre en compte les erreurs.',
+		    checking_success : 'Aucune erreur à signaler, vous pouvez fermer les options',
+		    //
+		    connecting : 'Connexion en cours : ', // Server url
+		    checking_server : 'Verification du serveur OGSpy n°$1', // Server number
+		    toolbar_activated : 'Barre d\'outils activée',
+		    toolbar_deactivated : 'Barre d\'outils désactivée',
+		    //
+		    ogspy_menu_tooltip: 'Connexion automatique au serveur OGSpy',
+		    //
+		    fatal_error : 'Une erreur critique est survenue et a arrêté l\'exécution de Xtense',
+		    parsing_error : 'Une erreur critique est survenue lors de la récupération des données de la page',
+		    //
+		    no_ogspy_server: 'Aucun serveur',
+		    no_server : 'Aucun serveur disponible pour cet univers',
+		    unknow_page: 'Page inconnue',
+		    activate : 'Activer',
+		    deactivate : 'Desactiver',
+		    wait_send: 'En attente de l\'envoi manuel des données',
+		    unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
+		    //
+		    overview_detected: 'Vue générale détectée',
+		    buildings_detected: 'Batiments détectés',
+		    installations_detected: 'Installations détectés',
+		    researchs_detected: 'Recherches détectés',
+		    fleet_detected: 'Flotte détectée',
+		    defense_detected: 'Défenses détectés',
+		    messages_detected: 'Page de messages détectée',
+		    ranking_detected: 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
+		    ally_list_detected: 'Liste des joueurs de l\'alliance détectée',
+		    system_detected: 'Système solaire détecté: ', // Galaxy, System
+		    re_detected: 'Rapport d\'espionnage détecté',
+		    rc_detected: 'Rapport de combat détecté',
+		    res_detected: 'Message de commerce détecté',
+		    //
+		    no_researchs : 'Aucune recherche à envoyer',
+		    no_defenses : 'Aucune défense à envoyer',
+		    no_buildings : 'Aucun bâtiment à envoyer',
+		    no_fleet : 'Pas de flotte à envoyer',
+		    //
+		    ranking_player: 'joueurs',
+		    ranking_ally: 'alliances',
+		    ranking_points: 'points',
+		    ranking_fleet: 'flotte',
+		    ranking_research: 'recherches',
+		    ranking_defense: 'défense',
+		    ranking_buildings: 'bâtiments',
+		    //
+		    invalid_system : 'Systême solaire non pris en compte',
+		    invalid_ranking : 'Page des statistiques invalide',
+		    invalid_rc : 'Rapport de combat invalide (Contact perdu)',
+		    no_ranking : 'Aucun classement à envoyer',
+		    no_messages : 'Aucun message à envoyer',
+		    impossible_ranking : 'Impossible de récupérer le classement alliance suivant les points par membre',
+		    // Responses
+		    response_start: 'Serveur $1 : ', // Serveur number
+		    http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
+		    response_hack : 'Les données envoyées ont été refusées par le plugin Xtense',
+		    //
+		    error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
+		    error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
+		    error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+		    error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
+		    error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
+		    error_username: 'Pseudo invalide',
+		    error_password: 'Mot de passe invalide',
+		    error_user_active: 'Votre compte est inactif',
+		    error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
+		    error_plugin_connections: 'Connexions au plugin Xtense non autorisées',
+		    error_plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+		    error_plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+		    error_grant_start: 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
+		    error_grant_empire: 'des pages de votre empire (Bâtiments, Laboratoire...)',
+		    error_grant_messages: 'des messages',
+		    error_grant_system: 'des systêmes solaires',
+		    error_grant_ranking: 'des classements',
+		    //
+		    success_home_updated : 'Espace personnel mis à jour ($1)', // Page name
+		    success_system : 'Mise à jour du système solaire effectuée', // Galaxy, System
+		    success_ranking : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
+		    success_rc : 'Rapport de combat envoyé',
+		    success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
+		    success_messages : 'Message correctement envoyé',
+		    success_fleetSending : 'Départ de flotte correctement envoyé',
+		    success_spy : 'Rapport d\'espionnage correctement envoyé',
+		    success_res : 'Message de commerce correctement envoyé',
+			success_research : 'Mise à jour des technologies effectuée',
+			success_buildings : 'Mise à jour des bâtiments effectuée',
+			success_station : 'Mise à jour des installations effectuée',
+		    //
+		    unknow_response: 'Code réponse inconnu : "$1", data: "$2"', // code, content
+		    //
+		    page_overview: 'Vue générale',
+		    page_buildings: 'Bâtiments',
+		    page_installations: 'Installations',
+		    page_labo: 'Laboratoire',
+		    page_defense: 'Défense',
+		    page_fleet: 'Flotte',
+		    page_fleetSending: 'Départ de flotte',
+		    //
+		    //'PM':'MP',
+		    call_messages : '-- Messages renvoyés par les appels'
     };  
 	}
 	Ximplements(XtenseLocales , {
@@ -2726,17 +2731,17 @@ function initLocales(){
 					'a_shoot' : 'avec une force totale de (.*) sur le défenseur.',
 					'd_bcl' : 'Les boucliers du défenseur absorbent (.*) points de dommage.',
 					'd_nb' : 'La flotte de défense tire (.*) fois',
-					'd_shoot' : 'sur l\'attaquant avec une force de (.*). Les boucliers',
-					'a_bcl' : ' de l\'attaquant absorbent (.*) points de dommage.'
+					'd_shoot' : 'sur l\`attaquant avec une force de (.*). Les boucliers',
+					'a_bcl' : ' de l\`attaquant absorbent (.*) points de dommage.'
 				},
 				'result' : {
 					'win_metal' : 'Il emporte (.*) unités de métal',
 					'win_cristal' : ', (.*) unités de cristal',
 					'win_deut' : 'et (.*) unités de deutérium.',
-					'a_lost' : 'L\'attaquant a perdu au total (.*) unités.',
+					'a_lost' : 'L\`attaquant a perdu au total (.*) unités.',
 					'd_lost' : 'Le défenseur a perdu au total (.*) unités.',
 					'deb_metal' : 'Un champ de débris contenant (.*) de métal',
-					'deb_cristal' : ' et (.*) de cristal se forme dans l\'orbite de la planète.'
+					'deb_cristal' : ' et (.*) de cristal se forme dans l\`orbite de la planète.'
 				},
 				'weapons' : {
 					'arm' : 'Armes: (\\d+)%',
@@ -2937,7 +2942,7 @@ function getResources(){
     var deut = XPath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
 	var antimater = XPath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
     var energy = XPath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
-	//log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
+	log("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 	return Array(metal,cristal,deut,antimater,energy);
 }
 /********************* Fin Utilities Ogame ******************************/
