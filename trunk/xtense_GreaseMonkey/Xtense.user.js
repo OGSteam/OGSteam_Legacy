@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.1
+// @version     2.3.14.2
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
