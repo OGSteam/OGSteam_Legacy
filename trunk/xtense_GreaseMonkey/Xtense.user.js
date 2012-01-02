@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.3";
+var VERSION = "2.3.14.2";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -115,8 +115,7 @@ function err(type, message)
                }, 0);
 } 	
 function log(message){
-	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
-    /*console.log(nomScript+" says : "+message);*/
+	if(GM_getValue('debug.mode','false')) { console.log(nomScript + " says : " + message); }
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
