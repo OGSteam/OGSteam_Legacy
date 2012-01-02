@@ -116,7 +116,6 @@ function err(type, message)
 } 	
 function log(message){
 	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
-    console.log(nomScript+" says : "+message); 
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -444,7 +443,8 @@ function parse_ally_inserted(event) {
 }
 
 /* Fonction appelée lors d'évenement sur le chargement des classements */
-function parse_ranking_inserted(event) {		
+function parse_ranking_inserted(event) {
+     log("Entering parse_ranking_inserted");
 	try {
 		var paths = XtenseXpaths.ranking;
 		
@@ -1305,7 +1305,7 @@ function manual_send(){
 /************************ Utilities des Parsings ************************/
 /* Fonction ajoutant lancant le parsing de la vue galaxie quand celle-ci est chargée */
 function get_galaxycontent(){	
-log("In get_galaxycontent()");
+
 	if (isChrome) //Pour Chrome :-)
 	{	/* Page Galaxie */
 		
@@ -1376,7 +1376,8 @@ function get_ally_content(){
 }
 
 /* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
-function get_ranking_content(){	
+function get_ranking_content(){
+    log
 	if (isChrome) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
@@ -1397,10 +1398,10 @@ function get_ranking_content(){
 		}
 		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
 		
-		unsafeWindow.$("#statisticsContent").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		unsafeWindow.$("#stat_list_content").ajaxSuccess(safeWrap(function(e,xhr,settings)
 		{
 			//l'url de la requête ajax contient page=galaxyContent
-			if (settings.url.indexOf("page=statisticsContent") == -1) return;
+			if (settings.url.indexOf("page=highscoreContent") == -1) return;
 
 			parse_ranking_inserted();
 			
