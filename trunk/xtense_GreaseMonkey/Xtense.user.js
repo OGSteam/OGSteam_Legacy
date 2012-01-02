@@ -38,7 +38,7 @@ var langUnivers = urlUnivers.match(new RegExp('ogame.(.*)'))[1];
 
 
 /*********************** Compatibilité Chrome ***************************/
-if(!GM_getValue){
+if(isChrome){
     function GM_getValue(key,defaultVal) 
     {
         var retValue = localStorage.getItem(key);
@@ -63,10 +63,18 @@ if(!GM_getValue){
     {
         localStorage.removeItem(value);
     }    
-} else if (isChrome) {
+
     if(unsafeWindow){
         isTamper =  true; // TamperMonkey
     }
+}else if(isFirefox){
+    function GM_exist(key){
+        var retValue = GM_getValue(key,'NaN') ;
+        if (retValue == 'NaN' ){
+        	return false;
+        }
+        return true;
+    }   
 }
 /********************** Fin Compatibilité Chrome ************************/
 
