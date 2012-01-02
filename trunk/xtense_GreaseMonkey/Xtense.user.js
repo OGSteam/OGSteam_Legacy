@@ -116,7 +116,7 @@ function err(type, message)
 } 	
 function log(message){
 	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
-    console.log(nomScript+" says : "+message);
+    /*console.log(nomScript+" says : "+message);*/
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
