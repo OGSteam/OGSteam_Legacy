@@ -1365,7 +1365,7 @@ function get_ally_content(){
 		unsafeWindow.$("#inhalt").ajaxSuccess(safeWrap(function(e,xhr,settings)
 		{
 			//l'url de la requête ajax contient page=inhalt
-			if (settings.url.indexOf("page=inhalt") == -1) return;
+			if (settings.url.indexOf("page=allianceOverview") == -1) return;
 
 			parse_ally_inserted();
 			
