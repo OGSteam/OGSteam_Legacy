@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.2";
+var VERSION = "2.3.14.3";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -171,7 +171,7 @@ function Xajax(obj) {
 			args.push({status: xhr.status, content: xhr.responseText});
 			//alert(args[0].status);
 			//callback.apply(scope, args);
-			if (isChrome) {handleResponse(args[0]); }// [Dark]Status = 0 sous Firefox : Etrange...
+			/*if (isChrome) {*/handleResponse(args[0]); /*}*/// [Dark]Status = 0 sous Firefox : Etrange...
 		}
 	};
 	
@@ -1794,18 +1794,19 @@ function displayInfoXtense(texte_a_afficher){
         var sp1 = document.createElement("span"); // on crée une balise span
         sp1.setAttribute("id", "XtenseDisp"); // on y ajoute un id
         var sp1_content = document.createTextNode('');
-        sp1.appendChild(sp1_content); 
-        var sp2 = document.getElementById('inhalt') ; // Lieu où on veut afficher (A remplacer par ce que vous voulez)
-        var parentDiv = sp2.parentNode;
-        parentDiv.insertBefore(sp1, sp2.nextSibling);
-        var tableau = document.createElement("span");
-        tableau.innerHTML = texte_a_afficher; // Ce qu'on veut afficher 
-        tableau.setAttribute("class","content");
-                    
-        document.getElementById('XtenseDisp').insertBefore(tableau, document.getElementById('XtenseDisp').firstChild); // Affichage
+        sp1.appendChild(sp1_content);
         
-        
+		var message = '<center><strong>Message Xtense ' +VERSION +'</strong></center> \n '
+					+'<BR/> <strong>Info: </strong>'+ texte_a_afficher +'\n<BR/><BR/>';
+		/*message = message +'<BR/>Xtense ' +VERSION;*/
+		var sp2 = document.createElement('div');
+		sp2.id = "message";
+		sp2.setAttribute('style','display:block !important;color:#ff0000;background-color: #000000;');
+		sp2.innerHTML = message;
+		document.getElementById('inhalt').insertBefore(sp2,document.getElementById('XtenseDisp'));
+                
     }
+
 }
 /* Vérification des Maj d'Xtense */
 function checkMaJ()
