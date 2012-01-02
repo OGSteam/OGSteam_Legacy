@@ -116,6 +116,7 @@ function err(type, message)
 } 	
 function log(message){
 	if(GM_getValue('debug.mode','false')=='true') { console.log(nomScript+" says : "+message); }
+    console.log(nomScript+" says : "+message);
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -264,17 +265,17 @@ function handle_current_page(){
 	var regStats = new RegExp(/(highscore)/);
 	
 	if(regOption.test(url)){ displayOptions();}
-	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false')=='true' || GM_getValue('manual.send','false')=='true'){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false')=='true' || GM_getValue('manual.send','false')=='true'){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')=='true'){parse_messages();}} 
-	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')=='true'){parse_rc();}}
-	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false')=='true' || GM_getValue('manual.send','false')=='true'){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
+	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false') || GM_getValue('manual.send','false')){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false') || GM_getValue('manual.send','false')){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false') || GM_getValue('manual.send','false')){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false') || GM_getValue('manual.send','false')){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false') || GM_getValue('manual.send','false')){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false') || GM_getValue('manual.send','false')){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')){parse_messages();}} 
+	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')){parse_rc();}}
+	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
 	else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -1008,7 +1009,7 @@ function parse_rc() {
 /* Page Messages */
 function parse_messages(){
 	setStatus(XLOG_NORMAL,Xl('messages_detected'));
-	
+	log('messages_detected');
 	var paths = XtenseXpaths.messages;
 	var data = {};		
 	var from = XPath.getStringValue(document,paths.from).trim();
