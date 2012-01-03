@@ -301,16 +301,20 @@ function parse_galaxy_system_inserted(event){
 			//var XtenseRequest = new XtenseRequest(null, null, null);
 			log(rows.snapshotLength+' rows found in galaxy');
 			var rowsData = [];
-			for (var i = 1; i < rows.snapshotLength ; i++) {
+			for (var i = 0; i < rows.snapshotLength ; i++) {
 				var row = rows.snapshotItem(i);
 				
 				var name = XPath.getStringValue(document,paths.planetname,row).trim().replace(/\($/,'');
 				var name_l = XPath.getStringValue(document,paths.planetname_1,row).trim().replace(/\($/,'');
 				var player = XPath.getStringValue(document, paths.playername,row).trim();
+				var player2 = XPath.getStringValue(document,paths.playername2,row).trim();
 				
 				if (player == '') {
-					log('row '+i+' has no player name');
-					continue;
+					if (player2 == '') {
+						log('row '+i+' has no player name');
+						continue;
+					} else
+						player = player2;
 				}
 				if (name == '') {
 					if (name_l == '') {
@@ -375,7 +379,7 @@ function parse_galaxy_system_inserted(event){
 					allymembers = allymembers.match(/Membres\: (.*)/);
 					allymembers = allymembers[1];
 				}
-log('row '+i+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon+',player_name:'+player+',status:'+status+',ally_id:'+allyid+',ally_tag:'+allytag+',ally_place:'+allyplace+',ally_members:'+allymembers+',debris:'+debris+',activity:'+activity);	
+log('row '+position+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon+',player_name:'+player+',status:'+status+',ally_id:'+allyid+',ally_tag:'+allytag+',ally_place:'+allyplace+',ally_members:'+allymembers+',debris:'+debris+',activity:'+activity);	
 				var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:allyid,ally_tag:allytag,ally_place:allyplace,ally_members:allymembers,debris:debris,activity:activity};
 				rowsData[position]=r;
 			}
@@ -1917,7 +1921,8 @@ galaxy : {
 	planetname_l : "td[@class=\'planetname\']/a/text()",
 	moon : "td[@class=\'moon\']/a",
 	debris : "descendant::li[@class=\'debris-content\']",
-	playername : "td[contains(@class,\'playername\')]/*[1]",//* pour a en gÃ©nÃ©ral, span pour joueur courant,
+	playername : "td[contains(@class,\'playername\')]/*[1]",//* pour joueur courant,
+	playername2 : "td[contains(@class,'playername')]/*[2]", //Pour joueur bandit ou empereur
 	allytag : "td[@class=\'allytag\']/span/text()",
 	status : "descendant::span[@class=\'status\']",
 	activity : "descendant::div[@id=\'TTPlanet\']/descendant::span[@class=\'spacing\']/text()",
@@ -1971,7 +1976,7 @@ ranking : {
 	time : "//div[@id=\'statisticsContent\']//div[@class=\'header\']/h3/text()",
 	who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
 	type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
-	
+	subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
 	rows : "id(\'ranks\')/tbody/tr",
 	position : "td[@class=\'position\']/a[contains(@name,'position')]/text()",
 	player : {
@@ -2043,7 +2048,7 @@ writemessage : {
         probability : ': (\\d+) %',
         coords : '\\[(\\d+:\\d+:\\d+)\\]',
         ally : 'Alliance \\[(.*)\\]',
-        
+        ally_msg_player_name : '<a href.*>(.*)</a>',
         parseTableStruct : '<a[^>]*id="details(\\d+)"[^>]*>[\\D\\d]*?([\\d.]+[KMG]?)<\/span>[^<]*<\/span>[^<]*<\/a>'
     }
 	/* Fonctions permettant de rÃ©cupÃ©rer les donnÃ©es des balises metas */
