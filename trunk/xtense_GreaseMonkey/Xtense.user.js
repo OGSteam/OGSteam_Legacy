@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.5
+// @version     2.3.14.6
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.5";
+var VERSION = "2.3.14.6";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -18,8 +18,8 @@ var Xlang = {};
 var XtenseLocales = { };
 
 //Variables globales pour la mise à jour.
-var start_time = (new Date()).getTime();
-var freqMaj = 23 * 3600;
+var start_time = (new Date()).getTime() /1000;
+var freqMaj = 2 * 3600;
 
 //Variables globales pour les status - Type d'erreur
 var XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5, XLOG_SEND = 6;
@@ -1801,7 +1801,10 @@ function displayInfoXtense(texte_a_afficher){
 /* Vérification des Maj d'Xtense */
 function checkMaJ()
 {
-    if(isFirefox || isChrome) 
+	var Derniere_Version,PageUserScript;
+    var checkupdate_required = (start_time - GM_getValue(nomScript+"dateMaJ",start_time) > freqMaj) ? true : false;
+
+	if((isFirefox || isChrome) && checkupdate_required) 
     {	
         /* ******************************Recherche des MaJ ********************************/
         
@@ -1812,9 +1815,9 @@ function checkMaJ()
                 
                 onload: function(response) 
                 {
-                    var PageUserScript = response.responseText;
+                    PageUserScript = response.responseText;
                     
-                    var Derniere_Version = PageUserScript.split('@version')[1].split('// @author')[0].trim();
+                    Derniere_Version = PageUserScript.split('@version')[1].split('// @author')[0].trim();
                     Version=VERSION+'';
                     log("Version Serveur: "+Derniere_Version);
                     log("Version Courante: "+Version);
@@ -1823,24 +1826,23 @@ function checkMaJ()
                         if (Derniere_Version != Version ) 
                         {							
                             GM_setValue(nomScript+"aJours",false);
-                            GM_setValue(nomScript+"dateMaJ",Date.parse(new Date()) / 1000);                               
-                                
-                            displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/117629.user.js">Mise à Jour Xtense Disponible ! (' + Derniere_Version + ')</a>');                                
-
+                            GM_setValue(nomScript+"dateMaJ",Date.parse(new Date()) / 1000); 
+                            GM_setValue(nomScript+"newVersion",Derniere_Version);
                         }
                         else 
                         {					
                             GM_setValue(nomScript+"aJours",true);
                             GM_setValue(nomScript+"dateMaJ",Date.parse(new Date()) / 1000);
-   
                         }
                                                 
                     }
                                        
                 }
             });
-        
+             
     }
+    //log(GM_getValue(nomScript+"aJours",false));
+    if (GM_getValue(nomScript+"aJours",false) == false) { displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/117629.user.js">Mise à Jour Xtense Disponible ! (' + GM_getValue(nomScript+"newVersion",'Inconnu') + ')</a>');}
 }
 /********************** Fin Fonctions Xtense ****************************/
 
