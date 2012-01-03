@@ -157,32 +157,7 @@ function setStatus(type,message){
 
 //Requete Ajax
 function Xajax(obj) {
-    if(isChrome){
-    var xhr = new XMLHttpRequest();
-	var callback = obj.callback || function(){};
-	//var args = obj.args || [];
-	var args = new Array();
-	var scope = obj.scope || null;
-	var url = obj.url || '';
-	var post = obj.post || '';
-
-	xhr.onreadystatechange =  function() {
-		if(xhr.readyState == 4) {
-			args.push({status: xhr.status, content: xhr.responseText});
-			//alert(args[0].status);
-			//callback.apply(scope, args);
-			handleResponse(args[0]);
-		}
-	};
-	
-	xhr.open('POST', url, true);
-	xhr.setRequestHeader('User-Agent', 'Xtense2');
-	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.send(post);   
-           
-    }else{    
-    
-    GM_xmlhttpRequest({
+      GM_xmlhttpRequest({
       method: "POST",
       url: obj.url || '',
       data: obj.post || '',
@@ -194,7 +169,7 @@ function Xajax(obj) {
         handleResponse(response);
       }
     });
-    }
+    
 }
 // Récupère les messages de retours et locales
 function Xl(name) {
@@ -1729,7 +1704,7 @@ function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
     
     //Lien vers OGSpy
-    var ogspy_link = GM_getValue('server.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php').split('mod')[0];
+    var ogspy_link = GM_getValue('server.url.plugin','http://www.ogsteam.fr').split('mod')[0];
     
     // Page classique
     if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
