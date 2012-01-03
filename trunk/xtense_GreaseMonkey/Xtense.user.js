@@ -1825,7 +1825,7 @@ function checkMaJ()
                             GM_setValue(nomScript+"aJours",false);
                             GM_setValue(nomScript+"dateMaJ",Date.parse(new Date()) / 1000);                               
                                 
-                            displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/117629.user.js">Mise à Jour Xtense Disponible !</a>');                                
+                            displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/117629.user.js">Mise à Jour Xtense Disponible ! (' + Derniere_Version + ')</a>');                                
 
                         }
                         else 
