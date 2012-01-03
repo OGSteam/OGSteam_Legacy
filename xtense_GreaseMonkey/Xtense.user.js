@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.4
+// @version     2.3.14.5
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.4";
+var VERSION = "2.3.14.5";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -157,7 +157,8 @@ function setStatus(type,message){
 
 //Requete Ajax
 function Xajax(obj) {
-	var xhr = new XMLHttpRequest();
+    if(isChrome){
+    var xhr = new XMLHttpRequest();
 	var callback = obj.callback || function(){};
 	//var args = obj.args || [];
 	var args = new Array();
@@ -170,16 +171,30 @@ function Xajax(obj) {
 			args.push({status: xhr.status, content: xhr.responseText});
 			//alert(args[0].status);
 			//callback.apply(scope, args);
-			/*if (isChrome) {*/handleResponse(args[0]); /*}*/// [Dark]Status = 0 sous Firefox : Etrange...
+			handleResponse(args[0]);
 		}
 	};
 	
 	xhr.open('POST', url, true);
 	xhr.setRequestHeader('User-Agent', 'Xtense2');
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.send(post);
-	
-
+	xhr.send(post);   
+           
+    }else{    
+    
+    GM_xmlhttpRequest({
+      method: "POST",
+      url: obj.url || '',
+      data: obj.post || '',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      onload: function(response) {
+        response.content = response.responseText;
+        handleResponse(response);
+      }
+    });
+    }
 }
 // Récupère les messages de retours et locales
 function Xl(name) {
@@ -1529,7 +1544,7 @@ function displayOptions(){
 	options+= '<tbody>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue('server.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
+	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue('server.url.plugin','http://VOTRESITEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
 	options+= '</tr>';
 	options+= '<tr><td>&#160;</td><td>&#160;</td></tr>';
 	options+= '<tr>';
@@ -1713,6 +1728,9 @@ function displayOptions(){
 function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
     
+    //Lien vers OGSpy
+    var ogspy_link = GM_getValue('server.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php').split('mod')[0];
+    
     // Page classique
     if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
 		var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
@@ -1722,7 +1740,7 @@ function displayXtense(){
     	if(GM_getValue('manual.send','false')=='true'){
     		aAttrs = 'onClick="window.location.reload()" target="_self"';
     	} else {
-    		aAttrs='href="http://board.ogsteam.fr" target="blank_" ';
+    		aAttrs='href="'+ ogspy_link +'" target="blank_" ';
     	}
     
         var aff_option ='<span class="menu_icon"><a '+aAttrs+'><img id="xtense.icone" class="mouseSwitch" src="'+icone+'" height="29" width="38"></span><a class="menubutton " href="'+url+'&xtense=Options" accesskey="" target="_self">';
@@ -1744,7 +1762,7 @@ function displayXtense(){
         
         var liXtense = document.createElement("li");
         var aXtense = document.createElement("a");
-        aXtense.setAttribute("href", "http://board.ogsteam.fr");
+        aXtense.setAttribute("href", ogspy_link);
         aXtense.setAttribute("target", "blank_");
         
         var imgXtense = document.createElement("img");
@@ -1763,7 +1781,7 @@ function displayXtense(){
         
         var pXtense = document.createElement("p");
         var aXtense = document.createElement("a");
-        aXtense.setAttribute("href", "http://www.ogsteam.fr");
+        aXtense.setAttribute("href", ogspy_link);
         aXtense.setAttribute("target", "blank_");
         
         var imgXtense = document.createElement("img");
