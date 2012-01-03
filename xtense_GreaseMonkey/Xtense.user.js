@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.2
+// @version     2.3.14.4
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.2";
+var VERSION = "2.3.14.4";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -468,12 +468,14 @@ function parse_ranking_inserted(event) {
 		
 		time =  Math.floor(time.getTime()/1000);
 		var type = new Array();
-		type[0] = XPath.getStringValue(document,paths.who);
-		type[1] = XPath.getStringValue(document,paths.type);
-		type[0] = type[0] != '' ? type[0] : 'player';
-		type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
-		type[1] = (type[1] == '' || type[1] == 'ressources') ? 'points' : type[1];		
-		
+        type[0] = XPath.getStringValue(document,paths.who);
+        type[1] = XPath.getStringValue(document,paths.type);
+        type[2] = XPath.getStringValue(document,paths.subnav_fleet);
+        type[0] = (type[0] != '') ? type[0] : 'player';
+        type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
+        type[1] = (type[1] != '') ? type[1] : 'points';
+        
+        
 		var length = 0;
 		var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
 		var offset = 0;
@@ -553,8 +555,15 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 						}
 					);
 					
-					XtenseRequest.set('lang',langUnivers);
-					XtenseRequest.send();
+                    XtenseRequest.set('lang',langUnivers);
+                    /*	Le if est temporaire : sert de filtre pour ne pas envoyer les sous-classements militaires (construit, détruit, perdu et points honorifiques)
+                     *	On envoie seulement le classement militaire "de base" (quand aucune sous-categorie n'est selectionnée)
+                     *	Devra être supprimé quand les tables pour stocker les nouveaux classements auront été crées,
+                     *	et que le type[2] sera pris en compte pour l'insertion des classements
+                    */
+                    if (type[2] == '')
+                        XtenseRequest.send();
+					
 				}
 				
 				//get_ranking_content();
@@ -567,14 +576,15 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 
 /* Page Overview */
 function parse_overview(event){
-	var doc = event.target.ownerDocument;
-	//if(typeof( delaytodisplay_overview ) != "undefined") { clearInterval(delaytodisplay_overview);} //Supression du setinterval si il existe
+    log("In Parse Overview() ");
 	
-	if(XPath.getStringValue(doc,XtenseXpaths.overview.temperatures) != null && XPath.getStringValue(doc,XtenseXpaths.overview.temperatures) != ""){
+	if(typeof( delaytodisplay_overview ) != "undefined") { clearInterval(delaytodisplay_overview);} //Supression du setinterval si il existe
+	
+	if(XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != null && XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != ""){
 		var planetData = getPlanetData();
 		if (GM_getValue('lastAction','') != 'planet_name:'+planetData.planet_name){
-			var cases = XPath.getStringValue(doc,XtenseXpaths.overview.cases).trimInt();
-			var temperatures = XPath.getStringValue(doc,XtenseXpaths.overview.temperatures);
+			var cases = XPath.getStringValue(document,XtenseXpaths.overview.cases).trimInt();
+			var temperatures = XPath.getStringValue(document,XtenseXpaths.overview.temperatures);
 			var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 			var temperature_min = temperatures.match(/(-?\d+)/)[1];
 			var resources = getResources();
@@ -594,10 +604,9 @@ function parse_overview(event){
 			XtenseRequest.send();
 			GM_setValue('lastAction','planet_name:'+planetData.planet_name);
 		}
-	}/*else{
-		delaytodisplay_overview = setInterval( parse_overview, 20); // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
-	
-	}*/
+	}else{
+		if (!isChrome){ delaytodisplay_overview = setInterval( get_planet_details, 20);} // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
+	}
 }
 
 /* Page Buildings */
@@ -1420,8 +1429,9 @@ function get_planet_details(){
 	
 	if (isChrome) //Pour Chrome :-)
 	{	
+        log("In get_planet_details()");
 		/* Page Overview */
-		log("In get_planet_details()");
+		
 		var target = document.getElementById('scoreContentField');
 		//target.removeEventListener("DOMNodeInserted");
 		//target.removeEventListener("DOMContentLoaded");
@@ -1429,24 +1439,8 @@ function get_planet_details(){
 		//target.addEventListener("DOMContentLoaded", parse_overview, false);		
 
 	}else{// Pour Firefox Notamment
-
-		function safeWrap(f)
-		{
-			return function()
-			{
-				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
-			};
-		}
-		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
-		
-		unsafeWindow.$("#planetDetails").ajaxSuccess(safeWrap(function(e,xhr,settings)
-		{
-			//l'url de la requête ajax contient page=galaxyContent
-			if (settings.url.indexOf("page=planetDetails") == -1) return;
-
+    
 			parse_overview();
-			
-		}));
 
 	}
 
