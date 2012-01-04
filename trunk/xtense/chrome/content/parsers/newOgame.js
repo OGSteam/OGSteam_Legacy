@@ -846,7 +846,8 @@ var XnewOgame = {
 					}
 				}
 				
-				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){
+				if(type[1]!='economy' && this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){ // Ajout du test sur le type economy pour ne pas l'envoyer en ecrasement des points
+					Xconsole('r:'+type[0]+':'+type[1]+':'+offset); 
 					//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
 					if (offset != 0 && length != 0) {
 						Request.set(
