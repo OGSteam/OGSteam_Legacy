@@ -593,6 +593,7 @@ function parse_overview(event){
 			GM_setValue('lastAction','planet_name:'+planetData.planet_name);
 		}
 	}else{
+        log("Temperature Content is not there! Retrying...");
 		if (!isChrome){ delaytodisplay_overview = setInterval( get_planet_details, 20);} // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
 	}
 }
@@ -1417,7 +1418,7 @@ function get_planet_details(){
         log("In get_planet_details()");
 		/* Page Overview */
 		
-		var target = document.getElementById('scoreContentField');
+		var target = document.getElementById('planetDetails');
 		//target.removeEventListener("DOMNodeInserted");
 		//target.removeEventListener("DOMContentLoaded");
 		target.addEventListener("DOMNodeInserted", parse_overview, false);		
