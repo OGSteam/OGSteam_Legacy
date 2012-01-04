@@ -47,13 +47,7 @@ if(isChrome){
         }
         return retValue;
     }
-    function GM_exist(key){
-        var retValue = localStorage.getItem(key);
-        if (!retValue ){
-        	return false;
-        }
-        return true;
-    }    
+
     function GM_setValue(key,value) 
     {
         localStorage.setItem(key, value);
@@ -67,14 +61,7 @@ if(isChrome){
         isTamper =  true; // TamperMonkey
     }
 }else if(isFirefox){
-    function GM_exist(key){
-        //inutile car implicite dans la fonction GM
-        /*var retValue = GM_getValue(key,'NaN') ;
-        if (retValue == 'NaN' ){
-        	return false;
-        }*/
-        return true;
-    }   
+ // A completer si besoin...
 }
 /********************** Fin Compatibilité Chrome ************************/
 
@@ -226,7 +213,7 @@ initParsers();
 initLocales();    
 displayXtense();
 checkMaJ();
-if(GM_exist('server.check') && GM_getValue('server.check','false')=='true') { // Initialisation du serveur demandée ? 
+if(GM_getValue('server.check','false')=='true') { // Initialisation du serveur demandée ? 
 	XtenseRequest.check();
 } 
 setStatus(XLOG_NORMAL,Xl('Xtense_activated'));
