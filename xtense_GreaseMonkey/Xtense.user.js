@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.7
+// @version     2.3.14.8
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,8 +8,8 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.7";
-var PLUGIN_REQUIRED = "2.3.10";
+var VERSION = "2.3.14.8";
+var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
 
@@ -35,6 +35,7 @@ var urlUnivers = url.match(new RegExp('(.*)\/game'))[1];
 var numUnivers = urlUnivers.match(new RegExp('uni(.*).ogame'))[1];
 var langUnivers = urlUnivers.match(new RegExp('ogame.(.*)'))[1];
 var cookie = nomScript + "-" + numUnivers + "-";
+var prefix_GMData = langUnivers + numUnivers +".";
 
 /*********************** Compatibilité Chrome ***************************/
 if(isChrome){
@@ -101,7 +102,7 @@ function err(type, message)
                }, 0);
 } 	
 function log(message){
-	if(GM_getValue('debug.mode','false').toString() == 'true') { console.log(nomScript + " says : " + message); }
+	if(GM_getValue(prefix_GMData +'debug.mode','false').toString() == 'true') { console.log(nomScript + " says : " + message); }
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -213,7 +214,7 @@ initParsers();
 initLocales();    
 displayXtense();
 checkMaJ();
-if(GM_getValue('server.check','false').toString() =='true') { // Initialisation du serveur demandée ? 
+if(GM_getValue(prefix_GMData +'server.check','false').toString() =='true') { // Initialisation du serveur demandée ? 
 	XtenseRequest.check();
 } 
 setStatus(XLOG_NORMAL,Xl('Xtense_activated'));
@@ -240,17 +241,17 @@ function handle_current_page(){
 	var regStats = new RegExp(/(highscore)/);
 	
 	if(regOption.test(url)){ displayOptions();}
-	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false').toString() == 'true'|| GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false').toString() == 'true'){parse_messages();}} 
-	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false').toString() == 'true'){parse_rc();}}
-	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
+	else if(regGalaxy.test(url))  	{ if(GM_getValue(prefix_GMData +'handle.system','false').toString() == 'true'|| GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_galaxycontent();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue(prefix_GMData +'handle.overview','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){get_planet_details();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regResearch.test(url))	{ if(GM_getValue(prefix_GMData +'handle.researchs','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_researchs();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regBuildings.test(url))	{ if(GM_getValue(prefix_GMData +'handle.buildings','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_buildings();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regStation.test(url))	{ if(GM_getValue(prefix_GMData +'handle.station','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_station();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue(prefix_GMData +'handle.shipyard','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_shipyard();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regDefense.test(url))	{ if(GM_getValue(prefix_GMData +'handle.defense','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_defense();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regMessages.test(url))	{ if(GM_getValue(prefix_GMData +'handle.msg.msg','false').toString() == 'true'){parse_messages();}} 
+	else if(regCombatreport.test(url))	{ if(GM_getValue(prefix_GMData +'handle.msg.rc','false').toString() == 'true'){parse_rc();}}
+	else if(regAlliance.test(url))	{ if(GM_getValue(prefix_GMData +'handle.alliance','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ally_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
+	else if(regStats.test(url))	{ if(GM_getValue(prefix_GMData +'handle.stats','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ranking_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }} 
 	else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -265,8 +266,8 @@ function parse_galaxy_system_inserted(event){
 	var system = XPath.getSingleNode(document,"//input[@id='system_input']").value; //Récupération SS
 	var rows = XPath.getUnorderedSnapshotNodes(document,paths.rows);
 	
-	//log("lastAction : "+GM_getValue('lastAction',''));
-	if (GM_getValue('lastAction','') != 's:'+galaxy+':'+system){
+	//log("lastAction : "+GM_getValue(prefix_GMData +'lastAction',''));
+	if (GM_getValue(prefix_GMData +'lastAction','') != 's:'+galaxy+':'+system){
 		var coords = [galaxy, system];
 		if (isNaN(coords[0]) || isNaN(coords[1])) {
 			log('invalid system'+' '+coords[0]+' '+coords[1]);
@@ -369,7 +370,7 @@ log('row '+position+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon
 			);
 			XtenseRequest.set('lang',langUnivers);
 			XtenseRequest.send();
-			GM_setValue('lastAction','s:'+coords[0]+':'+coords[1]);
+			GM_setValue(prefix_GMData +'lastAction','s:'+coords[0]+':'+coords[1]);
 		}
 		get_galaxycontent();
 	}
@@ -378,8 +379,8 @@ log('row '+position+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon
 /* Fonction appelée lors d'évenement sur le chargement de la page d'alliance */
 function parse_ally_inserted(event) {
 		try {
-			//log("last_action="+GM_getValue('lastAction',''));
-			if (GM_getValue('lastAction','') != 'ally_list'){
+			//log("last_action="+GM_getValue(prefix_GMData +'lastAction',''));
+			if (GM_getValue(prefix_GMData +'lastAction','') != 'ally_list'){
 				setStatus(XLOG_NORMAL,Xl('ally_list_detected'));
 				
 				//var doc = event.target.ownerDocument;
@@ -413,7 +414,7 @@ function parse_ally_inserted(event) {
 					);
 					XtenseRequest.set('lang', langUnivers);
 					XtenseRequest.send();
-					GM_setValue('lastAction','ally_list')
+					GM_setValue(prefix_GMData +'lastAction','ally_list')
 				}
 				get_ally_content();
 			}
@@ -516,9 +517,9 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 				}
 			}
 			
-			if(GM_setValue('lastAction','') != 'r:'+type[0]+':'+type[1]+':'+offset){				
+			if(GM_setValue(prefix_GMData +'lastAction','') != 'r:'+type[0]+':'+type[1]+':'+offset){				
 				setStatus(XLOG_NORMAL,Xl('ranking_detected', Xl('ranking_'+type[0]), Xl('ranking_'+type[1])));
-				GM_setValue('lastAction','r:'+type[0]+':'+type[1]+':'+offset);
+				GM_setValue(prefix_GMData +'lastAction','r:'+type[0]+':'+type[1]+':'+offset);
 				if (offset != 0 && length != 0) {
 					XtenseRequest.set(
 						{
@@ -530,7 +531,6 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 							time: time
 						}
 					);
-					
                     XtenseRequest.set('lang',langUnivers);
                     /*	Le if est temporaire : sert de filtre pour ne pas envoyer les sous-classements militaires (construit, détruit, perdu et points honorifiques)
                      *	On envoie seulement le classement militaire "de base" (quand aucune sous-categorie n'est selectionnée)
@@ -539,9 +539,7 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
                     */
                     if (type[2] == '')
                         XtenseRequest.send();
-					
 				}
-				
 				//get_ranking_content();
 			}
 		}
@@ -557,7 +555,7 @@ function parse_overview(event){
 	
 	if(XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != null && XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != ""){
 		var planetData = getPlanetData();
-		if (GM_getValue('lastAction','') != 'planet_name:'+planetData.planet_name){
+		if (GM_getValue(prefix_GMData +'lastAction','') != 'planet_name:'+planetData.planet_name){
 			var cases = XPath.getStringValue(document,XtenseXpaths.overview.cases).trimInt();
 			var temperatures = XPath.getStringValue(document,XtenseXpaths.overview.temperatures);
 			var temperature_max = temperatures.match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
@@ -577,11 +575,11 @@ function parse_overview(event){
 				
 			XtenseRequest.set('lang',langUnivers);
 			XtenseRequest.send();
-			GM_setValue('lastAction','planet_name:'+planetData.planet_name);
+			GM_setValue(prefix_GMData +'lastAction','planet_name:'+planetData.planet_name);
 		}
 	}else{
         log("Temperature Content is not there! Retrying...");
-		if (!isChrome){ delaytodisplay_overview = setInterval( get_planet_details, 20);} // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
+		delaytodisplay_overview = setInterval( get_planet_details, 50); // Necessaire car la page est remplie par des scripts JS. (Au premier passage les balises contenant les infomations sont vides)
 	}
 }
 
@@ -845,7 +843,7 @@ function parse_rc() {
 		}
 
 		//Vaisseaux/Défenses/Joueur/Coordonnées/Technos
-		var rc_temp = eval(GM_getValue('rc-temp')); //Coordonnées de destination
+		var rc_temp = eval(GM_getValue(prefix_GMData +'rc-temp')); //Coordonnées de destination
 	   	for(var table=0;table<infos.snapshotLength;table++){
 			var dat = {};
 			var val = {};
@@ -1010,7 +1008,7 @@ function parse_messages(){
 	data.type = '';
 	
 	// Messages de joueurs
-	if(GM_getValue('handle.msg.msg').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.msg').toString() == 'true') {
 		if (XPath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
 			var m = from.match(new RegExp(XtenseRegexps.userNameAndCoords));
 			if(m) {
@@ -1034,7 +1032,7 @@ function parse_messages(){
 	}
 	
 	// Messages d'alliance
-	if(GM_getValue('handle.msg.ally').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.ally').toString() == 'true') {
 		var m = from.match(new RegExp(XtenseRegexps.ally));
 		if(m){
 			var contentNode = XPath.getSingleNode(document,paths.contents['ally_msg']);
@@ -1047,7 +1045,7 @@ function parse_messages(){
 	}
 	
 	// Espionnages perso
-	if(GM_getValue('handle.msg.spy').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.spy').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['espionage of']+XtenseRegexps.planetNameAndCoords));
 		if(m){
 			setStatus(XLOG_NORMAL,Xl('re_detected'));
@@ -1073,7 +1071,7 @@ function parse_messages(){
 	}
 	
 	// Espionnages ennemis
-	 if(GM_getValue('handle.msg.ennemy.spy').toString() == 'true') {
+	 if(GM_getValue(prefix_GMData +'handle.msg.ennemy.spy').toString() == 'true') {
 		if(subject.match(new RegExp(locales['espionnage action']))) {
 			var contentNode = XPath.getSingleNode(document,paths.contents['ennemy_spy']);
 			var rawdata = contentNode.textContent.trim();
@@ -1089,17 +1087,17 @@ function parse_messages(){
 	}
 	
 	//RC
-	if(GM_getValue('handle.msg.rc').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.rc').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['combat of']));
 		if (m!=null){
 			var rapport = XPath.getStringValue(document,paths.contents['rc']).trim();
 			var m2 = rapport.match(new RegExp(locales['combat defence']+XtenseRegexps.planetNameAndCoords));
-			if (m2) GM_setValue('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+			if (m2) GM_setValue(prefix_GMData +'rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
 		}
 	}
 	
 	// Recyclages
-	if(GM_getValue('handle.msg.rc.cdr').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.rc.cdr').toString() == 'true') {
 		if(from.match(new RegExp(locales['fleet'])) 
 					&& subject.match(new RegExp(locales['harvesting']))) {
 		 	var m = subject.match(new RegExp(XtenseRegexps.coords));
@@ -1120,7 +1118,7 @@ function parse_messages(){
 	}
 	
 	// Expeditions
-	if(GM_getValue('handle.msg.expeditions').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.expeditions').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['expedition result']+XtenseRegexps.planetCoords));
 		var m2 = from.match(new RegExp(locales['fleet command']));
 		
@@ -1135,7 +1133,7 @@ function parse_messages(){
 	}
 
 	// Commerce
-	if(GM_getValue('handle.msg.commerce').toString() == 'true') {
+	if(GM_getValue(prefix_GMData +'handle.msg.commerce').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['trade message 1']));
 		var m2 = subject.match(new RegExp(locales['trade message 2']));
 					
@@ -1171,7 +1169,7 @@ function parse_messages(){
 			
 			// Récupération de mes planètes
 			//var mesPlanetes = XPath.getOrderedSnapshotNodes(window.parent.document,XtenseXpaths.planetData['coords']);
-			var mesPlanetes = GM_getValue('my.planets','').split(';');
+			var mesPlanetes = GM_getValue(prefix_GMData +'my.planets','').split(';');
 			
 			var isMyPlanet=false;
 			log("J'ai "+mesPlanetes.length+" planètes");
@@ -1283,7 +1281,7 @@ function getElementInSpyReport(RE,elem) {
 
 /* Fonction d'envoi manuel */
 function manual_send(){	
-	GM_setValue('manual.send','true');
+	GM_setValue(prefix_GMData +'manual.send','true');
 	displayXtense();
 	setStatus(XLOG_SEND,Xl('wait_send'));
 }
@@ -1399,24 +1397,7 @@ function get_ranking_content(){
 /* Fonction ajoutant lancant le parsing de la vue générale quand celle-ci est chargée */
 function get_planet_details(){	
 	setStatus(XLOG_NORMAL,Xl('overview_detected'));
-	
-	if (isChrome) //Pour Chrome :-)
-	{	
-        log("In get_planet_details()");
-		/* Page Overview */
-		
-		var target = document.getElementById('planetDetails');
-		//target.removeEventListener("DOMNodeInserted");
-		//target.removeEventListener("DOMContentLoaded");
-		target.addEventListener("DOMNodeInserted", parse_overview, false);		
-		//target.addEventListener("DOMContentLoaded", parse_overview, false);		
-
-	}else{// Pour Firefox Notamment
-    
-			parse_overview();
-
-	}
-
+	parse_overview();
 }
 /********************** Fin Utilities des Parsings **********************/
 
@@ -1453,31 +1434,31 @@ function displayOptions(){
 	var opt_debug_mode = ' ';
 	
 	// Récupération des préférences  : Serveur
-	if(GM_getValue('server.check','false').toString() == 'true'){server_check += 'checked';}
+	if(GM_getValue(prefix_GMData +'server.check','false').toString() == 'true'){server_check += 'checked';}
 	
 	// Récupération des préférences  : Pages
-	if(GM_getValue('handle.overview','false').toString() == 'true'){handle_overview += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.overview','false').toString() == 'true'){handle_overview += 'checked';}
     
-	if(GM_getValue('handle.buildings','false').toString() == 'true'){handle_buildings += 'checked';}
-	if(GM_getValue('handle.station','false').toString() == 'true'){handle_station += 'checked';}
-	if(GM_getValue('handle.researchs','false').toString() == 'true'){handle_researchs += 'checked';}
-	if(GM_getValue('handle.shipyard','false').toString() == 'true'){handle_shipyard += 'checked';}
-	if(GM_getValue('handle.system','false').toString() == 'true'){handle_system += 'checked';}
-	if(GM_getValue('handle.defense','false').toString() == 'true'){handle_defense += 'checked';}
-	if(GM_getValue('handle.alliance','false').toString() == 'true'){handle_alliance += 'checked';}
-	if(GM_getValue('handle.stats','false').toString() == 'true'){handle_stats += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.buildings','false').toString() == 'true'){handle_buildings += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.station','false').toString() == 'true'){handle_station += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.researchs','false').toString() == 'true'){handle_researchs += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.shipyard','false').toString() == 'true'){handle_shipyard += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.system','false').toString() == 'true'){handle_system += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.defense','false').toString() == 'true'){handle_defense += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.alliance','false').toString() == 'true'){handle_alliance += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.stats','false').toString() == 'true'){handle_stats += 'checked';}
 	
-	if(GM_getValue('handle.msg.msg','false').toString() == 'true'){handle_msg_msg += 'checked';}
-	if(GM_getValue('handle.msg.ally','false').toString() == 'true'){handle_msg_ally += 'checked';}
-	if(GM_getValue('handle.msg.spy','false').toString() == 'true'){handle_msg_spy += 'checked';}
-	if(GM_getValue('handle.msg.ennemy.spy','false').toString() == 'true') {handle_msg_ennemy_spy += 'checked';}
-	if(GM_getValue('handle.msg.rc','false').toString() == 'true'){handle_msg_rc += 'checked';}
-	if(GM_getValue('handle.msg.rc.cdr','false') == 'true'){handle_msg_rc_cdr += 'checked';}
-	if(GM_getValue('handle.msg.expeditions','false').toString() == 'true'){handle_msg_expeditions += 'checked';}
-	if(GM_getValue('handle.msg.commerce','false').toString() == 'true'){handle_msg_commerce += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.msg','false').toString() == 'true'){handle_msg_msg += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.ally','false').toString() == 'true'){handle_msg_ally += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.spy','false').toString() == 'true'){handle_msg_spy += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.ennemy.spy','false').toString() == 'true') {handle_msg_ennemy_spy += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.rc','false').toString() == 'true'){handle_msg_rc += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.rc.cdr','false').toString() == 'true'){handle_msg_rc_cdr += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.expeditions','false').toString() == 'true'){handle_msg_expeditions += 'checked';}
+	if(GM_getValue(prefix_GMData +'handle.msg.commerce','false').toString() == 'true'){handle_msg_commerce += 'checked';}
 	
 	// Récupération des préférences  : Options
-    if(GM_getValue('debug.mode','false').toString() == 'true'){opt_debug_mode += ' checked';}
+    if(GM_getValue(prefix_GMData +'debug.mode','false').toString() == 'true'){opt_debug_mode += ' checked';}
 	
 					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
@@ -1502,17 +1483,17 @@ function displayOptions(){
 	options+= '<tbody>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">URL OGSpy</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue('server.url.plugin','http://VOTRESITEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
+	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue(prefix_GMData +'server.url.plugin','http://VOTRESITEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
 	options+= '</tr>';
 	options+= '<tr><td>&#160;</td><td>&#160;</td></tr>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Utilisateur</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.user" value="'+GM_getValue('server.user','utilisateur')+'" size="35" alt="24" type="text"/></td>';
+	options+= '<td class="value"><input class="speed" id="server.user" value="'+GM_getValue(prefix_GMData +'server.user','utilisateur')+'" size="35" alt="24" type="text"/></td>';
 	options+= '</tr>';
 	options+= '<tr><td>&#160;</td><td>&#160;</td></tr>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Mot de passe</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.pwd" value="'+GM_getValue('server.pwd','mot de passe')+'" size="35" alt="24" type="password"/></td>';
+	options+= '<td class="value"><input class="speed" id="server.pwd" value="'+GM_getValue(prefix_GMData +'server.pwd','mot de passe')+'" size="35" alt="24" type="password"/></td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Initialiser le serveur ?</label></td>';
@@ -1623,11 +1604,21 @@ function displayOptions(){
 	options += '<colgroup><col width="20%"/><col/></colgroup>';
 	options += '<thead><tr><th class="Xtense_th" colspan="2" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 	options+= '<tbody>';
-	/*options+= '<tr>';
-	options+= '<td class="champ"><label class="styled textBeefy">A propos</label></td>';
-	options+= '<td class="value"><input class="speed" id="server.url.plugin" value="'+GM_getValue('server.url.plugin','http://VOTREPAGEPERSO/VOTREDOSSIEROGSPY/mod/xtense/xtense.php')+'" size="35" alt="24" type="text"/></td>';
-	options+= '</tr>';*/
-	options+= '</tbody></table>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">A Propos de Xtense:</td>';
+	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+    options+= '<td class="champ"><label class="styled textBeefy">Xtense GM par Jedinight et DarkNoon.<br /> Support disponible auprès de <a href="http://www.ogsteam.fr" target="_blank">l\'OGSteam</a></label></td>';
+	options+= '<tr>';
+	options+= '<td colspan="6">&nbsp;</td>';
+	options+= '</tr>';
+        options+= '<td class="champ"><label class="styled textBeefy">Xtense GM is an OGSteam Software © 2005-2012</label></td>';
+    options+= '</tbody></table>';
 	options+= '</div>';
 	options+= '<br/><br/></div>'; //fin Tableau
     
@@ -1660,7 +1651,7 @@ function displayOptions(){
 		if(inputOptions.snapshotLength > 0){					
 			for(var i=0;i<inputOptions.snapshotLength;i++){
 				var input = inputOptions.snapshotItem(i);
-				GM_setValue( input.id , input.value);
+				GM_setValue(prefix_GMData + input.id , input.value);
 			}
 		}
 		// Sauvegarde des checkbox
@@ -1669,8 +1660,8 @@ function displayOptions(){
 		if(checkboxOptions.snapshotLength > 0){
 			for(var j=0;j<checkboxOptions.snapshotLength;j++){
 				var checkbox = checkboxOptions.snapshotItem(j);
-				//log('GM_setValue('+checkbox.id+' , '+checkbox.checked+');');
-				GM_setValue(checkbox.id , checkbox.checked);
+				//log('GM_setValue(prefix_GMData +'+checkbox.id+' , '+checkbox.checked+');');
+				GM_setValue(prefix_GMData +checkbox.id , checkbox.checked);
 				
 			}
 		}	
@@ -1687,7 +1678,7 @@ function displayXtense(){
     // Ajout du Menu Options (Barre latérale de Ogame)
     
     //Lien vers OGSpy
-    var ogspy_link = GM_getValue('server.url.plugin','http://www.ogsteam.fr').split('mod')[0];
+    var ogspy_link = GM_getValue(prefix_GMData +'server.url.plugin','http://www.ogsteam.fr').split('mod')[0];
     
     // Page classique
     if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
@@ -1695,7 +1686,7 @@ function displayXtense(){
     
     	var aAttrs = "";    
     	var urlIcone = "";var onClick=null;
-    	if(GM_getValue('manual.send','false').toString() =='true'){
+    	if(GM_getValue(prefix_GMData +'manual.send','false').toString() =='true'){
     		aAttrs = 'onClick="window.location.reload()" target="_self"';
     	} else {
     		aAttrs='href="'+ ogspy_link +'" target="blank_" ';
@@ -2069,14 +2060,6 @@ writemessage : {
 /* Permet d'initialiser la communication avec OGSPY (serveur, BDD)*/
 function initOGSpyCommunication (){
 
-	/* **************************************** */
-	XtenseOptions = {
-		server_ids : {
-			url : "server.url.plugin",
-			user : "server.user",
-			password : "server.pwd"
-		}
-	}
 // Toutes les unites du jeu
 // id : nom du champ dans la bdd
 	XtenseDatabase = {
@@ -2110,11 +2093,11 @@ function initOGSpyCommunication (){
 		data : {},
 		send : function (){
 		
-				var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(XtenseOptions.server_ids.user,'') + '&password=' + MD5(SHA1(GM_getValue(XtenseOptions.server_ids.password,''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData();
-				log("sending " + postData + " to " + GM_getValue(XtenseOptions.server_ids.url,'') + " from " + urlUnivers);
+				var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(prefix_GMData +'server.user','') + '&password=' + MD5(SHA1(GM_getValue(prefix_GMData +'server.pwd',''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData();
+				log("sending " + postData + " to " + GM_getValue(prefix_GMData +'server.url.plugin','') + " from " + urlUnivers);
 				new Xajax(
 				{
-					url: GM_getValue(XtenseOptions.server_ids.url,''),
+					url: GM_getValue(prefix_GMData +'server.url.plugin',''),
 					post: postData,
 					callback: null,
 					scope: this
@@ -2163,11 +2146,11 @@ function initOGSpyCommunication (){
 			return uri;
 		},
 		check : function(isCheck){
-			var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(XtenseOptions.server_ids.user,'') + '&password=' + MD5(SHA1(GM_getValue(XtenseOptions.server_ids.password,''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData()+(GM_getValue('server.check','false')=='true'?'&server_check=1':'');
-				//log("sending " + postData + " to " + GM_getValue(XtenseOptions.server_ids.url,'') + " from " + urlUnivers);
+			var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(prefix_GMData +'server.user','') + '&password=' + MD5(SHA1(GM_getValue(prefix_GMData + 'server.pwd',''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData()+(GM_getValue(prefix_GMData +'server.check','false').toString() =='true'?'&server_check=1':'');
+				log("sending " + postData + " to " + GM_getValue(prefix_GMData +'server.url.plugin','') + " from " + urlUnivers);
 				new Xajax(
 				{
-					url: GM_getValue(XtenseOptions.server_ids.url,''),
+					url: GM_getValue(prefix_GMData +'server.url.plugin',''),
 					post: postData,
 					callback: null,
 					scope: this
@@ -2185,7 +2168,7 @@ function handleResponse(Response) {
 	log(Response.content);
 	//if (Server.cached()) var message_start = '"'+Server.name+'" : ';
 	//else var message_start = Xl('response start', Server.n+1);
-	var message_start = '"'+GM_getValue('server.name','')+'" : ';
+	var message_start = '"'+GM_getValue(prefix_GMData +'server.name','')+'" : ';
 	
 	//var extra = {Request: Request, Server: Server, Response: Response, page: Request.data.type};
 	if (Response.status != 200) {
@@ -2287,7 +2270,7 @@ function handleResponse(Response) {
 			setStatus(type,'['+data.execution+' ms] ' + message_start + message);
 			//Request.Tab.setStatus(message, type, extra);
 		} else {
-			GM_setValue('server.name',data.servername);
+			GM_setValue(prefix_GMData +'server.name',data.servername);
 			log(data.servername);
 		}
 	}
@@ -2653,7 +2636,7 @@ if (XtenseMetas.getLanguage() == 'en') {
 				}
 			},
 			'regxps' : {
-				'time' : 'Les flottes suivantes s\'affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
+				'time' : 'Les flottes suivantes s\`affrontent \\((\\d+).(\\d+).(\\d+) (\\d+):(\\d+):(\\d+)\\):',
 				'round' : {
 					'a_nb' : 'La flotte attaquante tire (.*) fois ',
 					'a_shoot' : 'avec une force totale de (.*) sur le défenseur.',
@@ -2860,7 +2843,7 @@ function save_my_planets_coords(){
 			pls += mesPlanetes.snapshotItem(i).textContent.trim()+((i<(mesPlanetes.snapshotLength - 1))?";":"");
 		}
 	}
-	GM_setValue('my.planets',pls);
+	GM_setValue(prefix_GMData +'my.planets',pls);
 }
 
 // Récupération des ressources d'une planète
