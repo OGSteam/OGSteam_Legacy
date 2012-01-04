@@ -131,7 +131,14 @@ switch ($pub_subaction) {
 </tr>
 </table>
 <br><br><br>
-<?php	
-page_footer();
+<?php
+if (!isset($pub_subaction)) $pub_subaction = "convert";
+	if ($pub_subaction !== "preview" && $pub_subaction !== "temp")
+		{
+		require_once("views/page_header.php");
+		require_once('mod/hofrc/Pages/include.php');
+		
+		page_footer();
+		}
 require_once("views/page_tail.php");
 ?>
