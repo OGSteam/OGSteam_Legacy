@@ -9,10 +9,9 @@
 
 // Variables Xtense
 var VERSION = "2.3.14.6";
-var PLUGIN_REQUIRED = "2.3.14";
+var PLUGIN_REQUIRED = "2.3.10";
 var callback = null;
 var nomScript = 'Xtense';
-
 
 var Xlang = {};
 var XtenseLocales = { };
@@ -230,7 +229,7 @@ checkMaJ();
 if(GM_exist('server.check') && GM_getValue('server.check','false')=='true') { // Initialisation du serveur demandée ? 
 	XtenseRequest.check();
 } 
-setStatus(XLOG_NORMAL,Xl('toolbar_activated'));
+setStatus(XLOG_NORMAL,Xl('Xtense_activated'));
 handle_current_page();
 //exit !!
 /***************************** Fin Main *********************************/
@@ -566,8 +565,7 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 
 /* Page Overview */
 function parse_overview(event){
-    log("In Parse Overview() ");
-	
+
 	if(typeof( delaytodisplay_overview ) != "undefined") { clearInterval(delaytodisplay_overview);} //Supression du setinterval si il existe
 	
 	if(XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != null && XPath.getStringValue(document,XtenseXpaths.overview.temperatures) != ""){
@@ -1044,9 +1042,6 @@ function parse_messages(){
 				data.subject = subject;
 				data.message = message;
 			// fin correctif	
-			
-			
-			
 		}
 	}
 	
@@ -1899,8 +1894,8 @@ ally_members_list : {
 },
 
 overview : {
-	cases : "//*[@id='diameterContentField']/span[2]/text()",
-	temperatures : "//*[@id='temperatureContentField']/text()"
+	cases : ".//*[@id='diameterContentField']/span[2]/text()",
+	temperatures : ".//*[@id='temperatureContentField']/text()"
 },
 
 galaxy : { 
@@ -2319,292 +2314,241 @@ function Ximplements (object, implement) {
 }
 /* Fonction initialisation des locales des status (retours OGSPY) */
 function initLocales(){
-	if(isChrome){
-    Ximplements(Xlang, {
-        'error_start' : 'ERREUR: ',
-        'http_status_403' : 'statut 403, Impossible d\'acceder au plugin Xtense.',
-        'http_status_404' : 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
-        'http_status_500' : 'statut 500: Erreur interne au serveur.',
-        'http_timeout' : 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
-        'http_status_unknown' : 'statut http inconnu: ',
+    Xlang = {
+        http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
+        http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
+        http_status_500: 'statut 500: Erreur interne au serveur.',
+        http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
         //
-        'incorrect_response' : 'Réponse incorrecte',
-        'empty_response' : 'Réponse du plugin vide',
-        'invalid_response' : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
+        empty_response : 'Réponse du plugin vide',
+        invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
         //
-        'php_version' : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
-        'error_occurs' : 'Une erreur est survenue',
-        'wrong_version_plugin' : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
-        'wrong_version_xtense' : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-        'wrong_version_toolbar' : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
-        'server_active' : 'le serveur OGSpy est pour le moment désactivé',
-        'plugin_connections' : 'Connexions au plugin Xtense désactivées',
-        'plugin_config' : 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-        'plugin_univers' : 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-        'username' : 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
-        'password' : 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
-        'user_active' : 'Votre compte est inactif, vous ne pouvez pas vous connecter',
+        php_version : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
+        wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
+        wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+        wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
+        server_active: 'le serveur OGSpy est pour le moment désactivé',
+        plugin_connections: 'Connexions au plugin Xtense désactivées',
+        plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+        plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+        username: 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
+        password: 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
+        user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
         //
-        'informations' : 'Informations',
-        'server_name' : 'Nom du serveur OGSpy', // Server name
-        'version' : 'Version', // version
-        'grant_all' : 'Vous possédez tous les droits pour utiliser Xtense',
-        'grant_nothing' : 'Vous ne possédez aucune autorisation quant à l\'import de données sur votre OGSpy',
+        informations : 'Informations',
+        server_name : 'Nom du serveur OGSpy', // Server name TODO : A internationaliser dans les options
+        version : 'Version', // version
         //
-        'grant_can' : 'pouvez',
-        'grant_cannot' : 'ne pouvez pas',
-        'grant_system' : 'Vous $1 ajouter des systêmes solaires', // can / cannot
-        'grant_ranking' : 'Vous $1 ajouter des classements', // can / cannot
-        'grant_empire' : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
-        'grant_messages' : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
+        grant_can : 'pouvez',
+        grant_cannot : 'ne pouvez pas',
+        grant_system : 'Vous $1 ajouter des systêmes solaires', // can / cannot
+        grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
+        grant_empire : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
+        grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
         //
-        'checking_end' : 'VERIFICATION TERMINEE',
-        'checking_errors' : 'Une ou plusieurs erreurs sont survenues, vous pouvez soit retourner à la fenetre des options ou alors fermer cette fenetre sans prendre en compte les erreurs.',
-        'checking_success' : 'Aucune erreur à signaler, vous pouvez fermer les options',
+        unknow_page: 'Page inconnue',
+        Xtense_activated : 'Activer',
+        Xtense_deactivated : 'Desactiver',
+        wait_send: 'En attente de l\'envoi manuel des données',
+        unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension) TODO
         //
-        'connecting' : 'Connexion en cours : ', // Server url
-        'checking_server' : 'Verification du serveur OGSpy n°$1', // Server number
-        'toolbar_activated' : 'Barre d\'outils activée',
-        'toolbar_deactivated' : 'Barre d\'outils désactivée',
+        overview_detected: 'Vue générale détectée',
+        buildings_detected: 'Batiments détectés',
+        installations_detected: 'Installations détectés',
+        researchs_detected: 'Recherches détectés',
+        fleet_detected: 'Flotte détectée',
+        defense_detected: 'Défenses détectés',
+        messages_detected: 'Page de messages détectée',
+        ranking_detected: 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
+        ally_list_detected: 'Liste des joueurs de l\'alliance détectée',
+        system_detected: 'Système solaire détecté: ', // Galaxy, System
+        re_detected: 'Rapport d\'espionnage détecté',
+        rc_detected: 'Rapport de combat détecté',
+        res_detected: 'Message de commerce détecté',
         //
-        'ogspy_menu_tooltip' : 'Connexion automatique au serveur OGSpy',
+        ranking_player: 'joueurs',
+        ranking_ally: 'alliances',
+        ranking_points: 'points',
+        ranking_fleet: 'flotte',
+        ranking_research: 'recherches',
+        ranking_defense: 'défense',
+        ranking_buildings: 'bâtiments',
         //
-        'fatal_error' : 'Une erreur critique est survenue et a arrêté l\'exécution de Xtense',
-        'parsing_error' : 'Une erreur critique est survenue lors de la récupération des données de la page',
-        //
-        'no_ogspy_server' : 'Aucun serveur',
-        'no_server' : 'Aucun serveur disponible pour cet univers',
-        'unknow_page' : 'Page inconnue',
-        'activate' : 'Activer',
-        'deactivate' : 'Desactiver',
-        'wait_send' : 'En attente de l\'envoi manuel des données',
-        'unavailable_parser_lang' : 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
-        //
-        'overview_detected' : 'Vue générale détectée',
-        'buildings_detected' : 'Batiments détectés',
-        'installations_detected' : 'Installations détectés',
-        'researchs_detected' : 'Recherches détectés',
-        'fleet_detected' : 'Flotte détectée',
-        'defense_detected' : 'Défenses détectés',
-        'messages_detected' : 'Page de messages détectée',
-        'ranking_detected' : 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
-        'ally_list_detected' : 'Liste des joueurs de l\'alliance détectée',
-        'system_detected' : 'Système solaire détecté: $1:$2', // Galaxy, System
-        're_detected' : 'Rapport d\'espionnage détecté',
-        'rc_detected' : 'Rapport de combat détecté',
-        'res_detected' : 'Message de commerce détecté',
-        //
-        'no_researchs' : 'Aucune recherche à envoyer',
-        'no_defenses' : 'Aucune défense à envoyer',
-        'no_buildings' : 'Aucun bâtiment à envoyer',
-        'no_fleet' : 'Pas de flotte à envoyer',
-        //
-        'ranking_player' : 'joueurs',
-        'ranking_ally' : 'alliances',
-        'ranking_points' : 'points',
-        'ranking_fleet' : 'flotte',
-        'ranking_research' : 'recherches',
-        'ranking_defense' : 'défense',
-        'ranking_buildings' : 'bâtiments',
-        //
-        'invalid_system' : 'Systême solaire non pris en compte',
-        'invalid_ranking' : 'Page des statistiques invalide',
-        'invalid_rc' : 'Rapport de combat invalide (Contact perdu)',
-        'no_ranking' : 'Aucun classement à envoyer',
-        'no_messages' : 'Aucun message à envoyer',
-        'impossible_ranking' : 'Impossible de récupérer le classement alliance suivant les points par membre',
+        invalid_system : 'Systême solaire non pris en compte',
+        invalid_ranking : 'Page des statistiques invalide',
+        invalid_rc : 'Rapport de combat invalide (Contact perdu)',
+        no_ranking : 'Aucun classement à envoyer',
+        no_messages : 'Aucun message à envoyer',
+
         // Responses
-        'response_start' : 'Serveur $1 : ', // Serveur number
-        'http_status_unknow' : 'Code d\'erreur Inconnu $1', // Http status
-        'response_hack' : 'Les données envoyées ont été refusées par le plugin Xtense',
+        response_start: 'Serveur $1 : ', // Serveur number
+        http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
+        response_hack : 'Les données envoyées ont été refusées par le plugin Xtense',
         //
-        'error_php_version' : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
-        'error_wrong_version_plugin' : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
-        'error_wrong_version_xtense' : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-        'error_wrong_version_toolbar' : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
-        'error_server_active' : 'Serveur OGSpy inactif (Raison: $1)', // reason
-        'error_username' : 'Pseudo invalide',
-        'error_password' : 'Mot de passe invalide',
-        'error_user_active' : 'Votre compte est inactif',
-        'error_home_full' : 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
-        'error_plugin_connections' : 'Connexions au plugin Xtense non autorisées',
-        'error_plugin_config' : 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-        'error_plugin_univers' : 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-        'error_grant_start' : 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
-        'error_grant_empire' : 'des pages de votre empire (Bâtiments, Laboratoire...)',
-        'error_grant_messages' : 'des messages',
-        'error_grant_system' : 'des systêmes solaires',
-        'error_grant_ranking' : 'des classements',
+        error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
+        error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
+        error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+        error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
+        error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
+        error_username: 'Pseudo invalide',
+        error_password: 'Mot de passe invalide',
+        error_user_active: 'Votre compte est inactif',
+        error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
+        error_plugin_connections: 'Connexions au plugin Xtense non autorisées',
+        error_plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+        error_plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+        error_grant_start: 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
+        error_grant_empire: 'des pages de votre empire (Bâtiments, Laboratoire...)',
+        error_grant_messages: 'des messages',
+        error_grant_system: 'des systèmes solaires',
+        error_grant_ranking: 'des classements',
         //
-        'success_home_updated' : 'Espace personnel mis à jour ($1)', // Page name
-        'success_system' : 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
-        'success_ranking' : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
-        'success_rc' : 'Rapport de combat envoyé',
-        'success_rc_cdr' : 'Rapport de recyclage envoyé',
-        'success_ally_list' : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
-        'success_messages' : 'Message correctement envoyé',
-        'success_fleetSending' : 'Départ de flotte correctement envoyé',
-        'success_fleet' : 'Départ de flotte correctement envoyé',
-        'success_spy' : 'Rapport d\'espionnage correctement envoyé',
-        'success_res' : 'Message de commerce correctement envoyé',
-		'success_research' : 'Mise à jour des technologies effectuée ($1)',
+        success_home_updated : 'Espace personnel mis à jour ($1)', // Page name
+        success_system : 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
+        success_ranking : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
+        success_rc : 'Rapport de combat envoyé',
+        success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
+        success_messages : 'Message correctement envoyé',
+        success_fleetSending : 'Départ de flotte correctement envoyé',
+        success_spy : 'Rapport d\'espionnage correctement envoyé',
+        success_res : 'Message de commerce correctement envoyé',
+        success_research : 'Mise à jour des technologies effectuée',
+        success_buildings : 'Mise à jour des bâtiments effectuée',
+        success_station : 'Mise à jour des installations effectuée',
         //
-        'unknow_response' : 'Code réponse inconnu : "$1", data: "$2"', // code, content
+        unknow_response: 'Code réponse inconnu : "$1", data: "$2"', // code, content
         //
-        'page_overview' : 'Vue générale',
-        'page_buildings' : 'Bâtiments',
-        'page_installations' : 'Installations',
-        'page_labo' : 'Laboratoire',
-        'page_defense' : 'Défense',
-        'page_fleet' : 'Flotte',
-        'page_fleetSending' : 'Flotte',
+        page_overview: 'Vue générale',
+        page_buildings: 'Bâtiments',
+        page_installations: 'Installations',
+        page_labo: 'Laboratoire',
+        page_defense: 'Défense',
+        page_fleet: 'Flotte',
+        page_fleetSending: 'Départ de flotte',
         //
         //'PM':'MP',
-        'call_messages' : '-- Messages renvoyés par les appels'});
-	} else if(isFirefox){
-		Xlang = {
-			error_start : 'ERREUR: ',
-		    http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
-		    http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
-		    http_status_500: 'statut 500: Erreur interne au serveur.',
-		    http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
-		    http_status_unknown : 'statut http inconnu: ',
-		    //
-		    incorrect_response : 'Réponse incorrecte',
-		    empty_response : 'Réponse du plugin vide',
-		    invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
-		    //
-		    php_version : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
-		    error_occurs : 'Une erreur est survenue',
-		    wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
-		    wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-		    wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
-		    server_active: 'le serveur OGSpy est pour le moment désactivé',
-		    plugin_connections: 'Connexions au plugin Xtense désactivées',
-		    plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-		    plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-		    username: 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
-		    password: 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
-		    user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
-		    //
-		    informations : 'Informations',
-		    server_name : 'Nom du serveur OGSpy', // Server name
-		    version : 'Version', // version
-		    grant_all : 'Vous possédez tous les droits pour utiliser Xtense',
-		    grant_nothing : 'Vous ne possédez aucune autorisation quant à l\'import de données sur votre OGSpy',
-		    //
-		    grant_can : 'pouvez',
-		    grant_cannot : 'ne pouvez pas',
-		    grant_system : 'Vous $1 ajouter des systêmes solaires', // can / cannot
-		    grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
-		    grant_empire : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
-		    grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
-		    //
-		    checking_end : 'VERIFICATION TERMINEE',
-		    checking_errors : 'Une ou plusieurs erreurs sont survenues, vous pouvez soit retourner à la fenetre des options ou alors fermer cette fenetre sans prendre en compte les erreurs.',
-		    checking_success : 'Aucune erreur à signaler, vous pouvez fermer les options',
-		    //
-		    connecting : 'Connexion en cours : ', // Server url
-		    checking_server : 'Verification du serveur OGSpy n°$1', // Server number
-		    toolbar_activated : 'Barre d\'outils activée',
-		    toolbar_deactivated : 'Barre d\'outils désactivée',
-		    //
-		    ogspy_menu_tooltip: 'Connexion automatique au serveur OGSpy',
-		    //
-		    fatal_error : 'Une erreur critique est survenue et a arrêté l\'exécution de Xtense',
-		    parsing_error : 'Une erreur critique est survenue lors de la récupération des données de la page',
-		    //
-		    no_ogspy_server: 'Aucun serveur',
-		    no_server : 'Aucun serveur disponible pour cet univers',
-		    unknow_page: 'Page inconnue',
-		    activate : 'Activer',
-		    deactivate : 'Desactiver',
-		    wait_send: 'En attente de l\'envoi manuel des données',
-		    unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
-		    //
-		    overview_detected: 'Vue générale détectée',
-		    buildings_detected: 'Batiments détectés',
-		    installations_detected: 'Installations détectés',
-		    researchs_detected: 'Recherches détectés',
-		    fleet_detected: 'Flotte détectée',
-		    defense_detected: 'Défenses détectés',
-		    messages_detected: 'Page de messages détectée',
-		    ranking_detected: 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
-		    ally_list_detected: 'Liste des joueurs de l\'alliance détectée',
-		    system_detected: 'Système solaire détecté: ', // Galaxy, System
-		    re_detected: 'Rapport d\'espionnage détecté',
-		    rc_detected: 'Rapport de combat détecté',
-		    res_detected: 'Message de commerce détecté',
-		    //
-		    no_researchs : 'Aucune recherche à envoyer',
-		    no_defenses : 'Aucune défense à envoyer',
-		    no_buildings : 'Aucun bâtiment à envoyer',
-		    no_fleet : 'Pas de flotte à envoyer',
-		    //
-		    ranking_player: 'joueurs',
-		    ranking_ally: 'alliances',
-		    ranking_points: 'points',
-		    ranking_fleet: 'flotte',
-		    ranking_research: 'recherches',
-		    ranking_defense: 'défense',
-		    ranking_buildings: 'bâtiments',
-		    //
-		    invalid_system : 'Systême solaire non pris en compte',
-		    invalid_ranking : 'Page des statistiques invalide',
-		    invalid_rc : 'Rapport de combat invalide (Contact perdu)',
-		    no_ranking : 'Aucun classement à envoyer',
-		    no_messages : 'Aucun message à envoyer',
-		    impossible_ranking : 'Impossible de récupérer le classement alliance suivant les points par membre',
-		    // Responses
-		    response_start: 'Serveur $1 : ', // Serveur number
-		    http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
-		    response_hack : 'Les données envoyées ont été refusées par le plugin Xtense',
-		    //
-		    error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
-		    error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
-		    error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-		    error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
-		    error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
-		    error_username: 'Pseudo invalide',
-		    error_password: 'Mot de passe invalide',
-		    error_user_active: 'Votre compte est inactif',
-		    error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
-		    error_plugin_connections: 'Connexions au plugin Xtense non autorisées',
-		    error_plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-		    error_plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-		    error_grant_start: 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
-		    error_grant_empire: 'des pages de votre empire (Bâtiments, Laboratoire...)',
-		    error_grant_messages: 'des messages',
-		    error_grant_system: 'des systêmes solaires',
-		    error_grant_ranking: 'des classements',
-		    //
-		    success_home_updated : 'Espace personnel mis à jour ($1)', // Page name
-		    success_system : 'Mise à jour du système solaire effectuée', // Galaxy, System
-		    success_ranking : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
-		    success_rc : 'Rapport de combat envoyé',
-		    success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
-		    success_messages : 'Message correctement envoyé',
-		    success_fleetSending : 'Départ de flotte correctement envoyé',
-		    success_spy : 'Rapport d\'espionnage correctement envoyé',
-		    success_res : 'Message de commerce correctement envoyé',
-			success_research : 'Mise à jour des technologies effectuée',
-			success_buildings : 'Mise à jour des bâtiments effectuée',
-			success_station : 'Mise à jour des installations effectuée',
-		    //
-		    unknow_response: 'Code réponse inconnu : "$1", data: "$2"', // code, content
-		    //
-		    page_overview: 'Vue générale',
-		    page_buildings: 'Bâtiments',
-		    page_installations: 'Installations',
-		    page_labo: 'Laboratoire',
-		    page_defense: 'Défense',
-		    page_fleet: 'Flotte',
-		    page_fleetSending: 'Départ de flotte',
-		    //
-		    //'PM':'MP',
-		    call_messages : '-- Messages renvoyés par les appels'
-    };  
-	}
+        call_messages : '-- Messages renvoyés par les appels'
+};
+if (XtenseMetas.getLanguage() == 'en') { 
+//TODO : à traduire !! 
+    Xlang = {
+        http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
+        http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
+        http_status_500: 'statut 500: Erreur interne au serveur.',
+        http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
+        //
+        empty_response : 'Réponse du plugin vide',
+        invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
+        //
+        php_version : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
+        wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
+        wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+        wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
+        server_active: 'le serveur OGSpy est pour le moment désactivé',
+        plugin_connections: 'Connexions au plugin Xtense désactivées',
+        plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+        plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+        username: 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
+        password: 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
+        user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
+        //
+        informations : 'Informations',
+        server_name : 'Nom du serveur OGSpy', // Server name TODO : A internationaliser dans les options
+        version : 'Version', // version
+        //
+        grant_can : 'pouvez',
+        grant_cannot : 'ne pouvez pas',
+        grant_system : 'Vous $1 ajouter des systêmes solaires', // can / cannot
+        grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
+        grant_empire : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
+        grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
+        //
+        unknow_page: 'Page inconnue',
+        Xtense_activated : 'Activer',
+        Xtense_deactivated : 'Desactiver',
+        wait_send: 'En attente de l\'envoi manuel des données',
+        unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension) TODO
+        //
+        overview_detected: 'Vue générale détectée',
+        buildings_detected: 'Batiments détectés',
+        installations_detected: 'Installations détectés',
+        researchs_detected: 'Recherches détectés',
+        fleet_detected: 'Flotte détectée',
+        defense_detected: 'Défenses détectés',
+        messages_detected: 'Page de messages détectée',
+        ranking_detected: 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
+        ally_list_detected: 'Liste des joueurs de l\'alliance détectée',
+        system_detected: 'Système solaire détecté: ', // Galaxy, System
+        re_detected: 'Rapport d\'espionnage détecté',
+        rc_detected: 'Rapport de combat détecté',
+        res_detected: 'Message de commerce détecté',
+        //
+        ranking_player: 'joueurs',
+        ranking_ally: 'alliances',
+        ranking_points: 'points',
+        ranking_fleet: 'flotte',
+        ranking_research: 'recherches',
+        ranking_defense: 'défense',
+        ranking_buildings: 'bâtiments',
+        //
+        invalid_system : 'Systême solaire non pris en compte',
+        invalid_ranking : 'Page des statistiques invalide',
+        invalid_rc : 'Rapport de combat invalide (Contact perdu)',
+        no_ranking : 'Aucun classement à envoyer',
+        no_messages : 'Aucun message à envoyer',
+
+        // Responses
+        response_start: 'Serveur $1 : ', // Serveur number
+        http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
+        response_hack : 'Les données envoyées ont été refusées par le plugin Xtense',
+        //
+        error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
+        error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
+        error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
+        error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
+        error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
+        error_username: 'Pseudo invalide',
+        error_password: 'Mot de passe invalide',
+        error_user_active: 'Votre compte est inactif',
+        error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
+        error_plugin_connections: 'Connexions au plugin Xtense non autorisées',
+        error_plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
+        error_plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
+        error_grant_start: 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
+        error_grant_empire: 'des pages de votre empire (Bâtiments, Laboratoire...)',
+        error_grant_messages: 'des messages',
+        error_grant_system: 'des systèmes solaires',
+        error_grant_ranking: 'des classements',
+        //
+        success_home_updated : 'Espace personnel mis à jour ($1)', // Page name
+        success_system : 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
+        success_ranking : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
+        success_rc : 'Rapport de combat envoyé',
+        success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
+        success_messages : 'Message correctement envoyé',
+        success_fleetSending : 'Départ de flotte correctement envoyé',
+        success_spy : 'Rapport d\'espionnage correctement envoyé',
+        success_res : 'Message de commerce correctement envoyé',
+        success_research : 'Mise à jour des technologies effectuée',
+        success_buildings : 'Mise à jour des bâtiments effectuée',
+        success_station : 'Mise à jour des installations effectuée',
+        //
+        unknow_response: 'Code réponse inconnu : "$1", data: "$2"', // code, content
+        //
+        page_overview: 'Vue générale',
+        page_buildings: 'Bâtiments',
+        page_installations: 'Installations',
+        page_labo: 'Laboratoire',
+        page_defense: 'Défense',
+        page_fleet: 'Flotte',
+        page_fleetSending: 'Départ de flotte',
+        //
+        //'PM':'MP',
+        call_messages : '-- Messages renvoyés par les appels'
+  
+    };
+
+}
 	Ximplements(XtenseLocales , {
 	'fr': {
 		'spy reports' : {
