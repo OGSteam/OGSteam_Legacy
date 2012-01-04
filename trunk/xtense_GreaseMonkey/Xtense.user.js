@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name		Xtense-dev
-// @version     2.3.14.6
+// @version     2.3.14.7
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.6";
+var VERSION = "2.3.14.7";
 var PLUGIN_REQUIRED = "2.3.10";
 var callback = null;
 var nomScript = 'Xtense';
@@ -101,7 +101,7 @@ function err(type, message)
                }, 0);
 } 	
 function log(message){
-	if(GM_getValue('debug.mode','false')) { console.log(nomScript + " says : " + message); }
+	if(GM_getValue('debug.mode','false').toString() == 'true') { console.log(nomScript + " says : " + message); }
 }	
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
@@ -213,7 +213,7 @@ initParsers();
 initLocales();    
 displayXtense();
 checkMaJ();
-if(GM_getValue('server.check','false')=='true') { // Initialisation du serveur demandée ? 
+if(GM_getValue('server.check','false').toString() =='true') { // Initialisation du serveur demandée ? 
 	XtenseRequest.check();
 } 
 setStatus(XLOG_NORMAL,Xl('Xtense_activated'));
@@ -240,17 +240,17 @@ function handle_current_page(){
 	var regStats = new RegExp(/(highscore)/);
 	
 	if(regOption.test(url)){ displayOptions();}
-	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false') || GM_getValue('manual.send','false')){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false') || GM_getValue('manual.send','false')){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false') || GM_getValue('manual.send','false')){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false') || GM_getValue('manual.send','false')){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false') || GM_getValue('manual.send','false')){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false') || GM_getValue('manual.send','false')){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false')){parse_messages();}} 
-	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false')){parse_rc();}}
-	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
-	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false') || GM_getValue('manual.send','false')){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
+	else if(regGalaxy.test(url))  	{ if(GM_getValue('handle.system','false').toString() == 'true'|| GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_galaxycontent();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regOverview.test(url))	{ save_my_planets_coords(); if(GM_getValue('handle.overview','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){get_planet_details();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regResearch.test(url))	{ if(GM_getValue('handle.researchs','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_researchs();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regBuildings.test(url))	{ if(GM_getValue('handle.buildings','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_buildings();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStation.test(url))	{ if(GM_getValue('handle.station','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_station();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue('handle.shipyard','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_shipyard();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regDefense.test(url))	{ if(GM_getValue('handle.defense','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){parse_defense();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regMessages.test(url))	{ if(GM_getValue('handle.msg.msg','false').toString() == 'true'){parse_messages();}} 
+	else if(regCombatreport.test(url))	{ if(GM_getValue('handle.msg.rc','false').toString() == 'true'){parse_rc();}}
+	else if(regAlliance.test(url))	{ if(GM_getValue('handle.alliance','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_ally_content();GM_setValue('manual.send','false');} else { manual_send(); }}
+	else if(regStats.test(url))	{ if(GM_getValue('handle.stats','false').toString() == 'true' || GM_getValue('manual.send','false').toString() == 'true'){GM_setValue('lastAction','');get_ranking_content();GM_setValue('manual.send','false');} else { manual_send(); }} 
 	else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
 }
 
@@ -1010,7 +1010,7 @@ function parse_messages(){
 	data.type = '';
 	
 	// Messages de joueurs
-	if(GM_getValue('handle.msg.msg')) {
+	if(GM_getValue('handle.msg.msg').toString() == 'true') {
 		if (XPath.getOrderedSnapshotNodes(document,paths.reply).snapshotLength > 0) { // si bouton "repondre", c'est un mp
 			var m = from.match(new RegExp(XtenseRegexps.userNameAndCoords));
 			if(m) {
@@ -1034,7 +1034,7 @@ function parse_messages(){
 	}
 	
 	// Messages d'alliance
-	if(GM_getValue('handle.msg.ally')) {
+	if(GM_getValue('handle.msg.ally').toString() == 'true') {
 		var m = from.match(new RegExp(XtenseRegexps.ally));
 		if(m){
 			var contentNode = XPath.getSingleNode(document,paths.contents['ally_msg']);
@@ -1047,7 +1047,7 @@ function parse_messages(){
 	}
 	
 	// Espionnages perso
-	if(GM_getValue('handle.msg.spy')) {
+	if(GM_getValue('handle.msg.spy').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['espionage of']+XtenseRegexps.planetNameAndCoords));
 		if(m){
 			setStatus(XLOG_NORMAL,Xl('re_detected'));
@@ -1073,7 +1073,7 @@ function parse_messages(){
 	}
 	
 	// Espionnages ennemis
-	 if(GM_getValue('handle.msg.ennemy.spy')) {
+	 if(GM_getValue('handle.msg.ennemy.spy').toString() == 'true') {
 		if(subject.match(new RegExp(locales['espionnage action']))) {
 			var contentNode = XPath.getSingleNode(document,paths.contents['ennemy_spy']);
 			var rawdata = contentNode.textContent.trim();
@@ -1089,7 +1089,7 @@ function parse_messages(){
 	}
 	
 	//RC
-	if(GM_getValue('handle.msg.rc')) {
+	if(GM_getValue('handle.msg.rc').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['combat of']));
 		if (m!=null){
 			var rapport = XPath.getStringValue(document,paths.contents['rc']).trim();
@@ -1099,7 +1099,7 @@ function parse_messages(){
 	}
 	
 	// Recyclages
-	if(GM_getValue('handle.msg.rc.cdr')) {
+	if(GM_getValue('handle.msg.rc.cdr').toString() == 'true') {
 		if(from.match(new RegExp(locales['fleet'])) 
 					&& subject.match(new RegExp(locales['harvesting']))) {
 		 	var m = subject.match(new RegExp(XtenseRegexps.coords));
@@ -1120,7 +1120,7 @@ function parse_messages(){
 	}
 	
 	// Expeditions
-	if(GM_getValue('handle.msg.expeditions')) {
+	if(GM_getValue('handle.msg.expeditions').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['expedition result']+XtenseRegexps.planetCoords));
 		var m2 = from.match(new RegExp(locales['fleet command']));
 		
@@ -1135,7 +1135,7 @@ function parse_messages(){
 	}
 
 	// Commerce
-	if(GM_getValue('handle.msg.commerce')) {
+	if(GM_getValue('handle.msg.commerce').toString() == 'true') {
 		var m = subject.match(new RegExp(locales['trade message 1']));
 		var m2 = subject.match(new RegExp(locales['trade message 2']));
 					
@@ -1453,32 +1453,32 @@ function displayOptions(){
 	var opt_debug_mode = ' ';
 	
 	// Récupération des préférences  : Serveur
-	if(GM_getValue('server.check','false')){server_check += 'checked';}
+	if(GM_getValue('server.check','false').toString() == 'true'){server_check += 'checked';}
 	
 	// Récupération des préférences  : Pages
-	if(GM_getValue('handle.overview','false')){handle_overview += 'checked';}
+	if(GM_getValue('handle.overview','false').toString() == 'true'){handle_overview += 'checked';}
     
-	if(GM_getValue('handle.buildings','false')){handle_buildings += 'checked';}
-	if(GM_getValue('handle.station','false')){handle_station += 'checked';}
-	if(GM_getValue('handle.researchs','false')){handle_researchs += 'checked';}
-	if(GM_getValue('handle.shipyard','false')){handle_shipyard += 'checked';}
-	if(GM_getValue('handle.system','false')){handle_system += 'checked';}
-	if(GM_getValue('handle.defense','false')){handle_defense += 'checked';}
-	if(GM_getValue('handle.alliance','false')){handle_alliance += 'checked';}
-	if(GM_getValue('handle.stats','false')){handle_stats += 'checked';}
+	if(GM_getValue('handle.buildings','false').toString() == 'true'){handle_buildings += 'checked';}
+	if(GM_getValue('handle.station','false').toString() == 'true'){handle_station += 'checked';}
+	if(GM_getValue('handle.researchs','false').toString() == 'true'){handle_researchs += 'checked';}
+	if(GM_getValue('handle.shipyard','false').toString() == 'true'){handle_shipyard += 'checked';}
+	if(GM_getValue('handle.system','false').toString() == 'true'){handle_system += 'checked';}
+	if(GM_getValue('handle.defense','false').toString() == 'true'){handle_defense += 'checked';}
+	if(GM_getValue('handle.alliance','false').toString() == 'true'){handle_alliance += 'checked';}
+	if(GM_getValue('handle.stats','false').toString() == 'true'){handle_stats += 'checked';}
 	
-	if(GM_getValue('handle.msg.msg','false')){handle_msg_msg += 'checked';}
-	if(GM_getValue('handle.msg.ally','false')){handle_msg_ally += 'checked';}
-	if(GM_getValue('handle.msg.spy','false')){handle_msg_spy += 'checked';}
-	if(GM_getValue('handle.msg.ennemy.spy','false')) {handle_msg_ennemy_spy += 'checked';}
-	if(GM_getValue('handle.msg.rc','false')){handle_msg_rc += 'checked';}
-	if(GM_getValue('handle.msg.rc.cdr','false')){handle_msg_rc_cdr += 'checked';}
-	if(GM_getValue('handle.msg.expeditions','false')){handle_msg_expeditions += 'checked';}
-	if(GM_getValue('handle.msg.commerce','false')){handle_msg_commerce += 'checked';}
+	if(GM_getValue('handle.msg.msg','false').toString() == 'true'){handle_msg_msg += 'checked';}
+	if(GM_getValue('handle.msg.ally','false').toString() == 'true'){handle_msg_ally += 'checked';}
+	if(GM_getValue('handle.msg.spy','false').toString() == 'true'){handle_msg_spy += 'checked';}
+	if(GM_getValue('handle.msg.ennemy.spy','false').toString() == 'true') {handle_msg_ennemy_spy += 'checked';}
+	if(GM_getValue('handle.msg.rc','false').toString() == 'true'){handle_msg_rc += 'checked';}
+	if(GM_getValue('handle.msg.rc.cdr','false') == 'true'){handle_msg_rc_cdr += 'checked';}
+	if(GM_getValue('handle.msg.expeditions','false').toString() == 'true'){handle_msg_expeditions += 'checked';}
+	if(GM_getValue('handle.msg.commerce','false').toString() == 'true'){handle_msg_commerce += 'checked';}
 	
 	// Récupération des préférences  : Options
-	if(GM_getValue('debug.mode','false')){opt_debug_mode += ' checked';}
-		
+    if(GM_getValue('debug.mode','false').toString() == 'true'){opt_debug_mode += ' checked';}
+	
 					
 	var options = '<div id="Xtense_Div" style="width:675px; color: orange; background-color: black; text-align: center; font-size: 12px; opacity : 0.8;"><br/><br/>';
 	// Serveur Univers
@@ -1695,7 +1695,7 @@ function displayXtense(){
     
     	var aAttrs = "";    
     	var urlIcone = "";var onClick=null;
-    	if(GM_getValue('manual.send','false')=='true'){
+    	if(GM_getValue('manual.send','false').toString() =='true'){
     		aAttrs = 'onClick="window.location.reload()" target="_self"';
     	} else {
     		aAttrs='href="'+ ogspy_link +'" target="blank_" ';
