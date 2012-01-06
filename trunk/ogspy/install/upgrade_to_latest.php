@@ -625,6 +625,7 @@ switch ($ogsversion) {
 		
 	case '3.0.8':
         // modif building
+	   $requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.1.0' WHERE config_name = 'version'";
        $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CD` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache deut
 	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CC` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache cristal
 	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CM` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache metal
@@ -780,22 +781,7 @@ switch ($ogsversion) {
         	" KEY datadate (datadate,player),".
         	" KEY player (player)".
         	" )";
-   
-   
- // militaire detruit
-        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_DESTRUCT." (".
-	        " datadate int(11) NOT NULL default '0',".
-	        " rank int(11) NOT NULL default '0',".
-	        " player varchar(30) NOT NULL,".
-        	" ally varchar(100) NOT NULL,".
-        	" points int(11) NOT NULL default '0',".
-        	" sender_id int(11) NOT NULL default '0',".
-        	" PRIMARY KEY  (rank,datadate),".
-        	" KEY datadate (datadate,player),".
-        	" KEY player (player)".
-        	" )";
-   
-   
+      
 
     // militaire honneur
         $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_HONOR." (".
