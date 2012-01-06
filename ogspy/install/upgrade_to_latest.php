@@ -623,6 +623,198 @@ switch ($ogsversion) {
 		$up_to_date = true;
 		break;
 		
+	case '3.0.8':
+        // modif building
+       $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CD` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache deut
+	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CC` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache cristal
+	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CM` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache metal
+        // fin modif building
+        
+        // ajout classement alliance //
+        // economique
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_ECO." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+      // recherche
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_TECHNOLOGIE." (".
+	         " datadate int(11) NOT NULL default '0',".
+	         " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+         	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+     // militaire
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_MILITARY." (".
+	         " datadate int(11) NOT NULL default '0',".
+	         " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+    
+     // militaire perdu
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_MILITARY_LOOSE." (".
+	         " datadate int(11) NOT NULL default '0',".
+	         " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+     // militaire detruit
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_MILITARY_DESTRUCT." (".
+	         " datadate int(11) NOT NULL default '0',".
+	         " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+    // point honneur
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_HONOR." (".
+	         " datadate int(11) NOT NULL default '0',".
+	         " rank int(11) NOT NULL default '0',".
+	        " ally varchar(30) NOT NULL,".
+        	" number_member int(11) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,ally),".
+        	" KEY ally (ally)".
+        	" )";
+        
+    // fin classement alliance
+    
+   /// classement joueur
+            // economique
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_ECO." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   
+   // technologie
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_TECHNOLOGIE." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   
+// militaire
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   
+// militaire perdu
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_LOOSE." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   // militaire detruit
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_DESTRUCT." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   
+ // militaire detruit
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_DESTRUCT." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+   
+   
+
+    // militaire honneur
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_HONOR." (".
+	        " datadate int(11) NOT NULL default '0',".
+	        " rank int(11) NOT NULL default '0',".
+	        " player varchar(30) NOT NULL,".
+        	" ally varchar(100) NOT NULL,".
+        	" points int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".
+        	" PRIMARY KEY  (rank,datadate),".
+        	" KEY datadate (datadate,player),".
+        	" KEY player (player)".
+        	" )";
+
+    
+        $ogsversion = '3.1.0';
+		$up_to_date = true;
+		break;
+		
 	default:
 	die("Aucune mise … jour n'est disponible");
 }
@@ -632,7 +824,7 @@ foreach ($requests as $request) {
 	$db->sql_query($request);
 }
 
-if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) ) {
+if ( $ogsversion == '3.1.0' && function_exists ( 'import_RE' ) ) {
     import_RE(); 
     }
   
@@ -640,6 +832,7 @@ if ( $ogsversion == '3.0.8' && function_exists ( 'import_RE' ) ) {
 // pour prendre en compte toutes les modifications
 $files = glob('../cache/*.php');
 foreach ($files as $filename){unlink($filename);}  
+
 
   
 ?>

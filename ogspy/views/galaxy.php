@@ -11,9 +11,9 @@ if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
 
+
 $info_system = galaxy_show(intval($server_config['num_of_galaxies']),intval($server_config['num_of_systems']));
 $population = $info_system["population"];
-
 $galaxy = $info_system["galaxy"];
 $system = $info_system["system"];
 
@@ -161,18 +161,30 @@ foreach ($population as $v) {
 
 		$individual_ranking = galaxy_show_ranking_unique_ally($ally);
 		while ($ranking = current($individual_ranking)) {
-			$datadate = strftime("%d %b %Y à %Hh", key($individual_ranking));
-			$general_rank = isset($ranking["general"]) ?  formate_number($ranking["general"]["rank"]) : "&nbsp;";
-			$general_points = isset($ranking["general"]) ? formate_number($ranking["general"]["points"]) . " <i>( ". formate_number($ranking["general"]["points_per_member"]) ." )</i>" : "&nbsp;";
-			$fleet_rank = isset($ranking["fleet"]) ?  formate_number($ranking["fleet"]["rank"]) : "&nbsp;";
-			$fleet_points = isset($ranking["fleet"]) ?  formate_number($ranking["fleet"]["points"]) . " <i>( ". formate_number($ranking["fleet"]["points_per_member"]) ." )</i>" : "&nbsp;";
-			$research_rank = isset($ranking["research"]) ?  formate_number($ranking["research"]["rank"]) : "&nbsp;";
-			$research_points = isset($ranking["research"]) ?  formate_number($ranking["research"]["points"]) . " <i>( ". formate_number($ranking["research"]["points_per_member"]) ." )</i>" : "&nbsp;";
-
+		    $datadate = strftime("%d %b %Y %H:%M", key($individual_ranking));
+            $general_rank = isset($ranking["general"]) ?  formate_number($ranking["general"]["rank"]) : "&nbsp;";
+        	$general_points = isset($ranking["general"]) ? formate_number($ranking["general"]["points"]) : "&nbsp;";
+        	$eco_rank = isset($ranking["eco"]) ?  formate_number($ranking["eco"]["rank"]) : "&nbsp;";
+        	$eco_points = isset($ranking["eco"]) ?  formate_number($ranking["eco"]["points"]) : "&nbsp;";
+        	$techno_rank = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["rank"]) : "&nbsp;";
+        	$techno_points = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["points"]) : "&nbsp;";
+            $military_rank = isset($ranking["military"]) ?  formate_number($ranking["military"]["rank"]) : "&nbsp;";
+        	$military_points = isset($ranking["military"]) ?  formate_number($ranking["military"]["points"]) : "&nbsp;";
+            $military_l_rank = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["rank"]) : "&nbsp;";
+        	$military_l_points = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["points"]) : "&nbsp;";
+            $military_d_rank = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["rank"]) : "&nbsp;";
+        	$military_d_points = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["points"]) : "&nbsp;";
+            $honnor_rank = isset($ranking["honnor"]) ?  formate_number($ranking["honnor"]["rank"]) : "&nbsp;";
+        	$honnor_points = isset($ranking["honnor"]) ?  formate_number($ranking["honnor"]["points"]) : "&nbsp;";
+    
 			$tooltip .= "<tr><td class=\"c\" colspan=\"3\" align=\"center\">Classement du ".$datadate."</td></tr>";
 			$tooltip .= "<tr><td class=\"c\" width=\"75\">Général</td><th width=\"30\">".$general_rank."</th><th>".$general_points."</th></tr>";
-			$tooltip .= "<tr><td class=\"c\">Flotte</td><th>".$fleet_rank."</th><th>".$fleet_points."</th></tr>";
-			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$research_rank."</th><th>".$research_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Economique</td><th>".$eco_rank."</th><th>".$eco_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$techno_rank."</th><th>".$techno_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Militaire</td><th width=\"30\">".$military_rank."</th><th>".$military_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Perte militaire</td><th>".$military_l_rank."</th><th>".$military_l_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Destruction</td><th>".$military_d_rank."</th><th>".$military_d_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Honneur</td><th>".$honnor_rank."</th><th>".$honnor_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\" colspan=\"3\" align=\"center\">".formate_number($ranking["number_member"])." membre(s)</td></tr>";
 			break;
 		}
@@ -190,18 +202,30 @@ foreach ($population as $v) {
 
 		$individual_ranking = galaxy_show_ranking_unique_player($player);
 		while ($ranking = current($individual_ranking)) {
-			$datadate = strftime("%d %b %Y à %Hh", key($individual_ranking));
-			$general_rank = isset($ranking["general"]) ?  formate_number($ranking["general"]["rank"]) : "&nbsp;";
-			$general_points = isset($ranking["general"]) ? formate_number($ranking["general"]["points"]) : "&nbsp;";
-			$fleet_rank = isset($ranking["fleet"]) ?  formate_number($ranking["fleet"]["rank"]) : "&nbsp;";
-			$fleet_points = isset($ranking["fleet"]) ?  formate_number($ranking["fleet"]["points"]) : "&nbsp;";
-			$research_rank = isset($ranking["research"]) ?  formate_number($ranking["research"]["rank"]) : "&nbsp;";
-			$research_points = isset($ranking["research"]) ?  formate_number($ranking["research"]["points"]) : "&nbsp;";
+			 $datadate = strftime("%d %b %Y %H:%M", key($individual_ranking));
+            $general_rank = isset($ranking["general"]) ?  formate_number($ranking["general"]["rank"]) : "&nbsp;";
+        	$general_points = isset($ranking["general"]) ? formate_number($ranking["general"]["points"]) : "&nbsp;";
+        	$eco_rank = isset($ranking["eco"]) ?  formate_number($ranking["eco"]["rank"]) : "&nbsp;";
+        	$eco_points = isset($ranking["eco"]) ?  formate_number($ranking["eco"]["points"]) : "&nbsp;";
+        	$techno_rank = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["rank"]) : "&nbsp;";
+        	$techno_points = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["points"]) : "&nbsp;";
+            $military_rank = isset($ranking["military"]) ?  formate_number($ranking["military"]["rank"]) : "&nbsp;";
+        	$military_points = isset($ranking["military"]) ?  formate_number($ranking["military"]["points"]) : "&nbsp;";
+            $military_l_rank = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["rank"]) : "&nbsp;";
+        	$military_l_points = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["points"]) : "&nbsp;";
+            $military_d_rank = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["rank"]) : "&nbsp;";
+        	$military_d_points = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["points"]) : "&nbsp;";
+            $honnor_rank = isset($ranking["honnor"]) ?  formate_number($ranking["honnor"]["rank"]) : "&nbsp;";
+        	$honnor_points = isset($ranking["honnor"]) ?  formate_number($ranking["honnor"]["points"]) : "&nbsp;";
 
 			$tooltip .= "<tr><td class=\"c\" colspan=\"3\" align=\"center\">Classement du ".$datadate."</td></tr>";
 			$tooltip .= "<tr><td class=\"c\" width=\"75\">Général</td><th width=\"30\">".$general_rank."</th><th>".$general_points."</th></tr>";
-			$tooltip .= "<tr><td class=\"c\">Flotte</td><th>".$fleet_rank."</th><th>".$fleet_points."</th></tr>";
-			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$research_rank."</th><th>".$research_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Economique</td><th>".$eco_rank."</th><th>".$eco_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$techno_rank."</th><th>".$techno_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Militaire</td><th width=\"30\">".$military_rank."</th><th>".$military_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Perte militaire</td><th>".$military_l_rank."</th><th>".$military_l_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Destruction</td><th>".$military_d_rank."</th><th>".$military_d_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Honneur</td><th>".$honnor_rank."</th><th>".$honnor_points."</th></tr>";
 			break;
 		}
 		$tooltip .= "<tr><td class=\"c\" colspan=\"3\" align=\"center\"><a href=\"index.php?action=search&type_search=player&string_search=".$player."&strict=on\">Voir détail</a></td></tr>";
@@ -214,7 +238,7 @@ foreach ($population as $v) {
 	if ($status == "") $status = "&nbsp;";
 
 	if ($moon == 1) {
-		$moon = "M";
+		$moon = "<img src=\"".$link_css."img/lune.png\">";
 		$detail = "";
 		if ($last_update_moon > 0) {
 			$detail .= $phalanx;
@@ -252,7 +276,7 @@ $legend .= "<tr><td class=\"c\">Inactif 7 jours</td><th>i</th></tr>";
 $legend .= "<tr><td class=\"c\">Inactif 28 jours</td><th>I</th></tr>";
 $legend .= "<tr><td class=\"c\">Mode vacance</td><th>v</th></tr>";
 $legend .= "<tr><td class=\"c\">Joueur faible</td><th>d</th></tr>";
-$legend .= "<tr><td class=\"c\">Lune<br><i>phalange 4 avec porte spatial</i></td><th>M - 4P</th></tr>";
+$legend .= "<tr><td class=\"c\">Lune<br><i>phalange 4 avec porte spatial</i></td><th><img src=\"".$link_css."img/lune.png\"> - 4P</th></tr>";
 $legend .= "<tr><td class=\"c\">Rapport d\'espionnage</td><th>RE</th></tr>";
 $legend .= "<tr><td class=\"c\">Rapports de combat</td><th>X RC</th></tr>";
 $legend .= "<tr><td class=\"c\">Joueur / Alliance allié</td><th><blink><a>abc</a></blink></th></tr>";

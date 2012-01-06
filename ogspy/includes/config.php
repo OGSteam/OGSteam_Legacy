@@ -26,12 +26,8 @@ if (!defined("INSTALL_IN_PROGRESS")) {
 	//Tables utilisées par les programmes
 	define("TABLE_CONFIG", $table_prefix."config");
 	define("TABLE_GROUP", $table_prefix."group");
-	define("TABLE_RANK_PLAYER_FLEET", $table_prefix."rank_player_fleet");
 	define("TABLE_RANK_PLAYER_POINTS", $table_prefix."rank_player_points");
-	define("TABLE_RANK_PLAYER_RESEARCH", $table_prefix."rank_player_research");
-	define("TABLE_RANK_ALLY_FLEET", $table_prefix."rank_ally_fleet");
 	define("TABLE_RANK_ALLY_POINTS", $table_prefix."rank_ally_points");
-	define("TABLE_RANK_ALLY_RESEARCH", $table_prefix."rank_ally_research");
 	define("TABLE_SESSIONS", $table_prefix."sessions");
 	define("TABLE_SPY", $table_prefix."spy");
 	define("TABLE_STATISTIC", $table_prefix."statistics");
@@ -52,6 +48,33 @@ if (!defined("INSTALL_IN_PROGRESS")) {
 	define("TABLE_PARSEDRCROUND", $table_prefix."parsedRCRound");
 	define("TABLE_ROUND_ATTACK", $table_prefix."round_attack");
 	define("TABLE_ROUND_DEFENSE", $table_prefix."round_defense");
+    
+    // nouvelle table v3 ogame
+    // joueur
+    define("TABLE_RANK_PLAYER_ECO", $table_prefix."rank_player_economique"); // economique
+    define("TABLE_RANK_PLAYER_TECHNOLOGIE", $table_prefix."rank_player_technologie"); // recherche
+    define("TABLE_RANK_PLAYER_MILITARY", $table_prefix."rank_player_military"); // militaire
+    define("TABLE_RANK_PLAYER_MILITARY_LOOSE", $table_prefix."rank_player_military_loose"); // militaire perdu
+    define("TABLE_RANK_PLAYER_MILITARY_DESTRUCT", $table_prefix."rank_player_military_destruct"); // militaire detruit
+    define("TABLE_RANK_PLAYER_HONOR", $table_prefix."rank_player_honor"); //point d honneur
+    // fin joueur
+    // alliance
+    define("TABLE_RANK_ALLY_ECO", $table_prefix."rank_ally_economique"); // economique
+    define("TABLE_RANK_ALLY_TECHNOLOGIE", $table_prefix."rank_ally_technologie"); // recherche
+    define("TABLE_RANK_ALLY_MILITARY", $table_prefix."rank_ally_military"); // militaire
+    define("TABLE_RANK_ALLY_MILITARY_LOOSE", $table_prefix."rank_ally_military_loose"); // militaire perdu
+    define("TABLE_RANK_ALLY_MILITARY_DESTRUCT", $table_prefix."rank_ally_military_destruct"); // militaire detruit
+    define("TABLE_RANK_ALLY_HONOR", $table_prefix."rank_ally_honor"); //point d honneur
+    // fin alliance
+    // fin nouvelle table
+    
+    // table a supp apres transition ogame v3
+    define("TABLE_RANK_PLAYER_FLEET", $table_prefix."rank_player_fleet"); // ancien classement flotte
+    define("TABLE_RANK_PLAYER_RESEARCH", $table_prefix."rank_player_research"); // ancien classement recherche
+    define("TABLE_RANK_ALLY_FLEET", $table_prefix."rank_ally_fleet");// ancien classement flotte
+    define("TABLE_RANK_ALLY_RESEARCH", $table_prefix."rank_ally_research");// ancien classement recherche
+    // fin table a supp
+    
 }
 
 
@@ -76,9 +99,7 @@ define("PATH_LOG_TODAY", PATH_LOG.date("ymd")."/");
 
 
 //Bannière OGSPY
-$banner[] = "OgameSpy2.jpg";
-$banner[] = "OgameSpy.gif";
-$banner[] = "OGSteam.gif";
+$banner[] = "logos/logo.png";
 
 srand(time());
 shuffle($banner);
