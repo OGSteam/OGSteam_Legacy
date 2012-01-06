@@ -615,7 +615,10 @@ function parse_buildings() {
 			"SAT": tabLevel[5],
 			"HM": tabLevel[6],
 			"HC": tabLevel[7],
-			"HD": tabLevel[8]
+			"HD": tabLevel[8],
+			"CM": tabLevel[9],
+			"CC": tabLevel[10],
+			"CD": tabLevel[11]
 		}
 	);
 	
@@ -2557,6 +2560,9 @@ if (XtenseMetas.getLanguage() == 'en') {
 					22 : 'Hangar de métal', 
 					23 : 'Hangar de cristal', 			
 					24 : 'Réservoir de deutérium', 
+					25 : 'Cachette de métal', 
+					26 : 'Cachette de cristal', 
+					27 : 'Cachette de deutérium', 
 					31 : 'Laboratoire de recherche', 
 					33 : 'Terraformeur', 				
 					34 : 'Dépôt de ravitaillement', 
