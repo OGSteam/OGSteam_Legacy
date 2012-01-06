@@ -185,7 +185,7 @@ function generate_id($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password,
 		die("Echec installation, impossible de générer le fichier 'parameters/id.php'");
 	}
 
-	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy 3.0.8 effectuée avec succès</font></h3>";
+	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy ".$install_version." effectuée avec succès</font></h3>";
 	echo "<center>";
 	echo "<b>Pensez à supprimer le dossier 'install'</b><br />";
 	echo "<a href='../index.php'>Retour</a>";
