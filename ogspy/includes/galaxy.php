@@ -2364,7 +2364,7 @@ function galaxy_show_ranking_player()
     //}
 
     $tables = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_PLAYER_ECO,
-        TABLE_RANK_PLAYER_TECHNOLOGIE, TABLE_RANK_PLAYER_MILITARY,
+        TABLE_RANK_PLAYER_TECHNOLOGY, TABLE_RANK_PLAYER_MILITARY,
         TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
         TABLE_RANK_PLAYER_HONOR);
     $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
@@ -2510,7 +2510,7 @@ function galaxy_show_ranking_ally()
     }
 
     $tables = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
-        TABLE_RANK_ALLY_TECHNOLOGIE, TABLE_RANK_ALLY_MILITARY,
+        TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
         TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
         TABLE_RANK_ALLY_HONOR);
     $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
@@ -2654,7 +2654,7 @@ function galaxy_show_ranking_unique_player($player, $last = false)
 
     $ranking = array();
     $tables = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_PLAYER_ECO,
-        TABLE_RANK_PLAYER_TECHNOLOGIE, TABLE_RANK_PLAYER_MILITARY,
+        TABLE_RANK_PLAYER_TECHNOLOGY, TABLE_RANK_PLAYER_MILITARY,
         TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
         TABLE_RANK_PLAYER_HONOR);
     $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
@@ -2691,7 +2691,7 @@ function galaxy_show_ranking_unique_ally($ally, $last = false)
 
     $ranking = array();
     $tables = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
-        TABLE_RANK_ALLY_TECHNOLOGIE, TABLE_RANK_ALLY_MILITARY,
+        TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
         TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
         TABLE_RANK_ALLY_HONOR);
     $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
@@ -3032,7 +3032,7 @@ function galaxy_drop_ranking()
             intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_PLAYER_ECO . " where datadate = " .
             intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_TECHNOLOGIE .
+        $requests[] = "delete from " . TABLE_RANK_PLAYER_TECHNOLOGY .
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY . " where datadate = " .
             intval($pub_datadate);
@@ -3054,7 +3054,7 @@ function galaxy_drop_ranking()
             intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_ALLY_ECO . " where datadate = " .
             intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_TECHNOLOGIE .
+        $requests[] = "delete from " . TABLE_RANK_ALLY_TECHNOLOGY .
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY . " where datadate = " .
             intval($pub_datadate);
