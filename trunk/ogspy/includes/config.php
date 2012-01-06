@@ -52,7 +52,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
     // nouvelle table v3 ogame
     // joueur
     define("TABLE_RANK_PLAYER_ECO", $table_prefix."rank_player_economique"); // economique
-    define("TABLE_RANK_PLAYER_TECHNOLOGIE", $table_prefix."rank_player_technologie"); // recherche
+    define("TABLE_RANK_PLAYER_TECHNOLOGY", $table_prefix."rank_player_technology"); // recherche
     define("TABLE_RANK_PLAYER_MILITARY", $table_prefix."rank_player_military"); // militaire
     define("TABLE_RANK_PLAYER_MILITARY_LOOSE", $table_prefix."rank_player_military_loose"); // militaire perdu
     define("TABLE_RANK_PLAYER_MILITARY_DESTRUCT", $table_prefix."rank_player_military_destruct"); // militaire detruit
@@ -60,7 +60,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
     // fin joueur
     // alliance
     define("TABLE_RANK_ALLY_ECO", $table_prefix."rank_ally_economique"); // economique
-    define("TABLE_RANK_ALLY_TECHNOLOGIE", $table_prefix."rank_ally_technologie"); // recherche
+    define("TABLE_RANK_ALLY_TECHNOLOGY", $table_prefix."rank_ally_technology"); // recherche
     define("TABLE_RANK_ALLY_MILITARY", $table_prefix."rank_ally_military"); // militaire
     define("TABLE_RANK_ALLY_MILITARY_LOOSE", $table_prefix."rank_ally_military_loose"); // militaire perdu
     define("TABLE_RANK_ALLY_MILITARY_DESTRUCT", $table_prefix."rank_ally_military_destruct"); // militaire detruit
