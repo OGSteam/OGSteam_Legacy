@@ -46,13 +46,32 @@ switch ($graph[0]) {
 	$table = TABLE_RANK_PLAYER_POINTS;
 	break;
 
-	case "fleet":
-	$table = TABLE_RANK_PLAYER_FLEET;
+	case "eco":
+	$table = TABLE_RANK_PLAYER_ECO;
 	break;
 
-	case "research":
-	$table = TABLE_RANK_PLAYER_RESEARCH;
+	case "techno":
+	$table = TABLE_RANK_PLAYER_TECHNOLOGIE;
 	break;
+
+	case "military":
+	$table = TABLE_RANK_PLAYER_MILITARY;
+	break;
+
+	case "militaryl":
+	$table = TABLE_RANK_PLAYER_MILITARY_LOOSE;
+	break;
+
+	case "militaryd":
+	$table = TABLE_RANK_PLAYER_MILITARY_DESTRUCT;
+	break;
+
+	case "honnor":
+	$table = TABLE_RANK_PLAYER_HONOR;
+	break;
+
+  
+
 }
 
 //on recupère le classement
