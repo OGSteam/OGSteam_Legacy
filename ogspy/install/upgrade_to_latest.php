@@ -646,7 +646,7 @@ switch ($ogsversion) {
         	" )";
         
       // recherche
-        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_TECHNOLOGIE." (".
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_TECHNOLOGY." (".
 	         " datadate int(11) NOT NULL default '0',".
 	         " rank int(11) NOT NULL default '0',".
 	        " ally varchar(30) NOT NULL,".
@@ -729,7 +729,7 @@ switch ($ogsversion) {
    
    
    // technologie
-        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_TECHNOLOGIE." (".
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_TECHNOLOGY." (".
 	        " datadate int(11) NOT NULL default '0',".
 	        " rank int(11) NOT NULL default '0',".
 	        " player varchar(30) NOT NULL,".

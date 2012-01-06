@@ -104,7 +104,7 @@ CREATE TABLE ogspy_rank_ally_economique (
 ## ########################################################
 
 ## 
-## Structure de la table `ogspy_rank_ally_technologie`
+## Structure de la table `ogspy_rank_ally_technology`
 ## 
       
 CREATE TABLE ogspy_rank_ally_technologie (
@@ -268,7 +268,7 @@ CREATE TABLE ogspy_rank_player_economique (
 ## ########################################################
 
 ## 
-## Structure de la table `ogspy_rank_player_technologie`
+## Structure de la table `ogspy_rank_player_technology`
 ## 
 
 CREATE TABLE ogspy_rank_player_technologie (
