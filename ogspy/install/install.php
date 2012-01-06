@@ -185,7 +185,7 @@ function generate_id($sgbd_server, $sgbd_dbname, $sgbd_username, $sgbd_password,
 		die("Echec installation, impossible de générer le fichier 'parameters/id.php'");
 	}
 
-	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy ".$install_version." effectuée avec succès</font></h3>";
+	echo "<h3 align='center'><font color='yellow'>Installation du serveur OGSpy effectuée avec succès !</font></h3>";
 	echo "<center>";
 	echo "<b>Pensez à supprimer le dossier 'install'</b><br />";
 	echo "<a href='../index.php'>Retour</a>";
@@ -313,7 +313,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 		
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td colspan="2" align="center"><a target="_blank" href="http://board.ogsteam.fr/"><i><font color="orange">Besoin d'assistance ?</font></i></a></td>
+			<td colspan="2" align="center"><a target="_blank" href="http://www.ogsteam.fr/"><i><font color="orange">Besoin d'assistance ?</font></i></a></td>
 		</tr>
 		</table>
 	</td>
