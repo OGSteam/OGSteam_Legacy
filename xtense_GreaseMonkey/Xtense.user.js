@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.3.14.10
+// @version     2.3.14.11
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.10";
+var VERSION = "2.3.14.11";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -1508,7 +1508,7 @@ function displayOptions(){
 	options+= '<thead><tr><th class="Xtense_th" colspan="3" style="font-size: 12px; text-align:center; font-weight: bold; color: #539fc8; line-height: 30px; height: 30px;"></th></tr></thead>';
 	options+= '<tbody>';
 	options+= '<tr>';
-	options+= '<td  style="color: white; font-size: 14px; font-weight: bold;">Envoi des données</td>';
+	options+= '<td  style="color: white; font-size: 14px; font-weight: bold;text-align:left;">Envoi des données:</td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
@@ -1541,7 +1541,7 @@ function displayOptions(){
 	options+= '<td colspan="6">&nbsp;</td>';
 	options+= '</tr>';
 	options+= '<tr>';
-	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">Envoi des messages</td>';
+	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;text-align:left;">Envoi des messages:</td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
@@ -1590,12 +1590,19 @@ function displayOptions(){
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Mode débogage</label></td>';
-	options+= '<td class="value"><input class="speed" id="debug.mode" size="35" alt="24" type="checkbox"'+ opt_debug_mode +'/></td>';
+	options+= '<td class="value" style="text-align:left;"><input class="speed" id="debug.mode" size="35" alt="24" type="checkbox"'+ opt_debug_mode +'/></td>';
 	options+= '<td class="champ"></td>';
 	options+= '<td class="value"></td>';
 	options+= '<td class="champ"></td>';
 	options+= '<td class="value"></td>';
 	options+= '</tr>';
+	options+= '<tr>';
+	options+= '<td class="champ"><label class="styled textBeefy">Mise à Jour Forcée du Script</label></td>';
+	options+= '<td class="value" colspan="5" style="text-align:left;"><a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/112690.user.js" > Mettre à jour maintenant ! </a></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
+	options+= '<td class="champ"></td>';
+	options+= '<td class="value"></td>';
 	options+= '</tbody></table>';
 	options+= '</div>';
 	/*---------------------------- A propos -----------------------------------------------*/
@@ -1816,7 +1823,7 @@ function checkMaJ()
              
     }
     //log(GM_getValue(nomScript+"aJours",false));
-    if (GM_getValue(nomScript+"aJours",'true').toString() == 'false') { displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/112690.user.js">Mise à Jour Xtense Disponible ! (' + GM_getValue(nomScript+"newVersion",'Inconnu') + ')</a>');}
+    if (GM_getValue(nomScript+"aJours",'true').toString() == 'false' && GM_getValue(nomScript+"newVersion",'Inconnu').toString() != VERSION ) { displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/112690.user.js">Mise à Jour Xtense Disponible ! (' + GM_getValue(nomScript+"newVersion",'Inconnu') + ')</a>');}
 }
 /********************** Fin Fonctions Xtense ****************************/
 
