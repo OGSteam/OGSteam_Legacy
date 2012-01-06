@@ -107,7 +107,7 @@ CREATE TABLE ogspy_rank_ally_economique (
 ## Structure de la table `ogspy_rank_ally_technology`
 ## 
       
-CREATE TABLE ogspy_rank_ally_technologie (
+CREATE TABLE ogspy_rank_ally_technology (
   datadate int(11) NOT NULL default '0',
   rank int(11) NOT NULL default '0',
   ally varchar(30) NOT NULL,
@@ -271,7 +271,7 @@ CREATE TABLE ogspy_rank_player_economique (
 ## Structure de la table `ogspy_rank_player_technology`
 ## 
 
-CREATE TABLE ogspy_rank_player_technologie (
+CREATE TABLE ogspy_rank_player_technology (
   datadate int(11) NOT NULL default '0',
   rank int(11) NOT NULL default '0',
   player varchar(30) NOT NULL default '',
