@@ -54,6 +54,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
     define("TABLE_RANK_PLAYER_ECO", $table_prefix."rank_player_economique"); // economique
     define("TABLE_RANK_PLAYER_TECHNOLOGY", $table_prefix."rank_player_technology"); // recherche
     define("TABLE_RANK_PLAYER_MILITARY", $table_prefix."rank_player_military"); // militaire
+    define("TABLE_RANK_PLAYER_MILITARY_BUILT", $table_prefix."rank_player_military_built"); // militaire construit
     define("TABLE_RANK_PLAYER_MILITARY_LOOSE", $table_prefix."rank_player_military_loose"); // militaire perdu
     define("TABLE_RANK_PLAYER_MILITARY_DESTRUCT", $table_prefix."rank_player_military_destruct"); // militaire detruit
     define("TABLE_RANK_PLAYER_HONOR", $table_prefix."rank_player_honor"); //point d honneur
@@ -62,6 +63,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
     define("TABLE_RANK_ALLY_ECO", $table_prefix."rank_ally_economique"); // economique
     define("TABLE_RANK_ALLY_TECHNOLOGY", $table_prefix."rank_ally_technology"); // recherche
     define("TABLE_RANK_ALLY_MILITARY", $table_prefix."rank_ally_military"); // militaire
+    define("TABLE_RANK_ALLY_MILITARY_BUILT", $table_prefix."rank_ally_military_built"); // militaire construit
     define("TABLE_RANK_ALLY_MILITARY_LOOSE", $table_prefix."rank_ally_military_loose"); // militaire perdu
     define("TABLE_RANK_ALLY_MILITARY_DESTRUCT", $table_prefix."rank_ally_military_destruct"); // militaire detruit
     define("TABLE_RANK_ALLY_HONOR", $table_prefix."rank_ally_honor"); //point d honneur

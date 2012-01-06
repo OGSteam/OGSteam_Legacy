@@ -670,7 +670,18 @@ switch ($ogsversion) {
         	" KEY datadate (datadate,ally),".
         	" KEY ally (ally)".
         	" )";
-        
+        // militaire construit
+        $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_MILITARY_BUILT." (".
+        	         " datadate int(11) NOT NULL default '0',".
+        	         " rank int(11) NOT NULL default '0',".
+        	        " ally varchar(30) NOT NULL,".
+                	" number_member int(11) NOT NULL,".
+                	" points int(11) NOT NULL default '0',".
+                	" sender_id int(11) NOT NULL default '0',".
+                	" PRIMARY KEY  (rank,datadate),".
+                	" KEY datadate (datadate,ally),".
+                	" KEY ally (ally)".
+                	" )";
     
      // militaire perdu
         $requests[] = "CREATE TABLE ".TABLE_RANK_ALLY_MILITARY_LOOSE." (".
@@ -754,7 +765,20 @@ switch ($ogsversion) {
         	" KEY datadate (datadate,player),".
         	" KEY player (player)".
         	" )";
-   
+        
+// militaire constuit
+        $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_BUILT." (".
+        	        " datadate int(11) NOT NULL default '0',".
+        	        " rank int(11) NOT NULL default '0',".
+        	        " player varchar(30) NOT NULL,".
+                	" ally varchar(100) NOT NULL,".
+                	" points int(11) NOT NULL default '0',".
+                	" sender_id int(11) NOT NULL default '0',".
+                	" PRIMARY KEY  (rank,datadate),".
+                	" KEY datadate (datadate,player),".
+                	" KEY player (player)".
+                	" )";
+        
    
 // militaire perdu
         $requests[] = "CREATE TABLE ".TABLE_RANK_PLAYER_MILITARY_LOOSE." (".
