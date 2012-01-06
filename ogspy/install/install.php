@@ -246,7 +246,7 @@ isset($pub_admin_username) && isset($pub_admin_password) && isset($pub_admin_pas
 	<td align="center">
 		<table width="800">
 		<tr>
-			<td colspan="2" align="center"><font size="3"><b>Bienvenue à l'installation d'OGSpy version 3.0.8</b></font></td>
+			<td colspan="2" align="center"><font size="3"><b>Bienvenue à l'installation d'OGSpy version <?php echo $install_version; ?></b></font></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">&nbsp;</td>
