@@ -565,6 +565,7 @@ switch ($pub_type){
 			
 			$type1		= $pub_type1;
 			$type2 		= $pub_type2;
+			$type3 		= $pub_type3;
 			$time		= (int)$pub_time;
 			$offset 	= (int)$pub_offset;
 			$n 			= (array)$pub_n;
@@ -573,30 +574,41 @@ switch ($pub_type){
 			
 			if ($type1 == 'player') {
 				switch($type2) {
-					case 'points': $table =TABLE_RANK_PLAYER_POINTS;
-										break;
-					case 'research': $table = TABLE_RANK_PLAYER_RESEARCH;
-										break;
-					case 'fleet':	$table = TABLE_RANK_PLAYER_FLEET;
-										break;
-					case 'defense':$table = TABLE_RANK_PLAYER_DEFENSE;
-										break;
-					case 'buildings':$table = TABLE_RANK_PLAYER_BUILDINGS;
-										break;
-					default:			$table = TABLE_RANK_PLAYER_POINTS;
-										break;
+					case 'points':  	$table =TABLE_RANK_PLAYER_POINTS; //Type2 =0
+											break;
+					case 'economy':		$table = TABLE_RANK_PLAYER_ECO;//Type2 =1
+											break;
+					case 'research':	$table = TABLE_RANK_PLAYER_TECHNOLOGY;//Type2 =2
+											break;
+					case 'fleet':  		//Type2 =3
+								   		switch($type3) {
+								   			case '5': 	$table = TABLE_RANK_PLAYER_MILITARY_BUILT;break;
+								   			case '6':	$table = TABLE_RANK_PLAYER_MILITARY_DESTRUCT;break;
+								   			case '4':	$table = TABLE_RANK_PLAYER_MILITARY_LOOSE;break;
+								   			case '7':   $table = TABLE_RANK_PLAYER_HONOR;break;
+								   			default: $table = TABLE_RANK_PLAYER_MILITARY;break;
+								   		}
+							
+											break;
+					default:		 	$table = TABLE_RANK_PLAYER_POINTS;
+											break;
 				}
 			} else {
 				switch($type2) {
 					case 'points': $table = TABLE_RANK_ALLY_POINTS;
 										break;
-					case 'research': $table = TABLE_RANK_ALLY_RESEARCH;
+					case 'economy': $table = TABLE_RANK_ALLY_ECO;
 										break;
-					case 'fleet':	$table = TABLE_RANK_ALLY_FLEET;
+					case 'research':	$table = TABLE_RANK_ALLY_TECHNOLOGY;
 										break;
-					case 'defense':$table = TABLE_RANK_ALLY_DEFENSE;
-										break;
-					case 'buildings':$table = TABLE_RANK_ALLY_BUILDINGS;
+					case 'fleet'://Type2 =3
+								   		switch($type3) {
+								   			case '5': 	$table = TABLE_RANK_ALLY_MILITARY_BUILT;break;
+								   			case '6':	$table = TABLE_RANK_ALLY_MILITARY_DESTRUCT;break;
+								   			case '4':	$table = TABLE_RANK_ALLY_MILITARY_LOOSE;break;
+								   			case '7':   $table = TABLE_RANK_ALLY_HONOR;break;
+								   			default: $table = TABLE_RANK_ALLY_MILITARY;break;
+								   		}
 										break;
 					default:			$table = TABLE_RANK_ALLY_POINTS;
 										break;
@@ -606,7 +618,7 @@ switch ($pub_type){
 			$query = array();
 			
 			if ($type1 == 'player') {
-				foreach ($n as $i => $val) {//for remplacé par un foreach pour les classements erronés d'E-Univers
+				foreach ($n as $i => $val) {
 					$data = $n[$i];
 					$data['player_name'] = Check::filterSpecialChars($data['player_name']);
 					$data['ally_tag'] = Check::filterSpecialChars($data['ally_tag']);
@@ -621,7 +633,7 @@ switch ($pub_type){
 
 			} else {
 				$fields = 'datadate, rank, ally, points, sender_id, number_member, points_per_member';
-				foreach ($n as $i => $val) {//for remplacé par un foreach pour les classements erronés d'E-Univers
+				foreach ($n as $i => $val) {
 					$data = $n[$i];
 					$data['ally_tag'] = Check::filterSpecialChars($data['ally_tag']);
 					if(!Check::data2(isset($data['points']),
