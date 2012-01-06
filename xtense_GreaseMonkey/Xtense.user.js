@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name		Xtense-dev
-// @version     2.3.14.8
+// @name	Xtense-GM
+// @version     2.3.14.10
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.8";
+var VERSION = "2.3.14.10";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -1608,7 +1608,7 @@ function displayOptions(){
 	options+= '<td colspan="6">&nbsp;</td>';
 	options+= '</tr>';
 	options+= '<tr>';
-	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">A Propos de Xtense:</td>';
+	options+= '<td colspan="6" style="color: white; font-size: 14px; font-weight: bold;">A Propos de Xtense ' + VERSION + ':</td>';
 	options+= '</tr>';
 	options+= '<tr>';
 	options+= '<td colspan="6">&nbsp;</td>';
@@ -1785,7 +1785,7 @@ function checkMaJ()
         GM_xmlhttpRequest(
             {
                 method: 'GET',
-                url: 'http://userscripts.org/scripts/source/117629.meta.js',
+                url: 'http://userscripts.org/scripts/source/112690.meta.js',
                 
                 onload: function(response) 
                 {
@@ -1816,7 +1816,7 @@ function checkMaJ()
              
     }
     //log(GM_getValue(nomScript+"aJours",false));
-    if (GM_getValue(nomScript+"aJours",false) == false) { displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/117629.user.js">Mise à Jour Xtense Disponible ! (' + GM_getValue(nomScript+"newVersion",'Inconnu') + ')</a>');}
+    if (GM_getValue(nomScript+"aJours",'true').toString() == 'false') { displayInfoXtense('<a style="cursor:pointer;color:red;"  href="http://userscripts.org/scripts/source/112690.user.js">Mise à Jour Xtense Disponible ! (' + GM_getValue(nomScript+"newVersion",'Inconnu') + ')</a>');}
 }
 /********************** Fin Fonctions Xtense ****************************/
 
