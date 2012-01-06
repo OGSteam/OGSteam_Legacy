@@ -18,7 +18,7 @@ var XtenseLocales = { };
 
 //Variables globales pour la mise à jour.
 var start_time = (new Date()).getTime() /1000;
-var freqMaj = 2 * 3600;
+var freqMaj = 4 * 3600;
 
 //Variables globales pour les status - Type d'erreur
 var XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_COMMENT = 5, XLOG_SEND = 6;
@@ -451,12 +451,12 @@ function parse_ranking_inserted(event) {
         type[0] = (type[0] != '') ? type[0] : 'player';
         type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
         type[1] = (type[1] != '') ? type[1] : 'points';
-        
+   
         
 		var length = 0;
 		var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
 		var offset = 0;
-log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',nombreLignes:'+rows.snapshotLength);
+log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',type3: '+type[2]+',nombreLignes:'+rows.snapshotLength);
 		if(rows.snapshotLength > 0){
 			var rowsData = [];
 			for (var i = 0; i < rows.snapshotLength; i++) {
@@ -492,7 +492,7 @@ log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',nombreLignes:'+rows.snaps
 					}
 					else if (ally)
 						ally_id = '-1';
-log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);					
+//log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);					
 					var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
 					rowsData[n]=r;
 					length ++;
@@ -510,7 +510,7 @@ log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+
 					}
 					else if (ally)
 						ally_id = '-1';
-log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
+//log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
 					var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
 					rowsData[n]=r;
 					length ++;
@@ -528,6 +528,7 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
 							offset : offset,
 							type1 : type[0],
 							type2 : type[1],
+							type3 : type[2],
 							time: time
 						}
 					);
@@ -537,7 +538,7 @@ log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',point
                      *	Devra être supprimé quand les tables pour stocker les nouveaux classements auront été crées,
                      *	et que le type[2] sera pris en compte pour l'insertion des classements
                     */
-                    if (type[2] == '')
+                    //if (type[2] == '')
                         XtenseRequest.send();
 				}
 				//get_ranking_content();
