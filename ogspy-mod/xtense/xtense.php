@@ -632,14 +632,14 @@ switch ($pub_type){
 					$db->sql_query('REPLACE INTO '.$table.' (datadate, rank, player, ally, points, sender_id) VALUES '.implode(',', $query));
 
 			} else {
-				$fields = 'datadate, rank, ally, points, sender_id, number_member, points_per_member';
+				$fields = 'datadate, rank, ally, points, sender_id, number_member';
 				foreach ($n as $i => $val) {
 					$data = $n[$i];
 					$data['ally_tag'] = Check::filterSpecialChars($data['ally_tag']);
 					if(!Check::data2(isset($data['points']),
 									Check::ally_tag($data['ally_tag'])))
 						continue;
-					$query[] = '('.$timestamp.', '.$i.', "'.$data['ally_tag'].'", '.((int)$data['points']).', '.$user_data['user_id'].','.((int)$data['members']).', '.((int)$data['mean']).')';
+					$query[] = '('.$timestamp.', '.$i.', "'.$data['ally_tag'].'", '.((int)$data['points']).', '.$user_data['user_id'].','.((int)$data['members']).')';
 					$datas[] = $data;
 					$total ++;
 				}
