@@ -90,10 +90,7 @@ function user_login()
                 $request = "update " . TABLE_USER . " set user_lastvisit = " . time() .
                     " where user_id = " . $user_id;
                 $db->sql_query($request);
-
-                /*//Incompatible MySQL 4.0
-                $request = "insert into ".TABLE_STATISTIC." values ('connection_server', '1')";
-                $request .= " on duplicate key update statistic_value = statistic_value + 1";*/
+                
                 $request = "update " . TABLE_STATISTIC .
                     " set statistic_value = statistic_value + 1";
                 $request .= " where statistic_name = 'connection_server'";
@@ -1574,8 +1571,8 @@ function user_get_empire()
     $planet = array(false, "user_id" => "", "planet_name" => "", "coordinates" => "",
         "fields" => "", "fields_used" => "", "temperature_min" => "", "temperature_max" =>
         "", "Sat" => "", "M" => 0, "C" => 0, "D" => 0, "CES" => 0, "CEF" => 0, "UdR" =>
-        0, "UdN" => 0, "CSp" => 0, "HM" => 0, "HC" => 0, "HD" => 0, "Lab" => 0, "Ter" =>
-        0, "Silo" => 0, "BaLu" => 0, "Pha" => 0, "PoSa" => 0, "DdR" => 0);
+        0, "UdN" => 0, "CSp" => 0, "HM" => 0, "HC" => 0, "HD" => 0, "CM" => 0,"CC" => 0,"CD" => 0,
+        "Lab" => 0, "Ter" => 0, "Silo" => 0, "BaLu" => 0, "Pha" => 0, "PoSa" => 0, "DdR" => 0);
 
     $defence = array("LM" => 0, "LLE" => 0, "LLO" => 0, "CG" => 0, "AI" => 0, "LP" =>
         0, "PB" => 0, "GB" => 0, "MIC" => 0, "MIP" => 0);
@@ -1601,7 +1598,7 @@ function user_get_empire()
     }
 
 
-    $request = "select planet_id, planet_name, `coordinates`, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
+    $request = "select planet_id, planet_name, `coordinates`, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, CM, CC, CD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
     $request .= " from " . TABLE_USER_BUILDING;
     $request .= " where user_id = " . $user_data["user_id"];
     $request .= " order by planet_id";

@@ -137,21 +137,8 @@ function session_set_user_data($cookie_id) {
 	global $db, $user_ip, $user_data, $user_auth, $server_config;
 	global $link_css;
 
-	if (preg_match("#^0.300([b-f])?$#", $server_config["version"])) {
-		$request = "select user_id, user_name, user_admin, user_galaxy, user_system, user_skin";
-	}
-	elseif (preg_match("#^0.301(b)?$#", $server_config["version"])) {
-		$request = "select user_id, user_name, user_admin, user_galaxy, user_system, user_skin, session_lastvisit";
-	}
-	elseif (preg_match("#^3.02(b)?$#", $server_config["version"])) {
-		$request = "select user_id, user_name, user_admin, user_coadmin, user_galaxy, user_system, user_skin, session_lastvisit, user_stat_name, ";
-		$request .= "management_user, management_ranking";
-	}
-	else {
-		$request = "select user_id, user_name, user_admin, user_coadmin, user_galaxy, user_system, user_skin, session_lastvisit, user_stat_name, ";
-		$request .= "management_user, management_ranking, disable_ip_check, off_amiral, off_ingenieur, off_geologue, off_technocrate";
-	}
-
+	$request = "select user_id, user_name, user_admin, user_coadmin, user_galaxy, user_system, user_skin, session_lastvisit, user_stat_name, ";
+	$request .= "management_user, management_ranking, disable_ip_check, off_amiral, off_ingenieur, off_geologue, off_technocrate";
 	$request .= " from ".TABLE_USER." u, ".TABLE_SESSIONS." s";
 	$request .= " where u.user_id = s.session_user_id";
 	$request .= " and session_id = '".$cookie_id."'";
@@ -161,11 +148,11 @@ function session_set_user_data($cookie_id) {
 	if ($db->sql_numrows($result) == 1) {
 		$user_data = $db->sql_fetch_assoc($result);
 		if ($user_data["user_skin"] != "") $link_css = $user_data["user_skin"];
-		else $link_css = $server_config["default_skin"];
+		else 
+			$link_css = $server_config["default_skin"];
 
-		if ( $server_config["version"] > "3.02" ) {
-			$user_auth = user_get_auth($user_data["user_id"]);
-		}
+		$user_auth = user_get_auth($user_data["user_id"]);
+
 	}
 	else {
 		unset($user_data);

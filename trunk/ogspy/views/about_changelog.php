@@ -18,7 +18,7 @@ if (!defined('IN_SPYOGAME')) {
 }
 ?>
 
-<table width="70%" align="center">
+<table width="70%" style="text-align:center;">
 <tr>
 	<td align="center" class="c" colspan="2"><font color="Yellow">Notes de version</font></td>
 </tr>
