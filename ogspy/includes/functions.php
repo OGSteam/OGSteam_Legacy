@@ -107,53 +107,16 @@ function write_file_gz($file, $mode, $text)
  * @param string $ip sous la forme xxx.xxx.xxx.xxx en IPv4 et xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx en IPv6
  * @return string IP codé en hexa : HHHHHHHH en IPv4 et HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH en IPv6
  */
-function encode_ip($ip)
+function encode_ip ($ip)
 {
-    if (substr_count($ip, ":") > 0 && substr_count($ip, ".") == 0) {
-        $ip_sep = explode(":", uncompress_ipv6($ip));
-        return implode($ip_sep);
-    } else {
-        $ip_sep = explode(".", $ip);
-        return sprintf("%02x%02x%02x%02x", $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
-    }
-}
+	$d = explode('.', $ip);
+	if (count($d) == 4) return sprintf('%02x%02x%02x%02x', $d[0], $d[1], $d[2], $d[3]);
 
-/**
- * Décompression d'adresses IPv6
- * @param string $ip IPv6 sous la forme xx::xxxx
- * @return string IP sous la forme xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
- */
-function uncompress_ipv6($ipv6)
-{
-    if (strpos($ipv6, "::") == false) {
-        $e = explode(":", $ipv6);
-        $s = 8 - sizeof($e) + 1;
-        foreach ($e as $key => $val) {
-            if ($val == "") {
-                for ($i = 0; $i <= $s; $i++)
-                    $newip[] = '0000';
-            } else
-                $newip[] = padleft($val, '0', 4);
-        }
-        $ip = implode(":", $newip);
-    }
-    return $ip;
-}
-/**
- * Complète une chaîne avec des caractères à gauche
- * @param string $str chaîne à compléter
- * @param string $strChar caractère de remplissage
- * @param string $strChar longeur finale
- * @return string chaîne complétée
- */
-function padleft($str, $strChar, $intLength)
-{
-    $str = $str . '';
-    if (strlen($str) > 0) {
-        while (strlen($str) < $intLength)
-            $str = $strChar . $str;
-    }
-    return $str;
+	$d = explode(':', preg_replace('/(^:)|(:$)/', '', $ip));
+	$res = '';
+	foreach ($d as $x)
+	$res .= sprintf('%0'. ($x == '' ? (9 - count($d)) * 4 : 4) .'s', $x);
+	return $res;
 }
 
 /**
@@ -161,12 +124,30 @@ function padleft($str, $strChar, $intLength)
  * @param string $ip_encode IP encodé
  * @return string IP sous la forme xxx.xxx.xxx.xxx
  */
-function decode_ip($ip_encode)
+function decode_ip($int_ip)
 {
-    $hexipbang = explode('.', chunk_split($ip_encode, 2, '.'));
-    return hexdec($hexipbang[0]) . '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) .
-        '.' . hexdec($hexipbang[3]);
+    
+ 
+    if (strlen($int_ip) == 32) {
+        $int_ip = substr(chunk_split($int_ip, 4, ':'), 0, 39);
+        $int_ip = ':'. implode(':', array_map("hexhex", explode(':',$int_ip))) .':';
+        preg_match_all("/(:0)+/", $int_ip, $zeros);
+        if (count($zeros[0]) > 0) {
+            $match = '';
+            foreach($zeros[0] as $zero)
+                if (strlen($zero) > strlen($match))
+                    $match = $zero;
+            $int_ip = preg_replace('/'. $match .'/', ':', $int_ip, 1);
+        }
+        return preg_replace('/(^:([^:]))|(([^:]):$)/', '$2$4', $int_ip);
+    }
+    $hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
+    return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
 }
+
+function hexhex($value) {
+	return dechex(hexdec($value));
+};
 
 /**
  * Génératrice de mot de passe de 6 caractères
