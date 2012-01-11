@@ -913,6 +913,7 @@ switch ($pub_type){
 						}
 						$db->sql_query('UPDATE '.TABLE_USER.' SET spy_added_ogs = spy_added_ogs + 1 WHERE user_id = '.$user_data['user_id']);
 						update_statistic('spyimport_ogs', '1');
+						
 					}
 				break;
 				
@@ -1008,6 +1009,9 @@ switch ($pub_type){
 					'type' => (isset($pub_returnAs) && $pub_returnAs == 'spy' ? 'spy' : 'messages')
 			));
 		}
+		add_log('messages', array(
+							$line['type'] => $tag
+		));
 	break;
 
 	default:
