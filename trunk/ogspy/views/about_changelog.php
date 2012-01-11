@@ -27,6 +27,16 @@ if (!defined('IN_SPYOGAME')) {
 	<td class="c">Description</td>
 </tr>
 <tr>
+	<th>3.1.0</th>
+	<th style="text-align:left">
+- Compatibilité OGame 3.X:<br />
+- Nouveaux classements militaires<br />
+- Nouveaux bâtiments.<br />
+- Support IPv6.<br />
+- Nouveau skin.<br />
+  </th>
+</tr>
+<tr>
 	<th>3.0.8</th>
 	<th style="text-align:left">
 - Affichage RE vue galaxie : affichage de 2 RE : 1 de planète, et 1 de lune, si il(s) existe(nt)<br />
