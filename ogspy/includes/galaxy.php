@@ -2358,16 +2358,11 @@ function galaxy_show_ranking_player()
         $pub_order_by = "general";
     }
 
-
-    //if ($pub_order_by != "general" && $pub_order_by != "fleet" && $pub_order_by != "research" ) {
-    //	$pub_order_by = "general";
-    //}
-
     $tables = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_PLAYER_ECO,
         TABLE_RANK_PLAYER_TECHNOLOGY, TABLE_RANK_PLAYER_MILITARY,
-        TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
+        TABLE_RANK_PLAYER_MILITARY_BUILT, TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
         TABLE_RANK_PLAYER_HONOR);
-    $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
+    $name = array('general', 'eco', 'techno', 'military', 'military_b', 'military_l', 'military_d',
         'honnor');
 
     // verification de la variable pub_order
@@ -2511,9 +2506,9 @@ function galaxy_show_ranking_ally()
 
     $tables = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
         TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
-        TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
+        TABLE_RANK_ALLY_MILITARY_BUILT, TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
         TABLE_RANK_ALLY_HONOR);
-    $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
+    $name = array('general', 'eco', 'techno', 'military', 'military_b', 'military_l', 'military_d',
         'honnor');
 
     // verification de la variable pub_order_by
@@ -2692,9 +2687,9 @@ function galaxy_show_ranking_unique_ally($ally, $last = false)
     $ranking = array();
     $tables = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
         TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
-        TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
+        TABLE_RANK_ALLY_MILITARY_BUILT, TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
         TABLE_RANK_ALLY_HONOR);
-    $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
+    $name = array('general', 'eco', 'techno', 'military', 'military_b', 'military_l', 'military_d',
         'honnor');
 
     $i = 0;
