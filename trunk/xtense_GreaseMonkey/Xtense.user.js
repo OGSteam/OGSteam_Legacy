@@ -2078,7 +2078,8 @@ function initOGSpyCommunication (){
 	'buildings': { 1:'M', 2:'C', 3:'D', 4:'CES', 
 				12:'CEF', 14:'UdR', 15:'UdN', 
 				21:'CSp', 212:'Sat', 22:'HM', 23:'HC', 
-				24:'HD', 31:'Lab', 33:'Ter', 
+				24:'HD', 25:'CM', 26:'CC', 
+				27:'CD',31:'Lab', 33:'Ter', 
 				34:'DdR', 44:'Silo', 41:'BaLu', 
 				42:'Pha', 43:'PoSa'
 				},
