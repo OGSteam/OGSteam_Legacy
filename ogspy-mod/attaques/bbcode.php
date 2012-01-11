@@ -78,9 +78,9 @@ echo"</font></b></legend>";
 
 echo"Afficher mes attaques et mes recyclages en BBCode : ";
 echo"<form action='index.php?action=attaques&page=bbcode' method='post' name='date'>";
-echo"du : <input type='text' name='date_from' id='date_from' size='2' maxlength='2' value='$pub_date_from' /> ";
+echo"du : <input type='text' name='date_from' id='date_from' size='11' maxlength='2' value='$pub_date_from' /> ";
 echo"au : ";
-echo"<input type='text' name='date_to' id='date_to' size='2' maxlength='2' value='$pub_date_to' />";
+echo"<input type='text' name='date_to' id='date_to' size='11' maxlength='2' value='$pub_date_to' />";
 echo"<br>";
 ?>		
 <a href="#haut" onclick="javascript: setDateFrom('<?php echo $date; ?>'); setDateTo('<?php echo $date; ?>');  valid();">du jour</a> |
