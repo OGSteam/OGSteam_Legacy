@@ -69,14 +69,6 @@ if ($page == 'config') {
 	}
 	
 	if (isset($pub_do)) {
-		if ($pub_do == 'move') {
-			if (move_plugin()) {
-				$server_config['xtense_plugin_root'] = 1;
-				$db->sql_query('REPLACE INTO '.TABLE_CONFIG.' (config_name, config_value) VALUES ("xtense_plugin_root", "1")');
-				generate_config_cache();
-			}
-			$action = 'move';
-		}
 		
 		if ($pub_do == 'repair') {
 			$db->sql_query('DELETE FROM '.TABLE_USER_BUILDING.' WHERE planet_id < 1');
@@ -146,15 +138,15 @@ if ($page == 'mods') {
 		'expedition' => 'Rapports d\'expeditions',
 		'trade' => 'Livraisons Amies',
 		'trade_me' => 'Mes Livraisons',
-		'overview' => 'Vue gÃ©nÃ©rale',
+		'overview' => 'Vue générale',
 		'ennemy_spy' => 'Espionnages ennemis',
-		'system' => 'SystÃ¨mes solaires',
+		'system' => 'Systèmes solaires',
 		'ally_list' => 'Liste des joueurs d\'alliance',
-		'buildings' => 'BÃ¢timents',
+		'buildings' => 'Bâtiments',
 		'research' => 'Laboratoire',
 		'fleet' => 'Flotte',
-		'fleetSending' => 'DÃ©part de flotte',
-		'defense' => 'DÃ©fense',
+		'fleetSending' => 'Départ de flotte',
+		'defense' => 'Défense',
 		'rc' => 'Rapports de combat',
 		'ranking_player_fleet' => 'Statistiques (flotte) des joueurs',
 		'ranking_player_points' => 'Statistiques (points) des joueurs',
@@ -261,7 +253,7 @@ function toggle_callback_info() {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" >
 <head>
 	<title>Xtense <?php echo $version; ?></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link rel="stylesheet" media="all" type="text/css" href="mod/<?php echo $root; ?>/style.css" />
 </head>
 <body>
@@ -309,7 +301,8 @@ function toggle_callback_info() {
 	
 <?php if ($page == 'infos') { ?>
 	<h2>T&eacute;l&eacute;chargement de la barre</h2>
-		<p>Version Firefox (RÃ©cupÃ©rez la derniÃ¨re version et ouvrez le fichier avec Firefox): <a href="http://update.ogsteam.fr/xtense/download.php" target="_blank">Module Xtense</a></p>
+		<p>Version Firefox (Récupérez la dernière version et ouvrez le fichier avec Firefox): <a href="http://update.ogsteam.fr/xtense/download.php" target="_blank">Module Xtense</a></p>
+		<p>Version Chrome et Firefox : <a href="http://userscripts.org/scripts/show/112690" target="_blank">Module Xtense Grease Monkey</a></p>
 	<h2>Informations</h2>
 	
 	<p>Voici les informations que vous devez rentrer dans le plugin Xtense pour vous connecter &agrave; ce serveur :</p>
@@ -330,23 +323,7 @@ function toggle_callback_info() {
 	<?php } ?>
 	
 	<?php if (isset($action)) { ?>
-			<?php if ($action == 'move') { ?>
-				<?php if (isset($move_error)) { ?>
-					<p class="error">
-						<?php if ($move_error == 'file_access') 
-							echo 'Le fichier <em>xtense.php</em> d&eacute;j&agrave; pr&eacute;sent &agrave; la racine de votre ogspy n&#039;est pas disponible en &eacute;criture, veuillez v&eacute;rifier son CHMOD.';
-						elseif ($move_error == 'file_unlink')
-							echo 'Impossible de supprimer le fichier <em>xtense.php</em> d&eacute;j&agrave; pr&eacute;sent &agrave; la racine de votre OGSpy.';
-						elseif ($move_error == 'dir_access')
-							echo 'Le dossier racine de votre ogspy n&#039;est pas disponible en &eacute;criture. Il est impossible de copier le plugin.';
-						else
-							echo 'Une erreur critique est survenue lors de la copie du plugin !';
-						?>
-					</p>
-				<?php } else { ?>
-					<p class="success">Le d&eacute;placement c&#039;est correctement pass&eacute;. L&#039;URL du plugin a &eacute;t&eacute; modifi&eacute;e pour correspondre &agrave; son nouvel emplacement.</p>
-				<?php } ?>
-			<?php } elseif ($action == 'repair') { ?>
+			<?php if ($action == 'repair') { ?>
 				<p class="success">L&#039;espace personnel a &eacute;t&eacute; correctement r&eacute;par&eacute;</p>
 			<?php } elseif ($action == 'install_callbacks') { ?>
 				<p class="success" name="callback_sumary">Les appels ont &eacute;t&eacute; install&eacute;s. <?php echo $installed_callbacks; ?> appel(s) install&eacute;(s) pour un total de <?php echo $total_callbacks; ?> appels disponibles.
@@ -396,11 +373,6 @@ function toggle_callback_info() {
 				<span class="chk"><input type="checkbox" id="log_reverse" name="log_reverse"<?php echo ($server_config['xtense_log_reverse'] == 1 ? ' checked="checked"' : '');?> /></span>
 				<label for="log_reverse">Afficher les actions les plus r&eacute;centes en haut dans le journal.</label>
 			</p>
-			
-			<p>
-				<span class="chk"><input type="checkbox" id="plugin_root" name="plugin_root"<?php echo ($server_config['xtense_plugin_root'] == 1 ? ' checked="checked"' : '');?> /></span>
-				<label for="plugin_root">Plugin &agrave; la racine de votre OGSpy.</label>
-			</p>
 			<p>
 				<span class="chk"><input type="checkbox" id="spy_autodelete" name="spy_autodelete"<?php echo ($server_config['xtense_spy_autodelete'] == 1 ? ' checked="checked"' : '');?> /></span>
 				<label for="spy_autodelete">Effacement automatique des RE trop vieux (configurable depuis l&#039;admin de OGSpy).</label>
@@ -449,10 +421,6 @@ function toggle_callback_info() {
 		<div class="clear sep"></div>
 		<div id="actions">
 			<h2>Actions</h2>
-			<p>
-				<a href="?action=xtense&amp;page=config&amp;do=move" class="action" title="Effectuer cette action">&nbsp;</a>
-				Tenter de d&eacute;placer automatiquement le fichier xtense.php &agrave; la racine de votre OGSpy
-			</p>
 			<p>
 				<a href="?action=xtense&amp;page=config&amp;do=repair" class="action" title="Effectuer cette action">&nbsp;</a>
 				R&eacute;parer les espaces personnels (en cas de probl&egrave;mes avec un espace personnel plein)
@@ -595,7 +563,7 @@ Calendar.setup({
 	ifFormat    : '%d/%m/%Y',
 	button      : 'date',
 	showOthers  : true,
-	range		: [2007, 2099],
+	range		: [2012, 2099],
 	weekNumbers : false
 });
 </script>
@@ -621,6 +589,14 @@ Calendar.setup({
 	<h2>Changelog</h2>
 	
 	<dl class="changelog">
+		<dt>Janvier 2012</dt>
+			<dd>			
+				<div class="version">Module OGSpy 2.4</div>
+				<p>
+					<em>Ajouts : </em><br />
+					&nbsp;* Support OGame 3.0
+				</p>
+			</dd>
 		<dt>14 janvier 2009</dt>
 			<dd>			
 				<div class="version">Module OGSpy 2.2</div>
@@ -706,7 +682,7 @@ Calendar.setup({
 	</div>
 </div>
 
-<div id="foot"><?php echo round($php_timing, 2); ?> ms - Cr&eacute;&eacute; par Unibozu - <a href="http://board.ogsteam.fr/" onclick="return winOpen(this);" target="_blank">Support</a></div>
+<div id="foot"><?php echo round($php_timing, 2); ?> ms - Cr&eacute;&eacute; par Unibozu - <a href="http://www.ogsteam.fr/" onclick="return winOpen(this);" target="_blank">Support</a></div>
 
 
 </body>

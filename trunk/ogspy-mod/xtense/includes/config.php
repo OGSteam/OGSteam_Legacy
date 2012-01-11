@@ -19,9 +19,9 @@ define('TYPE_MOON', 1);
 
 define('MAGIC_QUOTES', false);
 if (file_exists ("../mod/{$root}/version.txt"))
-	list($mod_name, $mod_version, $mod_install, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file("../mod/{$root}/version.txt");
+	list($mod_name, $mod_version, $mod_install, $ogspy_min_version, $toolbar_min_version) = file("../mod/{$root}/version.txt");
 else
-	list($mod_name, $mod_version, $mod_install, $ogspy_min_version, $unispy_min_version, $toolbar_min_version) = file("mod/{$root}/version.txt");
+	list($mod_name, $mod_version, $mod_install, $ogspy_min_version, $toolbar_min_version) = file("mod/{$root}/version.txt");
 	
 define('PLUGIN_VERSION', trim($mod_version));
 define('TOOLBAR_MIN_VERSION', trim($toolbar_min_version));
