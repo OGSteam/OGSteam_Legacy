@@ -63,7 +63,7 @@ switch ($ogsversion) {
 
 	case "0.300d" :
 	$requests[] = "INSERT INTO ".TABLE_CONFIG." (config_name, config_value)".
-	" VALUES ('url_forum', 'http://ogsteam.fr/index.php')";
+	" VALUES ('url_forum', 'http://www.ogsteam.fr/index.php')";
 
 	$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '0.300e' WHERE config_name = 'version'";
 	$ogsversion = "0.300e";
@@ -629,6 +629,9 @@ switch ($ogsversion) {
        $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CD` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache deut
 	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CC` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache cristal
 	   $requests[] = "ALTER TABLE `".TABLE_USER_BUILDING."` ADD `CM` SMALLINT(2) NOT NULL default '0' AFTER `HD`"; // cache metal
+	   $requests[] = "ALTER TABLE `".TABLE_PARSEDSPY."` ADD `CD` SMALLINT(2) NOT NULL default '-1' AFTER `HD`"; // cache deut
+	   $requests[] = "ALTER TABLE `".TABLE_PARSEDSPY."` ADD `CC` SMALLINT(2) NOT NULL default '-1' AFTER `HD`"; // cache cristal
+	   $requests[] = "ALTER TABLE `".TABLE_PARSEDSPY."` ADD `CM` SMALLINT(2) NOT NULL default '-1' AFTER `HD`"; // cache metal
         // fin modif building
         
         // ajout classement alliance //
