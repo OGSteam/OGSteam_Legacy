@@ -78,25 +78,6 @@ function dump() {
 	echo $content."\n";
 }
 
-function move_plugin () {	
-	global $root;
-	if (file_exists('./xtense.php') && !is_writable('./xtense.php'))
-		return false;
-	
-	if (!is_writable('./'))
-		return false;
-	
-	@unlink('./xtense.php');
-	if (file_exists('./xtense.php'))
-		return false;
-	
-	@copy("mod/{$root}/xtense.php", './xtense.php');
-	if (!file_exists('./xtense.php'))
-		return false;
-	
-	@chmod('./xtense.php', 0777);
-	return true;
-}
 
 /**
  * Echappement forcé pour la syntaxe Json
@@ -233,13 +214,13 @@ function add_log($type, $data = null) {
 		$message = 'envoie sa page de messages';
 		
 		$extra = array();
-		if ($data['msg']) $extra[] = 'messages : '.$data['msg'];
-		if ($data['ally_msg']) $extra[] = $data['ally_msg'].' messages d\'alliance';
-		if ($data['ennemy_spy']) $extra[] = $data['ennemy_spy'].' espionnages ennemis';
-		if ($data['rc_cdr']) $extra[] = $data['rc_cdr'].' rapports de recyclages';
-		if ($data['expedition']) $extra[] = $data['expedition'].' rapports d\'expedition';
-		if ($data['added_spy']) $extra[] = $data['added_spy'].' rapports d\'espionnage ajoutés : '.implode(', ', $data['added_spy_coords']);
-		if ($data['ignored_spy']) $extra[] = $data['ignored_spy'].' rapports d\'espionnage ignorés';
+		if (array_key_exists('msg', $data)) $extra[] = 'messages : '.$data['msg'];
+		if (array_key_exists('ally_msg', $data)) $extra[] = $data['ally_msg'].' messages d\'alliance';
+		if (array_key_exists('ennemy_spy', $data)) $extra[] = $data['ennemy_spy'].' espionnages ennemis';
+		if (array_key_exists('rc_cdr', $data)) $extra[] = $data['rc_cdr'].' rapports de recyclages';
+		if (array_key_exists('expedition', $data)) $extra[] = $data['expedition'].' rapports d\'expedition';
+		if (array_key_exists('added_spy', $data)) $extra[] = ' Rapport d\'espionnage ajouté : '.$data['added_spy_coords'];
+		if (array_key_exists('ignored_spy', $data)) $extra[] = $data['ignored_spy'].' rapports d\'espionnage ignorés';
 		
 		if (!empty($extra)) $message .= ' ('.implode(', ', $extra).')';
 	}
