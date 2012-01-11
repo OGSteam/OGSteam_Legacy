@@ -2655,9 +2655,9 @@ function galaxy_show_ranking_unique_player($player, $last = false)
     $ranking = array();
     $tables = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_PLAYER_ECO,
         TABLE_RANK_PLAYER_TECHNOLOGY, TABLE_RANK_PLAYER_MILITARY,
-        TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
+        TABLE_RANK_PLAYER_MILITARY_BUILT, TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
         TABLE_RANK_PLAYER_HONOR);
-    $name = array('general', 'eco', 'techno', 'military', 'military_l', 'military_d',
+    $name = array('general', 'eco', 'techno', 'military', 'military_b', 'military_l', 'military_d',
         'honnor');
 
     $i = 0;
