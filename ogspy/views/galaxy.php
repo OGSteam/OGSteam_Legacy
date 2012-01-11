@@ -170,6 +170,8 @@ foreach ($population as $v) {
         	$techno_points = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["points"]) : "&nbsp;";
             $military_rank = isset($ranking["military"]) ?  formate_number($ranking["military"]["rank"]) : "&nbsp;";
         	$military_points = isset($ranking["military"]) ?  formate_number($ranking["military"]["points"]) : "&nbsp;";
+        	$military_b_rank = isset($ranking["military_b"]) ?  formate_number($ranking["military_b"]["rank"]) : "&nbsp;";
+        	$military_b_points = isset($ranking["military_b"]) ?  formate_number($ranking["military_b"]["points"]) : "&nbsp;";
             $military_l_rank = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["rank"]) : "&nbsp;";
         	$military_l_points = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["points"]) : "&nbsp;";
             $military_d_rank = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["rank"]) : "&nbsp;";
@@ -182,6 +184,7 @@ foreach ($population as $v) {
 			$tooltip .= "<tr><td class=\"c\">Economique</td><th>".$eco_rank."</th><th>".$eco_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$techno_rank."</th><th>".$techno_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Militaire</td><th width=\"30\">".$military_rank."</th><th>".$military_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Militaire construit</td><th width=\"30\">".$military_b_rank."</th><th>".$military_b_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Perte militaire</td><th>".$military_l_rank."</th><th>".$military_l_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Destruction</td><th>".$military_d_rank."</th><th>".$military_d_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Honneur</td><th>".$honnor_rank."</th><th>".$honnor_points."</th></tr>";
@@ -211,6 +214,8 @@ foreach ($population as $v) {
         	$techno_points = isset($ranking["techno"]) ?  formate_number($ranking["techno"]["points"]) : "&nbsp;";
             $military_rank = isset($ranking["military"]) ?  formate_number($ranking["military"]["rank"]) : "&nbsp;";
         	$military_points = isset($ranking["military"]) ?  formate_number($ranking["military"]["points"]) : "&nbsp;";
+        	$military_b_rank = isset($ranking["military_b"]) ?  formate_number($ranking["military_b"]["rank"]) : "&nbsp;";
+        	$military_b_points = isset($ranking["military_b"]) ?  formate_number($ranking["military_b"]["points"]) : "&nbsp;";
             $military_l_rank = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["rank"]) : "&nbsp;";
         	$military_l_points = isset($ranking["military_l"]) ?  formate_number($ranking["military_l"]["points"]) : "&nbsp;";
             $military_d_rank = isset($ranking["military_d"]) ?  formate_number($ranking["military_d"]["rank"]) : "&nbsp;";
@@ -223,6 +228,7 @@ foreach ($population as $v) {
 			$tooltip .= "<tr><td class=\"c\">Economique</td><th>".$eco_rank."</th><th>".$eco_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Recherche</td><th>".$techno_rank."</th><th>".$techno_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Militaire</td><th width=\"30\">".$military_rank."</th><th>".$military_points."</th></tr>";
+			$tooltip .= "<tr><td class=\"c\">Militaire construit</td><th>".$military_b_rank."</th><th>".$military_b_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Perte militaire</td><th>".$military_l_rank."</th><th>".$military_l_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Destruction</td><th>".$military_d_rank."</th><th>".$military_d_points."</th></tr>";
 			$tooltip .= "<tr><td class=\"c\">Honneur</td><th>".$honnor_rank."</th><th>".$honnor_points."</th></tr>";

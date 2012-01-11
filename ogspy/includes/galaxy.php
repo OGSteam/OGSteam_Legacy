@@ -2907,98 +2907,38 @@ function galaxy_purge_ranking()
     }
     $max_keeprank = intval($server_config["max_keeprank"]);
 
+    $rank_tables = array('TABLE_RANK_PLAYER_POINTS', 'TABLE_RANK_ALLY_POINTS','TABLE_RANK_PLAYER_ECO','TABLE_RANK_PLAYER_TECHNOLOGY',
+            'TABLE_RANK_PLAYER_MILITARY','TABLE_RANK_PLAYER_MILITARY_BUILT','TABLE_RANK_PLAYER_MILITARY_LOOSE',
+            'TABLE_RANK_PLAYER_MILITARY_DESTRUCT','TABLE_RANK_PLAYER_HONOR','TABLE_RANK_ALLY_ECO','TABLE_RANK_ALLY_TECHNOLOGY',
+            'TABLE_RANK_ALLY_MILITARY','TABLE_RANK_ALLY_MILITARY_BUILT','TABLE_RANK_ALLY_MILITARY_LOOSE','TABLE_RANK_ALLY_MILITARY_DESTRUCT',
+            'TABLE_RANK_ALLY_HONOR');
+    
     if ($server_config["keeprank_criterion"] == "day") {
         // classement joueur
-        $request = "delete from " . TABLE_RANK_PLAYER_POINTS . " where datadate < " . (time
+
+        foreach ($rank_tables as $table){
+        $request = "delete from " . $table . " where datadate < " . (time
             () - 60 * 60 * 24 * $max_keeprank);
         $db->sql_query($request, true, false);
-        $request = "delete from " . TABLE_RANK_PLAYER_FLEET . " where datadate < " . (time
-            () - 60 * 60 * 24 * $max_keeprank);
-        $db->sql_query($request, true, false);
-        $request = "delete from " . TABLE_RANK_PLAYER_RESEARCH . " where datadate < " . (time
-            () - 60 * 60 * 24 * $max_keeprank);
-        $db->sql_query($request, true, false);
-        // classement ally
-        $request = "delete from " . TABLE_RANK_ALLY_POINTS . " where datadate < " . (time
-            () - 60 * 60 * 24 * $max_keeprank);
-        $db->sql_query($request, true, false);
-        $request = "delete from " . TABLE_RANK_ALLY_FLEET . " where datadate < " . (time
-            () - 60 * 60 * 24 * $max_keeprank);
-        $db->sql_query($request, true, false);
-        $request = "delete from " . TABLE_RANK_ALLY_RESEARCH . " where datadate < " . (time
-            () - 60 * 60 * 24 * $max_keeprank);
-        $db->sql_query($request, true, false);
+        }
+
     }
 
     if ($server_config["keeprank_criterion"] == "quantity") {
-        // classement joueur
-        $request = "select distinct datadate from " . TABLE_RANK_PLAYER_POINTS .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_PLAYER_POINTS . " where datadate < " . $datadate;
-            $db->sql_query($request, true, false);
-        }
-
-        $request = "select distinct datadate from " . TABLE_RANK_PLAYER_FLEET .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_PLAYER_FLEET . " where datadate < " . $datadate;
-            $db->sql_query($request, true, false);
-        }
-
-        $request = "select distinct datadate from " . TABLE_RANK_PLAYER_RESEARCH .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_PLAYER_RESEARCH . " where datadate < " .
-                $datadate;
-            $db->sql_query($request, true, false);
-        }
-
-        // classement ally
-        $request = "select distinct datadate from " . TABLE_RANK_ALLY_POINTS .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_ALLY_POINTS . " where datadate < " . $datadate;
-            $db->sql_query($request, true, false);
-        }
-
-        $request = "select distinct datadate from " . TABLE_RANK_ALLY_FLEET .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_ALLY_FLEET . " where datadate < " . $datadate;
-            $db->sql_query($request, true, false);
-        }
-
-        $request = "select distinct datadate from " . TABLE_RANK_ALLY_RESEARCH .
-            " order by datadate desc limit 0, " . $max_keeprank;
-        $result = $db->sql_query($request);
-        while ($row = $db->sql_fetch_assoc($result)) {
-            $datadate = $row["datadate"];
-        }
-        if (isset($datadate)) {
-            $request = "delete from " . TABLE_RANK_ALLY_RESEARCH . " where datadate < " . $datadate;
-            $db->sql_query($request, true, false);
-        }
+    	foreach ($rank_tables as $table){
+    		
+	        $request = "select distinct datadate from " . $table .
+	            " order by datadate desc limit 0, " . $max_keeprank;
+	        $result = $db->sql_query($request);
+	        while ($row = $db->sql_fetch_assoc($result)) {
+	            $datadate = $row["datadate"];
+	        }
+	        if (isset($datadate)) {
+	            $request = "delete from " . $table . " where datadate < " . $datadate;
+	            $db->sql_query($request, true, false);
+	        }
+    	}
+      
     }
 }
 
@@ -3031,6 +2971,8 @@ function galaxy_drop_ranking()
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY . " where datadate = " .
             intval($pub_datadate);
+        $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_BUILT .
+                    " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_LOOSE .
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_DESTRUCT .
@@ -3053,6 +2995,8 @@ function galaxy_drop_ranking()
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY . " where datadate = " .
             intval($pub_datadate);
+        $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_BUILT .
+                    " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_LOOSE .
             " where datadate = " . intval($pub_datadate);
         $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_DESTRUCT .
