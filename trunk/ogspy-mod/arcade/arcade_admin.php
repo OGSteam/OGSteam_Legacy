@@ -13,7 +13,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 // a priori pas besoin de verifier si le mod est actif.. vu que la demande ne peut venir que d'arcade.php
 
-require_once("mod/Arcade/arcade_functions.php");
+require_once("mod/arcade/arcade_functions.php");
 $aapc="?action=Arcade&amp;subaction=Admin&amp;command";
 
 /**
@@ -118,7 +118,7 @@ function ShowInstallSwfForm($pub_swffile){
 	$basename=basename($pub_swffile,".swf");
 	
 	echo "<table>\n"
-	    ."<tr><th class=c colspan=2>Options d'installation de <a href='./mod/Arcade/games/".$pub_swffile."'>$pub_swffile</a></th></tr>";
+	    ."<tr><th class=c colspan=2>Options d'installation de <a href='./mod/arcade/games/".$pub_swffile."'>$pub_swffile</a></th></tr>";
 	echo "<form action='?action=Arcade&amp;subaction=Admin&amp;command=setswfoptions' method='post'>\n";
 	echo "<input type=hidden name=swffile value=".$pub_swffile.">\n";
 	echo "<tr><td class=c width=100>Nom Affiché:</td><td class=k><input type=text size=40 name=nomjeu value='".$basename."'></td></tr>\n";
@@ -262,9 +262,9 @@ function ShowGameOptions($game){
 		echo "<tr><td class=c>Scorename:</td><td class=k><input type=text size=8 name=scorename value='".$row["scorename"]."'></td></tr>\n";
 		echo "<tr><td class=c>Backcolor:</td><td class=k><input type=text size=8 name=backcolor value='".$row["backcolor"]."'></td></tr>\n";
 		echo "<tr><td class=c>swf:</td><td class=k><input type=text size=40 name=swfname value='".$row["swfname"]."'></td></tr>\n";
-		echo "<tr><td align=center colspan=2><a href='mod/Arcade/games/".$row["swfname"]."'>".$row["swfname"]."</a>&nbsp;(lire)</td></tr>\n";
+		echo "<tr><td align=center colspan=2><a href='mod/arcade/games/".$row["swfname"]."'>".$row["swfname"]."</a>&nbsp;(lire)</td></tr>\n";
 
-		echo "<tr><td class=c>image:</td><td class=k><img width=32 height=32 src='mod/Arcade/pics/".$row["image"]."'>&nbsp;<input type=text size=40 name=image value='".$row["image"]."'></td></tr>\n";
+		echo "<tr><td class=c>image:</td><td class=k><img width=32 height=32 src='mod/arcade/pics/".$row["image"]."'>&nbsp;<input type=text size=40 name=image value='".$row["image"]."'></td></tr>\n";
 		echo "<tr><th colspan=2><input type=submit></th></tr>\n";
 		echo "</form>\n";
 		echo "<tr><th colspan=2>Commandes</th></tr>\n";
@@ -322,7 +322,7 @@ function UploadTarFile(){
 		KeyValueLine("Taille",$poidsFichier." octets");
 		KeyValueLine("Type",$typeFichier);
 		
-		require_once("./mod/Arcade/tarlib.php");
+		require_once("./mod/arcade/tarlib.php");
 		
 		$filetar=new CompTar();
 		$filetar->_nomf=$server_config["arcade_uploadpath"]."/$nomFichier";
@@ -426,7 +426,7 @@ if(!empty($_FILES["file"]["name"])){
 	// Si le poids du fichier est de 0 bytes, le fichier est
 	// invalide (ou le chemin incorrect) => message d'erreur
 	// sinon, le script continue.
-		$uploadOK=move_uploaded_file($nomTemporaire,$_SERVER["DOCUMENT_ROOT"]."/mod/Arcade/games/$nomFichier");
+		$uploadOK=move_uploaded_file($nomTemporaire,$_SERVER["DOCUMENT_ROOT"]."/mod/arcade/games/$nomFichier");
 		if ($uploadOK){
 			echo "L'upload fichier s'est bien déroulé<br>";
 		}else {
@@ -458,7 +458,7 @@ if(!empty($_FILES["image"]["name"])){
 	// Si le poids du fichier est de 0 bytes, le fichier est
 	// invalide (ou le chemin incorrect) => message d'erreur
 	// sinon, le script continue.
-		$uploadimg=move_uploaded_file($nomTemporaire,$_SERVER["DOCUMENT_ROOT"]."/mod/Arcade/pics/$nomFichier");
+		$uploadimg=move_uploaded_file($nomTemporaire,$_SERVER["DOCUMENT_ROOT"]."/mod/arcade/pics/$nomFichier");
 		if ($uploadimg){
 			echo "L'upload fichier image s'est bien déroulé<br>";
 		}else {

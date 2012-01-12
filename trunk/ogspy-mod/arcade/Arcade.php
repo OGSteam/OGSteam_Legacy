@@ -14,7 +14,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='Arcade' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 
-require_once("mod/Arcade/arcade_functions.php");
+require_once("mod/arcade/arcade_functions.php");
 
 $game_title='';
 
@@ -139,7 +139,7 @@ float: left;
 		 Verdana, Lucida, Geneva, Helvetica, 
 		 Arial, sans-serif;
 	font-size: 9px;
-	background-image: url('./mod/Arcade/pics/menugauche.jpg');
+	background-image: url('./mod/arcade/pics/menugauche.jpg');
 	color: #5588FF;
 	text-align: left;
 	border: thin #FFFFFF;
@@ -201,7 +201,7 @@ function ShowArcadeMenu2(){
 	$nbre_scores=$row["nbre_scores"];
 	OutputArcadeCSS();
 	echo "<table class=arcademenu >\n<tr><td width=92 valign=top>\n";
-	echo "\t<div class=left><a href='http://ogsteam.fr'><img  src='mod/Arcade/pics/logo90x90.jpg'></a>\n";
+	echo "\t<div class=left><a href='http://ogsteam.fr'><img  src='mod/arcade/pics/logo90x90.jpg'></a>\n";
 	
 	echo "\t</div>\n";
 	echo "</td><td>\n";
@@ -209,7 +209,7 @@ function ShowArcadeMenu2(){
 
 	echo "\t<table width=100%>\n";
 	echo "\t<tr>\n\t\t<th>";
-	echo "\n\t\t\t<img class='right' src='mod/Arcade/pics/logo.jpg'>\n\t\t\t<p class=left > Stats: $nbre_jeux Jeux, jouées $scores_soumis fois, $nbre_scores Scores\n\t\t</p></th>\n\t</tr>\n";
+	echo "\n\t\t\t<img class='right' src='mod/arcade/pics/logo.jpg'>\n\t\t\t<p class=left > Stats: $nbre_jeux Jeux, jouées $scores_soumis fois, $nbre_scores Scores\n\t\t</p></th>\n\t</tr>\n";
 	global $server_config;
 	echo "\t<tr>\n<td class='c'>[&nbsp; \n";
 	echo "\t<a href='"._ARCSA_."'>Alphabétique</a>$div\n";
@@ -492,7 +492,7 @@ function ShowGames($order='name') {
 	echo "<a href='index.php?action=Arcade&amp;start=$prevstart'>&lt;&lt;</a>";	
 	}else echo "&nbsp;";
 	echo "\n\t</th>\n";
-	echo "\t<td class='a'><img class='centered' src='mod/Arcade/pics/logo.jpg'><div class=left><form class=arcadeinput action='index.php?action=Arcade&amp;subaction=filter' method=post>Filtrer sur le nom: <input type='text' name='filter' value='$pub_filter'><input type='submit' value='Filtre'></form></div></td>\n";
+	echo "\t<td class='a'><img class='centered' src='mod/arcade/pics/logo.jpg'><div class=left><form class=arcadeinput action='index.php?action=Arcade&amp;subaction=filter' method=post>Filtrer sur le nom: <input type='text' name='filter' value='$pub_filter'><input type='submit' value='Filtre'></form></div></td>\n";
 	echo "\t<th width=30>\n";
 	if ($limit==$numrows) {
 		echo "\t\t<a href='index.php?action=Arcade&amp;start=".intval($start+$numrows)."'>&gt;&gt;</a>";
@@ -558,7 +558,7 @@ function ShowPlayPage(){
 	global $db,$pub_gamename;
 	global $game_title;
 
-	$query="SELECT * FROM `ogspy_arcade_game` WHERE `scorename`='$pub_gamename' LIMIT 1";
+	$query="SELECT * FROM `ogspy_arcade_game` WHERE `scorename`='".$pub_gamename."' LIMIT 1";
 
 	$result=$db->sql_query($query);
 
@@ -569,7 +569,7 @@ function ShowPlayPage(){
 	echo "<div class=arcadeheader>";
 	echo "<table><tr><td>";
 	echo "<div class=arcadegameheader style='width: ".$game["width"]."px;'>\n";
-	echo "<div class=left><img src='./mod/Arcade/pics/".$game["image"]."'></div>\n";
+	echo "<div class=left><img src='./mod/arcade/pics/".$game["image"]."'></div>\n";
 	echo $game["name"]."<br>\n";
 	echo "\t<span class=headersmall>".stripslashes($game["description"])."</span>\n";
 	echo "</div>\n";
@@ -577,11 +577,11 @@ function ShowPlayPage(){
 	echo "<div class=arcadegameswf style='width: ".$game["width"]."px;height: ".$game["height"]."px;'>\n";
 ?>
 	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" width="<?php echo $game["width"];?>" height="<?php echo $game["height"];?>">
-		<param name="movie" value="mod/Arcade/games/<?php echo $game["swfname"];?>">
+		<param name="movie" value="mod/arcade/games/<?php echo $game["swfname"];?>">
 		<param name="bgcolor" value="<?php echo $game["backcolor"];?>">
 		<param name="quality" value="high">
 		<param name="menu" value="false">
-		 <embed src="mod/Arcade/games/<?php echo $game["swfname"];?>" width="<?php echo $game["width"];?>" height="<?php echo $game["height"];?>" bgcolor="<?php echo $game["backcolor"];?>" quality="high" menu="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer/"></embed>
+		 <embed src="mod/arcade/games/<?php echo $game["swfname"];?>" width="<?php echo $game["width"];?>" height="<?php echo $game["height"];?>" bgcolor="<?php echo $game["backcolor"];?>" quality="high" menu="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer/"></embed>
 		 <noembed>Sorry, you will need the <a href="http://www.macromedia.com/go/getflashplayer/" target="_blank">Flash Player</a> to play Pac-Man.</noembed>
 	</object>
 <?php
@@ -675,14 +675,14 @@ if($user_data["user_admin"] == 1 || ($server_config["arcade_coadminenable"]=="1"
   switch($pub_subaction) {
 	case "Admin":
 		require_once("views/page_header.php");
-		include_once("mod/Arcade/arcade_admin.php");
+		include_once("mod/arcade/arcade_admin.php");
 		exit();
 		break;
 
   }
 }//}}}
 $banner_selected='';
-require_once("./mod/Arcade/arcade_header.php");
+require_once("./mod/arcade/arcade_header.php");
 
 
 //Interception des subactions utilisateurs {{{
@@ -727,7 +727,7 @@ switch ($pub_subaction) {
 		break;
 	case "comment":
 		ShowOnlinePlayers();
-		require_once("./mod/Arcade/arcade_comment.php");
+		require_once("./mod/arcade/arcade_comment.php");
 		break;
 	case "setcomment":
 		SetComment();
