@@ -17,6 +17,9 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 // Appel des Javascripts
 echo"<script type='text/javascript' language='javascript' src='".FOLDER_ATTCK."/attack.js'></script>";
 
+echo"<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>";
+echo"<script type='text/javascript'>jQuery.noConflict();</script>";
+
 //Définitions
 global $db, $table_prefix;
 
@@ -127,13 +130,92 @@ echo"<table width='100%'><tr align='left' valign='center'>";
 
 // Afficher l'image du graphique
 echo"<td width='410px' align='center'>";
-if ((!isset($recy_metal)) && (!isset($recy_cristal)))
-   {
-   echo "Pas de graphique disponible";
-   }else{
-   echo "<img src='index.php?action=graphic_pie&values=".$recy_metal."_x_".$recy_cristal."&legend=Metal_x_Cristal&title=Proportion%20des%20gains%20des%20recyclages%20affich%E9es' alt='Pas de graphique disponible'>";
+
+   if ((!isset($recy_metal)) && (!isset($recy_cristal))) {
+   	echo "Pas de graphique disponible";
+   } else {   	
+   	/**   GRAPHIQUE   **/
+   	echo "<div id='graphique' style='height: 350px; width: 800px; margin: 0pt auto; clear: both;'></div>";
+   	/** FIN GRAPHIQUE **/
+   	   	 
+   	echo "<script type='text/javascript'>
+      			function number_format(number, decimals, dec_point, thousands_sep) {
+       			var n = !isFinite(+number) ? 0 : +number, 
+           		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+           		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+   		        s = '',
+   		        toFixedFix = function (n, prec) {
+   		            var k = Math.pow(10, prec);
+   		            return '' + Math.round(n * k) / k;
+   		        };
+       			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+       			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+   			    if (s[0].length > 3) {
+   			        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
+   			    if ((s[1] || '').length < prec) {
+   			        s[1] = s[1] || '';
+   			        s[1] += new Array(prec - s[1].length + 1).join('0');
+   			    }    return s.join(dec);
+   			}
+   			
+   		var chart;
+   		
+   	chart = new Highcharts.Chart({
+         chart: {
+            renderTo: 'graphique',
+            defaultSeriesType: 'pie',
+            margin: [50, 200, 60, 170]
+         },
+         title: {
+            text: 'Proportion des gains des recyclages affich&eacute;es'
+         },
+         plotArea: {
+            shadow: null,
+            borderWidth: null,
+            backgroundColor: null
+         },
+         tooltip: {
+            formatter: function() {
+               return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
+            }
+         },
+         plotOptions: {
+            pie: {
+               allowPointSelect: true,
+               cursor: 'pointer',
+               dataLabels: {
+                  enabled: true,
+                  formatter: function() {
+                     return this.point.name;
+                  },
+                  color: 'white',
+                  style: {
+                     font: '13px Trebuchet MS, Verdana, sans-serif'
+                  }
+               }
+            }
+         },
+         legend: {
+            layout: 'vertical',
+            style: {
+               left: 'auto',
+               bottom: 'auto',
+               left: '50px',
+               top: '50px'
+            }
+         },
+         series: [{
+            type: 'pie',
+            name: 'Recyclages',
+            data: [
+               ['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."],
+               ['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]
+            ]
+         }]
+      });</script>";
+   	//echo "<img src='index.php?action=graphic_pie&values=".$recy_metal."_x_".$recy_cristal."&legend=Metal_x_Cristal&title=Proportion%20des%20gains%20des%20recyclages%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";
    }
-echo"</td>";
+   echo"</td></tr>";
 
 //Affichage des gains en métal, en cristal et en deut
 $recy_metal = number_format($recy_metal, 0, ',', ' ');
