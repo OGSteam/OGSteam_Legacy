@@ -2,12 +2,12 @@
 	/***************************************************************************
 	*	fichier		: index.php
 	*	description.	: eXpedition
-	*	Auteur		: parAdOxxx_ZeRo
+	*	Auteur		: parAdOxxx_ZeRo repris par varius9
 	*	créé		: 04/01/2008
-	*	modifié		: 25/02/2008
-	*	version		: 0.4.2
-	
+	*	modifié		: 10/01/2011
+	*	version		: 2.0.0
 	Changelog
+		2.0.0	Mise à jour du mod
 		0.4.2	Nettoyage du code + fix du css
 		0.4.1	Ajout du bouton de forcage de xtense 2 dans config.
 		0.4.0	Derniers fix + tag
@@ -34,11 +34,7 @@
 		0.1.1 	Gros ménage du code + séparation en plusieurs fichier + ajout de gestion des modules + ajout module stat globales + ajout module detail
 		0.1.0 	Premiere release en alpha : ajout du parsing + insertion dans la base TODO : gestion du mois courant
 		0.0.1 	Affichage des données de la base
-		0.0.0 	Création + maquette HTML
-
-			
-	***************************************************************************/
-
+		0.0.0 	Création + maquette HTML	***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt"); // Pas d'accès direct
 
@@ -46,11 +42,9 @@ global $db, $table_preffix;
 
 //definition des tables
 define("TABLE_EXPEDITION",	  $table_prefix."eXpedition");
-define("TABLE_EXPEDITION_TYPE_0", $table_prefix."eXpedition_Type_0");
 define("TABLE_EXPEDITION_TYPE_1", $table_prefix."eXpedition_Type_1");
 define("TABLE_EXPEDITION_TYPE_2", $table_prefix."eXpedition_Type_2");
-define("TABLE_EXPEDITION_TYPE_3", $table_prefix."eXpedition_Type_3");
-define("TABLE_EXPEDITION_OPTS",   $table_prefix."eXpedition_Opts");
+define("TABLE_EXPEDITION_OPTS",   $table_prefix."eXpedition_Opts"); //contient les options de chaque user
 
 //On regarde si le mod est activé + on recupère la racine :
 $query = "SELECT `root` FROM `".TABLE_MOD."` WHERE `action`='eXpedition' AND `active`='1' LIMIT 1";
@@ -63,33 +57,19 @@ list($root) = $db->sql_fetch_row($result);
 
 // définition du dossier du modules
 define("FOLDEREXP","mod/".$root."/");
-
 // Inclusion des fonctions :
 require_once(FOLDEREXP."includes/functions.php"); //on inclut l'entete d'ogspy dans le mod
 
-
 // On regarde si on veut afficher une page spécifique ou juste la page d'accueil :
-
 if(!isset($pub_module))
-{
-	$module = 'stat';
-}
+{//	$module = 'stat';
+	$module = 'add';}
 else
-{
-	$module = $pub_module;
-}
+{	$module = $pub_module;}
 
 require_once("views/page_header.php"); //on inclut l'entete d'ogspy dans le mod
-
 require_once(FOLDEREXP."includes/header.php"); //on inclut notre header à nous !
-
 require_once(FOLDEREXP."includes/$module.php");// on inclut le fichier correspondant à la page désirée !
-
 require_once(FOLDEREXP."includes/footer.php"); //on inclut notre footer à nous !
-
 require_once("views/page_tail.php"); //on inclus la queue d'ogspy
-
-
-//Voila le mod est fini ! Pas trop triste ? :D
-
 ?>

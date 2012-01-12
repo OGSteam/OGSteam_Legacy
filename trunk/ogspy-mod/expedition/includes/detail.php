@@ -12,29 +12,23 @@ $cellspacing = 2;
 
 //définition de la page
 $pageDet = <<<HEREDET
-<span style="font-weight: bold;">
-	<big><big>$titrePeriode</big></big>
-</span>
+<span style="font-weight: bold;"><big><big>$titrePeriode</big></big></span>
 <br />
 <br />
-<br />
-<br />
-<span style="font-weight: bold;">
-	<big>eXpeditions ratées :</big>
-</span>
-<br />
-<br />
-<br />
-
 <table style="text-align: left; " border="0" cellpadding="$cellpadding" cellspacing="$cellspacing">
 	<tbody>
 		<tr>
 HEREDET;
-if($typeUser == 0)
+
+$pageDet .= <<<HEREDET
+			<td colspan=3><span align=center style="font-weight: bold;"><big>eXpeditions ratées :</big></span></td>
+			</tr>
+HEREDET;
+
+if ($typeUser == 0)
 {
 $pageDet .= <<<HEREDET
 			<td class="c" style="width: 75px; font-weight: bold;">Pseudo</td>
-			<td style="width: 20px; font-weight: bold;"></td>
 HEREDET;
 }
 
@@ -43,10 +37,11 @@ $pageDet .= <<<HEREDET
 			<td class="c" style="width: 75px; font-weight: bold;">Position</td>
 		</tr>
 HEREDET;
+
 if(count($superTableau['Rate'])!=0 && $superTableau['Rate']!='')
 {
-	foreach($superTableau['Rate'] as $res)
-	{
+	foreach($superTableau['Rate'] as $res) {
+	if ($res[4] == 0) {
 		$date = date('d-m-Y - H:i:s', $res[0]);
 		$pos = "[".$res[1].":".$res[2].":16]";
 		$pageDet .= "<tr>";
@@ -55,7 +50,6 @@ if(count($superTableau['Rate'])!=0 && $superTableau['Rate']!='')
 			$uname = getUserNameById($res[3]);
 			$pageDet .= <<<USER
 				<th style="width: 75px; font-weight: bold;">$uname</td>
-				<td style="width: 20px; font-weight: bold;"></td>
 USER;
 		}
 		$pageDet .= <<<ITERATION
@@ -63,7 +57,81 @@ USER;
 				<th align=center style="width: 75px;">$pos</th>
 			</tr>
 ITERATION;
-	}
+	}}
+	
+$pageDet .= <<<HEREDET
+			<td colspan=3><span align=center style="font-weight: bold;"><big>eXpeditions combat Pirates :</big></span></td>
+			</tr>
+HEREDET;
+if ($typeUser == 0)
+{
+$pageDet .= <<<HEREDET
+			<td class="c" style="width: 75px; font-weight: bold;">Pseudo</td>
+HEREDET;
+}
+$pageDet .= <<<HEREDET
+			<td class="c" style="width: 200px; font-weight: bold;">Date</td>
+			<td class="c" style="width: 75px; font-weight: bold;">Position</td>
+			<td class="c" style="width: 75px; font-weight: bold;">Perte</td>
+		</tr>
+HEREDET;
+
+	foreach($superTableau['Rate'] as $res) {
+	if ($res[4] == 4) {
+		$date = date('d-m-Y - H:i:s', $res[0]);
+		$pos = "[".$res[1].":".$res[2].":16]";
+		$perte = $res[5];
+		$pageDet .= "<tr>";
+		if($typeUser == 0) 
+		{
+			$uname = getUserNameById($res[3]);
+			$pageDet .= <<<USER
+				<th style="width: 75px; font-weight: bold;">$uname</td>
+USER;
+		}
+		$pageDet .= <<<ITERATION
+				<th align=center style="width: 200px;">$date</th>
+				<th align=center style="width: 75px;">$pos</th>
+				<th align=center style="width: 75px;">$perte</th>
+			</tr>
+ITERATION;
+	}}
+$pageDet .= <<<HEREDET
+			<td colspan=3><span align=center style="font-weight: bold;"><big>eXpeditions combat Aliens :</big></span></td>
+			</tr>
+HEREDET;
+if ($typeUser == 0)
+{
+$pageDet .= <<<HEREDET
+			<td class="c" style="width: 75px; font-weight: bold;">Pseudo</td>
+HEREDET;
+}
+$pageDet .= <<<HEREDET
+			<td class="c" style="width: 200px; font-weight: bold;">Date</td>
+			<td class="c" style="width: 75px; font-weight: bold;">Position</td>
+			<td class="c" style="width: 75px; font-weight: bold;">Perte</td>
+		</tr>
+HEREDET;
+	foreach($superTableau['Rate'] as $res) {
+	if ($res[4] == 5) {
+		$date = date('d-m-Y - H:i:s', $res[0]);
+		$pos = "[".$res[1].":".$res[2].":16]";
+		$perte = $res[5];
+		$pageDet .= "<tr>";
+		if($typeUser == 0) 
+		{
+			$uname = getUserNameById($res[3]);
+			$pageDet .= <<<USER
+				<th style="width: 75px; font-weight: bold;">$uname</td>
+USER;
+		}
+		$pageDet .= <<<ITERATION
+				<th align=center style="width: 200px;">$date</th>
+				<th align=center style="width: 75px;">$pos</th>
+				<th align=center style="width: 75px;">$perte</th>
+			</tr>
+ITERATION;
+	}}	
 }
 
 $pageDet .= <<<HEREDET

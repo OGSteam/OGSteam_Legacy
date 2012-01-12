@@ -110,13 +110,7 @@ Voir eXpeditions du
 	<input value='Valider' type='submit'>
 </form>
 </span>
-
-<br />
-<br />
-<br />
 HERESUBHEADER;
-
-
 //affichage de la page
 echo($pageSubHeader);
 ?>

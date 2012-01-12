@@ -1,11 +1,9 @@
 <?php
 //definition des tables
 global $table_prefix;
-define("TABLE_EXPEDITION", $table_prefix."eXpedition");
-define("TABLE_EXPEDITION_TYPE_0", $table_prefix."eXpedition_Type_0");
-define("TABLE_EXPEDITION_TYPE_1", $table_prefix."eXpedition_Type_1");
-define("TABLE_EXPEDITION_TYPE_2", $table_prefix."eXpedition_Type_2");
-define("TABLE_EXPEDITION_TYPE_3", $table_prefix."eXpedition_Type_3");
+define("TABLE_EXPEDITION", $table_prefix."expedition");
+define("TABLE_EXPEDITION_TYPE_1", $table_prefix."expedition_type_1");
+define("TABLE_EXPEDITION_TYPE_2", $table_prefix."expedition_type_2");
 /**
 *
 * @return int 0 => rapport non valide / 1 => traitement OK / 2 => rapport déjà existant
@@ -197,8 +195,6 @@ function analyseRapport($raw)
         $query = "Insert into " . TABLE_EXPEDITION . " (id, user_id, date, pos_galaxie, pos_sys, type) values ('', ".$user_data['user_id'].", $timestmp, $galaxy, $systeme, 3)";
         mysql_query ( $query );
         $idInsert = mysql_insert_id();
-        $query = "Insert into " . TABLE_EXPEDITION_TYPE_3 . " (id, id_eXpedition, typeRessource) values ('', $idInsert, 0)";
-        mysql_query($query);
       }
       else
         return 2;
@@ -212,8 +208,6 @@ function analyseRapport($raw)
         $query = "Insert into " . TABLE_EXPEDITION . " (id, user_id, date, pos_galaxie, pos_sys, type) values ('', ".$user_data['user_id'].", $timestmp, $galaxy, $systeme, 0)";
         mysql_query ( $query );
         $idInsert = mysql_insert_id();
-        $query = "Insert into " . TABLE_EXPEDITION_TYPE_0 . " (id, id_eXpedition, typeVitesse) values ('', $idInsert, 0)"; //TODO : Choisir le type !
-        mysql_query ( $query );
       }
       else
         return 2;
