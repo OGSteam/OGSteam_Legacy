@@ -1,3 +1,3 @@
-Module qui a pour but d'aider &agrave; optimiser les transports entre plan&egrave;tes pour un objectif de construction d&eacute;fini.
-Xtense2.1 envoi directement les ressources &agrave; quai en m&eacute;moire 0.
+Module qui a pour but d'aider à optimiser les transports entre planètes pour un objectif de construction défini.
+Xtense2.1 envoi directement les ressources à quai en mémoire 0.
 <a href='http://ogsteam.fr/viewtopic.php?pid=51777#p51777'>Informations</a>

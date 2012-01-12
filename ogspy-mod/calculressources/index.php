@@ -10,7 +10,7 @@
 *	desc.		: CalculRessources
 *	Author		: varius9
 *	created		: 03/09/2008
-*	modified	: 
+*	modified	: 07/01/2012
 ***************************************************************************/
 if (!defined('IN_SPYOGAME')) {die("Hacking attempt");}
 
@@ -33,13 +33,18 @@ define("FOLDEREXP","mod/".$root."/");
 //On ajoute l'action dans le log
 
 // Inclusion des fonctions :
-if ($pub_page == "changelog") {include(FOLDEREXP."changelog.php"); exit();}
+if (isset ($pub_page)) {
+if ($pub_page == "changelog") {include(FOLDEREXP."changelog.php"); exit();}}
+
 require_once(FOLDEREXP."functions.php");
 
 $user_empire = user_get_empire(); // récupération des infos empire
 $user_building = $user_empire["building"];
 $line = $user_data["user_name"]." se connecte sur le mod Calcul Ressources";
 $fichier = "log_".date("ymd").'.log';
+$nb_planet = find_nb_planete_user();
+$start = 101;
+$moon_start = 201;
 
 if (isset ($pub_depuis_ajax)) {
 	if ($pub_depuis_ajax=="1"){  // Appel depuis l'ajax Mise à jour de la DB (car &depuis_ajax=1)
@@ -47,7 +52,6 @@ if (isset ($pub_depuis_ajax)) {
 		$metal = $pub_metal;
 		$cristal = $pub_cristal;
 		$deut = $pub_deut;
-
 
 /* $request = "SELECT metal FROM ".TABLE_CALCULRESS_USER." WHERE user_id = ".$user['id']." and planet_id = ".$home['id'];
 if ($sql-&gt;check($request) == 0) {   //nouvel enregistrement
@@ -93,7 +97,17 @@ $sql->query($request); */
 				$request = "TRUNCATE TABLE ".TABLE_CALCULRESS_USER;
 				$db->sql_query($request);}
 			else {
-				for ($i=1; $i<=18 ; $i++) {
+				for ($i=$start; $i<=$start+$nb_planet-1 ; $i++) {
+					$result = $db->sql_query("SELECT planet_id FROM ".TABLE_CALCULRESS_USER." WHERE user_id = ".$user_data['user_id']." and planet_id = ".$i);
+					if ($db->sql_numrows($result)> 0) { 
+						if ($mem == "0") {
+							$request = "UPDATE ".TABLE_CALCULRESS_USER." set `date_heure` = '', metal = 0, cristal = 0, deut = 0 WHERE user_id = ".$user_data['user_id']." and planet_id = ".$i;
+							$db->sql_query($request);}
+						else if ($mem == "1") {
+							$request = "UPDATE ".TABLE_CALCULRESS_USER." set metal1 = 0, cristal1 = 0, deut1 = 0 WHERE user_id = ".$user_data['user_id']." and planet_id = ".$i;
+							$db->sql_query($request);}
+					}}
+				for ($i=$moon_start; $i<=$moon_start+$nb_planet-1 ; $i++) {
 					$result = $db->sql_query("SELECT planet_id FROM ".TABLE_CALCULRESS_USER." WHERE user_id = ".$user_data['user_id']." and planet_id = ".$i);
 					if ($db->sql_numrows($result)> 0) { 
 						if ($mem == "0") {
@@ -135,19 +149,31 @@ else {
 }// Fin Appel AJAX.
 
 require_once("views/page_header.php");
-
 ?>
 
 <!-- DEBUT DU SCRIPT -->
 <script language="JavaScript">
 <?php
-	$ress = array(false, "user_id" => "", "date_heure" => "", "planet_id" => "", "metal" => 0, "cristal" => 0, "deut" => 0, "metal1" => 0, "cristal1" => 0, "deut1" => 0);
-	$request = "select * from ".TABLE_CALCULRESS_USER." where user_id = ".$user_data["user_id"];
-//	$request = "select planet_id, `date_heure`, metal, cristal, deut, metal1, cristal1, deut1 from ".TABLE_CALCULRESS_USER." where user_id = ".$user_data["user_id"];
-	$request .= " order by planet_id";
-	$result = $db->sql_query($request); // or die ("Erreur SQL !".$request."<br>".mysql_error());
-	$user_ress = array_fill(1, 18, $ress);
-	while ($row = $db->sql_fetch_assoc($result)) {
+
+$name = $coordinates = "";
+$coord = $ressM = $ressC = $ressD = $ressM1 = $ressC1 = $ressD1 = ""; // Initialisation des variables, pour eviter l'erreur PHP-8
+$dh = "";
+
+for ($i=$start ; $i<=$start+$nb_planet-1 ; $i++) {
+	$name .= "'".$user_building[$i]["planet_name"]."', ";
+	$coordinates .= "'".$user_building[$i]["coordinates"]."', ";
+}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1 ; $i++) {
+	$name .= "'".$user_building[$i]["planet_name"]."', ";
+	$coordinates .= "'".$user_building[$i]["coordinates"]."', ";
+}
+
+$ress = array(false, "user_id" => "", "date_heure" => "", "planet_id" => "", "metal" => 0, "cristal" => 0, "deut" => 0, "metal1" => 0, "cristal1" => 0, "deut1" => 0);
+$request = "select * from ".TABLE_CALCULRESS_USER." where user_id = ".$user_data["user_id"];
+$request .= " order by planet_id";
+$result = $db->sql_query($request); // or die ("Erreur SQL !".$request."<br>".mysql_error());
+$user_ress = array_fill(1, $nb_planet*2, $ress);
+while ($row = $db->sql_fetch_assoc($result)) {
 		$arr = $row;
 		unset($arr["planet_id"]);
 		unset($arr["date_heure"]);
@@ -159,10 +185,21 @@ require_once("views/page_header.php");
 		unset($arr["deut1"]);
 		$user_ress[$row["planet_id"]] = $row;
 		$user_ress[$row["planet_id"]][0] = true;
-		}
-$coord = $ressM = $ressC = $ressD = $ressM1 = $ressC1 = $ressD1 = ""; // Initialisation des variables, pour eviter l'erreur PHP-8
-$dh = "";
-for ($i=1 ; $i<=18 ; $i++) {
+	}
+
+for ($i=$start ; $i<=$start+$nb_planet-1 ; $i++) {
+	if (isset($user_building[$i]["coordinates"])){  // Test de l'existance des données (toujours pour eviter le PHP-8)
+		$coord .= "'".$user_building[$i]["coordinates"]."', ";
+		$dh .= "'".date('j M y  G:i',strtotime($user_ress[$i]["date_heure"]))."', ";
+		$ressM .= "'".$user_ress[$i]["metal"]."', ";
+		$ressC .= "'".$user_ress[$i]["cristal"]."', ";
+		$ressD .= "'".$user_ress[$i]["deut"]."', ";
+		$ressM1 .= "'".$user_ress[$i]["metal1"]."', ";
+		$ressC1 .= "'".$user_ress[$i]["cristal1"]."', ";
+		$ressD1 .= "'".$user_ress[$i]["deut1"]."', ";
+	}
+}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1 ; $i++) {
 	if (isset($user_building[$i]["coordinates"])){  // Test de l'existance des données (toujours pour eviter le PHP-8)
 		$coord .= "'".$user_building[$i]["coordinates"]."', ";
 		$dh .= "'".date('j M y  G:i',strtotime($user_ress[$i]["date_heure"]))."', ";
@@ -175,6 +212,9 @@ for ($i=1 ; $i<=18 ; $i++) {
 	}
 }
 
+echo "var name = new Array(".substr($name, 0, strlen($name)-2).");"."\n";
+echo "var coordinates = new Array(".substr($coordinates, 0, strlen($coordinates)-2).");"."\n";
+echo "var nb_planet = ".$nb_planet.";"."\n";
 echo "var user_build_coord = new Array(".substr($coord, 0, strlen($coord)-2).");"."\n";
 echo "var user_build_dh = new Array(".substr($dh, 0, strlen($dh)-2).");"."\n";
 echo "var user_build_metal = new Array(".substr($ressM, 0, strlen($ressM)-2).");"."\n";
@@ -183,6 +223,7 @@ echo "var user_build_deut = new Array(".substr($ressD, 0, strlen($ressD)-2).");"
 echo "var user_build_metal1 = new Array(".substr($ressM1, 0, strlen($ressM1)-2).");"."\n";
 echo "var user_build_cristal1 = new Array(".substr($ressC1, 0, strlen($ressC1)-2).");"."\n";
 echo "var user_build_deut1 = new Array(".substr($ressD1, 0, strlen($ressD1)-2).");"."\n";
+
 ?>
 var coord_planet = "";
 var type_planet = "";
@@ -282,10 +323,10 @@ function IndicePlanet(typeP,coordP) {
 	if (typeP != "Planète" && typeP != "Lune") {
 		return 0;}
 	else if (typeP == "Planète") {
-		for (i=0; i<=8 ; i++) {
+		for (i=0; i<=19 ; i++) {
 			if (user_build_coord[i] == coordP) return i+1;}}
 	else {
-		for (i=9; i<=17 ; i++) {
+		for (i=20; i<=39 ; i++) {
 			if (user_build_coord[i] == coordP) return i+1;}}
 	return 0;}
 
@@ -352,8 +393,10 @@ function ecrit_bd(planet, mem) {
 	xhr_object.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr_object.send(data);
 }
+
 </script>
 <!-- FIN DU SCRIPT -->
+
 <table>
 <form method="POST" name="post2" action="" enctype="multipart/form-data">
 <tr>
@@ -372,70 +415,61 @@ function ecrit_bd(planet, mem) {
 	<th colspan="1"><a href=mailto:varius9@free.fr><img src="mod/CalculRessources/VariusSign.jpg"></a></th>
 	<th><a href="index.php?action=CalculRessources&page=changelog">Changelog</a></th>
 </tr>
-<tr><th width="7%"><a>A Sommer</a></th>
+<tr><th width="5%"><a>A Sommer</a></th>
 <?php
-for ($i=1; $i<=9 ; $i++) 
-		echo "\t"."<th width='6%'><label><input type='checkbox' name='checkbox".$i."' value='".$i."' onclick=Calcul_Ress(this.value)></label></th>"."\n";
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+		echo "\t"."<th width='5%'><label><input type='checkbox' name='checkbox".$i."' value='".$i."' onclick=Calcul_Ress(this.value)></label></th>"."\n";}
 ?>
-</tr>
-<tr><th><a>Nom Planète</a></th>
+</tr><tr><th><a>Nom Planète</a></th>
 <?php
-for ($i=1; $i<=9 ; $i++) {
-	$name = $user_building[$i]["planet_name"];
-	if ($name == "") $name = "&nbsp;";
-	echo "\t"."<th style='font-size: 10pt;	font-weight: bold; color: cyan;'>".$name."</th>"."\n";}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th style='font-size: 10pt;	font-weight: bold; color: cyan;'>".$user_building[$i]["planet_name"]."</th>"."\n";}
 ?>
 </tr><tr><th><a>Coordonnées</a></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
-	$coordinates = $user_building[$i]["coordinates"];
-	if ($coordinates == "") $coordinates = "&nbsp;";
-	echo "\t"."<th>".$coordinates."</th>"."\n";
-}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th>".$user_building[$i]["coordinates"]."</th>"."\n";}
 ?>
 </tr><tr><th><font color='violet'><FONT SIZE="3"><U>L</U>it=>/=><U>E</U>crit</FONT></font>
 <br><font color='lime'>Mem0/<font color='yellow'>Mem1</font></th>
 <?php
-for ($i=1 ; $i<=9 ; $i++) {
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
 	echo "\t"."<th class='c' align='center'><input width='15%' style='color: black; background-color: lime' type='button' value='Lit0=>' onclick='javascript: reload(".$i.");'>   <input style='color: black; background-color: lime' type='button' value='=>Ecrit0' onclick='javascript: upload(".$i.");'>
 	<br><input style='color: black; background-color: yellow' type='button' value='Lit1=>' onclick='javascript: reload_1(".$i.");'>   <input style='color: black; background-color: yellow' type='button' value='=>Ecrit1' onclick='javascript: upload_1(".$i.");'></th>"."\n";}
 ?>
 </tr><tr><th>Date/Heure</th>
 <?php
-for ($i=1; $i<=9 ; $i++) {
-	echo "\t"."<th><label><input style='text-align: center;' name='DateH".$i."' value=".date('"j M y  G:i"',strtotime($user_ress[$i]["date_heure"]))." disabled='false'></label></th>"."\n";
-}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='DateH".$i."' value=".date('"j M y  G:i"',strtotime($user_ress[$i]["date_heure"]))." disabled='false'></label></th>"."\n";}
 ?>
 </tr><tr><th>Métal:</th>
 <?php
-for ($i=1; $i<=9 ; $i++) {
-	echo "\t"."<th><label><input class='menu_on' name='metal".$i."' value=".$user_ress[$i]["metal"]."></label></th>"."\n";
-}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='metal".$i."' value=".$user_ress[$i]["metal"]."></label></th>"."\n";}
 ?>
 </tr><tr><th>Cristal:</th>
 <?php
-for ($i=1; $i<=9 ; $i++) {
-	echo "\t"."<th><label><input class='menu_on' name='cristal".$i."' value=".$user_ress[$i]["cristal"]."></label></th>"."\n";}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='cristal".$i."' value=".$user_ress[$i]["cristal"]."></label></th>"."\n";}
 ?>
 </tr><tr><th>Deuterium:</th>
 <?php
-for ($i=1; $i<=9 ; $i++) {
-	echo "\t"."<th><label><input class='menu_on' name='deut".$i."' value=".$user_ress[$i]["deut"]."></label></th>"."\n";}
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='deut".$i."' value=".$user_ress[$i]["deut"]."></label></th>"."\n";}
 ?>
 </tr><tr><th width="7%"><a>Nb GT</a></th>
 <?php
-for ($i=1; $i<=9 ; $i++) 
-	echo "\t"."<th><label><input class='menu_on' name='NbGT".$i."' value=0 size='10' disabled='false'></label></th>"."\n";
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input class='menu_on' name='NbGT".$i."' value=0 size='10' disabled='false'></label></th>"."\n";}
 ?>
 </tr><tr><th width="7%"><a>A Sommer</a></th>
 <?php
-for ($i=10; $i<=18 ; $i++) 
-	echo "\t"."<th><label><input type='checkbox' name='checkbox".$i."' value='".$i."' onclick=Calcul_Ress(this.value)></label></th>"."\n";
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input type='checkbox' name='checkbox".$i."' value='".$i."' onclick=Calcul_Ress(this.value)></label></th>"."\n";}
 ?>
-</tr>
-<th><a>Nom Lune</a></th>
+</tr><th><a>Nom Lune</a></th>
 <?php
-for ($i=10; $i<=18 ; $i++) {
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
 	$name = $user_building[$i]["planet_name"];
 	if ($name == "") $name = "&nbsp;";
 	echo "\t"."<th style='font-size: 10pt;	font-weight: bold; color: cyan;'><a>".$name."</a></th>"."\n";}
@@ -443,35 +477,34 @@ for ($i=10; $i<=18 ; $i++) {
 </tr><tr><th><font color='violet'><FONT SIZE="3"><U>L</U>it=>/=><U>E</U>crit</FONT></font>
 <br><font color='lime'>Mem0/<font color='yellow'>Mem1</font></th>
 <?php
-for ($i=10 ; $i<=18 ; $i++) {
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
 	echo "\t"."<th class='c' align='center'><input width='15%' style='color: black; background-color: lime' type='button' value='Lit0=>' onclick='javascript: reload(".$i.");'>   <input style='color: black; background-color: lime' type='button' value='=>Ecrit0' onclick='javascript: upload(".$i.");'>
 	<br><input style='color: black; background-color: yellow' type='button' value='Lit1=>' onclick='javascript: reload_1(".$i.");'>   <input style='color: black; background-color: yellow' type='button' value='=>Ecrit1' onclick='javascript: upload_1(".$i.");'></th>"."\n";}
 ?>
 </tr><tr><th>Date/Heure</th>
 <?php
-for ($i=10; $i<=18 ; $i++) {
-	echo "\t"."<th><label><input style='text-align: center;' name='DateH".$i."' value=".date('"j M y  G:i"',strtotime($user_ress[$i]["date_heure"]))." disabled='false'></label></th>"."\n";
-}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='DateH".$i."' value=".date('"j M y  G:i"',strtotime($user_ress[$i]["date_heure"]))." disabled='false'></label></th>"."\n";}
 ?>
-</tr></tr><th>Métal:</th>
+</tr><tr><th>Métal:</th>
 <?php
-for ($i=10; $i<=18 ; $i++)
-	echo "\t"."<th><label><input class='menu_on' name='metal".$i."' value=".$user_ress[$i]["metal"]."></label></th>"."\n";
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='metal".$i."' value=".$user_ress[$i]["metal"]."></label></th>"."\n";}
 ?>
 </tr><tr><th>Cristal:</th>
 <?php
-for ($i=10; $i<=18 ; $i++) {
-	echo "\t"."<th><label><input class='menu_on' name='cristal".$i."' value=".$user_ress[$i]["cristal"]."></label></th>"."\n";}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='cristal".$i."' value=".$user_ress[$i]["cristal"]."></label></th>"."\n";}
 ?>
 </tr><tr><th>Deuterium:</th>
 <?php
-for ($i=10; $i<=18 ; $i++) {
-	echo "\t"."<th><label><input class='menu_on' name='deut".$i."' value=".$user_ress[$i]["deut"]."></label></th>"."\n";}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='deut".$i."' value=".$user_ress[$i]["deut"]."></label></th>"."\n";}
 ?>
 </tr><tr><th width="7%"><a>Nb GT</a></th>
 <?php
-for ($i=10; $i<=18 ; $i++) 
-	echo "\t"."<th><label><input class='menu_on' name='NbGT".$i."' value=0 size='10' disabled='false'></label></th>"."\n";
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
+	echo "\t"."<th><label><input style='text-align: center;' name='NbGT".$i."' value=0 size='10' disabled='false'></label></th>"."\n";}
 ?>
 </tr>
 </form>
@@ -534,9 +567,8 @@ for ($i=10; $i<=18 ; $i++)
 
 <!-- DEBUT DU SCRIPT -->
 <SCRIPT type="text/JavaScript">
-
 function RAZ(mem) {
-	for (var i = 0; i <= 17; i++) {
+	for (var i = 0; i <= nb_planet ; i++) {
 		if (mem==0 || mem==-1) {
 			user_build_metal[i] = 0;
 			user_build_cristal[i] = 0;
@@ -566,7 +598,9 @@ function RAZ(mem) {
 }
 
 function tout_cocher(etat) {
-for (i = 1; i <= 18; i++)
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++)
+	document.forms.post2.elements["checkbox"+i].checked = etat;
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++)
 	document.forms.post2.elements["checkbox"+i].checked = etat;
 Calcul_Ress (null);
 }
@@ -605,7 +639,19 @@ Obj_C = return_num(document.forms.resultat.Obj_cristal.value);
 Obj_D = return_num(document.forms.resultat.Obj_deut.value);
 
 
-for (i = 1; i <= 18; i++) {
+for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {
+	if (document.forms.post2.elements["checkbox"+i].checked == true) {
+		totalGT =0;
+		tmp = parseInt(document.forms.post2.elements["metal"+i].value);
+		if (!isNaN(tmp)) {totalM += tmp; totalGT = tmp;} else document.forms.post2.elements["metal"+i].value=0;
+		tmp = parseInt(document.forms.post2.elements["cristal"+i].value);
+		if (!isNaN(tmp)) {totalC += tmp; totalGT += tmp;} else document.forms.post2.elements["cristal"+i].value=0;
+		tmp = parseInt(document.forms.post2.elements["deut"+i].value);
+		if (!isNaN(tmp)) {totalD += tmp; totalGT += tmp;} else document.forms.post2.elements["deut"+i].value=0;
+		document.forms.post2.elements["NbGT"+i].value = format(Math.ceil(totalGT/25000));}
+	changeCouleur(i);
+}
+for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {
 	if (document.forms.post2.elements["checkbox"+i].checked == true) {
 		totalGT =0;
 		tmp = parseInt(document.forms.post2.elements["metal"+i].value);
@@ -648,7 +694,8 @@ document.forms.resultat.Ecart_deut.value = format(tmp);
 }
 
 function Vue(mem) {
-	for (i = 1; i <= 18; i++) {if (mem==0) reload(i); else reload_1(i);}
+	for ($i=$start ; $i<=$start+$nb_planet-1; $i++) {if (mem==0) reload(i); else reload_1(i);}
+	for ($i=$moon_start ; $i<=$moon_start+$nb_planet-1; $i++) {if (mem==0) reload(i); else reload_1(i);}
 }
 
 function reload(select) {
@@ -676,7 +723,6 @@ else document.forms["post2"].elements["deut"+select].value = user_build_deut1[se
 
 document.forms["post2"].elements["DateH"+select].value = "";
 Calcul_Ress ();}
-
 
 function upload(select) { // permet de forcer une valeur dans la BD
 	var tmpM = parseInt(document.forms["post2"].elements["metal"+select].value);
@@ -713,12 +759,11 @@ function upload_1(select) { // permet de forcer une valeur dans la BD
 			Calcul_Ress ();
 		ecrit_bd(select,1);}
 }
-
 </script>
 <!-- FIN DU SCRIPT -->
 
 <?php
-require_once("./mod/CalculRessources/pied_CalculR.php");
+require_once("./mod/calculressources/pied_CalculR.php");
 require_once("views/page_tail.php");
 ?>
 </body>

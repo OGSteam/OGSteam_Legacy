@@ -58,7 +58,14 @@ echo"Suite à la nouvelle barre Xtense2.1 => Maj pour intégration du nouveau call
 echo"Adieu le copier/coller des versions précédentes ^^<br>";
 echo"</p></FONT></fieldset>";
 
-require_once("./mod/CalculRessources/pied_CalculR.php");
+echo"<br>";
+echo"<fieldset><legend><b><font color='#0080FF'><u>Version 1.4c</u></font></b></legend>";
+echo"<p align='left'><font color='white'>";
+echo"Mise à jour faite par varius9<br>";
+echo"Vérifications des modifs par Shad<br>";
+echo"</p></FONT></fieldset>";
+
+require_once("./mod/calculressources/pied_CalculR.php");
 require_once("views/page_tail.php");
 
 ?>

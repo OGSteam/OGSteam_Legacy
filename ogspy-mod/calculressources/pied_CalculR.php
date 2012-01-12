@@ -1,11 +1,9 @@
 <?php
 /***************************************************************************
 *	filename	: pied_CalculR.php
-*	desc.		: 1.00
 *	Author		: varius9
 *	created		: 21/09/2008
-*	modified	: Varius9
-*   last modif. : 
+*	modified	: Janvier 2011 par Varius9
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) {die("Hacking attempt");}
@@ -16,7 +14,7 @@ list($vers)=mysql_fetch_array($result);
 echo '<div align="center" style="margin-top:20px;">';
 echo '<div class="footer">';
 echo 'Mod <font COLOR="#FFFF00">Calcul Ressources</font> créé par Aeris Repris par <a href=mailto:varius9@free.fr>Varius9</a><br>';
-echo 'Version '.$vers.' , &copy;2008';
+echo 'Version '.$vers.' , &copy;2008-2012';
 echo '</div>';
 echo '</div>';
 ?>

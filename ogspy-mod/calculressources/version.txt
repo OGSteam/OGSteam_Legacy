@@ -1,2 +1,3 @@
 CalculRessources
-1.0c
+1.4
+CalculRessources,Calcul Ressources,CalculRessources,calculressources,index.php,1,0
