@@ -3,7 +3,7 @@
 * install.php
 * @package CalculRessources
 * @author varius9
-* @version 1.0c
+* @version 1.4
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @description Fichier d'installation du mod
 */
@@ -21,14 +21,15 @@ $db->sql_query($query);
 $query="DROP TABLE IF EXISTS ".TABLE_CALCUL_BESOIN;
 $db->sql_query($query);
 
-$file = file ('mod/CalculRessources/version.txt');
-define ('NOM_MOD', trim($file[0]));
-define ('VERSION_MOD', trim($file[1]));
-
-$query = "INSERT INTO ".TABLE_MOD." (title, menu, action, root, link, version, active) VALUES ('".NOM_MOD."','Calcul Ressources','".NOM_MOD."','".NOM_MOD."','index.php','".VERSION_MOD."','1')";
+$query = "DELETE FROM ".TABLE_MOD." WHERE root='calculressources'";
 $db->sql_query($query);
-$mod_id = $db->sql_insertid(); //besoin pour callbacks
+		
+$is_ok = false;
+$mod_folder = "calculressources";
+$is_ok = install_mod ($mod_folder);
 
+$mod_id = $db->sql_insertid(); //besoin pour callbacks
+if ($is_ok == true) {
 $query = "CREATE TABLE ".TABLE_CALCULRESS_USER." ("
 	. " user_id INT NOT NULL default '0', "
 	. " planet_id INT NOT NULL, "
@@ -157,22 +158,37 @@ $db->sql_query($query);
 $query = $var."('50','Techno','Reseau','240000','400000','160000','2')";
 $db->sql_query($query);
 
-// On regarde si la table xtense_callbacks existe :
-$query = 'show tables from '.$db->dbname.' like "'.TABLE_XTENSE_CALLBACKS.'" ';
-$result = $db->sql_query($query);
-if($db->sql_numrows($result) != 0)
-{
+//On vérifie que la table xtense_callbacks existe (Xtense2)
+		if( mysql_num_rows( mysql_query("SHOW TABLES LIKE '".$table_prefix."xtense_callbacks"."'")))
+			{
+				// Si oui, on récupère le n° d'id du mod
+				$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='calculressources' AND `active`='1' LIMIT 1";
+				$result = $db->sql_query($query);
+				$mod_id = $db->sql_fetch_row($result);
+				$mod_id = $mod_id[0];
+				// on fait du nettoyage au cas ou
+				$query = "DELETE FROM `".$table_prefix."xtense_callbacks"."` WHERE `mod_id`=".$mod_id;
+				$db->sql_query($query);
+				// Insert les données pour récuperer les informations de la page Alliance
+				$query = "INSERT INTO ".$table_prefix."xtense_callbacks"." ( `mod_id` , `function` , `type` )
+				VALUES ( '".$mod_id."', 'get_overview', 'overview')";
+				$db->sql_query($query);
+			}
+			
+		
+if($db->sql_numrows($result) != 0) {
 	//Bonne nouvelle le mod xtense 2 est installé !
 	//Maintenant on regarde s'il est dedans normalement il devrait pas mais on est jamais trop prudent...
 	$query = 'Select * From '.TABLE_XTENSE_CALLBACKS.' where mod_id = '.$mod_id.' ';
 	$result = $db->sql_query($query);
 	$nresult = $db->sql_numrows($result);
 	if($nresult == 0)	{	// Il est pas dedans alors on l'ajoute :
-		$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES ('.$mod_id.', "get_overview", "overview", 1)';
+		$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES (mod_id, "get_overview", "overview", 1)';
 		$db->sql_query($query);		
 		echo("<script> alert('La compatibilité du mod eXchange avec le mod Xtense2 est installée !') </script>");}
-}
-else {	//On averti qu'Xtense 2 n'est pas installé :
-	echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod eXchange ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
+}}
+else
+{
+	echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
 }
 ?>
