@@ -7,36 +7,15 @@
 * @package Arcade
 */
 if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-	}
+    die("Hacking attempt");
+}
+global $db, $table_prefix;
 
-// La suppression du mod dans la table de mod est faites par OGSpy
-// (Donc pas besoin de la faire dans le fichier uninstall.php)
+$mod_uninstall_name = "Arcade";
+$mod_uninstall_table = $table_prefix."arcade".', '.$table_prefix."arcade_ban".', '.$table_prefix."arcade_game".', '.$table_prefix."arcade_online".', '.$table_prefix."arcade_tourgame".', '.$table_prefix."arcade_tournament".', '.$table_prefix."arcade_tourscore";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
-// Suppression des tables spécifiques au module
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_ban`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_game`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_online`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_tourgame`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_tournament`";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS `ogspy_arcade_tourscore`";
-$db->sql_query($query);
 // Suppression des variables de configuration du module dans la table de config
-
 $query="DELETE FROM ".TABLE_CONFIG." WHERE config_name like 'arcade_%'";
 $db->sql_query($query);
 

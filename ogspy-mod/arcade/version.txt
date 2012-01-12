@@ -1,2 +1,3 @@
 Arcade
-2.4
+1.0.0
+Arcade,Arcade,Arcade,arcade,Arcade.php,1,0

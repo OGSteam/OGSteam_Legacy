@@ -10,7 +10,7 @@ if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
 
-require_once("mod/Arcade/arcade_functions.php");
+require_once("mod/arcade/arcade_functions.php");
 ?>
 <html>
 <head>

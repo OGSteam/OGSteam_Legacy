@@ -16,9 +16,9 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 define("arcWidthHeight",$server_config["arcade_imagesize"]);
 define("_ARCSA_","index.php?action=Arcade&amp;subaction=");
 //<div style='float: left;vertical-align:top;position: relative;top:-13'>
-define("_img_1st_","<img src='mod/Arcade/pics/1st.gif' width=31 height=26 border=0 />");
-define("_img_2nd_","<img src='mod/Arcade/pics/2nd.gif' width=31 height=26 border=0 />");
-define("_img_3rd_","<img src='mod/Arcade/pics/3rd.gif' width=31 height=26 border=0 />");
+define("_img_1st_","<img src='mod/arcade/pics/1st.gif' width=31 height=26 border=0 />");
+define("_img_2nd_","<img src='mod/arcade/pics/2nd.gif' width=31 height=26 border=0 />");
+define("_img_3rd_","<img src='mod/arcade/pics/3rd.gif' width=31 height=26 border=0 />");
 //}}}
 
 
@@ -39,7 +39,7 @@ function ShowGameFromRow($game,$option=''){ //{{{
 		$retval .= "&nbsp;";
 	}else
 	{
-		$retval .= "\t<a href='index.php?action=Arcade&amp;subaction=play&amp;gamename=".$game["scorename"]."'><img src='mod/Arcade/pics/".$game["image"]."' width=".arcWidthHeight." height=".arcWidthHeight." border=0></a>\n";
+		$retval .= "\t<a href='index.php?action=Arcade&amp;subaction=play&amp;gamename=".$game["scorename"]."'><img src='mod/arcade/pics/".$game["image"]."' width=".arcWidthHeight." height=".arcWidthHeight." border=0></a>\n";
 	}
 	$retval .= "</td>\n";
 
