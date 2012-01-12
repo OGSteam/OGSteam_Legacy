@@ -6,10 +6,8 @@ if (!defined('IN_SPYOGAME')) {
 
 global $db, $table_prefix;
 define("TABLE_EXPEDITION", $table_prefix."eXpedition");
-define("TABLE_EXPEDITION_TYPE_0", $table_prefix."eXpedition_Type_0");
 define("TABLE_EXPEDITION_TYPE_1", $table_prefix."eXpedition_Type_1");
 define("TABLE_EXPEDITION_TYPE_2", $table_prefix."eXpedition_Type_2");
-define("TABLE_EXPEDITION_TYPE_3", $table_prefix."eXpedition_Type_3");
 define("TABLE_EXPEDITION_OPTS", $table_prefix."eXpedition_Opts");
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
@@ -19,9 +17,10 @@ $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
 $mod_uninstall_name = "eXpedition";
-$mod_uninstall_table = $table_prefix."eXpedition".','.$table_prefix."eXpedition_Type_0".','.$table_prefix."eXpedition_Type_1".','.$table_prefix."eXpedition_Type_2".','.$table_prefix."eXpedition_Type_3".','.$table_prefix."eXpedition_Opts";
+$mod_uninstall_table = $table_prefix."eXpedition".','.$table_prefix."eXpedition_Type_1".','.$table_prefix."eXpedition_Type_2".','.$table_prefix."eXpedition_Opts";
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 echo $mod_id;
+
 // On regarde si la table xtense_callbacks existe :
 $query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
 $result = $db->sql_query($query);
