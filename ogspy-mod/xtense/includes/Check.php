@@ -60,6 +60,10 @@ abstract class Check {
 		return ($string != 'points' || $string != 'fleet' || $string != 'research');
 	}
 	
+	static function stats_type3($string) {
+		return ($string >= 4 && $string <= 7);
+	}
+	
 	static function stats_offset($off) {
 		return ((($off-1) % 100) == 0);
 	}

@@ -548,7 +548,7 @@ switch ($pub_type){
 	break;
 
 	case 'ranking': //PAGE STATS
-		Check::data(isset($pub_type1, $pub_type2, $pub_offset, $pub_n, $pub_time));
+		Check::data(isset($pub_type1, $pub_type2, $pub_type3, $pub_offset, $pub_n, $pub_time));
 		
 		if (!$user_data['grant']['ranking']) {
 			$io->set(array(
@@ -560,6 +560,7 @@ switch ($pub_type){
 			Check::data(
 				Check::stats_type1($pub_type1),
 				Check::stats_type2($pub_type2),
+				Check::stats_type3($pub_type3),
 				Check::stats_offset($pub_offset)
 			);
 			
