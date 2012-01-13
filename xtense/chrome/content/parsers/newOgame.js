@@ -846,7 +846,7 @@ var XnewOgame = {
 					}
 				}
 				
-				if(type[1]!='economy' && this.lastAction != 'r:'+type[0]+':'+type[1]+':'+offset){ // Ajout du test sur le type economy pour ne pas l'envoyer en ecrasement des points
+				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+type[2]+':'+offset) {
 					Xconsole('r:'+type[0]+':'+type[1]+':'+offset); 
 					//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
 					if (offset != 0 && length != 0) {
@@ -857,20 +857,15 @@ var XnewOgame = {
 								offset : offset,
 								type1 : type[0],
 								type2 : type[1],
+								type3 : type[2],
 								time: time
 							}
 						);
 						
 						Request.set('lang',XnewOgame.lang);
-						/*	Le if est temporaire : sert de filtre pour ne pas envoyer les sous-classements militaires (construit, détruit, perdu et points honorifiques)
-						 *	On envoie seulement le classement militaire "de base" (quand aucune sous-categorie n'est selectionnée)
-						 *	Devra être supprimé quand les tables pour stocker les nouveaux classements auront été crées,
-						 *	et que le type[2] sera pris en compte pour l'insertion des classements
-						*/
-						if (type[2] == '')
-							Request.send(XnewOgame.servers);
+						Request.send(XnewOgame.servers);
 					}
-					this.lastAction = 'r:'+type[0]+':'+type[1]+':'+offset;
+					this.lastAction = 'r:'+type[0]+':'+type[1]+':'+type[2]+':'+offset;
 				}
 			}
 		} catch (e) {
