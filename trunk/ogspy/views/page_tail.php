@@ -40,6 +40,8 @@ if (is_array($ogspy_phperror) && count($ogspy_phperror)) {
 	</td>
 </tr>
 </table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"> </script>
 <script language="JavaScript" src="js/wz_tooltip.js"></script>
+
 </body>
 </html>

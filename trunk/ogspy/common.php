@@ -51,6 +51,7 @@ require_once ("includes/help.php");
 require_once ("includes/mod.php");
 require_once ("includes/ogame.php");
 require_once ("includes/cache.php");
+require_once ("includes/chart_js.php");
 
 //Récupération des valeur GET, POST, COOKIE
 @import_request_variables('GP', "pub_");
