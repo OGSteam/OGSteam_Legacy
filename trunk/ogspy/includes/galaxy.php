@@ -2382,7 +2382,6 @@ function galaxy_show_ranking_player()
 
     }
 
-   
     // selection de rank max !
     $maxrank = max($maxrank);
 
@@ -2528,7 +2527,9 @@ function galaxy_show_ranking_ally()
         $i++;
 
     }
-
+	
+	// selection de rank max !
+    $maxrank = max($maxrank);
 
     if (isset($pub_suborder) && $pub_suborder == "member")
         $pub_order_by2 = "points_per_member desc";
@@ -2563,7 +2564,6 @@ function galaxy_show_ranking_ally()
 
     }
 
-
     $i = 0;
 
     if (!isset($pub_date)) {
@@ -2580,20 +2580,18 @@ function galaxy_show_ranking_ally()
     $request .= isset($last_ranking) ? " and datadate = " . $db->sql_escape_string($last_ranking) :
         "";
     $request .= " order by " . $pub_order_by2;
+	
     $result = $db->sql_query($request);
  
          while ($row = $db->sql_fetch_assoc($result)) {
-           
-        $ranking[$row["ally"]][$table[$i]["arrayname"]] = array("rank" => $row["rank"], "points" =>  $row["points"],
-            "points_per_member" => (int)($row["points"]/$row["number_member"]));
-        $ranking[$row["ally"]]["number_member"] = $row["number_member"];
-        $ranking[$row["ally"]]["sender"] = $row["user_name"];
+			$ranking[$row["ally"]][$table[$i]["arrayname"]] = array("rank" => $row["rank"], "points" =>  $row["points"],
+				"points_per_member" => (int)($row["points"]/$row["number_member"]));
+			$ranking[$row["ally"]]["number_member"] = $row["number_member"];
+			$ranking[$row["ally"]]["sender"] = $row["user_name"];
 
-        if ($pub_order_by == $table[$i]["arrayname"]) {
-            $order[$row["rank"]] = $row["ally"];
-        }
-        
-        
+			if ($pub_order_by == $table[$i]["arrayname"]) {
+				$order[$row["rank"]] = $row["ally"];
+			}
         }
 
 
@@ -2616,21 +2614,16 @@ function galaxy_show_ranking_ally()
             $request .= " order by rank";
             $result = $db->sql_query($request);
 
-              while ($row = $db->sql_fetch_assoc($result)) {
-           
-        $ranking[$row["ally"]][$table[$i]["arrayname"]] = array("rank" => $row["rank"], "points" =>  $row["points"],
-            "points_per_member" => (int)($row["points"]/$row["number_member"]));
-        $ranking[$row["ally"]]["number_member"] = $row["number_member"];
-        $ranking[$row["ally"]]["sender"] = $row["user_name"];
+            while ($row = $db->sql_fetch_assoc($result)) {           
+				$ranking[$row["ally"]][$table[$i]["arrayname"]] = array("rank" => $row["rank"], "points" =>  $row["points"],
+					"points_per_member" => (int)($row["points"]/$row["number_member"]));
+				$ranking[$row["ally"]]["number_member"] = $row["number_member"];
+				$ranking[$row["ally"]]["sender"] = $row["user_name"];
 
-        if ($pub_order_by == $table[$i]["arrayname"]) {
-            $order[$row["rank"]] = $row["ally"];
-        }
-        
-        
-        }
-
-
+				if ($pub_order_by == $table[$i]["arrayname"]) {
+					$order[$row["rank"]] = $row["ally"];
+				}
+			}
             next($ranking);
         }
     }
