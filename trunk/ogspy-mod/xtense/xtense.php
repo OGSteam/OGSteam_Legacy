@@ -639,7 +639,7 @@ switch ($pub_type){
 					if(!Check::data2(isset($data['points']),
 									Check::ally_tag($data['ally_tag'])))
 						continue;
-					$query[] = '('.$timestamp.', '.$i.', "'.$data['ally_tag'].'", '.((int)$data['points']).', '.$user_data['user_id'].','.((int)$data['members']).')';
+					$query[] = '('.$timestamp.', '.$i.', "'.$data['ally_tag'].'", '.((int)$data['points']).', '.$user_data['user_id'].','.((int)$data['members'][0]).')';
 					$datas[] = $data;
 					$total ++;
 				}
