@@ -130,12 +130,14 @@ $pageConfig = <<<HERECONFIG
 <br />
 <form name='form' method='post' action=''>
 
+<!-- desactivation js
 Choisir votre type de menu (Dock) : 
 	<SELECT name="td">
 		<OPTION $is00Selected VALUE="0">Menu animé (nécéssite javascript)</OPTION>
 		<OPTION $is01Selected VALUE="1">Menu fixe (compatibilité) </OPTION>
 	</SELECT>
 <br /><br />
+-->
 Choisir le nombre de messages affichés par pages: 
 	<SELECT name="mpp">
 		<OPTION $is210Selected VALUE="10">10</OPTION>
