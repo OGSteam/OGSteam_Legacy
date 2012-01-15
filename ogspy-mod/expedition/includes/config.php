@@ -111,6 +111,7 @@ $pageConfig = <<<HERECONFIG
 </div>
 <br />
 <form name='form' method='post' action=''>
+<!-- desactivation js
 
 Choisir votre type de menu (Dock) : 
 	<SELECT name="td">
@@ -118,6 +119,7 @@ Choisir votre type de menu (Dock) :
 		<OPTION $is01Seclected VALUE="1">Menu fixe (compatibilité) </OPTION>
 	</SELECT>
 <br /><br />
+-->
 Mode Debug (= Affichage de nombreuses choses incompréhensibles) ?
 	<SELECT name="debug">
 		<OPTION $is10Seclected VALUE="0">Non merci...    ;) </OPTION>
