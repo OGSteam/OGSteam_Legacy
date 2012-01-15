@@ -560,7 +560,7 @@ switch ($pub_type){
 			Check::data(
 				Check::stats_type1($pub_type1),
 				Check::stats_type2($pub_type2),
-				Check::stats_type3($pub_type3),
+				//Check::stats_type3($pub_type3),
 				Check::stats_offset($pub_offset)
 			);
 			
@@ -650,6 +650,8 @@ switch ($pub_type){
 			}
 			
 			$db->sql_query('UPDATE '.TABLE_USER.' SET rank_added_ogs = rank_added_ogs + '.$total.' WHERE user_id = '.$user_data['user_id']);
+			
+			$type2 = (($type2 == 'fleet') ? $type2.$type3 : $type2);
 			
 			$call->add('ranking_'.$type1.'_'.$type2, array(
 					'data' => $datas,
