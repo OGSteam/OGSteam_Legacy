@@ -71,6 +71,10 @@ $(document).ready(function() {
          plotBorderWidth: null,
          plotShadow: false
       },
+      credits: {
+        text: '<b>OGSteam Software</b> v ".$server_config["version"]." ',
+        href: 'http://www.ogsteam.fr'
+    },
       title: {
          text: '" . $title . "'
       },
@@ -547,7 +551,7 @@ var highchartsOptions = Highcharts.setOptions(Highcharts.theme); ";
 
 function create_multi_curve($titre, $sous_titre, $data, $names, $conteneur)
 {
-    global $zoom; // on recupere le zoom s il existe
+    global $zoom , $server_config; // on recupere le zoom s il existe
 
     // traitement des datas recu
     foreach ($names as $name) {
@@ -576,9 +580,17 @@ $(document).ready(function() {
    chart3 = new Highcharts.Chart({
       chart: {
          renderTo: '" . $conteneur . "',
-         zoomType: 'xy',
+         zoomType: 'xy'
+         
         
       },
+
+    
+      credits: {
+        text: '<b>OGSteam Software</b> v ".$server_config["version"]." ',
+        href: 'http://www.ogsteam.fr'
+    },
+    
       title: {
          text: '" . $titre . "'
       },
@@ -600,7 +612,7 @@ $(document).ready(function() {
          formatter: function() {
                return '<b>'+ this.series.name +'</b><br/>'+
                Highcharts.dateFormat('%e. %b', this.x) +'<br/>" . $titre .
-        " : '+ this.y +' m';
+        " : '+ Highcharts.numberFormat(this.y, 0, ' ') +' ' ;
          }
       },
       series: [
