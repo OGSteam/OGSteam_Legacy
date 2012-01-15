@@ -57,7 +57,7 @@ abstract class Check {
 	}
 	
 	static function stats_type2($string) {
-		return ($string != 'points' || $string != 'fleet' || $string != 'research');
+		return ($string != 'points' || $string != 'fleet' || $string != 'research' || $string != 'economy');
 	}
 	
 	static function stats_type3($string) {
