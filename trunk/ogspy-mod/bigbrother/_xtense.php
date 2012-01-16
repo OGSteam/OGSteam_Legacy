@@ -253,7 +253,7 @@ function abstract_rankplayer($ranking, $type)
 
 function abstract_rankally($ranking, $type)
 {
-
+//var_dump($ranking);
     $sql = new sql();
     $sql->start_transaction();
     $cache = $sql->get_all_cache_ally();
@@ -262,7 +262,7 @@ function abstract_rankally($ranking, $type)
     //   var_dump($ranking['data'][6]);
     for ($i = 0; $i < 100; $i++) {
         if (isset($ranking['data'][$i])) {
-            if ($ranking['data'][$i]['ally_id'] != -1) {
+            if ($ranking['data'][$i]['ally_id'] != -1 && $ranking['data'][$i]['ally_id'] !="") {
                 if (!isset($cache[$ranking['data'][$i]['ally_id']])) {
                     $cache[$ranking['data'][$i]['ally_id']] = null;
                 }

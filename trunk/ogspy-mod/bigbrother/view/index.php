@@ -73,6 +73,22 @@ $rip_ally = $total_ally - $actif_ally;
 
 
 
+$pie_player="";
+echo "<table><tr><td  width=\"600\">";
+echo "<div id='pie_player'>";
+echo "Pas de données dans la base";
+echo "</div>";
+echo "</td></tr></table>";
+if (isset($value) && isset ($legend))
+{
+$pie_player = create_pie(implode($value, "_x_"), implode($legend, "_x_"),
+        "Dernière répartition des joueurs actifs", "pie_player");    
+    
+}
+// autrement on affiche rien : on prepare juste l affichage du script
+
+    
+echo $pie_player;
 ?>
 
-<img src='index.php?action=graphic_pie&values=<?php echo implode("_x_",$value);?>&legend=<?php echo implode("_x_",$legend);?>&title=Dernière répartition des joueurs actifs' alt='pas de graphique disponible'/>
+
