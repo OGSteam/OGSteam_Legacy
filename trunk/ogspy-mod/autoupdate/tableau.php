@@ -176,7 +176,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		<th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a></th>
 	</tr>
 	<tr>
-		<th colspan="100"><a href="http://board.ogsteam.fr">OGSteam.fr</a></th>
+		<th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
 	</tr>
 		<?php
 	}
