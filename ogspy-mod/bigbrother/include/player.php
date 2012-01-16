@@ -9,6 +9,10 @@ class player
     private $_status = 'x'; // seule variable qui n est pas forcement presente
     private $_date;
 
+    // filtre status => status qui dependent de la personne qui met a jour => non généralisable
+    private $_filtre_status = array("d","f","ph","o"," "); // debutant, fort , ph , hors la loi
+    
+    
     private $_must_update = false;
     private $_must_historique = false;
     private $_requete_historique;
@@ -20,8 +24,18 @@ class player
         $this->_id_player = $id_player;
         $this->_name_player = $name_player;
         $this->_id_ally = $id_ally;
-        $this->_status = $status;
+        $this->_status = $this->filtre_status($status);
         $this->_date = $date;
+    }
+    
+    private function filtre_status($str)
+    {
+        $i = 0;
+        while ($i < count($this->_filtre_status)) {
+       $str = str_replace($this->_filtre_status[$i],"",$str);
+        $i++;
+    }
+        return $str;
     }
 
     // renvoi le joueur avec les informations provenant d une ligne d un systeme
@@ -163,6 +177,7 @@ class player
     }
 
 
+    
 }
 
 //}
