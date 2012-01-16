@@ -78,7 +78,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 		<th colspan="100"><a href="index.php?action=administration&subaction=mod"><?php echo $lang['autoupdate_tableau_pageadmin']; ?></a></th>
 	</tr>
 	<tr>
-		<th colspan="100"><a href="http://board.ogsteam.fr">OGSteam.fr</a></th>
+		<th colspan="100"><a href="http://www.ogsteam.fr">OGSteam.fr</a></th>
 	</tr>
 </table><?php
 } else die($lang['autoupdate_MaJ_rights']);
