@@ -17,9 +17,6 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 // Appel des Javascripts
 echo"<script type='text/javascript' language='javascript' src='".FOLDER_ATTCK."/attack.js'></script>";
 
-echo"<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>";
-echo"<script type='text/javascript'>jQuery.noConflict();</script>";
-
 //Définitions
 global $db, $table_prefix;
 
@@ -160,59 +157,62 @@ echo"<td width='410px' align='center'>";
    			
    		var chart;
    		
-   	chart = new Highcharts.Chart({
-         chart: {
-            renderTo: 'graphique',
-            defaultSeriesType: 'pie',
-            margin: [50, 200, 60, 170]
-         },
-         title: {
-            text: 'Proportion des gains des recyclages affich&eacute;es'
-         },
-         plotArea: {
-            shadow: null,
-            borderWidth: null,
-            backgroundColor: null
-         },
-         tooltip: {
-            formatter: function() {
-               return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
-            }
-         },
-         plotOptions: {
-            pie: {
-               allowPointSelect: true,
-               cursor: 'pointer',
-               dataLabels: {
-                  enabled: true,
-                  formatter: function() {
-                     return this.point.name;
-                  },
-                  color: 'white',
-                  style: {
-                     font: '13px Trebuchet MS, Verdana, sans-serif'
-                  }
-               }
-            }
-         },
-         legend: {
-            layout: 'vertical',
-            style: {
-               left: 'auto',
-               bottom: 'auto',
-               left: '50px',
-               top: '50px'
-            }
-         },
-         series: [{
-            type: 'pie',
-            name: 'Recyclages',
-            data: [
-               ['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."],
-               ['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]
-            ]
-         }]
-      });</script>";
+   	//$(document).ready(function() {
+	   	chart = new Highcharts.Chart({
+	         chart: {
+	            renderTo: 'graphique',
+	            defaultSeriesType: 'pie',
+	            margin: [50, 200, 60, 170]
+	         },
+	         title: {
+	            text: 'Proportion des gains des recyclages affich&eacute;es'
+	         },
+	         plotArea: {
+	            shadow: null,
+	            borderWidth: null,
+	            backgroundColor: null
+	         },
+	         tooltip: {
+	            formatter: function() {
+	               return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
+	            }
+	         },
+	         plotOptions: {
+	            pie: {
+	               allowPointSelect: true,
+	               cursor: 'pointer',
+	               dataLabels: {
+	                  enabled: true,
+	                  formatter: function() {
+	                     return this.point.name;
+	                  },
+	                  color: 'white',
+	                  style: {
+	                     font: '13px Trebuchet MS, Verdana, sans-serif'
+	                  }
+	               }
+	            }
+	         },
+	         legend: {
+	            layout: 'vertical',
+	            style: {
+	               left: 'auto',
+	               bottom: 'auto',
+	               left: '50px',
+	               top: '50px'
+	            }
+	         },
+	         series: [{
+	            type: 'pie',
+	            name: 'Recyclages',
+	            data: [
+	               ['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."],
+	               ['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]
+	            ]
+	         }]
+	 //     })
+   		});
+      </script>";
    	//echo "<img src='index.php?action=graphic_pie&values=".$recy_metal."_x_".$recy_cristal."&legend=Metal_x_Cristal&title=Proportion%20des%20gains%20des%20recyclages%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";
    }
    echo"</td></tr>";
