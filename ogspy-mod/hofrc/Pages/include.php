@@ -95,7 +95,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 						}
 					elseif ($type == "bbcode")
 						{
-							return "[img=".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$filename."][/img]";
+							return "[img]".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$filename."[/img]";
 						}
 				}
 			elseif ($historique == "1")
@@ -116,7 +116,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 										}
 									elseif ($type == "bbcode")
 										{
-											$historique_picture .= "[url=".$historique_title['board_url']."][img=".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$picture_title."][/img][/url]<br>";
+											$historique_picture .= "[url=".$historique_title['board_url']."][img]".str_replace(' ','%20','http://'.substr($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'],0, strlen($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])-9)).$picture_title."[/img][/url]<br>";
 										}
 								}
 						}
@@ -134,7 +134,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 						}
 					elseif ($type == "bbcode")
 						{
-							return "[img=".$filename."][/img]";
+							return "[img]".$filename."][/img]";
 						}
 				}
 		}
@@ -315,6 +315,10 @@ function jsspecialchars($s) {
 			$dateRC = date('d.m.Y H:i:s', $dateRC);
 			
 			// Début du la variable de concaténation
+			if ($type == "bbcode")
+				{
+					$template.= "[center]";
+				}	
 			// Si hof on affiche l'historique
 			if ($hof == "1")
 				{
