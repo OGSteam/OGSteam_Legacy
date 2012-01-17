@@ -196,7 +196,7 @@ if ($is_ok == true)
 			."  ) COMMENT='Information pour la création de l\'image'";
 			$db->sql_query($query);	
 			
-			$query = "INSERT INTO `".TABLE_HOFRC_SKIN."` VALUES ('','ogsteam', '#0BED05', '#0BED05', '#DDEF03', '#DDEF03', '#EE7404', '#EE7404', '#0BED05', '#EE7404', '#EE7404', '#EE7404', '#EE7404', '#DC0106', '#CB0000', '#0BED05', '#00F700', '#00E700', '#00D700', '#00C700', '#00B700', '#00A700', '#009700', '#008700', '#4040FF', '#4040FF', '#4040FF', '#FF4000', '#FF4000', '#FFFFFF', '#FFFFFF', '#FF0000', '1000000', '1000000', '1000000', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', 'header.gif', 'round.gif', 'separator.jpg','result.jpg', 'background.png')";
+			$query = "INSERT INTO `".TABLE_HOFRC_SKIN."` VALUES ('','ogsteam', '#0BED05', '#0BED05', '#DDEF03', '#DDEF03', '#EE7404', '#EE7404', '#0BED05', '#EE7404', '#EE7404', '#EE7404', '#EE7404', '#DC0106', '#CB0000', '#0BED05', '#00F700', '#00E700', '#00D700', '#00C700', '#00B700', '#00A700', '#009700', '#008700', '#4040FF', '#4040FF', '#4040FF', '#FF4000', '#FF4000', '#FFFFFF', '#FFFFFF', '#FF0000', '1000000', '1000000', '1000000', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', 'header.png', 'round.png', 'separator.jpg','result.jpg', 'background.png')";
 			$db->sql_query($query);
 			
 			
