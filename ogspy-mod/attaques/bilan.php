@@ -16,9 +16,6 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 // Appel des Javascripts
 echo"<script type='text/javascript' language='javascript' src='".FOLDER_ATTCK."/attack.js'></script>";
 
-echo"<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>";
-echo"<script type='text/javascript'>jQuery.noConflict();</script>";
-
 //Définitions
 global $db, $table_prefix;
 
