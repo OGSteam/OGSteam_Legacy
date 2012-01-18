@@ -394,11 +394,135 @@ echo"</tr>";
 echo"</table>";
 echo"</fieldset>";
 
-if ($config['histo']==1)
-{
-echo"<fieldset><legend><b><font color='#0080FF'>Historique mensuel</font></b></legend>";
-echo "<img src='index.php?action=attaques&subaction=attaques' alt='pas de graphique disponible' />";
-echo"</fieldset>";
+if ($config['histo']==1){
+	
+	/**** DEBUT HISTO ******/
+	$mois = date("m");
+	$annee = date("Y");
+	
+	$query="SELECT DAY(FROM_UNIXTIME(attack_date)) AS day, SUM(attack_metal) AS metal, SUM(attack_cristal) AS cristal, SUM(attack_deut) AS deut FROM ".TABLE_ATTAQUES_ATTAQUES." WHERE attack_user_id=".$user_data['user_id']." and MONTH(FROM_UNIXTIME(attack_date))=".$mois." and YEAR(FROM_UNIXTIME(attack_date))=".$annee." GROUP BY day";
+	
+	// requète SQL pour récupérer le total par ressource par jour
+	$result = $db->sql_query($query);
+	
+	// Initialisation des variables et tableau
+	
+	$barre = array();
+	// Lecture de la base de données et stockage des valeurs dans le tableau
+	if ( $pub_subaction !="recyclage") {
+		while (list($jour, $metal, $cristal, $deut) = $db->sql_fetch_row($result)) {
+			$barre[$jour][0]=$metal;
+			$barre[$jour][1]=$cristal;
+			$barre[$jour][2]=$deut;
+		  
+			// on recherche la valeur la plus grande pour définir la valeur maxi de l'axe Y
+			if ($metal>$maxy) {
+				$maxy=$metal;
+			}
+			if ($cristal>$maxy) {
+				$maxy=$cristal;
+			}
+			if ($deut>$maxy)  {
+				$maxy=$deut;
+			}
+		}
+	}
+	
+	$i=0;
+	$categories="";$metal="";$cristal="";$deuterium="";
+	for($n = 1; $n < 32; $n++) {
+		if ( !isset($barre[$n][0])) { $barre[$n][0]=0;}
+		if ( !isset($barre[$n][1])) { $barre[$n][1]=0;}
+		if ( !isset($barre[$n][2])) { $barre[$n][2]=0;}
+		
+		if($n==1){
+			$categories .= "'".$n."'";
+			$metal .= $barre[$n][0];
+			$cristal .= $barre[$n][1];
+			$deuterium .= $barre[$n][2];
+		} else {
+			$categories .= ",'".$n."'";
+			$metal .= ",".$barre[$n][0];
+			$cristal .= ",".$barre[$n][1];
+			$deuterium .= ",".$barre[$n][2];
+		}
+	}
+	
+	$series = "{name: 'M&eacute;tal', data: [".$metal."] }, " .
+			  "{name: 'Cristal', data: [".$cristal."] }, " .
+			  "{name: 'Deut&eacute;rium', data: [".$deuterium."] }";
+		
+/** GRAPHIQUE **/
+echo "<div id='graphiquemois' style='height: 350px; width: 1200px; margin: 0pt auto; clear: both;'></div>";
+/** GRAPHIQUE **/
+
+echo "<script type='text/javascript'>
+	   			function number_format(number, decimals, dec_point, thousands_sep) {
+	    			var n = !isFinite(+number) ? 0 : +number, 
+	        		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+	        		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+			        s = '',
+			        toFixedFix = function (n, prec) {
+			            var k = Math.pow(10, prec);
+			            return '' + Math.round(n * k) / k;
+			        };
+	    			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+	    			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+				    if (s[0].length > 3) {
+				        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
+				    if ((s[1] || '').length < prec) {
+				        s[1] = s[1] || '';
+				        s[1] += new Array(prec - s[1].length + 1).join('0');
+				    }    return s.join(dec);
+				}
+				
+			var chart;
+			
+				chart = new Highcharts.Chart({
+	      chart: {
+	         renderTo: 'graphiquemois',
+	         defaultSeriesType: 'column'
+	      },
+	      title: {
+	         text: 'Historique du mois'
+	      },
+	      xAxis: {
+	         categories: [".$categories."]
+	      },
+	      yAxis: {
+	         min: 0,
+	         title: {
+	            text: 'Quantit&eacute;'
+	         }
+	      },
+	      legend: {
+	         layout: 'vertical',
+	         style: {
+			   left: 'auto',
+			   bottom: 'auto',
+	           right: '50px',
+	           top: '50px'
+			 },
+	         backgroundColor: '#FFFFFF',
+	         align: 'left',
+	         verticalAlign: 'top',
+	         x: 100,
+	         y: 70
+	      },
+	      tooltip: {
+	         formatter: function() {
+	            return '<b>' + this.series.name + '</b>: ' + number_format(this.y, 0, ',', ' ');
+	         }
+	      },
+	      plotOptions: {
+	         column: {
+	            pointPadding: 0.2,
+	            borderWidth: 0
+	         }
+	      },
+	           series: [".$series."]
+	   });      
+	</script>";
 }
 echo"<br>";
 echo"<br>";
