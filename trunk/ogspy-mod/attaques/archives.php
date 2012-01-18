@@ -97,10 +97,172 @@ echo"<table width='100%'><tr align='left'>";
 
 // Afficher l'image du graphique
 echo"<td width='410px' align='center'>";
+
+/** GRAPHIQUE **/
+echo "<div id='graphique1' style='height: 350px; width: 800px; margin: 0pt auto; clear: both;'></div>";
+/** GRAPHIQUE **/
+
+echo "<script type='text/javascript'>
+   			function number_format(number, decimals, dec_point, thousands_sep) {
+    			var n = !isFinite(+number) ? 0 : +number, 
+        		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+		        s = '',
+		        toFixedFix = function (n, prec) {
+		            var k = Math.pow(10, prec);
+		            return '' + Math.round(n * k) / k;
+		        };
+    			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+			    if (s[0].length > 3) {
+			        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
+			    if ((s[1] || '').length < prec) {
+			        s[1] = s[1] || '';
+			        s[1] += new Array(prec - s[1].length + 1).join('0');
+			    }    return s.join(dec);
+			}
+			
+		var chart;
+		
+	chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'graphique1',
+         defaultSeriesType: 'pie',
+         margin: [50, 200, 60, 170]
+      },
+      title: {
+         text: 'Gains par ressoucres'
+      },
+      plotArea: {
+         shadow: null,
+         borderWidth: null,
+         backgroundColor: null
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               formatter: function() {
+                  return this.point.name;
+               },
+               color: 'white',
+               style: {
+                  font: '13px Trebuchet MS, Verdana, sans-serif'
+               }
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         style: {
+            left: 'auto',
+            bottom: 'auto',
+            left: '50px',
+            top: '50px'
+         }
+      },
+      series: [{
+         type: 'pie',
+         name: 'Gains',
+         data: [
+            ['<b>M&eacute;tal</b>', ".number_format($archives_metal, 0, ',', '')."],
+            ['<b>Cristal</b>', ".number_format($archives_cristal, 0, ',', '')."],
+            ['<b>Deut&eacute;rium</b>', ".number_format($archives_deut, 0, ',', '')."],
+            ['<b>M&eacute;tal Rec.</b>', ".number_format($archives_recy_metal, 0, ',', '')."],
+            ['<b>Cristal Rec.</b>', ".number_format($archives_recy_cristal, 0, ',', '')."]
+         ]
+      }]
+   });</script>";
 ?>
-<img src="index.php?action=graphic_pie&values=<?php echo $archives_cristal ?>_x_<?php echo $archives_cristal ?>_x_<?php echo $archives_deut ?>_x_<?php echo $archives_recy_metal ?>_x_<?php echo $archives_recy_cristal ?>&legend=Métal_x_Cristal_x_Deuterium_x_Métal%20cdr_x_Cristal%20cdr&title=Proportion%20des%20gains%20des%20attaques%20affich%E9es" alt="Pas de graphique disponible">
-<br><br><br><br>
-<img src="index.php?action=graphic_pie&values=<?php echo $total_gains ?>_x_<?php echo $total_recy ?>&legend=Attaques_x_Recyclages&title=Proportion%20de%20la%20provenance%20des%20gains" alt="">
+<br/>
+<?php
+/** GRAPHIQUE **/
+echo "<div id='graphique2' style='height: 350px; width: 800px; margin: 0pt auto; clear: both;'></div>";
+/** GRAPHIQUE **/
+
+echo "<script type='text/javascript'>
+   			function number_format(number, decimals, dec_point, thousands_sep) {
+    			var n = !isFinite(+number) ? 0 : +number, 
+        		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+		        s = '',
+		        toFixedFix = function (n, prec) {
+		            var k = Math.pow(10, prec);
+		            return '' + Math.round(n * k) / k;
+		        };
+    			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+			    if (s[0].length > 3) {
+			        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
+			    if ((s[1] || '').length < prec) {
+			        s[1] = s[1] || '';
+			        s[1] += new Array(prec - s[1].length + 1).join('0');
+			    }    return s.join(dec);
+			}
+			
+		var chart;
+		
+	chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'graphique2',
+         defaultSeriesType: 'pie',
+         margin: [50, 200, 60, 170]
+      },
+      title: {
+         text: 'Gains & Recyclages'
+      },
+      plotArea: {
+         shadow: null,
+         borderWidth: null,
+         backgroundColor: null
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               formatter: function() {
+                  return this.point.name;
+               },
+               color: 'white',
+               style: {
+                  font: '13px Trebuchet MS, Verdana, sans-serif'
+               }
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         style: {
+            left: 'auto',
+            bottom: 'auto',
+            left: '50px',
+            top: '50px'
+         }
+      },
+      series: [{
+         type: 'pie',
+         name: 'Gains',
+         data: [
+            ['<b>Gains</b>', ".number_format($total_gains, 0, ',', '')."],
+            ['<b>Recyclages</b>', ".number_format($total_recy, 0, ',', '')."]
+         ]
+      }]
+   });</script>";
+?>
 <?php
 
 //Separateur de milliers
