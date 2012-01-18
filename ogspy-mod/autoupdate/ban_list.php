@@ -47,7 +47,9 @@ $ban_mod = array(
 'ressources',
 'restyler',
 'sogsrov',
-'update'
+'update',
+'vaisseaux',
+'refinder'
 );
 
 ?>
