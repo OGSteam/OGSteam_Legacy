@@ -309,18 +309,36 @@ if ((!isset($attack_metal)) && (!isset($attack_cristal)) && (!isset($attack_deut
       },
       series: [{
          type: 'pie',
-         name: 'Gains',
-         data: [
-            ['<b>M&eacute;tal</b>', ".number_format($attack_metal, 0, ',', '')."],
-            ['<b>Cristal</b>', ".number_format($attack_cristal, 0, ',', '')."],
-            ['<b>Deut&eacute;rium</b>', ".number_format($attack_deut, 0, ',', '')."],
-            {
+         name: 'Gain des Attaques',
+         data: [";
+			if($attack_metal!=0){
+		    	echo "['<b>M&eacute;tal</b>', ".number_format($attack_metal, 0, ',', '')."]";
+		    	if($attack_cristal!=0 || $attack_deut!=0 || $attack_pertes!=0){ 
+		    		echo ","; 
+		    	};
+			}
+			if($attack_cristal!=0){
+		    	echo "['<b>Cristal</b>', ".number_format($attack_cristal, 0, ',', '')."]";
+		    	if($attack_deut!=0 || $attack_pertes!=0){
+		    		echo ",";
+		    	};
+			}
+			if($attack_deut!=0){
+		    	echo "['<b>Deut&eacute;rium</b>', ".number_format($attack_deut, 0, ',', '')."]";
+		    	if($attack_pertes!=0){
+		    		echo ",";
+		    	};
+			}
+			if($attack_pertes!=0){
+            echo "{
                name: '<b>Pertes</b>',    
                y: ".number_format($attack_pertes, 0, ',', '').",
                sliced: true,
                selected: true
-            }
-         ]
+            }";
+			}
+            
+         echo "]
       }]
    });</script>";
 	//echo "<img src='index.php?action=graphic_pie&values=".$attack_metal."_x_".$attack_cristal."_x_".$attack_deut."&legend=Metal_x_Cristal_x_Deut%E9rium&title=Proportion%20des%20gains%20des%20attaques%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";
