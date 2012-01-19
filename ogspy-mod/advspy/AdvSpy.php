@@ -33,7 +33,7 @@ function return_bytes($val) {
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 $query = 'SELECT `active` FROM `'.TABLE_MOD.'` WHERE `action`=\''.$pub_action.'\' AND `active`=\'1\' LIMIT 1';
-if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt (ou alors mod installÃ© n\'importe commen)');
+if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt (ou alors mod installé n\'importe comment)');
 
 define("IN_MOD_ADVSPY",TRUE);
 

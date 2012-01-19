@@ -845,7 +845,7 @@ function AdvSpy_PrintHtml_Tab_FrontPage(){
 ".$lang['UI_Lang']['Tab_FrontPage_Help7A']."<a style=\"cursor:pointer\" onclick=\"AdvSpy_MenuHideAllThenShowFromID('AdvSpy_DivOptions');\">"			.$lang['UI_Lang']['Tab_FrontPage_Help7B']."</a>".$lang['UI_Lang']['Tab_FrontPage_Help7C']."<br/>
 <br/>
 <br/>
-".$lang['UI_Lang']['Tab_FrontPage_Help8A']."<a href=\"http://www.ogsteam.fr/forums/sujet-1273-advspy-recherche-crit-selon-fense-flotte\" target=\"_blank\">".$lang['UI_Lang']['Tab_FrontPage_Help8B']."</a>.<br/>
+".$lang['UI_Lang']['Tab_FrontPage_Help8A']."<a href=\"http://www.ogsteam.fr/\" target=\"_blank\">".$lang['UI_Lang']['Tab_FrontPage_Help8B']."</a>.<br/>
 ".$lang['UI_Lang']['Tab_FrontPage_Help8C']."<br/>
 <br/>
 <br/>
