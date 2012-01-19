@@ -127,8 +127,8 @@ echo"<table width='100%'><tr align='left' valign='center'>";
 
 // Afficher l'image du graphique
 echo"<td width='410px' align='center'>";
-
-   if ((!isset($recy_metal)) && (!isset($recy_cristal))) {
+//echo $recy_metal."?".(!isset($recy_metal));
+   if ((!isset($recy_metal)) && (!isset($recy_cristal)) && $recy_metal==0 && $recy_cristal==0) {
    	echo "Pas de graphique disponible";
    } else {   	
    	/**   GRAPHIQUE   **/
@@ -156,7 +156,6 @@ echo"<td width='410px' align='center'>";
    			}
    			
    		var chart;
-   	//$(document).ready(function() {
 	   	chart = new Highcharts.Chart({
 	         chart: {
 	            renderTo: 'graphique',
@@ -203,13 +202,22 @@ echo"<td width='410px' align='center'>";
 	         },
 	         series: [{
 	            type: 'pie',
-	            name: 'Recyclages',
-	            data: [
-	               ['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."],
-	               ['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]
-	            ]
+	            name: 'Gain des Recyclages',
+	            data: [";
+					if($recy_metal!=0){
+				    	echo "['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."]";
+					}
+					if($recy_cristal!=0){
+				    	//echo ",['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]";
+						echo ",{
+							name: '<b>Cristal</b>',
+							y: ".number_format($recy_cristal, 0, ',', '').",
+							sliced: true,
+							selected: true
+						}";
+					}
+	         echo "]
 	         }]
-	 //     })
    		});
       </script>";
    	//echo "<img src='index.php?action=graphic_pie&values=".$recy_metal."_x_".$recy_cristal."&legend=Metal_x_Cristal&title=Proportion%20des%20gains%20des%20recyclages%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";

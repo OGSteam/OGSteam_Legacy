@@ -152,22 +152,50 @@ echo "<script type='text/javascript'>
 		      },
 		      series: [{
 		         type: 'pie',
-		         name: 'Recyclages',
-		         data: [
-		            ['<b>M&eacute;tal</b>', ".number_format($attack_metal, 0, ',', '')."],
-		            ['<b>M&eacute;tal Rec.</b>', ".number_format($recy_metal, 0, ',', '')."],
-		            ['<b>Cristal</b>', ".number_format($attack_cristal, 0, ',', '')."],
-					['<b>Cristal Rec.</b>', ".number_format($recy_cristal, 0, ',', '')."],
-					['<b>Deut&eacute;rium</b>', ".number_format($attack_deut, 0, ',', '')."],
-					{
+		         name: 'Gains de la semaine',
+		         data: [";
+		            if($attack_metal!=0){
+		            	echo "['<b>M&eacute;tal</b>', ".number_format($attack_metal, 0, ',', '')."]";
+		            	if($attack_cristal!=0 || $attack_deut!=0 || $attack_pertes!=0 || $recy_metal!=0 || $recy_cristal!=0){
+		            		echo ",";
+		            	};
+		            }
+		            if($attack_cristal!=0){
+		            	echo "['<b>Cristal</b>', ".number_format($attack_cristal, 0, ',', '')."]";
+		            	if($attack_deut!=0 || $attack_pertes!=0 || $recy_metal!=0 || $recy_cristal!=0){
+		            		echo ",";
+		            	};
+		            }
+					if($attack_deut!=0){
+		            	echo "['<b>Deut&eacute;rium</b>', ".number_format($attack_deut, 0, ',', '')."]";		            	
+		            	if($attack_deut!=0 || $attack_pertes!=0 || $recy_metal!=0 || $recy_cristal!=0){
+		            	echo ",";
+		            	};
+					}
+		            if($recy_metal!=0){
+		            	echo "['<b>M&eacute;tal Rec.</b>', ".number_format($recy_metal, 0, ',', '')."]";
+		            	if($recy_cristal!=0 || $attack_pertes!=0){
+		            	echo ",";
+		            	};
+		            }
+					if($recy_cristal!=0){
+		            	echo "['<b>Cristal Rec.</b>', ".number_format($recy_cristal, 0, ',', '')."]";
+		            	if($attack_pertes!=0){
+		            		echo ",";
+		            	};
+					}
+					if($attack_pertes!=0){
+					echo "{
 		               name: '<b>Pertes</b>',    
 		               y: ".number_format($attack_pertes, 0, ',', '').",
 		               sliced: true,
 		               selected: true
-		            }
-		         ]
+		            }";
+					}
+		         echo "]
 		      }]
-   			});</script>";
+   			});
+  		</script>";
 //echo "<img src='index.php?action=attaques&graphic=week' alt='".T_("Attaques_pasdegraphique")."' />";
 echo "</fieldset>";
 
