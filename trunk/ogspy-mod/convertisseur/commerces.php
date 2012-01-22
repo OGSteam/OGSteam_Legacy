@@ -76,7 +76,7 @@ function valid() {
 	<tr>
 		<th colspan="4">
 			<form action='index.php?action=convertisseur&page=commerce' method='post' name='date'>
-				<input type='text' name='date_from' id='date_from' size='2' maxlength='2' value='<?php echo $pub_date_from;?>'/> au : <input type='text' name='date_to' id='date_to' size='2' maxlength='2' value='<?php echo $pub_date_to;?>'/>
+				<input type='text' name='date_from' id='date_from' size='10' value='<?php echo $pub_date_from;?>'/> au : <input type='text' name='date_to' id='date_to' size='10' value='<?php echo $pub_date_to;?>'/>
 			</form>
 		</th>
 	</tr>
