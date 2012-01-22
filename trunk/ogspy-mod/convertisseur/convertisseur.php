@@ -198,7 +198,7 @@ if ($ouvert=="1"){
 
 
 		<form action="index.php" method="post">
-		<input type="hidden" name="action" value="Convertisseur">
+		<input type="hidden" name="action" value="convertisseur">
 		<input type="hidden" name="ouvert" value="1"/> 
 
 			<th colspan="4">Convertisseur de ressources</th>
@@ -211,7 +211,7 @@ if ($ouvert=="1"){
 				
 				<tr>
 				<?php if (!isset($transporteur)){$transporteur="aucun";}?>
-				<td class="c">Calcule des transporteurs <?php infobulle('Ici vous pouvez décider si oui ou non il vous met le calcule du nombre de transporteur requis et Quel type de transporteur vous allez utiliser ')?></td>
+				<td class="c">Calcul des transporteurs <?php infobulle('Ici vous pouvez décider si oui ou non il vous met le calcule du nombre de transporteur requis et Quel type de transporteur vous allez utiliser ')?></td>
 				<th><input type="radio" name="transporteur" value="aucun" <?php if ($transporteur=='aucun') { ?> checked="checked"<?php } ?> /> Aucun</th>
 				<th><input type="radio" name="transporteur" value="pt" <?php if ($transporteur=='pt') { ?> checked="checked"<?php } ?> /> PT</th>
 				<th><input type="radio" name="transporteur" value="gt" <?php if ($transporteur=='gt') { ?>checked="checked"<?php } ?> /> GT</th>
@@ -219,7 +219,7 @@ if ($ouvert=="1"){
 				
 				<tr>
 				<?php if (!isset($unitée)){$unitée="1";}?>
-				<td class="c">Unitée pour les résultats <?php infobulle('Vous pouvez ici choisir en quel unité s\'affiche les résultats. bien utile pour pas avoir des nom long comme le bras ;\) ')?></td>
+				<td class="c">Unité pour les résultats <?php infobulle('Vous pouvez ici choisir en quel unité s\'affiche les résultats. bien utile pour pas avoir des nom long comme le bras ;\) ')?></td>
 				<th><input type="radio" name="unitée" value="1" <?php if ($unitée=='1') { ?> checked="checked"<?php } ?> /> Unitée</th>
 				<th><input type="radio" name="unitée" value="1000" <?php if ($unitée=='1000') { ?> checked="checked"<?php } ?> /> Kilo</th>
 				<th><input type="radio" name="unitée" value="1000000" <?php if ($unitée=='1000000') { ?>checked="checked"<?php } ?> />Million</th>
