@@ -2349,6 +2349,10 @@ function initLocales(){
         ranking_research: 'recherches',
         ranking_defense: 'défense',
         ranking_buildings: 'bâtiments',
+		ranking_fleet5 : 'militaire construit',
+        ranking_fleet6 : 'militaire destruction',
+        ranking_fleet4 : 'militaire pertes',
+        ranking_fleet7 : 'militaire honneur',
         //
         invalid_system : 'Systême solaire non pris en compte',
         invalid_ranking : 'Page des statistiques invalide',
@@ -2466,6 +2470,10 @@ if (XtenseMetas.getLanguage() == 'en') {
         ranking_research: 'recherches',
         ranking_defense: 'défense',
         ranking_buildings: 'bâtiments',
+		ranking_fleet5 : 'militaire construit',
+        ranking_fleet6 : 'militaire destruction',
+        ranking_fleet4 : 'militaire pertes',
+        ranking_fleet7 : 'militaire honneur',
         //
         invalid_system : 'Systême solaire non pris en compte',
         invalid_ranking : 'Page des statistiques invalide',
