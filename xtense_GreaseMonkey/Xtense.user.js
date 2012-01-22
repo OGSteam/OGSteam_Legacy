@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.3.14.11
+// @version     2.4.0.2
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.3.14.11";
+var VERSION = "2.4.0.2";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -283,24 +283,34 @@ function parse_galaxy_system_inserted(event){
 				
 				var name = XPath.getStringValue(document,paths.planetname,row).trim().replace(/\($/,'');
 				var name_l = XPath.getStringValue(document,paths.planetname_1,row).trim().replace(/\($/,'');
+				var name_tooltip = XPath.getStringValue(document,paths.planetname_tooltip,row).trim().replace(/\($/,'');
 				var player = XPath.getStringValue(document, paths.playername,row).trim();
 				var player2 = XPath.getStringValue(document,paths.playername2,row).trim();
+				var player_tooltip = XPath.getStringValue(document,paths.playername_tooltip,row).trim();
 				
-				if (player == '') {
-					if (player2 == '') {
-						log('row '+i+' has no player name');
-						continue;
-					} else
-						player = player2;
-				}
-				if (name == '') {
-					if (name_l == '') {
-						log('row '+i+' has no planet name');
-						continue;
-					} else
-						name = name_l;
-				}
-				var position = i+1;
+				if (player_tooltip == '') {
+					if (player == '') {
+						if (player2 == '') {
+							log('row '+i+' has no player name');
+							continue;
+						} else
+							player = player2;
+					}
+				} else
+					player = player_tooltip;
+				if (name_tooltip == '') {
+					if (name == '') {
+						if (name_l == '') {
+							log('row '+i+' has no planet name');
+							continue;
+						} else
+							name = name_l;
+					}
+				} else
+					name = name_tooltip;
+				
+				//var position = i+1;
+				var position = XPath.getNumberValue(document,paths.position,row);
 				if(isNaN(position)) {
 					log('position '+position+' is not a number');
 					continue;
@@ -533,13 +543,7 @@ log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',type3: '+type[2]+',nombre
 						}
 					);
                     XtenseRequest.set('lang',langUnivers);
-                    /*	Le if est temporaire : sert de filtre pour ne pas envoyer les sous-classements militaires (construit, détruit, perdu et points honorifiques)
-                     *	On envoie seulement le classement militaire "de base" (quand aucune sous-categorie n'est selectionnée)
-                     *	Devra être supprimé quand les tables pour stocker les nouveaux classements auront été crées,
-                     *	et que le type[2] sera pris en compte pour l'insertion des classements
-                    */
-                    //if (type[2] == '')
-                        XtenseRequest.send();
+                    XtenseRequest.send();
 				}
 				//get_ranking_content();
 			}
@@ -726,8 +730,8 @@ function parse_shipyard(){
 	   	}
 	}
 	var req = "";
-	if(tabLevel.length == 14){
-		req={"CLE": tabLevel[0],
+		req={
+			"CLE": tabLevel[0],
 			"CLO": tabLevel[1],
 			"CR": tabLevel[2],
 			"VB": tabLevel[3],
@@ -741,21 +745,6 @@ function parse_shipyard(){
 			"REC": tabLevel[11],
 			"SE": tabLevel[12], 
 			"SAT": tabLevel[13]};
-	} else {
-		req={"CLE": tabLevel[0],
-			"CLO": tabLevel[1],
-			"CR": tabLevel[2],
-			"VB": tabLevel[3],
-			"TRA": tabLevel[4],
-			"BMD": tabLevel[5],
-			"DST": tabLevel[6],
-			"EDLM": tabLevel[7],
-			"PT": tabLevel[8],
-			"GT": tabLevel[9],
-			"VC": tabLevel[10],
-			"REC": tabLevel[11],
-			"SE": tabLevel[12]};
-	}
 	
 	XtenseRequest.set(getPlanetData());
 	XtenseRequest.set(req);
@@ -1875,12 +1864,12 @@ metas : {
 	planet_type: "//meta[@name=\'ogame-planet-type\']/@content"
 },
 ally_members_list : {
-	rows : "//table[@id='member-list']/tbody/tr",
-	player : "td[1]",
-	rank : "td[4]/span",
-	points : "td[4]/span/@title",
-	coords : "td[5]/a",
-	tag : "//table[@class=\'members bborder\']/tbody/tr[2]/td[2]/span"
+		rows : '//table[@class="members zebra bborder"]/tbody/tr',
+		player : 'td[1]',
+		rank : 'td[4]/span',
+		points : 'td[4]/span/@title',
+		coords : 'td[5]/a',
+		tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
 },
 
 overview : {
@@ -1889,68 +1878,71 @@ overview : {
 },
 
 galaxy : { 
-	rows : "//tr[@class=\'row\']",
-	position : "td[@class=\'position\']/text()",
-	planetname : "td[@class=\'planetname\']/text()",
-	planetname_l : "td[@class=\'planetname\']/a/text()",
-	moon : "td[@class=\'moon\']/a",
-	debris : "descendant::li[@class=\'debris-content\']",
-	playername : "td[contains(@class,\'playername\')]/*[1]",//* pour joueur courant,
-	playername2 : "td[contains(@class,'playername')]/*[2]", //Pour joueur bandit ou empereur
-	allytag : "td[@class=\'allytag\']/span/text()",
-	status : "descendant::span[@class=\'status\']",
-	activity : "descendant::div[@id=\'TTPlanet\']/descendant::span[@class=\'spacing\']/text()",
-	player_id : "descendant::a[contains(@href,\'writemessage\')]/@href",
-	ally_id : "descendant::a[@target='_ally']/@href",
+		rows : '//tr[@class="row"]',
+		position : 'td[@class="position"]/text()',
+		planetname : 'td[@class="planetname"]/text()',
+		planetname_l : 'td[@class="planetname"]/a/text()',
+		planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
+		moon : 'td[@class="moon"]/a',
+		debris : 'descendant::li[@class="debris-content"]',
+		playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en general, span pour joueur courant,
+		playername2 : 'td[contains(@class,"playername")]/*[2]', //Pour joueur bandit ou empereur
+		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
+		allytag : 'td[@class="allytag"]/span/text()',
+		status : 'descendant::span[@class="status"]',
+		activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
+		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
+		ally_id : 'descendant::a[@target="_ally"]/@href',
 	ally_place : "td[@class='allytag']//li[@class='rank']/a/text()",
 	ally_members : "td[@class='allytag']//li[@class='members']/text()"	
 },
 
 levels : {
-	level : "//span[@class=\'level\']/text()"
+		level : '//span[@class="level"]/text()'
 },
 
 messages : {
-	from : "//tr[1]/td",
-	to : "//tr[2]/td",
-	subject : "//tr[3]/td",
-	date : "//tr[4]/td",
+		from : '//tr[1]/td',
+		to : '//tr[2]/td',
+		subject : '//tr[3]/td',
+		date : '//tr[4]/td',
 	reply : "//*[contains(@class,'toolbar')]/li[contains(@class,'reply')]",
 	contents : {
-		"spy" : "//div[@class=\'note\']",
-		"msg": "//div[@class=\'note\']",
-		"ally_msg": "//div[@class=\'note\']",
-		"expedition": "//div[@class=\'note\']",
-		"rc": "//div[@id=\'battlereport\']",
-		"rc_cdr": "//div[@class=\'note\']",
-		"ennemy_spy": "//div[@class=\'textWrapper\']/div[@class=\'note\']",
-		"livraison": "//div[@class=\'note\']",
-		"livraison_me": "//div[@class=\'note\']"
+			'spy' : '//div[@class="note"]',
+			'msg': '//div[@class="note"]',
+			'ally_msg': '//div[@class="note"]',
+			'expedition': '//div[@class="note"]',
+			'rc': '//div[@id="battlereport"]',
+			'rc_cdr': '//div[@class="note"]',
+			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+			'livraison': '//div[@class="note"]',
+			'livraison_me': '//div[@class="note"]'
 	},
 	spy : {
-		fleetdefbuildings : "//table[contains(@class,\'spy\')]//th[@colspan=\'6\']",
-		moon : "//a[@class=\'buttonSave\']"
+			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
+			moon : '//a[@class="buttonSave"]'
 	}
 },
 
 parseTableStruct : {
-	units : "id(\'buttonz\')//ul/li/div/div",
-	id : "a[starts-with(@id,\'details\')]",
+		units : "id('buttonz')//ul/li/div/div",
+		id : "a[starts-with(@id,'details')]",
 	number : "a/span"
 },
 
 planetData : {
-	name : "id(\'selectedPlanetName\')",
-	name_planete : "//span[@class=\'planet-name\']",
-	coords : "//span[@class=\'planet-koords\']",
-	coords_unique_planet : "//div[@class=\'smallplanet\']/a[contains(@class,\'\') or @href=\'#\']/span[@class=\'planet-koords\']"
+		name : "id('selectedPlanetName')",
+		name_planete : "//span[@class='planet-name']",
+		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
+		coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
 },
 
 ranking : { 
-	time : "//div[@id=\'statisticsContent\']//div[@class=\'header\']/h3/text()",
-	who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
-	type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
-	subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
+		date : "//div[@id=\'OGameClock\']/text()",
+		time : "//div[@id=\'OGameClock\']/span/text()",
+		who : "//div[@id=\'categoryButtons\']/a[contains(@class,'active')]/@id",
+		type : "//div[@id=\'typeButtons\']/a[contains(@class,'active')]/@id",
+		subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
 	rows : "id(\'ranks\')/tbody/tr",
 	position : "td[@class=\'position\']/a[contains(@name,'position')]/text()",
 	player : {
@@ -1963,9 +1955,10 @@ ranking : {
 	
 	ally : {
 		position_ally : "td[contains(@class,\'position\')]/a/text()",
-		allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
-		points :  "td[6]/text()",
-		members : "td[5]/text()",
+			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
+			members : "td[5]/text()",
+			points :  "td[6]/text()",
+			points_moy :  "td[6]/@title",
 		ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 	}
 },
@@ -1979,26 +1972,26 @@ ressources : {
 },
 
 rc : {
-	list_infos : "//td[@class=\'newBack\']/center",
-	list_rounds : "//div[@class=\'round_info\']",
+		list_infos : '//td[@class="newBack"]/center',
+		list_rounds : '//div[@class="round_info"]',
 	infos: {
-		player : "span[contains(@class,\'name\')]",
-		weapons : "span[contains(@class,\'weapons\')]",
-		destroyed : "span[contains(@class,\'destroyed\')]"
+			player : 'span[contains(@class, "name")]',
+			weapons : 'span[contains(@class, "weapons")]',
+			destroyed : 'span[contains(@class, "destroyed")]'
 	},
-	list_types : "table/tbody/tr[1]/th",
-	list_values : "table/tbody/tr[2]/td",
-	result : "//div[@id=\'combat_result\']",
-	combat_round : "//div[@id=\'master\']//div[@class=\'combat_round\']"
+		list_types : 'table/tbody/tr[1]/th',
+		list_values : 'table/tbody/tr[2]/td',
+		result : '//div[@id="combat_result"]',
+		combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
 },
 
 writemessage : {
-	form : "//form[1]",
-	from : "id(\'wrapper\')/form/div/table/tbody/tr[1]/td",
-	to : "id(\'wrapper\')/form/div/table/tbody/tr[2]/td",
-	subject : "id(\'wrapper\')/form/div[1]/table/tbody/tr[3]/td/input",
-	date : "id(\'wrapper\')/form/div/table/tbody/tr[4]/td",
-	content : "id(\'wrapper\')/form/div[2]/div/textarea"
+		form : '//form[1]',
+		from : 'id("wrapper")/form/div/table/tbody/tr[1]/td',
+		to : 'id("wrapper")/form/div/table/tbody/tr[2]/td',
+		subject : 'id("wrapper")/form/div[1]/table/tbody/tr[3]/td/input',
+		date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
+		content : 'id("wrapper")/form/div[2]/div/textarea'
 	}
 }
     XtenseRegexps = {
