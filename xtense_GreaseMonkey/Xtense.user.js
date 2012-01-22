@@ -2345,7 +2345,7 @@ function initLocales(){
         ranking_player: 'joueurs',
         ranking_ally: 'alliances',
         ranking_points: 'points',
-        ranking_fleet: 'flotte',
+        ranking_fleet: 'militaire',
         ranking_research: 'recherches',
         ranking_defense: 'défense',
         ranking_buildings: 'bâtiments',
@@ -2353,6 +2353,7 @@ function initLocales(){
         ranking_fleet6 : 'militaire destruction',
         ranking_fleet4 : 'militaire pertes',
         ranking_fleet7 : 'militaire honneur',
+        ranking_economy : 'économique',
         //
         invalid_system : 'Systême solaire non pris en compte',
         invalid_ranking : 'Page des statistiques invalide',
@@ -2466,7 +2467,7 @@ if (XtenseMetas.getLanguage() == 'en') {
         ranking_player: 'joueurs',
         ranking_ally: 'alliances',
         ranking_points: 'points',
-        ranking_fleet: 'flotte',
+        ranking_fleet: 'militaire',
         ranking_research: 'recherches',
         ranking_defense: 'défense',
         ranking_buildings: 'bâtiments',
@@ -2474,6 +2475,7 @@ if (XtenseMetas.getLanguage() == 'en') {
         ranking_fleet6 : 'militaire destruction',
         ranking_fleet4 : 'militaire pertes',
         ranking_fleet7 : 'militaire honneur',
+        ranking_economy : 'économique',
         //
         invalid_system : 'Systême solaire non pris en compte',
         invalid_ranking : 'Page des statistiques invalide',
