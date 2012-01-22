@@ -2495,14 +2495,6 @@ function galaxy_show_ranking_ally()
         redirection("index.php?action=message&id_message=errordata&info");
     }
 
-    if (!isset($pub_order_by)) {
-        $pub_order_by = "general";
-    }
-    if ($pub_order_by != "general" && $pub_order_by != "fleet" && $pub_order_by !=
-        "research") {
-        $pub_order_by = "general";
-    }
-
     $tables = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
         TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
         TABLE_RANK_ALLY_MILITARY_BUILT, TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
