@@ -27,7 +27,7 @@ String.prototype.trimAll = function () {
 	return this.replace(/\s*/g, '');
 }
 String.prototype.trimInt = function() {
-	string = this.replace(/\D/g,'');
+	string = this.replace(/([^-\d])/g,'');
 	return string ? parseInt(string) : 0;
 }
 String.prototype.trimZeros = function() {

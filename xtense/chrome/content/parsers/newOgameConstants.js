@@ -94,22 +94,19 @@ XnewOgame.Xpaths = {
 		subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
 		
 		rows : "id(\'ranks\')/tbody/tr",
-		position : "td[@class=\'position\']/a/text()",
+		position : "td[contains(@class,\'position\')]/a/text()",
+		points :  "td[contains(@class,\'score\')]/text()",
+		ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href",
 		player : {
 			playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
 			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
-			points :  "td[@class=\'score\']/text()",
 			player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
-			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
 		},
 		
 		ally : {
-			position_ally : "td[contains(@class,\'position\')]/a/text()",
 			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
-			members : "td[5]/text()",
-			points :  "td[6]/text()",
-			points_moy :  "td[6]/@title",
-			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href"
+			members : "td[@class=\'name tipsStandard\']/text()",
+			points_moy :  "td[@class=\'score tipsStandard\']/@title",
 		}
 	},
 	
