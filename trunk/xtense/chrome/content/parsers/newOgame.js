@@ -791,21 +791,17 @@ var XnewOgame = {
 				var rowsData = [];
 				for (var i = 0; i < rows.snapshotLength; i++) {
 					var row = rows.snapshotItem(i);
-					var n = null;
-					if (type[0] == 'player') {
-						n = Xpath.getStringValue(doc,paths.position,row).trimInt();
-					} else if(type[0] == 'ally') {
-						n = Xpath.getStringValue(doc,paths.ally.position_ally,row).trimInt();
-					}
+					var n = Xpath.getStringValue(doc,paths.position,row).trimInt();
 					if (i == 1) {
 						offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
 					}
+					
+					var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
+					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
 					if (type[0] == 'player') {
 						var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
 						var ally = Xpath.getStringValue(doc,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
-						var points = Xpath.getStringValue(doc,paths.player.points,row).trimInt();
 						var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
-						var ally_id = Xpath.getStringValue(doc,paths.player.ally_id,row).trim();
 						
 						if (player_id != '' ) {
 							player_id = player_id.match(/\&to\=(.*)\&ajax/);
@@ -829,8 +825,6 @@ var XnewOgame = {
 						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
 						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
 						var moy = Xpath.getStringValue(doc,paths.ally.points_moy,row).replace("|.", "").trimInt();
-						var points = Xpath.getStringValue(doc,paths.ally.points,row).trimInt();
-						var ally_id = Xpath.getStringValue(doc,paths.ally.ally_id,row).trim();
 						
 						if (ally_id != '' ) {
 							ally_id = ally_id.match(/allyid\=(.*)/);
