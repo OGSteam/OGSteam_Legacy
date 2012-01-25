@@ -77,9 +77,9 @@ require_once("mod/bthof/functions.php");
 	
 	$bbcode = "[color=orange][b][u]HoF Bâtiments - Flottes - Technologies - Défense - Production Miniere[/u][/b][/color]\n\n\n"; 	
 
-	$Building_Name  = array("M","C","D","CES","CEF","UdR","UdN","CSp","HM","HC","HD","Lab","Ter","Silo","BaLu","Pha","PoSa","DdR");
-	$Building_Label = array("Mine de métal","Mine de Cristal","Synthétiseur de deutérium","Centrale électrique solaire","Centrale électrique de fusion","Usine de robots","Usine de nanites ","Chantier spatial","Hangar de métal","Hangar de cristal","Réservoir de deutérium","Laboratoire de recherche","Terraformeur","Silo de missiles ","Base Lunaire","Phalange de capteur","Porte de saut spatial","Dépôt de Ravitaillement");
-	$Building_icon  = array("1.gif","2.gif","3.gif","4.gif","12.gif","14.gif","15.gif","21.gif","22.gif","23.gif","24.gif","31.gif","33.gif","44.gif","41.gif","42.gif","43.gif","34.gif");
+	$Building_Name  = array("M","C","D","CES","CEF","UdR","UdN","CSp","HM","HC","HD","CM","CC","CD","Lab","Ter","Silo","BaLu","Pha","PoSa","DdR");
+	$Building_Label = array("Mine de métal","Mine de Cristal","Synthétiseur de deutérium","Centrale électrique solaire","Centrale électrique de fusion","Usine de robots","Usine de nanites ","Chantier spatial","Hangar de métal","Hangar de cristal","Réservoir de deutérium","Cachette de métal","Cachette de cristal","Cachette de deutérium","Laboratoire de recherche","Terraformeur","Silo de missiles ","Base Lunaire","Phalange de capteur","Porte de saut spatial","Dépôt de Ravitaillement");
+	$Building_icon  = array("1.gif","2.gif","3.gif","4.gif","12.gif","14.gif","15.gif","21.gif","22.gif","23.gif","24.gif","25.gif","26.gif","27.gif","31.gif","33.gif","44.gif","41.gif","42.gif","43.gif","34.gif");
 
 	$Flottes_Name  = array("PT","GT","CLE","CLO","CR","VB","VC","REC","SE","BMD","DST","EDLM","TRA","SAT");
 	$Flottes_Label = array("Petit Transporteur","Grand Transporteur","Chasseur Léger","Chasseur Lourd","Croiseur","Vaisseau de Bataille","Vaisseau de Colonisation","Recycleur","Sonde d'Espionnage","Bombardier","Destructeur","Etoile de la Mort","Traqueur","Satellite Solaire");
@@ -416,7 +416,7 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234; text-align : center;'>0.1</td>
 						<td style='background-color : #273234;'>
 							<ul>
-								<li>Version initiale avec affichage sur une seule page</li>
+								<li>Version initiale avec affichage sur une seule page.</li>
 							</ul>
 						</td>
 					</tr>
@@ -424,7 +424,7 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234; text-align : center;'>0.2</td>
 						<td style='background-color : #273234;'>
 							<ul>
-								<li>Correction du parsing des résultats</li>
+								<li>Correction du parsing des résultats.</li>
 							</ul>
 						</td>
 					</tr>
@@ -432,11 +432,11 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234; text-align : center;'>0.3</td>
 						<td style='background-color : #273234;'>
 							<ul>
-								<li>Mise en place de l'affichage par onglets avec idée d' Oliwan</li>
-								<li>Ajout des Gifs Ogame des bâtiments, technologies, défense en se basant sur le skin indiqué dans le profil utilisateur (par défaut http://zebulondunet.free.fr/skin/gebaeude/)</li>
-								<li>Ajout de la fonction de création de BBCode</li>
-								<li>Réorganisation du source (fonctions, tableaux)</li>
-								<li>Première intégration d'informations totaux de production minière par jour</li>
+								<li>Mise en place de l'affichage par onglets avec idée d' Oliwan.</li>
+								<li>Ajout des Gifs Ogame des bâtiments, technologies, défense en se basant sur le skin indiqué dans le profil utilisateur (par défaut http://zebulondunet.free.fr/skin/gebaeude/).</li>
+								<li>Ajout de la fonction de création de BBCode.</li>
+								<li>Réorganisation du source (fonctions, tableaux).</li>
+								<li>Première intégration d'informations totaux de production minière par jour.</li>
 							</ul>
 						</td>
 					</tr>
@@ -446,15 +446,15 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Version personnalisée par Lithie</i>
 							<ul>
-								<li>Modification du design en utilisant des liens avec du subaction en get</li>
-								<li>Regroupement des classements de production sous un seul onglet (Prod Minière)</li>
-								<li>Espace BBCode : ajout des hof de production et coloration (sur le principe de _LaNceLoT_)</li>
-								<li>Mise en place du choix d'affichage des images (méthode proposée par Oliwan)					</li>
-								<li>Ajout du choix des couleurs (en partie admin) pour l'espace BBCode</li>
-								<li>Changement du lien par défaut pour les images (celui du serveur)</li>
-								<li>Espace BBCode : retrait de la balise [list] remplacée par \" - \" à chaque entrée</li>
-								<li>Activation du choix d'affichage des images via la partie admin</li>
-								<li>Numérotage du classement dans Prod. Minière</li>
+								<li>Modification du design en utilisant des liens avec du subaction en get.</li>
+								<li>Regroupement des classements de production sous un seul onglet (Prod Minière).</li>
+								<li>Espace BBCode : ajout des hof de production et coloration (sur le principe de _LaNceLoT_).</li>
+								<li>Mise en place du choix d'affichage des images (méthode proposée par Oliwan).</li>
+								<li>Ajout du choix des couleurs (en partie admin) pour l'espace BBCode.</li>
+								<li>Changement du lien par défaut pour les images (celui du serveur).</li>
+								<li>Espace BBCode : retrait de la balise [list] remplacée par \" - \" à chaque entrée.</li>
+								<li>Activation du choix d'affichage des images via la partie admin.</li>
+								<li>Numérotage du classement dans Prod. Minière.</li>
 							</ul>
 						</td>
 					</tr>
@@ -464,7 +464,7 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par Shad</i>
 							<ul>
-								<li>Ajout d'une section flotte</li>
+								<li>Ajout d'une section flotte.</li>
 							</ul>
 						</td>
 					</tr>
@@ -474,7 +474,7 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par Tehty</i>
 							<ul>
-								<li>Suppression de bug</li>
+								<li>Suppression de bug.</li>
 							</ul>
 						</td>
 					</tr>
@@ -484,7 +484,7 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par Naruto kun</i>
 							<ul>
-								<li>Suppression de bug</li>
+								<li>Suppression de bug.</li>
 							</ul>
 						</td>
 					</tr>
@@ -493,8 +493,8 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par scaler</i>
 							<ul>
-								<li>Nouvelle formule de production d'énergie de la Centrale Électrique de Fusion avec la version 0.78a d'OGame</li>
-								<li>Calcul du facteur de production erroné</li>
+								<li>Nouvelle formule de production d'énergie de la Centrale Électrique de Fusion avec la version 0.78a d'OGame.</li>
+								<li>Calcul du facteur de production erroné.</li>
 							</ul>
 						</td>
 					</tr>
@@ -503,18 +503,18 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par Ninety</i>
 							<ul>
-								<li>Les tableaux ont ete re-codes (plus propre au niveau du code + apparence)</li>
-								<li>Changement mineur a niveau du BBCode</li>
-								<li>Valeur pour les production formattees</li>
-								<li>Changement de l'apparence de la partie Admin et Change Log</li>
-								<li>Modification du menu (ericc)</li>
-								<li>Ajout d'une colonne "Cumul Total" (ericc)</li>
-								<li>Détection de la présence du Mod_flottes (ericc)</li>
-								<li>Les fonctions sont maintenant dans un fichier séparé (ericc)</li>
+								<li>Les tableaux ont ete re-codes (plus propre au niveau du code + apparence).</li>
+								<li>Changement mineur a niveau du BBCode.</li>
+								<li>Valeur pour les production formattees.</li>
+								<li>Changement de l'apparence de la partie Admin et Change Log.</li>
+								<li>Modification du menu. (ericc)</li>
+								<li>Ajout d'une colonne "Cumul Total". (ericc)</li>
+								<li>Détection de la présence du Mod_flottes. (ericc)</li>
+								<li>Les fonctions sont maintenant dans un fichier séparé. (ericc)</li>
 								<li>La mise à jour de la table flotte ne se fait que pour la page flotte (gain de temps) (ericc)</li>
-								<li>Les icones sont maintenant celle du skin séléctionnée.Si elles ne sont pas présentes dans le skin, on va chercher celles de Ogame (ralentissement de l'affichage) (Sylar)</li>
-								<li>La techonologie expédition a la même place que dans OGame (Sylar) </li>
-                                <li>Une colonne 'Total' dans les productions minière (Sylar) </li>
+								<li>Les icones sont maintenant celle du skin séléctionnée.Si elles ne sont pas présentes dans le skin, on va chercher celles de Ogame (ralentissement de l'affichage). (Sylar)</li>
+								<li>La techonologie expédition a la même place que dans OGame. (Sylar) </li>
+                                <li>Une colonne 'Total' dans les productions minière. (Sylar) </li>
                                 <li>Simplification du code d'affichage des productions. </li>
 							</ul>
 						</td>
@@ -524,8 +524,8 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par ericc</i>
 							<ul>
-								<li>Simplification du code d'affichage des icones</li>
-								<li>Correction du bug d'affichage si les icones n'était pas validés</li>
+								<li>Simplification du code d'affichage des icones.</li>
+								<li>Correction du bug d'affichage si les icones n'était pas validés.</li>
 							</ul>
 						</td>
 					</tr>
@@ -534,11 +534,11 @@ require_once("mod/bthof/functions.php");
 						<td style='background-color : #273234;'>
 							<i>Mise à jour par Shad</i>
 							<ul>
-								<li>Changement du lien qui affiche les images</li>
-								<li>Mise a jour des fonctions d'install, update et uninstall</li>
-								<li>Remise a jour des id planètes et prise en compte du nombre de planètes et lunes</li>
-								<li>Remplacement de la techonologie expédition par astrophysique</li>
-								<li>Prise en compte de la vitesse de l'uni</li>
+								<li>Changement du lien qui affiche les images.</li>
+								<li>Mise a jour des fonctions d'install, update et uninstall.</li>
+								<li>Remise a jour des id planètes et prise en compte du nombre de planètes et lunes.</li>
+								<li>Remplacement de la techonologie expédition par astrophysique.</li>
+								<li>Prise en compte de la vitesse de l'uni.</li>
 								
 							</ul>
 						</td>
@@ -552,7 +552,24 @@ require_once("mod/bthof/functions.php");
 							</ul>
 						</td>
 					</tr>
-					
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.2</td>
+						<td style='background-color : #273234;'>
+							<i>Mise à jour par Shad</i>
+							<ul>
+								<li>Correction de bug.</li>								
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td style='background-color : #273234; text-align : center;'>1.0.3</td>
+						<td style='background-color : #273234;'>
+							<i>Mise à jour par Shad</i>
+							<ul>
+								<li>Ajout des cachettes métal, cristal et deutérium.</li>								
+							</ul>
+						</td>
+					</tr>
 				</table>
 			
 				<?php		
