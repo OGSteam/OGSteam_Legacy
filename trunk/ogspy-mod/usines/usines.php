@@ -14,7 +14,13 @@ require_once("views/page_header.php");
 
 require_once("includes/ogame.php");
 
-require_once("parameters/lang_empire.php");
+//require_once("parameters/lang_empire.php");
+$lang_building["M"] = "Mine de métal";
+$lang_building["C"] = "Mine de cristal";
+$lang_building["D"] = "Synthétiseur de deutérium";
+$lang_building["UdR"] = "Usine de robots";
+$lang_building["UdN"] = "Usine de nanites";
+$lang_building["CSp"] = "Chantier spatial";
 
 $start = 101; // pour planetes
 $nb_planete = find_nb_planete_user(); // nb de planetes dans bdd
