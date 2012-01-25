@@ -17,11 +17,11 @@
 	
 	if ($ddr == 1)
 		{
-			$number ="17";
+			$number ="20";
 		}
 	else
 		{
-			$number ="16";
+			$number ="19";
 		}
 	
 	function Create_Mine_HOF()
@@ -452,8 +452,11 @@
         }
         else
         {
+        	// Manque d'image don dans le mod maintenant
             // sinon on affiche celle d'un site extérieur
-            echo "<img src='http://renaissance.wow.free.fr/DL/Metal-BridgeFF1200/gebaeude/" . $imag . "' /><br />";
+            //echo "<img src='http://renaissance.wow.free.fr/DL/Metal-BridgeFF1200/gebaeude/" . $imag . "' /><br />";
+            // Image du mod
+            echo "<img src='mod/bthof/picture/".$imag."'/><br />";
         }
     }
 
