@@ -14,7 +14,8 @@ ob_start();
 require_once("views/page_header.php");
 
 require_once("includes/ogame.php");
-require_once("parameters/lang_empire.php");
+//require_once("parameters/lang_empire.php");
+
 
 $user_empire = user_get_empire();
 $user_technology = $user_empire["technology"];
