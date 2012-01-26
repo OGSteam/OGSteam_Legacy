@@ -356,7 +356,6 @@ var XnewOgame = {
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
 
 		var planetData = this.getPlanetData();
-		
 		var Request = this.newRequest();
 		Request.set(
 			{
@@ -485,7 +484,10 @@ var XnewOgame = {
 				"SAT": tabLevel[5],
 				"HM": tabLevel[6],
 				"HC": tabLevel[7],
-				"HD": tabLevel[8]
+				"HD": tabLevel[8],
+				"CM": tabLevel[9],
+				"CC": tabLevel[10],
+				"CD": tabLevel[11]
 			}
 		);
 		
