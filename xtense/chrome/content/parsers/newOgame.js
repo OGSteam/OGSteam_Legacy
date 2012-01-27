@@ -339,11 +339,12 @@ var XnewOgame = {
 	},
 	
 	getResources : function () {
-		var metal = XPath.getStringValue(document,XtenseXpaths.ressources.metal).trimInt();
-	    var cristal = XPath.getStringValue(document,XtenseXpaths.ressources.cristal).trimInt();
-	    var deut = XPath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
-		var antimater = XPath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
-	    var energy = XPath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
+		var paths = this.Xpaths.ressources;
+		var metal = Xpath.getStringValue(this.doc, paths.metal).trimInt();
+	    var cristal = Xpath.getStringValue(this.doc, paths.cristal).trimInt();
+	    var deut = Xpath.getStringValue(this.doc, paths.deuterium).trimInt();
+		var antimater = Xpath.getStringValue(this.doc, paths.antimatiere).trimInt();
+	    var energy = Xpath.getStringValue(this.doc, paths.energie).trimInt();
 		Xconsole("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 		return Array(metal,cristal,deut,antimater,energy);
 	},
@@ -729,6 +730,7 @@ var XnewOgame = {
 					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
 					rowsData[position]=r;
 				}
+				
 				Request.set(
 					{
 						row : rowsData,
