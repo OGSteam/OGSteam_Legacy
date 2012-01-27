@@ -110,6 +110,14 @@ XnewOgame.Xpaths = {
 		}
 	},
 	
+	ressources : {
+		metal : '//span[@id="resources_metal"]/text()',
+		cristal : '//span[@id="resources_crystal"]/text()',
+		deuterium : '//span[@id="resources_deuterium"]/text()',
+		antimatiere : '//span[@id="resources_darkmatter"]/text()',
+		energie : '//span[@id="resources_energy"]/text()'	
+	},
+		
 	rc : {
 		list_infos : '//td[@class="newBack"]/center',
 		list_rounds : '//div[@class="round_info"]',
