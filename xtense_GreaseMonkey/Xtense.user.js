@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.4.0.3
+// @version     2.4.0.4
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.0.3";
+var VERSION = "2.4.0.4";
 var PLUGIN_REQUIRED = "2.3.14";
 var callback = null;
 var nomScript = 'Xtense';
@@ -1094,8 +1094,8 @@ function parse_messages(){
 				data.type ='rc_cdr';
 				data.coords = coords;
 				data.nombre = nums[0];
-				data.M_recovered = nums[4];
-				data.C_recovered = nums[5];
+				data.M_recovered = nums[7];
+				data.C_recovered = nums[8];
 				data.M_total = nums[2];
 				data.C_total = nums[3];
 			}
