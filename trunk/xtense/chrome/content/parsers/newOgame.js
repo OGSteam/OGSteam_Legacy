@@ -339,13 +339,12 @@ var XnewOgame = {
 	},
 	
 	getResources : function () {
-		var res = this.doc.getElementById("resources");
-		var metal = res.getElementsByClassName("metal")[0].getAttribute('title').getInts()[0];
-	    var cristal = res.getElementsByClassName("crystal")[0].getAttribute('title').getInts()[0];
-	    var deut = res.getElementsByClassName("deuterium")[0].getAttribute('title').getInts()[0];
-		var antimater = res.getElementsByClassName("darkmatter")[0].getAttribute('title').getInts()[0];
-	    var energy = res.getElementsByClassName("energy")[0].getAttribute('title').getInts()[2];
-		
+		var metal = XPath.getStringValue(document,XtenseXpaths.ressources.metal).trimInt();
+	    var cristal = XPath.getStringValue(document,XtenseXpaths.ressources.cristal).trimInt();
+	    var deut = XPath.getStringValue(document,XtenseXpaths.ressources.deuterium).trimInt();
+		var antimater = XPath.getStringValue(document,XtenseXpaths.ressources.antimatiere).trimInt();
+	    var energy = XPath.getStringValue(document,XtenseXpaths.ressources.energie).trimInt();
+		Xconsole("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 		return Array(metal,cristal,deut,antimater,energy);
 	},
 	
