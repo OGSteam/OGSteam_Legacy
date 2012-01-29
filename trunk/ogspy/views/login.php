@@ -40,7 +40,7 @@ $enable_register_view = isset ( $server_config['enable_register_view'] ) ? $serv
 <tr>
 <th colspan='2' align='right'>Si vous ne disposez pas d'un compte, il faut <font color='red'>obligatoirement</font> en demander un sur le forum de <?php echo $server_config['register_alliance']; ?>.</th>
 <tr>
-<th colspan='2' align='right'><input type="button" value="Demander un compte" onclick="self.location.href = '<?php echo $server_config['register_forum']; ?>';"></th>
+<th colspan='2' align='right'><input type="button" value="Demander un compte" onclick="window.open('<?php echo $server_config['register_forum']; ?>');" ></th>
 </tr>
 <?php } ?>
 </table>
