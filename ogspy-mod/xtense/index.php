@@ -581,8 +581,8 @@ Calendar.setup({
 		} ?>
 	</p>
 <?php } elseif ($page == 'about') { ?>
-	<p>Xtense a &eacute;t&eacute; enti&egrave;rement r&eacute;-&eacute;crit par <a href="http://www.unibozu.fr/" onclick="return winOpen(this);" target="_blank">Unibozu</a></p>
-	<p>Forum de support de l'OGSteam : <a href="http://ogsteam.fr/forum-59-xtense" onclick="return winOpen(this);" target="_blank">Xtense</a></p>
+	<p>Xtense par Unibozu</a></p>
+	<p>Forum de support de l'OGSteam : <a href="http://www.ogsteam.fr/" onclick="return winOpen(this);" target="_blank">Xtense</a></p>
 	<p>Set d'ic&ocirc;nes "Silk icons" par <a href="http://www.famfamfam.com/lab/icons/silk/">FamFamFam</a></p>
 	
 	<div class="sep"></div>
@@ -591,7 +591,7 @@ Calendar.setup({
 	<dl class="changelog">
 		<dt>Janvier 2012</dt>
 			<dd>			
-				<div class="version">Module OGSpy 2.4</div>
+				<div class="version">Module OGSpy 2.4.0</div>
 				<p>
 					<em>Ajouts : </em><br />
 					&nbsp;* Support OGame 3.0
@@ -611,22 +611,6 @@ Calendar.setup({
 			</dd>
 		<dt>09 novembre 2008</dt>
 		<dd>
-			<div class="version">Extension Firefox 2.1</div>
-			<p>
-				<em>Fix : </em><br />
-				&nbsp;* Compatibilit&eacute; Foxgame<br />
-				&nbsp;* Les plan&egrave;tes sans nom de joueurs dans la galaxie sont ignor&eacute;es (le reste du syst&egrave;me solaire est envoy&eacute;)<br />
-				&nbsp;* L'absence de laboratoire ou de chantier spatial ne cr&eacute;e plus d'erreur<br />
-			</p>
-			<p>
-				<em>Ajouts : </em><br />
-				&nbsp;* Refonte de l'architecture du code par Unibozu<br />
-				&nbsp;* Modification du design<br />
-				&nbsp;* Ajout de la lecture des d&eacute;parts de flotte<br />
-				&nbsp;* Lecture des ressources &agrave; quai sur la vue g&eacute;n&eacute;rale<br />
-				&nbsp;* Am&eacute;lioration du journal d'erreurs (plus de pr&eacute;cisions sur les mods appell&eacute;s)<br />
-			</p>
-			
 			<div class="version">Module OGSpy 2.1a</div>
 			<p>
 				<em>Fix : </em><br />
