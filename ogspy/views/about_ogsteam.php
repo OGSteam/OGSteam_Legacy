@@ -27,8 +27,6 @@ if (!defined('IN_SPYOGAME')) {
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Kyser</font></a><br />
 		<center><b>Concepteur du serveur d'alliance OGSpy</b><br /><br /></center>
-		<b>U18 => Kyser [Dwelwork]<br />
-		U32 => Kyser [Brothers]</b>
 	</td>
 </tr>
 <tr>
@@ -40,14 +38,6 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/204.jpg"></td>
-	<td class="l">
-		&nbsp;<a><font color="Yellow" size="2">Ben.12</font></a><br />
-		<center><b>Développeur sur le projet OGSpy</b><br /><br /></center>
-		<b>U6 => ange de la mort<br />
-	</td>
-</tr>
-<tr>
 	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/24.png"></td>
 	<td class="l">
 		&nbsp;<a><font color="Yellow" size="2">Capi</font></a><br />
@@ -56,82 +46,60 @@ if (!defined('IN_SPYOGAME')) {
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/17.png"></td>
-	<td class="l">
-		&nbsp;<a><font color="Yellow" size="2">Corwin(bleys) alias "Le boucher"</font></a><br />
-		<center><b>Testeur / "Profiteur de Service"</b></center><br />
-	</td>
-</tr>
-<tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/7.jpg"></td>
-	<td class="l">
-		&nbsp;<b><font color="Yellow" size="2">Erreur32</font></b><br />
-		<center><b>Testeur<br />
-		<font color="orange">Skinner de l'espace (-•O•-)</font></b></center><br />
-		<br />
-	</td>
-</tr>
-<tr>
 	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/903.png"></td>
 	<td class="l">
 		&nbsp;<b><font color="Yellow" size="2">Aéris</font></b><br />
-		<center><b>Développeur</b></center><br />
-		<b>U31 => Aeris [LMG]</b>
+		<center><b>Administrateur du Site OGSteam.fr</b></center><br />
 	</td> 
 </tr> 
 <tr> 
-	<td width="100" height="100" align="center" valign="middle">&nbsp;</td> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://r27.imgfast.net/users/2712/34/86/71/avatars/207-55.gif"></td> 
 	<td class="l"> 
-		&nbsp;<b><font color="Yellow" size="2">Superbox</font></b><br /> 
-		<center><b>Développeur</b></center><br /> 
-	</td> 
-</tr> 
-<tr> 
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/227.gif"></td> 
-	<td class="l"> 
-		&nbsp;<b><font color="Yellow" size="2">oXid_FoX</font></b><br /> 
-		<center><b>Développeur - débuggueur</b></center><br /> 
+		&nbsp;<b><font color="Yellow" size="2">DarkNoon</font></b><br /> 
+		<center><b>Responsable Projet - Développeur</b></center><br /> 
 	</td>
 </tr>
 <tr> 
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogame.fr/wcf/images/avatars/avatar-22926."></td> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://r27.imgfast.net/users/2712/24/28/03/avatars/165-4.gif"></td> 
+	<td class="l"> 
+		&nbsp;<b><font color="Yellow" size="2">Superbox</font></b><br /> 
+		<center><b>Développeur</b></center><br />
+	</td> 
+</tr> 
+<tr> 
+	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/2165.png"></td> 
 	<td class="l"> 
 		&nbsp;<b><font color="Yellow" size="2">Machine</font></b><br /> 
 		<center><b>Développeur - débuggueur</b></center><br /> 
 	</td>
 </tr>
 <tr> 
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/11552.gif"></td> 
+	<td width="100" height="100" align="center" valign="middle">&nbsp;</td> 
 	<td class="l"> 
-		&nbsp;<b><font color="Yellow" size="2">DarkNoon</font></b><br /> 
-		<center><b>Développeur - débuggueur</b></center><br /> 
-	</td>
-</tr>
-<tr> 
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/5290.gif"></td> 
-	<td class="l"> 
-		&nbsp;<b><font color="Yellow" size="2">naruto`kun</font></b><br /> 
+		&nbsp;<b><font color="Yellow" size="2">Shad</font></b><br /> 
 		<center><b>Développeur - débuggueur</b></center><br /> 
 	</td>
 </tr>
 <tr>
-	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
+	<td width="100" height="100" align="center" valign="middle"><img src="http://ballonrond.passion.free.fr/Images/Forums/ogsteam_avatar_jedinight.png" width="60" height="80"></td>
 	<td class="l">
-		&nbsp;<b><font color="Yellow" size="2">Jey</font></b><br />
+		&nbsp;<b><font color="Yellow" size="2">Jedinight</font></b><br />
 		<center><b>Développeur - débuggueur</b></center><br />
 	</td>
 </tr>
+
 <tr>
-	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/logo.png" height="75" width="100"></td> 
-	<td class="l"><br />
-		<center><b>Equipe de test OGSpy 3.02</b></center><br />
+	<td width="100" height="100" align="center" valign="middle">&nbsp;</td>
+	<td class="l">
+		&nbsp;<b><font color="Yellow" size="2">Chris Alys</font></b><br />
+		<center><b>Graphiste</b></center><br />
 	</td>
 </tr>
 <tr>
 	<td width="100" height="100" align="center" valign="middle"><img src="http://board.ogsteam.fr/img/avatars/logo.png" height="75" width="100"></td> 
 	<td class="l">
-		&nbsp;<b><font color="Yellow" size="2">Equipe de test OGSpy 3.0.7</font></b><br />
-		<center><b>Noumaïos - Peuchy - Superbox</b></center><br />
+		&nbsp;<b><font color="Yellow" size="2">Equipe de test OGSpy 3.1.0</font></b><br />
+		<center><b>Gilga - Guiliguili </b></center><br />
         
 	</td>
 </tr>
