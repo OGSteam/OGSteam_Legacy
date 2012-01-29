@@ -9,7 +9,7 @@
 
 // Variables Xtense
 var VERSION = "2.4.0.4";
-var PLUGIN_REQUIRED = "2.3.14";
+var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
 var nomScript = 'Xtense';
 
