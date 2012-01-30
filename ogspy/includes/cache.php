@@ -104,10 +104,4 @@ function generate_all_cache()
         
 }
 
-
-
-
-
-
-
 ?>
