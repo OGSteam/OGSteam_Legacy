@@ -165,7 +165,7 @@
       if ($modflotte[0] != "1")
         {
         // Le mod flotte n'est pas installé ou n'est pas actif 
-        echo "Le <a href='http://www.ogsteam.fr/forums/sujet-1858-mod-flottes' target='_blank'>mod Flottes</a> doit être installé et actif pour permettre de faire des statistiques sur les flottes";
+        echo "Le mod Flottes doit être installé et actif pour permettre de faire des statistiques sur les flottes";
         return;
         }
         else
