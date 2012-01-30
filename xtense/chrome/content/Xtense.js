@@ -32,9 +32,9 @@ window.on('load', function(){
 });
 
 var Xtense = {
-	VERSION: '2.3.15',
+	VERSION: '2.4.0',
 	REVISION: 0,
-	PLUGIN_REQUIRED: '2.3.10',
+	PLUGIN_REQUIRED: '2.4.0',
 	
 	active: false,
 	CurrentTab: null,
