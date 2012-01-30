@@ -3,7 +3,7 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt"); // Pas d'accès direct
 
 
-$chemin_fichier = "http://ogsteam.fr/forums/sujet-4226-mod-exchange";
+$chemin_fichier = "http://www.ogsteam.fr/";
 
 $pageAbout = "<!-- DEBUT Insertion mod eXchange : About -->";
 
