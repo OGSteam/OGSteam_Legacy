@@ -13,11 +13,11 @@
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="11.*"
-                   em:updateInfoURL="http://svn.ogsteam.fr/tags/xtense-2.3.15/release-notes.xhtml"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.3.15"
-                   em:updateHash="sha1:55cafa55ac731143cd8c2a3de40844ccbde58f70" />
+                   em:updateInfoURL="http://svn.ogsteam.fr/tags/xtense-2.4.0/release-notes.xhtml"
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.0"
+                   em:updateHash="sha1:73b6e1716e280f6f5f4c38fdc667eaa4ef79ae79" />
   <RDF:Description RDF:about="rdf:#$wf4Yf"
-                   em:version="2.3.15"
+                   em:version="2.4.0"
                    em:name="Xtense for Firefox">
     <em:targetApplication RDF:resource="rdf:#$Af4Yf"/>
   </RDF:Description>
