@@ -30,7 +30,7 @@ function log_ ($parameter, $option=0) {
 	}
 
 	switch ($parameter) {
-		/* ----------- Entrée Journal générique de Mod ----------- */		
+		/* ----------- Entrée Journal générique de Mod ----------- */
 		case 'mod':
 		$line = "[$pub_action] ".$member." ";
 		if (is_array($option)) {
