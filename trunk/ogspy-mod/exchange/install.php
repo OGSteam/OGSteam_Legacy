@@ -42,7 +42,7 @@ if ($is_ok == true)
 			. " body TEXT NOT NULL, "
 			. " FULLTEXT (player,title,body), "
 			. " primary key ( id )"
-			. " )TYPE=MyISAM";
+			. " )ENGINE=MyISAM";
 		$db->sql_query($query);
 
 		$query = "CREATE TABLE ".TABLE_EXCHANGE_ALLY." ("
@@ -54,7 +54,7 @@ if ($is_ok == true)
 			. " body TEXT NOT NULL, "
 			. " FULLTEXT (player,alliance,body), "
 			. " primary key ( id )"
-			. " )TYPE=MyISAM";
+			. " )ENGINE=MyISAM";
 		$db->sql_query($query);
 	
 		$query = "CREATE TABLE ".TABLE_EXCHANGE_OPTS." ("
