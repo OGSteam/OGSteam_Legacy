@@ -11,8 +11,8 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 if (!isset($num_of_galaxies) || !isset($num_of_systems)) { 
-	$num_of_galaxies = 9;
-	$num_of_systems = 499;
+	$num_of_galaxies = $server_config['num_of_galaxies'];
+	$num_of_systems = $server_config['num_of_systems'];
 }
 
 
@@ -99,39 +99,110 @@ function rank_maj($ranking) {
 			$div_type = -1;
 			break;
 		
-		case "player_fleet":
+		case "player_economic":
 		case -2:
-			$name = "Joueurs Flotte";
-			$table = TABLE_RANK_PLAYER_FLEET;
+			$name = "Joueurs Economique";
+			$table = TABLE_RANK_PLAYER_ECO;
 			$div_type = -2;
 			break;
 			
 		case "player_research":
 		case -3:
 			$name = "Joueurs Recherche";
-			$table = TABLE_RANK_PLAYER_RESEARCH;
+			$table = TABLE_RANK_PLAYER_TECHNOLOGY;
 			$div_type = -3;
 			break;
 			
-		case "ally_points":
+			
+		case "player_military":
 		case -4:
-			$name = "Alliances Général";
-			$table = TABLE_RANK_ALLY_POINTS;
+			$name = "Joueurs Militaire";
+			$table = TABLE_RANK_PLAYER_MILITARY;
 			$div_type = -4;
 			break;
-			
-		case "ally_fleet":
+		
+		case "player_military_built":
 		case -5:
-			$name = "Alliances Flotte";
-			$table = TABLE_RANK_ALLY_FLEET;
+			$name = "Joueurs Mil. Construit";
+			$table = TABLE_RANK_PLAYER_MILITARY_BUILT;
 			$div_type = -5;
+			break;
+
+		case "player_military_loose":
+		case -6:
+			$name = "Joueurs Mil. Détruit";
+			$table = TABLE_RANK_PLAYER_MILITARY_LOOSE;
+			$div_type = -6;
+			break;
+			
+		case "player_military_destruct":
+		case -7:
+			$name = "Joueurs Mil. Détruit";
+			$table = TABLE_RANK_PLAYER_MILITARY_DESTRUCT;
+			$div_type = -7;
+			break;
+				
+		case "player_military_honnor":
+		case -8:
+			$name = "Joueurs Mil. Honneur";
+			$table = TABLE_RANK_PLAYER_HONOR;
+			$div_type = -8;
+			break;
+					
+		case "ally_points":
+		case -9:
+			$name = "Alliances Général";
+			$table = TABLE_RANK_ALLY_POINTS;
+			$div_type = -9;
+			break;
+			
+		case "ally_economic":
+		case -10:
+			$name = "Alliances Economique";
+			$table = TABLE_RANK_ALLY_ECO;
+			$div_type = -10;
 			break;
 			
 		case "ally_research":
-		case -6:
+		case -11:
 			$name = "Alliances recherche";
-			$table = TABLE_RANK_ALLY_RESEARCH;
-			$div_type = -6;
+			$table = TABLE_RANK_ALLY_TECHNOLOGY;
+			$div_type = -11;
+			break;
+			
+		case "ally_military":
+		case -12:
+			$name = "Alliances Militaire";
+			$table = TABLE_RANK_ALLY_MILITARY;
+			$div_type = -12;
+			break;
+				
+		case "ally_military_buil":
+		case -13:
+			$name = "Alliances Mil. Construit";
+			$table = TABLE_RANK_ALLY_MILITARY_BUILT;
+			$div_type = -13;
+			break;
+				
+		case "ally_military_loose":
+		case -14:
+			$name = "Alliances Mil. Perdu";
+			$table = TABLE_RANK_ALLY_MILITARY_LOOSE;
+			$div_type = -14;
+			break;
+		
+		case "ally_military_destruct":
+		case -15:
+			$name = "Alliances Mil. Détruit";
+			$table = TABLE_RANK_ALLY_MILITARY_DESTRUCT;
+			$div_type = -15;
+			break;
+		
+		case "ally_military_honnor":
+		case -16:
+			$name = "Alliances Mil. Honneur";
+			$table = TABLE_RANK_ALLY_HONOR;
+			$div_type = -16;
 			break;
 			
 		default:
@@ -194,9 +265,9 @@ function add_rank($name, $date, $nb_rank, $rank, $user, $type, $page_number = 15
 	echo "\t<th><font color='#".get_color($rate, $min_maj)."'>".formate_number($nb_rank)."</font></th>\n";
 	for($i=0; $i<$page_number ;$i++) {
 		if(isset($rank[$i]) && $rank[$i]>0) 
-			echo "\t<th><img src='mod/MAJ/img/ok.gif' alt='ok' ></th>\n";
+			echo "\t<th><img src='mod/maj/img/ok.gif' alt='ok' ></th>\n";
 		else
-			echo "\t<th><img src='mod/MAJ/img/no.gif' alt='no' ></th>\n";
+			echo "\t<th><img src='mod/maj/img/no.gif' alt='no' ></th>\n";
 	}
 }
 
@@ -229,23 +300,45 @@ function get_min_rank_number($type) {
 	switch($type) {
 		case "player_points":
 		case -1:
-		case "player_fleet":
+		case "player_economic":
 		case -2:
 		case "player_research":
 		case -3:
+		case "player_military":
+		case -4:
+		case "player_military_built":
+		case -5:
+		case "player_military_loose":
+		case -6:
+		case "player_military_destruct":
+		case -7:
+		case "player_military_honnor":
+		case -8:
 		case "player":
+							
 		case "popup_maj_num_rank_player_alert":
 		default:
 			$min_maj = $server_config['popup_maj_num_rank_player_alert'];
 			break;
 			
 		case "ally_points":
-		case -4:
-		case "ally_fleet":
-		case -5:
+		case -9:
+		case "ally_economic":
+		case -10:
 		case "ally_research":
-		case -6:
+		case -11:
+		case "ally_military":
+		case -12:
+		case "ally_military_built":
+		case -13:
+		case "ally_military_loose":
+		case -14:
+		case "ally_military_destruct":
+		case -15:
+		case "ally_military_honnor":
+		case -16:
 		case "ally":
+			
 		case "popup_maj_num_rank_ally_alert":
 			$min_maj = $server_config['popup_maj_num_rank_ally_alert'];
 			break;

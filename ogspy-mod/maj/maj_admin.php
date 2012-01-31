@@ -10,6 +10,7 @@ if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
 
+
 if (!($user_data["user_admin"]==1 || $user_data["user_coadmin"]==1))
 	die("Accepté interdit!");
 
@@ -29,7 +30,7 @@ if(isset($pub_active) && isset($pub_seuil) && isset($pub_step_rank_player) && is
 		 || $pub_step_rank_ally<0    || $pub_step_rank_ally>999
 		 || $pub_num_rank_player<0   || $pub_num_rank_ally<0)
 		redirection("index.php?action=message&id_message=errordata&info");
-	
+
 	$request = "update ".TABLE_CONFIG." set config_value = '".$pub_active."'";
 	$request .= " where config_name = 'popup_maj_active'";
 	$db->sql_query($request);
@@ -67,7 +68,7 @@ echo "\t\t<td class='c' colspan='2'>Avertissements Popup &nbsp;".help("mod_maj_p
 echo '</tr>';
 
 if(!defined('POPUP_MAJ_INCLUDED')) {
-	echo "<tr>\n\t\t<th colspan='2'><blink><font color='red'><b>Popup non installé.</b></font></blink><br>Veillez lire le fichier \"Hack_pour_popup.txt\"</th>\n\t</tr>";
+	echo "<tr>\n\t\t<th colspan='2'><blink><font color='red'><b>Popup non installé.(Fonction non testé)</b></font></blink><br>Veillez lire le fichier \"Hack_pour_popup.txt\"</th>\n\t</tr>";
 }
 
 echo "\t<tr>\n";

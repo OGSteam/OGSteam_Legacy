@@ -9,7 +9,8 @@
 	//$num_of_systems = 100;
 
 $step = ceil($num_of_systems/$server_config["step_maj"]);
-$days = $server_config["step_jrs"];
+$days = $server_config["maj_step_jrs"];
+
 
 if(isset($pub_galaxy) && is_numeric($pub_galaxy) && isset($pub_system) && is_numeric($pub_system)) {
 	$galaxy = $pub_galaxy;
@@ -23,7 +24,7 @@ if(isset($pub_galaxy) && is_numeric($pub_galaxy) && isset($pub_system) && is_num
 <form action='index.php?action=mod_maj&subaction=obs' method='POST'>
 <table>
 <tr>
-	<td class="c" align="center" colspan='2'>Système non mis à jour ces <?php echo $server_config['step_jrs'] ?> derniers jours pour:</td>
+	<td class="c" align="center" colspan='2'>Système non mis à jour ces <?php echo $server_config['maj_step_jrs'] ?> derniers jours pour:</td>
 </tr>
 <tr><th>
 	Galaxie
@@ -63,7 +64,7 @@ if($galaxy != 0) {
 	if ($up > $num_of_systems) $up = $num_of_systems;
 	
 	$obsolete = get_system_obs($galaxy, $system);
-	
+
 	echo "<table>\n";
 	echo "<tr>\n";
 	echo "\t<td class='c' width='110'>Système solaire</td><td class='c' width='110'>Date mise à jour</td>\n";

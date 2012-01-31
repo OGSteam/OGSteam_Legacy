@@ -17,7 +17,7 @@
 		$query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='mod_maj' AND `active`='1' LIMIT 1";
 		if ($db->sql_numrows($db->sql_query($query))) {
 			
-			require_once('./mod/MAJ/functions.php');
+			require_once('./mod/maj/functions.php');
 			
 			/********************************************
 			                                    GALAXIES:
@@ -40,7 +40,7 @@
 				$request = "select count(*) from ".TABLE_UNIVERSE;
 		        $request .= " where galaxy = ".$maj_galaxy;
 		        $request .= " and system between ".$maj_system." and ".($maj_system+$maj_step-1);
-		        $request .= " and last_update > ".(time()-(60*60*24*$server_config["step_jrs"]));
+		        $request .= " and last_update > ".(time()-(60*60*24*$server_config["maj_step_jrs"]));
 		        $result2 = $db->sql_query($request);
 		        list($maj_planet) = $db->sql_fetch_row($result2);
 				

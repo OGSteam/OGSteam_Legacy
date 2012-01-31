@@ -16,6 +16,7 @@ $admin = isset($pub_admin)?$pub_admin:0;
 
 $nbr_total_planet = $num_of_galaxies*$num_of_systems*15;
 
+
 // Adiministration:
 $step = ceil($num_of_systems/$server_config["step_maj"]);
 
@@ -27,7 +28,7 @@ if(((isset($pub_jours) && isset($pub_nbpg)) || (isset($pub_galaxy) && isset($pub
 		$db->sql_query($request);
 	}
 	
-	if(isset($pub_jours) && is_numeric($pub_jours) && $pub_jours != $server_config["step_jrs"]) {
+	if(isset($pub_jours) && is_numeric($pub_jours) && $pub_jours != $server_config["maj_step_jrs"]) {
 		$request = "update ".TABLE_CONFIG." set config_value = '".$pub_jours."'";
 		$request .= " where config_name = 'step_jrs'";
 		$db->sql_query($request);
@@ -45,7 +46,7 @@ if(((isset($pub_jours) && isset($pub_nbpg)) || (isset($pub_galaxy) && isset($pub
 }
 
 // Récupértion des données de mise à jour
-list($statistic_maj, $nb_planets) = galaxy_maj($server_config["step_maj"], $server_config["step_jrs"]);
+list($statistic_maj, $nb_planets) = galaxy_maj($server_config["step_maj"], $server_config["maj_step_jrs"]);
 $users = user_get();
 
 //Affichage de l'administration:
@@ -61,7 +62,7 @@ if($user_data["user_admin"]==1 || $user_data["user_coadmin"]==1) {
        <td class="c">Division des galaxies:</td>
        </tr>
 	   <tr><th>
-       <input name="jours" type="text" value="<?php echo $server_config["step_jrs"]; ?>" maxlength="2" size="2"/>
+       <input name="jours" type="text" value="<?php echo $server_config["maj_step_jrs"]; ?>" maxlength="2" size="2"/>
        </th><th>
        <select name="nbpg">
                <option value="1" <?php if($server_config["step_maj"]==1) echo "selected"; ?>>1</option>
@@ -146,7 +147,7 @@ for ($system=1 ; $system<=$num_of_systems ; $system+=$step) {
 					echo "<td class='c' width='30'>Dernière m.à.j</td>";
 			break;
 			case 2: $v = "planet";
-					echo "<td class='c' style='border-bottom:1px solid lime;' width='30'>Planètes m.à.j ces ".$server_config["step_jrs"]." derniers jours</td>";
+					echo "<td class='c' style='border-bottom:1px solid lime;' width='30'>Planètes m.à.j ces ".$server_config["maj_step_jrs"]." derniers jours</td>";
 			break;
 		}
 		for ($galaxy=1 ; $galaxy<=($num_of_galaxies>10?$num_of_galaxies/2:$num_of_galaxies); $galaxy++) {
@@ -209,7 +210,7 @@ for ($system=1 ; $system<=$num_of_systems && $num_of_galaxies>10 ; $system+=$ste
 					echo "<td class='c' width='30'>Dernière m.à.j</td>";
 			break;
 			case 2: $v = "planet";
-					echo "<td class='c' style='border-bottom:1px solid lime;' width='30'>Planètes m.à.j ces ".$server_config["step_jrs"]." derniers jours</td>";
+					echo "<td class='c' style='border-bottom:1px solid lime;' width='30'>Planètes m.à.j ces ".$server_config["maj_step_jrs"]." derniers jours</td>";
 			break;
 		}
 		for ($galaxy=$num_of_galaxies/2+1 ; $galaxy<=$num_of_galaxies ; $galaxy++) {
@@ -278,7 +279,9 @@ echo "</tr>\n";
 		}
 		$i++;
 	}
+
 	echo "<img alt='Graphic indisponible' title='Mise à jour par utilisateurs' src='index.php?action=graphic_pie&values=".$nb_planet.($autre>0?'_x_'.$autre:'')."&legend=".$user_name.($autre>0?'_x_autres':'')."&title=Proportion%20de%20mises%20à%20jour%20par%20utilisateurs'>";
+
 ?>
 	</th>
 </tr>
