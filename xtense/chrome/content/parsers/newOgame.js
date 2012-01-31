@@ -799,11 +799,18 @@ var XnewOgame = {
 						offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
 					}
 					
-					var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
+					var ally = Xpath.getStringValue(doc,paths.allytag,row).trim().replace(/\]|\[/g,'');
 					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
+					if (ally_id != '' && !ally_id.match(/page\=alliance/)) { //Pas d'id sur le lien de sa propre alliance (dans les classements alliances)
+						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id[1];
+					} else if (ally){
+						ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
+					}
+					var points = Xpath.getStringValue(doc,paths.points,row).trimInt();
+					
 					if (type[0] == 'player') {
 						var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
-						var ally = Xpath.getStringValue(doc,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
 						var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
 						
 						if (player_id != '' ) {
@@ -812,35 +819,18 @@ var XnewOgame = {
 						}
 						else if(doc.cookie.match(/login_(.*)=U_/))
 							player_id = doc.cookie.match(/login_(.*)=U_/)[1];
-						
-						if (ally_id != '' ) {
-							ally_id = ally_id.match(/allyid\=(.*)/);
-							ally_id = ally_id[1];
-						} else if (ally){
-							//ally_id = '-1';
-							ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
-						}
-//Xconsole('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
+
+						//Xconsole('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
 						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
-						rowsData[n]=r;
-						length ++;
 					} else if(type[0] == 'ally') {
-						var ally = Xpath.getStringValue(doc,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
 						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
 						var moy = Xpath.getStringValue(doc,paths.ally.points_moy,row).replace("|.", "").trimInt();
 						
-						if (ally_id != '' ) {
-							ally_id = ally_id.match(/allyid\=(.*)/);
-							ally_id = ally_id[1];
-						} else if (ally){
-							//ally_id = '-1';
-							ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
-						}
-//Xconsole('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
+						//Xconsole('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
 						var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
-						rowsData[n]=r;
-						length ++;
 					}
+					rowsData[n]=r;
+					length ++;
 				}
 				
 				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+type[2]+':'+offset) {

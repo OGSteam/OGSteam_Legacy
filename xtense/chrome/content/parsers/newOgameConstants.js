@@ -97,15 +97,14 @@ XnewOgame.Xpaths = {
 		rows : "id(\'ranks\')/tbody/tr",
 		position : "td[contains(@class,\'position\')]/a/text()",
 		points :  "td[contains(@class,\'score\')]/text()",
-		ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href",
+		allytag : "td[@class=\'name\']/span[@class=\'ally-tag\']/a/text()",
+		ally_id : "td[@class=\'name\']/span[@class=\'ally-tag\']/a/@href",
 		player : {
 			playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
-			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
 			player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
 		},
 		
 		ally : {
-			allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
 			members : "td[@class=\'name tipsStandard\']/text()",
 			points_moy :  "td[@class=\'score tipsStandard\']/@title",
 		}
