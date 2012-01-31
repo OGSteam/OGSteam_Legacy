@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.4.0.4
+// @version     2.4.0.5
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.0.4";
+var VERSION = "2.4.0.5";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
 var nomScript = 'Xtense';
@@ -1041,6 +1041,7 @@ function parse_messages(){
 			data.planetName = m[1];
 			data.coords = m[2];
 			
+			data.proba = 0;
 			m = content.match(new RegExp(locales['unespionage prob']+XtenseRegexps.probability));
 			if(m)
 				data.proba = m[1];
@@ -1221,8 +1222,7 @@ function parse_spy_report(RE) {
 	var moonNode = XPath.getSingleNode(document, paths.moon);
 
 	isMoon = (moonNode.href).match(new RegExp(locales['moon'] + XtenseRegexps.moon))[1] == '3' ? true : false;
-	var playerName = RE.match(new RegExp(XtenseRegexps.spy.player))[1];
-	
+	var playerName = XPath.getStringValue(document, paths.playername).trim();
 	var types = XPath.getOrderedSnapshotNodes(document,paths.fleetdefbuildings);
 	if(types.snapshotLength > 0){
 	   	for(var table=0;table<types.snapshotLength;table++){
@@ -1907,8 +1907,10 @@ XtenseXpaths = {
 				'livraison_me': '//div[@class="note"]'
 			},
 			spy : {
+				/*playername : '//table[@class="material spy"]/tbody/tr[1]/th[@class="area"]/span/text()',*/ /*Version Longue*/			
+				playername : '//th[@class="area"]/span/text()',				
 				fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
-				moon : '//a[@class="buttonSave"]'
+				moon : '//a[@class="buttonSave"]'				
 			}
 		},
 		
@@ -1995,9 +1997,7 @@ XtenseXpaths = {
 			trade_message_infos_res : 'tal(.*)Cristal(.*)Deut.rium(.*)',
 			trade_message_infos_me_res : 'tal(.*)Cristal(.*)Deut.rium(.*)'
         },
-        spy : {
-            player : " '(.*)'\\)"
-        },
+
         probability : ': (\\d+) %',
         coords : '\\[(\\d+:\\d+:\\d+)\\]',
         ally : 'Alliance \\[(.*)\\]',
