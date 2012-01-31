@@ -240,108 +240,7 @@ if ((!isset($attack_metal)) && (!isset($attack_cristal)) && (!isset($attack_deut
 	/** GRAPHIQUE **/
 	echo "<div id='graphique' style='height: 350px; width: 800px; margin: 0pt auto; clear: both;'></div>";
 	/** GRAPHIQUE **/
-		
-	echo "<script type='text/javascript'>
-   			function number_format(number, decimals, dec_point, thousands_sep) {
-    			var n = !isFinite(+number) ? 0 : +number, 
-        		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-        		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-		        s = '',
-		        toFixedFix = function (n, prec) {
-		            var k = Math.pow(10, prec);
-		            return '' + Math.round(n * k) / k;
-		        };
-    			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
-    			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-			    if (s[0].length > 3) {
-			        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
-			    if ((s[1] || '').length < prec) {
-			        s[1] = s[1] || '';
-			        s[1] += new Array(prec - s[1].length + 1).join('0');
-			    }    return s.join(dec);
-			}
-			
-		var chart;
-		
-	chart = new Highcharts.Chart({
-      chart: {
-         renderTo: 'graphique',
-         defaultSeriesType: 'pie',
-         margin: [50, 200, 60, 170]
-      },
-      title: {
-         text: 'Proportion des gains des attaques affich&eacute;es'
-      },
-      plotArea: {
-         shadow: null,
-         borderWidth: null,
-         backgroundColor: null
-      },
-      tooltip: {
-         formatter: function() {
-            return '<b>'+ this.point.name +'</b>: '+ number_format(this.y, 0, ',', ' ');
-         }
-      },
-      plotOptions: {
-         pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-               enabled: true,
-               formatter: function() {
-                  return this.point.name;
-               },
-               color: 'white',
-               style: {
-                  font: '13px Trebuchet MS, Verdana, sans-serif'
-               }
-            }
-         }
-      },
-      legend: {
-         layout: 'vertical',
-         style: {
-            left: 'auto',
-            bottom: 'auto',
-            left: '50px',
-            top: '50px'
-         }
-      },
-      series: [{
-         type: 'pie',
-         name: 'Gain des Attaques',
-         data: [";
-			if($attack_metal!=0){
-		    	echo "['<b>M&eacute;tal</b>', ".number_format($attack_metal, 0, ',', '')."]";
-		    	if($attack_cristal!=0 || $attack_deut!=0 || $attack_pertes!=0){ 
-		    		echo ","; 
-		    	};
-			}
-			if($attack_cristal!=0){
-		    	echo "['<b>Cristal</b>', ".number_format($attack_cristal, 0, ',', '')."]";
-		    	if($attack_deut!=0 || $attack_pertes!=0){
-		    		echo ",";
-		    	};
-			}
-			if($attack_deut!=0){
-		    	echo "['<b>Deut&eacute;rium</b>', ".number_format($attack_deut, 0, ',', '')."]";
-		    	if($attack_pertes!=0){
-		    		echo ",";
-		    	};
-			}
-			if($attack_pertes!=0){
-            echo "{
-               name: '<b>Pertes</b>',    
-               y: ".number_format($attack_pertes, 0, ',', '').",
-               sliced: true,
-               selected: true
-            }";
-			}
-            
-         echo "]
-      }]
-   });</script>";
-	//echo "<img src='index.php?action=graphic_pie&values=".$attack_metal."_x_".$attack_cristal."_x_".$attack_deut."&legend=Metal_x_Cristal_x_Deut%E9rium&title=Proportion%20des%20gains%20des%20attaques%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";
+	echo  create_pie($attack_metal . "_x_" . $attack_cristal . "_x_" . $attack_deut . "_x_" . $attack_pertes, "Métal_x_Cristal_x_Deutérium_x_Pertes", "Gains des Attaques", "graphique");
 }
 echo"</td></tr>";
 
@@ -349,7 +248,7 @@ echo"</td></tr>";
 $attack_metal = number_format($attack_metal, 0, ',', ' ');
 $attack_cristal = number_format($attack_cristal, 0, ',', ' ');
 $attack_deut = number_format($attack_deut, 0, ',', ' ');
-echo "<td><p align='left'><font color='#FFFFFF'><big><big><big>Métal gagné : ".$attack_metal."<br>Cristal gagné : ".$attack_cristal."<br>Deut&eacute;rium gagné : ".$attack_deut."<br>";
+echo "<td><p align='left'><font color='#FFFFFF'><big><big><big>Métal gagné : ".$attack_metal."<br>Cristal gagné : ".$attack_cristal."<br>Deutérium gagné : ".$attack_deut."<br>";
 
 //Affichage du total des gains
 $totalgains = number_format($totalgains, 0, ',', ' ');
@@ -466,9 +365,9 @@ if ($config['histo']==1){
 		}
 	}
 	
-	$series = "{name: 'M&eacute;tal', data: [".$metal."] }, " .
+	$series = "{name: 'Métal', data: [".$metal."] }, " .
 			  "{name: 'Cristal', data: [".$cristal."] }, " .
-			  "{name: 'Deut&eacute;rium', data: [".$deuterium."] }";
+			  "{name: 'Deutérium', data: [".$deuterium."] }";
 		
 /** GRAPHIQUE **/
 echo "<div id='graphiquemois' style='height: 350px; width: 1200px; margin: 0pt auto; clear: both;'></div>";
@@ -510,7 +409,7 @@ echo "<script type='text/javascript'>
 	      yAxis: {
 	         min: 0,
 	         title: {
-	            text: 'Quantit&eacute;'
+	            text: 'Quantité'
 	         }
 	      },
 	      legend: {

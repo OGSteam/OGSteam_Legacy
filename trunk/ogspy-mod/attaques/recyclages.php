@@ -134,8 +134,8 @@ echo"<td width='410px' align='center'>";
    	/**   GRAPHIQUE   **/
    	echo "<div id='graphique' style='height: 350px; width: 800px; margin: 0pt auto; clear: both;'></div>";
    	/** FIN GRAPHIQUE **/
-   	   	 
-   	echo "<script type='text/javascript'>
+   	echo  create_pie($recy_metal . "_x_" . $recy_cristal, "Métal_x_Cristal", "Gains des recyclages", "graphique");
+   	/*echo "<script type='text/javascript'>
       			function number_format(number, decimals, dec_point, thousands_sep) {
        			var n = !isFinite(+number) ? 0 : +number, 
            		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -163,7 +163,7 @@ echo"<td width='410px' align='center'>";
 	            margin: [50, 200, 60, 170]
 	         },
 	         title: {
-	            text: 'Proportion des gains des recyclages affich&eacute;es'
+	            text: 'Proportion des gains des recyclages affichées'
 	         },
 	         plotArea: {
 	            shadow: null,
@@ -205,7 +205,7 @@ echo"<td width='410px' align='center'>";
 	            name: 'Gain des Recyclages',
 	            data: [";
 					if($recy_metal!=0){
-				    	echo "['<b>M&eacute;tal</b>', ".number_format($recy_metal, 0, ',', '')."]";
+				    	echo "['<b>Métal</b>', ".number_format($recy_metal, 0, ',', '')."]";
 					}
 					if($recy_cristal!=0){
 				    	//echo ",['<b>Cristal</b>', ".number_format($recy_cristal, 0, ',', '')."]";
@@ -219,7 +219,7 @@ echo"<td width='410px' align='center'>";
 	         echo "]
 	         }]
    		});
-      </script>";
+      </script>";*/
    	//echo "<img src='index.php?action=graphic_pie&values=".$recy_metal."_x_".$recy_cristal."&legend=Metal_x_Cristal&title=Proportion%20des%20gains%20des%20recyclages%20affich%E9es' alt='".T_("Attaques_pasdegraphique")."'>";
    }
    echo"</td></tr>";
@@ -320,9 +320,9 @@ if ($config['histo']==1)
 		}
 	}
 	
-	$series = "{name: 'M&eacute;tal', data: [".$metal."] }, " .
+	$series = "{name: 'Métal', data: [".$metal."] }, " .
 			  "{name: 'Cristal', data: [".$cristal."] }, " .
-			  "{name: 'Deut&eacute;rium', data: [".$deuterium."] }";
+			  "{name: 'Deutérium', data: [".$deuterium."] }";
 		
 /** GRAPHIQUE **/
 echo "<div id='graphiquemois' style='height: 350px; width: 1200px; margin: 0pt auto; clear: both;'></div>";
@@ -364,7 +364,7 @@ echo "<script type='text/javascript'>
 	      yAxis: {
 	         min: 0,
 	         title: {
-	            text: 'Quantit&eacute;'
+	            text: 'Quantité'
 	         }
 	      },
 	      legend: {
