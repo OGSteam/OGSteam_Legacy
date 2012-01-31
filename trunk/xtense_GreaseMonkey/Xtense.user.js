@@ -434,115 +434,107 @@ function parse_ally_inserted(event) {
 }
 
 /* Fonction appelée lors d'évenement sur le chargement des classements */
+/* Fonction appelée lors d'évenement sur le chargement des classements */
 function parse_ranking_inserted(event) {
-     log("Entering parse_ranking_inserted");
-	try {
-		var paths = XtenseXpaths.ranking;
-		
-		var timeText = XPath.getStringValue(document,paths.time).trim();
-		timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
 
-		var time = new Date();
-		time.setHours((Math.floor(time.getHours())/8)*8);
-		time.setMinutes(0);
-		time.setSeconds(0);
-		if(timeText) {
-			time.setYear(timeText[3]);
-			time.setMonth(parseInt(timeText[2].trimZeros())-1);
-			time.setDate(timeText[1]);
-			time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
-		}
-		
-		time =  Math.floor(time.getTime()/1000);
-		var type = new Array();
-        type[0] = XPath.getStringValue(document,paths.who);
-        type[1] = XPath.getStringValue(document,paths.type);
-        type[2] = XPath.getStringValue(document,paths.subnav_fleet);
-        type[0] = (type[0] != '') ? type[0] : 'player';
-        type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
-        type[1] = (type[1] != '') ? type[1] : 'points';
-   
-        
-		var length = 0;
-		var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
-		var offset = 0;
-log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',type3: '+type[2]+',nombreLignes:'+rows.snapshotLength);
-		if(rows.snapshotLength > 0){
-			var rowsData = [];
-			for (var i = 0; i < rows.snapshotLength; i++) {
-				var row = rows.snapshotItem(i);
-				var n = XPath.getStringValue(document,paths.position,row).trimInt();
+    log("Entering parse_ranking_inserted");
+	var paths = XtenseXpaths.ranking;
+	
+	var timeText = XPath.getStringValue(document,paths.time).trim();
+	timeText = timeText.match(/(\d+).(\d+).(\d+)[^\d]+(\d+):\d+:\d+/);
 
-				if (i == 1) {
-					offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
-				}
-				//setStatus(XLOG_NORMAL,Xl('ranking_detected'));
-				var points = XPath.getStringValue(document,paths.points,row).trimInt();
-				var ally_id = XPath.getStringValue(document,paths.ally_id,row).trim();				
-				if (type[0] == 'player') {
-					var name = XPath.getStringValue(document,paths.player.playername,row).trim();
-					var ally = XPath.getStringValue(document,paths.player.allytag,row).trim().replace(/\]|\[/g,'');
-					var player_id = XPath.getStringValue(document,paths.player.player_id,row).trim();
-					
-					if (player_id != '' ) {
-						player_id = player_id.match(/\&to\=(.*)\&ajax/);
-						player_id = player_id[1];
-					}
-					else if(document.cookie.match(/login_(.*)=U_/))
-						player_id = document.cookie.match(/login_(.*)=U_/)[1];
-					
-					if (ally_id != '' ) {
-						ally_id = ally_id.match(/allyid\=(.*)/);
-						ally_id = ally_id[1];
-					}
-					else if (ally)
-						ally_id = '-1';
-//log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);					
-					var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
-					rowsData[n]=r;
-					length ++;
-				} else if(type[0] == 'ally') {
-					var ally = XPath.getStringValue(document,paths.ally.allytag,row).trim().replace(/\]|\[/g,'');
-					var members = XPath.getStringValue(document,paths.ally.members,row).getInts();
-					var moy = XPath.getStringValue(document,paths.ally.points_moy,row).replace("|.", "").trimInt();
-					
-					if (ally_id != '' ) {
-						ally_id = ally_id.match(/allyid\=(.*)/);
-						ally_id = ally_id[1];
-					}
-					else if (ally)
-						ally_id = '-1';
-//log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
-					var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
-					rowsData[n]=r;
-					length ++;
-				}
+	var time = new Date();
+	time.setHours((Math.floor(time.getHours())/8)*8);
+	time.setMinutes(0);
+	time.setSeconds(0);
+	if(timeText) {
+		time.setYear(timeText[3]);
+		time.setMonth(parseInt(timeText[2].trimZeros())-1);
+		time.setDate(timeText[1]);
+		time.setHours(Math.floor(parseInt(timeText[4].trimZeros())/8)*8);
+	}
+	
+	time =  Math.floor(time.getTime()/1000);
+	var type = new Array();
+	type[0] = XPath.getStringValue(document,paths.who);
+	type[1] = XPath.getStringValue(document,paths.type);
+	type[2] = XPath.getStringValue(document,paths.subnav_fleet);
+	type[0] = (type[0] != '') ? type[0] : 'player';
+	type[0] = (type[0] == 'alliance') ? 'ally' : type[0];
+	type[1] = (type[1] != '') ? type[1] : 'points';
+
+	
+	var length = 0;
+	var rows = XPath.getOrderedSnapshotNodes(document,paths.rows,null);
+	var offset = 0;
+	log('time:'+time+',type1:'+type[0]+',type2:'+type[1]+',type3: '+type[2]+',nombreLignes:'+rows.snapshotLength);	
+		
+	if(rows.snapshotLength > 0){
+		var rowsData = [];
+		for (var i = 0; i < rows.snapshotLength; i++) {
+			var row = rows.snapshotItem(i);
+			var n = XPath.getStringValue(document,paths.position,row).trimInt();
+			if (i == 1) {
+				offset = Math.floor(n/100)*100+1;//parce que le nouveau classement ne commence pas toujours pile a la centaine et OGSpy toujours a 101,201...
 			}
 			
-			if(GM_setValue(prefix_GMData +'lastAction','') != 'r:'+type[0]+':'+type[1]+':'+offset){				
-				setStatus(XLOG_NORMAL,Xl('ranking_detected', Xl('ranking_'+type[0]), Xl('ranking_'+type[1])));
-				GM_setValue(prefix_GMData +'lastAction','r:'+type[0]+':'+type[1]+':'+offset);
-				if (offset != 0 && length != 0) {
-					XtenseRequest.set(
-						{
-							n : rowsData,
-							type : 'ranking',
-							offset : offset,
-							type1 : type[0],
-							type2 : type[1],
-							type3 : type[2],
-							time: time
-						}
-					);
-                    XtenseRequest.set('lang',langUnivers);
-                    XtenseRequest.send();
-				}
-				//get_ranking_content();
+			var ally = XPath.getStringValue(document,paths.allytag,row).trim().replace(/\]|\[/g,'');
+			var ally_id = XPath.getStringValue(document,paths.ally_id,row).trim();
+			if (ally_id != '' && !ally_id.match(/page\=alliance/)) { //Pas d'id sur le lien de sa propre alliance (dans les classements alliances)
+				ally_id = ally_id.match(/allyid\=(.*)/);
+				ally_id = ally_id[1];
+			} else if (ally){
+				ally_id = XtenseMetas.getAllyId();
 			}
+			var points = XPath.getStringValue(document,paths.points,row).trimInt();
+			
+			if (type[0] == 'player') {
+				var name = XPath.getStringValue(document,paths.player.playername,row).trim();
+				var player_id = XPath.getStringValue(document,paths.player.player_id,row).trim();
+				
+				if (player_id != '' ) {
+					player_id = player_id.match(/\&to\=(.*)\&ajax/);
+					player_id = player_id[1];
+				}
+				else if(document.cookie.match(/login_(.*)=U_/))
+					player_id = document.cookie.match(/login_(.*)=U_/)[1];
+
+				log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
+				var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+			} else if(type[0] == 'ally') {
+				var members = XPath.getStringValue(document,paths.ally.members,row).getInts();
+				var moy = XPath.getStringValue(document,paths.ally.points_moy,row).replace("|.", "").trimInt();
+				
+				log('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
+				var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
+			}
+			rowsData[n]=r;
+			length ++;
 		}
-	} catch (e) {
-		throw_error(e);
 	}
+		
+	if(GM_setValue(prefix_GMData +'lastAction','') != 'r:'+type[0]+':'+type[1]+':'+offset){				
+		setStatus(XLOG_NORMAL,Xl('ranking_detected', Xl('ranking_'+type[0]), Xl('ranking_'+type[1])));
+		GM_setValue(prefix_GMData +'lastAction','r:'+type[0]+':'+type[1]+':'+offset);
+		if (offset != 0 && length != 0) {
+			XtenseRequest.set(
+				{
+					n : rowsData,
+					type : 'ranking',
+					offset : offset,
+					type1 : type[0],
+					type2 : type[1],
+					type3 : type[2],
+					time: time
+				}
+			);
+			XtenseRequest.set('lang',langUnivers);
+			XtenseRequest.send();
+		}
+		//get_ranking_content();
+	}
+		
+	
 }
 
 /* Page Overview */
@@ -1346,7 +1338,7 @@ function get_ally_content(){
 
 /* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
 function get_ranking_content(){
-    log
+    log("Entering get_ranking_content");
 	if (isChrome) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
@@ -1937,15 +1929,14 @@ XtenseXpaths = {
 			rows : "id(\'ranks\')/tbody/tr",
 			position : "td[contains(@class,\'position\')]/a/text()",
 			points :  "td[contains(@class,\'score\')]/text()",
+			allytag : "td[@class=\'name\']/span[@class=\'ally-tag\']/a/text()",
 			ally_id : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/@href",
 			player : {
 				playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
-				allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\')]/text()",
 				player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
 			},
 			
 			ally : {
-				allytag : "td[@class=\'name\']//a[contains(@target,\'_ally\') or contains(@href,'page=alliance')]/text()",
 				members : "td[@class=\'name tipsStandard\']/text()",
 				points_moy :  "td[@class=\'score tipsStandard\']/@title",
 			}
