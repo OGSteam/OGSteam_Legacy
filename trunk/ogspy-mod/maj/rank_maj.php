@@ -17,7 +17,7 @@ $admin = isset($pub_admin)?$pub_admin:0;
 // Adiministration:
 if(isset($pub_rank) && isset($pub_name_id) && ($user_data["user_admin"]==1 || $user_data["user_coadmin"]==1)) {
 	
-	if(is_numeric($pub_rank) && $pub_rank>=-6 && $pub_rank<=-1 && is_numeric($pub_name_id)) {
+	if(is_numeric($pub_rank) && $pub_rank>=-16 && $pub_rank<=-1 && is_numeric($pub_name_id)) {
 		$request = "update ".TABLE_MAJ." set name_id = ".intval($pub_name_id);
         $request .= " where div_type = ".intval($pub_rank);
         $db->sql_query($request);
@@ -48,11 +48,21 @@ if($user_data["user_admin"]==1 || $user_data["user_coadmin"]==1) {
 	   <tr><th>
 	   <select name="rank">
                <option value="-1" selected>Joueurs Général</option>
-               <option value="-2" >Joueurs Flotte</option>
+               <option value="-2" >Joueurs Economique</option>
                <option value="-3" >Joueurs Recherche</option>
-               <option value="-4" >Alliances Général</option>
-			   <option value="-5" >Alliances Flotte</option>
-			   <option value="-6" >Alliances Recherche</option>
+               <option value="-4" >Joueurs Militaire</option>
+               <option value="-5" >Joueurs Mil. Construit</option>
+               <option value="-6" >Joueurs Mil. Perdu</option>
+               <option value="-7" >Joueurs Mil. Détruit</option>
+               <option value="-8" >Joueurs Mil. Honneur</option>
+               <option value="-9" >Alliances Général</option>
+			   <option value="-10" >Alliances Economique</option>
+			   <option value="-11" >Alliances Recherche</option>
+			   <option value="-12" >Alliances Militaire</option>
+			   <option value="-13" >Alliances Mil. Construit</option>
+			   <option value="-14" >Alliances Mil. Perdu</option>
+			   <option value="-15" >Alliances Mil. Détruit</option>
+			   <option value="-16" >Alliances Mil. Honneur</option>
        </select>
        </th><th>
        <select name="name_id">
@@ -78,14 +88,25 @@ if($user_data["user_admin"]==1 || $user_data["user_coadmin"]==1) {
 // fin d'administration
 
 list($player_points_name, $player_points_date, $player_points_nb_rank, $player_points_rank, $player_points_user) = rank_maj("player_points");
-list($player_fleet_name, $player_fleet_date, $player_fleet_nb_rank, $player_fleet_rank, $player_fleet_user) = rank_maj("player_fleet");
+list($player_economic_name, $player_economic_date, $player_economic_nb_rank, $player_economic_rank, $player_economic_user) = rank_maj("player_economic");
 list($player_research_name, $player_research_date, $player_research_nb_rank, $player_research_rank, $player_research_user) = rank_maj("player_research");
+list($player_military_name, $player_military_date, $player_military_nb_rank, $player_military_rank, $player_military_user) = rank_maj("player_military");
+list($player_military_built_name, $player_military_built_date, $player_military_built_nb_rank, $player_military_built_rank, $player_military_built_user) = rank_maj("player_military_built");
+list($player_military_loose_name, $player_military_loose_date, $player_military_loose_nb_rank, $player_military_loose_rank, $player_military_loose_user) = rank_maj("player_military_loose");
+list($player_military_destruct_name, $player_military_destruct_date, $player_military_destruct_nb_rank, $player_military_destruct_rank, $player_military_destruct_user) = rank_maj("player_military_destruct");
+list($player_military_honnor_name, $player_military_honnor_date, $player_military_honnor_nb_rank, $player_military_honnor_rank, $player_military_honnor_user) = rank_maj("player_military_honnor");
 
 list($ally_points_name, $ally_points_date, $ally_points_nb_rank, $ally_points_rank, $ally_points_user) = rank_maj("ally_points");
-list($ally_fleet_name, $ally_fleet_date, $ally_fleet_nb_rank, $ally_fleet_rank, $ally_fleet_user) = rank_maj("ally_fleet");
+list($ally_economic_name, $ally_economic_date, $ally_economic_nb_rank, $ally_economic_rank, $ally_economic_user) = rank_maj("ally_economic");
 list($ally_research_name, $ally_research_date, $ally_research_nb_rank, $ally_research_rank, $ally_research_user) = rank_maj("ally_research");
+list($ally_military_name, $ally_military_date, $ally_military_nb_rank, $ally_military_rank, $ally_military_user) = rank_maj("ally_military");
+list($ally_military_built_name, $ally_military_built_date, $ally_military_built_nb_rank, $ally_military_built_rank, $ally_military_built_user) = rank_maj("ally_military_built");
+list($ally_military_loose_name, $ally_military_loose_date, $ally_military_loose_nb_rank, $ally_military_loose_rank, $ally_military_loose_user) = rank_maj("ally_military_loose");
+list($ally_military_destruct_name, $ally_military_destruct_date, $ally_military_destruct_nb_rank, $ally_military_destruct_rank, $ally_military_destruct_user) = rank_maj("ally_military_destruct");
+list($ally_military_honnor_name, $ally_military_honnor_date, $ally_military_honnor_nb_rank, $ally_military_honnor_rank, $ally_military_honnor_user) = rank_maj("ally_military_honnor");
 
-$rank_max_number = max(count($player_points_rank), count($player_fleet_rank), count($player_research_rank), count($ally_points_rank), count($ally_fleet_rank), count($ally_research_rank));
+
+$rank_max_number = max(count($player_points_rank), count($player_economic_name), count($player_research_name), count($player_military_name), count($player_military_built_name), count($player_military_loose_name), count($player_military_destruct_name), count($player_military_honnor_name), count($ally_points_name), count($ally_economic_name), count($ally_research_name), count($ally_military_name), count($ally_military_built_name), count($ally_military_loose_name), count($ally_military_destruct_name), count($ally_military_honnor_name));
 
 ?>
 
@@ -102,14 +123,27 @@ $rank_max_number = max(count($player_points_rank), count($player_fleet_rank), co
 
 for($i=0;$i<$rank_max_number;$i++)
 {
+
 	echo '<td class="c" width="25">'.($i*100+1).' - '.($i*100+100).'</td>';
 }
 
 add_rank($player_points_name, $player_points_date, $player_points_nb_rank, $player_points_rank, $player_points_user, "player", $rank_max_number);
-add_rank($player_fleet_name, $player_fleet_date, $player_fleet_nb_rank, $player_fleet_rank, $player_fleet_user, "player", $rank_max_number);
+add_rank($player_economic_name, $player_economic_date, $player_economic_nb_rank, $player_economic_rank, $player_economic_user, "player", $rank_max_number);
 add_rank($player_research_name, $player_research_date, $player_research_nb_rank, $player_research_rank, $player_research_user, "player", $rank_max_number);
+add_rank($player_military_name, $player_military_date, $player_military_nb_rank, $player_military_rank, $player_military_user, "player", $rank_max_number);
+add_rank($player_military_loose_name, $player_military_loose_date, $player_military_loose_nb_rank, $player_military_loose_rank, $player_military_loose_user, "player", $rank_max_number);
+add_rank($player_military_loose_name, $player_military_loose_date, $player_military_loose_nb_rank, $player_military_loose_rank, $player_military_loose_user, "player", $rank_max_number);
+add_rank($player_military_destruct_name, $player_military_destruct_date, $player_military_destruct_nb_rank, $player_military_destruct_rank, $player_military_destruct_user, "player", $rank_max_number);
+add_rank($player_military_honnor_name, $player_military_honnor_date, $player_military_honnor_nb_rank, $player_military_honnor_rank, $player_military_honnor_user, "player", $rank_max_number);
 add_rank($ally_points_name, $ally_points_date, $ally_points_nb_rank, $ally_points_rank, $ally_points_user, "ally", $rank_max_number);
-add_rank($ally_fleet_name, $ally_fleet_date, $ally_fleet_nb_rank, $ally_fleet_rank, $ally_fleet_user, "ally", $rank_max_number);
+add_rank($ally_economic_name, $ally_economic_date, $ally_economic_nb_rank, $ally_economic_rank, $ally_economic_user, "ally", $rank_max_number);
 add_rank($ally_research_name, $ally_research_date, $ally_research_nb_rank, $ally_research_rank, $ally_research_user, "ally", $rank_max_number);
+add_rank($ally_military_name, $ally_military_date, $ally_military_nb_rank, $ally_military_rank, $ally_military_user, "ally", $rank_max_number);
+add_rank($ally_military_loose_name, $ally_military_loose_date, $ally_military_loose_nb_rank, $ally_military_loose_rank, $ally_military_loose_user, "ally", $rank_max_number);
+add_rank($ally_military_loose_name, $ally_military_loose_date, $ally_military_loose_nb_rank, $ally_military_loose_rank, $ally_military_loose_user, "ally", $rank_max_number);
+add_rank($ally_military_destruct_name, $ally_military_destruct_date, $ally_military_destruct_nb_rank, $ally_military_destruct_rank, $ally_military_destruct_user, "ally", $rank_max_number);
+add_rank($ally_military_honnor_name, $ally_military_honnor_date, $ally_military_honnor_nb_rank, $ally_military_honnor_rank, $ally_military_honnor_user, "ally", $rank_max_number);
+
+
 ?>
 </table>

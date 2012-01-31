@@ -10,7 +10,7 @@ if (!defined('IN_SPYOGAME')) {
    die("Hacking attempt");
 }
 
-require_once('./mod/MAJ/functions.php');
+require_once('./mod/maj/functions.php');
 
 $query = "SELECT `active` FROM `".TABLE_MOD."` WHERE `action`='mod_maj' AND `active`='1' LIMIT 1";
 if (!$db->sql_numrows($db->sql_query($query))) die('Hacking attempt');
@@ -24,7 +24,6 @@ $result = $db->sql_query($query);
 list($mod_version) = $db->sql_fetch_row($result);
 
 require_once('views/page_header.php');
-
 // Coloration des joueur classés
 $couleur_deb = 'FF0000';
 $couleur_fin = '00FF00';
@@ -183,20 +182,20 @@ function tohex($k) {
 <?php
 	switch($pub_subaction) {
 		case 'galaxy':
-			include('./mod/MAJ/galaxy_maj.php');
+			include('./mod/maj/galaxy_maj.php');
 		break;
 		case 'rank':
-			include('./mod/MAJ/rank_maj.php');
+			include('./mod/maj/rank_maj.php');
 		break;
 		case 'obs':
-			include('./mod/MAJ/system_not_updated.php');
+			include('./mod/maj/system_not_updated.php');
 		break;
 		case 'admin':
 			if($user_data['user_admin']==1 || $user_data['user_coadmin']==1) 
-				include('./mod/MAJ/maj_admin.php');
+				include('./mod/maj/maj_admin.php');
 		break;
 		default:
-			include('./mod/MAJ/galaxy_maj.php');
+			include('./mod/maj/galaxy_maj.php');
 	}
 ?>
 	</td>
@@ -204,5 +203,6 @@ function tohex($k) {
 </table>
 <?php
 echo '<center><p><b>MOD MAJ v'.$mod_version.' par <font color="lime">ben.12</font></b></p></center>';
+echo '<center><p><b>Mise à jour par <font color="lime">Shad</font></b></p></center>';
 require_once('views/page_tail.php');
 ?>
