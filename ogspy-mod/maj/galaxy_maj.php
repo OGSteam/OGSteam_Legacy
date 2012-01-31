@@ -30,7 +30,7 @@ if(((isset($pub_jours) && isset($pub_nbpg)) || (isset($pub_galaxy) && isset($pub
 	
 	if(isset($pub_jours) && is_numeric($pub_jours) && $pub_jours != $server_config["maj_step_jrs"]) {
 		$request = "update ".TABLE_CONFIG." set config_value = '".$pub_jours."'";
-		$request .= " where config_name = 'step_jrs'";
+		$request .= " where config_name = 'maj_step_jrs'";
 		$db->sql_query($request);
 	}
 	elseif(isset($pub_galaxy) && is_numeric($pub_galaxy) && $pub_galaxy>=1 && $pub_galaxy<=$num_of_galaxies && isset($pub_trache_system) && is_numeric($pub_trache_system) && $pub_trache_system>=0 && $pub_trache_system<=$server_config["step_maj"] && isset($pub_name_id) && is_numeric($pub_name_id)) {
@@ -250,7 +250,7 @@ echo "</tr>\n";
 ?>
 <tr>
 	<td colspan="19">
-		<b>Nombre total de planètes mises à jour ces <?php echo $server_config["step_jrs"]; ?> derniers jours: </b><font color="Lime"><b><?php echo formate_number($nb_planets); ?></b></font>/<?php echo formate_number($nbr_total_planet);?> (<?php echo round(($nb_planets/$nbr_total_planet)*100,1); ?>%)
+		<b>Nombre total de planètes mises à jour ces <?php echo $server_config["maj_step_jrs"]; ?> derniers jours: </b><font color="Lime"><b><?php echo formate_number($nb_planets); ?></b></font>/<?php echo formate_number($nbr_total_planet);?> (<?php echo round(($nb_planets/$nbr_total_planet)*100,1); ?>%)
 	</td>
 </tr>
 </table>
