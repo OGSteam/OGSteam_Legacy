@@ -68,6 +68,7 @@ XnewOgame.Xpaths = {
 			'livraison_me': '//div[@class="note"]'
 		},
 		spy : {
+			playername : '//table[@class="material spy"]//span/text()',
 			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
 			moon : '//a[@class="buttonSave"]'
 		}

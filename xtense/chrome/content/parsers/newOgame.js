@@ -1125,7 +1125,8 @@ var XnewOgame = {
 		var moonNode = Xpath.getSingleNode(this.doc, paths.moon);
 
 		isMoon = (moonNode.href).match(new RegExp(locales['moon'] + this.regexps.moon))[1] == '3' ? true : false;
-		var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
+		//var playerName = RE.match(new RegExp(this.regexps.spy.player))[1];
+		var playerName = Xpath.getSingleNode(this.doc, paths.playername).textContent.trim();
 		
 		var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.fleetdefbuildings);
 		if(types.snapshotLength > 0){
