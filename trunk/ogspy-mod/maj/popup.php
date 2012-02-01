@@ -77,7 +77,7 @@
 					$key_config1='popup_maj_step_rank_ally_alert';
 					$key_config2='popup_maj_num_rank_ally_alert';
 				} else {
-					$key_config1='popup_maj_step_rank_player_alert';
+					$key_config1='popup_maj_step_rank_playeralert';
 					$key_config2='popup_maj_num_rank_player_alert';
 				}
 				
