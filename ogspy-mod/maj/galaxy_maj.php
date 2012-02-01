@@ -26,12 +26,14 @@ if(((isset($pub_jours) && isset($pub_nbpg)) || (isset($pub_galaxy) && isset($pub
 		$request = "update ".TABLE_CONFIG." set config_value = '".$pub_nbpg."'";
 		$request .= " where config_name = 'step_maj'";
 		$db->sql_query($request);
+		generate_config_cache();
 	}
 	
 	if(isset($pub_jours) && is_numeric($pub_jours) && $pub_jours != $server_config["maj_step_jrs"]) {
 		$request = "update ".TABLE_CONFIG." set config_value = '".$pub_jours."'";
 		$request .= " where config_name = 'maj_step_jrs'";
 		$db->sql_query($request);
+		generate_config_cache();
 	}
 	elseif(isset($pub_galaxy) && is_numeric($pub_galaxy) && $pub_galaxy>=1 && $pub_galaxy<=$num_of_galaxies && isset($pub_trache_system) && is_numeric($pub_trache_system) && $pub_trache_system>=0 && $pub_trache_system<=$server_config["step_maj"] && isset($pub_name_id) && is_numeric($pub_name_id)) {
 		$request = "update ".TABLE_MAJ." set name_id = ".$pub_name_id;
@@ -42,6 +44,7 @@ if(((isset($pub_jours) && isset($pub_nbpg)) || (isset($pub_galaxy) && isset($pub
             $db->sql_query($request);
         }
 	}
+	
 	redirection("index.php?action=mod_maj&admin=".$admin);
 }
 

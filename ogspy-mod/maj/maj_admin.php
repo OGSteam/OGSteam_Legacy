@@ -54,7 +54,7 @@ if(isset($pub_active) && isset($pub_seuil) && isset($pub_step_rank_player) && is
 	$request = "update ".TABLE_CONFIG." set config_value = '".$pub_num_rank_ally."'";
 	$request .= " where config_name = 'popup_maj_num_rank_ally_alert'";
 	$db->sql_query($request);
-	
+	generate_config_cache();
 	redirection("index.php?action=mod_maj&subaction=admin");
 }
 

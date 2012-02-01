@@ -26,6 +26,7 @@ if(isset($pub_rank) && isset($pub_name_id) && ($user_data["user_admin"]==1 || $u
             $db->sql_query($request);
         }
 	}
+	generate_mod_cache();
 	redirection("index.php?action=mod_maj&subaction=rank&admin=".$admin);
 }
 

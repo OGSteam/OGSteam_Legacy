@@ -40,11 +40,6 @@ if(isset($server_config['popup_maj_step_rank_player_alert'])) {
 	$db->sql_query($query);
 }
 
-if(isset($server_config['popup_maj_step_rank_ally_alert'])) {
-	$query = "DELETE FROM ".TABLE_CONFIG." WHERE `config_name`='popup_maj_step_rank_ally_alert'";
-	$db->sql_query($query);
-}
-
 if(isset($server_config['popup_maj_num_rank_player_alert'])) {
 	$query = "DELETE FROM ".TABLE_CONFIG." WHERE `config_name`='popup_maj_num_rank_player_alert'";
 	$db->sql_query($query);
