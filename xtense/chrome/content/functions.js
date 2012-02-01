@@ -47,6 +47,10 @@ String.prototype.cleanPoints = function() {return parseInt(this.replace(/\.+/g, 
 String.prototype.cleanHTML = function () {
 	return this.replace(/<.+>/g, '');
 }
+String.prototype.getBetweenHTML = function () {
+	return this.replace(/(\<(\/?[^\>]+)\>)/g, '');
+}
+
 String.prototype.stripHTML = function () {
 	return this.replace(/<[^>]*>/g, '');
 }
