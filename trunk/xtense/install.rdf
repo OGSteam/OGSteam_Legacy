@@ -10,14 +10,14 @@
                    em:id="ogsteam@ogsteam.fr"
                    em:name="Xtense for Firefox"
                    em:type="2"
-                   em:version="2.4.0"
+                   em:version="2.4.1"
                    em:creator="OGSteam"
                    em:developer="Jedinight"
                    em:contributor="Machine, Shad, DarkNoon, SuperBox"
                    em:description="Barre d'outils permettant d'envoyer vos données automatiquement vers vos serveurs OGSpy"
                    em:optionsURL="chrome://xtense2/content/ui/prefs.xul"
                    em:updateURL="http://update.ogsteam.fr/xtense/latest.php" 
-                   em:updateInfoURL="http://svn.ogsteam.fr/tags/xtense-2.4.0/release-notes.xhtml"
+                   em:updateInfoURL="http://svn.ogsteam.fr/tags/xtense-2.4.1/release-notes.xhtml"
                    em:iconURL="chrome://xtense2/skin/icon.png" 
                    em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCwCieWwmu2QveR7TWSx+HYozz2fC7lhsYIrsJlAWLfHdBaOwFFSLlSNu2uHnqsbAlf4gdFlHHtfACLbrWqqar+I8bM50xLMh5tr/4Y5rANSVwANzJWWJUI0a+38n2aYRdgRltuP6SAdXiJU9jHmpW6jQ2++/cyYc86g2ffdxKvQIDAQAB">
     <em:targetApplication RDF:resource="rdf:#$pyIVb"/>
