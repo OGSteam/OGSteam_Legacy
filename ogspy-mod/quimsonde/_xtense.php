@@ -28,7 +28,7 @@ class QuiMSonde_Callback extends Callback {
 					$coords_to = $spy['to'];
 				}else{
 					$pos_from = $spy['from']; 
-					$pos_to = $spy['from']; 
+					$pos_to = $spy['to']; 
 					$coords_from = implode(':',$spy['from']);
 					$coords_to = implode(':',$spy['to']);
 				}
