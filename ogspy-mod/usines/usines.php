@@ -22,6 +22,7 @@ $lang_building["UdR"] = "Usine de robots";
 $lang_building["UdN"] = "Usine de nanites";
 $lang_building["CSp"] = "Chantier spatial";
 
+
 $start = 101; // pour planetes
 $nb_planete = find_nb_planete_user(); // nb de planetes dans bdd
 $user_empire = user_get_empire();
