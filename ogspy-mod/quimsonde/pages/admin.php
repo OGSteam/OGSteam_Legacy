@@ -49,7 +49,7 @@ global $db,$user_data,$config_list;
 			$name = "admin_".$a;
 			echo"\t<tr>\n\t\t<th>".$config['titre']." ".help('qms_'.$name)."</th>\n\t\t";
 			if($a=="time_start"||$a=="time_end"){ // Type DATE
-				echo"<th><input id='$name' name='$name' $param readonly value='".date("d/m/Y",$value)."' /></th>";
+				echo"<th><input id='$name' name='$name' $param value='".date("d/m/Y",$value)."' /></th>";
 			}else
 			if($a=="add_home"||$a=="imgmenu"||$a=="banniere"){ // Type YES/NO
 				echo"<th><select name='$name'>";

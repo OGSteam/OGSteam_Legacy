@@ -28,7 +28,7 @@ foreach($config_list as $config){
 		$value = get_qms_config($a,$b=$user_data['user_id']);
 		echo"\t<tr>\n\t\t<th>".$config['titre']." ".help('qms_user_'.$a)."</th>\n\t\t";
 		if($a=="time_start"||$a=="time_end"){ // Type DATE
-			echo"<th><input id='$name' name='$name' $param readonly value='".date($lang['qms_format_date'],$value)."' /></th>";
+			echo"<th><input id='$name' name='$name' $param value='".date($lang['qms_format_date'],$value)."' /></th>";
 		}else
 		if($a=="add_home"||$a=="imgmenu"||$a=="banniere"){ // Type YES/NO
 			echo"<th><select name='$name'>";

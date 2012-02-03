@@ -134,8 +134,13 @@ $lang['qms_format_date_regex'] = "#(.*)/(.*)/(.*)#";
 $lang['qms_classement_of'] = "Classement du %s";      //  (%s = date, cf. qms_classement_date)
 $lang['qms_classement_date'] = "%d %b %Y à %Hh";
 $lang['qms_classement_general'] = "Général";
-$lang['qms_classement_flotte'] = "Flotte";
-$lang['qms_classement_research'] = "Recherche";
+$lang['qms_classement_economique'] = "Economique";
+$lang['qms_classement_technologie'] = "Recherche";
+$lang['qms_classement_militaire'] = "Militaire";
+$lang['qms_classement_militaire_construit'] = "Militaire construit";
+$lang['qms_classement_militaire_perdu'] = "Militaire perdu";
+$lang['qms_classement_militaire_detruit'] = "Militaire détruit";
+$lang['qms_classement_honneur'] = "Honneur";
 $lang['qms_classement_membres'] = "%s membre(s)";
 $lang['qms_classement_voir_details'] = "Voir détail";
 $lang['qms_classement_voir_espionnage'] = "Voir Espionnage";
@@ -378,6 +383,15 @@ $lang['qms_insertion_ok'] = "<font color=\"00FF40\" size=\"2\">Enregistrement  O
 
 
 $lang['qms_changelog'] = Array (
+	"<fieldset><legend><font color='#0080FF'><b><u>Version 1.8 :</u></b> <i>(03/01/12)</i></font></legend>".
+	"<p align='left'><font size=\"2\">".
+	"- [fix] Bug de calcul des distances<br/>".
+	"- [fix] Lien pour les RE des joueurs qui nous sondent<br/>".
+	"- [fix] Permettre l'édition des dates dans la config<br/>".
+	"- [fix] Correction lien du changelog<br/>".
+	"- [add] Compatibilité avec les nouveaux classements<br/>".
+	"</font></p></fieldset>",
+	
 	"<fieldset><legend><font color='#0080FF'><b><u>Version 1.6a :</u></b> <i>(09/11/08)</i></font></legend>".
 	"<p align='left'><font size=\"2\">".
 	"- [fix] Divers petits bugs.<br/>".
@@ -578,7 +592,7 @@ $lang['qms_changelog'] = Array (
 $lang['qms_footer'] = 
 	"<div align=\"right\"><font size=\"2\">%1\$s v%2\$s by <a href='mailto:sylar.web@free.fr'>Sylar</a> <s>©</s> 2008</font><br/>\n".
 	"<font size=\"1\">Mod de Gestion des Espionnages subits<br />".
-	"<a href='index.php?action=%2\$s&page=changelog'>ChangeLog</a> / ".
+	"<a href='index.php?action=%1\$s&page=changelog'>ChangeLog</a> / ".
 	"<a href='http://board.ogsteam.fr/viewtopic.php?id=4816' target='_blank'>plus d'infos</a></font><br/></div>\n";
 
 ?>
