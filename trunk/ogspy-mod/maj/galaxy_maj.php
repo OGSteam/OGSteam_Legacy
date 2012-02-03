@@ -283,9 +283,20 @@ echo "</tr>\n";
 		$i++;
 	}
 
-	echo "<img alt='Graphic indisponible' title='Mise à jour par utilisateurs' src='index.php?action=graphic_pie&values=".$nb_planet.($autre>0?'_x_'.$autre:'')."&legend=".$user_name.($autre>0?'_x_autres':'')."&title=Proportion%20de%20mises%20à%20jour%20par%20utilisateurs'>";
+//	echo "<img alt='Graphic indisponible' title='Mise à jour par utilisateurs' src='index.php?action=graphic_pie&values=".$nb_planet.($autre>0?'_x_'.$autre:'')."&legend=".$user_name.($autre>0?'_x_autres':'')."&title=Proportion%20de%20mises%20à%20jour%20par%20utilisateurs'>";
 
+// affichage  
+$non = "";
+echo "<div id='non'>";
+$non = create_pie($nb_planet.($autre>0?'_x_'.$autre:''), $user_name.($autre>0?'_x_autres':''), "Proportion de mises à jour par utilisateurs", "non");
+echo "</div>";
+
+	
+	
+	
 ?>
 	</th>
 </tr>
 </table>
+
+<?php echo $non ; ?>
