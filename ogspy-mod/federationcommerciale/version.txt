@@ -1,2 +1,3 @@
 Federation Commerciale
-1.2
+1.3.0
+federation commerciale,Fédération commerciale,federation_commerciale,federationcommerciale,index.php,1,0
