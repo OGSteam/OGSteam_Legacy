@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.4.0.5
+// @version     2.4.0.6
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.0.5";
+var VERSION = "2.4.0.6";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
 var nomScript = 'Xtense';
