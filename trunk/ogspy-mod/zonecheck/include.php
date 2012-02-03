@@ -502,12 +502,12 @@ if ( $system_per_page == 0 )
 {
   $system_per_page = 50;
   $color_block = '#FFAAD4';
-  $color_moon = '#00D4FF';
-  $color_deco = '#DDBB66';
+  $color_moon = '#0066cc';
+  $color_deco = '#666600';
   $color_vac = '#7FFFFF';
   $color_inactif = '#FF7F00';
   $color_unstatus = '#FFAA2A';
-  $color_colo = '#FF0000';
+  $color_colo = '#990000';
   $color_date_less = '#FF2A00';
   $color_date_middle = '#FFAA2A';
   $color_date_more = '#FFFF2A';

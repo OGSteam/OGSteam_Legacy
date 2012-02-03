@@ -56,12 +56,12 @@ if ($is_ok == true)
 				$query = 'CREATE TABLE IF NOT EXISTS `' . TABLE_MOD_ZONECHECK_CFG . '` (
 				`nb_system` SMALLINT(3) DEFAULT 50,
 				`block` CHAR(7) DEFAULT "#FFAAD4",
-				`moon` CHAR(7) DEFAULT "#0066CC",
-				`deco` CHAR(7) DEFAULT "#DDBB66",
-				`vac` CHAR(7) DEFAULT "#99FFFF",
+				`moon` CHAR(7) DEFAULT "#0066cc",
+				`deco` CHAR(7) DEFAULT "#666600",
+				`vac` CHAR(7) DEFAULT "#7FFFFF",
 				`inactif` CHAR(7) DEFAULT "#FF7F00",
 				`unstatus` CHAR(7) DEFAULT "#FFAA2A",
-				`colo` CHAR(7) DEFAULT "#FF0000",
+				`colo` CHAR(7) DEFAULT "#990000",
 				`less` CHAR(7) DEFAULT "#FF2A00",
 				`middle` CHAR(7) DEFAULT "#FFAA2A",
 				`more` CHAR(7) DEFAULT "#FFFF2A",
@@ -69,7 +69,7 @@ if ($is_ok == true)
 				`affichage` VARCHAR(255)
 				);';
 				$db->sql_query ( $query );
-				$query = 'INSERT IGNORE INTO ' . TABLE_MOD_ZONECHECK_CFG . ' VALUES ( 50, "#FFAAD4", "#0066CC", "#DDBB66", "##99FFFF", "#FF7F00", "#FFAA2A", "#FF0000", "#FF2A00", "#FFAA2A", "#FFFF2A", "#FFFFFF", "\inactif|I|Lune|Colonisation")';
+				$query = 'INSERT IGNORE INTO ' . TABLE_MOD_ZONECHECK_CFG . ' VALUES ( 50, "#FFAAD4", "#0066cc", "#666600", "#7FFFFF", "#FF7F00", "#FFAA2A", "#990000", "#FF2A00", "#FFAA2A", "#FFFF2A", "#FFFFFF", "\inactif|I|Lune|Colonisation")';
 				$db->sql_query ( $query );
 			}
 		else
@@ -77,11 +77,11 @@ if ($is_ok == true)
 				$query = 'INSERT IGNORE INTO ' . TABLE_MOD_CFG . ' VALUES ( "ZoneCheck", "nb_system", "50" ), 
 				( "ZoneCheck", "block", "#FFAAD4" ), 
 				( "ZoneCheck", "moon", "#0066CC" ), 
-				( "ZoneCheck", "deco", "#DDBB66" ), 
-				( "ZoneCheck", "vac", "##99FFFF" ), 
+				( "ZoneCheck", "deco", "#666600" ), 
+				( "ZoneCheck", "vac", "##7FFFFF" ), 
 				( "ZoneCheck", "inactif", "#FF7F00" ), 
 				( "ZoneCheck", "unstatus", "#FFAA2A" ), 
-				( "ZoneCheck", "colo", "#FF0000" ), 
+				( "ZoneCheck", "colo", "#990000" ), 
 				( "ZoneCheck", "less", "#FF2A00" ), 
 				( "ZoneCheck", "middle", "#FFAA2A" ), 
 				( "ZoneCheck", "more", "#FFFF2A" ), 
