@@ -487,23 +487,12 @@ function analyse_globale($periodes,$nb_rapport,$JorA){								// Analyse des esp
 }
 function get_spies_string($position,$texte="<color=red>E</color>"){					// Renvoi le lien vers le popup qui affiche les espionnages fait sur cette planete
 	global $db;
-/*	$spy_count = 0;
-	$c_pos=get_coord($coordonnees);
-	$spy_string="";
-	if($c_pos[0]>0&&$c_pos[1]>0&&$c_pos[2]>0){
-		$request = "SELECT * FROM ".TABLE_SPY." WHERE active = '1' and spy_galaxy = ".$c_pos[0]." and spy_system = ".$c_pos[1]." and spy_row = ".$c_pos[2];
-		$result = $db->sql_query($request);
-		if ($db->sql_numrows($result) > 0) $spy_count = $db->sql_numrows($result);
-		if($spy_count>0){
-			$spy_string = " (<A HREF='#' onClick=\"window.open('index.php?action=show_reportspy&galaxy=".$c_pos[0]."&system=".$c_pos[1]."&row=".$c_pos[2]."','_blank','width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0');return(false)\">".$spy_count."E</A>)";
-		}
-	}*/
 	list($galaxy,$system,$row)=get_coord($position);
-	$info_system = galaxy_show(intval($galaxy),intval($system));
-	$population = $info_system["population"];
-	qms_debug("Position : ".$position);
-	qms_debug($population[$row]);
-	if ($population[$row]["report_spy"] > 0) $spy = " <A HREF=\'#\' onClick=\"window.open(\'index.php?action=show_reportspy&galaxy=$galaxy&system=$system&row=$row\',\'_blank\',\'width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0\');return(false)\"><i>$texte</i></A>";
+	$report_spy = 0;
+	$request = "select id_spy from ".TABLE_PARSEDSPY." where active = '1' and coordinates = '$galaxy:$system:$row'";
+	if ($db->sql_numrows($result_2) > 0)
+        $report_spy = $db->sql_numrows($result_2);
+	if ($report_spy > 0) $spy = " <A HREF=\'#\' onClick=\"window.open(\'index.php?action=show_reportspy&galaxy=$galaxy&system=$system&row=$row\',\'_blank\',\'width=640, height=480, toolbar=0, location=0, directories=0, status=0, scrollbars=1, resizable=1, copyhistory=0, menuBar=0\');return(false)\"><i>$texte</i></A>";
 	else $spy = "";
 	return $spy;
 }
