@@ -20,7 +20,7 @@ global $mod_name;
 	border: 1px solid #999;
 	color: #FFF;
 	padding: 3px 2px 2px 24px;
-	cursor: pointer;
+	cursor: hand;
 	background: url(mod/<?php echo $mod_name; ?>/images/img.gif) no-repeat 2px center;
 }
 </style>
