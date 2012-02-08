@@ -17,13 +17,15 @@ if (class_exists("Callback")) {
 
         public function getCallbacks()
         {
-            return array(array('function' => 'addsystem', 'type' => 'system'), array('function' =>
-                'addrankplayerpoints', 'type' => 'ranking_player_points'), array('function' =>
-                'addrankplayerflotte', 'type' => 'ranking_player_fleet'), array('function' =>
-                'addrankplayersearch', 'type' => 'ranking_player_research'), array('function' =>
-                'addrankallypoints', 'type' => 'ranking_ally_points'), array('function' =>
-                'addrankallyflotte', 'type' => 'ranking_ally_fleet'), array('function' =>
-                'addrankallysearch', 'type' => 'ranking_ally_research'));
+            return array(array('function' => 'addsystem', 'type' => 'system')
+//            , array('function' =>
+//                'addrankplayerpoints', 'type' => 'ranking_player_points'), array('function' =>
+//                'addrankplayerflotte', 'type' => 'ranking_player_fleet'), array('function' =>
+//                'addrankplayersearch', 'type' => 'ranking_player_research'), array('function' =>
+//                'addrankallypoints', 'type' => 'ranking_ally_points'), array('function' =>
+//                'addrankallyflotte', 'type' => 'ranking_ally_fleet'), array('function' =>
+//                'addrankallysearch', 'type' => 'ranking_ally_research')
+                );
         }
 
         //////////////////////////////////////  SYSTEME \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
