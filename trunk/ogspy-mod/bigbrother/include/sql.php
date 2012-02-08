@@ -340,8 +340,17 @@ class sql
             return $retour;
 
         } else { // le cche existe, on l inclus
-            include $path;
-            return $temp;
+            try {
+                // on tente d inclure le fichier
+                include $path;
+                return $temp;
+                 }
+            catch (exception $e) {
+                // si erreur on le genere a nouveau
+                log_("mod big brother", "get_all_cache_player");
+                $retour = self::create_cache_player();
+            return $retour;
+            }
         }
 
     }
@@ -387,8 +396,18 @@ class sql
             return $retour;
 
         } else { // le cche existe, on l inclus
+          try {
+                // on tente d inclure le fichier
             include $path;
             return $temp;
+                 }
+            catch (exception $e) {
+                // si erreur on le regenere
+                 log_("mod big brother", "get_all_cache_ally");
+             $retour = self::create_cache_ally();
+            return $retour;
+            }
+
         }
 
     }
