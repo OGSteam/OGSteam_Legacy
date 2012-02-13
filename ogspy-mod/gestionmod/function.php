@@ -1,217 +1,421 @@
 <?php
 /**
-* function.php Fichier avec les fonction
+* function.php Fichier avec les fonctions
 * @package Gestion MOD
 * @author Kal Nightmare
+* @Mise à jour par xaviernuma 2012
 * @link http://www.ogsteam.fr
 */
-if (!defined('IN_SPYOGAME')) {
+
+if (!defined('IN_SPYOGAME')) 
+{
 	die("Hacking attempt");
 }
-if (!defined('GESTION_MOD')) {
+
+if (!defined('GESTION_MOD')) 
+{
 	die("Hacking attempt");
 }
+
 /**
- * fait la petite infobulle par oXid_FoX
+ * Infobulle par oXid_FoX
+ * Optimisé par xaviernuma le 08/02/2012
+ * Fonction à revoir la librairie wz_tooltip.js n'est pas top...
  */
-function infobulle($txt_contenu, $titre = 'Aide', $largeur = '200') {
-	// remplace ' par \'
-	// puis remplace \\' par \'
-	// au cas où le guillemet simple aurait déjà été protégé avant l'appel à la fonction
-	$txt_contenu = str_replace('\\\\\'','\\\'',str_replace('\'','\\\'',$txt_contenu));
-	// remplace le guillemet double par son code HTML
-	$txt_contenu = str_replace('"','&quot;',$txt_contenu);
+function infobulle($s_contenu, $s_titre = 'Aide', $n_largeur = '200') 
+{
+	// Déclaration des variables
+	$s_html = '';
+	$s_contenu_infobulle = '';
+	
+	// On prépare le contenu de l'infobulle
+	$s_contenu_infobulle .= '<table>';
+	$s_contenu_infobulle .= 	'<tr>';
+	$s_contenu_infobulle .= 		'<td class="c" style="text-align:center;">';
+	$s_contenu_infobulle .= 			$s_titre;
+	$s_contenu_infobulle .= 		'</td>';
+	$s_contenu_infobulle .= 	'</tr>';
+	$s_contenu_infobulle .= 	'<tr>';
+	$s_contenu_infobulle .= 		'<th class="c" style="text-align:center;">';
+	$s_contenu_infobulle .= 			$s_contenu;
+	$s_contenu_infobulle .= 		'</th>';
+	$s_contenu_infobulle .= 	'</tr>';
+	$s_contenu_infobulle .= '</table>';
+	
+	// On transforme le contenu en htmlspecialchars pour la fonction javascript 
+	$s_contenu_infobulle = addslashes($s_contenu_infobulle);
+	$s_contenu_infobulle = htmlspecialchars($s_contenu_infobulle);
+	
+	// On vérifie que la largeur est bien un nombre
+	if(!is_numeric($n_largeur))
+	{
+		$n_largeur = 200;
+	}
 
-	// pareil avec $titre
-	$titre = str_replace('\\\\\'','\\\'',str_replace('\'','\\\'',$titre));
-	$titre = str_replace('"','&quot;',$titre);
-
-	// tant qu'on y est, vérification de $largeur
-	if (!is_numeric($largeur))
-	  $largeur = 200;
-
-	// affiche l'infobulle
-	echo '<img style="cursor: pointer;" src="images/help_2.png" onMouseOver="this.T_WIDTH=210;this.T_TEMP=0;return escape(\'<table width=&quot;',$largeur
-	,'&quot;><tr><td align=&quot;center&quot; class=&quot;c&quot;>',$titre,'</td></tr><tr><th align=&quot;center&quot;>',$txt_contenu,'</th></tr></table>\')">';
+	// Affichage de l'infobulle
+	$s_html .= '<img';
+	$s_html .= ' style="cursor: pointer;"';
+	$s_html .= ' src="images/help_2.png"';
+	$s_html .= ' onmouseover="javascript:this.T_WIDTH=210;this.T_TEMP=0;return escape(\''.$s_contenu_infobulle.'\');"';
+	// $s_html .= ' onmouseout="javascript:tt_Hide();"';
+	$s_html .= ' alt="'.$s_titre.'"';
+	$s_html .= ' />';
+	
+	return $s_html;
 }
 
-function nb_group() {
-global $db;
-$query = 'SELECT title FROM '.TABLE_MOD.' WHERE link = "group" ORDER BY action';
-$quet = $db->sql_query($query);
-while ($row = $db->sql_fetch_assoc($quet)) {
-		$num_group = explode('.',$row['title']);
+// Retourne le nombre de groupe créé par gestionmod
+function nb_group() 
+{
+	// Déclaration des variables
+	global $db;
+	
+	// On sélectionne les numéros de groupe dans la table root
+	$s_sql = 'SELECT `root` FROM `'.TABLE_MOD.'` WHERE `link` = "group" ORDER BY `root` desc;';
+	
+	// On récupère le dernier numéro créé
+	$r_sql = $db->sql_query($s_sql);
+	$ta_dernier_numero_groupe = $db->sql_fetch_assoc($r_sql);
+	
+	return $ta_dernier_numero_groupe['root'];
+}
+
+// Fonction qui liste les groupes créé par gestionmod
+function list_group() 
+{
+	// Déclaration des variables
+	global $db;
+	$i = 0;
+	$group = array();
+	
+	// On récupère le numéro du groupe et le lien de chaque groupe créé
+	$s_sql = 'SELECT `root`, `menu` FROM `'.TABLE_MOD.'` WHERE `link` = "group";';
+	$r_sql = $db->sql_query($s_sql);
+	
+	while($row = $db->sql_fetch_assoc($r_sql)) 
+	{
+		$espace = 'non';
+		
+		if(substr($row['menu'], 0, 9) == "</a><img ") 
+		{
+			$espace = 'oui';
 		}
-return $num_group[1] ;
+		
+		$group[$i] = array('Nom' => $row['menu'] , 'Num' => $row['root'] , 'Espace' => $espace);
+		$i++;	
+	}
+	
+	return $group;
 }
 
-function list_group() {
-global $db;
-$query = 'SELECT title, menu FROM '.TABLE_MOD.' WHERE link = "group" ';
-$quet = $db->sql_query($query);
-$i = 0;
-while ($row = $db->sql_fetch_assoc($quet)) {
-		if("</a><img "==substr($row['menu'], 0, 9)) $espace = 'oui';
-		else $espace = 'non'; 
-		$num_group = explode('.',$row['title']);
-		$group[$i] = array('Nom' => $row['menu'] , 'Num' => $num_group[1] , 'Espace' => $espace);
-		$i = $i + 1;	
-		}
-return $group ;
-}
-
-function new_group () {
-global $db,$dir;
-if (isset($_POST['new_group']) && isset($_POST['espace'])) {
-	if ($_POST['new_group'] == '') {$menu = '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"><a>';
-	} else {
-	if ($_POST['espace'] == 'oui' ) {
-	$menu = '<img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"></div></td></tr>';
-	$menu .='<tr><td><div align="center"><a href=""><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
-	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div>';
-	} else if ($_POST['espace'] == 'non' ) {
-	$menu ='<div align="center"><a href=""><u>'.$_POST['new_group'].'</u></a></div></td></tr>';
-	$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div>';
-	} }
-$num_group = nb_group();
-$num_new_group = $num_group + 1;
-$query = "INSERT INTO ".TABLE_MOD." (id, title, menu, action, root, link, version, active) VALUES ('','Group.".$num_new_group."','".$menu."','".$num_new_group."','".$num_new_group."','group','0','1')";
-$db->sql_query($query);
-}
-redirection("index.php?action=gestion&subaction=group");
-}
-
-function group () {
-global $db,$dir;
-if (isset($_POST['ordre']) && isset($_POST['num_group']) && isset($_POST['nom_group']) && isset($_POST['espace'])) {
-	if ($_POST['nom_group'] != '') {
-	switch ($_POST['ordre']) {
-	    case "Renommer Groupe" :
-		if ($_POST['espace'] == 'oui' ) {
-		$menu = '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"></div></td></tr>';
-		$menu .='<tr><td><div align="center"><a href=\"\"><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
-		$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
-		} else {
-		$menu .='</a><div align="center"><a href=""><u>'.$_POST['nom_group'].'</u></a></div></td></tr>';
-		$menu .='<tr><td><img src="mod/'.$dir.'/image.gif" width="110" height="5"><div><a>';
+// Transforme un nom en nom de menu par xaviernuma
+function f_traitement_nom_groupe($s_nom, $s_espace)
+{
+	// Déclaration des variables
+	$menu = '';
+	
+	if($s_nom != '') 
+	{
+		// Si on affiche un espace
+		if ($s_espace == 'oui' ) 
+		{
+			$menu .= '</a><img src="skin/OGSpy_skin/gfx/user-menu.jpg" style="width:140px;height:19px;position:relative;right:9px;" />';	
+			$menu .= '<br><center><b>'.$s_nom.'</b></center><a>';	
 		} 
-		$query = "UPDATE ".TABLE_MOD." SET menu='".$menu."' WHERE title = 'Group.".$_POST['num_group']."' ";
-		$result = $db->sql_query($query);
-		break;
+		else 
+		{
+			$menu .= '</a><div style="';
+			$menu .= 'background:#000;';
+			$menu .= 'bottom:9px;';
+			$menu .= 'position:relative;';
+			$menu .= '">';	
+			$menu .= '<center><b>'.$s_nom.'</b></center></div><a>';	
+		}
 		
-		case "Supprimer Groupe" :
-		$query = "DELETE FROM ".TABLE_MOD." WHERE title = 'Group.".$_POST['num_group']."' ";
-		$result = $db->sql_query($query);
-		break;
-	}
-	}
-}
-redirection("index.php?action=gestion&subaction=group");
-}	
-		
-function list_all () {
-global $db,$dir;
-	$query = "SELECT menu, root, title, version, link, id, active FROM ".TABLE_MOD." ORDER BY position";
-$result = $db->sql_query($query);
-	$i=1;
-	while ($mod = $db->sql_fetch_assoc($result)) {
-		if ($mod['link'] == 'group' ) $type = 1;
-		else $type = 0;
-		if ($mod['menu'] == '</a><img src="skin/OGSpy_skin//gfx/user-menu.jpg" width="110" height="19"><a>') $type = 2;
-		$list_mod[$i] = array('menu' => $mod['menu'] , 'position' => $i , 'type' => $type , 'id' => $mod['id'] , 'title' => $mod['title'] , 'version' => $mod['version'], 'active' => $mod['active']);
-		$query2 = "UPDATE ".TABLE_MOD." SET position='".$i."' WHERE id = '".$mod["id"]."' ";
-		$result2 = $db->sql_query($query2);
-		$i = $i + 1;	
-		}
-return $list_mod;
-}
-
-function name_group ($menu) {
-$arr = array();
-if(preg_match("#^.*?<a href=\"\"><u>(.*?)<\/u><\/a>.*$#", $menu, $arr)) {
-     $text = $arr[1];
-}
-return $text;
-}	
-
-function mod () {
-global $db;
-if (isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']) && isset($_POST['place_limite'])) || (isset($_POST['menu'])) ) ) {
-	switch ($_POST['ordre']) {
-		case "Monter":
-		if ($_POST['position'] <> 1){
-			$place_voulue = $_POST['position']-1;
-			$query = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$place_voulue."'";
-			$result = $db->sql_query($query);
-			$val = $db->sql_fetch_assoc($result);
-			$query2 = "UPDATE ".TABLE_MOD." SET position='".$_POST['position']."' WHERE id = '".$val['id']."' ";
-			$result2 = $db->sql_query($query2);
-			$query3 = "UPDATE ".TABLE_MOD." SET position='".$place_voulue."' WHERE id = '".$_POST['id']."' ";
-			$result3 = $db->sql_query($query3);
-            generate_mod_cache();
-		}
-		break;
-		case "Descendre":
-		if ($_POST['position'] <> $_POST['place_limite']){
-			$place_voulue = $_POST['position']+1;
-			$query = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$place_voulue."'";
-			$result = $db->sql_query($query);
-			$val = $db->sql_fetch_assoc($result);
-			$query2 = "UPDATE ".TABLE_MOD." SET position = '".$_POST['position']."' WHERE id = '".$val['id']."' ";
-			$result2 = $db->sql_query($query2);
-			$query3 = "UPDATE ".TABLE_MOD." SET position = '".$place_voulue."' WHERE id = '".$_POST['id']."' ";
-			$result = $db->sql_query($query3);
-             generate_mod_cache();
-		}
-		break;
-		case "Deplacer":
-		if (isset($_POST['place_voulue'])) {
-			if (is_numeric($_POST['place_voulue'])) {
-				if ($_POST['place_voulue'] > $_POST['place_limite']) $_POST['place_voulue'] = $_POST['place_limite'];
-				if ($_POST['place_voulue'] < 1) $_POST['place_voulue'] = 1;
-				if ($_POST['place_voulue'] > $_POST['position']) {
-					$pos1 = $_POST['position'] + 1;
-					$pos2 = $_POST['place_voulue'];
-					while ($pos1 <= $pos2) {
-					mod_attrib_place($pos1,'haut');
-					$pos1 = $pos1+1;
-					}
-				}
-				if ($_POST['place_voulue'] < $_POST['position']) {
-					$pos1 = $_POST['position'] - 1;
-					$pos2 = $_POST['place_voulue'];
-					while ($pos1 >= $pos2) {
-					mod_attrib_place($pos1,'bas');
-					$pos1 = $pos1-1;
-					}
-				}
-			$query = "UPDATE ".TABLE_MOD." SET position = '".$_POST['place_voulue']."' WHERE id = '".$_POST['id']."' ";
-			$result = $db->sql_query($query);
-             generate_mod_cache();	
+		// On vérifie si le nom n'existe pas déjà
+		$ta_liste_groupes = list_group();
+		for($i = 0 ; $i < count($ta_liste_groupes) ; $i++)
+		{
+			if($ta_liste_groupes[$i]['Nom'] == $menu)
+			{
+				$menu = ''; // On met à null menu
 			}
 		}
-		break;	
-		case "Renommer":
-		if ($_POST['menu'] != '') {
-		$query = "UPDATE ".TABLE_MOD." SET menu='".$_POST['menu']."' WHERE id = '".$_POST['id']."' ";
-		$result = $db->sql_query($query);}
-         generate_mod_cache();
-		break;
+			
+		// Le champ dans la base est de 255 caractère, on regarde si on ne dépasse pas
+		if(strlen($menu) > 255)
+		{
+			$menu = '';
+		}
+	}
+	
+	return $menu;
+}
+
+// Insertion d'un nouveau groupe
+function new_group () 
+{
+	// Déclaration des variables
+	global $db, $dir;
+	$s_champs = '';
+	$menu = ''; // Attention, limité à 255 caractères...
+	$new_group = '';
+	
+	// On test si des données ont été envoyé
+	if(isset($_POST['new_group']) && isset($_POST['espace'])) 
+	{
+		$menu = f_traitement_nom_groupe($_POST['new_group'], $_POST['espace']);
+		
+		if(!empty($menu))
+		{
+			// On génère le nouvel identifiant unique du groupe
+			$num_new_group = nb_group();
+			$num_new_group++;
+			
+			// Préparation de la requête
+			$s_champs .= "INSERT INTO ";
+			$s_champs .= "`".TABLE_MOD."` SET ";
+			$s_champs .= "`id` = '', ";
+			$s_champs .= "`title` = '%s', ";
+			$s_champs .= "`menu` = '%s', ";
+			$s_champs .= "`action` = '%s', ";
+			$s_champs .= "`root` = '%s', ";
+			$s_champs .= "`link` = '%s', ";
+			$s_champs .= "`version` = '%s', ";
+			$s_champs .= "`active` = '%s' ";
+
+			$s_sql = sprintf($s_champs,
+					mysql_real_escape_string("Group.".$num_new_group),
+					mysql_real_escape_string($menu),
+					mysql_real_escape_string($num_new_group),
+					mysql_real_escape_string($num_new_group),
+					mysql_real_escape_string('group'),
+					mysql_real_escape_string(0),
+					mysql_real_escape_string(1)
+					);
+			
+			$db->sql_query($s_sql);
+			// On met les groupes dans l'ordre
+			list_all();
+		}
+	}
+	redirection("index.php?action=gestion&subaction=group");
+}
+
+function group () 
+{
+	// Déclaration des variables
+	global $db,$dir;
+	$s_champs = '';
+	
+	if (isset($_POST['ordre']) && isset($_POST['num_group']) && isset($_POST['nom_group']) && isset($_POST['espace'])) 
+	{
+		if ($_POST['num_group'] != '') 
+		{
+			switch ($_POST['ordre']) 
+			{
+				case "Renommer Groupe" :
+					$menu = f_traitement_nom_groupe($_POST['nom_group'], $_POST['espace']);
+		
+					if(!empty($menu))
+					{						
+						// Préparation de la requête
+						$s_champs .= "UPDATE ";
+						$s_champs .= "`".TABLE_MOD."` SET ";
+						$s_champs .= "`menu` = '%s' ";
+						$s_champs .= "WHERE ";
+						$s_champs .= "`title` = '%s';";
+
+						$s_sql = sprintf($s_champs,
+								mysql_real_escape_string($menu),
+								mysql_real_escape_string('Group.'.$_POST['num_group'])
+								);		
+						$db->sql_query($s_sql);
+					}
+					break;
+				
+				case "Supprimer Groupe" :
+					$s_sql = "DELETE FROM ".TABLE_MOD." WHERE title = 'Group.".$_POST['num_group']."' ";
+					$db->sql_query($s_sql);
+					// On met les groupes dans l'ordre
+					list_all();
+					break;
+			}
+		}
+	}
+	redirection("index.php?action=gestion&subaction=group");
+}	
+		
+function list_all() 
+{
+	// Déclaration des variables
+	global $db,$dir;
+	$i = 1;
+	
+	$s_sql = "SELECT * FROM ".TABLE_MOD." ORDER BY position";
+	$r_sql = $db->sql_query($s_sql);
+	
+	while($mod = $db->sql_fetch_assoc($r_sql)) 
+	{
+		$type = 0;
+		
+		if($mod['link'] == 'group') 
+		{
+			$type = 1;
+		}
+		
+		$list_mod[$i] = array('menu' => $mod['menu'] , 'position' => $i , 'type' => $type , 'id' => $mod['id'] , 'title' => $mod['title'] , 'version' => $mod['version'], 'active' => $mod['active'], 'admin_only' => $mod['admin_only']);
+		
+		$s_sql = "UPDATE ".TABLE_MOD." SET position='".$i."' WHERE id = '".$mod["id"]."' ";
+		$db->sql_query($s_sql);
+		
+		$i++;	
+	}
+	return $list_mod;
+}
+
+function name_group($menu) 
+{
+	// Déclaration des variables
+	$arr = array();
+	$text = '';
+	
+	// Ancien pattern pour ceux qui ont créé nom de groupe avant la mise à jour du mod
+	if(preg_match("#^.*?<a href=\"\"><u>(.*?)<\/u><\/a>.*$#", $menu, $arr)) 
+	{
+		$text = $arr[1];
+	}
+	elseif(preg_match("#<center><b>(.*?)</b></center>#", $menu, $arr)) 
+	{
+		 $text = $arr[1];
+	}
+	
+	return $text;
+}	
+
+function mod() 
+{
+	// Déclaration des variables
+	global $db;
+	
+	if(isset($_POST['ordre']) && isset($_POST['id']) && ( (isset($_POST['position']) && isset($_POST['place_limite'])) || (isset($_POST['menu'])) ) ) 
+	{
+		switch ($_POST['ordre']) 
+		{
+			case "Monter":
+				if ($_POST['position'] <> 1)
+				{
+					$place_voulue = $_POST['position'] - 1;
+					$s_sql = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$place_voulue."'";
+					$r_sql = $db->sql_query($s_sql);
+					$val = $db->sql_fetch_assoc($r_sql);
+					$query2 = "UPDATE ".TABLE_MOD." SET position='".$_POST['position']."' WHERE id = '".$val['id']."' ";
+					$result2 = $db->sql_query($query2);
+					$query3 = "UPDATE ".TABLE_MOD." SET position='".$place_voulue."' WHERE id = '".$_POST['id']."' ";
+					$result3 = $db->sql_query($query3);
+				}
+				break;
+			case "Descendre":
+				if ($_POST['position'] <> $_POST['place_limite'])
+				{
+					$place_voulue = $_POST['position'] + 1;
+					$s_sql = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$place_voulue."'";
+					$r_sql = $db->sql_query($s_sql);
+					$val = $db->sql_fetch_assoc($r_sql);
+					$query2 = "UPDATE ".TABLE_MOD." SET position = '".$_POST['position']."' WHERE id = '".$val['id']."' ";
+					$result2 = $db->sql_query($query2);
+					$query3 = "UPDATE ".TABLE_MOD." SET position = '".$place_voulue."' WHERE id = '".$_POST['id']."' ";
+					$r_sql = $db->sql_query($query3);
+				}
+				break;
+			case "Deplacer":
+				if (isset($_POST['place_voulue'])) 
+				{
+					if (is_numeric($_POST['place_voulue']))
+					{
+						if ($_POST['place_voulue'] > $_POST['place_limite']) 
+						{
+							$_POST['place_voulue'] = $_POST['place_limite'];
+						}
+						if ($_POST['place_voulue'] < 1) 
+						{
+							$_POST['place_voulue'] = 1;
+						}
+						if ($_POST['place_voulue'] > $_POST['position']) 
+						{
+							$pos1 = $_POST['position'] + 1;
+							$pos2 = $_POST['place_voulue'];
+							while ($pos1 <= $pos2) 
+							{
+								mod_attrib_place($pos1, 'haut');
+								echo $pos1++;
+							}
+						}
+						if ($_POST['place_voulue'] < $_POST['position']) 
+						{
+							$pos1 = $_POST['position'] - 1; // 1
+							$pos2 = $_POST['place_voulue']; //1
+							while ($pos1 >= $pos2) 
+							{
+								mod_attrib_place($pos1, 'bas');
+								$pos1--;
+							}
+						}
+						$s_sql = "UPDATE ".TABLE_MOD." SET position = '".$_POST['place_voulue']."' WHERE id = '".$_POST['id']."' ";
+						$r_sql = $db->sql_query($s_sql);	
+					}
+				}
+				break;	
+			case "Renommer":
+				if($_POST['menu'] != '') 
+				{
+					$s_champs = "UPDATE ";
+					$s_champs .= "`".TABLE_MOD."` SET ";
+					$s_champs .= "`menu` = '%s' ";
+					$s_champs .= "WHERE id = '%s' ";
+
+					$s_sql = sprintf($s_champs,
+							mysql_real_escape_string($_POST['menu']),
+							mysql_real_escape_string($_POST['id'])
+							);
+					// $s_sql = "UPDATE ".TABLE_MOD." SET menu='".$_POST['menu']."' WHERE id = '".$_POST['id']."';";
+					$r_sql = $db->sql_query($s_sql);
+				}
+			break;
+		}
+	}
+	
+	if(isset($_POST['page']))
+	{	
+		redirection("index.php?action=gestion&subaction=".$_POST['page']);
+	}
+	else 
+	{
+		redirection("index.php?action=gestion");
 	}
 }
-if (isset($_POST['page'])) redirection("index.php?action=gestion&subaction=".$_POST['page']);
-else redirection("index.php?action=gestion");
+
+function mod_attrib_place($position, $direction) 
+{
+	// Déclaration des variables
+	global $db;
+	
+	$s_sql = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$position."'";
+	$r_sql = $db->sql_query($s_sql);
+	$val = $db->sql_fetch_assoc($r_sql);
+	if($direction == 'bas' || $direction == 'haut') 
+	{
+		if ($direction == 'bas') 
+		{
+			$position++;
+		}
+		if ($direction == 'haut')
+		{
+			$position--;
+		}
+		$query2 = "UPDATE ".TABLE_MOD." SET position = '".$position."' WHERE id = '".$val['id']."' ";
+		$result2 = $db->sql_query($query2);
+	}
 }
-function mod_attrib_place ($position,$direction) {
-global $db;
-$query = "SELECT id FROM ".TABLE_MOD." WHERE position = '".$position."'";
-$result = $db->sql_query($query);
-$val = $db->sql_fetch_assoc($result);
-if ($direction='bas' || $direction='haut') {
-if ($direction='bas') $position = $position + 1;
-if ($direction='haut') $position = $position - 1;
-$query2 = "UPDATE ".TABLE_MOD." SET position = '".$position."' WHERE id = '".$val['id']."' ";
-$result2 = $db->sql_query($query2);}
- generate_mod_cache();
-}
+
 ?>
