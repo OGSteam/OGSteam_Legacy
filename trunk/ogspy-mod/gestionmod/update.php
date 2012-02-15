@@ -16,7 +16,7 @@ if (!defined('IN_SPYOGAME'))
 global $db;
 
 $mod_folder = "gestionmod";
-$mod_name = "gestionmod";
+$mod_name = "gestion";
 update_mod($mod_folder,$mod_name);
 
 ?>

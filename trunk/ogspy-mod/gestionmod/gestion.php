@@ -56,18 +56,18 @@ if (!isset($pub_subaction))
 	$pub_subaction = 'list';
 }
 
-$req = "SELECT * FROM `" . TABLE_MOD . "` WHERE `action` = 'modUpdate' and `active`= 0 ";
+$req = "SELECT * FROM `" . TABLE_MOD . "` WHERE `action` = 'autoupdate' and `active`= 1 ";
 $res = $db->sql_query($req);
 
 if ($db->sql_numrows($res) > 0) 
 {
-	$nb_colonnes = 4;
+	$nb_colonnes = 5;
 	$row = $db->sql_fetch_assoc($res);
 	$lien = 'mod/'.$row['root'].'/'.$row['link'];
 } 
 else 
 {
-	$nb_colonnes = 3;
+	$nb_colonnes = 4;
 }
 
 $n_taille_colonne = floor(100/$nb_colonnes);
@@ -108,7 +108,11 @@ else
 }
 $s_html .= '>Renommeur de MOD</a></td>';
 
-if 	($nb_colonnes == 4) 
+
+$s_html .= '<td class="c" style="width:'.$n_taille_colonne.'%;"><a href="index.php?action=administration&subaction=mod" style="color: lime;"';
+$s_html .= '>Administration des mods</a></td>';
+
+if 	($nb_colonnes == 5) 
 {
 	if ($pub_subaction != 'modUpdate') 
 	{
@@ -118,7 +122,7 @@ if 	($nb_colonnes == 4)
 	{
 		$s_html .= '<th style="width:'.$n_taille_colonne.'%;"><a';
 	}
-	$s_html .= '>modUpdate</a></td>';
+	$s_html .= '>AutoUpdate</a></td>';
 }
 
 $s_html .= '</tr>';
@@ -158,13 +162,16 @@ switch ($pub_subaction)
 	default:
 		require('mod/'.$dir.'/list.php');
 }
-    
-$s_html = '';
-$s_html .= '<div style="font-size: 10px;width: 400px;text-align:center;background-image:url(\'skin/OGSpy_skin/tableaux/th.png\');background-repeat:repeat;">Gestion MOD ('.$version.')';
-$s_html .= '<br>Développé par <a href="mailto:kalnightmare@free.fr">Kal Nightmare</a> 2006';
-$s_html .= '<br>Mise à jour par <a href="http://www.ogsteam.fr/">xaviernuma</a> 2012</div>';
 
-echo $s_html;
+if($pub_subaction <> 'modUpdate')
+{
+	$s_html = '';
+	$s_html .= '<div style="font-size: 10px;width: 400px;text-align:center;background-image:url(\'skin/OGSpy_skin/tableaux/th.png\');background-repeat:repeat;">Gestion MOD ('.$version.')';
+	$s_html .= '<br>Développé par <a href="mailto:kalnightmare@free.fr">Kal Nightmare</a> 2006';
+	$s_html .= '<br>Mise à jour par <a href="http://www.ogsteam.fr/">xaviernuma</a> 2012</div>';
+
+	echo $s_html;
+}
 
 require_once("views/page_tail.php");
 
