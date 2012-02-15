@@ -23,15 +23,7 @@ include(FOLDER_INCLUDE."/qms_sql.php");
 include(FOLDER_INCLUDE."/qms_main.php");
 include(FOLDER_INCLUDE."/qms_html.php");
 
-// Analyse du numéro de version
-$version=get_QMS_version();
-$file = file(FOLDER_QMS.'/version.txt'); 
-$vers = trim($file[1]);
-if($version!=$vers){
-	Echo $lang['qms_please_update'];
-	$pub_page = "update";
-}
-	else if (!isset($pub_page)) $pub_page = "accueil";
+if (!isset($pub_page)) $pub_page = "accueil";
 
 // Quel header&tail ogspy? rien si graph, page_header_2.php & page_tail_2 si popup
 $popup = ($pub_page=="popup"?"_2":"");
