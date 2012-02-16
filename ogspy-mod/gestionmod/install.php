@@ -1,11 +1,11 @@
 <?php
 
 /**
-* install.php Fichier de mise à jour du MOD Gestion MOD
+* install.php Fichier d'installation du MOD Gestion MOD
 * @package Gestion MOD
 * @author Kal Nightmare
-* @Mise à jour par xaviernuma 2012
-* @link http://www.ogsteam.fr
+* @update xaviernuma - 2012
+* @link http://www.ogsteam.fr/
 */
 
 if (!defined('IN_SPYOGAME')) 
@@ -14,17 +14,17 @@ if (!defined('IN_SPYOGAME'))
 }
 
 global $db;
-$is_ok = false;
 $mod_folder = "gestionmod";
-$is_ok = install_mod ($mod_folder);
+
+$is_ok = install_mod($mod_folder);
 
 if ($is_ok == true)
 {
-	// Si besoin de creer des tables, à faire ici
+	// Si besoin de créer des tables.
 }
 else
 {
-	echo  '<script type="text/javascript">>alert(\'Désolé, un problème a eu lieu pendant l\\\'installation, corrigez les problèmes survenue et réessayez.\');</script>';
+	echo  '<script type="text/javascript">alert(\'Désolé, un problème à eu lieu pendant l\\\'installation, corrigez les problèmes survenus et réessayez.\');</script>';
 }
 	
 ?>
