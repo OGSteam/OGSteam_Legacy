@@ -355,6 +355,11 @@ var XnewOgame = {
 		var temperature_max = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
 
+		var target = this.doc.getElementById('contentWrapper');
+		target.win = this.win;
+		//target.addEventListener("DOMSubtreeModified", this.getHostiles, false);
+		target.addEventListener("DOMNodeInserted", this.getHostiles, false);
+		
 		var planetData = this.getPlanetData();
 		var Request = this.newRequest();
 		Request.set(
@@ -370,7 +375,21 @@ var XnewOgame = {
 		
 		return Request;
 	},
-
+	getHostiles : function (event) {
+		//if (this.lastAction != 'events'){
+			//Xconsole("In events !");
+			var doc = event.target.ownerDocument;
+			var hostiles = Xpath.getOrderedSnapshotNodes(doc,"//tr[@class='allianceAttack hostile' or @class='eventFleet hostile']",null);
+			//Xconsole(hostiles.snapshotLength+" mission(s) hostiles detectee(s)");
+		 	for(var i=0;i<hostiles.snapshotLength;i++){
+		 		var hostile = hostiles.snapshotItem(i);
+				Xconsole("Attaquant : "+Xpath.getStringValue(doc,"//td[@class='sendMail']/a/@title"),hostile);
+				Xconsole("Arrivée à : "+Xpath.getStringValue(doc,"//td[@class='arrivalTime']/text()"),hostile);
+				
+				//this.lastAction='events';
+			}
+		//}
+	},
     parseStation : function () {		
 		var paths = XnewOgame.Xpaths.levels;
 		//this.Tab.setStatus(Xl('installations detected'), XLOG_NORMAL, {url: this.url});
