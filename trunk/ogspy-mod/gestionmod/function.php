@@ -90,9 +90,6 @@ function f_traitement_nom_groupe($s_nom, $b_nouveau_groupe, $n_admin = 0)
 			}
 		}
 		
-		// On remplace le caractère d'échappement de la futur requête sql
-		$s_menu = str_replace("'", "&#039;", $s_menu);
-		
 		// Le champ dans la base est de 255 caractère, on regarde si on ne dépasse pas
 		if(strlen($s_menu) > 255)
 		{
@@ -285,7 +282,18 @@ function f_gerer_mod()
 				}
 				break;	
 			case "Renommer": // On renomme un module
-				if($_POST['menu'] != '') 
+				$b_existant = false;
+				
+				$ta_liste_des_mods = f_lister_la_table_mod();
+				for($i = 0 ; $i < count($ta_liste_des_mods) ; $i++)
+				{
+					if($ta_liste_des_mods[$i]['menu'] == $_POST['menu'])
+					{
+						$b_existant = true;
+					}
+				}
+				
+				if(!$b_existant)
 				{
 					$s_champs = "UPDATE ";
 					$s_champs .= "`".TABLE_MOD."` SET ";

@@ -81,7 +81,7 @@ if($n_groupes > 0) // Si il n'y a pas de groupe de créé, on n'affiche pas le tab
 	for ($i = 0 ; $i < count($ta_liste_groupes) ; $i++) 
 	{
 		$s_html .= 	'<tr>';
-		$s_html .= 		'<th><input type="text" name="nom_group'.$i.'" id="nom_group'.$i.'" style="width:500px;" maxlength="250" value="'.f_nom_du_groupe($ta_liste_groupes[$i]['Nom']).'" /></th>';
+		$s_html .= 		'<th><input type="text" name="nom_group'.$i.'" id="nom_group'.$i.'" style="width:500px;" maxlength="250" value="'.htmlentities(f_nom_du_groupe($ta_liste_groupes[$i]['Nom'])).'" /></th>';
 		
 		if ($ta_liste_groupes[$i]['admin'] == '1' ) 
 		{
