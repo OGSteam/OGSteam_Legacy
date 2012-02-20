@@ -63,6 +63,10 @@ function f_traitement_nom_groupe($s_nom, $b_nouveau_groupe, $n_admin = 0)
 	
 	if($s_nom <> '') 
 	{
+		if(get_magic_quotes_gpc() == 1)
+		{
+			$s_nom = stripslashes($s_nom);
+		}
 		$s_menu .= '</a><div style="';
 		$s_menu .= 'background:#000;';
 		$s_menu .= 'bottom:9px;';
@@ -186,7 +190,7 @@ function f_gerer_un_groupe()
 								mysql_real_escape_string($s_menu),
 								mysql_real_escape_string($_POST['admin']), // 0 Groupe normal, 1 Groupe admin
 								mysql_real_escape_string('Group.'.$_POST['num_group'])
-								);		
+								);
 						$db->sql_query($s_sql);
 					}
 					break;
@@ -295,6 +299,10 @@ function f_gerer_mod()
 				
 				if(!$b_existant)
 				{
+					if(get_magic_quotes_gpc () == 1)
+					{
+						$_POST['menu'] = stripslashes($_POST['menu']);
+					}
 					$s_champs = "UPDATE ";
 					$s_champs .= "`".TABLE_MOD."` SET ";
 					$s_champs .= "`menu` = '%s' ";
