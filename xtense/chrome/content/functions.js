@@ -26,6 +26,9 @@ String.prototype.trim = function () {
 String.prototype.trimAll = function () {
 	return this.replace(/\s*/g, '');
 }
+String.prototype.replaceAll = function (replace, with_this) {
+  return this.replace(new RegExp(replace, 'g'),with_this);
+}
 String.prototype.trimInt = function() {
 	string = this.replace(/([^-\d])/g,'');
 	return string ? parseInt(string) : 0;
@@ -464,6 +467,22 @@ function Xreload_firefox() {
  * Optionnels: scope, args, all
  */
 
+
+function XajaxCompo(url) {
+     var xhr_object = new XMLHttpRequest();
+     
+     xhr_object.open("GET", url , false);
+     xhr_object.send(null);
+     
+     if(xhr_object.readyState == 4){
+     	//var response = clean(xhr_object.responseXML.documentElement);
+     	return(xhr_object.responseText);
+     } else {
+     	return (false);
+     }
+}
+
+//Requete Ajax
 function Xajax(obj) {
 	this.xhr = new XMLHttpRequest();
 	this.callback = obj.callback || function(){};

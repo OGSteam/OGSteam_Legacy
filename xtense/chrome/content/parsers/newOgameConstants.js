@@ -139,6 +139,15 @@ XnewOgame.Xpaths = {
 		subject : 'id("wrapper")/form/div[1]/table/tbody/tr[3]/td/input',
 		date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
 		content : 'id("wrapper")/form/div[2]/div/textarea'
+	},
+	eventList : {
+		attack: {
+			event : '//tr[@class="eventFleet hostile"]',
+			arrivalTime : 'td[@class="arrivalTime"]/text()'
+		},
+		group: {
+			form : '//form[1]'
+		}
 	}
 }
 
