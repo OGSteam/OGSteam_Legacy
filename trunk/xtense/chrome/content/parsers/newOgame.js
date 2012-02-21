@@ -282,6 +282,7 @@ var XnewOgame = {
 				else if (code == 'grant') 				message = Xl('error grant start') + Xl('error grant '+ data.access);
 				else 									message = Xl('unknow response', code, Response.content);
 			} else {
+				type = XLOG_SUCCESS;
 				if (code == 'home updated') 			message = Xl('success home updated', Xl('page '+data.page));
 				else if (code == 'system')				message = Xl('success system', data.galaxy, data.system);
 				else if (code == 'ranking') 			message = Xl('success ranking', Xl('ranking '+data.type1), Xl('ranking '+data.type2), data.offset, data.offset+99);
@@ -355,6 +356,8 @@ var XnewOgame = {
 		var temperature_max = this.win.textContent[3].match(/\d+[^\d-]*(-?\d+)[^\d]/)[1];
 		var temperature_min = this.win.textContent[3].match(/(-?\d+)/)[1]; //TODO trouver l'expression reguliere pour la temperature min
 
+		// Récupération de flottes en attaque
+		this.lastAction = "";
 		var target = this.doc.getElementById('contentWrapper');
 		target.win = this.win;
 		//target.addEventListener("DOMSubtreeModified", this.getHostiles, false);
@@ -375,21 +378,85 @@ var XnewOgame = {
 		
 		return Request;
 	},
+	
 	getHostiles : function (event) {
-		//if (this.lastAction != 'events'){
-			//Xconsole("In events !");
+		//Xconsole("In events ! this.lastAction="+this.lastAction);
+		if(this.lastAction != 'events:1'){			
 			var doc = event.target.ownerDocument;
-			var hostiles = Xpath.getOrderedSnapshotNodes(doc,"//tr[@class='allianceAttack hostile' or @class='eventFleet hostile']",null);
-			//Xconsole(hostiles.snapshotLength+" mission(s) hostiles detectee(s)");
+			var paths = XnewOgame.Xpaths.eventList;
+			
+			// Attaques
+			var hostiles = Xpath.getOrderedSnapshotNodes(doc,paths.attack.event);			
 		 	for(var i=0;i<hostiles.snapshotLength;i++){
 		 		var hostile = hostiles.snapshotItem(i);
-				Xconsole("Attaquant : "+Xpath.getStringValue(doc,"//td[@class='sendMail']/a/@title"),hostile);
-				Xconsole("Arrivée à : "+Xpath.getStringValue(doc,"//td[@class='arrivalTime']/text()"),hostile);
+		 		
+		 		var arrivalTime = Xpath.getStringValue(doc,paths.attack.arrivalTime,hostile).trim();
+		 		
+		 		var originAttackName = Xpath.getStringValue(doc,"td[@class='originFleet']/text()",hostile).trim();
+		 		var originAttackCoords = Xpath.getStringValue(doc,"td[@class='coordsOrigin']/a/text()",hostile).trim();
+		 		var attacker = Xpath.getStringValue(doc,"td[@class='sendMail']/a/@title",hostile);
+		 		var attackerTab = attacker.split(" ");
+		 		attacker=attackerTab[attackerTab.length-1];
+		 		 		
+		 		var destName = Xpath.getStringValue(doc,"td[@class='destFleet']/text()",hostile).trim();
+		 		var destCoords = Xpath.getStringValue(doc,"td[@class='destCoords']/a/text()",hostile).trim();
+		 				 		
+		 		var urlCompo = Xpath.getStringValue(doc,"td[@class='icon_movement']/span/@href",hostile).trim();
+		 		var compo = XajaxCompo(urlCompo).trim().replaceAll("\r","").replaceAll("\n","").replaceAll("\t","").replaceAll(" {2,}","").replaceAll("> <","><");
+		 		var tabCompo = compo.split("</tr>");
+		 		
+		 		var compoTotale = "";
+		 		for(var j=1;j<tabCompo.length;j++){
+		 			var comp=tabCompo[j].getBetweenHTML();
+		 			compoTotale+=(j<(tabCompo.length-2))?comp+",":comp;
+		 		}
+				Xconsole(attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
+			}			
+			
+			// Attaques groupées
+			var idGroupees = Xpath.getOrderedSnapshotNodes(doc,"//tr[@class='allianceAttack hostile']/td[a/@class='toggleInfos infosClosed']/a/@rel");
+			// Parcours de ids
+			for(var i=0;i<idGroupees.snapshotLength;i++){
+				var idGr = idGroupees.snapshotItem(i).nodeValue;
+				// Recuperation des vagues de l'attaque groupée 
+				var vagues = Xpath.getOrderedSnapshotNodes(doc,"//tr[starts-with(@class,'partnerInfo "+idGr+"')]");
 				
-				//this.lastAction='events';
+				// Parcours des vagues de l'AG
+				for(var f=0;f<vagues.snapshotLength;f++){
+					var vague = vagues.snapshotItem(f);
+					
+					var attack = Xpath.getSingleNode(doc,"//tr[@class='allianceAttack hostile' and td[a/@class='toggleInfos infosClosed']/a/@rel='"+idGr+"']");
+					var arrivalTime = Xpath.getStringValue(doc,"td[@class='arrivalTime']/text()",attack).trim();
+		 		
+			 		var originAttackName = Xpath.getStringValue(doc,"td[@class='originFleet']/text()",vague).trim();
+			 		var originAttackCoords = Xpath.getStringValue(doc,"td[@class='coordsOrigin']/a/text()",vague).trim();
+			 		var attacker = Xpath.getStringValue(doc,"td[@class='sendMail']/a/@title",vague);
+			 		var attackerTab = attacker.split(" ");
+			 		attacker=attackerTab[attackerTab.length-1];
+			 		 		
+			 		var destName = Xpath.getStringValue(doc,"td[@class='destFleet']/text()",vague).trim();
+			 		var destCoords = Xpath.getStringValue(doc,"td[@class='destCoords']/a/text()",vague).trim();
+			 				 		
+			 		var urlCompo = Xpath.getStringValue(doc,"td[@class='icon_movement']/span/@rel",vague).trim();
+			 		var compo = XajaxCompo(urlCompo).trim().replaceAll("\r","").replaceAll("\n","").replaceAll("\t","").replaceAll(" {2,}","").replaceAll("> <","><");
+			 		
+			 		var tabCompo = compo.split("</tr>");
+			 		var compoTotale = "";
+			 		for(var j=1;j<tabCompo.length;j++){
+			 			var comp=tabCompo[j].getBetweenHTML();
+			 			compoTotale+=(j<(tabCompo.length-2))?comp+",":comp;
+			 		}
+					Xconsole("Vague "+(1+f)+" : "+attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
+				}
+				
 			}
-		//}
+			if(hostiles.snapshotLength > 0 || idGroupees.snapshotLength > 0){
+				this.lastAction = "events:1";
+			}
+			
+		}
 	},
+	
     parseStation : function () {		
 		var paths = XnewOgame.Xpaths.levels;
 		//this.Tab.setStatus(Xl('installations detected'), XLOG_NORMAL, {url: this.url});
