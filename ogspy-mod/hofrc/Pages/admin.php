@@ -93,7 +93,7 @@ $skin= select_skin(0);
 
 // On récupère la configuration des couleurs par défaut
 $query_RCcolor = $db->sql_query("SELECT id,title, pt, gt, cle, clo, cr, vb, vc, rec, se, bmd, dst, edlm, tra, sat, lm, lleger, llourd, cg, ai, lp, pb, gb, ally, player_att, player_def,  techno, detruit, ressources_piller_min, ressources_piller_max, pertes_fleet_def, seuil_pertes, seuil_pillage, seuil_cdr, pertes_min_att, pertes_max_att, pertes_min_def, pertes_max_def, debris_min, debris_max, renta_min, renta_max FROM ".TABLE_HOFRC_SKIN." WHERE title='".$skin."'");
-list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color_VB, $color_VC, $color_REC, $color_SE, $color_BMD, $color_DST, $color_EDLM, $color_TRA, $color_SAT, $color_LM, $color_LLEGER, $color_LLOURD, $color_CG, $color_AI, $color_LP, $color_PB, $color_GB, $color_PLAYER_ATT, $color_PLAYER_DEF, $color_ALLY, $color_TECHNO, $color_DETRUIT, $color_RESSOURCES_PILLER_MIN, $color_RESSOURCES_PILLER_MAX, $color_PERTES_FLEET_DEF, $color_SEUIL_PERTES, $color_SEUIL_PILLAGE, $color_SEUIL_CDR,$color_PERTES_MIN_ATT, $color_PERTES_MAX_ATT, $color_PERTES_MIN_DEF, $color_PERTES_MAX_DEF, $color_DEBRIS_MIN, $color_DEBRIS_MAX, $color_RENTA_MIN, $color_RENTA_MAX) = $db->sql_fetch_row($query_RCcolor);
+list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color_VB, $color_VC, $color_REC, $color_SE, $color_BMD, $color_DST, $color_EDLM, $color_TRA, $color_SAT, $color_LM, $color_LLEGER, $color_LLOURD, $color_CG, $color_AI, $color_LP, $color_PB, $color_GB, $color_ALLY, $color_PLAYER_ATT, $color_PLAYER_DEF, $color_TECHNO, $color_DETRUIT, $color_RESSOURCES_PILLER_MIN, $color_RESSOURCES_PILLER_MAX, $color_PERTES_FLEET_DEF, $color_SEUIL_PERTES, $color_SEUIL_PILLAGE, $color_SEUIL_CDR,$color_PERTES_MIN_ATT, $color_PERTES_MAX_ATT, $color_PERTES_MIN_DEF, $color_PERTES_MAX_DEF, $color_DEBRIS_MIN, $color_DEBRIS_MAX, $color_RENTA_MIN, $color_RENTA_MAX) = $db->sql_fetch_row($query_RCcolor);
 
 // On récupère les configurations de l'univers
 			$query_config = "select * from " . TABLE_HOFRC_CONFIG;
@@ -446,19 +446,16 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 							Texte: Position Verticale: <input type="text" name="set_pos_verti_historique" id="set_pos_verti_historique" value="<?php if (!empty($pos_verti_historique)==TRUE) echo $pos_verti_historique; else echo 'Pos. vert. txt'; ?>" maxlength="20">
 							Angle: <input type="text" name="set_angle_historique" id="set_angle_historique" value="<?php if (!empty($angle_historique)==TRUE) echo $angle_historique; else echo '0'; ?>" maxlength="20">
 							<br />
-							Texte 1: Position horizontale: <input type="text" name="set_pos_horiz_historique_1" id="set_pos_horiz_historique_1" value="<?php if (!empty($pos_horiz_historique_1)==TRUE) echo $pos_horiz_historique_1; else echo 'Pos. Horiz. txt 1'; ?>" maxlength="20">
-							Couleur: <input type="text" name="set_color_txt_1_RGB" id="set_color_txt_1_RGB" value="<?php if (!empty($color_txt_1_RGB)==TRUE) echo $color_txt_1_RGB; else echo 'X,XX,XXX'; ?>" maxlength="20">
-							<br />
-							Texte 2: Position horizontale: <input type="text" name="set_pos_horiz_historique_2" id="set_pos_horiz_historique_2" value="<?php if (!empty($pos_horiz_historique_2)==TRUE) echo $pos_horiz_historique_2; else echo 'Pos. Horiz. txt 2'; ?>" maxlength="20">
+							Texte 1: Position horizontale: <input type="text" name="set_pos_horiz_historique_2" id="set_pos_horiz_historique_2" value="<?php if (!empty($pos_horiz_historique_2)==TRUE) echo $pos_horiz_historique_2; else echo 'Pos. Horiz. txt 2'; ?>" maxlength="20">
 							Couleur: <input type="text" name="set_color_txt_2_RGB" id="set_color_txt_2_RGB" value="<?php if (!empty($color_txt_2_RGB)==TRUE) echo $color_txt_2_RGB; else echo 'X,XX,XXX'; ?>" maxlength="20">
 							<br />
-							Texte 3: Position horizontale: <input type="text" name="set_pos_horiz_historique_3" id="set_pos_horiz_historique_3" value="<?php if (!empty($pos_horiz_historique_3)==TRUE) echo $pos_horiz_historique_3; else echo 'Pos. Horiz. txt 3'; ?>" maxlength="20">
+							Texte 2: Position horizontale: <input type="text" name="set_pos_horiz_historique_3" id="set_pos_horiz_historique_3" value="<?php if (!empty($pos_horiz_historique_3)==TRUE) echo $pos_horiz_historique_3; else echo 'Pos. Horiz. txt 3'; ?>" maxlength="20">
 							Couleur: <input type="text" name="set_color_txt_3_RGB" id="set_color_txt_3_RGB" value="<?php if (!empty($color_txt_3_RGB)==TRUE) echo $color_txt_3_RGB; else echo 'X,XX,XXX'; ?>" maxlength="20">
 							<br />
-							Texte 4: Position horizontale: <input type="text" name="set_pos_horiz_historique_4" id="set_pos_horiz_historique_4" value="<?php if (!empty($pos_horiz_historique_4)==TRUE) echo $pos_horiz_historique_4; else echo 'Pos. Horiz. txt 4'; ?>" maxlength="20">
+							Texte 3: Position horizontale: <input type="text" name="set_pos_horiz_historique_4" id="set_pos_horiz_historique_4" value="<?php if (!empty($pos_horiz_historique_4)==TRUE) echo $pos_horiz_historique_4; else echo 'Pos. Horiz. txt 4'; ?>" maxlength="20">
 							Couleur: <input type="text" name="set_color_txt_4_RGB" id="set_color_txt_4_RGB" value="<?php if (!empty($color_txt_4_RGB)==TRUE) echo $color_txt_4_RGB; else echo 'X,XX,XXX'; ?>" maxlength="20">
 							<br />
-							Texte 5: Position horizontale: <input type="text" name="set_pos_horiz_historique_5" id="set_pos_horiz_historique_5" value="<?php if (!empty($pos_horiz_historique_5)==TRUE) echo $pos_horiz_historique_5; else echo 'Pos. Horiz. txt 5'; ?>" maxlength="20">
+							Texte 4: Position horizontale: <input type="text" name="set_pos_horiz_historique_5" id="set_pos_horiz_historique_5" value="<?php if (!empty($pos_horiz_historique_5)==TRUE) echo $pos_horiz_historique_5; else echo 'Pos. Horiz. txt 5'; ?>" maxlength="20">
 							Couleur: <input type="text" name="set_color_txt_5_RGB" id="set_color_txt_5_RGB" value="<?php if (!empty($color_txt_5_RGB)==TRUE) echo $color_txt_5_RGB; else echo 'X,XX,XXX'; ?>" maxlength="20">
 							<!-- VALIDATION DES PARAMETRES -->
 						<br><center><input type="reset" name="Submit" value="Réinitialiser le formulaire"> <input type="submit" name="set_historique" value="Envoyer"></center>
@@ -494,7 +491,7 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 					
 				// image - taille font - angle - horizontal - verticale
 				$text1 = "1";
-				$text2 = "-";
+				$text2 = "";
 				$text3 = "LEGENDAIRE";
 				$text4 = "-";
 				$text5 = "Titre du RP";
@@ -529,22 +526,25 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 						<font color='#0080FF'><u>Générales</u></font>
 					</b>
 				</legend>
-				<p align='left'>
-					<form method="POST" action="index.php?action=hofrc&subaction=admin&id=<?php echo $id ?>" name="color">
+				<form method="POST" action="index.php?action=hofrc&subaction=admin&id=<?php echo $id ?>" name="color">
+					<p align='left'>
 						Titre du Skin:	<input type="text" name="set_title" id="set_title" value="<?php if (!empty($title)==TRUE) echo $title; else echo 'temporaire'; ?>" maxlength="20"><br />
 
 						Nom du joueur Attaquant:	<input type="radio" name="position_color_picker" id="position_color_picker_player_att" checked="checked">
-						<input type="text" name="couleur_player_att" id="couleur_player_att" value="<?php if (!empty($color_PLAYER_ATT)==TRUE) echo $color_PLAYER_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_player_att').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_player_att" id="couleur_player_att" value="<?php if (!empty($color_PLAYER_ATT)==TRUE) echo $color_PLAYER_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_player_att').style.color=this.value;" maxlength="7"><br />
 
 						Nom du joueur Défenseur:	<input type="radio" name="position_color_picker" id="position_color_picker_player_def" checked="checked">
-						<input type="text" name="couleur_player_def" id="couleur_player_def" value="<?php if (!empty($color_PLAYER_DEF)==TRUE) echo $color_PLAYER_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_player_def').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_player_def" id="couleur_player_def" value="<?php if (!empty($color_PLAYER_DEF)==TRUE) echo $color_PLAYER_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_player_def').style.color=this.value;" maxlength="7"><br />
 
 						Alliance:	<input type="radio" name="position_color_picker" id="position_color_picker_ally" checked="checked">
-						<input type="text" name="couleur_ally" id="couleur_ally" value="<?php if (!empty($color_ALLY)==TRUE) echo $color_ALLY; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ally').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_ally" id="couleur_ally" value="<?php if (!empty($color_ALLY)==TRUE) echo $color_ALLY; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ally').style.color=this.value;" maxlength="7"><br />
 	
 						Technologie:<input type="radio" name="position_color_picker" id="position_color_picker_techno" checked="checked">
-						<input type="text" name="couleur_techno" id="couleur_techno" value="<?php if (!empty($color_TECHNO)==TRUE) echo $color_TECHNO; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_techno').style.color=this.value;" maxlength="6"><br />
-				
+						<input type="text" name="couleur_techno" id="couleur_techno" value="<?php if (!empty($color_TECHNO)==TRUE) echo $color_TECHNO; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_techno').style.color=this.value;" maxlength="7"><br />
+						
+						Détruit: <input type="radio" name="position_color_picker" id="position_color_picker_detruit" checked="checked">
+						<input type="text" name="couleur_detruit" id="couleur_detruit" value="<?php if (!empty($color_DETRUIT)==TRUE) echo $color_DETRUIT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_detruit').style.color=this.value;" maxlength="7"><br /> 
+			
 				</p>
 			</fieldset>
 		
@@ -556,40 +556,37 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 					</b>
 				</legend>
 				<p align='left'>
-					Détruit: <input type="radio" name="position_color_picker" id="position_color_picker_detruit" checked="checked">
-					<input type="text" name="couleur_detruit" id="couleur_detruit" value="<?php if (!empty($color_DETRUIT)==TRUE) echo $color_DETRUIT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_detruit').style.color=this.value;" maxlength="6"><br /> 
-		
 					Ressources Piller Minimum: <input type="radio" name="position_color_picker" id="position_color_picker_ressources_piller_min" checked="checked">
-					<input type="text" name="couleur_ressources_piller_min" id="couleur_ressources_piller_min" value="<?php if (!empty($color_RESSOURCES_PILLER_MIN)==TRUE) echo $color_RESSOURCES_PILLER_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ressources_piller_min').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_ressources_piller_min" id="couleur_ressources_piller_min" value="<?php if (!empty($color_RESSOURCES_PILLER_MIN)==TRUE) echo $color_RESSOURCES_PILLER_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ressources_piller_min').style.color=this.value;" maxlength="7"><br />
 		
 					Ressources Piller Maximum: <input type="radio" name="position_color_picker" id="position_color_picker_ressources_piller_max" checked="checked">
-					<input type="text" name="couleur_ressources_piller_max" id="couleur_ressources_piller_max" value="<?php if (!empty($color_RESSOURCES_PILLER_MAX)==TRUE) echo $color_RESSOURCES_PILLER_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ressources_piller_max').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_ressources_piller_max" id="couleur_ressources_piller_max" value="<?php if (!empty($color_RESSOURCES_PILLER_MAX)==TRUE) echo $color_RESSOURCES_PILLER_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ressources_piller_max').style.color=this.value;" maxlength="7"><br />
 		
 					Pertes des Flottes et Défences: <input type="radio" name="position_color_picker" id="position_color_picker_pertes_fleet_def" checked="checked">
-					<input type="text" name="couleur_pertes_fleet_def" id="couleur_pertes_fleet_def" value="<?php if (!empty($color_PERTES_FLEET_DEF)==TRUE) echo $color_PERTES_FLEET_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_fleet_def').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_pertes_fleet_def" id="couleur_pertes_fleet_def" value="<?php if (!empty($color_PERTES_FLEET_DEF)==TRUE) echo $color_PERTES_FLEET_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_fleet_def').style.color=this.value;" maxlength="7"><br />
 		
 					Pertes Minimum Attaque: <input type="radio" name="position_color_picker" id="position_color_picker_pertes_min_att" checked="checked">
-					<input type="text" name="couleur_pertes_min_att" id="couleur_pertes_min_att" value="<?php if (!empty($color_PERTES_MIN_ATT)==TRUE) echo $color_PERTES_MIN_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_min_att').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_pertes_min_att" id="couleur_pertes_min_att" value="<?php if (!empty($color_PERTES_MIN_ATT)==TRUE) echo $color_PERTES_MIN_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_min_att').style.color=this.value;" maxlength="7"><br />
 		
 					Pertes Maximum Attaque: <input type="radio" name="position_color_picker" id="position_color_picker_pertes_max_att" checked="checked">
-					<input type="text" name="couleur_pertes_max_att" id="couleur_pertes_max_att" value="<?php if (!empty($color_PERTES_MAX_ATT)==TRUE) echo $color_PERTES_MAX_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_max_att').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_pertes_max_att" id="couleur_pertes_max_att" value="<?php if (!empty($color_PERTES_MAX_ATT)==TRUE) echo $color_PERTES_MAX_ATT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_max_att').style.color=this.value;" maxlength="7"><br />
 		
 					Pertes Minimum Défense: <input type="radio" name="position_color_picker" id="position_color_picker_pertes_min_def" checked="checked">
-					<input type="text" name="couleur_pertes_min_def" id="couleur_pertes_min_def" value="<?php if (!empty($color_PERTES_MIN_DEF)==TRUE) echo $color_PERTES_MIN_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_min_def').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_pertes_min_def" id="couleur_pertes_min_def" value="<?php if (!empty($color_PERTES_MIN_DEF)==TRUE) echo $color_PERTES_MIN_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_min_def').style.color=this.value;" maxlength="7"><br />
 		
 					Pertes Maximum Défense: <input type="radio" name="position_color_picker" id="position_color_picker_pertes_max_def" checked="checked">
-					<input type="text" name="couleur_pertes_max_def" id="couleur_pertes_max_def" value="<?php if (!empty($color_PERTES_MAX_DEF)==TRUE) echo $color_PERTES_MAX_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_max_def').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_pertes_max_def" id="couleur_pertes_max_def" value="<?php if (!empty($color_PERTES_MAX_DEF)==TRUE) echo $color_PERTES_MAX_DEF; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pertes_max_def').style.color=this.value;" maxlength="7"><br />
 					Débris Minimum: <input type="radio" name="position_color_picker" id="position_color_picker_debris_min" checked="checked">
-					<input type="text" name="couleur_debris_min" id="couleur_debris_min" value="<?php if (!empty($color_DEBRIS_MIN)==TRUE) echo $color_DEBRIS_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_debris_min').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_debris_min" id="couleur_debris_min" value="<?php if (!empty($color_DEBRIS_MIN)==TRUE) echo $color_DEBRIS_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_debris_min').style.color=this.value;" maxlength="7"><br />
 		 
 					Débris Maximum: <input type="radio" name="position_color_picker" id="position_color_picker_debris_max" checked="checked">
-					<input type="text" name="couleur_debris_max" id="couleur_debris_max" value="<?php if (!empty($color_DEBRIS_MAX)==TRUE) echo $color_DEBRIS_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_debris_max').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_debris_max" id="couleur_debris_max" value="<?php if (!empty($color_DEBRIS_MAX)==TRUE) echo $color_DEBRIS_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_debris_max').style.color=this.value;" maxlength="7"><br />
 		
 					Rentabilité Minimum: <input type="radio" name="position_color_picker" id="position_color_picker_renta_min" checked="checked">
-					<input type="text" name="couleur_renta_min" id="couleur_renta_min" value="<?php if (!empty($color_RENTA_MIN)==TRUE) echo $color_RENTA_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_renta_min').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_renta_min" id="couleur_renta_min" value="<?php if (!empty($color_RENTA_MIN)==TRUE) echo $color_RENTA_MIN; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_renta_min').style.color=this.value;" maxlength="7"><br />
 		
 					Rentabilité Maximum: <input type="radio" name="position_color_picker" id="position_color_picker_renta_max" checked="checked">
-					<input type="text" name="couleur_renta_max" id="couleur_renta_max" value="<?php if (!empty($color_RENTA_MAX)==TRUE) echo $color_RENTA_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_renta_max').style.color=this.value;" maxlength="6"><br />
+					<input type="text" name="couleur_renta_max" id="couleur_renta_max" value="<?php if (!empty($color_RENTA_MAX)==TRUE) echo $color_RENTA_MAX; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_renta_max').style.color=this.value;" maxlength="7"><br />
 				</p>
 			</fieldset>	
 			
@@ -601,11 +598,11 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 				</legend>
 				<p align='left'>	
 					
-						Seuil des pertes: <input type="text" name="couleur_seuil_pertes" id="couleur_seuil_pertes" value="<?php if (!empty($color_SEUIL_PERTES)==TRUE) echo $color_SEUIL_PERTES; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_pertes').style.color=this.value;" maxlength="6"><br />
+						Seuil des pertes: <input type="text" name="couleur_seuil_pertes" id="couleur_seuil_pertes" value="<?php if (!empty($color_SEUIL_PERTES)==TRUE) echo $color_SEUIL_PERTES; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_pertes').style.color=this.value;" maxlength="7"><br />
 		
-						Seuil des pillages: <input type="text" name="couleur_seuil_pillage" id="couleur_seuil_pillage" value="<?php if (!empty($color_SEUIL_PILLAGE)==TRUE) echo $color_SEUIL_PILLAGE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_pillage').style.color=this.value;" maxlength="6"><br />
+						Seuil des pillages: <input type="text" name="couleur_seuil_pillage" id="couleur_seuil_pillage" value="<?php if (!empty($color_SEUIL_PILLAGE)==TRUE) echo $color_SEUIL_PILLAGE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_pillage').style.color=this.value;" maxlength="7"><br />
 		
-						Seuil Champs de débris: <input type="text" name="couleur_seuil_cdr" id="couleur_seuil_cdr" value="<?php if (!empty($color_SEUIL_CDR)==TRUE) echo $color_SEUIL_CDR; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_cdr').style.color=this.value;" maxlength="6"><br />
+						Seuil Champs de débris: <input type="text" name="couleur_seuil_cdr" id="couleur_seuil_cdr" value="<?php if (!empty($color_SEUIL_CDR)==TRUE) echo $color_SEUIL_CDR; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_seuil_cdr').style.color=this.value;" maxlength="7"><br />
 		
 				</p>
 			</fieldset>
@@ -621,46 +618,46 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 				<p align='left'>
 					
 						P.transporteur:<input type="radio" name="position_color_picker" id="position_color_picker_pt" checked="checked">
-						<input type="text" name="couleur_pt" id="couleur_pt" value="<?php if (!empty($color_PT)==TRUE) echo $color_PT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pt').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_pt" id="couleur_pt" value="<?php if (!empty($color_PT)==TRUE) echo $color_PT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pt').style.color=this.value;" maxlength="7"><br />
 		
 						G.transporteur:<input type="radio" name="position_color_picker" id="position_color_picker_gt" checked="checked">
-						<input type="text" name="couleur_gt" id="couleur_gt" value="<?php if (!empty($color_GT)==TRUE) echo $color_PT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_gt').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_gt" id="couleur_gt" value="<?php if (!empty($color_GT)==TRUE) echo $color_PT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_gt').style.color=this.value;" maxlength="7"><br />
 		
 						C.Léger<input type="radio" name="position_color_picker" id="position_color_picker_cle" checked="checked">
-						<input type="text" name="couleur_cle" id="couleur_cle" value="<?php if (!empty($color_CLE)==TRUE) echo $color_CLE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cle').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_cle" id="couleur_cle" value="<?php if (!empty($color_CLE)==TRUE) echo $color_CLE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cle').style.color=this.value;" maxlength="7"><br />
 		
 						C.Lourd<input type="radio" name="position_color_picker" id="position_color_picker_clo" checked="checked">
-						<input type="text" name="couleur_clo" id="couleur_clo" value="<?php if (!empty($color_CLO)==TRUE) echo $color_CLO; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_clo').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_clo" id="couleur_clo" value="<?php if (!empty($color_CLO)==TRUE) echo $color_CLO; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_clo').style.color=this.value;" maxlength="7"><br />
 		
 						Croiseur:<input type="radio" name="position_color_picker" id="position_color_picker_cr" checked="checked">
-						<input type="text" name="couleur_cr" id="couleur_cr" value="<?php if (!empty($color_CR)==TRUE) echo $color_CR; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cr').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_cr" id="couleur_cr" value="<?php if (!empty($color_CR)==TRUE) echo $color_CR; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cr').style.color=this.value;" maxlength="7"><br />
 		
 						V.Bataille:<input type="radio" name="position_color_picker" id="position_color_picker_vb" checked="checked">
-						<input type="text" name="couleur_vb" id="couleur_vb" value="<?php if (!empty($color_VB)==TRUE) echo $color_VB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_vb').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_vb" id="couleur_vb" value="<?php if (!empty($color_VB)==TRUE) echo $color_VB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_vb').style.color=this.value;" maxlength="7"><br />
 		
 						V.Colonisation:<input type="radio" name="position_color_picker" id="position_color_picker_vc" checked="checked">
-						<input type="text" name="couleur_vc" id="couleur_vc" value="<?php if (!empty($color_VC)==TRUE) echo $color_VC; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_vc').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_vc" id="couleur_vc" value="<?php if (!empty($color_VC)==TRUE) echo $color_VC; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_vc').style.color=this.value;" maxlength="7"><br />
 		
 						Recycleur:<input type="radio" name="position_color_picker" id="position_color_picker_rec" checked="checked">
-						<input type="text" name="couleur_rec" id="couleur_rec" value="<?php if (!empty($color_REC)==TRUE) echo $color_REC; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_rec').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_rec" id="couleur_rec" value="<?php if (!empty($color_REC)==TRUE) echo $color_REC; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_rec').style.color=this.value;" maxlength="7"><br />
 		
 						Sonde:<input type="radio" name="position_color_picker" id="position_color_picker_se" checked="checked">
-						<input type="text" name="couleur_se" id="couleur_se" value="<?php if (!empty($color_SE)==TRUE) echo $color_SE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_se').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_se" id="couleur_se" value="<?php if (!empty($color_SE)==TRUE) echo $color_SE; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_se').style.color=this.value;" maxlength="7"><br />
 		
 						Bombardier:<input type="radio" name="position_color_picker" id="position_color_picker_bmd" checked="checked">
-						<input type="text" name="couleur_bmd" id="couleur_bmd" value="<?php if (!empty($color_BMD)==TRUE) echo $color_BMD; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_bmd').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_bmd" id="couleur_bmd" value="<?php if (!empty($color_BMD)==TRUE) echo $color_BMD; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_bmd').style.color=this.value;" maxlength="7"><br />
 		
 						S.Solaire: <input type="radio" name="position_color_picker" id="position_color_picker_sat" checked="checked">
-						<input type="text" name="couleur_sat" id="couleur_sat" value="<?php if (!empty($color_SAT)==TRUE) echo $color_SAT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_sat').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_sat" id="couleur_sat" value="<?php if (!empty($color_SAT)==TRUE) echo $color_SAT; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_sat').style.color=this.value;" maxlength="7"><br />
 		
 						Destructeur: <input type="radio" name="position_color_picker" id="position_color_picker_dst" checked="checked">
-						<input type="text" name="couleur_dst" id="couleur_dst" value="<?php if (!empty($color_DST)==TRUE) echo $color_DST; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_dst').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_dst" id="couleur_dst" value="<?php if (!empty($color_DST)==TRUE) echo $color_DST; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_dst').style.color=this.value;" maxlength="7"><br />
 		
 						EDLM:<input type="radio" name="position_color_picker" id="position_color_picker_edlm" checked="checked">
-						<input type="text" name="couleur_edlm" id="couleur_edlm" value="<?php if (!empty($color_EDLM)==TRUE) echo $color_EDLM; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_edlm').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_edlm" id="couleur_edlm" value="<?php if (!empty($color_EDLM)==TRUE) echo $color_EDLM; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_edlm').style.color=this.value;" maxlength="7"><br />
 		
 						Traqueur:<input type="radio" name="position_color_picker" id="position_color_picker_tra" checked="checked">
-						<input type="text" name="couleur_tra" id="couleur_tra" value="<?php if (!empty($color_TRA)==TRUE) echo $color_TRA; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_tra').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_tra" id="couleur_tra" value="<?php if (!empty($color_TRA)==TRUE) echo $color_TRA; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_tra').style.color=this.value;" maxlength="7"><br />
 		
 						
 				</p>
@@ -674,28 +671,28 @@ list($id,$title, $color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color
 				<p align='left'>	
 					
 						L.Missile:<input type="radio" name="position_color_picker" id="position_color_picker_lm" checked="checked">
-						<input type="text" name="couleur_lm" id="couleur_lm" value="<?php if (!empty($color_LM)==TRUE) echo $color_LM; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lm').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_lm" id="couleur_lm" value="<?php if (!empty($color_LM)==TRUE) echo $color_LM; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lm').style.color=this.value;" maxlength="7"><br />
 		
 						L.Léger:<input type="radio" name="position_color_picker" id="position_color_picker_lleger" checked="checked">
-						<input type="text" name="couleur_lleger" id="couleur_lleger" value="<?php if (!empty($color_LLEGER)==TRUE) echo $color_LLEGER; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lleger').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_lleger" id="couleur_lleger" value="<?php if (!empty($color_LLEGER)==TRUE) echo $color_LLEGER; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lleger').style.color=this.value;" maxlength="7"><br />
 		
 						L.Lourd:<input type="radio" name="position_color_picker" id="position_color_picker_llourd" checked="checked">
-						<input type="text" name="couleur_llourd" id="couleur_llourd" value="<?php if (!empty($color_LLOURD)==TRUE) echo $color_LLOURD; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_llourd').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_llourd" id="couleur_llourd" value="<?php if (!empty($color_LLOURD)==TRUE) echo $color_LLOURD; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_llourd').style.color=this.value;" maxlength="7"><br />
 		
 						Can.Gauss:<input type="radio" name="position_color_picker" id="position_color_picker_cg" checked="checked">
-						<input type="text" name="couleur_cg" id="couleur_cg" value="<?php if (!empty($color_CG)==TRUE) echo $color_CG; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cg').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_cg" id="couleur_cg" value="<?php if (!empty($color_CG)==TRUE) echo $color_CG; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_cg').style.color=this.value;" maxlength="7"><br />
 		
 						Art.Ions:<input type="radio" name="position_color_picker" id="position_color_picker_ai" checked="checked">
-						<input type="text" name="couleur_ai" id="couleur_ai" value="<?php if (!empty($color_AI)==TRUE) echo $color_AI; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ai').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_ai" id="couleur_ai" value="<?php if (!empty($color_AI)==TRUE) echo $color_AI; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_ai').style.color=this.value;" maxlength="7"><br />
 		
 						Lanc.Plasma:<input type="radio" name="position_color_picker" id="position_color_picker_lp" checked="checked">
-						<input type="text" name="couleur_lp" id="couleur_lp" value="<?php if (!empty($color_LP)==TRUE) echo $color_LP; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lp').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_lp" id="couleur_lp" value="<?php if (!empty($color_LP)==TRUE) echo $color_LP; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_lp').style.color=this.value;" maxlength="7"><br />
 		
 						P.Bouclier:<input type="radio" name="position_color_picker" id="position_color_picker_pb" checked="checked">
-						<input type="text" name="couleur_pb" id="couleur_pb" value="<?php if (!empty($color_PB)==TRUE) echo $color_PB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pb').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_pb" id="couleur_pb" value="<?php if (!empty($color_PB)==TRUE) echo $color_PB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_pb').style.color=this.value;" maxlength="7"><br />
 		
 						G.Bouclier:<input type="radio" name="position_color_picker" id="position_color_picker_gb" checked="checked">
-						<input type="text" name="couleur_gb" id="couleur_gb" value="<?php if (!empty($color_GB)==TRUE) echo $color_GB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_gb').style.color=this.value;" maxlength="6"><br />
+						<input type="text" name="couleur_gb" id="couleur_gb" value="<?php if (!empty($color_GB)==TRUE) echo $color_GB; else echo '000000'; ?>" onKeyUp="document.getElementById('preview_gb').style.color=this.value;" maxlength="7"><br />
 			</fieldset>
 		</th>
 	
