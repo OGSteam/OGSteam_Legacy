@@ -23,7 +23,7 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 		<td class='c' style='text-align : center; color : #0080FF;'>Version</td>
 	</tr>
 		<tr>
-			<td style='background-color : #273234; '>
+			<th>
 				<fieldset>
 					<legend>
 						<b>
@@ -34,6 +34,6 @@ if (!$db->sql_numrows($db->sql_query($query))) die("Hacking attempt");
 						<li>Sortie du mod</li>
 					</ul>
 				</fieldset>
-			</td>
+			</th>
 		</tr>
 </table>

@@ -687,7 +687,7 @@ function jsspecialchars($s) {
 
 /**************************************************************************/
 		
-	function set_color_general ($title, $ALLY, $PLAYER_ATT, $PLEYER_DEF, $TECHNO, $DETRUIT)
+	function set_color_general ($title, $ALLY, $PLAYER_ATT, $PLAYER_DEF, $TECHNO, $DETRUIT)
 		{ 
 			global $db, $table_prefix;
 			define('TABLE_HOFRC_SKIN',$table_prefix.'hofrc_skin');
@@ -1375,7 +1375,7 @@ function jsspecialchars($s) {
 					$query_info = $db->sql_query("SELECT `TYPE_HOF` FROM `".TABLE_HOFRC_INFO_RC."` WHERE `id_rc` = ".$title['id_rc']);
 					(list($type_hof) = $db->sql_fetch_row($query_info));
 					$text1 = $title['id'];
-					$text2 = "-";
+					$text2 = "";
 					$text3 =  $type_hof;
 					$text4 = "-";
 					$text5 = $title['title']."\n";
