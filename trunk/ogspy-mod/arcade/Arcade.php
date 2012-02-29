@@ -751,6 +751,20 @@ if($user_data["user_admin"] == 1 ) {
 		echo "</table>\n";
 	}
 }//}}}
-
+//Récupére le numéro de version du mod
+$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'Arcade\'';
+$result = $db->sql_query($request);
+list($version) = $db->sql_fetch_row($result);
+echo '</tr>
+	</table>
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+		<tr align="center">
+			<td>
+				<center>
+				<font size="2">
+					<i>Arcade (v'.$version.') Mise à Jour par Shad</i>
+				</font>
+				</center>';
 require_once("views/page_tail.php");
+
 ?>
