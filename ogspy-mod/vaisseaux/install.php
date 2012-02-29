@@ -1,9 +1,18 @@
 <?php
+define("IN_SPYOGAME", true);
+require_once("common.php");
+global $db;
 
-if (file_exists('mod/vaisseaux/version.txt')) {
-	$file = file('mod/vaisseaux/version.txt');
-	
-	$db->sql_query('INSERT INTO '.TABLE_MOD.' (id, title, menu, action, root, link, version, active) VALUES ("", "Vaisseaux", "Vaisseaux", "vaisseaux", "vaisseaux", "vaisseaux.php", "'.trim($file[1]).'", "1")');
-
-}
+$is_ok = false;
+$mod_folder = "vaisseaux";
+$is_ok = install_mod ($mod_folder);
+install_mod($mod_folder);
+if ($is_ok == true)
+	{
+		// Si besoin de creer des tables, à faire ici
+	}
+else
+	{
+  echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
+	}
 ?>

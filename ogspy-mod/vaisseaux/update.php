@@ -1,9 +1,9 @@
 <?php
-
-if (file_exists('mod/'.$root.'/version.txt')) {
-	$file = file('mod/'.$root.'/version.txt');
-	
-	$db->sql_query('UPDATE '.TABLE_MOD.' SET version = "'.trim($file[1]).'" WHERE id = "'.$pub_mod_id.'"');
+if (!defined('IN_SPYOGAME')) {
+    die("Hacking attempt");
 }
 
+$mod_folder = "vaisseaux";
+$mod_name = "vaisseaux";
+update_mod($mod_folder, $mod_name);
 ?>
