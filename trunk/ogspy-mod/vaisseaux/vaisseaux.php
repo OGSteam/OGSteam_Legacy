@@ -495,7 +495,20 @@ for ($b=1; $b <= 14; $b++){
 
 
 <?php 
-
+//Récupére le numéro de version du mod
+$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'vaisseaux\'';
+$result = $db->sql_query($request);
+list($version) = $db->sql_fetch_row($result);
+echo '</tr>
+	</table>
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+		<tr align="center">
+			<td>
+				<center>
+				<font size="2">
+					<i>Vaisseaux (v'.$version.') Mise à Jour par Shad</i>
+				</font>
+				</center>';
 require_once('views/page_tail.php'); 
 ob_flush();
 
