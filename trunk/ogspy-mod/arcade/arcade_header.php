@@ -18,6 +18,8 @@ require_once("mod/arcade/arcade_functions.php");
 <meta name="language" content="fr">
 <title><?php echo $server_config["servername"]." - OGSpy ".$server_config["version"];?></title>
 <link rel="stylesheet" type="text/css" href="<?php echo $link_css;?>formate.css" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/icon">
 </head>
 <body>
 <table border="0" width="100%" cellpadding="10" cellspacing="0" align="center">
