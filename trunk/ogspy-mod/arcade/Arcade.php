@@ -44,7 +44,7 @@ function OutputArcadeCSS(){//{{{
 .arcadeheader {
 	padding: 0 0 ;
 	background: transparent;
-	float: left;
+	
 }
 .arcadegameheader {
 	background: black;
@@ -95,6 +95,7 @@ function OutputArcadeCSS(){//{{{
 
 }
 .logocenter {
+
 	
 }
 .arcadeannounce {
@@ -130,7 +131,7 @@ float: left;
 	color: black;
 }
 .arcadeonline {
-	float: left;
+	float: right;
 	text-indent:0;	
 	width: 14em;
 	padding: 8px 8px 2px 1px;
