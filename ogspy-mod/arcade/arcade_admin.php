@@ -623,6 +623,7 @@ if($user_data["user_admin"] != 1 && !($server_config["arcade_coadminenable"]=="1
 		break;
 	default:
 		ShowAdminPanel();
+	generate_config_cache();
  }
 }
 //}}}//

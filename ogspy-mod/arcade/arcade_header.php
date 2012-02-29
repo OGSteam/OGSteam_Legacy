@@ -16,7 +16,7 @@ require_once("mod/arcade/arcade_functions.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="language" content="fr">
-<title>Arcade - <?php echo $server_config["servername"]." - OGSpy ".$server_config["version"];?></title>
+<title><?php echo $server_config["servername"]." - OGSpy ".$server_config["version"];?></title>
 <link rel="stylesheet" type="text/css" href="<?php echo $link_css;?>formate.css" />
 </head>
 <body>
@@ -26,7 +26,7 @@ require_once("mod/arcade/arcade_functions.php");
 
 	if ($server_config['arcade_fullscreen']!='1') {
 
-		echo "<td width='150' align='center' valign='top' rowspan='2'>";
+		echo "<td width='150' align='center' valign='top' rowspan='4'>";
 		require_once('views/menu.php');
 		echo "</td>";
 	}
