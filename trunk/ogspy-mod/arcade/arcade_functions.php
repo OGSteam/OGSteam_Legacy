@@ -294,4 +294,66 @@ function FormatScore($score){//{{{
 	return number_format($score,2,","," ");
 
 }//}}}
+
+function create_gamedata(){
+	$structure = "arcade/gamedata";	
+	if (!mkdir($structure, 0777, true))	{
+			die('Verifiez si le répertoire existe déjà, ou si la fonction est activé sur le serveur!');
+			}
+}
+
+function check_gamedata(){
+	$structure = "arcade/gamedata";
+	if (is_dir($structure))	{
+		return "<img src='mod/arcade/pics/ok.png' border=0 />";
+	}
+	else{
+		return "<img src='mod/arcade/pics/error.png' border=0 />"; 	
+	}
+}
+
+function modify_index(){
+if (is_writable("index.php"))
+	{
+		// Ouverture du fichier
+		$Fichier = @fopen("index.php", "r");
+		$content = file_get_contents("index.php");
+		if (strpos($content, 'require_once($file_exist);')){
+			die('Le fichier index.php est déjà jour!');
+		}
+		else{
+$content_modify = str_replace('require_once("common.php");','require_once("common.php");
+$file_exist = "mod/arcade/arcade_intercept.php";
+if (file_exists($file_exist))
+	{
+		require_once($file_exist);
+	}',$content);
+		fclose("index.php");
+		
+		$File = @fopen("index.php", "w+");
+		fwrite ($File, $content_modify);
+		fclose("index.php");
+		}	
+	}
+	else
+	{
+		echo 'Verifiez les droits du fichier, ou la fonction n\'est pas activez sur le serveur';
+	}
+}
+
+function check_index(){
+	if (is_writable("index.php"))
+		{
+			// Ouverture du fichier
+			$Fichier = @fopen("index.php", "r");
+			$content = file_get_contents("index.php");
+			if (strpos($content, 'require_once($file_exist);')){
+				return "<img src='mod/arcade/pics/ok.png' border=0 />"; 
+			}
+			else{
+				return "<img src='mod/arcade/pics/error.png' border=0 />"; 		
+			}
+		}
+}
+
 ?>
