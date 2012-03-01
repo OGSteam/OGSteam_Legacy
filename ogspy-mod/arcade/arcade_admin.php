@@ -16,6 +16,18 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("mod/arcade/arcade_functions.php");
 $aapc="?action=Arcade&amp;subaction=Admin&amp;command";
 
+if($_GET['create'] == 'create_folder')
+{
+	create_gamedata();
+}
+
+if($_GET['modif'] == 'modif_index')
+{
+	modify_index();
+	
+}
+
+
 /**
 * {{{ ShowAdminPanel() : Affichage du panneau d'administration du module Arcade
 *
@@ -61,7 +73,14 @@ function ShowAdminPanel(){
         echo "<tr><td>&nbsp;</td><th colspan=2><a href='$aapc=deleteallscore'>Réinitialisation de toutes les tables de Scores</th></tr>\n";
         echo "<tr><td>&nbsp;</td><th colspan=2><a href='$aapc=fixallscore'>Réparer les Scores</th></tr>\n";
         echo "<tr><td>&nbsp;</td><th colspan=2>Effacer les scores du joueur <form action='$aapc=deleteplayerscore' method='post'><input type='text' name='playername'><input type='submit'></form></th></tr>\n";
-	
+        echo "<tr><td class='c' align='center'>".check_gamedata()."</td><td><form style='text-align:center;' method='POST' action='index.php?action=Arcade&subaction=Admin&create=create_folder' name='create_folder'>
+        <input align='center' type='submit' name='create' value='Création'>
+        </form></td><th>Création du répertoire de sauvegarde des scores.</th></tr>\n";
+        echo "<tr><td class='c' align='center'>".check_index()."</td><td><form style='text-align:center;' method='POST' action='index.php?action=Arcade&subaction=Admin&modif=modif_index' name='modif_index'>
+        <input align='center' type='submit' name='modif' value='Modification'>
+        </form></td><th>Modification du fichier index.php</th></tr>\n";
+        
+        
 	// Les bans et Unbans utilisateurs
 	echo "<tr><td colspan=3>&nbsp;</td></tr>\n";
 	echo "<tr><td class='c' colspan='3' align='center'>Ban et Unban Utilisateur</td></tr>\n";
@@ -600,7 +619,7 @@ if($user_data["user_admin"] != 1 && !($server_config["arcade_coadminenable"]=="1
 		SetConfig("arcade_uploadpath",trim($pub_arcade_uploadpath));
 		SetConfig("arcade_onlinmins",trim($pub_arcade_onlinmins));
 		SetConfig("arcade_guestuser",trim($pub_arcade_guestuser));
-
+		generate_config_cache();
 		echo "<tr><th><a href='$aapc'>Retour sur le panneau d'administration</a></th></tr>";
 		echo "<tr><th><a href='?action=Arcade'>Retour sur le mod Arcade</a></th></tr>";
 
@@ -623,7 +642,6 @@ if($user_data["user_admin"] != 1 && !($server_config["arcade_coadminenable"]=="1
 		break;
 	default:
 		ShowAdminPanel();
-	generate_config_cache();
  }
 }
 //}}}//

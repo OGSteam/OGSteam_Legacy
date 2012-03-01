@@ -16,7 +16,7 @@ $mod_folder = "arcade";
 $is_ok = install_mod ($mod_folder);
 //et si tu as pris la fonction boléenne faut que je rajoute sae
 if ($is_ok == true)
-{
+{			
 	require_once("common.php");
 	define('TABLE_ARCADE',$table_prefix.'arcade');
 	define('TABLE_ARCADE_BAN',$table_prefix.'arcade_ban');
@@ -162,8 +162,6 @@ if ($is_ok == true)
 	$query="INSERT INTO `".TABLE_ARCADE_GAME."` (`id`, `name`, `scorename`, `width`, `height`, `swfname`, `description`, `playcount`, `image`, `highscore`, `highscoreplayer`, `highscoredate`, `backcolor`) "
       ."VALUES (null, 'Pacman', 'pacman', 350, 400, 'pacman.swf', 'Le classique pacman , par Neaves', 0, 'pacman1.gif', 0, '', 0, '#000000')";
 	$db->sql_query($query) ;     
-
-	//ActivateMod();
 }
 else
 {
