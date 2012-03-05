@@ -251,7 +251,7 @@ function jsspecialchars($s) {
 			$skin = select_skin(0);
 		
 			// On récupère la configuration par défaut
-			$query_RCcolor = $db->sql_query("SELECT pt, gt, cle, clo, cr, vb, vc, rec, se, bmd, dst, edlm, tra, sat, lm, lleger, llourd, cg, ai, lp, pb, gb, player_att, player_def, ally, techno, detruit, ressources_piller_min, ressources_piller_max, pertes_fleet_def, seuil_pertes, seuil_pillage, seuil_cdr, pertes_min_att, pertes_max_att, pertes_min_def, pertes_max_def, debris_min, debris_max, renta_min, renta_max, pic_header , pic_round, pic_separator, pic_result, pic_background FROM ".TABLE_HOFRC_SKIN." WHERE title = CONVERT( _utf8 '".$skin."' USING latin1 )");
+			$query_RCcolor = $db->sql_query("SELECT pt, gt, cle, clo, cr, vb, vc, rec, se, bmd, dst, edlm, tra, sat, lm, lleger, llourd, cg, ai, lp, pb, gb, player_att, player_def, ally, techno, detruit, ressources_piller_min, ressources_piller_max, pertes_fleet_def, seuil_pertes, seuil_pillage, seuil_cdr, pertes_min_att, pertes_max_att, pertes_min_def, pertes_max_def, debris_min, debris_max, renta_min, renta_max, pic_header , pic_round, pic_separator, pic_result, pic_background FROM ".TABLE_HOFRC_SKIN." WHERE title LIKE CONVERT( _utf8 '".$skin."' USING latin1 ) COLLATE latin1_general_ci");
 			list($color_PT, $color_GT, $color_CLE, $color_CLO, $color_CR, $color_VB, $color_VC, $color_REC, $color_SE, $color_BMD, $color_DST, $color_EDLM, $color_TRA, $color_SAT, $color_LM, $color_LLEGER, $color_LLOURD, $color_CG, $color_AI, $color_LP, $color_PB, $color_GB, $color_PLAYER_ATT, $color_PLAYER_DEF, $color_ALLY, $color_TECHNO, $color_DETRUIT, $color_RESSOURCES_PILLER_MIN, $color_RESSOURCES_PILLER_MAX, $color_PERTES_FLEET_DEF, $color_SEUIL_PERTES, $color_SEUIL_PILLAGE, $color_SEUIL_CDR,$color_PERTES_MIN_ATT, $color_PERTES_MAX_ATT, $color_PERTES_MIN_DEF, $color_PERTES_MAX_DEF, $color_DEBRIS_MIN, $color_DEBRIS_MAX, $color_RENTA_MIN, $color_RENTA_MAX, $color_PIC_HEADER , $color_PIC_ROUND, $color_PIC_SEPARATOR, $color_PIC_RESULT, $color_PIC_BACKGROUND) = $db->sql_fetch_row($query_RCcolor);
 				
 			$query_RCRound = $db->sql_query("SELECT id_rcround FROM ".TABLE_PARSEDRCROUND." WHERE id_rc=".$id_RC." AND numround=1");
@@ -1406,6 +1406,16 @@ function jsspecialchars($s) {
 		$request = 'SELECT `version` from `'.TABLE_MOD.'` WHERE title=\'Hof RC\'';
 		$result = $db->sql_query($request);
 		list($version) = $db->sql_fetch_row($result);
-		echo '<div>HofRC (v'.$version.') créé par Shad</div>';
+		echo '</tr>
+			</table>
+			<table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+				<tr align="center">
+					<td>
+						<center>
+						<font size="2">
+							<i>HofRC (v'.$version.') créé par Shad</i>
+						</font>
+						</center>';
+
 }
 ?>
