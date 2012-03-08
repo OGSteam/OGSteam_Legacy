@@ -1,0 +1,2 @@
+Module "Densité" par Ninety. Donne un aperçu graphique de la densité de chaque galaxie.
+Version 1.0
