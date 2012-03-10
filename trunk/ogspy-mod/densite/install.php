@@ -2,12 +2,14 @@
 
 if (!defined('IN_SPYOGAME'))
 {
-	exit('Hacking attempt');
+  exit('Hacking attempt');
 }
 
-if (!install_mod('densite'))
+$mod_folder = 'densite';
+
+if (!install_mod($mod_folder))
 {
-	echo '<script>alert(\'Une erreur est survenue pendant l\'installation du module "Densité".\')</script>';
+  echo '<script>alert(\'Une erreur est survenue pendant l\'installation du module "Densité".\')</script>';
 }
 
 ?>

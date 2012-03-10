@@ -90,6 +90,7 @@ foreach ($universe as $k => $galaxy)
 <p><input type="button" id="download-canvas" value="Sauver l'image (PNG)" /></p>
 
 <script type="text/javascript">
+
   var rowCount = parseInt(<?php echo $rowCount; ?>),
       padding = parseInt(<?php echo $padding; ?>),
       galaxyMargin = parseInt(<?php echo $galaxyMargin; ?>),
