@@ -32,7 +32,7 @@
 	{
 		$select_hof	= mysql_query ('SELECT * FROM ' . TABLE_HOF_RECORDS . ' WHERE id_cat=\'' . $i . '\'');
 		
-		$cat		= '[color=' . $settings['couleurCat'] . '][size=' . $settings['tailleCat'] . ']' . $catTable[$i] . '[/size][/color]';
+		$cat		= '[color=' . $settings['couleurCat'] . ']' . $catTable[$i] . '[/color]';
 		
 		if ($settings['gras'])
 			$cat	= '[b]' . $cat . '[/b]';
@@ -45,18 +45,16 @@
 		
 		echo $cat . "\n";
 		
-		echo '[list]' . "\n";
-		
 		while ($hof	= mysql_fetch_array ($select_hof))
 		{
-			$label		= '[color=' . $settings['couleurLabel'] . '][size=' . $settings['tailleLabel'] . ']' . $hof['nom'] . '[/size][/color]';
-			$max		= ' [color=' . $settings['couleurNiv'] . '][size=' . $settings['tailleNiv'] . ']' . number_format ($hof['valeur'], 0, ',', ' ') . '[/size][/color] ';
-			$pseudos	= '[color=' . $settings['couleurPseudos'] . '][size=' . $settings['taillePseudos'] . ']' . $hof['pseudos'] . '[/size][/color]';
+			$label   = '[color=' . $settings['couleurLabel'] . ']' . $hof['nom'] . '[/color]';
+			$max     = ' [color=' . $settings['couleurNiv'] . ']' . number_format ($hof['valeur'], 0, ',', ' ') . '[/color] ';
+			$pseudos = '[color=' . $settings['couleurPseudos'] . ']' . $hof['pseudos'] . '[/color]';
 			
-			echo '[*]' . $label . $max . $pseudos . "\n";
+			echo $label . $max . $pseudos . "\n";
 		}
 		
-		echo '[/list]' . "\n\n";
+		echo "\n";
 	}
 	
 	/* On affiche la production */
@@ -69,7 +67,7 @@
 	{
 		/* On affiche les records de production */
 		
-		$cat		= '[color=' . $settings['couleurCat'] . '][size=' . $settings['tailleCat'] . ']Production par Heure[/size][/color]';
+		$cat		= '[color=' . $settings['couleurCat'] . ']Production par heure[/color]';
 		
 		if ($settings['gras'])
 			$cat	= '[b]' . $cat . '[/b]';
@@ -81,8 +79,6 @@
 			$cat	= '[i]' . $cat . '[/i]';
 		
 		echo $cat . "\n";
-		
-		echo '[list]' . "\n";
 		
 		$select_records	= mysql_query ('SELECT * FROM ' . TABLE_HOF_PROD . ' ORDER BY m DESC LIMIT 0, ' . $settings['nb_recordsMen'] . '');
 		
@@ -95,15 +91,13 @@
 				$records['d'] = 2 * $records['d'];
 			}
 			
-			$pseudo	= '[color=' . $settings['couleurPseudos'] . '][size=' . $settings['taillePseudos'] . ']' . $records['pseudo'] . '[/size][/color]';
-			$m		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/size][/color] ';
-			$c		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/size][/color] ';
-			$d		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/size][/color] ';
+			$pseudo	= '[color=' . $settings['couleurPseudos'] . ']' . $records['pseudo'] . '[/color]';
+			$m		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/color] ';
+			$c		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/color] ';
+			$d		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/color] ';
 			
-			echo '[*]' . $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
+			echo $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
 		}
-		
-		echo '[/list]' . "\n";
 	}
 	
 	/* ** ******************* ** *
@@ -112,7 +106,7 @@
 	
 	if ($settings['prod_jour'])
 	{
-		$cat		= '[color=' . $settings['couleurCat'] . '][size=' . $settings['tailleCat'] . ']Production par Jour[/size][/color]';
+		$cat		= '[color=' . $settings['couleurCat'] . ']Production par jour[/color]';
 		
 		if ($settings['gras'])
 			$cat	= '[b]' . $cat . '[/b]';
@@ -124,8 +118,6 @@
 			$cat	= '[i]' . $cat . '[/i]';
 		
 		echo $cat . "\n";
-		
-		echo '[list]' . "\n";
 		
 		/* On affiche les records de production */
 		
@@ -146,15 +138,13 @@
 				$records['d'] = 24 * $records['d'];
 			}
 			
-			$pseudo	= '[color=' . $settings['couleurPseudos'] . '][size=' . $settings['taillePseudos'] . ']' . $records['pseudo'] . '[/size][/color]';
-			$m		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/size][/color] ';
-			$c		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/size][/color] ';
-			$d		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/size][/color] ';
+			$pseudo	= '[color=' . $settings['couleurPseudos'] . ']' . $records['pseudo'] . '[/color]';
+			$m	   	= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/color] ';
+			$c		  = '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/color] ';
+			$d      = '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/color] ';
 			
-			echo '[*]' . $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
+			echo $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
 		}
-		
-		echo '[/list]' . "\n";
 	}
 	
 	/* ** ********************** ** *
@@ -163,7 +153,7 @@
 	
 	if ($settings['prod_semaine'])
 	{
-		$cat		= '[color=' . $settings['couleurCat'] . '][size=' . $settings['tailleCat'] . ']Production par Semaine[/size][/color]';
+		$cat		= '[color=' . $settings['couleurCat'] . ']Production par semaine[/color]';
 		
 		if ($settings['gras'])
 			$cat	= '[b]' . $cat . '[/b]';
@@ -175,8 +165,6 @@
 			$cat	= '[i]' . $cat . '[/i]';
 		
 		echo $cat . "\n";
-		
-		echo '[list]' . "\n";
 		
 		/* On affiche les records de production */
 		
@@ -197,17 +185,16 @@
 				$records['d'] = 168 * $records['d'];
 			}
 			
-			$pseudo	= '[color=' . $settings['couleurPseudos'] . '][size=' . $settings['taillePseudos'] . ']' . $records['pseudo'] . '[/size][/color]';
-			$m		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/size][/color] ';
-			$c		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/size][/color] ';
-			$d		= '[color=' . $settings['couleurNiv'] . '][size=' . $settings['taillePseudos'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/size][/color] ';
+			$pseudo	= '[color=' . $settings['couleurPseudos'] . ']' . $records['pseudo'] . '[/color]';
+			$m		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['m'], 0, ',', ' ') . '[/color] ';
+			$c		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['c'], 0, ',', ' ') . '[/color] ';
+			$d		= '[color=' . $settings['couleurNiv'] . ']' . number_format ($records['d'], 0, ',', ' ') . '[/color] ';
 			
-			echo '[*]' . $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
+			echo $pseudo . ' : ' . $m . ' - ' . $c . ' - ' . $d . "\n";
 		}
-		
-		echo '[/list]';
 	}
 	
 	if ($settings['center'])
 		echo '[/center]';
+
 ?></textarea>

@@ -222,14 +222,7 @@
 	?>
 	
 	<tr>
-		<td class='gauche'>
-			<?php
-				if ($settings['img'])
-					echo '<img src=\'' . $settings['imgLink'] . $icon[$i] . '\' alt=\'' . $label[$i] . '\' /><br />';
-				
-				echo $name[$i];
-			?>
-		</td>		
+		<td class='gauche'><?php echo $name[$i]; ?></td>		
 		<?php
 			if ($settings['vous'])
 			{
