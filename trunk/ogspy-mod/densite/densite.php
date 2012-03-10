@@ -102,7 +102,7 @@ foreach ($universe as $k => $galaxy)
       ctx = canvas.getContext('2d'),
       imageData, data, y, i;
   
-  // background color
+  // canvas background
   ctx.fillStyle = '#252525';
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
   
