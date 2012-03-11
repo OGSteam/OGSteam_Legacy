@@ -82,12 +82,12 @@ while ($defense = $db->sql_fetch_assoc($select_defense))
 
   if (!$user_exist)
   {
-    $db->sql_query('DELETE FROM '. TABLE_USER_DEFENCE .' WHERE user_id=\''. $defense['user_id'] .'\'');
+    $db->sql_query('DELETE FROM '. TABLE_USER_DEFENCE .' WHERE user_id = \''. $defense['user_id'] .'\'');
   }
 }
 
 // Flotte, si le mod flotte existe
-$select_mod = $db->sql_query('SELECT title FROM '. TABLE_MOD .' WHERE title=\'Flottes\'');
+$select_mod = $db->sql_query('SELECT title FROM '. TABLE_MOD .' WHERE title = \'Flottes\'');
 $mod = $db->sql_fetch_assoc($select_mod);
 
 if (!empty ($mod))
@@ -109,7 +109,7 @@ if (!empty ($mod))
 
     if (!$user_exist)
     {
-      $db->sql_query('DELETE FROM '. TABLE_FLOTTES .' WHERE user_id=\''. $flotte['user_id'] .'\'') or exit($db->sql_error());
+      $db->sql_query('DELETE FROM '. TABLE_FLOTTES .' WHERE user_id = \''. $flotte['user_id'] .'\'') or exit($db->sql_error());
     }
   }
 }
