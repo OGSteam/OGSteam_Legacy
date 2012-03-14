@@ -11,11 +11,11 @@ if (!defined('IN_SPYOGAME')) {
 }
 global $db;
 
-if (file_exists('mod/convertisseur/version.txt')) {
-	$version_txt = file('mod/convertisseur/version.txt');
+if (file_exists('mod/hostiles/version.txt')) {
+	$version_txt = file('mod/hostiles/version.txt');
 	}
 
-$query = "UPDATE ".TABLE_MOD." SET version='".trim($version_txt[1])."' WHERE action='convertisseur'";
+$query = "UPDATE ".TABLE_MOD." SET version='".trim($version_txt[1])."' WHERE action='hostiles'";
 $db->sql_query($query);
 ?>
 
