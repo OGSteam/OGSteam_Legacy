@@ -12,15 +12,19 @@ if (!defined('IN_SPYOGAME')) die('Hacking attempt');
 global $db;
 global $table_prefix;
 
-define("TABLE_COMMERCE", $table_prefix."convertisseur_commerce");
+
+define("TABLE_HOSTILES", $table_prefix."hostiles");
+define("TABLE_HOSTILES_ATTACKS", $table_prefix."hostiles_attacks");
+define("TABLE_HOSTILES_COMPOSITION", $table_prefix."hostiles_composition");
+
 
 // On récupère l'id du mod pour xtense...
-$query = "SELECT id FROM ".TABLE_MOD." WHERE action='convertisseur'";
+$query = "SELECT id FROM ".TABLE_MOD." WHERE action='hostiles'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
-$mod_uninstall_name = "convertisseur";
-$mod_uninstall_table = TABLE_COMMERCE;
+$mod_uninstall_name = "hostiles";
+$mod_uninstall_table = TABLE_HOSTILES.', '.TABLE_HOSTILES_ATTACKS.', '.TABLE_HOSTILES_COMPOSITION;
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 // On regarde si la table xtense_callbacks existe :
