@@ -1,61 +1,23 @@
-//Production par heure
-function production (building, level, temperature_max, NRJ) {
-	var speed = document.getElementById("vitesse_uni").value;
-	var NRJ = document.getElementById("NRJ").value;
-	var Ing = document.getElementById("off_ingenieur").value;
-	var Geo = document.getElementById("off_geologue").value;
-	var result,geologue,ingenieur,prod_base = 0;
-	
+// Production par heure
+function production (building, level, temperatureMax) {
+
+    var speed = document.getElementById('vitesse_uni').value,
+        energy = document.getElementById('NRJ').value,
+        ingenieur = document.getElementById('off_ingenieur').value ? 1.1 : 1,
+        geologue = document.getElementById('off_geologue').value ? 1.1 : 1;
+
     switch (building) {
-		case "M":
-		geologue = (Geo == 0) ? 1: 1.10;
-		prod_base = 30;
-		result = 30 * level * Math.pow(1.1, level);
-		result = result * geologue;
-		result = Math.floor(result);
-		result = prod_base + result;
-		result = result * speed;
-		break;
+        case 'M': return speed * (30 + Math.floor(30 * level * Math.pow(1.1, level) * geologue));
+        case 'C': return speed * (15 + Math.floor(20 * level * Math.pow(1.1, level) * geologue));
+        case 'D': return speed * Math.floor(10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperatureMax) * geologue);
+        case 'CES': return 20 * level * Math.pow(1.1, level) * ingenieur;
+        case 'CEF': return 30 * level * Math.pow(1.05 + 0.01 * energy, level) * ingenieur;
+        default: return 0;
+    }
 
-		case "C":
-		geologue = (Geo == 0) ? 1: 1.10;
-		prod_base = 15;
-		result = 20 * level * Math.pow(1.1, level);
-		result = result * geologue;
-		result = Math.floor(result);
-		result = prod_base + result;
-		result = result * speed;
-		break;
-
-		case "D":
-		geologue = (Geo == 0) ? 1: 1.10;
-		result = 10 * level * Math.pow(1.1, level) * (1.44 - 0.004 * temperature_max);
-		result = result * geologue;
-		result = Math.floor(result);
-        result = result * speed;
-		break;
-
-		case "CES":
-		ingenieur = (Ing == 0) ? 1: 1.10;
-		result = 20 * level * Math.pow(1.1, level);
-		result = result * ingenieur;
-		break;
-
-		case "CEF":
-		ingenieur = (Ing == 0) ? 1: 1.10;
-		result = 30 * level * Math.pow((1.05 + 0.01 * NRJ), level);
-		result = result * ingenieur;
-		break;
-
-		default:
-		result = 0;
-		break;
-	}
-    
-	return result;
 }
 
-//Production des satellites
+// Production des satellites
 function production_sat (temperature_min, temperature_max) {
 
 	var ingenieur = 0;
