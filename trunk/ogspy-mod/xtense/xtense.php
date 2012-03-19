@@ -824,7 +824,39 @@ switch ($pub_type){
 					'type' => 'trader'
 			));
 	break;
-
+	
+	case 'hostiles': // Hostiles
+		//Check::data(isset($line['trader'], $line['planet']), Check::planet_name($line['planet'], 1));
+		//Check::data(isset($line['trader'], $line['planet']), true);
+		//$line['trader'] = Check::filterSpecialChars($line['trader']);
+		
+		//Check::data(isset($pub_data));
+		$io->set(array('function' => 'hostiles',
+			        'type' => 'hostiles'));
+		$line = $pub_data;
+		$line['attacker_name'] = Check::filterSpecialChars($line['attacker_name']);
+		$line['origin_attack_name'] = Check::filterSpecialChars($line['origin_attack_name']);
+		$line['destination_name'] = Check::filterSpecialChars($line['destination_name']);
+		$line['composition'] = Check::filterSpecialChars($line['composition']);
+		
+		$hostile = array('id' => $line['id'],
+						'id_vague' => $line['id_vague'],
+						'player_id' => $line['player_id'],
+						'ally_id' => $line['ally_id'],
+						'arrival_time' => $line['arrival_time'],
+						'destination_name' => $line['destination_name'],
+						'id_vague' => $line['id_vague'],
+						'attacker' => $line['attacker_name'],
+						'origin_planet' => $line['origin_attack_name'],
+						'origin_coords' => $line['origin_attack_coords'],
+						'cible_planet' => $line['destination_name'],
+						'cible_coords' => $line['destination_coords'],
+						'composition_flotte' => $line['composition'],
+						'clean' => $line['clean']
+		);
+		$call->add('hostiles', $hostile);			
+	break;
+		
 	case 'messages': //PAGE MESSAGES
 		Check::data(isset($pub_data));
 		
