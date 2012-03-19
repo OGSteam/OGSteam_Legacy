@@ -7,9 +7,7 @@
 * created : 06/11/2006
 */
 
-if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-}
+if (!defined('IN_SPYOGAME')) { die("Hacking attempt"); }
 global $db, $table_prefix, $user_data;
 define("TABLE_CONVERTISSEUR_COMMERCE", $table_prefix."convertisseur_commerce");
 

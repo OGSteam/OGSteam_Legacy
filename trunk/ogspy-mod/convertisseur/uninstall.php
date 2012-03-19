@@ -6,25 +6,21 @@
 * @link http://www.ogsteam.fr
 */
 
-if (!defined('IN_SPYOGAME')) die('Hacking attempt');
+if (!defined('IN_SPYOGAME')){ die('Hacking attempt'); }
 
 //Définitions
 global $db;
 global $table_prefix;
 
-
-define("TABLE_HOSTILES", $table_prefix."hostiles");
-define("TABLE_HOSTILES_ATTACKS", $table_prefix."hostiles_attacks");
-define("TABLE_HOSTILES_COMPOSITION", $table_prefix."hostiles_composition");
-
+define("TABLE_COMMERCE", $table_prefix."convertisseur_commerce");
 
 // On récupère l'id du mod pour xtense...
-$query = "SELECT id FROM ".TABLE_MOD." WHERE action='hostiles'";
+$query = "SELECT id FROM ".TABLE_MOD." WHERE action='convertisseur'";
 $result = $db->sql_query($query);
 list($mod_id) = $db->sql_fetch_row($result);
 
-$mod_uninstall_name = "hostiles";
-$mod_uninstall_table = TABLE_HOSTILES.', '.TABLE_HOSTILES_ATTACKS.', '.TABLE_HOSTILES_COMPOSITION;
+$mod_uninstall_name = "convertisseur";
+$mod_uninstall_table = TABLE_COMMERCE;
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 // On regarde si la table xtense_callbacks existe :

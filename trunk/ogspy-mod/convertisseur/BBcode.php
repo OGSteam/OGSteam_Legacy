@@ -7,9 +7,7 @@
 * created : 29/11/06
 */
 
-if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-}
+if (!defined('IN_SPYOGAME')) {	die("Hacking attempt"); }
 
 //BBcode
 	//Le haut de page et le pied de page

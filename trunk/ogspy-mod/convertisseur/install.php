@@ -1,88 +1,62 @@
 <?php
 /**
 * install.php 
-* @package hostiles
-* @author Jedinight
+* @package convertisseur
+* @author Mirtador
 * @link http://www.ogsteam.fr
 */
 
-//Ce fichier installe la version 1 du module hostiles
+//Ce fichier installe la version 1 du module de aide au commerce
 
-
-if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-}
+if (!defined('IN_SPYOGAME')) { die("Hacking attempt"); }
 
 //Définitions
 global $db;
 global $table_prefix;
 
+define("TABLE_COMMERCE", $table_prefix."convertisseur_commerce");
 define("TABLE_XTENSE_CALLBACKS", $table_prefix."xtense_callbacks");
 
-define("TABLE_HOSTILES", $table_prefix."hostiles");
-define("TABLE_HOSTILES_ATTACKS", $table_prefix."hostiles_attacks");
-define("TABLE_HOSTILES_COMPOSITION", $table_prefix."hostiles_composition");
-
-if (file_exists('mod/hostiles/version.txt')) {
-	$version_txt = file('mod/hostiles/version.txt');
+if (file_exists('mod/convertisseur/version.txt')) {
+	$version_txt = file('mod/convertisseur/version.txt');
 }
 
-//Si les tables hostiles existe déjà on la supprime
-$query="DROP TABLE IF EXISTS ".TABLE_HOSTILES."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_HOSTILES_ATTACKS."";
-$db->sql_query($query);
-
-$query="DROP TABLE IF EXISTS ".TABLE_HOSTILES_COMPOSITION."";
+//Si la table commerce existe déjà on la supprime
+$query="DROP TABLE IF EXISTS ".TABLE_COMMERCE."";
 $db->sql_query($query);
 
 //$query = "INSERT INTO ".TABLE_MOD." ( title, menu, action, root, link, version, active) VALUES ( 'Commerce', 'Convertisseur <br> de ressources', 'convertisseur', 'convertisseur', 'index.php', '".trim($version_txt[1])."', '1')";
 //$db->sql_query($query);
 
 $is_ok = false;
-$mod_folder = "hostiles";
+$mod_folder = "convertisseur";
 $is_ok = install_mod ($mod_folder);
-
 if ($is_ok == true){
 		//Ensuite, on crée la table commerce
-		$query = "CREATE TABLE ".TABLE_HOSTILES." ("
-			. " id_attack VARCHAR(50) NOT NULL, "
-			. " user_id INT NOT NULL, "			
-			. " player_id INT NOT NULL, "
-			. " ally_id INT NOT NULL, "
-			. " arrival_time VARCHAR(8) NOT NULL, "
-			. " primary key ( id_attack )"
+		$query = "CREATE TABLE ".TABLE_COMMERCE." ("
+			. " commerce_id INT NOT NULL AUTO_INCREMENT, "
+			. " commerce_user_id INT NOT NULL, "
+			. " commerce_planet VARCHAR(50) NOT NULL, "
+			. " commerce_planet_coords VARCHAR(50) NOT NULL, "
+			. " commerce_planet_dest VARCHAR(50) NOT NULL, "
+			. " commerce_planet_dest_coords VARCHAR(50) NOT NULL, "				
+			. " commerce_trader VARCHAR(50) NOT NULL, "
+			. " commerce_trader_planet VARCHAR(50) NOT NULL, "
+			. " commerce_trader_planet_coords VARCHAR(50) NOT NULL, "
+			. " commerce_type VARCHAR(1) NOT NULL, "
+			. " commerce_date INT NOT NULL, "
+			. " commerce_metal INT NOT NULL default 0, "
+			. " commerce_cristal INT NOT NULL default 0, "
+			. " commerce_deut INT NOT NULL default 0, "
+			. " primary key ( commerce_id )"
 			. " )";
-		$db->sql_query($query);
-		
-		$query = "CREATE TABLE ".TABLE_HOSTILES_ATTACKS." ("
-		. " id_attack VARCHAR(50) NOT NULL, "
-		. " id_vague INT NOT NULL default 0, "
-		. " attacker VARCHAR(50) NOT NULL, "
-		. " origin_planet VARCHAR(50) NOT NULL, "
-		. " origin_coords VARCHAR(8) NOT NULL, "
-		. " cible_planet VARCHAR(50) NOT NULL, "
-		. " cible_coords VARCHAR(8) NOT NULL, "
-		. " primary key ( id_attack,id_vague )"
-		. " )";
-		$db->sql_query($query);
-		
-		$query = "CREATE TABLE ".TABLE_HOSTILES_COMPOSITION." ("
-		. " id_attack VARCHAR(50) NOT NULL, "
-		. " id_vague INT NOT NULL default 0, "
-		. " type_ship VARCHAR(50) NOT NULL, "
-		. " nb_ship VARCHAR(50) NOT NULL, "
-		. " primary key ( id_attack,id_vague )"
-		. " )";
 		$db->sql_query($query);
 		
 		// On regarde si la table xtense_callbacks existe :
 		$query = 'show tables like "'.TABLE_XTENSE_CALLBACKS.'" ';
 		$result = $db->sql_query($query);
-		
 		// On récupère le n° d'id du mod
-		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='hostiles' AND `active`='1' LIMIT 1";
+		$query = "SELECT `id` FROM `".TABLE_MOD."` WHERE `action`='convertisseur' AND `active`='1' LIMIT 1";
 		$result = $db->sql_query($query);
 		$mod_id = $db->sql_fetch_row($result);
 		$mod_id = $mod_id[0];
@@ -95,15 +69,21 @@ if ($is_ok == true){
 				$nresult = $db->sql_numrows($result);
 				if($nresult == 0) {
 					// Il est pas dedans alors on l'ajoute :
-					$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES ('.$mod_id.', "hostiles", "hostile", 1)';
+					$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES ('.$mod_id.', "livraison", "trade", 1)';
+					$db->sql_query($query);		
+					$query = 'INSERT INTO '.TABLE_XTENSE_CALLBACKS.' (mod_id, function, type, active) VALUES ('.$mod_id.', "livraison_me", "trade_me", 1)';
 					$db->sql_query($query);
 					echo("<script> alert('La compatibilité du mod Commerce avec le mod Xtense2 est installée !') </script>");
 				}
-		} else {
+			}	
+		else
+			{
 			//On averti qu'Xtense 2 n'est pas installé :
 			echo("<script> alert('Le mod Xtense 2 n\'est pas installé. \nLa compatibilité du mod Commerce ne sera donc pas installée !\nPensez à installer Xtense 2 c'est pratique ;)') </script>");
-		}	
-	} else {
+			}	
+	}
+else
+	{
 		echo  "<script>alert('Désolé, un problème a eu lieu pendant l'installation, corrigez les problèmes survenue et réessayez.');</script>";
 	}
 ?>
