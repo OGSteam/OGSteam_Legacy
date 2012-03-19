@@ -45,6 +45,7 @@
 <!ENTITY opt.handle.ally_list "Alliance members list">
 <!ENTITY opt.handle.resources "Resources">
 <!ENTITY opt.handle.fleetSending "Sent fleets">
+<!ENTITY opt.handle.hostiles "Sent hostiles fleets">
 
 <!-- Messages -->
 <!ENTITY opt.msg "Messages">

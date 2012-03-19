@@ -44,7 +44,8 @@
 <!ENTITY opt.handle.rc "Rapports de Bataille">
 <!ENTITY opt.handle.ally_list "Liste des membres d'alliance">
 <!ENTITY opt.handle.resources "Ressources">
-<!ENTITY opt.handle.fleetSending "Envoi FLottes">
+<!ENTITY opt.handle.fleetSending "Envoi Flottes">
+<!ENTITY opt.handle.hostiles "Envoi des flottes hostiles">
 
 <!--/ Options sur les messages /-->
 <!ENTITY opt.msg "Traitement des messages">
@@ -66,6 +67,8 @@
 
 <!-- ABOUT -->
 <!ENTITY opt.about "Xtense a été créé par Unibozu et est maintenue par l'OGSteam : ">
+<!ENTITY opt.bugs "Déclaration de bugs">
+<!ENTITY opt.doc "Documentation">
 <!ENTITY opt.info "Informations sur l'extension">
 <!ENTITY opt.license "License">
 <!ENTITY opt.links "Liens utiles">

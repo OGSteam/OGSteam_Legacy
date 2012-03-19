@@ -14,6 +14,7 @@ pref('Xtense.handle-fleet', true);
 pref('Xtense.handle-researchs', true);
 pref('Xtense.handle-messages', true);
 pref('Xtense.handle-overview', true);
+pref('Xtense.handle-hostiles', true);
 pref('Xtense.handle-ranking', true);
 pref('Xtense.handle-resources', true);
 pref('Xtense.handle-system', true);

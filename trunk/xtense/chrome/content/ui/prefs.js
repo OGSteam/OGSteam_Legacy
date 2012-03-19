@@ -3,8 +3,8 @@
  * @license GNU/GPL
  */
 
-var boolPrefs = ['autostart', 'debug', 'dev', 'handle-overview', 'handle-system', 'handle-buildings', 'handle-researchs', 'handle-defense',
-'handle-fleet', 'handle-ranking', 'handle-messages', 'handle-ally_list', 'msg-spy', 'msg-expeditions','msg-ennemy_spy', 'msg-rc_cdr','msg-rc',
+var boolPrefs = ['autostart', 'debug', 'dev', 'handle-overview' , 'handle-system', 'handle-buildings', 'handle-researchs', 'handle-defense',
+'handle-fleet', 'handle-ranking', 'handle-messages', 'handle-ally_list', 'handle-hostiles' , 'msg-spy', 'msg-expeditions','msg-ennemy_spy', 'msg-rc_cdr','msg-rc',
 'msg-msg', 'msg-ally_msg', 'msg-res-pref', 'log-display-time', 'log-hide_psw', 'fixpopups', 'autohide', 'context-menu', 'display-execution-time'];
 
 var Xtense = XgetMainInstance();
