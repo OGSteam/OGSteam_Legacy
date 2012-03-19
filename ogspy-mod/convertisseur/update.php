@@ -6,16 +6,15 @@
 * @link http://www.ogsteam.fr
 */
 
-if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-}
+if (!defined('IN_SPYOGAME')){ die("Hacking attempt"); }
+
 global $db;
 
-if (file_exists('mod/hostiles/version.txt')) {
-	$version_txt = file('mod/hostiles/version.txt');
+if (file_exists('mod/convertisseur/version.txt')) {
+	$version_txt = file('mod/convertisseur/version.txt');
 	}
 
-$query = "UPDATE ".TABLE_MOD." SET version='".trim($version_txt[1])."' WHERE action='hostiles'";
+$query = "UPDATE ".TABLE_MOD." SET version='".trim($version_txt[1])."' WHERE action='convertisseur'";
 $db->sql_query($query);
 ?>
 

@@ -7,9 +7,7 @@
 * created : 06/11/2006
 */
 
-if (!defined('IN_SPYOGAME')) {
-	die("Hacking attempt");
-}
+if (!defined('IN_SPYOGAME')) { die("Hacking attempt"); }
 
 echo "<table width='100%'>";
 //Débug

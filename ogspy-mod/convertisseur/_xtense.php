@@ -12,79 +12,108 @@
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 
 // Version minimum de Xtense2
-$xtense_version="2.4.0";
+$xtense_version="2.3.10";
+
 
 if(class_exists("Callback")){
-	class Hostiles_Callback extends Callback {
-	        public $version = '2.4.0';
+	class Convertisseur_Callback extends Callback {
+	        public $version = '2.3.10';
 	        
-	        public function hostiles($hostile){
+	        public function livraison($trade){
 				global $io, $user_data;
-				if(hostile_fleet($hostile)){
-					$io->append_call_message("Flotte hostile en direction de ".$hostile['destination_name']." a été enregistrée", Io::SUCCESS);
-					//return Io::SUCCESS;
+				if(livraison($trade)){
+					 $io->append_call_message("Livraison du joueur ".$trade['trader']." sur ma planète ".$trade['planet']." enrégistrée", Io::SUCCESS);
 		        } else {
-					$io->append_call_message("Flotte hostile en direction de ".$hostile['destination_name']." non enrégistrée", Io::WARNING);
-		        	//return Io::WARNING;
+					$io->append_call_message("Livraison du joueur ".$trade['trader']." sur ma planète ".$trade['planet']." non enrégistrée", Io::ERROR);
 				}
+				return Io::SUCCESS;
+			}
+			public function livraison_me($trade_me){
+				global $io, $user_data;
+				if(livraison_me($trade_me)){
+					 $io->append_call_message("Livraison sur planete amie (".$trade_me['planet'].") enregistrée", Io::SUCCESS);
+		        } else {
+					$io->append_call_message("Livraison sur planete amie (".$trade_me['planet'].") non enregistrée", Io::ERROR);
+				}
+				return Io::SUCCESS;
 			}
 			
-	        public function getCallbacks() { 
-	        	return array('function' => 'hostiles', 
-	        				'type' => 'hostiles'); 
-	        }
+	        public function getCallbacks() {
+	                return array(
+	                        array(
+	                                'function' => 'livraison',
+	                                'type' => 'trade'
+	                        ),
+	                        array(
+	                                'function' => 'livraison_me',
+	                                'type' => 'trade_me'
+	                        )
+	                );
+	       }
 	}
 }
  
 // Import des Livraisons de ressources
-function hostile_fleet($hostile){
+function livraison($trade){
   global $db, $table_prefix, $convertisseur_config, $user_data;
 	//$trade = remove_htm($trade["content"]);
 	//definition de la table Convertisseur
-	define("TABLE_HOSTILES", $table_prefix."hostiles");
-	define("TABLE_HOSTILES_ATTACKS", $table_prefix."hostiles_attacks");
-	define("TABLE_HOSTILES_COMPOSITION", $table_prefix."hostiles_composition");
-  
-	//read_config();
+	define("TABLE_CONVERTISSEUR_COMMERCE", $table_prefix."convertisseur_commerce");
+	read_config();
 	
 	$retour = false;
 	// Verification de présence 
-	if($hostile['id']!=null){
-	    $query = "DELETE FROM " . TABLE_HOSTILES . " WHERE id_attack = '".$hostile['id']."'";
-	    $db->sql_query($query);
-	    
-	    $query = "DELETE FROM " . TABLE_HOSTILES_ATTACKS . " WHERE id_attack = '".$hostile['id']."'";
-	    $db->sql_query($query);
-	    
-	    $query = "DELETE FROM " . TABLE_HOSTILES_COMPOSITION . " WHERE id_attack = '".$hostile['id']."'";
-	    $db->sql_query($query);
-	    
-		// Non enregistré		
-		$query = "INSERT INTO " . TABLE_HOSTILES ."(`id_attack`, `user_id`, `player_id`, `ally_id`, `arrival_time`) " .
-									"VALUES ('".$hostile['id']."', '".$user_data['user_id']."', '".$hostile['player_id']."', '".$hostile['ally_id']."', '".$hostile['arrival_time']."')";
-		
-	    $db->sql_query($query);
-	    	    
-		$query = "INSERT INTO " . TABLE_HOSTILES_ATTACKS ."(`id_attack`,`id_vague`,`attacker`,`origin_planet`,`origin_coords`,`cible_planet`,`cible_coords`) " .
-											"VALUES ('".$hostile['id']."', '".$hostile['id_vague']."', '".$hostile['attacker']."', '".$hostile['origin_planet']."', '".$hostile['origin_coords']."', '".$hostile['cible_planet']."', '".$hostile['cible_coords']."')";
-		
-		$db->sql_query($query);
-		
-	    $retour = true;
-	}
-    
+    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade['time']." AND commerce_user_id = '".$user_data['user_id']."'AND commerce_planet_coords = '".$trade['planet_coords']."'";
+    $result = $db->sql_query($query);
+	$nb = mysql_num_rows($result);
+	
+	// Non enregistré	
+	if ($nb == 0){
+        $query = "INSERT INTO " . TABLE_CONVERTISSEUR_COMMERCE ."" .
+        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_planet_coords`, `commerce_trader`, `commerce_trader_planet`, `commerce_trader_planet_coords`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
+				"VALUES (NULL, '".$user_data['user_id']."', '".$trade['planet']."', '".$trade['planet_coords']."', '".htmlspecialchars($trade['trader'])."', '".$trade['trader_planet']."', '".$trade['trader_planet_coords']."', ".
+				"'1', '".$trade['time']."', '" . $trade['metal']."', '".$trade['cristal']."', '".$trade['deuterium']."')";
+        $db->sql_query($query);
+        $retour = true;        
+    }
+	return $retour;
+}
+
+// Import des Livraisons de ressources sur planètes amies
+function livraison_me($trade_me) {
+	global $db, $table_prefix, $convertisseur_config, $user_data;
+	//$trade = remove_htm($trade["content"]);
+	//definition de la table Convertisseur
+	define("TABLE_CONVERTISSEUR_COMMERCE", $table_prefix."convertisseur_commerce");
+	read_config();
+	
+	$retour = false;
+	// Verification de présence 
+    $query = "SELECT * FROM " . TABLE_CONVERTISSEUR_COMMERCE . " WHERE commerce_date = ".$trade_me['time']." AND commerce_user_id = ".$user_data['user_id']." AND commerce_planet_dest_coords = '".$trade_me['planet_dest_coords']."'";
+    $result = $db->sql_query($query);
+	$nb = mysql_num_rows($result);
+	
+	// Non enregistré	
+	if ($nb == 0){
+        $query = "INSERT INTO " . TABLE_CONVERTISSEUR_COMMERCE ."" .
+        		"(`commerce_id`, `commerce_user_id`, `commerce_planet`, `commerce_planet_coords`, `commerce_planet_dest`, `commerce_planet_dest_coords`, `commerce_trader`, `commerce_type`, `commerce_date`, `commerce_metal`, `commerce_cristal`, `commerce_deut`) " .
+				"VALUES (NULL, '".$user_data['user_id']."', '".$trade_me['planet']."', '".$trade_me['planet_coords']."', '".$trade_me['planet_dest']."', '".$trade_me['planet_dest_coords']."', '".$trade_me['trader']."', " .
+				"'0', '".$trade_me['time']."', '" . $trade_me['metal']."', '".$trade_me['cristal']."', '".$trade_me['deuterium']."')";
+        $db->sql_query($query);
+        $retour = true;        
+    }
 	return $retour;
 }
 
 
-function remove_htm($hostile) {
-  $hostile = stripslashes($hostile);
-  $hostile = html_entity_decode($hostile);
-  $hostile = strip_tags($hostile);
-  $hostile = str_replace(".","",$hostile);
-  return $hostile;
+function remove_htm($trade) {
+  $trade = stripslashes($trade);
+  $trade = html_entity_decode($trade);
+  $trade = strip_tags($trade);
+  $trade = str_replace(".","",$trade);
+  return $trade;
 }
-/*
+
 function read_config() {
   global $convertisseur_config,$db;
 //récupération des paramètres de config
@@ -93,5 +122,5 @@ function read_config() {
   while ($data = mysql_fetch_row($result)) {
     $convertisseur_config=unserialize($data[0]); 
   }
-}*/
+}
 ?>
