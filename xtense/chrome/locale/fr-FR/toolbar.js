@@ -96,6 +96,7 @@ Ximplements(Xlocales, {
 	'success ally_list': 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
 	'success messages': 'Message correctement envoyé',
 	'success fleetSending': 'Départ de flotte correctement envoyé',
+	'success hostiles': 'Flotte hostile correctement envoyée',
 	'success spy': 'Rapport d\'espionnage correctement envoyé',
 	'success res': 'Message de commerce correctement envoyé',
 	

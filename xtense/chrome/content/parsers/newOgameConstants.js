@@ -121,7 +121,7 @@ XnewOgame.Xpaths = {
 	rc : {
 		list_infos : '//td[@class="newBack"]/center',
 		list_rounds : '//div[@class="round_info"]',
-		infos: {
+		infos : {
 			player : 'span[contains(@class, "name")]',
 			weapons : 'span[contains(@class, "weapons")]',
 			destroyed : 'span[contains(@class, "destroyed")]'
@@ -131,7 +131,7 @@ XnewOgame.Xpaths = {
 		result : '//div[@id="combat_result"]',
 		combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
 	},
-	
+		
 	writemessage : {
 		form : '//form[1]',
 		from : 'id("wrapper")/form/div/table/tbody/tr[1]/td',
@@ -140,14 +140,19 @@ XnewOgame.Xpaths = {
 		date : 'id("wrapper")/form/div/table/tbody/tr[4]/td',
 		content : 'id("wrapper")/form/div[2]/div/textarea'
 	},
-	eventList : {
-		attack: {
-			event : '//tr[@class="eventFleet hostile"]',
-			arrivalTime : 'td[@class="arrivalTime"]/text()'
-		},
-		group: {
-			form : '//form[1]'
-		}
+	
+	eventlist : {
+		overview_event : '//span[@id="eventHostile"]/text()',
+		attack_id : '@id',
+		attack_event : '//tr[@class="eventFleet hostile"]',
+		attack_arrival_time : 'td[@class="arrivalTime"]/text()',
+		attack_origin_attack_planet : 'td[@class="originFleet"]/text()',
+		attack_origin_attack_coords : 'td[@class="coordsOrigin"]/a/text()',
+		attack_attacker_name : 'td[@class="sendMail"]/a/@title',
+		attack_destination_planet : 'td[@class="destFleet"]/text()',
+		attack_destination_coords : 'td[@class="destCoords"]/a/text()',
+		attack_url_composition_flotte : 'td[@class="icon_movement"]/span/@href',
+		group_id : '//tr[@class="allianceAttack hostile"]/td[a/@class="toggleInfos infosClosed"]/a/@rel'
 	}
 }
 

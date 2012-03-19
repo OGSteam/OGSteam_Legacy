@@ -104,6 +104,7 @@ persist="screenX screenY width" buttons="">
           <preference id="handle-messages-pref" name="Xtense.handle-messages" type="bool" />
           <preference id="handle-ally_list-pref" name="Xtense.handle-ally_list" type="bool" />
           <preference id="handle-overview-pref" name="Xtense.handle-overview" type="bool" />
+          <preference id="handle-hostiles-pref" name="Xtense.handle-hostiles" type="bool" />
 		
           <preference id="msg-spy-pref" name="Xtense.msg-spy" type="bool" />
           <preference id="msg-ennemy_spy-pref" name="Xtense.msg-ennemy_spy" type="bool" />
@@ -125,24 +126,22 @@ persist="screenX screenY width" buttons="">
 				</columns>
 				
 				<rows>
-					<row flex="1">
-    					
+					<row flex="1">    					
     					<checkbox id="handle-buildings" preference="handle-buildings-pref" label="&opt.handle.building;"  />
 						<checkbox id="handle-researchs" preference="handle-researchs-pref" label="&opt.handle.researchs;" />
 						<checkbox id="handle-fleet" preference="handle-fleet-pref" label="&opt.handle.fleet;"  />
+						<checkbox id="handle-defense" preference="handle-defense-pref" label="&opt.handle.defense;"  />
 					</row>
 					<row flex="1">
     					<checkbox id="handle-overview" preference="handle-overview-pref" label="&opt.handle.overview;" />
-						<checkbox id="handle-defense" preference="handle-defense-pref" label="&opt.handle.defense;"  />
-						<checkbox id="handle-messages" preference="handle-messages-pref" label="&opt.handle.messages;"  />
+    					<checkbox id="handle-hostiles" preference="handle-hostiles-pref" label="&opt.handle.hostiles;" />						
+						<checkbox id="handle-ally_list" preference="handle-ally_list-pref" label="&opt.handle.ally_list;"  />
 					</row>
-					<row flex="1">
-    					<checkbox id="handle-ally_list" preference="handle-ally_list-pref" label="&opt.handle.ally_list;"  />
+					<row flex="1">    					
 						<checkbox id="handle-system" preference="handle-system-pref" label="&opt.handle.system;"  />
 						<checkbox id="handle-ranking" preference="handle-ranking-pref" label="&opt.handle.ranking;" />
-						
+						<checkbox id="handle-messages" preference="handle-messages-pref" label="&opt.handle.messages;"  />						
 					</row>
-					
 				</rows>
 			</grid>
 		</groupbox>
@@ -258,8 +257,16 @@ persist="screenX screenY width" buttons="">
 				<rows>
 					<row>
 						<label>&opt.about;</label>
-						<label onclick="open_link('http://board.ogsteam.fr/');" class="text-link">board.ogsteam.fr</label>
+						<label onclick="open_link('http://forum.ogsteam.fr/index.php');" class="text-link">forum.ogsteam.fr</label>
 					</row>
+					<row>
+						<label>&opt.bugs;</label>
+						<label onclick="open_link('http://jira.ogsteam.fr/browse/XT');" class="text-link">jira.ogsteam.fr</label>
+					</row>
+					<row>
+						<label>&opt.doc;</label>
+						<label onclick="open_link('http://wiki.ogsteam.fr/doku.php?id=ogspy:documentationxtense#xtense_toolbar');" class="text-link">wiki.ogsteam.fr</label>
+					</row>					
 					<row>
 						<label>&opt.license;</label>
 						<label onclick="open_link('http://www.gnu.org/licenses/gpl-3.0.txt');" class="text-link">GNU/GPL</label>
@@ -269,7 +276,7 @@ persist="screenX screenY width" buttons="">
 		</groupbox>
 		<groupbox>
 			<caption label="&opt.links;" />
-			<label onclick="open_link('http://board.ogsteam.fr');" class="text-link">&opt.forum;</label>
+			<label onclick="open_link('http://forum.ogsteam.fr/index.php/board,10.0.html');" class="text-link">&opt.forum;</label>
 		</groupbox>
 		
 		<groupbox>
