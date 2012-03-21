@@ -1,10 +1,9 @@
 // Production par heure
-function production (building, level, temperatureMax) {
+function production (building, level, temperatureMax, energy) {
 
     var speed = document.getElementById('vitesse_uni').value,
-        energy = document.getElementById('NRJ').value,
-        ingenieur = document.getElementById('off_ingenieur').value ? 1.1 : 1,
-        geologue = document.getElementById('off_geologue').value ? 1.1 : 1;
+        ingenieur = document.getElementById('off_ingenieur').value == 1 ? 1.1 : 1,
+        geologue = document.getElementById('off_geologue').value == 1 ? 1.1 : 1;
 
     switch (building) {
         case 'M': return speed * (30 + Math.floor(30 * level * Math.pow(1.1, level) * geologue));
@@ -18,43 +17,26 @@ function production (building, level, temperatureMax) {
 }
 
 // Production des satellites
-function production_sat (temperature_min, temperature_max) {
-
-	var ingenieur = 0;
-	var Ing = document.getElementById("off_ingenieur").value;
-	ingenieur = (Ing == 1) ? 1.10: 1;
-   	return Math.floor(ingenieur * ((((parseInt(temperature_min) + parseInt(temperature_max)) / 2) + 160) / 6));
+function production_sat (temperatureMin, temperatureMax) {
+    var ingenieur = document.getElementById('off_ingenieur').value == 1 ? 1.1 : 1;
+    return Math.floor(ingenieur * ((((parseInt(temperatureMin) + parseInt(temperatureMax)) / 2) + 160) / 6));
 }
 
-//Consommation d"énergie
+// Consommation d"énergie
 function consumption (building, level) {
-	switch (building) {
-		case "M":
-		result = Math.ceil(10 * level * Math.pow(1.1, level));
-		break;
-
-		case "C":
-		result = Math.ceil(10 * level * Math.pow(1.1, level));
-		break;
-
-		case "D":
-		result = Math.ceil(20 * level * Math.pow(1.1, level));
-		break;
-
-		case "CEF":
-        var speed = document.getElementById("vitesse_uni").value; // consommation de deut doublé par vitesse uni
-		result = Math.ceil((10 * level * Math.pow(1.1, level))* speed);
-		break;
-
-		default:
-		result = 0;
-		break;
-	}
     
-	return Math.round(result);
+    switch (building) {
+        case 'M': return Math.ceil(10 * level * Math.pow(1.1, level));
+        case 'C': return Math.ceil(10 * level * Math.pow(1.1, level));
+        case 'D': return Math.ceil(20 * level * Math.pow(1.1, level));
+        case 'CEF': return Math.ceil((10 * level * Math.pow(1.1, level)) * document.getElementById('vitesse_uni').value);
+        default: return 0;
+    }
+
 }
 
-function update_page() {
+// Met à jour la page Espace Personel > Simulation
+function update_page () {
 	var NRJ = document.getElementById("NRJ").value;
 	
 	//
@@ -151,8 +133,6 @@ function update_page() {
 		}
 	}
 
-
-
 	//
 	// Totaux
 	//
@@ -174,6 +154,7 @@ function update_page() {
 		D_prod = D_prod + D_1_prod[i];
 		NRJ = NRJ + NRJ_1[i];
 	}
+	
 	//Metal
 	document.getElementById("M_conso").innerHTML = M_conso;
 	document.getElementById("M_prod").innerHTML = M_prod;
@@ -193,7 +174,6 @@ function update_page() {
 	else Delta_NRJ = "<font color='lime'>"+Delta_NRJ+"</font>";
 	NRJ = "<font color='lime'>"+NRJ+"</font>"
 	document.getElementById("NRJ").innerHTML = Delta_NRJ + " / " + NRJ;
-
 
 	//
 	// Points
@@ -241,7 +221,6 @@ function update_page() {
 
 	document.getElementById("total_d_pts").innerHTML = Math.round(total_d_pts/1000);
 
-
 	// Lunes de planetes
 	var total_lune_pts = 0;
 	var lune_pts_1 = new Array();
@@ -262,7 +241,6 @@ function update_page() {
 	}
 
 	document.getElementById("total_lune_pts").innerHTML = Math.round(total_lune_pts/1000);
-
 
 	// Sat planetes
 	var total_sat_pts = 0;
@@ -306,9 +284,7 @@ function update_page() {
 	techno_pts = techno_pts + techno_astro_pts;
 	// Cout Total Techno
 	document.getElementById("techno_pts").innerHTML = Math.round(techno_pts/1000);
-	
 
-	
 	// Cout Total
 	document.getElementById("total_pts").innerHTML = Math.round((total_b_pts + total_d_pts + total_lune_pts + techno_pts)/1000)+total_sat_pts;
 }
