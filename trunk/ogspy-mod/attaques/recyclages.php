@@ -353,7 +353,20 @@ echo "<script type='text/javascript'>
 				chart = new Highcharts.Chart({
 	      chart: {
 	         renderTo: 'graphiquemois',
-	         defaultSeriesType: 'column'
+	         defaultSeriesType: 'column',
+	         backgroundColor: {
+		         linearGradient: [0, 0, 250, 500],
+		         stops: [
+		            [0, 'rgb(48, 48, 96)'],
+		            [1, 'rgb(0, 0, 0)']
+		         ]
+		      },
+		      borderColor: '#000000',
+		      borderWidth: 2,
+		      className: 'dark-container',
+		      plotBackgroundColor: 'rgba(255, 255, 255, .1)',
+		      plotBorderColor: '#CCCCCC',
+		      plotBorderWidth: 1
 	      },
 	      title: {
 	         text: 'Historique du mois'
@@ -375,7 +388,11 @@ echo "<script type='text/javascript'>
 	           right: '50px',
 	           top: '50px'
 			 },
-	         backgroundColor: '#FFFFFF',
+			 itemStyle: {
+		         font: '9pt Trebuchet MS, Verdana, sans-serif',
+		         color: '#A0A0A0'
+		     },
+	         backgroundColor: '#666',
 	         align: 'left',
 	         verticalAlign: 'top',
 	         x: 100,
@@ -393,7 +410,7 @@ echo "<script type='text/javascript'>
 	         }
 	      },
 	           series: [".$series."]
-	   });      
+	   });
 	</script>";
 
 //echo"</fieldset>";

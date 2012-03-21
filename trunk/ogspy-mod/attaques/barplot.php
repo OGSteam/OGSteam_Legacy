@@ -16,60 +16,13 @@
 // L'appel direct est interdit....
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 // Appel de la librairie Artichow pour tracer des histogrammes
-require_once "library/artichow/BarPlot.class.php";
+//require_once "library/artichow/BarPlot.class.php";
 global $db, $table_prefix, $prefixe;
 // Gestion des dates - récupère le mois et l'année courants 
 $mois = date("m");
 $annee = date("Y");
-$maxy=0;
 
-function color($a = NULL) {
-    if($a === NULL) {
-        $a = 0;
-    }
-    return new Color(mt_rand(20, 180), mt_rand(20, 180), mt_rand(20, 180), $a);
-}
-
-// Initialisation du graphique
-$graph = new Graph(800, 600);
-// Active l'AntiAliasing pour avoir un graph plus net
-$graph->setAntiAliasing(TRUE);
-// cache la bordure du graphe
-$graph->border->hide();
-// Initialisation d'un group de plot
-$group = new PlotGroup;
-//setSpace(/* Gauche */,/* Droite */,/* Haut */,/* Bas */);
-// paramétrage des espaces autour du graphe 
-//$group->setSpace(1, 5, NULL, NULL);
-// parametrage des espaces entre barres
-$group->setPadding(40, 10, NULL, 20);
-//$group->setXAxisZero(FALSE);
-$group->axis->bottom->setColor(new White);
-$group->axis->bottom->label->setColor(new White);
-$group->axis->left->setColor(new White);
-$group->axis->left->setLabelPrecision(0);
-$group->axis->left->label->setColor(new White);
-$group->setBackgroundColor(new Color(0, 0, 20));
-$group->grid->setNoBackground();
-$group->grid->setType(2);
-// Définition des couleurs des barres
-$colors = array(
-    new Color(187, 213, 151, 20), // Métal
-    new Color(223, 177, 151, 20), // Cristal
-    new Color(111, 186, 132, 20)  // Deutérium
-);
-// Définition des labels des jours sur l'axe X
-function setday($value) {
-    return $value + 1;
-}
-$group->axis->bottom->label->setCallbackFunction('setday');
-// Définition du tableau pour les textes dans le label
-$nom_ress[0]="Métal";
-$nom_ress[1]="Cristal";
-$nom_ress[2]="Deutérium";
-
-switch ($pub_subaction)
-{
+switch ($pub_subaction) {
   case "attaques" :
     $query="SELECT DAY(FROM_UNIXTIME(attack_date)) AS day, SUM(attack_metal) AS metal, SUM(attack_cristal) AS cristal, SUM(attack_deut) AS deut FROM ".TABLE_ATTAQUES_ATTAQUES." WHERE attack_user_id=".$user_data['user_id']." and MONTH(FROM_UNIXTIME(attack_date))=".$mois." and YEAR(FROM_UNIXTIME(attack_date))=".$annee." GROUP BY day"; 
     break;
@@ -89,25 +42,22 @@ switch ($pub_subaction)
 
 $barre = array();
 // Lecture de la base de données et stockage des valeurs dans le tableau
-if ( $pub_subaction !="recyclage")
-{
-while (list($jour, $metal, $cristal, $deut) = $db->sql_fetch_row($result))
-    {
-    $barre[$jour][0]=$metal;
-    $barre[$jour][1]=$cristal;
-    $barre[$jour][2]=$deut;
-    
-    // on recherche la valeur la plus grande pour définir la valeur maxi de l'axe Y
-    if ($metal>$maxy) {$maxy=$metal;}
-    if ($cristal>$maxy) {$maxy=$cristal;}
-    if ($deut>$maxy)  {$maxy=$deut;}
-  }
+if ( $pub_subaction !="recyclage") {
+	while (list($jour, $metal, $cristal, $deut) = $db->sql_fetch_row($result)) {
+	    $barre[$jour][0]=$metal;
+	    $barre[$jour][1]=$cristal;
+	    $barre[$jour][2]=$deut;
+	    
+	    // on recherche la valeur la plus grande pour définir la valeur maxi de l'axe Y
+	    if ($metal>$maxy) {$maxy=$metal;}
+	    if ($cristal>$maxy) {$maxy=$cristal;}
+	    if ($deut>$maxy)  {$maxy=$deut;}
+	}
 }
-if (isset($query2))
-  {
+
+if (isset($query2)) {
   $result2 = $db->sql_query($query2);
-  while (list($jour, $metal, $cristal) = $db->sql_fetch_row($result2))
-    {
+  while (list($jour, $metal, $cristal) = $db->sql_fetch_row($result2)) {
     if ( !isset($barre[$jour][0])) {$barre[$jour][0]=0;}
     if ( !isset($barre[$jour][1])) {$barre[$jour][1]=0;}
     $barre[$jour][0] += $metal;
@@ -116,41 +66,100 @@ if (isset($query2))
     // on recherche la valeur la plus grande pour définir la valeur maxi de l'axe Y
     if ($metal>$maxy) {$maxy=$metal;}
     if ($cristal>$maxy) {$maxy=$cristal;}
-    }
   }
-for($n = 0; $n < 3; $n++) 
-  {   
-    $x = array();
-    // On récupère les valeurs stockés dans le tableau et on les passe dans celui du graphique 
-    for($i = 1; $i < 32; $i++) {
-        if ( ! isset($barre[$i][$n])) {$barre[$i][$n]=0;}
-        $x[] = $barre[$i][$n];
-    }
-    // On paramètre la barre
-    $plot = new BarPlot($x, 1, 1, (2 - $n) * 7);
-    $plot->barBorder->setColor(new White);
-    //$plot->setBarSize(0.54);
-    $plot->barShadow->setSize(3);
-    $plot->barShadow->setPosition(SHADOW_RIGHT_TOP);
-    // erreur dans la Class Shadow de Artichow (http://artichow.org/forum/read.php?2,490,505)
-    //$plot->barShadow->setColor(new Color(160, 160, 160, 10));
-    $plot->barShadow->smooth(TRUE);
-    $plot->setBarColor($colors[$n]);
-    // et on l'ajoute au graphique
-    $group->add($plot);
-    $group->legend->add($plot, $nom_ress[$n], LEGEND_BACKGROUND); 
-  }
+}
 
-$group->setYMax($maxy);
-$group->setXMax(31);
-$group->legend->shadow->setSize(0);
-$group->legend->setAlign(LEGEND_CENTER);
-$group->legend->setSpace(6);
-$group->legend->setTextFont(new Tuffy(8));
-$group->legend->setPosition(0.50, 0.1);
-$group->legend->setBackgroundColor(new Color(255, 255, 255, 25));
-$group->legend->setColumns(2);
+$i=0;
+$categories="";$metal="";$cristal="";$deuterium="";
+for($n = 1; $n < 32; $n++) {
+	if ( ! isset($barre[$n][$i])) {
+		$barre[$n][$i]=0;
+	}		
+	if($i==1){
+		$categories .= "'Jour ".$n."'";
+		$metal .= $barre[$n][0];
+		$cristal .= $barre[$n][1];
+		$deuterium .= $barre[$n][2];
+	} else {
+		$categories .= ",'Jour ".$n."''";
+		$metal .= ",".$barre[$n][0];
+		$cristal .= ",".$barre[$n][1];
+		$deuterium .= ",".$barre[$n][2];
+	}
+}
 
-$graph->add($group);
-$graph->draw();
+$series = "{name: 'M&eacute;tal', data: [".$metal."] }, " .
+		  "{name: 'Cristal', data: [".$cristal."] }, " .
+		  "{name: 'Pertes', data: [".$deuterium."] }";
+
+echo $series;
+
+echo "<script type='text/javascript'>
+   			function number_format(number, decimals, dec_point, thousands_sep) {
+    			var n = !isFinite(+number) ? 0 : +number, 
+        		prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        		sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+		        s = '',
+		        toFixedFix = function (n, prec) {
+		            var k = Math.pow(10, prec);
+		            return '' + Math.round(n * k) / k;
+		        };
+    			// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    			s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+			    if (s[0].length > 3) {
+			        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);    }
+			    if ((s[1] || '').length < prec) {
+			        s[1] = s[1] || '';
+			        s[1] += new Array(prec - s[1].length + 1).join('0');
+			    }    return s.join(dec);
+			}
+			
+		var chart;
+		
+			chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'graphiquemois',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: 'Historique du mois'
+      },
+      xAxis: {
+         categories: [".$categories."]
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Quantit&eacute;'
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         style: {
+		   left: 'auto',
+		   bottom: 'auto',
+           right: '50px',
+           top: '50px'
+		 },
+         backgroundColor: '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>' + this.series.name + '</b>: ' + number_format(this.y, 0, ',', ' ');
+         }
+      },
+      plotOptions: {
+         column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+         }
+      },
+           series: [".$series."]
+   });      
+</script>";
+
 ?> 
