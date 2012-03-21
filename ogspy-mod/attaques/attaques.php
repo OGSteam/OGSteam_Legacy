@@ -395,50 +395,67 @@ echo "<script type='text/javascript'>
 				
 			var chart;
 			
-				chart = new Highcharts.Chart({
-	      chart: {
-	         renderTo: 'graphiquemois',
-	         defaultSeriesType: 'column'
-	      },
-	      title: {
-	         text: 'Historique du mois'
-	      },
-	      xAxis: {
-	         categories: [".$categories."]
-	      },
-	      yAxis: {
-	         min: 0,
-	         title: {
-	            text: 'Quantité'
-	         }
-	      },
-	      legend: {
-	         layout: 'vertical',
-	         style: {
-			   left: 'auto',
-			   bottom: 'auto',
-	           right: '50px',
-	           top: '50px'
-			 },
-	         backgroundColor: '#FFFFFF',
-	         align: 'left',
-	         verticalAlign: 'top',
-	         x: 100,
-	         y: 70
-	      },
-	      tooltip: {
-	         formatter: function() {
-	            return '<b>' + this.series.name + '</b>: ' + number_format(this.y, 0, ',', ' ');
-	         }
-	      },
-	      plotOptions: {
-	         column: {
-	            pointPadding: 0.2,
-	            borderWidth: 0
-	         }
-	      },
-	           series: [".$series."]
-	   });      
+			chart = new Highcharts.Chart({
+							      chart: {
+							         renderTo: 'graphiquemois',
+							         defaultSeriesType: 'column',
+							         backgroundColor: {
+								         linearGradient: [0, 0, 250, 500],
+								         stops: [
+								            [0, 'rgb(48, 48, 96)'],
+								            [1, 'rgb(0, 0, 0)']
+								         ]
+								      },
+								      borderColor: '#000000',
+								      borderWidth: 2,
+								      className: 'dark-container',
+								      plotBackgroundColor: 'rgba(255, 255, 255, .1)',
+								      plotBorderColor: '#CCCCCC',
+								      plotBorderWidth: 1
+							      },
+							      title: {
+							         text: 'Historique du mois'
+							      },
+							      xAxis: {
+							         categories: [".$categories."]
+							      },
+							      yAxis: {
+							         min: 0,
+							         title: {
+							            text: 'Quantité'
+							         }
+							      },
+							      legend: {
+							         layout: 'vertical',
+							         style: {
+									   left: 'auto',
+									   bottom: 'auto',
+							           right: '50px',
+							           top: '50px'
+									 },
+									 itemStyle: {
+								         font: '9pt Trebuchet MS, Verdana, sans-serif',
+								         color: '#A0A0A0'
+								     },
+							         backgroundColor: '#666',
+							         align: 'left',
+							         verticalAlign: 'top',
+							         x: 100,
+							         y: 70
+							      },
+							      tooltip: {
+							         formatter: function() {
+							            return '<b>' + this.series.name + '</b>: ' + number_format(this.y, 0, ',', ' ');
+							         }
+							      },
+							      plotOptions: {
+							         column: {
+							            pointPadding: 0.2,
+							            borderWidth: 0
+							         }
+							      },
+							           series: [".$series."]
+	   });   
 	</script>";
 }
 echo"<br>";
