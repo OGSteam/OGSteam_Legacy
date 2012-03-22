@@ -153,7 +153,10 @@ if ($page == 'mods') {
 		'ranking_player_research' => 'Statistiques (recherches) des joueurs',
 		'ranking_ally_fleet' => 'Statistiques (flotte) des alliances',
 		'ranking_ally_points' => 'Statistiques (points) des alliances',
-		'ranking_ally_research' => 'Statistiques (recherches) des alliances'
+		'ranking_ally_research' => 'Statistiques (recherches) des alliances',
+		'trade' => 'Livraisons Alliées',
+		'trade_me' => 'Mes livraisons',
+		'hostiles' => 'Flottes Hostiles'
 	);
 	
 	while ($data = $db->sql_fetch_assoc($query)) {
