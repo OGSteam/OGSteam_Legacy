@@ -314,7 +314,7 @@ CREATE TABLE ogspy_rank_player_military (
   ally varchar(100) NOT NULL default '',
   points int(11) NOT NULL default '0',
   sender_id int(11) NOT NULL default '0',
-  Nb_Spacecraft int(11) NOT NULL default '0',
+  nb_spacecraft int(11) NOT NULL default '0',
   PRIMARY KEY (rank,datadate),
   KEY datadate (datadate,player),
   KEY player (player)
