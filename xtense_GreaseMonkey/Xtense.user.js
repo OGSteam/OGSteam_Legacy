@@ -8,7 +8,8 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.0.6";
+var VERSION = "2.4.1";
+var TYPE = "GM";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
 var nomScript = 'Xtense';
@@ -28,6 +29,12 @@ var XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_CO
 var isFirefox = (window.navigator.userAgent.indexOf('Firefox') > -1) ? true : false;
 var isChrome = (window.navigator.userAgent.indexOf('Chrome') > -1) ? true : false;
 var isTamper = false;
+
+if(isFirefox){
+	TYPE+="FF";
+} else if(isChrome){
+	TYPE+="GC";
+}
 
 // Variables globales données ogame
 var url = location.href;// Adresse en cours sur la barre d'outils
@@ -2075,7 +2082,7 @@ function initOGSpyCommunication (){
 		data : {},
 		send : function (){
 		
-				var postData = 'toolbar_version=' + VERSION + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(prefix_GMData +'server.user','') + '&password=' + MD5(SHA1(GM_getValue(prefix_GMData +'server.pwd',''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData();
+				var postData = 'toolbar_version=' + VERSION + '&toolbar_type=' + TYPE + '&mod_min_version=' + PLUGIN_REQUIRED + '&user=' + GM_getValue(prefix_GMData +'server.user','') + '&password=' + MD5(SHA1(GM_getValue(prefix_GMData +'server.pwd',''))) + '&univers=' + urlUnivers + XtenseRequest.serializeData();
 				log("sending " + postData + " to " + GM_getValue(prefix_GMData +'server.url.plugin','') + " from " + urlUnivers);
 				new Xajax(
 				{
