@@ -35,7 +35,7 @@ if ($time > mktime(0,0,0) && $time < mktime(8,0,0)) $timestamp = mktime(0,0,0);
 if ($time > mktime(8,0,0) && $time < mktime(16,0,0)) $timestamp = mktime(8,0,0);
 if ($time > mktime(16,0,0) && $time < (mktime(0,0,0)+60*60*24)) $timestamp = mktime(16,0,0);
 
-Check::data(isset($pub_toolbar_version, $pub_mod_min_version, $pub_user, $pub_password, $pub_univers));
+Check::data(isset($pub_toolbar_version, $pub_toolbar_type, $pub_mod_min_version, $pub_user, $pub_password, $pub_univers));
 
 if (version_compare($pub_toolbar_version, TOOLBAR_MIN_VERSION, '<')) {
 	$io->set(array(
@@ -128,6 +128,9 @@ $call = new CallbackHandler();
 
 //nombre de messages
 $io->set(array('new_messages' => 0));
+
+// Xtense : Ajout de la version et du type de barre utilisée par l'utilisateur
+$db->sql_query("UPDATE " . TABLE_USER . " SET xtense_version='" . $pub_toolbar_version . "', xtense_type='" . $pub_toolbar_type . "' WHERE user_id = ".$user_data['user_id']);
 
 switch ($pub_type){
 	case 'overview': //PAGE OVERVIEW
@@ -408,6 +411,7 @@ switch ($pub_type){
 			$planet_type 	= ((int)$pub_planet_type == TYPE_PLANET ? TYPE_PLANET : TYPE_MOON);
 			$planet_name 	= utf8_decode($pub_planet_name);
 			if (isset($pub_SAT)) $ss = $pub_SAT;
+			if($ss=='undefined') $ss = "";
 			
 			$home = home_check($planet_type, $coords);
 					
@@ -419,7 +423,7 @@ switch ($pub_type){
 			} elseif ($home[0] == 'update') {
 				$db->sql_query('UPDATE '.TABLE_USER_BUILDING.' SET planet_name = "'.$planet_name.'" WHERE user_id = '.$user_data['user_id'].' AND planet_id = '.$home['id']);
 				
-				if (isset($pub_SAT)) $db->sql_query('UPDATE '.TABLE_USER_BUILDING.' SET planet_name = "'.$planet_name.'", Sat = '.$ss.' WHERE planet_id = '.$home['id'].' AND user_id = '.$user_data['user_id']);
+				if (isset($pub_SAT)) $db->sql_query('UPDATE '.TABLE_USER_BUILDING.' SET planet_name = "'.$planet_name.'", Sat = \''.$ss.'\' WHERE planet_id = '.$home['id'].' AND user_id = '.$user_data['user_id']);
 				
 				$io->set(array(
 						'type' => 'home updated',
