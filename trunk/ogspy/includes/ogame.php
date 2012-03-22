@@ -199,25 +199,14 @@ function depot_capacity($level)
     return $result;
 }
 
-//renvoit le nombre de planete max
+// Renvoie le nombre de planete max en fonction de la techno astro (PM incluse)
 function astro_max_planete($level)
 {
     global $server_config;
-
-    // nouvel uni
-    $result = 1; // la pm ...
-    if ($level > 0) {
-        $result = ceil($level / 2) + 1;
-    }
-
-    // anciens unis peuvent avoir 9 planetes sans la techno
-    if ($server_config['astro_strict'] == 1 || $level < 15) {
-        return 9;
-    }
-    return $result;
+    return ($server_config['astro_strict'] && $level < 15) ? 9 : ceil($level / 2) + 1;
 }
 
-//Coûts d'amélioration des batiments et recherches
+// Coûts d'amélioration des batiments et recherches
 function building_upgrade($building, $level)
 {
     switch ($building) {
