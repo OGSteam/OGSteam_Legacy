@@ -9,7 +9,7 @@ function Request(Tab, callback, scope) {
 		
 		for (var i = 0, len = servers.length; i < len; i++) {
 			var server = servers[i];
-			var postData = 'toolbar_version=' + Xtense.VERSION + '&mod_min_version=' + Xtense.PLUGIN_REQUIRED + '&user=' + server.user
+			var postData = 'toolbar_version=' + Xtense.VERSION + '&toolbar_type=' + Xtense.TYPE + '&mod_min_version=' + Xtense.PLUGIN_REQUIRED + '&user=' + server.user
 							+ '&password=' + server.hash + '&univers=' + server.univers +this.serializeData();
 			
 			if (Xprefs.getBool('spy-debug')) postData += '&spy_debug=1';

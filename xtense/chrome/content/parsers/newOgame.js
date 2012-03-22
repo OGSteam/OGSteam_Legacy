@@ -479,7 +479,7 @@ var XnewOgame = {
 				counterAg++;
 				var idGr = idGroupees.snapshotItem(i).nodeValue;
 				// Recuperation des vagues de l'attaque groupée 
-				var vagues = Xpath.getOrderedSnapshotNodes(doc,"//tr[starts-with(@class,'partnerInfo "+idGr+"')]");
+				var vagues = Xpath.getOrderedSnapshotNodes(doc,paths.group_id.formatPatern(0,idGr));
 				
 				var counterVague=0;
 				// Parcours des vagues de l'AG
@@ -487,20 +487,20 @@ var XnewOgame = {
 					counterVague++;
 					var vague = vagues.snapshotItem(f);
 					
-					var attack = Xpath.getSingleNode(doc,"//tr[@class='allianceAttack hostile' and td[a/@class='toggleInfos infosClosed']/a/@rel='"+idGr+"']");
-					var arrivalTime = Xpath.getStringValue(doc,"td[@class='arrivalTime']/text()",attack).trim();
+					var attack = Xpath.getSingleNode(doc,paths.group_attack.formatPatern(0,idGr));
+					var arrivalTime = Xpath.getStringValue(doc,paths.group_arrival_time,attack).trim();
 		 		
-			 		var originAttackName = Xpath.getStringValue(doc,"td[@class='originFleet']/a/text()",vague).trim();
-			 		var originAttackCoords = Xpath.getStringValue(doc,"td[@class='coordsOrigin']/a/text()",vague).trim().replace("[","").replace("]","");
-			 		var attacker = Xpath.getStringValue(doc,"td[@class='sendMail']/a/@title",vague);
+			 		var originAttackName = Xpath.getStringValue(doc,paths.group_origin_attack_planet,vague).trim();
+			 		var originAttackCoords = Xpath.getStringValue(doc,paths.group_origin_attack_coords,vague).trim().cleanCoords();
+			 		var attacker = Xpath.getStringValue(doc,paths.group_attacker_name,vague);
 			 		var attackerTab = attacker.split(" ");
 			 		attacker=attackerTab[attackerTab.length-1];
 			 		 		
-			 		var destName = Xpath.getStringValue(doc,"td[@class='destFleet']/text()",vague).trim();
-			 		var destCoords = Xpath.getStringValue(doc,"td[@class='destCoords']/a/text()",vague).trim().replace("[","").replace("]","");
+			 		var destName = Xpath.getStringValue(doc,paths.group_destination_planet,vague).trim();
+			 		var destCoords = Xpath.getStringValue(doc,paths.group_destination_coords,vague).trim().cleanCoords();
 			 				 		
-			 		var urlCompo = Xpath.getStringValue(doc,"td[@class='icon_movement']/span/@rel",vague).trim();
-			 		var compo = XajaxCompo(urlCompo).trim().replaceAll("\r","").replaceAll("\n","").replaceAll("\t","").replaceAll(" {2,}","").replaceAll("> <","><");
+			 		var urlCompo = Xpath.getStringValue(doc,paths.group_url_compo,vague).trim();
+			 		var compo = XajaxCompo(urlCompo).trim().cleanHtmlIndentation();
 			 		
 			 		var tabCompo = compo.split("</tr>");
 			 		var compoTotale = "";
@@ -522,7 +522,6 @@ var XnewOgame = {
 			if(hostiles.snapshotLength == 0 && idGroupees.snapshotLength == 0){
 				var target = this.doc.getElementById('contentWrapper');
 				target.removeEventListener("DOMNodeInserted", this.getHostiles, false);
-				//div.removeEventListener('click', listener, false);
 				Xconsole("Aucune flotte hostile en approche");
 			}			  
 		}		
