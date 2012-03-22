@@ -237,17 +237,19 @@ document.getElementById('satellite').style.visibility='hidden';
 
 </form> --> 
 <?php
+
 // verification de compte de planete/lune avec la technologie astro
 $astro = astro_max_planete($user_technology['Astrophysique']);
-if (((find_nb_planete_user() > $astro )||(find_nb_moon_user() >  $astro))&&($user_technology != false)){
-echo '<tr>';
-echo '	<td class="c" colspan="';
-print ($nb_planete <10)?'10':($nb_planete +1) ; 
-echo '">Une incohérence a été trouvée dans votre espace personnel<br />';
-print (find_nb_planete_user() > $astro )?'En rapport avec le nombre de vos planetes<br />':'' ; 
-print (find_nb_moon_user() > $astro )?'En rapport avec le nombre de vos lunes<br />':'' ; 
-echo ' </td>';
-echo'</tr>';}
+
+if (((find_nb_planete_user() > $astro ) || (find_nb_moon_user() > $astro)) && ($user_technology != false)) {
+	echo '<tr>';
+	echo '<td class="c" colspan="'. ($nb_planete < 10 ? '10' : $nb_planete + 1) .'">';
+	echo 'Une incohérence a été trouvée dans votre espace personnel<br />';
+	echo (find_nb_planete_user() > $astro) ? 'En rapport avec le nombre de vos planetes<br />' : '';
+	echo (find_nb_moon_user() > $astro) ? 'En rapport avec le nombre de vos lunes<br />' : '';
+	echo '</td>';
+	echo '</tr>';
+}
 
 ?>
 
