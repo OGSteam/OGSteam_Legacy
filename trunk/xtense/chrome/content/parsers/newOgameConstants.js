@@ -152,7 +152,16 @@ XnewOgame.Xpaths = {
 		attack_destination_planet : 'td[@class="destFleet"]/text()',
 		attack_destination_coords : 'td[@class="destCoords"]/a/text()',
 		attack_url_composition_flotte : 'td[@class="icon_movement"]/span/@href',
-		group_id : '//tr[@class="allianceAttack hostile"]/td[a/@class="toggleInfos infosClosed"]/a/@rel'
+		group_id : '//tr[@class="allianceAttack hostile"]/td[a/@class="toggleInfos infosClosed"]/a/@rel',
+		group_event : '//tr[starts-with(@class,"partnerInfo {0}")]',
+		group_attack : '//tr[@class="allianceAttack hostile" and td[a/@class="toggleInfos infosClosed"]/a/@rel=\'{0}\']',
+		group_arrival_time : 'td[@class="arrivalTime"]/text()',
+		group_origin_attack_planet : 'td[@class="originFleet"]/a/text()',
+		group_origin_attack_coords : 'td[@class="coordsOrigin"]/a/text()',
+		group_attacker_name : 'td[@class="sendMail"]/a/@title',
+		group_destination_planet : 'td[@class="destFleet"]/text()',
+		group_destination_coords : 'td[@class="destCoords"]/a/text()',
+		group_url_compo : 'td[@class="icon_movement"]/span/@rel'
 	}
 }
 

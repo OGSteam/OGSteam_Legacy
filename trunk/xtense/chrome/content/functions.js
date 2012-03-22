@@ -36,7 +36,15 @@ String.prototype.trimInt = function() {
 String.prototype.trimZeros = function() {
 	return this.replace(/^0+/g,'');
 }
-
+String.prototype.formatPatern = function(id,valeur) {
+	return this.replace('{'+id+'}',valeur);
+}
+String.prototype.cleanCoords = function() {
+	return this.replace("[","").replace("]","");
+}
+String.prototype.cleanHtmlIndentation = function() {
+	return this.replaceAll("\r","").replaceAll("\n","").replaceAll("\t","").replaceAll(" {2,}","").replaceAll("> <","><");
+}
 String.prototype.getInts = function (/*separator*/) {
 	/*if(typeof separator!="undefined")reg=new Regexp("[0-9("+separator+")]+","g");
 	else reg=new Regexp("[0-9("+separator+")]+","g");*/
