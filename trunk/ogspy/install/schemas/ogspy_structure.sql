@@ -541,6 +541,8 @@ CREATE TABLE ogspy_user (
   spy_exported int(11) NOT NULL default '0',
   rank_added_web int(11) NOT NULL default '0',
   rank_added_ogs int(11) NOT NULL default '0',
+  xtense_type enum('FF','GMFF','GMGC'),
+  xtense_version varchar(10),
   rank_exported int(11) NOT NULL default '0',
   user_skin varchar(255) NOT NULL default '',
   user_stat_name varchar(50) NOT NULL default '',

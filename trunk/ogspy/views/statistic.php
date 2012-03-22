@@ -119,6 +119,7 @@ $legend = htmlentities($legend);
 	<td class="c" colspan="3">Classement (lignes)</td>
 	<td class="c" colspan="1">Recherches<br />effectuées</td>
 	<td class="c" colspan="1">Ratio</td>
+	<td class="c" colspan="2">Xtense</td>
 </tr>
 <tr align="center">
 	<td class="c" width="100" colspan="1">&nbsp;</td>
@@ -133,6 +134,8 @@ $legend = htmlentities($legend);
 	<td class="c" width="50"><a title="Envoyées vers OGS">OGS&nbsp;<img src='images/asc.png'></a></td>
 	<td class="c" width="100" colspan="1">&nbsp;</td>
 	<td class="c" width="100" colspan="1">&nbsp;</td>
+	<td class="c" width="150" colspan="1">Type</td>
+	<td class="c" width="50" colspan="1">Version</td>
 </tr>
 <?php
 //Statistiques participation des membres actifs
@@ -173,23 +176,35 @@ foreach ($user_statistic as $v) {
 	else $color = "lime";
 
 	if ($enable_stat_view || ($v["user_name"] == $user_data["user_name"]) || $user_data["user_admin"] || $user_data["user_coadmin"]){
+		
+		$xtense_type="NC";
+		if($v["xtense_type"]=='FF') {
+		 $xtense_type = "Firefox"; 
+		} else if($v["xtense_type"]=='GMFF') {
+		 $xtense_type = "GreaseMonkey Firefox"; 
+		} else if($v["xtense_type"]=='GMGC') {
+		 $xtense_type = "GreaseMonkey Google Chrome"; 
+		}
+		
 		echo "<tr>"."\n";
 		echo "\t"."<th><font color='".$color."'>".$v["user_name"]." ";
 		if ($enable_members_view || $user_data["user_admin"] || $user_data["user_coadmin"])
 			echo $v["here"];
-		echo "</font></th>";
-		echo "<th>".formate_number($v["planet_added_web"])."</th>";
-		echo "<th>".formate_number($v["planet_added_ogs"])."</th>";
-		echo "<th>".formate_number($v["planet_exported"])."</th>";
-		echo "<th>".formate_number($v["spy_added_web"])."</th>";
-		echo "<th>".formate_number($v["spy_added_ogs"])."</th>";
-		echo "<th>".formate_number($v["spy_exported"])."</th>";
-		echo "<th>".formate_number($v["rank_added_web"])."</th>";
-		echo "<th>".formate_number($v["rank_added_ogs"])."</th>";
-		echo "<th>".formate_number($v["rank_exported"])."</th>";
-		echo "<th>".formate_number($v["search"])."</th>"."\n";
-		echo "<th><font color='".$color."'>".formate_number($result)."</font></th>"."\n";
-		echo "</tr>"."\n";
+		echo "</font></th>"
+			."<th>".formate_number($v["planet_added_web"])."</th>"
+		 	."<th>".formate_number($v["planet_added_ogs"])."</th>"
+			."<th>".formate_number($v["planet_exported"])."</th>"
+			."<th>".formate_number($v["spy_added_web"])."</th>"
+			."<th>".formate_number($v["spy_added_ogs"])."</th>"
+			."<th>".formate_number($v["spy_exported"])."</th>"
+			."<th>".formate_number($v["rank_added_web"])."</th>"
+			."<th>".formate_number($v["rank_added_ogs"])."</th>"
+			."<th>".formate_number($v["rank_exported"])."</th>"
+			."<th>".formate_number($v["search"])."</th>\n"
+			."<th><font color='".$color."'>".formate_number($result)."</font></th>\n"
+			."<th>" . $xtense_type . "</th>"
+			."<th>".$v["xtense_version"]."</th>"
+		."</tr>\n";
 	}
 }
 if (sizeof($user_statistic) > 10) {
@@ -207,6 +222,8 @@ if (sizeof($user_statistic) > 10) {
 	<td class="c" width="50"><a title="Envoyées vers OGS">OGS&nbsp;<img src='images/desc.png'></a></td>
 	<td class="c" width="100" colspan="1">&nbsp;</td>
 	<td class="c" width="100" colspan="1">&nbsp;</td>
+	<td class="c" width="150" colspan="1">Type</td>
+	<td class="c" width="50" colspan="1">Version</td>
 </tr>
 <tr align="center">
 	<td class="c" width="100">Pseudos</td>
@@ -214,7 +231,8 @@ if (sizeof($user_statistic) > 10) {
 	<td class="c" colspan="3">Rapports d'espionnage</td>
 	<td class="c" colspan="3">Classement (lignes)</td>
 	<td class="c" colspan="1">Recherches effectuées</td>
-	<td class="c" colspan="1">Ratio</td>
+	<td class="c" colspan="1">Ratio</td>	
+	<td class="c" colspan="2">Xtense</td>
 </tr>
 <?php
 }
