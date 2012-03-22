@@ -828,6 +828,14 @@ switch ($ogsversion) {
 		$up_to_date = true;
 		break;
 		
+	case '3.1.0':
+		// modif user
+		$requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_type` enum('FF','GMFF','GMGC') AFTER `rank_added_ogs`"; // Type de barre utilisée par le user
+		$requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_version` VARCHAR(10) AFTER `xtense_type`"; // Type de barre utilisée par le user
+		
+		$ogsversion = '3.1.1';
+		$up_to_date = true;
+		break;
 	default:
 	die("Aucune mise … jour n'est disponible");
 }
