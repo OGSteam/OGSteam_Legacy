@@ -1,4 +1,4 @@
-<?php
+	<?php
 /** $Id$ **/
 /**
 * Fonctions d'administrations 
@@ -27,7 +27,7 @@ require_once("views/page_header.php");
 <table width="100%">
 <tr>
 	<td>
-		<table border="1">
+		<table border="1" width="100%">
 		<tr align="center">
 <?php
 if (!isset($pub_subaction)) {
@@ -37,7 +37,7 @@ if (!isset($pub_subaction)) {
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($pub_subaction != "infoserver") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=infoserver';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=infoserver';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Informations générales</font></a>";
 		echo "</td>"."\n";
 	}
@@ -50,7 +50,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($pub_subaction != "parameter") {
-		echo "\t\t\t"."<td class='c_tech' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=parameter';\">";
+		echo "\t\t\t"."<td class='c_tech' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=parameter';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Paramètres du serveur</font></a>";
 		echo "</td>"."\n";
 	}
@@ -63,7 +63,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($pub_subaction != "affichage") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=affichage';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=affichage';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Paramètres d'affichage</font></a>";
 		echo "</td>"."\n";
 	}
@@ -76,7 +76,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_data["management_user"] == 1) {
 	if ($pub_subaction != "member") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=member';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=member';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Gestion des membres</font></a>";
 		echo "</td>"."\n";
 	}
@@ -89,7 +89,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_data["management_user"] == 1) {
 	if ($pub_subaction != "group") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=group';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=group';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Gestion des groupes</font></a>";
 		echo "</td>"."\n";
 	}
@@ -102,7 +102,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($pub_subaction != "viewer") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=viewer';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=viewer';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Journal</font></a>";
 		echo "</td>"."\n";
 	}
@@ -115,7 +115,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 
 if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 	if ($pub_subaction != "mod") {
-		echo "\t\t\t"."<td class='c' width='150' onclick=\"window.location = 'index.php?action=administration&subaction=mod';\">";
+		echo "\t\t\t"."<td class='c' width='14%' onclick=\"window.location = 'index.php?action=administration&subaction=mod';\">";
 		echo "<a style='cursor:pointer'><font color='lime'>Mods</font></a>";
 		echo "</td>"."\n";
 	}
