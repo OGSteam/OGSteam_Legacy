@@ -35,23 +35,18 @@ $users_info = sizeof(user_statistic());
 
 //Statistiques du serveur
 $connection_server = 0;
-$connection_ogs = 0;
-$planetimport_server = 0;
-$spyimport_server = 0;
 $planetimport_ogs = 0;
 $planetexport_ogs = 0;
 $spyimport_ogs = 0;
 $spyexport_ogs = 0;
 $rankimport_ogs = 0;
 $rankexport_ogs = 0;
-$rankimport_server = 0;
 $key = 'unknow';
 $paths = 'unknow';
 $since = 0;
 $nb_users = 0;
 $og_uni = 'unknow';
 $og_pays = 'unknow';
-
 
 // recuperation du pays et de l univers du serveur
 if (isset($server_config["xtense_universe"])) {
@@ -78,25 +73,19 @@ if (defined("OGSPY_KEY")) {
 
 $request = "select statistic_name, statistic_value from " . TABLE_STATISTIC;
 $result = $db->sql_query($request);
+
 while (list($statistic_name, $statistic_value) = $db->sql_fetch_row($result)) {
-    switch ($statistic_name) {
-        case "connection_server":
-            $connection_server = $statistic_value;
-            break;
-        case "connection_ogs":
-            $connection_ogs = $statistic_value;
-            break;
 
-        case "planetimport_server":
-            $planetimport_server = $statistic_value;
-            break;
-        case "spyimport_server":
-            $spyimport_server = $statistic_value;
-            break;
+	switch ($statistic_name) {
 
-        case "planetimport_ogs":
+		case "connection_server":
+			$connection_server = $statistic_value;
+			break;
+
+		case "planetimport_ogs":
             $planetimport_ogs = $statistic_value;
             break;
+
         case "planetexport_ogs":
             $planetexport_ogs = $statistic_value;
             break;
@@ -104,6 +93,7 @@ while (list($statistic_name, $statistic_value) = $db->sql_fetch_row($result)) {
         case "spyimport_ogs":
             $spyimport_ogs = $statistic_value;
             break;
+
         case "spyexport_ogs":
             $spyexport_ogs = $statistic_value;
             break;
@@ -111,11 +101,9 @@ while (list($statistic_name, $statistic_value) = $db->sql_fetch_row($result)) {
         case "rankimport_ogs":
             $rankimport_ogs = $statistic_value;
             break;
+
         case "rankexport_ogs":
             $rankexport_ogs = $statistic_value;
-            break;
-        case "rankimport_server":
-            $rankimport_server = $statistic_value;
             break;
     }
 }
@@ -172,10 +160,6 @@ if ($fsock) {
     $link .= "&nb_users=" . $users_info;
 
     $link .= "&connection_server=" . $connection_server;
-    $link .= "&connection_ogs=" . $connection_ogs;
-
-    $link .= "&planetimport_server=" . $planetimport_server;
-    $link .= "&spyimport_server=" . $spyimport_server;
 
     $link .= "&planetimport_ogs=" . $planetimport_ogs;
     $link .= "&planetexport_ogs=" . $planetexport_ogs;
@@ -185,7 +169,6 @@ if ($fsock) {
 
     $link .= "&rankimport_ogs=" . $rankimport_ogs;
     $link .= "&rankexport_ogs=" . $rankexport_ogs;
-    $link .= "&rankimport_server=" . $rankimport_server;
 
     // clef unique
     $link .= "&server_paths=" . $paths;
@@ -284,24 +267,18 @@ help("drop_sessions"); ?>)</th>
 	<th colspan='4'>&nbsp;</th>
 </tr>
 <tr>
-	<th><a>Connexions [Serveur]</a></th><th><?php echo formate_number($connection_server); ?></th>
-	<th><a>Connexions [OGS]</a></th><th><?php echo formate_number($connection_ogs); ?></th>
+	<th><a>Connexions au serveur</a></th>
+	<th><?php echo formate_number($connection_server); ?></th>
+	
+	<th><a>Planètes</a></th>
+	<th><?php echo formate_number($planetimport_ogs); ?> importations - <?php echo formate_number($planetexport_ogs); ?> exportations</th>
 </tr>
 <tr>
-	<th><a>Planètes [Serveur]</a></th><th><?php echo formate_number($planetimport_server); ?> importations</th>
-	<th><a>Planètes [OGS]</a></th><th><?php echo formate_number($planetimport_ogs); ?> importations - <?php echo
-formate_number($planetexport_ogs); ?> exportations</th>
-</tr>
-<tr>
-	<th><a>Rapports espionnage [Serveur]</a></th><th><?php echo formate_number($spyimport_server); ?> importations</th>
-	<th><a>Rapports espionnage [OGS]</a></th><th><?php echo formate_number($spyimport_ogs); ?> importations - <?php echo
-formate_number($spyexport_ogs); ?> exportations</th>
-</tr>
-<tr>
-	<th><a>Classement (nombre de lignes) [Serveur]</a></th><th><?php echo
-formate_number($rankimport_server); ?> importations</th>
-	<th><a>Classement (nombre de lignes) [OGS]</a></th><th><?php echo
-formate_number($rankimport_ogs); ?> importations - <?php echo formate_number($rankexport_ogs); ?> exportations</th>
+	<th><a>Rapports d'espionnage</a></th>
+	<th><?php echo formate_number($spyimport_ogs); ?> importations - <?php echo formate_number($spyexport_ogs); ?> exportations</th>
+	
+	<th><a>Classement (nombre de lignes)</a></th>
+	<th><?php echo formate_number($rankimport_ogs); ?> importations - <?php echo formate_number($rankexport_ogs); ?> exportations</th>
 </tr>
 <!--<tr>
 	<th><a>Rapports de combats [Serveur]</a></th><th>x importations</th>
