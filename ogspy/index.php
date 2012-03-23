@@ -62,7 +62,7 @@ if (strstr($_SERVER['HTTP_USER_AGENT'], "OGSClient") === false) {
 		else {
 			if (preg_match("#^action=(.*)#", $_SERVER['QUERY_STRING'], $matches)) {
 				$goto = $matches[1];
-			}
+			}			
 			require_once("views/login.php");
 		}
 		exit();
@@ -90,7 +90,11 @@ if (strstr($_SERVER['HTTP_USER_AGENT'], "OGSClient") === false) {
 		//----------------------------------------//
 		//Identification
 		case "login_web" :
-		user_login();
+			if($pub_goto==null){
+				user_login();
+			} else {
+				user_login_redirection();
+			}
 		break;
 
 		//Déconnexion
