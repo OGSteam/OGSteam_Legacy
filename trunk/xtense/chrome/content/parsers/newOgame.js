@@ -330,12 +330,12 @@ var XnewOgame = {
 		
 		var name = Xpath.getStringValue(this.doc, paths.name);
 		var coords = null;
-		var coords_list = Xpath.getStringValue(this.doc, paths.coords); //Si plusieurs planètes
+		var coords_list = Xpath.getStringValue(this.doc, paths.coords); //Si plusieurs planï¿½tes
 		if (!coords_list) {
 			Xconsole("plan&egrave;te unique");
-			coords_list = Xpath.getStringValue(this.doc, paths.coords_unique_planet); //Si 1 seule planète
+			coords_list = Xpath.getStringValue(this.doc, paths.coords_unique_planet); //Si 1 seule planï¿½te
 		}
-		coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1]; //On récupère les coordonnées
+		coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1]; //On rï¿½cupï¿½re les coordonnï¿½es
 		
 		return {planet_name: name, coords : coords, planet_type : this.planet_type};
 	},
@@ -351,6 +351,29 @@ var XnewOgame = {
 		return Array(metal,cristal,deut,antimater,energy);
 	},
 	
+	addLinkToGalaxy : function (doc,paths,galaxy,system) {
+		var contants = XnewOgame.contants.galaxy_link;
+		
+		var a = document.createElement('a');
+		a.setAttribute('style', contants.a_style);
+		a.textContent = contants.a_libelle.formatPatern(0,galaxy).formatPatern(1,system);
+			
+		var func = function(){ Xtoolbar.ogspyConnectGalaxy(XnewOgame.universe,galaxy,system); };
+		a.addEventListener("click", func, false);
+		
+		var tr = document.createElement('tr');			
+		var td = document.createElement('td');
+		td.setAttribute('colspan', contants.td_colspan);
+		td.setAttribute('style', contants.td_style);
+		
+		td.appendChild(a);		
+		tr.appendChild(td);
+		
+		var conteneur = Xpath.getSingleNode(doc,paths.table_galaxy);	
+		var before = Xpath.getSingleNode(doc,paths.table_galaxy_header);
+		conteneur.insertBefore(tr,before);
+	},			
+	
 	parseOverview : function () {
 		//this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
 		this.lastAction = "";
@@ -361,7 +384,7 @@ var XnewOgame = {
 			// Recuperation des events
 			var eventlist = XajaxCompo(this.universe+"/game/index.php?page=eventList");
 			
-			// Est-ce qu'aucune attaque est détectée ?
+			// Est-ce qu'aucune attaque est dï¿½tectï¿½e ?
 			if(eventlist.search("hostile") == -1){ 
 				Xconsole("Aucune flotte hostile en approche");
 				
@@ -376,9 +399,9 @@ var XnewOgame = {
 				Request.set('lang',XnewOgame.lang);
 				Request.send(XnewOgame.servers);	
 			} else {
-				Xconsole("Attaque(s) en approche détectées");
+				Xconsole("Attaque(s) en approche dï¿½tectï¿½es");
 				
-				// Récupération de flottes en attaque		
+				// Rï¿½cupï¿½ration de flottes en attaque		
 				var target = this.doc.getElementById('contentWrapper');
 				target.win = this.win;
 				//target.addEventListener("DOMSubtreeModified", this.getHostiles, false);
@@ -467,7 +490,7 @@ var XnewOgame = {
 				Request.send(XnewOgame.servers);		
 			}
 			
-			// Attaques groupées			
+			// Attaques groupï¿½es			
 			var idGroupees = Xpath.getOrderedSnapshotNodes(doc,paths.group_id);
 			if(idGroupees.snapshotLength > 0){ 
 				this.lastAction = "events:1";
@@ -478,7 +501,7 @@ var XnewOgame = {
 			for(var i=0;i<idGroupees.snapshotLength;i++){
 				counterAg++;
 				var idGr = idGroupees.snapshotItem(i).nodeValue;
-				// Recuperation des vagues de l'attaque groupée 
+				// Recuperation des vagues de l'attaque groupï¿½e 
 				var vagues = Xpath.getOrderedSnapshotNodes(doc,paths.group_id.formatPatern(0,idGr));
 				
 				var counterVague=0;
@@ -784,7 +807,7 @@ var XnewOgame = {
 		var paths = XnewOgame.Xpaths.galaxy;
 		var galaxy = win.galaxy;
 		var system = win.system;
-		
+						
 		if (this.lastAction != 's:'+galaxy+':'+system){
 			var coords = [galaxy, system];
 			if (isNaN(coords[0]) || isNaN(coords[1])) {
@@ -793,6 +816,9 @@ var XnewOgame = {
 			}
 			//XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
 			Xconsole(Xl('system detected', coords[0], coords[1]));
+			//Xconsole("Univers="+XnewOgame.universe);
+				
+			
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
 			Xconsole(paths.rows+' '+rows.snapshotLength);
 			if(rows.snapshotLength > 0) {
@@ -901,6 +927,7 @@ var XnewOgame = {
 				Request.send(XnewOgame.servers);
 				this.lastAction = 's:'+coords[0]+':'+coords[1];
 			}
+			XnewOgame.addLinkToGalaxy(doc,paths,galaxy,system);
 		}
 	},
 
@@ -1106,8 +1133,8 @@ var XnewOgame = {
 				}
 			}
 
-			//Vaisseaux/Défenses/Joueur/Coordonnées/Technos
-			var rc_temp = eval(Xprefs.getChar('rc-temp')); //Coordonnées de destination
+			//Vaisseaux/Dï¿½fenses/Joueur/Coordonnï¿½es/Technos
+			var rc_temp = eval(Xprefs.getChar('rc-temp')); //Coordonnï¿½es de destination
 		   	for(var table=0;table<infos.snapshotLength;table++){
 				var dat = {};
 				var val = {};
@@ -1115,7 +1142,7 @@ var XnewOgame = {
 				var info = infos.snapshotItem(table);
 				var nbJoueurs=infos.snapshotLength/nbrounds;
 				
-				//Nombre d'unités
+				//Nombre d'unitï¿½s
 				var values = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_values, info);
 				if(values.snapshotLength > 0){
 					for(var td=1;td<values.snapshotLength;td++){
@@ -1126,7 +1153,7 @@ var XnewOgame = {
 					}
 				}
 				
-				//Type de l'unité
+				//Type de l'unitï¿½
 				var types = Xpath.getOrderedSnapshotNodes(this.doc,paths.list_types, info);
 				if(types.snapshotLength > 0){
 					for(var th=1;th<types.snapshotLength;th++){
@@ -1143,10 +1170,10 @@ var XnewOgame = {
 					}
 				}
 
-				//Nom joueur et coordonnées
+				//Nom joueur et coordonnï¿½es
 				var dest = 0;
-				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non détruit
-				if (player.length==0) { //Dans ce cas, joueur détruit
+				var player = Xpath.getStringValue(this.doc,paths.infos.player,info).trim(); //Joueur non dï¿½truit
+				if (player.length==0) { //Dans ce cas, joueur dï¿½truit
 					player = Xpath.getStringValue(this.doc,paths.infos.destroyed,info).trim();
 					dest=1;
 				}
@@ -1159,7 +1186,7 @@ var XnewOgame = {
 					if (!dest)
 						var coords = m[2];
 					else
-						var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; //Joueur détruit, on récupère ses coordonnées lorsqu'il était encore vivant
+						var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; //Joueur dï¿½truit, on rï¿½cupï¿½re ses coordonnï¿½es lorsqu'il ï¿½tait encore vivant
 					var type = "A";
 				} else {
 					if(!dest)
@@ -1173,7 +1200,7 @@ var XnewOgame = {
 							var coords = m[2];
 						else {
 							if (rc_temp != "")
-								var coords = rc_temp.coords; //Si défenseur où à lieu le raid est détruit au 1er tour
+								var coords = rc_temp.coords; //Si dï¿½fenseur oï¿½ ï¿½ lieu le raid est dï¿½truit au 1er tour
 							else
 								var coords = data[(table-nbJoueurs)%nbJoueurs]['coords']; // Si ce n'est pas le 1er round
 						}
@@ -1191,11 +1218,11 @@ var XnewOgame = {
 					var m = weapons.match(new RegExp(rcStrings['regxps']['weapons'][i]));
 					if(m)
 						weap[i] = m[1].replace(/\./g, '');
-					else { //Joueur détruit
-						if ((table-nbJoueurs)<0) //Défenseur où à lieu le raid détruit au 1er tour -> technos inutiles
+					else { //Joueur dï¿½truit
+						if ((table-nbJoueurs)<0) //Dï¿½fenseur oï¿½ ï¿½ lieu le raid dï¿½truit au 1er tour -> technos inutiles
 							weap[i] = 0;
 						else
-							weap[i] = data[(table-nbJoueurs)%nbJoueurs]['weapons'][i]; //On récupère ses technos lorsqu'il était encore vivant
+							weap[i] = data[(table-nbJoueurs)%nbJoueurs]['weapons'][i]; //On rï¿½cupï¿½re ses technos lorsqu'il ï¿½tait encore vivant
 					}
 				}
 				
@@ -1473,13 +1500,13 @@ var XnewOgame = {
 			var m = subject.match(new RegExp(locales['trade message 1']));
 			var m2 = subject.match(new RegExp(locales['trade message 2']));
 						
-			// Livraison d'un ami sur une de mes planètes
+			// Livraison d'un ami sur une de mes planï¿½tes
 			if (m!=null) {
 				var message = Xpath.getStringValue(this.doc,paths.contents['livraison']).trim();
 				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos));
 				
-				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livrées
-				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantité de ressources livrées
+				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livrï¿½es
+				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantitï¿½ de ressources livrï¿½es
 
 				var met=ressources[1].trimInt();
 				var cri=ressources[2].trimInt();
@@ -1495,19 +1522,19 @@ var XnewOgame = {
 				data.cristal = cri;
 				data.deuterium = deut;
 				
-				Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planète '+infos[2].trim()+'('+infos[3].trim()+')sur ma planète '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+				Xconsole('Livraison du joueur ('+infos[1].trim()+') de la planï¿½te '+infos[2].trim()+'('+infos[3].trim()+')sur ma planï¿½te '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 				
-			} else if (m2!=null) { // Livraison sur la planète d'un ami
+			} else if (m2!=null) { // Livraison sur la planï¿½te d'un ami
 				var message = Xpath.getStringValue(this.doc,paths.contents['livraison_me']).trim(); // Corps du message
 				
-				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos_me)); // Infos sur la planète
-				var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison à eu lieu
+				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos_me)); // Infos sur la planï¿½te
+				var planeteLivraison = infos[4].trim(); // Planete sur laquelle la livraison ï¿½ eu lieu
 				
-				// Récupération de mes planètes
+				// Rï¿½cupï¿½ration de mes planï¿½tes
 				var mesPlanetes = Xpath.getOrderedSnapshotNodes(this.win.parent.parent.document,this.Xpaths.planetData['coords']);
 				var isMyPlanet=false;
 				
-				// Parcours de mes planète pour s'assurer que ce n'est pas une des mienne
+				// Parcours de mes planï¿½te pour s'assurer que ce n'est pas une des mienne
 				if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
 				   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
 						var coord = mesPlanetes.snapshotItem(i).textContent.trim();
@@ -1519,9 +1546,9 @@ var XnewOgame = {
 				   	}
 				}
 				
-				// Livraison sur une planète amie ? 
+				// Livraison sur une planï¿½te amie ? 
 				if(!isMyPlanet){
-					var ressources = message.match(new RegExp(this.regexps.messages.trade_message_infos_me_res)); // Quantité de ressources livrées
+					var ressources = message.match(new RegExp(this.regexps.messages.trade_message_infos_me_res)); // Quantitï¿½ de ressources livrï¿½es
 					
 					var met=ressources[1].trimInt();
 					var cri=ressources[2].trimInt();
@@ -1537,7 +1564,7 @@ var XnewOgame = {
 					data.cristal = cri;
 					data.deuterium = deut;
 					
-					Xconsole('Je livre de ma planète '+infos[1].trim()+'('+infos[2].trim()+') sur la planète '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+					Xconsole('Je livre de ma planï¿½te '+infos[1].trim()+'('+infos[2].trim()+') sur la planï¿½te '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 				}
 				
 			}/* else {
