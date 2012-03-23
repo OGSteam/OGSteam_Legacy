@@ -67,7 +67,7 @@ function user_check_auth($action, $user_id = null)
 function user_login()
 {
     global $db;
-    global $pub_login, $pub_password, $pub_goto;
+    global $pub_login, $pub_password, $pub_goto, $url_append;
 
     if (!check_var($pub_login, "Pseudo_Groupname") || !check_var($pub_password,
         "Password") || !check_var($pub_goto, "Special", "#^[\w=&%+]+$#")) {
@@ -103,7 +103,10 @@ function user_login()
 
                 session_set_user_id($user_id, $lastvisit);
                 log_('login');
-                redirection("index.php?action=" . $pub_goto);
+                if(!isset($url_append)){
+                	$url_append="";
+                }
+                redirection("index.php?action=" . $pub_goto . "" . $url_append);
             } else {
                 redirection("index.php?action=message&id_message=account_lock&info");
             }
@@ -112,6 +115,23 @@ function user_login()
         }
     }
 }
+/**
+* Login d'un utilisateur avec redirection
+* @global string $pub_login
+* @global string $pub_password
+* @global string $pub_goto
+*/
+function user_login_redirection()
+{
+	global $pub_login, $pub_password, $pub_goto, $url_append;
+	
+	if($pub_goto=='galaxy'){
+		global $pub_galaxy, $pub_system;
+		$url_append="&galaxy=" . $pub_galaxy . "&system=" . $pub_system;		
+		user_login();
+	}
+}
+
 /**
  * Login d'un utilisateur OGS
  */
