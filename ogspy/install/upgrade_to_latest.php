@@ -764,6 +764,7 @@ switch ($ogsversion) {
         	" ally varchar(100) NOT NULL,".
         	" points int(11) NOT NULL default '0',".
         	" sender_id int(11) NOT NULL default '0',".
+        	" nb_spacecraft int(11) NOT NULL default '0',".
         	" PRIMARY KEY  (rank,datadate),".
         	" KEY datadate (datadate,player),".
         	" KEY player (player)".
