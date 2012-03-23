@@ -43,7 +43,9 @@ XnewOgame.Xpaths = {
 		status : 'descendant::span[@class="status"]',
 		activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
-		ally_id : 'descendant::a[@target="_ally"]/@href'
+		ally_id : 'descendant::a[@target="_ally"]/@href',
+		table_galaxy : '//table[@id="galaxytable"]/tbody',
+		table_galaxy_header : '//table[@id="galaxytable"]/tbody/tr[@class="info info_header"]'
 	},
 	
 	levels : {
@@ -194,7 +196,6 @@ XnewOgame.database = {
 						}
 }
 	
-	
 XnewOgame.regexps = {
 	planetNameAndCoords : ' (.*) \\[(\\d+:\\d+:\\d+)\\]',
 	planetCoords : '\\[(\\d+:\\d+:\\d+)\\]',
@@ -219,4 +220,14 @@ XnewOgame.regexps = {
 	ally_msg_player_name : '<a href.*>(.*)</a>',
 	
 	parseTableStruct : '<a[^>]*id="details(\\d+)"[^>]*>[\\D\\d]*?([\\d.]+[KMG]?)<\/span>[^<]*<\/span>[^<]*<\/a>'
+}
+
+
+XnewOgame.contants = {
+	galaxy_link : {
+		td_colspan : '13',
+		td_style : 'background: url("http://gf1.geo.gfsrv.net/cdn2b/1479c3eccd39bf4e3c4d37d4877387.gif") repeat-x scroll -1px 0 transparent; padding: 0 10px;',
+		a_style : 'color: #FFFFFF; cursor: pointer; text-decoration: none;',
+		a_libelle : 'OGSPY [{0}:{1}]'
+	}	
 }

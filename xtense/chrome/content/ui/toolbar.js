@@ -35,6 +35,36 @@ var Xtoolbar = {
 		Browser.selectedTab = Browser.addTab(url, null, null, postData);
 	},
 	
+	ogspyConnectGalaxy : function (url_univers,g,s) {
+		var server=null;
+		for(var i = 0 ; i < 5 ; i++){
+			server = eval(Xprefs.getChar('server'+i));
+			if(server.univers==url_univers){
+				 break;
+			} else {
+				server=null;
+			}
+		}
+		if(server!=null){
+			var n = -1;
+			var url = server.url.substr(0, ((n = server.url.indexOf('mod/xtense/xtense.php')) == -1 ? server.url.indexOf('xtense.php') : n));
+			var dataString = 'action=login_web&login='+server.user+'&password='+server.password+"&goto=galaxy&galaxy="+g+"&system="+s;
+			var stringStream = Cc['@mozilla.org/io/string-input-stream;1'].createInstance(Ci.nsIStringInputStream);
+			if ('data' in stringStream) stringStream.data = dataString;
+			else 						stringStream.setData(dataString, dataString.length);
+			
+			Xconsole(url+"\n"+dataString);
+			
+			var postData = Cc['@mozilla.org/network/mime-input-stream;1'].createInstance(Ci.nsIMIMEInputStream);
+			postData.addHeader('Content-Type', 'application/x-www-form-urlencoded');
+			postData.addContentLength = true;
+			postData.setData(stringStream);
+
+			Browser.selectedTab = Browser.addTab(url, null, null, postData);
+		}
+	},
+	
+	
 	ogspyConnect2 : function (id,page) {
 		var server = eval(Xprefs.getChar('server'+id));
 		var n = -1;
