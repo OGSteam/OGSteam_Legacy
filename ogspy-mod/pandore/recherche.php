@@ -1,11 +1,11 @@
 <?php
 /***************************************************************************
 *	filename	: recherche.php
-*	version		: 0.5
+*	version		: 1.0.2
 *	desc.			: Calcul des points à partir des rapports d'espionnages et déduction de la flotte.
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 12:56 01/11/2007
-*	modified	: 14:03 08/01/2010
+*	modified	: 18:00 24/03/2012
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
@@ -119,7 +119,7 @@ if ($search && $error == 0) {
 // Recherche des classements du joueur
 if ($search && $error == 0) {
 	$class_gene = mysql_fetch_assoc(mysql_query("SELECT datadate, points, rank FROM ".TABLE_RANK_PLAYER_POINTS." WHERE player = '".$nom."' ORDER BY datadate DESC LIMIT 1"));
-	$class_flotte = mysql_fetch_assoc(mysql_query("SELECT datadate, points, rank FROM ".TABLE_RANK_PLAYER_FLEET." WHERE player = '".$nom."' ORDER BY datadate DESC LIMIT 1"));
+	$class_flotte = mysql_fetch_assoc(mysql_query("SELECT datadate, nb_spacecraft, rank FROM ".TABLE_RANK_PLAYER_MILITARY." WHERE player = '".$nom."' ORDER BY datadate DESC LIMIT 1"));
 	$class_techno = mysql_fetch_assoc(mysql_query("SELECT datadate, points, rank FROM ".TABLE_RANK_PLAYER_RESEARCH." WHERE player = '".$nom."' ORDER BY datadate DESC LIMIT 1"));
 	if (!$class_gene || !$class_flotte || !$class_techno) $error2[0] = 1;
 }
@@ -145,7 +145,7 @@ if (isset($class_flotte) && $class_flotte) {
 	$class_flotte["date"] = date($date_format,$class_flotte["datadate"]);
 	$r_f = max(min(255, round((time() - $class_flotte["datadate"] - 86400) / 2033)), 0);
 } else {
-	$class_flotte["points"] = 0;
+	$class_flotte["nb_spacecraft"] = 0;
 	$class_flotte["rank"] = 0;
 	$class_flotte["date"] = FALSE;
 	$r_f = 255;
@@ -239,7 +239,7 @@ echo "r_pt = ".$r_pt.";\n";
 echo "r_t = ".$r_t.";\n";
 echo "class_gene = new Array('".$class_gene['date']."', ".$class_gene['points'].");\n";
 echo "class_techno = new Array('".$class_techno['date']."', ".$class_techno['points'].");\n";
-echo "class_vaisseaux = new Array('".$class_flotte['date']."', ".$class_flotte['points'].");\n";
+echo "class_vaisseaux = new Array('".$class_flotte['date']."', ".$class_flotte['nb_spacecraft'].");\n";
 echo "points = new Array(".$points["batiments"].", ".$points["defenses"].", ".$points["recherches"].", ".($class_gene["points"] - $points["batiments"] - $points["defenses"] - $points["recherches"]).");\n";
 echo "techno = ".array_sum($technologies).";";
 ?>
@@ -515,7 +515,7 @@ if ($search && $error == 0) {
 	echo "\t<tr>\n\t\t<td class='c' align='center'>".$lang['pandore_fleet_points']."</td>\n\t\t<td class='b' align='center'>".number_format(floor($points["flottes"]), 0, ',', $sep_mille)."</td>\n\t\t<td class='b' align='center'>-</td>\n\t\t<td class='b' align='center'><span id='points'></span><input type='hidden' name='points' id='points_in'/></td>\n\t</tr>\n";
 	echo "\t<tr>\n\t\t<td class='c' align='center'>".$lang['pandore_missing_points']."</td>\n\t\t<td class='b' align='center'><span id='points_manquants_sondes'>".number_format($class_gene["points"] - $points["batiments"] - $points["defenses"] - $points["recherches"] - $points["flottes"], 0, ',', $sep_mille)."</span></td>\n\t\t<td class='b' align='center'>-</td>\n\t\t<td class='b' align='center'><span id='points_manquants'></span><input type='hidden' name='points_manquants' id='points_manquants_in'/></td>\n\t</tr>\n";
 	echo "\t<tr>\n\t\t<td class='c' align='center'>".$lang['pandore_fleet_number']."</td>\n\t\t<td class='b' align='center'>".number_format(array_sum($flotte), 0, ',', $sep_mille)."</td>\n\t\t<td class='b' align='center'>-</td>\n\t\t<td class='b' align='center'><span id='flottes'></span><input type='hidden' name='flottes' id='flottes_in'/></td>\n\t</tr>\n";
-	echo "\t<tr>\n\t\t<td class='c' align='center'>".$lang['pandore_missing_fleet']."</td>\n\t\t<td class='b' align='center'><span id='flottes_manquantes_sondes'>".number_format($class_flotte["points"] - array_sum($flotte), 0, ',', $sep_mille)."</span></td>\n\t\t<td class='b' align='center'>-</td>\n\t\t<td class='b' align='center'><span id='flottes_manquantes'></span><input type='hidden' name='flottes_manquantes' id='flottes_manquantes_in'/></td>\n\t</tr>\n";
+	echo "\t<tr>\n\t\t<td class='c' align='center'>".$lang['pandore_missing_fleet']."</td>\n\t\t<td class='b' align='center'><span id='flottes_manquantes_sondes'>".number_format($class_flotte["nb_spacecraft"] - array_sum($flotte), 0, ',', $sep_mille)."</span></td>\n\t\t<td class='b' align='center'>-</td>\n\t\t<td class='b' align='center'><span id='flottes_manquantes'></span><input type='hidden' name='flottes_manquantes' id='flottes_manquantes_in'/></td>\n\t</tr>\n";
 	echo "<tr><td /><td /><td /><td class='c' align='center'><input type='submit' name='save' title='".$lang['pandore_save']."' value='".$lang['pandore_save']."'></td></tr>\n";
 	echo "</table></form></div></div></div>\n";
 	// Affichage des erreurs dues à un manque d'informations

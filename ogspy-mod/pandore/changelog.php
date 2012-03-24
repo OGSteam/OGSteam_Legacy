@@ -1,11 +1,11 @@
 <?php
 /***************************************************************************
 *	filename	: changelog.php
-*	version		: 0.5
+*	version		: 1.0.2
 *	desc.			: changelog du mod Pandore
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 12:55 01/11/2007
-*	modified	: 14:03 08/01/2010
+*	modified	: 18:03 24/03/2012
 
 TODO
 - Rien.

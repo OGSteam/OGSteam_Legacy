@@ -1,11 +1,11 @@
 <?php
 /***************************************************************************
 *	filename	: pandore.php
-*	version		: 0.5
+*	version		: 1.0.2
 *	desc.			: Calcul des points à partir des rapports d'espionnages et déduction de la flotte.
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 12:56 01/11/2007
-*	modified	: 14:03 08/01/2010
+*	modified	: 18:02 24/03/2012
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
