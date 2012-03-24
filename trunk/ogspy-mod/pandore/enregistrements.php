@@ -1,11 +1,11 @@
 <?php
 /***************************************************************************
 *	filename	: enregistrements.php
-*	version		: 0.5
+*	version		: 1.0.2
 *	desc.			: Affichage des enregistrements du mod pandore
 *	Authors		: Scaler - http://ogsteam.fr
 *	created		: 18:34 05/09/2009
-*	modified	: 14:03 08/01/2010
+*	modified	: 18:03 24/03/2012
 ***************************************************************************/
 
 if (!defined('IN_SPYOGAME')) die("Hacking attempt");
