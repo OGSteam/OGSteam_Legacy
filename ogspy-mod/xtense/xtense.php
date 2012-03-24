@@ -629,13 +629,20 @@ switch ($pub_type){
 					$data['ally_tag'] = Check::filterSpecialChars($data['ally_tag']);
 					if(!Check::data2(isset($data['points']), Check::player_name($data['player_name']), Check::ally_tag($data['ally_tag'])))
 						continue;
-					$query[] = '('.$timestamp.', '.$i.', "'.quote($data['player_name']).'", "'.quote($data['ally_tag']).'", '.((int)$data['points']).', '.$user_data['user_id'].')';
+					if ($table == TABLE_RANK_PLAYER_MILITARY) { 
+						$query[] = '('.$timestamp.', '.$i.', "'.quote($data['player_name']).'", "'.quote($data['ally_tag']).'", '.((int)$data['points']).', '.$user_data['user_id'].', '.((int)$data['nb_spacecraft']).')';
+					} else {
+						$query[] = '('.$timestamp.', '.$i.', "'.quote($data['player_name']).'", "'.quote($data['ally_tag']).'", '.((int)$data['points']).', '.$user_data['user_id'].')';
+					}
 					$total ++;
                     $datas[] = $data;
 				}
 				if (!empty($query))
-					$db->sql_query('REPLACE INTO '.$table.' (datadate, rank, player, ally, points, sender_id) VALUES '.implode(',', $query));
-
+					if ($table == TABLE_RANK_PLAYER_MILITARY) {
+						$db->sql_query('REPLACE INTO '.$table.' (datadate, rank, player, ally, points, sender_id, nb_spacecraft) VALUES '.implode(',', $query));
+					} else {
+						$db->sql_query('REPLACE INTO '.$table.' (datadate, rank, player, ally, points, sender_id) VALUES '.implode(',', $query));
+					}
 			} else {
 				$fields = 'datadate, rank, ally, points, sender_id, number_member';
 				foreach ($n as $i => $val) {
