@@ -42,7 +42,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Informations générales</a>";
 		echo "</th>"."\n";
 	}
@@ -55,7 +55,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Paramètres du serveur</a>";
 		echo "</th>"."\n";
 	}
@@ -68,7 +68,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Paramètres d'affichage</a>";
 		echo "</th>"."\n";
 	}
@@ -81,7 +81,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Gestion des membres<a>";
 		echo "</th>"."\n";
 	}
@@ -94,7 +94,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_da
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Gestion des groupes<a>";
 		echo "</th>"."\n";
 	}
@@ -107,7 +107,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Journal</a>";
 		echo "</th>"."\n";
 	}
@@ -120,7 +120,7 @@ if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
 		echo "</td>"."\n";
 	}
 	else {
-		echo "\t\t\t"."<th width='150'>";
+		echo "\t\t\t"."<th width='14%'>";
 		echo "<a>Mods</a>";
 		echo "</th>"."\n";
 	}

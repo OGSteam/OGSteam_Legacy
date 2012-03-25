@@ -21,8 +21,8 @@ if(!isset($pub_view) || $pub_view=="") $view = "planets";
 elseif ($pub_view == "planets" || $pub_view == "moons") $view = $pub_view;
 else $view = "planets";
 $start = $view=="planets" ? 101 : 201;
- $view_ratio = false; // vue prod reel si ratio inf a 0
- 
+$view_ratio = false; // vue prod reel si ratio inf a 0
+
 /* Restes du Lang Empire :-) */
 $technology_requirement["Esp"] = array(3);
 $technology_requirement["Ordi"] = array(1);
@@ -151,16 +151,18 @@ function message(msg) {
 -->
 <tr>
 <?php
+
+$colspan = ($nb_planete + 1) / 2;
+$colspan_planete = floor($colspan);
+$colspan_lune = ceil($colspan);
+
 if ($view == "planets") {
-	echo "<th colspan='5'><a>Planètes</a></th>";
-	echo "<td class='c' align='center' colspan='5' onClick=\"window.location = 'index.php?action=home&view=moons';\"><a style='cursor:pointer'><font color='lime'>Lunes</font></a></td>";
-    echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete);
+	echo "<th colspan='$colspan_planete'><a>Planètes</a></th>";
+	echo "<td class='c' align='center' colspan='$colspan_lune' onClick=\"window.location = 'index.php?action=home&view=moons';\"><a style='cursor:pointer'><font color='lime'>Lunes</font></a></td>";
 }
 else {
-	echo "<td class='c' align='center' colspan='5' onClick=\"window.location = 'index.php?action=home&view=planets';\"><a style='cursor:pointer'><font color='lime'>Planètes</font></a></td>";
-	echo "<th colspan='5'><a>Lunes</a></th>";
-      echo read_th("<td class=\"c\">&nbsp;</td>",$nb_planete);
-
+	echo "<td class='c' align='center' colspan='$colspan_planete' onClick=\"window.location = 'index.php?action=home&view=planets';\"><a style='cursor:pointer'><font color='lime'>Planètes</font></a></td>";
+	echo "<th colspan='$colspan_lune'><a>Lunes</a></th>";
 }
 ?>
 	<!--<th colspan="5" onClick="window.location = 'index.php?action=home&view=planets';"><center><a style='cursor:pointer'>Planètes</a></center></th>

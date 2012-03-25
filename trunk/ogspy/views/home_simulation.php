@@ -35,9 +35,9 @@ echo "<input type='hidden' id='off_geologue' value='".$user_data["off_geologue"]
 
 ?>
 
-<SCRIPT LANGUAGE=Javascript SRC="js/ogame_formula.js"></SCRIPT>
+<script src="js/ogame_formula.js" type="text/javascript"></script>
 
-<table id="simu" width="1200" title="<?php echo $nb_planete;?>" >
+<table id="simu" width="1200" title="<?php echo $nb_planete;?>">
 <tr>
 	<td class="c"></td>
 <?php
@@ -61,7 +61,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$coordinates."</th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Cases</a></th>
@@ -78,7 +78,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$fields."</th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Température Min.</a></th>
@@ -90,7 +90,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$temperature_min."<input id='temperature_min_".$i."' type='hidden' value='".$temperature_min."'></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Température Max.</a></th>
@@ -102,7 +102,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$temperature_max."<input id='temperature_max_".$i."' type='hidden' value='".$temperature_max."'></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <!--
 Energie
@@ -111,7 +111,7 @@ Energie
 <tr>
 	<td class="c">Énergies</td>
 	<td class="c" colspan="4">Technologie Énergie <input type="text" id="NRJ" size="2" maxlength="2" value="<?php print $user_technology['NRJ'] ?>" onchange='update_page();'></td>
-	<td class="c" colspan="15">&nbsp;</td>
+	<td class="c" colspan="17">&nbsp;</td>
 </tr>
 <tr>
 	<th><a>CES</a></th>
@@ -130,7 +130,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>CEF</a></th>
@@ -149,7 +149,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Satellites</a></th>
@@ -168,7 +168,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Energie</a></th>
@@ -178,7 +178,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='NRJ_".$i."'>-</div></font></th>"."\n";
 }
 ?>
-	<th><div id="NRJ">-</div></th>
+	<th><div id="NRJ">-</div></th> <!-- id NRJ deja utilisé -->
 </tr>
 
 <!--
@@ -206,7 +206,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<td class="c"></td>
 </tr>
 <tr>
 	<th><a>Consommation Energie</a></th>
