@@ -184,20 +184,30 @@ function update_page () {
 	// Batiments planetes
 	var total_b_pts = 0;
 	var total_pts_1 = new Array();
-	for(i=101; i <= nombrePlanete+100; i++) {
+	
+	for (i = 101; i <= nombrePlanete + 100; i++) {
+	    
 		var building_1 = document.getElementById("building_" + i).value;
 		building_1 = building_1.split('<>');
+		
 		var b_pts_1 = Math.floor(((60 + 15) * (1 - Math.pow(1.5, M_1[i])) / (-0.5)) + ((48 + 24) * (1 - Math.pow(1.6, C_1[i])) / (-0.6)) + ((225 +75) * (1 - Math.pow(1.5, D_1[i])) / (-0.5)) + ((75 + 30) * (1 - Math.pow(1.5, CES_1[i])) / (-0.5)) + ((900 + 360 + 180) * (1 - Math.pow(1.8, CEF_1[i])) / (-0.8)));
-		for(j=0; j<(building_1.length); j++) { // 	for(j=0; j<(building_1.length-2); j++) {
-			if (j ==6 || j==7 || j==8){
-				b_pts_1 = b_pts_1 + init_b_prix[j] * (1- Math.pow(2.3 , building_1[j]))/(-1.3); //Formules Cachette En attendant de faire du propre en V5 et les Formules Officielles...
-			}else{
-				b_pts_1 = b_pts_1 + init_b_prix[j] * (Math.pow(2, building_1[j] - 1));
+		
+		for (j = 0; j < building_1.length; j++) {
+		    
+			if (building_1[j] != 0) {
 				
+				if (j == 6 || j == 7 || j == 8) {
+					b_pts_1 += init_b_prix[j] * (1 - Math.pow(2.3, building_1[j])) / -1.3; //Formules Cachette En attendant de faire du propre en V5 et les Formules Officielles...
+				}
+				else {
+					b_pts_1 += init_b_prix[j] * Math.pow(2, building_1[j] - 1);
+				}
 			}
 		}
+		
 		total_pts_1[i] = b_pts_1;
 		total_b_pts += b_pts_1;
+		
 		document.getElementById("building_pts_" + i).innerHTML = Math.round(b_pts_1/1000);
 	}
 
