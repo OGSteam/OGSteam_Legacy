@@ -37,7 +37,7 @@ echo "<input type='hidden' id='off_geologue' value='".$user_data["off_geologue"]
 
 <script src="js/ogame_formula.js" type="text/javascript"></script>
 
-<table id="simu" width="1200" title="<?php echo $nb_planete;?>">
+<table id="simu" width="100%" title="<?php echo $nb_planete;?>">
 <tr>
 	<td class="c"></td>
 <?php
@@ -61,7 +61,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$coordinates."</th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Cases</a></th>
@@ -78,7 +78,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$fields."</th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Température Min.</a></th>
@@ -90,7 +90,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$temperature_min."<input id='temperature_min_".$i."' type='hidden' value='".$temperature_min."'></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Température Max.</a></th>
@@ -102,8 +102,9 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'>".$temperature_max."<input id='temperature_max_".$i."' type='hidden' value='".$temperature_max."'></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
+
 <!--
 Energie
 -->
@@ -111,7 +112,7 @@ Energie
 <tr>
 	<td class="c">Énergies</td>
 	<td class="c" colspan="4">Technologie Énergie <input type="text" id="NRJ" size="2" maxlength="2" value="<?php print $user_technology['NRJ'] ?>" onchange='update_page();'></td>
-	<td class="c" colspan="17">&nbsp;</td>
+	<td class="c" colspan="<?php echo 2 * ($nb_planete + 1) - 5; ?>">&nbsp;</td>
 </tr>
 <tr>
 	<th><a>CES</a></th>
@@ -130,7 +131,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>CEF</a></th>
@@ -149,7 +150,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Satellites</a></th>
@@ -168,7 +169,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Energie</a></th>
@@ -178,7 +179,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "\t"."<th colspan='2'><font color='lime'><div id='NRJ_".$i."'>-</div></font></th>"."\n";
 }
 ?>
-	<th><div id="NRJ">-</div></th> <!-- id NRJ deja utilisé -->
+	<th></th>
 </tr>
 
 <!--
@@ -186,7 +187,7 @@ Métal
 -->
 
 <tr>
-	<td class="c" colspan="20">Métal</td>
+	<td class="c" colspan="<?php echo 2 * ($nb_planete + 1); ?>">Métal</td>
 </tr>
 <tr>
 	<th><a>Niveau</a></th>
@@ -206,7 +207,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td class="c"></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Consommation Energie</a></th>
@@ -232,7 +233,7 @@ Cristal
 -->
 
 <tr>
-	<td class="c" colspan="20">Cristal</td>
+	<td class="c" colspan="<?php echo 2 * ($nb_planete + 1); ?>">Cristal</td>
 </tr>
 <tr>
 	<th><a>Niveau</a></th>
@@ -251,7 +252,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Consommation Energie</a></th>
@@ -277,7 +278,7 @@ Deutérium
 -->
 
 <tr>
-	<td class="c" colspan="20">Deutérium</td>
+	<td class="c" colspan="<?php echo 2 * ($nb_planete + 1); ?>">Deutérium</td>
 </tr>
 <tr>
 	<th><a>Niveau</a></th>
@@ -296,7 +297,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	echo "</select></th>"."\n";
 }
 ?>
-	<td></td>
+	<th></th>
 </tr>
 <tr>
 	<th><a>Consommation Energie</a></th>
@@ -317,7 +318,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	<th><div id="D_prod">-</div></th>
 </tr>
 <tr>
-	<td class="c" colspan="20">Poids en points de chaque planète</td>
+	<td class="c" colspan="<?php echo 2 * ($nb_planete + 1); ?>">Poids en points de chaque planète</td>
 </tr>
 <tr>
 <th><a>Bâtiments</a></th>
@@ -398,6 +399,7 @@ for ($i=101 ; $i<=$nb_planete+100 ; $i++) {
 	<td class='c'>Totaux</td>
 </tr>
 </table>
-<script language="JavaScript">
-update_page();
+
+<script type="text/javascript">
+	update_page();
 </script>
