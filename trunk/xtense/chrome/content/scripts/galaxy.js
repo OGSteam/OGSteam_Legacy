@@ -37,3 +37,32 @@ function fix_ally_popups() {
 		link.addEventListener('mouseover', ally_popup, false);
 	}*/
 }
+
+// Ajout du lien ver OGSPY
+/** @author : Jedinight */
+function addLinkToGalaxy(doc,paths,galaxy,system) {
+	var contants = XnewOgame.contants.galaxy_link;
+	
+	// Creation du lien
+	var a = document.createElement('a');
+	a.setAttribute('style', contants.a_style);
+	a.textContent = contants.a_libelle.formatPatern(0,galaxy).formatPatern(1,system);
+	
+	// Mise en place de l'ecoute au click
+	var func = function(){ Xtoolbar.ogspyConnectGalaxy(XnewOgame.universe,galaxy,system); };
+	a.addEventListener("click", func, false);
+	
+	// Creation du conteneur
+	var tr = document.createElement('tr');			
+	var td = document.createElement('td');
+	td.setAttribute('colspan', contants.td_colspan);
+	td.setAttribute('style', contants.td_style);
+	
+	td.appendChild(a);		
+	tr.appendChild(td);
+	
+	// Insertion du lien
+	var conteneur = Xpath.getSingleNode(doc,paths.table_galaxy);	
+	var before = Xpath.getSingleNode(doc,paths.table_galaxy_header);
+	conteneur.insertBefore(tr,before);
+}

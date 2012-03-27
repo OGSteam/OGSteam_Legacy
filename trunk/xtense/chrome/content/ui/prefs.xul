@@ -260,6 +260,10 @@ persist="screenX screenY width" buttons="">
 						<label onclick="open_link('http://forum.ogsteam.fr/index.php');" class="text-link">forum.ogsteam.fr</label>
 					</row>
 					<row>
+						<label>&opt.links;</label>
+						<label onclick="open_link('http://forum.ogsteam.fr/index.php/board,10.0.html');" class="text-link">&opt.forum;</label>
+					</row>
+					<row>
 						<label>&opt.bugs;</label>
 						<label onclick="open_link('http://jira.ogsteam.fr/browse/XT');" class="text-link">jira.ogsteam.fr</label>
 					</row>
@@ -271,25 +275,31 @@ persist="screenX screenY width" buttons="">
 						<label>&opt.license;</label>
 						<label onclick="open_link('http://www.gnu.org/licenses/gpl-3.0.txt');" class="text-link">GNU/GPL</label>
 					</row>
+					<row>
+						<label>&opt.release.notes;</label>
+						<label onclick="open_link('http://svn.ogsteam.fr/trunk/xtense/release-notes.xhtml');" class="text-link">&opt.releases;</label>
+					</row>
 				</rows>
 			</grid>
 		</groupbox>
-		<groupbox>
+		
+		<!--groupbox>
 			<caption label="&opt.links;" />
 			<label onclick="open_link('http://forum.ogsteam.fr/index.php/board,10.0.html');" class="text-link">&opt.forum;</label>
-		</groupbox>
+		</groupbox-->
 		
 		<groupbox>
 			<caption label="&opt.contrib;" />
 			
 			<!--<label value="&opt.contrib.debug;" style="font-weight: bold;" />-->
-			<label value="Jedinight" />
-			<label value="Jormund" />
-			<label value="Scaler" />
-			<label value="Sylar" />
-			<label value="DarkNoon" />
-			<label value="&opt.contrib.others;" />
+			<label value="Jedinight, Jormund, Scaler, Sylar, DarkNoon, &opt.contrib.others;"/>
 		</groupbox>
+		
+		<groupbox>
+			<caption label="&opt.contrib.debug;" />
+			
+			<label value="Gilga, Guiliguili, &opt.contrib.others;"/>
+		</groupbox>		
 	</prefpane>
 	
 	<!--
