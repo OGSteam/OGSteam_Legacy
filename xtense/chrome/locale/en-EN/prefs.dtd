@@ -68,13 +68,17 @@
 
 <!-- ABOUT -->
 <!ENTITY opt.about "Xtense was created by Unibozu and is now maintained by the OGSteam : ">
+<!ENTITY opt.bugs "Déclaration de bugs">
+<!ENTITY opt.contrib "Contributors">
+<!ENTITY opt.contrib.debug "Crazy Debuggers">
+<!ENTITY opt.contrib.others "And many others...">
+<!ENTITY opt.doc "Documentation">
+<!ENTITY opt.forum "Support board">
 <!ENTITY opt.info "Informations about the extension">
 <!ENTITY opt.license "License">
 <!ENTITY opt.links "Useful links">
-<!ENTITY opt.forum "Support board">
-<!ENTITY opt.contrib "Contributors">
-<!ENTITY opt.contrib.others "And many others...">
-<!--<!ENTITY opt.contrib.debug "Débogueurs fous">-->
+<!ENTITY opt.releases "Release Notes">
+<!ENTITY opt.release.notes "Version History">
 
 
 <!-- Servers checking -->

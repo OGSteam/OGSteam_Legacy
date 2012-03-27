@@ -350,30 +350,7 @@ var XnewOgame = {
 		Xconsole("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 		return Array(metal,cristal,deut,antimater,energy);
 	},
-	
-	addLinkToGalaxy : function (doc,paths,galaxy,system) {
-		var contants = XnewOgame.contants.galaxy_link;
-		
-		var a = document.createElement('a');
-		a.setAttribute('style', contants.a_style);
-		a.textContent = contants.a_libelle.formatPatern(0,galaxy).formatPatern(1,system);
-			
-		var func = function(){ Xtoolbar.ogspyConnectGalaxy(XnewOgame.universe,galaxy,system); };
-		a.addEventListener("click", func, false);
-		
-		var tr = document.createElement('tr');			
-		var td = document.createElement('td');
-		td.setAttribute('colspan', contants.td_colspan);
-		td.setAttribute('style', contants.td_style);
-		
-		td.appendChild(a);		
-		tr.appendChild(td);
-		
-		var conteneur = Xpath.getSingleNode(doc,paths.table_galaxy);	
-		var before = Xpath.getSingleNode(doc,paths.table_galaxy_header);
-		conteneur.insertBefore(tr,before);
-	},			
-	
+
 	parseOverview : function () {
 		//this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
 		this.lastAction = "";
@@ -927,7 +904,7 @@ var XnewOgame = {
 				Request.send(XnewOgame.servers);
 				this.lastAction = 's:'+coords[0]+':'+coords[1];
 			}
-			XnewOgame.addLinkToGalaxy(doc,paths,galaxy,system);
+			addLinkToGalaxy(doc,paths,galaxy,system);
 		}
 	},
 
