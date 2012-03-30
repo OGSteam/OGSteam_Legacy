@@ -16,6 +16,7 @@ var XnewOgame = {
 	params : [],
 	messagesCache: {},
 	lastAction: null,
+	lastCheckHostile : null,
 		
 	l: function(name) {
 		if (!this.locales[this.lang][name]) {
@@ -131,6 +132,9 @@ var XnewOgame = {
 	},
 	
 	sendPage: function (page) {
+		// Vérification des flottes hostiles sur un des membres de la communauté OGSPY
+		checkHostilesOnOGSPY();
+		
 		var Request = null;
 		
 		if (page == 'overview') 		Request = this.parseOverview();
@@ -215,6 +219,19 @@ var XnewOgame = {
 		}
 	},
 
+	checkHostilesOnOGSPY : function () {
+ 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
+		//Xconsole("CheckHostile : last="+this.lastCheckHostile+"; duree="+dureeDepuisDernierCheckHostile);
+		if(this.lastCheckHostile==null || dureeDepuisDernierCheckHostile > (10 * 60 * 1000)){
+			this.lastCheckHostile=new Date().getTime();
+			//Xconsole("Check Hostile !");
+			Request = XnewOgame.newRequest();
+			Request.set('type','checkhostiles');
+			Request.set('lang',XnewOgame.lang);
+			Request.send(XnewOgame.servers);
+		}
+ 	},
+
 	handleResponse: function (Request, Server, Response) {
 		Xdump(Response.content);
 		if (Server.cached()) var message_start = '"'+Server.name+'" : ';
@@ -297,6 +314,16 @@ var XnewOgame = {
 			
 			if (Xprefs.getBool('display-execution-time') && data.execution) message = '['+data.execution+' ms] '+ message_start + message;
 			if (Xprefs.getBool('display-new-messages') && typeof data.new_messages!='undefined') Request.Tab.setNewPMStatus (data.new_messages, Server);
+			
+			// Recuperation du check des flottes hostiles
+			if(data.type!=null && data.type=="checkhostiles"){
+				//Xconsole("check?"+data.check+" | user="+data.user);
+				if(data.check!=null && data.check==1){
+					$('xtense-hostiles-hbox').set('tooltiptext', Xl('hostiles', data.user)).set('class', 'hostiles');
+				} else {
+					$('xtense-hostiles-hbox').set('tooltiptext', Xl('no hostiles')).set('class', 'no-hostiles');
+				}
+			}
 			
 			if (data.calls) {
 				// Merge the both objects

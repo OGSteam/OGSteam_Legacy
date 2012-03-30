@@ -14,6 +14,7 @@
 <!ENTITY toolbar.send.t "Send data of this page">
 <!ENTITY toolbar.new-messages.display "Displays new OGSpy private messages">
 <!ENTITY toolbar.new-messages.no "0 PM">
+<!ENTITY toolbar.hostiles.display "No Hostile fleet detected on member of community">
 
 <!ENTITY toolbar.tooltip.header "Launched modules">
 <!ENTITY toolbar.tooltip.footer "See log for more informations">

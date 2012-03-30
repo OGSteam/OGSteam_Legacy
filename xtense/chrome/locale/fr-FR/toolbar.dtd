@@ -14,6 +14,7 @@
 <!ENTITY toolbar.send.t "Envoyer les données de la page">
 <!ENTITY toolbar.new-messages.display "Affichage des messages non lus sur OGSpy">
 <!ENTITY toolbar.new-messages.no "0 MP">
+<!ENTITY toolbar.hostiles.display "Aucune flotte hostile détectée sur un membre de la communauté">
 
 <!ENTITY toolbar.tooltip.header "Mods éxécutés">
 <!ENTITY toolbar.tooltip.footer "Repportez-vous au journal pour plus d'informations">
