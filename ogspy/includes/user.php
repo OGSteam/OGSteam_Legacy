@@ -129,6 +129,8 @@ function user_login_redirection()
 		global $pub_galaxy, $pub_system;
 		$url_append="&galaxy=" . $pub_galaxy . "&system=" . $pub_system;		
 		user_login();
+	} else {
+		user_login();
 	}
 }
 
