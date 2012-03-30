@@ -249,11 +249,11 @@ min-width: 26px;
 list-style-image: url(chrome://xtense2/skin/images/new-messages.jpg);
 min-width: 26px;
 }*/
-.no-new-message toolbarbutton{
-list-style-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
+.no-hostiles toolbarbutton{
+list-style-image: url(chrome://xtense2/skin/images/target.png);
 }
-.new-messages toolbarbutton{
-list-style-image: url(chrome://xtense2/skin/images/new-messages.jpg);
+.hostiles toolbarbutton{
+list-style-image: url(chrome://xtense2/skin/images/target_hostile.png);
 }
 .new-messages label{
 /*text-decoration: blink;*//*impossible sur FF à l'heure où j'écris*/

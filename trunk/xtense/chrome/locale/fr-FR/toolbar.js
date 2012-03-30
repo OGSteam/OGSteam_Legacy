@@ -20,6 +20,8 @@ Ximplements(Xlocales, {
 	'deactivate': 'Desactiver',
 	'wait send': 'En attente de l\'envoi manuel des données',
 	'unavailable parser lang': 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension)
+	'hostiles': 'Flotte(s) hostile(s) détectée(s) sur $1',
+	'no hostiles': 'Aucune flotte hostile détectée sur un membre de la communauté',		
 	
 	'overview detected': 'Vue générale détectée',
 	'buildings detected': 'Batiments détectés',

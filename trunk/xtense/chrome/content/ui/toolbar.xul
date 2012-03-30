@@ -38,6 +38,10 @@
 				<toolbarbutton id="xtense-log" tooltiptext="&toolbar.log.t;" label="&toolbar.log;"/>
 				<toolbarbutton id="xtense-send" tooltiptext="&toolbar.send.t;" label="&toolbar.send;" disabled="true"/>
 				<toolbarseparator/>
+				<hbox id="xtense-hostiles-hbox" class="no-hostiles" tooltiptext="&toolbar.hostiles.display;" flex="0">
+					<toolbarbutton id="xtense-hostiles" /><!--image="chrome://xtense2/skin/images/no-new-message.jpg"-->
+				</hbox>
+				<toolbarseparator/>
 				<hbox id="xtense-new-messages-hbox" class="no-new-message" tooltiptext="&toolbar.new-messages.display;" flex="0">
 					<!--<vbox>
 						<spacer flex="1"/>
