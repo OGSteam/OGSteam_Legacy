@@ -837,13 +837,6 @@ switch ($pub_type){
 	break;
 	
 	case 'hostiles': // Hostiles
-		//Check::data(isset($line['trader'], $line['planet']), Check::planet_name($line['planet'], 1));
-		//Check::data(isset($line['trader'], $line['planet']), true);
-		//$line['trader'] = Check::filterSpecialChars($line['trader']);
-		
-		//Check::data(isset($pub_data));
-		$io->set(array('function' => 'hostiles',
-			        'type' => 'hostiles'));
 		$line = $pub_data;
 		$line['attacker_name'] = Check::filterSpecialChars($line['attacker_name']);
 		$line['origin_attack_name'] = Check::filterSpecialChars($line['origin_attack_name']);
@@ -865,7 +858,30 @@ switch ($pub_type){
 						'composition_flotte' => $line['composition'],
 						'clean' => $line['clean']
 		);
-		$call->add('hostiles', $hostile);			
+		$call->add('hostiles', $hostile);	
+		$io->set(array('function' => 'hostiles',
+					   		'type' => 'hostiles'
+		));
+	break;
+		
+	case 'checkhostiles': // Verification des flotttes Hostiles
+		$user_attack="";
+		$query = "SELECT DISTINCT(hos.user_id) AS user_id, user_name "
+				."FROM " . TABLE_USER . " user, ogspy_barym_hostiles hos "
+				."WHERE user.user_id=hos.user_id";
+		$result = $db->sql_query($query);
+		$isAttack=0;
+		//while($value = $db->sql_fetch_assoc($check)){
+		while(list($user_id,$user_name)=$db->sql_fetch_row($result)){			
+			$user_attack .= $user_name;
+			$user_attack .= " ";
+			$isAttack=1;
+		}
+		
+		$io->set(array('type' => 'checkhostiles',
+							'check' => $isAttack,
+							'user' => $user_attack
+		));
 	break;
 		
 	case 'messages': //PAGE MESSAGES
