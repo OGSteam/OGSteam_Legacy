@@ -830,8 +830,9 @@ switch ($ogsversion) {
 		break;
 		
 	case '3.1.0':
-		// modif user
-		$requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_type` enum('FF','GMFF','GMGC') AFTER `rank_added_ogs`"; // Type de barre utilisée par le user
+		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.1.1' WHERE config_name = 'version'";
+        // modif user
+        $requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_type` enum('FF','GMFF','GMGC') AFTER `rank_added_ogs`"; // Type de barre utilisée par le user
 		$requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_version` VARCHAR(10) AFTER `xtense_type`"; // Type de barre utilisée par le user
 		
 		$ogsversion = '3.1.1';
