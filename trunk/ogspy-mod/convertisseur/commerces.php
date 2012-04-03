@@ -93,12 +93,12 @@ function valid() {
 			<th colspan="6" align="center" style="font-size:14px; font-weight: bold; color:orange;">Mes Livraisons du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
 		</tr>
 		<tr>
-			<th align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">D&eacute;part livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Arriv&eacute;e livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">D&eacute;part livraison</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Arriv&eacute;e livraison</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -132,13 +132,13 @@ function valid() {
 			<th colspan="7" align="center" style="font-size:14px; font-weight: bold; color:orange;">Livraisons Amies du <?php echo strftime("%d %b %Y", $pub_date_from);?> au <?php echo strftime("%d %b %Y", $pub_date_to);?></th>
 		</tr>
 		<tr>
-			<th align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Lieu de livraison</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Livreur</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Provenance</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
-			<th align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Date de livraison</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Lieu de livraison</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Livreur</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Provenance</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">M&eacute;tal livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Cristal livr&eacute;</th>
+			<td class="c" align="center" style="font-size:12px; font-weight: bold;">Deut&eacute;rium livr&eacute;</th>
 		</tr>
 	</thead>
 	<tbody>
