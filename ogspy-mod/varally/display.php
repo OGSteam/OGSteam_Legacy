@@ -23,12 +23,12 @@ if ($tag == '')
 } else {
 	foreach ($listTag as $tag)
 	{
-		$query = 'SELECT DISTINCT `player` FROM `'.TABLE_UNIVERSE.'` WHERE `ally`=\''.mysql_real_escape_string($tag).'\' ORDER BY `player` ASC';
+		$query = 'SELECT DISTINCT `player` FROM `'.TABLE_VARALLY.'` WHERE `ally`=\''.mysql_real_escape_string($tag).'\' ORDER BY `player` ASC';
 		$result = $db->sql_query($query);
 ?>
 		<table width='100%'>
 		<tr><td class='c' colspan='7'>Alliance [<?php echo $tag; ?>]</td></tr>
-		<tr><td class='c'>Joueur</td><td class='c'>Ecart général</td><td class='c'>%</td><td class='c'>Ecart flotte</td><td class='c'>%</td><td class='c'>Ecart recherche</td><td class='c'>%</td></tr>		
+		<tr><td class='c'>Joueur</td><td class='c'>Écart général</td><td class='c'>%</td><td class='c'>Écart flotte</td><td class='c'>%</td><td class='c'>Écart recherche</td><td class='c'>%</td></tr>		
 <?php
 		while ($val = $db->sql_fetch_assoc($result))
 		{
