@@ -144,11 +144,6 @@ function message(msg) {
 <!-- FIN DU SCRIPT -->
 
 <table width="100%">
-<!--
-<tr>
-	<td class="c" colspan="<?php print ($nb_planete <10)?'10':($nb_planete +1) ; ?>">Collez les informations et sélectionnez une planète pour les y assigner</td>
-</tr>
--->
 <tr>
 <?php
 
@@ -165,79 +160,8 @@ else {
 	echo "<th colspan='$colspan_lune'><a>Lunes</a></th>";
 }
 ?>
-	<!--<th colspan="5" onClick="window.location = 'index.php?action=home&view=planets';"><center><a style='cursor:pointer'>Planètes</a></center></th>
-	<th colspan="5" onClick="window.location = 'index.php?action=home&view=moons';"><center><a style='cursor:pointer'>Lunes</a></center></th>-->
     </tr>
-    <?php //TODO =>Suppression de l'insertion Manuelle ?>
-<!-- <form method="POST" name="post2" enctype="multipart/form-data" action="index.php">
-<tr>
-	<input type="hidden" name="action" value="set_empire">
-	<input type="hidden" name="view" value="<?php echo $view; ?>">
-	<th><a>Collez les infos ici</a></th>
-	<th colspan="5"><textarea name="data" rows="2"  onFocus="clear_text2()">Empire & Bâtiments & Laboratoire & Défenses</textarea></th>	
-	<th colspan="3"><label><input name="typedata" value="E" id="empire" type="radio"/ checked><a>Empire</a></label> (<?php echo $view=="moons" ? "lunes" : "planètes"; ?>)&nbsp;<?php echo help("home_commandant");?><br />
-	<label><input name="typedata" id="building" value="B" type="radio" onclick="if(!select_planet) message('Vous devez sélectionner une planète');"> <a>Bâtiments</a></label><label><input name="typedata" value="D" type="radio" onclick="if(!select_planet) message('Vous devez selectionner une planete');"> <a>Défenses</a></label>
-	<?php if($view=="planets") echo '<label><input name="typedata" value="T" type="radio"> <a>Technologies</a></label>' ?></th>
-	<th><input type="submit" value="Envoyer"></th>
-    <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
-</tr>
 
-<tr>
-	<th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><a>Sélectionnez une planète</a></th>
-       <?php for ($i=$start ; $i<=$start+$nb_planete -1 ; $i++) {
-        ?>
-        <th width="<?php echo intval(abs(100 / ( 1 + $nb_planete ))); ?>%"><label><input name="planet_id" value="<?php echo $view=="planets" ? $start : $start + 100; ?>" type="radio" onclick="select_planet = autofill(<?php echo $view=="planets" ? $start : $start + 100; ?>);if (document.getElementById('empire').checked == true) document.getElementById('building').checked=true;"><?php if($view=="moons") echo "<br />".$user_building[$i]["planet_name"]; ?></label></th>
-         <?php }
-        ?>
-      
-
-</tr>
-
-<tr>
-<?php
-if($view == "planets") {
-?>
-	<th><a>Nom de la planète</a></th>
-	<th><input type="text" id="planet_name" name="planet_name" size="15" maxlength="20" disabled></th>
-	<th><a>Coordonnées (par ex 3:100:10)</a></th>
-	<th><input type="text" id="coordinates" name="coordinates" size="10" maxlength="10" disabled></th>
-	<th><a>Nombre de cases</a></th>
-	<th><input type="text" id="fields" name="fields" size="8" maxlength="3" disabled></th>
-	<th><a>Temp. Min.</a><input type="text" id="temperature_min" name="temperature_min" size="8" maxlength="3" disabled></th>
-	<th><a>Temp. Max.</a><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
-	<th><a>Nombre de satellites</a></th>
-	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
-     <?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
-<?php
-} // fin de si view="planets"
-else {
-?>
-	<th></th>
-	<input type="hidden" id="planet_name" name="planet_name" disabled>
-	<input type="hidden" id="fields" name="fields" disabled>
-	<input type="hidden" id="coordinates" name="coordinates" disabled>
-	<th colspan="2"><a>Température Min</a></th>
-	<th><input type="text" id="temperature_min" name="temperature_min" size="8" maxlength="3" disabled></th>
-	<th colspan="2"><a>Température Max</a></th>
-	<th><input type="text" id="temperature_max" name="temperature_max" size="8" maxlength="3" disabled></th>
-	<th colspan="2"><a>Satellites</a></th>
-	<th><input type="text" id="satellite" name="satellite" size="8" maxlength="5" disabled></th>
-	<?php echo read_th("<th>&nbsp;</th>",$nb_planete); ?>
-<?php
-} // fin de sinon view="planets"
-?>
-</tr>
-
-<script language="JavaScript">
-document.getElementById('planet_name').style.visibility='hidden';
-document.getElementById('coordinates').style.visibility='hidden';
-document.getElementById('fields').style.visibility='hidden';
-document.getElementById('temperature_min').style.visibility='hidden';
-document.getElementById('temperature_max').style.visibility='hidden';
-document.getElementById('satellite').style.visibility='hidden';
-</script>
-
-</form> --> 
 <?php
 
 // verification de compte de planete/lune avec la technologie astro
