@@ -96,113 +96,146 @@ function Biper() {
 
 window.onload = Biper;
 </script>
+
 <table border="0" cellpadding="0" cellspacing="0">
-<tr align="center"><td><b>Heure serveur</b><br /><span id="datetime"><blink>En attente</blink></span></td></tr>
-<tr>
-	<td><div><a href="index.php" class="menu"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="65" border="0"/></a></div>
-	</td>
-</tr>
-<?php
-if ($server_config["server_active"] == 0) {
-	echo "<tr>\n";
-	echo "\t"."<td><div align='center'><font color='red'><b><blink>Serveur hors-ligne</blink></b></font></div></td>\n";
-	echo "</tr>\n";
-}
-if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_data["management_user"] == 1) {
-	echo "<tr>";
-	echo "<td><div align='center'><a href='index.php?action=administration' class='menu0'><img src='".$link_css."/transpa.gif' width='166' height='19'></a></font></div></td>";
-	echo "</tr>";
-}?>
-<tr><td><div align="center"><a href="index.php?action=profile" class="menu1"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=home" class="menu2"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></font></div></td></tr>
-<tr>
-	<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div>
-	</td>
-</tr>
-<tr><td><div align="center"><a href="index.php?action=galaxy" class="menu3"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=cartography" class="menu4"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=search" class="menu5"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=ranking" class="menu6"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr>
-	<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div>
-	</td>
-</tr>
-<tr><td><div align="center"><a href="index.php?action=statistic" class="menu7"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr><td><div align="center"><a href="index.php?action=galaxy_obsolete" class="menu8"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div>
-</td></tr>
-<tr>
-	<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div>
-	</td>
-</tr>
-<tr><td><div align="center"><img src="<?php echo $link_css;?>/menu/mods.png" width="166" height="19"></div>
-</td></tr>
-<!-- Emplacement mod /-->
-<?php
-if (ratio_is_ok()) {
-$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '0' order by position, title";
-$result = $db->sql_query($request);
-if ($db->sql_numrows($result)) {
-	while ($val = $db->sql_fetch_assoc($result)) echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a class="menu_mods" href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></font></td></tr>'."\n";
-}
-} else echo '<tr><td>- <font color="red">Mods<br />inaccessibles&nbsp;'.help("ratio_block").'</font></td></tr>'."\n";
-?>
-<!-- Fin des mods /-->
-<!-- Emplacement mod  admin/-->
-<?php
-if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
-$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '1' order by position, title";
-$result = $db->sql_query($request);
-if ($db->sql_numrows($result)) {
-	echo '<tr><td><div align="center"><img src="'.$link_css.'transpa.gif" width="110" height="12"></div></td></tr>'."\n";
-	while ($val = $db->sql_fetch_assoc($result)) echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a class="menu_mods" href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></td></tr>'."\n";
-}
-}
-?>
-<!-- Fin des mods  admin/-->
-<tr>
-	<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div>
-	</td>
-</tr>
-<tr><td><div align="center"><a href="index.php?action=logout" class="menu10"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<tr>
-	<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div>
-	</td>
-</tr>
-<?php if ($server_config["url_forum"] != "") {?>
-<tr><td><div align="center"><a href="<?php echo $server_config["url_forum"];?>" target="_blank" class="menu11"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-<?php }?>
-<tr><td><div align="center"><a href="index.php?action=about" class="menu12"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td></tr>
-</table>
-</div>
-<br />
-<table>
-<?php //TODO =>Suppression de l'insertion Manuelle ?>
-<!-- <form method="POST" name="post" enctype="multipart/form-data" action="index.php">
-<input type="hidden" name="action" value="get_data">
-<?php
-if (sizeof($items) > 0) {
-	echo "<tr><td>"."\n";
-	echo "\t"."<select name='datatype'>"."\n";
-	foreach ($items as $value) {
-		list($type, $text) = $value;
-		echo "\t"."<option value='".$type."'>".$text."</option>"."\n";
+	<tr align="center">
+		<td>
+			<b>Heure serveur</b><br />
+			<span id="datetime"><blink>En attente</blink></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<div><a href="index.php" class="menu"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="65" border="0"/></a></div>
+		</td>
+	</tr>
+	
+	<?php
+	
+	if ($server_config["server_active"] == 0) {
+		echo "<tr>\n";
+		echo "\t"."<td><div align='center'><font color='red'><b><blink>Serveur hors-ligne</blink></b></font></div></td>\n";
+		echo "</tr>\n";
 	}
-	echo "\t"."</select>"."\n";
-	echo "</td></tr>"."\n";
-}
-
-echo "<tr align='center'>"."\n";
-echo "\t"."<td><textarea name='data' rows='3' cols='20' onFocus='clear_box()'>";
-if (sizeof($items) > 0) echo "Système solaire & Rapport espionnage & Classement";
-else echo "Vous ne disposez pas des droits nécessaires pour importer des informations sur le serveur";
-echo "</textarea></td>"."\n";
-echo "</tr>"."\n";
-
-if (sizeof($items) > 0) {
-	echo "<tr>"."\n";
-	echo "\t"."<td><div align='center'><input type='submit' value='Envoyer' ></div></td>"."\n";
-	echo "</tr>"."\n";
-}
-?>
-</form> -->
+	
+	if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1 || $user_data["management_user"] == 1) {
+		echo "<tr>";
+		echo "<td><div align='center'><a href='index.php?action=administration' class='menu0'><img src='".$link_css."/transpa.gif' width='166' height='19'></a></font></div></td>";
+		echo "</tr>";
+	}
+	
+	?>
+	
+	<tr>
+		<td><div align="center"><a href="index.php?action=profile" class="menu1"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=home" class="menu2"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></font></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=galaxy" class="menu3"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=cartography" class="menu4"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=search" class="menu5"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=ranking" class="menu6"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=statistic" class="menu7"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=galaxy_obsolete" class="menu8"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/menu/mods.png" width="166" height="19"></div></td>
+	</tr>
+	
+	<!-- Emplacement mod /-->
+	
+	<?php
+	
+	if (ratio_is_ok()) {
+		$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '0' order by position, title";
+		$result = $db->sql_query($request);
+		
+		if ($db->sql_numrows($result)) {
+			while ($val = $db->sql_fetch_assoc($result)) {
+				echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a class="menu_mods" href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></font></td></tr>'."\n";
+			}
+		}
+	}
+	else {
+		echo '<tr><td>- <font color="red">Mods<br />inaccessibles&nbsp;'.help("ratio_block").'</font></td></tr>'."\n";
+	}
+	
+	?>
+	
+	<!-- Fin des mods /-->
+	
+	<!-- Emplacement mod  admin/-->
+	
+	<?php
+	
+	if ($user_data["user_admin"] == 1 || $user_data["user_coadmin"] == 1) {
+		$request = "select action, menu from ".TABLE_MOD." where active = 1 and `admin_only` = '1' order by position, title";
+		$result = $db->sql_query($request);
+		
+		if ($db->sql_numrows($result)) {
+			echo '<tr><td><div align="center"><img src="'.$link_css.'transpa.gif" width="110" height="12"></div></td></tr>'."\n";
+			
+			while ($val = $db->sql_fetch_assoc($result)) {
+				echo '<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a class="menu_mods" href="index.php?action='.$val['action'].'">'.$val['menu'].'</a></td></tr>'."\n";
+			}
+		}
+	}
+	
+	?>
+	
+	<!-- Fin des mods  admin/-->
+	
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><a href="index.php?action=logout" class="menu10"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	<tr>
+		<td><div align="center"><img src="<?php echo $link_css;?>/transpa.gif" width="0" height="17"></div></td>
+	</tr>
+	
+	<?php
+	
+	if ($server_config["url_forum"] != "") {
+	
+	?>
+	
+	<tr>
+		<td><div align="center"><a href="<?php echo $server_config["url_forum"];?>" target="_blank" class="menu11"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
+	
+	<?php
+	
+	}
+	
+	?>
+	
+	<tr>
+		<td><div align="center"><a href="index.php?action=about" class="menu12"><img src="<?php echo $link_css;?>/transpa.gif" width="166" height="19"></a></div></td>
+	</tr>
 </table>
+
+</div>
