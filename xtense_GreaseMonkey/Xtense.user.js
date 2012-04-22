@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.4.0.6
+// @version     2.4.1.0
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -734,8 +734,7 @@ function parse_shipyard(){
 			"GT": tabLevel[9],
 			"VC": tabLevel[10],
 			"REC": tabLevel[11],
-			"SE": tabLevel[12], 
-			"SAT": tabLevel[13]};
+			"SE": tabLevel[12]};
 	
 	XtenseRequest.set(getPlanetData());
 	XtenseRequest.set(req);
