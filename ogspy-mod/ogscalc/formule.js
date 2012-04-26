@@ -1,15 +1,14 @@
+<!--//--><![CDATA[//><!--
+
+var batimentsOGSpy = new Array();
+var technologiesOGSpy = new Array();
+
 arrayTechno = new Array('robot','chantier','nanite','labopm','labo1','labo2','labo3','labo4','labo5','labo6','labo7','labo8','reseau');
-
 arrayBatiments = new Array('mine_metal','mine_cristal','synthetiseur_deuterium','centrale_solaire','reacteur_fusion','usine_robots','usine_nanites','chantier_spatial','hangar_metal','hangar_cristal','reservoir_deuterium','laboratoire','silo_missiles','terraformeur');
-
 arrayBatimentsSpeciaux = new Array('base_lunaire','phalange_capteurs','porte_saut_spatial','depot_ravitaillement');
-
 arrayTechnologies = new Array('espionnage','ordinateur','armes','bouclier','protection_vaisseaux','energie','hyperespace','reacteur_combustion','reacteur_impulsion','propulsion_hyperespace','laser','ion','plasma','reseau_recherche','expeditions');
-
 arrayVaisseaux = new Array('pt','gt','cle','clo','cr','vb','traq','bb','dest','edlm','recycleur','vc','sonde','satellite');
-
 arrayDefenses = new Array('lm','ale','alo','canon_ion','gauss','lp','pb','gb','min','mip');
-
 arrayTotal = new Array('batiments','batiments_speciaux','technologies','vaisseaux','defenses');
 
 function writeCookie(nom, valeur)
@@ -249,18 +248,28 @@ function defense ( uni, met, crist, deut )
 	sommeTotale();
 }
 
-function laboEqui ()
+function laboEqui()
 {
-	arr = new Array(document.getElementById('labo1').value, document.getElementById('labo2').value, document.getElementById('labo3').value, document.getElementById('labo4').value, document.getElementById('labo5').value, document.getElementById('labo6').value, document.getElementById('labo7').value, document.getElementById('labo8').value);
-	arr = arr.sort(compare);
-
-	labo_Equi=0;
-	for (cpt=0; cpt<parseFloat(document.getElementById('reseau').value); cpt++)
+	var i = 0;
+	var t_labo = Array();
+	
+	while(batimentsOGSpy[i])
 	{
-		labo_Equi += parseFloat(arr[cpt]);
+		t_labo.push(batimentsOGSpy[i][12]);
+		i++;
 	}
-	labo_Equi += parseFloat(document.getElementById('labopm').value); 
-	document.getElementById('laboequi').value=labo_Equi;
+
+	t_labo.sort(compare);
+	
+	labo_Equi = 0;
+	for(i = 0 ; i < document.getElementById('reseau').value ; i++)
+	{
+		if(t_labo[i] >= 7)
+		{	
+			labo_Equi += parseFloat(t_labo[i]);
+		}
+	}
+	document.getElementById('laboequi').value = labo_Equi;
 	rafraichiLaboratoire();
 }
 
@@ -492,11 +501,7 @@ function resetTotal ()
 
 function resetData ()
 {
-	for ( i = 0; i < arrayTechno.length; i++ )
-	{
-		bat = arrayTechno[i];
-		document.getElementById(bat).value = 0;
-	}
+
 	document.getElementById('laboequi').value = 0;
 	
 	document.getElementById('graviton_actuel').value = 0;
@@ -544,3 +549,26 @@ function formatNmb(numero)
 		sRes = nNmb.charAt(i) + ((j > 0) && (j % 3 == 0)? ".": "") + sRes;
 	return sRes;
 }
+
+function chargement(id_planete)
+{
+	// resetData();
+	
+	document.getElementById("labopm").value = batimentsOGSpy[id_planete][12];
+	document.getElementById("robot").value = batimentsOGSpy[id_planete][6];
+	document.getElementById("chantier").value = batimentsOGSpy[id_planete][8];
+	document.getElementById("nanite").value = batimentsOGSpy[id_planete][7];
+	document.getElementById("reseau").value = technologiesOGSpy[13];
+	document.getElementById("graviton_actuel").value=technologiesOGSpy[14];
+	
+	if(batimentsOGSpy[id_planete][12] >= 7)
+	{
+		laboEqui();
+	}
+	else
+	{
+		document.getElementById('laboequi').value = batimentsOGSpy[id_planete][12];
+	}
+}
+
+//--><!]]>
