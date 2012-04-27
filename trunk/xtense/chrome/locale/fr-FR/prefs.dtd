@@ -45,7 +45,7 @@
 <!ENTITY opt.handle.ally_list "Liste des membres d'alliance">
 <!ENTITY opt.handle.resources "Ressources">
 <!ENTITY opt.handle.fleetSending "Envoi Flottes">
-<!ENTITY opt.handle.hostiles "Envoi des flottes hostiles">
+<!ENTITY opt.handle.hostiles "Envoi et récupération des flottes hostiles">
 
 <!--/ Options sur les messages /-->
 <!ENTITY opt.msg "Traitement des messages">
