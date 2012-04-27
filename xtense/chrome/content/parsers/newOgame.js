@@ -133,8 +133,9 @@ var XnewOgame = {
 	
 	sendPage: function (page) {
 		// Vérification des flottes hostiles sur un des membres de la communauté OGSPY
-		checkHostilesOnOGSPY();
-		
+		if(Xprefs.isset('handle-hostiles') && Xprefs.getBool('handle-hostiles')) {
+			checkHostilesOnOGSPY();
+		}
 		var Request = null;
 		
 		if (page == 'overview') 		Request = this.parseOverview();
@@ -219,17 +220,17 @@ var XnewOgame = {
 		}
 	},
 
-	checkHostilesOnOGSPY : function () {
- 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
-		//Xconsole("CheckHostile : last="+this.lastCheckHostile+"; duree="+dureeDepuisDernierCheckHostile);
-		if(this.lastCheckHostile==null || dureeDepuisDernierCheckHostile > (10 * 60 * 1000)){
-			this.lastCheckHostile=new Date().getTime();
-			//Xconsole("Check Hostile !");
-			Request = XnewOgame.newRequest();
-			Request.set('type','checkhostiles');
-			Request.set('lang',XnewOgame.lang);
-			Request.send(XnewOgame.servers);
-		}
+	checkHostilesOnOGSPY : function () {		
+	 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
+			//Xconsole("CheckHostile : last="+this.lastCheckHostile+"; duree="+dureeDepuisDernierCheckHostile);
+			if(this.lastCheckHostile==null || dureeDepuisDernierCheckHostile > (10 * 60 * 1000)){
+				this.lastCheckHostile=new Date().getTime();
+				//Xconsole("Check Hostile !");
+				Request = XnewOgame.newRequest();
+				Request.set('type','checkhostiles');
+				Request.set('lang',XnewOgame.lang);
+				Request.send(XnewOgame.servers);
+			}
  	},
 
 	handleResponse: function (Request, Server, Response) {
@@ -382,8 +383,6 @@ var XnewOgame = {
 		//this.Tab.setStatus(Xl('overview detected'), XLOG_NORMAL, {url: this.url});
 		this.lastAction = "";
 		
-		
-		
 		if(Xprefs.getBool('handle-hostiles')) {
 			// Recuperation des events
 			var eventlist = XajaxCompo(this.universe+"/game/index.php?page=eventList");
@@ -466,16 +465,16 @@ var XnewOgame = {
 		 		var arrivalTime = Xpath.getStringValue(doc,paths.attack_arrival_time,hostile).trim();
 		 		
 		 		var originAttackName = Xpath.getStringValue(doc,paths.attack_origin_attack_planet,hostile).trim();
-		 		var originAttackCoords = Xpath.getStringValue(doc,paths.attack_origin_attack_coords,hostile).trim().replace("[","").replace("]","");
+		 		var originAttackCoords = Xpath.getStringValue(doc,paths.attack_origin_attack_coords,hostile).trim().cleanCoords();
 		 		var attacker = Xpath.getStringValue(doc,paths.attack_attacker_name,hostile);
 		 		var attackerTab = attacker.split(" ");
 		 		attacker=attackerTab[attackerTab.length-1];
 		 		 		
 		 		var destName = Xpath.getStringValue(doc,paths.attack_destination_planet,hostile).trim();
-		 		var destCoords = Xpath.getStringValue(doc,paths.attack_destination_coords,hostile).trim().replace("[","").replace("]","");
+		 		var destCoords = Xpath.getStringValue(doc,paths.attack_destination_coords,hostile).trim().cleanCoords();
 		 				 		
 		 		var urlCompo = Xpath.getStringValue(doc,paths.attack_url_composition_flotte,hostile).trim();
-		 		var compo = XajaxCompo(urlCompo).trim().replaceAll("\r","").replaceAll("\n","").replaceAll("\t","").replaceAll(" {2,}","").replaceAll("> <","><");
+		 		var compo = XajaxCompo(urlCompo).trim().cleanHtmlIndentation();
 		 		var tabCompo = compo.split("</tr>");
 		 		
 		 		var compoTotale = "";
