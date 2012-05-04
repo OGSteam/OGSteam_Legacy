@@ -41,7 +41,7 @@ XnewOgame.Xpaths = {
 		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
 		allytag : 'td[contains(@class, "allytag")]/span/text()',
 		status : 'descendant::span[@class="status"]',
-		activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
+		activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 		ally_id : 'descendant::a[@target="_ally"]/@href',
 		table_galaxy : '//table[@id="galaxytable"]/tbody',
@@ -70,7 +70,7 @@ XnewOgame.Xpaths = {
 			'livraison_me': '//div[@class="note"]'
 		},
 		spy : {
-			playername : '//table[@class="material spy"]//span/text()',
+			playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',
 			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
 			moon : '//a[@class="buttonSave"]'
 		}
