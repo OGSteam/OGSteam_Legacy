@@ -30,7 +30,7 @@ XnewOgame.Xpaths = {
 	
 	galaxy : { 
 		rows : '//tr[@class="row"]',
-		position : 'td[@class="position"]/text()',
+		position : 'td[contains(@class, "position")]/text()',
 		planetname : 'td[@class="planetname"]/text()',
 		planetname_l : 'td[@class="planetname"]/a/text()',
 		planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
@@ -39,7 +39,7 @@ XnewOgame.Xpaths = {
 		playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en general, span pour joueur courant,
 		playername2 : 'td[contains(@class,"playername")]/*[2]', //Pour joueur bandit ou empereur
 		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
-		allytag : 'td[@class="allytag"]/span/text()',
+		allytag : 'td[contains(@class, "allytag")]/span/text()',
 		status : 'descendant::span[@class="status"]',
 		activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
@@ -97,7 +97,7 @@ XnewOgame.Xpaths = {
 		subnav_fleet : "//div[@id=\'subnav_fleet\']/a[contains(@class,'active')]/@rel",
 		
 		rows : "id(\'ranks\')/tbody/tr",
-		position : "td[contains(@class,\'position\')]/a/text()",
+		position : "td[contains(@class,\'position\')]/text()",
 		points :  "td[contains(@class,\'score\')]/text()",
 		allytag : "td[@class=\'name\']/span[@class=\'ally-tag\']/a/text()",
 		ally_id : "td[@class=\'name\']/span[@class=\'ally-tag\']/a/@href",
