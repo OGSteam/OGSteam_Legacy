@@ -906,11 +906,11 @@ var XnewOgame = {
 
 					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
 					if (ally_id != '' ) {
-						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id.match(/allianceId\=(.*)/);
 						ally_id = ally_id[1];
 					}
-					else if (allytag)
-						ally_id = '-1';
+					else
+						ally_id = '0';
 					
 					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
 					rowsData[position]=r;
@@ -988,7 +988,7 @@ var XnewOgame = {
 					var ally = Xpath.getStringValue(doc,paths.allytag,row).trim().replace(/\]|\[/g,'');
 					var ally_id = Xpath.getStringValue(doc,paths.ally_id,row).trim();
 					if (ally_id != '' && !ally_id.match(/page\=alliance/)) { //Pas d'id sur le lien de sa propre alliance (dans les classements alliances)
-						ally_id = ally_id.match(/allyid\=(.*)/);
+						ally_id = ally_id.match(/allianceId\=(.*)/);
 						ally_id = ally_id[1];
 					} else if (ally){
 						ally_id = XtenseMetas.getAllyId(XnewOgame.Xpaths.metas);
