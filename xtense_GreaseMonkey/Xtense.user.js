@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	Xtense-GM
-// @version     2.4.1.0
+// @version     2.4.0.9
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,7 +8,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.1";
+var VERSION = "2.4.0.9";
 var TYPE = "GM";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
@@ -358,14 +358,14 @@ function parse_galaxy_system_inserted(event){
 					//player_id = doc.cookie.match(/login_(.*)=U_/)[1];
 					player_id = XtenseMetas.getPlayerId();  
 				}
-				var allyid = XPath.getStringValue(document,paths.ally_id,row).trim();
-				if (allyid != '' ) {
-					allyid = allyid.match(/allyid\=(.*)/);
-					allyid = allyid[1];
-				} else if (allytag) {
-					//ally_id = '-1';
-					allyid = XtenseMetas.getAllyId();
-				}
+                var allyid = XPath.getStringValue(document,paths.ally_id,row).trim();
+					if (allyid != '' ) {
+						allyid = allyid.match(/allianceId\=(.*)/);
+						allyid = allyid[1];
+					}
+					else
+						allyid = '0';            
+                
 				var allyplace = XPath.getStringValue(document,paths.ally_place,row).trim();
 
 				var allymembers = XPath.getStringValue(document,paths.ally_members,row).trim();
@@ -488,7 +488,7 @@ function parse_ranking_inserted(event) {
 			var ally = XPath.getStringValue(document,paths.allytag,row).trim().replace(/\]|\[/g,'');
 			var ally_id = XPath.getStringValue(document,paths.ally_id,row).trim();
 			if (ally_id != '' && !ally_id.match(/page\=alliance/)) { //Pas d'id sur le lien de sa propre alliance (dans les classements alliances)
-				ally_id = ally_id.match(/allyid\=(.*)/);
+				ally_id = ally_id.match(/allianceId\=(.*)/);
 				ally_id = ally_id[1];
 			} else if (ally){
 				ally_id = XtenseMetas.getAllyId();
@@ -1867,7 +1867,7 @@ XtenseXpaths = {
 		},
 		galaxy : { 
 			rows : '//tr[@class="row"]',
-			position : 'td[@class="position"]/text()',
+			position : 'td[contains(@class, "position")]/text()',
 			planetname : 'td[@class="planetname"]/text()',
 			planetname_l : 'td[@class="planetname"]/a/text()',
 			planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
@@ -1876,9 +1876,9 @@ XtenseXpaths = {
 			playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en general, span pour joueur courant,
 			playername2 : 'td[contains(@class,"playername")]/*[2]', //Pour joueur bandit ou empereur
 			playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
-			allytag : 'td[@class="allytag"]/span/text()',
+			allytag : 'td[contains(@class, "allytag")]/span/text()',
 			status : 'descendant::span[@class="status"]',
-			activity : 'td[@class="planetname"]/span[@class="undermark"]/text()',
+			activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
 			player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 			ally_id : 'descendant::a[@target="_ally"]/@href'
 		},
@@ -1905,8 +1905,7 @@ XtenseXpaths = {
 				'livraison_me': '//div[@class="note"]'
 			},
 			spy : {
-				/*playername : '//table[@class="material spy"]/tbody/tr[1]/th[@class="area"]/span/text()',*/ /*Version Longue*/			
-				playername : '//th[@class="area"]/span/text()',				
+                playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',				
 				fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
 				moon : '//a[@class="buttonSave"]'				
 			}
