@@ -255,8 +255,15 @@ function handle_current_page(){
 	else if(regStation.test(url))	{ if(GM_getValue(prefix_GMData +'handle.station','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_station();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
 	else if(regShipyard.test(url) || regFleet1.test(url))	{ if(GM_getValue(prefix_GMData +'handle.shipyard','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_shipyard();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
 	else if(regDefense.test(url))	{ if(GM_getValue(prefix_GMData +'handle.defense','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){parse_defense();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
-	else if(regMessages.test(url))	{ if(GM_getValue(prefix_GMData +'handle.msg.msg','false').toString() == 'true'){parse_messages();}} 
-	else if(regCombatreport.test(url))	{ if(GM_getValue(prefix_GMData +'handle.msg.rc','false').toString() == 'true'){parse_rc();}}
+	else if(regMessages.test(url))	{ if(GM_getValue(prefix_GMData +'handle.msg.msg','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.ally','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.spy','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.ennemy.spy','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.rc.cdr','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.expeditions','false').toString() == 'true' ||
+                                        GM_getValue(prefix_GMData +'handle.msg.commerce','false').toString() == 'true' 
+                                        ){parse_messages();}} 
+	else if(regCombatreport.test(url)){ if(GM_getValue(prefix_GMData +'handle.msg.rc','false').toString() == 'true'){parse_rc();}}
 	else if(regAlliance.test(url))	{ if(GM_getValue(prefix_GMData +'handle.alliance','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ally_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
 	else if(regStats.test(url))	{ if(GM_getValue(prefix_GMData +'handle.stats','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ranking_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }} 
 	else { setStatus(XLOG_NORMAL,Xl('unknow_page'));}
@@ -505,9 +512,17 @@ function parse_ranking_inserted(event) {
 				}
 				else if(document.cookie.match(/login_(.*)=U_/))
 					player_id = document.cookie.match(/login_(.*)=U_/)[1];
-
-				log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
-				var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+                    
+                /*Nombre de vaisseaux*/    
+                if (type[1] == 'fleet') {
+                    var NbVaisseaux = XPath.getStringValue(document,paths.ally.points_moy, row).replace("|.", "").trimInt();
+                    log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points+',NbVaisseaux:'+NbVaisseaux);
+                    var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points,Nb_Vaisseaux:NbVaisseaux};
+                }else{
+                    log('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);
+                    var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+                }
+                
 			} else if(type[0] == 'ally') {
 				var members = XPath.getStringValue(document,paths.ally.members,row).getInts();
 				var moy = XPath.getStringValue(document,paths.ally.points_moy,row).replace("|.", "").trimInt();
