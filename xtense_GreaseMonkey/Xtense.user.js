@@ -101,16 +101,11 @@ function parseNB(monText){
   return (monText.replace(/\./g,""));  
 }
 
-function err(type, message) 
-{ 
-    setTimeout(function() 
-               {
-                   throw new Error( message);
-               }, 0);
-} 	
+//Affichage des Logs dans Firebug
 function log(message){
 	if(GM_getValue(prefix_GMData +'debug.mode','false').toString() == 'true') { console.log(nomScript + " says : " + message); }
-}	
+}
+//Gestion de l'icone
 function setStatus(type,message){
 	var icone = XPath.getSingleNode(document,"//img[@id='xtense.icone']");
 	if(icone!=null){
@@ -147,7 +142,7 @@ function setStatus(type,message){
 	} else {
 		log(message);
 	}
-}//Gestion de l'icone
+}//Fin Gestion de l'icone
 
 //Requete Ajax
 function Xajax(obj) {
