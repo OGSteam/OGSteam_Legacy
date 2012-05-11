@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$XaKFX1"
-                   em:version="2.4.2"
-                   em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$+aKFX1"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$WaKFX1">
-    <RDF:li RDF:resource="rdf:#$XaKFX1"/>
+  <RDF:Seq RDF:about="rdf:#$qSWe9">
+    <RDF:li RDF:resource="rdf:#$rSWe9"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
                    em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBACE8XFa+UXi1Sv7n3lH/QmZjRWBNk8DBH90S70ybOkQfS8orhSOaBnEjo80E9eHL0NA0AnqTiop5rm6qzyiwVneXe8AgnwriRxtrIyBGmWpsGXmcq/GlFXEMWcO2VuPsKH7BfKX3TW00zvcf5JWU94skXLT94LmHFpU5M6/CaQrl">
-    <em:updates RDF:resource="rdf:#$WaKFX1"/>
+    <em:updates RDF:resource="rdf:#$qSWe9"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$+aKFX1"
+  <RDF:Description RDF:about="rdf:#$vSWe9"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="13.*"
                    em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.2"
                    em:updateHash="sha1:a881ac32f61caa6f0c0f4daa584d38667820686b" />
+  <RDF:Description RDF:about="rdf:#$rSWe9"
+                   em:version="2.4.2"
+                   em:name="Xtense for Firefox">
+    <em:targetApplication RDF:resource="rdf:#$vSWe9"/>
+  </RDF:Description>
 </RDF:RDF>
