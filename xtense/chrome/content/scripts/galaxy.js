@@ -38,7 +38,7 @@ function fix_ally_popups() {
 	}*/
 }
 
-// Ajout du lien ver OGSPY
+// Ajout du lien vers OGSPY
 /** @author : Jedinight */
 function addLinkToGalaxy(doc,paths,galaxy,system) {
 	var contants = XnewOgame.contants.galaxy_link;
