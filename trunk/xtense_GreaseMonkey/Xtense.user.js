@@ -1883,7 +1883,7 @@ XtenseXpaths = {
 			temperatures : ".//*[@id='temperatureContentField']/text()"
 		},
 		galaxy : { 
-			rows : '//tr[@class="row"]',
+			rows : '//tr[contains(@class, "row")]',
 			position : 'td[contains(@class, "position")]/text()',
 			planetname : 'td[@class="planetname"]/text()',
 			planetname_l : 'td[@class="planetname"]/a/text()',
