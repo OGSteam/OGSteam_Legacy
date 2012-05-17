@@ -1,6 +1,7 @@
 // ==UserScript==
-// @name	Xtense-GM
-// @version     2.4.0.10
+// @name	    Xtense-GM
+// @version     2.4.2.0
+// @updateURL   http://userscripts.org/scripts/source/112690.meta.js
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @include     http://*.ogame.*/game/index.php*
@@ -8,8 +9,8 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.0.10";
-var TYPE = "GM";
+var VERSION = "2.4.2.0";
+var TYPE = "GM-";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
 var nomScript = 'Xtense';
@@ -28,12 +29,16 @@ var XLOG_WARNING = 1, XLOG_ERROR = 2, XLOG_NORMAL = 3, XLOG_SUCCESS = 4, XLOG_CO
 // Navigateurs
 var isFirefox = (window.navigator.userAgent.indexOf('Firefox') > -1) ? true : false;
 var isChrome = (window.navigator.userAgent.indexOf('Chrome') > -1) ? true : false;
+var isOpera = (window.navigator.userAgent.indexOf('Opera') > -1) ? true : false;
 var isTamper = false;
 
 if(isFirefox){
 	TYPE+="FF";
 } else if(isChrome){
 	TYPE+="GC";
+}else if(isOpera){
+    TYPE+="OP";
+    alert("Opera is not Supported");
 }
 
 // Variables globales données ogame
@@ -45,7 +50,7 @@ var cookie = nomScript + "-" + numUnivers + "-";
 var prefix_GMData = langUnivers + numUnivers +".";
 
 /*********************** Compatibilité Chrome ***************************/
-if(isChrome){
+if (isChrome){
     function GM_getValue(key,defaultVal) 
     {
         var retValue = localStorage.getItem(key);
@@ -64,15 +69,15 @@ if(isChrome){
     {
         localStorage.removeItem(value);
     }    
-
-    if(unsafeWindow){
-        isTamper =  true; // TamperMonkey
-    }
-}else if(isFirefox){
- // A completer si besoin...
 }
-/********************** Fin Compatibilité Chrome ************************/
-
+/********************** Fin Compatibilité Chrome ************************/ 
+// Variables globales données ogame
+var url = location.href;// Adresse en cours sur la barre d'outils
+var urlUnivers = url.match(new RegExp('(.*)\/game'))[1];
+var numUnivers = urlUnivers.match(new RegExp('uni(.*).ogame'))[1];
+var langUnivers = urlUnivers.match(new RegExp('ogame.(.*)'))[1];
+var cookie = nomScript + "-" + numUnivers + "-";
+var prefix_GMData = langUnivers + numUnivers +".";
 
 /***************************** Utilities ********************************/
 /* Fonctions sur strings */
@@ -158,8 +163,8 @@ function Xajax(obj) {
         handleResponse(response);
       }
     });
-    
 }
+
 // Récupère les messages de retours et locales
 function Xl(name) {
 		try {
@@ -199,7 +204,6 @@ function XtenseParseDate(dateString,handler) {
 		if(handler.fields.sec!=-1)
 			time.setSeconds(m[handler.fields.sec]);
 	}
-	//Xconsole(m+' | '+time);
 	time =  Math.floor(time.getTime()/1000);//division par 1000 pour un timestamp php
 	return time;
 }
