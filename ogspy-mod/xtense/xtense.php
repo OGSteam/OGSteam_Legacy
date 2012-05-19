@@ -131,6 +131,7 @@ $io->set(array('new_messages' => 0));
 
 // Xtense : Ajout de la version et du type de barre utilisée par l'utilisateur
 $db->sql_query("UPDATE " . TABLE_USER . " SET xtense_version='" . $pub_toolbar_version . "', xtense_type='" . $pub_toolbar_type . "' WHERE user_id = ".$user_data['user_id']);
+$toolbar_info = $pub_toolbar_type . " V" . $pub_toolbar_version;
 
 switch ($pub_type){
 	case 'overview': //PAGE OVERVIEW
@@ -186,7 +187,7 @@ switch ($pub_type){
 						'ressources' => $ressources
 			));
 			
-			add_log('overview', array('coords' => $coords, 'planet_name' => $planet_name));
+			add_log('overview', array('coords' => $coords, 'planet_name' => $planet_name, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -257,7 +258,7 @@ switch ($pub_type){
 						'buildings' => $buildings
 			));
 			
-			add_log('buildings', array('coords' => $coords, 'planet_name' => $planet_name));
+			add_log('buildings', array('coords' => $coords, 'planet_name' => $planet_name, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -337,7 +338,7 @@ switch ($pub_type){
 						'defense' => $defenses
 			));
 			
-			add_log('defense', array('coords' => $coords, 'planet_name' => $planet_name));
+			add_log('defense', array('coords' => $coords, 'planet_name' => $planet_name, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -390,7 +391,7 @@ switch ($pub_type){
 						'research' => $research
 			));
 			
-			add_log('research', array());
+			add_log('research', array('toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -411,7 +412,7 @@ switch ($pub_type){
 			$planet_type 	= ((int)$pub_planet_type == TYPE_PLANET ? TYPE_PLANET : TYPE_MOON);
 			$planet_name 	= utf8_decode($pub_planet_name);
 			if (isset($pub_SAT)) $ss = $pub_SAT;
-			if($ss=='undefined') $ss = "";
+			if(!isset($ss)) $ss = "";
 			
 			$home = home_check($planet_type, $coords);
 					
@@ -452,7 +453,7 @@ switch ($pub_type){
 					'fleet' => $fleet
 			));
 			
-			add_log('fleet', array('coords' => $coords, 'planet_name' => $planet_name));
+			add_log('fleet', array('coords' => $coords, 'planet_name' => $planet_name, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -547,7 +548,7 @@ switch ($pub_type){
 			));
 			
 			update_statistic('planetimport_ogs',15);
-			add_log('system', array('coords' => $galaxy.':'.$system));
+			add_log('system', array('coords' => $galaxy.':'.$system, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -678,7 +679,7 @@ switch ($pub_type){
 			));
 			
 			update_statistic('rankimport_ogs',100);
-			add_log('ranking', array('type1' => $type1, 'type2' => $type2, 'offset' => $offset, 'time' => $time));
+			add_log('ranking', array('type1' => $type1, 'type2' => $type2, 'offset' => $offset, 'time' => $time, 'toolbar' => $toolbar_info));
 		}
 	break;
 
@@ -824,7 +825,8 @@ switch ($pub_type){
 			));
 			
 			add_log('ally_list', array(
-					'tag' => $tag
+					'tag' => $tag,
+                    'toolbar' => $toolbar_info
 			));
 		}
 	break;
@@ -975,7 +977,7 @@ switch ($pub_type){
 						}
 						$db->sql_query('UPDATE '.TABLE_USER.' SET spy_added_ogs = spy_added_ogs + 1 WHERE user_id = '.$user_data['user_id']);
 						update_statistic('spyimport_ogs', '1');
-						add_log('messages', array( 'added_spy' => $spy['planet_name'],'added_spy_coords'  => $coords));
+						add_log('messages', array( 'added_spy' => $spy['planet_name'],'added_spy_coords'  => $coords, 'toolbar' => $toolbar_info));
 					}
 				break;
 				
