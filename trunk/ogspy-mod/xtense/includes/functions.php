@@ -178,7 +178,7 @@ function get_microtime() {
 function add_log($type, $data = null) {
 	global $server_config, $user_data, $root;
 	$message = '';
-	
+	if(!isset($data['toolbar'])) {$data['toolbar'] = "";}
 	if ($type == 'buildings' || $type == 'overview' || $type == 'defense' || $type == 'research' || $type == 'fleet'||$type == 'info') {
 		if (!$server_config['xtense_log_empire']) return;
 		
@@ -234,7 +234,7 @@ function add_log($type, $data = null) {
 				@chmod('journal/'.$date, 0777);
 				$fp = @fopen('journal/'.$dir.'/'.$file, 'a+');
 				if ($fp) {
-					fwrite($fp, '/*'.date('d/m/Y H:i:s').'*/'.'[Xtense] '.$user_data['user_name'].' '.$message."\n");
+					fwrite($fp, '/*'.date('d/m/Y H:i:s').'*/'.'[Xtense]'.'['.$data['toolbar'].'] '.$user_data['user_name'].' '.$message."\n");
 					fclose($fp);
 					@chmod('journal/'.$dir.'/'.$file, 0777);
 				}

@@ -274,7 +274,7 @@ function toggle_callback_info() {
 	<?php if ($user_data['user_admin'] == 1 || ($user_data['user_coadmin'] == 1 && $server_config['xtense_strict_admin'] == 0)) { ?>
 		<li class="config<?php if ($page == 'config') echo ' active'; ?>">
 			<div>
-				<a href="index.php?action=xtense&amp;page=config">Informations</a>
+				<a href="index.php?action=xtense&amp;page=config">Configuration</a>
 			</div>
 		</li>
 		<li class="user<?php if ($page == 'group') echo ' active'; ?>">
@@ -590,8 +590,15 @@ Calendar.setup({
 	
 	<div class="sep"></div>
 	<h2>Changelog</h2>
-	
 	<dl class="changelog">
+    		<dt>Mai 2012</dt>
+			<dd>			
+				<div class="version">Module OGSpy 2.4.2</div>
+				<p>
+					<em>Ajouts : </em><br />
+					&nbsp;* Support OGame 4.0
+				</p>
+			</dd>
 		<dt>Janvier 2012</dt>
 			<dd>			
 				<div class="version">Module OGSpy 2.4.0</div>
