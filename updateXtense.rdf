@@ -2,23 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$2YClS3"
-                   em:version="2.4.1"
+  <RDF:Description RDF:about="rdf:#$8fpsQ"
+                   em:version="2.4.2"
                    em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$6YClS3"/>
+    <em:targetApplication RDF:resource="rdf:#$cfpsQ"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$1YClS3">
-    <RDF:li RDF:resource="rdf:#$2YClS3"/>
+  <RDF:Seq RDF:about="rdf:#$7fpsQ">
+    <RDF:li RDF:resource="rdf:#$8fpsQ"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBADQSz1xbCiHrbvrXd5VIBaba2ZvokEaUmfTMTLlfQvEWZImVk9JF+1pN6CyxL79/CWgZ1iAEG4xt9EIFtmdbs7CJNjSEFJuz8IDzOpV8SZDp2CMhs/i5t2UflZ8OoFIdQ7Ko/tCyf7fP1UzpWbJdgrJyQG7HTenGxvsqodKdu5Bf">
-    <em:updates RDF:resource="rdf:#$1YClS3"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJgH8ReswHjGM37seh9P2uHtHhgRQFAU77GHX2GYUgk6Km2c8oUL2OLE5Z6fRV0WHQSc0G5tLBT4gPynga7oh2iokyfTwKnKY0xvTOTtw14hcapEvs6pxPCRoGOYooVTYVM6rjHoURtB5G20yCSoVRxXfI5VCxj2DJbQKDuNpkgZ">
+    <em:updates RDF:resource="rdf:#$7fpsQ"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$6YClS3"
+  <RDF:Description RDF:about="rdf:#$cfpsQ"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
-                   em:maxVersion="11.*"
-                   em:updateInfoURL="http://svn.ogsteam.fr/tags/xtense-2.4.1/release-notes.xhtml"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.1"
-                   em:updateHash="sha1:aea1a67b788ffbd3cbae2baf94c5d87377f73b0c" />
+                   em:maxVersion="13.*"
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.2"
+                   em:updateHash="sha1:195cdfcb51ba04e268cae3cd4603225f19d40dac" />
 </RDF:RDF>
