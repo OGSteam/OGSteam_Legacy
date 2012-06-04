@@ -147,22 +147,16 @@ function temps_usine (bat,level,planete) {
 	var batiment = 0;
 	switch (bat) {
 		case "UdN":
-		niv=parseFloat(batimentsOGSpy[planete][4]) + 1;
-		while (niv<=level){
-			res = ((1000000 * Math.pow(2,(niv-1))) + (500000 * Math.pow(2,(niv-1))) ) / 1000;
-			batiment = (parseFloat(batimentsOGSpy[planete][8]) + 1) * (Math.pow (2,(niv-1))) ;
-			temps += Math.floor ( ( (res) / (batiment) ) * 24 * 60);
-			niv++;}
+		niv=parseFloat(batimentsOGSpy[planete][4]);
+		temps = Math.floor ( ( ( ( ( ( (1500000)/5000 ) * ( 2 /(parseFloat(batimentsOGSpy[planete][8])+1) ) ) * ( level - niv) ) * 3600 ) - (90 * ( level - niv) ) )/vitesse_uni );
 		break;
 		case "UdR":
-		niv=parseFloat(batimentsOGSpy[planete][8]) + 1;
+		niv=parseFloat(batimentsOGSpy[planete][8]);
 		case "M":
-		while (niv<=level){
-			res = ((400 * Math.pow(2,(niv-1))) + (120 * Math.pow(2,(niv-1))) ) / 1000;
-			batiment = (niv) * (UdN[planete]) ;
-			temps += Math.floor ( ( (res) / (batiment) ) * 24 * 60);
-			niv++;
-		}
+		res = (520 * -(1 - Math.pow(2,level))) - (520 * -(1 - Math.pow(2,niv)));
+		tUdR = ( 2 /(parseFloat(batimentsOGSpy[planete][8])+1) );
+		tUdN = Math.pow(0.5,parseFloat(batimentsOGSpy[planete][4]) );
+		temps = Math.floor ( ( ( ( ( ( res / 5000 ) * tUdR ) ) * tUdN * 3600 ) - (90 * ( level - niv) ) )/vitesse_uni );
 		break;
 		default :
 		temps =0;
@@ -178,9 +172,9 @@ function calcul (i) {
  NRJ_nec = 300000 * Math.pow (3,(niv_grav-1));
  	
  Prod['CES'][i] = Math.round ((20 * (niv_bat['CES'][i]) * (Math.pow(1.1,(niv_bat['CES'][i])))));
- Prod['CEF'][i] = Math.round ((50 * (niv_bat['CEF'][i]) * (Math.pow(1.1,(niv_bat['CEF'][i])))));
+ Prod['CEF'][i] = Math.round (30 * niv_bat['CEF'][i] * Math.pow((1.05 + 0.01 * lvl_energie), niv_bat['CEF'][i]));
 		
- Sat['prod_un'][i] = Math.floor (((batimentsOGSpy[i][1]) / 4) + 20);
+ Sat['prod_un'][i] = Math.floor (batimentsOGSpy[i][1]);
  Prod['Sat'][i] = Math.round ((niv_bat['Sat'][i]) * (Sat['prod_un'][i]));
 	
  Prod['tot'][i] = Prod['CES'][i] + Prod['CEF'][i] + Prod['Sat'][i];
@@ -232,8 +226,8 @@ function calcul (i) {
  Temps['Sat'][i] = Sat['nb_nec'][i] * Temps['Sat_un'][i];
  Temps['Centrale'][i] = 	Math.floor ((( ((Ress['Centrale']['Metal'][i] + Ress['Centrale']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60)/vitesse_uni);
  Temps['CSp'][i] = Math.floor ((( ((Ress['CSp']['Metal'][i] + Ress['CSp']['Cristal'][i]) / 1000) / ((UdR[i]) * (UdN[i]))) * 24 * 60)/vitesse_uni);
- Temps['UdN'][i] = temps_usine ('UdN',niv_bat['UdN'][i],i)/vitesse_uni;
- Temps['UdR'][i] = temps_usine ('UdR',niv_bat['UdR'][i],i)/vitesse_uni;
+ Temps['UdN'][i] = temps_usine ('UdN',niv_bat['UdN'][i],i);
+ Temps['UdR'][i] = temps_usine ('UdR',niv_bat['UdR'][i],i);
  Temps['Usine'][i] = Temps['CSp'][i] + Temps['UdN'][i] + Temps['UdR'][i];
  
  Temps['Total'][i] = Temps['Lab'][i] + Temps['Sat'][i] + Temps['Centrale'][i] + Temps['Usine'][i];

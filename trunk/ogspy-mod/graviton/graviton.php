@@ -61,7 +61,7 @@ for ($i=101;$i<=100+$nb_planete;$i++)
 	{
 		echo "batimentsOGSpy[".$j."]= new Array('".
 			$user_building[$i]['planet_name']."','".
-			floor(($user_building[$i]["temperature_max"] + $user_building[$i]["temperature_min"])/2)."','".
+			floor(((($user_building[$i]["temperature_max"] + $user_building[$i]["temperature_min"])/2)+160)/6)."','".
 			$user_building[$i]['CES']."','".
 			$user_building[$i]['CEF']."','".
 			$user_building[$i]['UdN']."','".
@@ -74,6 +74,7 @@ for ($i=101;$i<=100+$nb_planete;$i++)
 }
 echo 'nb_planete = '.$nb_planete.';';
 echo 'vitesse_uni = '.$vitesse_uni.';';
+echo 'lvl_NRJ = '.$user_technology['NRJ'].';';
 if ($user_technology['Graviton'] <> '') {echo "graviton=".$user_technology['Graviton'].";\n";}
 else {echo "graviton=0;\n";}
 
@@ -93,6 +94,7 @@ for ($i=1;$i<= $nb_planete;$i++)
 		echo "document.getElementById('UdR".$i."').value = batimentsOGSpy[".$i."][8];\n";
 	}
 	echo "document.getElementById('niv_graviton').value= graviton + 1 ;\n";
+	echo "document.getElementById('lvl_NRJ').value= lvl_NRJ ;\n";
 ?>
 
 verif_all ();
@@ -116,6 +118,7 @@ recup_donne (planete);
 function recup_donne(planete){
 niv_bat = new Array;
 niv_grav = parseFloat(document.getElementById('niv_graviton').value);
+lvl_energie = parseFloat(document.getElementById('lvl_NRJ').value);
 <?php
 $bat = array("'Lab'","'CES'","'CEF'","'Sat'","'UdN'","'UdR'","'CSp'");
 $bat2 = array('Lab','CES','CEF','Sat','UdN','UdR','CSp');
@@ -169,7 +172,7 @@ window.onload = chargement;
 <?php $largeur=190+(106*$nb_planete)+106;
 echo "<table width=".$largeur." >";?>
 <tr>
-	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Simulation Graviton niv <input type='text' id='niv_graviton' size='2' maxlength='2' onBlur="javascript:verif_all ()" value='1'> <input type="submit" value="Restaurer les données" onClick="javascript:chargement()"></td>
+	<td class="c" <?php echo 'colspan="'.($nb_planete + 2).'"'; ?> >Simulation Graviton niv <input type='text' id='niv_graviton' size='2' maxlength='2' onBlur="javascript:verif_all ()" value='1'> Niveau de la recherche Energie <input type='text' id='lvl_NRJ' size='2' maxlength='2' onBlur="javascript:verif_all ()" value='<?php echo $user_technology['NRJ']; ?>'> <input type="submit" value="Restaurer les données" onClick="javascript:chargement()"></td>
 </tr>
 <tr>
 	<th width="190"><a>Nom</a></th>
