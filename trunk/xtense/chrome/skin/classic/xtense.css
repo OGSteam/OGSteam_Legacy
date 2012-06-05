@@ -232,23 +232,23 @@ window.log {
 #extra > .debug {
 	background-image: url(chrome://xtense2/skin/images/bug.png);
 }
-
-/*.no-new-message image{
+/*
+.no-new-message image{
 background-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
 min-width: 26px;
 }
 .new-messages image{
 background-image: url(chrome://xtense2/skin/images/new-messages.jpg);
 min-width: 26px;
-}
-.no-new-message button{
+}*/
+.no-new-message #xtense-new-messages-icon {
 list-style-image: url(chrome://xtense2/skin/images/no-new-message.jpg);
 min-width: 26px;
 }
-.new-messages button{
+.new-messages #xtense-new-messages-icon {
 list-style-image: url(chrome://xtense2/skin/images/new-messages.jpg);
 min-width: 26px;
-}*/
+}
 .no-hostiles toolbarbutton{
 list-style-image: url(chrome://xtense2/skin/images/target.png);
 }
