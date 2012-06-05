@@ -17,6 +17,7 @@ var XnewOgame = {
 	messagesCache: {},
 	lastAction: null,
 	lastCheckHostile : null,
+	MINUTES_TO_CHECK_HOSTILES : 2,
 		
 	l: function(name) {
 		if (!this.locales[this.lang][name]) {
@@ -131,11 +132,17 @@ var XnewOgame = {
 		}
 	},
 	
+	checkHostilesOnOGSPY : function () {		
+	 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
+			Xconsole("CheckHostile : limite="+(parseInt(this.MINUTES_TO_CHECK_HOSTILES) * 60 * 1000)+"; duree="+dureeDepuisDernierCheckHostile);
+			if(dureeDepuisDernierCheckHostile > ( parseInt(this.MINUTES_TO_CHECK_HOSTILES) * 60 * 1000)){
+				this.lastCheckHostile=new Date().getTime();
+				//Xconsole("Check Hostile !");
+				return true;
+			}
+ 	},
+	
 	sendPage: function (page) {
-		// Vérification des flottes hostiles sur un des membres de la communauté OGSPY
-		if(Xprefs.isset('handle-hostiles') && Xprefs.getBool('handle-hostiles')) {
-			checkHostilesOnOGSPY();
-		}
 		var Request = null;
 		
 		if (page == 'overview') 		Request = this.parseOverview();
@@ -151,11 +158,22 @@ var XnewOgame = {
 		else if (page == 'messages') 	Request = this.parseMessage();
 		else if (page == 'trader') 		Request = this.parseTrader();
 		else this.Tab.setStatus('invalid page type: "'+page+'"', XLOG_ERROR, {url: this.url});
-		
+				
 		if (Request) {
 			Request.set('lang',this.lang);
 		    Xdump(Request.data);
 		    Request.send(this.servers);
+		}
+		
+		// Vérification des flottes hostiles sur un des membres de la communauté OGSPY
+		if(Xprefs.getBool('handle-hostiles')){
+			if(this.checkHostilesOnOGSPY()){
+				var Request2 = this.newRequest();
+				Request2.set('type','checkhostiles');
+				Request2.set('data', {check:1});
+				Request2.set('lang',this.lang);
+				Request2.send(this.servers);	
+			}
 		}
 	},
 
@@ -219,19 +237,6 @@ var XnewOgame = {
 			throw_error(e);
 		}
 	},
-
-	checkHostilesOnOGSPY : function () {		
-	 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
-			//Xconsole("CheckHostile : last="+this.lastCheckHostile+"; duree="+dureeDepuisDernierCheckHostile);
-			if(this.lastCheckHostile==null || dureeDepuisDernierCheckHostile > (10 * 60 * 1000)){
-				this.lastCheckHostile=new Date().getTime();
-				//Xconsole("Check Hostile !");
-				Request = XnewOgame.newRequest();
-				Request.set('type','checkhostiles');
-				Request.set('lang',XnewOgame.lang);
-				Request.send(XnewOgame.servers);
-			}
- 	},
 
 	handleResponse: function (Request, Server, Response) {
 		Xdump(Response.content);
@@ -310,6 +315,7 @@ var XnewOgame = {
 				else if (code == 'spy') 				message = Xl('success spy');
 				else if (code == 'fleetSending')		message = Xl('success fleetSending');
 				else if (code == 'hostiles')			message = Xl('success hostiles');
+				else if (code == 'checkhostiles')		message = Xl('hostiles',data.user);
 				else 									message = Xl('unknow response', code, Response.content);
 			}
 			

@@ -48,7 +48,7 @@
 						<image id="xtense-new-messages-icon" class="icon"></image>
 						<spacer flex="1"/>
 					</vbox>-->
-					<toolbarbutton id="xtense-new-messages-icon" /><!--image="chrome://xtense2/skin/images/no-new-message.jpg"-->
+					<toolbarbutton id="xtense-new-messages-icon"/><!--image="chrome://xtense2/skin/images/no-new-message.jpg"-->
 					
 					<vbox flex="1">
 						<spacer flex="1"/>
