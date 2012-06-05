@@ -36,7 +36,7 @@ var Xcheck = {
 						Xl('connecting') + this.Server.url;
 		
 		
-		var postData = 'toolbar_version=' + Xtense.VERSION + '&mod_min_version=' + Xtense.PLUGIN_REQUIRED + '&user=' + this.Server.user
+		var postData = 'toolbar_version=' + Xtense.VERSION + '&toolbar_type=' + Xtense.TYPE + '&mod_min_version=' + Xtense.PLUGIN_REQUIRED + '&user=' + this.Server.user
 						+ '&password=' + this.Server.hash + '&univers=' + this.Server.univers + '&server_check=1';
 		
 		if (Xprefs.getBool('dev')) postData += '&dev=1';
@@ -89,7 +89,7 @@ var Xcheck = {
 				this.next();
 				return;
 			}
-			
+			Xconsole(Response.content);
 			Xdump(Response.content);
 			
 			var data = {};
