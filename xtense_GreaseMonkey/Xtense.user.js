@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name	    Xtense-GM
-// @version     2.4.2.0
+// @version     2.4.2.2
 // @updateURL   http://userscripts.org/scripts/source/112690.meta.js
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
+// @updateURL   http://userscripts.org/scripts/source/112690.meta.js
 // @include     http://*.ogame.*/game/index.php*
 // @description Cette extension permet d'envoyer des données d'Ogame à votre serveur OGSPY d'alliance
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.2.0";
+var VERSION = "2.4.2.2";
 var TYPE = "GM-";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
@@ -38,7 +39,6 @@ if(isFirefox){
 	TYPE+="GC";
 }else if(isOpera){
     TYPE+="OP";
-    alert("Opera is not Supported");
 }
 
 // Variables globales données ogame
@@ -50,7 +50,7 @@ var cookie = nomScript + "-" + numUnivers + "-";
 var prefix_GMData = langUnivers + numUnivers +".";
 
 /*********************** Compatibilité Chrome ***************************/
-if (isChrome){
+if (isChrome || isOpera){
     function GM_getValue(key,defaultVal) 
     {
         var retValue = localStorage.getItem(key);
@@ -151,18 +151,41 @@ function setStatus(type,message){
 
 //Requete Ajax
 function Xajax(obj) {
-      GM_xmlhttpRequest({
-      method: "POST",
-      url: obj.url || '',
-      data: obj.post || '',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      onload: function(response) {
-        response.content = response.responseText;
-        handleResponse(response);
-      }
-    });
+    if(isOpera){
+        
+    xhr = new XMLHttpRequest();
+	url = obj.url || '';
+	post = obj.post || '';
+    
+    xhr.open("POST", url, true);
+	//xhr.setRequestHeader('User-Agent', 'Xtense2');
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.send(post);
+    var response;
+ 
+	xhr.onreadystatechange =  function() {
+		if(xhr.readyState == 4) {
+			//response.content = xhr.responseText;
+            //response.status = xhr.status;
+            handleResponse(xhr);
+
+		}
+	};
+
+    }else{
+              GM_xmlhttpRequest({
+          method: "POST",
+          url: obj.url || '',
+          data: obj.post || '',
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          onload: function(response) {
+            response.content = response.responseText;
+            handleResponse(response);
+          }
+        });
+    }
 }
 
 // Récupère les messages de retours et locales
@@ -1294,7 +1317,7 @@ function manual_send(){
 /* Fonction ajoutant lancant le parsing de la vue galaxie quand celle-ci est chargée */
 function get_galaxycontent(){	
 
-	if (isChrome) //Pour Chrome :-)
+	if (isChrome || isOpera) //Pour Chrome :-)
 	{	/* Page Galaxie */
 		
 		var target = document.getElementById('galaxyContent');
@@ -1329,7 +1352,7 @@ function get_galaxycontent(){
 
 /* Fonction ajoutant lancant le parsing de la vue alliance quand celle-ci est chargée */
 function get_ally_content(){	
-	if (isChrome) //Pour Chrome :-)
+	if (isChrome || isOpera) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
 		log("In get_ally_content()");
@@ -1366,7 +1389,7 @@ function get_ally_content(){
 /* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
 function get_ranking_content(){
     log("Entering get_ranking_content");
-	if (isChrome) //Pour Chrome :-)
+	if (isChrome || isOpera) //Pour Chrome :-)
 	{	
 		/* Page Galaxie */
 		var target = document.getElementById('stat_list_content');
@@ -2173,6 +2196,7 @@ function initOGSpyCommunication (){
 }
 /* Interpretation des retours Xtense (module OGSPY) */
 function handleResponse(Response) {
+    Response.content = Response.responseText;
 	log(Response.content);
 	//if (Server.cached()) var message_start = '"'+Server.name+'" : ';
 	//else var message_start = Xl('response start', Server.n+1);
@@ -2180,15 +2204,15 @@ function handleResponse(Response) {
 	
 	//var extra = {Request: Request, Server: Server, Response: Response, page: Request.data.type};
 	if (Response.status != 200) {
-		if (Response.status == 404) 		log(Xl('http_status_404'));
-		else if (Response.status == 403) 	log(Xl('http_status_403'));
-		else if (Response.status == 500) 	log(Xl('http_status_500'));
-		else if (Response.status == 0)		log(Xl('http_timeout'));
-		else 								log(Xl('http_status_unknow', Response.status));
+		if (Response.status == 404) 		setStatus(XLOG_ERROR,Xl('http_status_404'));
+		else if (Response.status == 403) 	setStatus(XLOG_ERROR,Xl('http_status_403'));
+		else if (Response.status == 500) 	setStatus(XLOG_ERROR,Xl('http_status_500'));
+		else if (Response.status == 0)		setStatus(XLOG_ERROR,Xl('http_timeout'));
+		else 								setStatus(XLOG_ERROR,Xl('http_status_unknow'), Response.status);
 	} else {		
 		var type = XLOG_SUCCESS;
 		
-		if (Response.content == '') {
+		if (Response.content == '' || typeof(Response.content)== 'undefined') {
 			setStatus(XLOG_ERROR, message_start + Xl('empty_response') + extra);
 			return;
 		}
@@ -2297,7 +2321,7 @@ function initLocales(){
         http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
         http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
         http_status_500: 'statut 500: Erreur interne au serveur.',
-        http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
+        http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problèmes de réseau.',
         //
         empty_response : 'Réponse du plugin vide',
         invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
