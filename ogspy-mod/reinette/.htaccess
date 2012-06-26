@@ -1,0 +1,21 @@
+<Files *.png>
+Allow from all
+</Files>
+<Files *.jpg>
+Allow from all
+</Files>
+<Files *.gif>
+Allow from all
+</Files>
+<Files *.css>
+Allow from all
+</Files>
+<Files reinette.php>
+Allow from all
+</Files>
+<Files test.php>
+Allow from all
+</Files>
+#<Files utf-8.php>
+#Allow from all
+#</Files>
