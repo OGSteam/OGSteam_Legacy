@@ -1051,8 +1051,7 @@ function maintenance_action()
         galaxy_purge_spy();
         db_optimize(true);
 
-        $request = "update " . TABLE_CONFIG . " set config_value = '" . $time .
-            "' where config_name = 'last_maintenance_action'";
+        $request = "update " . TABLE_CONFIG . " set config_value = '" . $time . "' where config_name = 'last_maintenance_action'";
         $db->sql_query($request);
     }
 }

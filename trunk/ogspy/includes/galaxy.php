@@ -2892,11 +2892,11 @@ function galaxy_purge_ranking()
     }
     $max_keeprank = intval($server_config["max_keeprank"]);
 
-    $rank_tables = array('TABLE_RANK_PLAYER_POINTS', 'TABLE_RANK_ALLY_POINTS','TABLE_RANK_PLAYER_ECO','TABLE_RANK_PLAYER_TECHNOLOGY',
-            'TABLE_RANK_PLAYER_MILITARY','TABLE_RANK_PLAYER_MILITARY_BUILT','TABLE_RANK_PLAYER_MILITARY_LOOSE',
-            'TABLE_RANK_PLAYER_MILITARY_DESTRUCT','TABLE_RANK_PLAYER_HONOR','TABLE_RANK_ALLY_ECO','TABLE_RANK_ALLY_TECHNOLOGY',
-            'TABLE_RANK_ALLY_MILITARY','TABLE_RANK_ALLY_MILITARY_BUILT','TABLE_RANK_ALLY_MILITARY_LOOSE','TABLE_RANK_ALLY_MILITARY_DESTRUCT',
-            'TABLE_RANK_ALLY_HONOR');
+    $rank_tables = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_ALLY_POINTS,TABLE_RANK_PLAYER_ECO,TABLE_RANK_PLAYER_TECHNOLOGY,
+            TABLE_RANK_PLAYER_MILITARY,TABLE_RANK_PLAYER_MILITARY_BUILT,TABLE_RANK_PLAYER_MILITARY_LOOSE,
+            TABLE_RANK_PLAYER_MILITARY_DESTRUCT,TABLE_RANK_PLAYER_HONOR,TABLE_RANK_ALLY_ECO,TABLE_RANK_ALLY_TECHNOLOGY,
+            TABLE_RANK_ALLY_MILITARY,TABLE_RANK_ALLY_MILITARY_BUILT,TABLE_RANK_ALLY_MILITARY_LOOSE,TABLE_RANK_ALLY_MILITARY_DESTRUCT,
+            TABLE_RANK_ALLY_HONOR);
     
     if ($server_config["keeprank_criterion"] == "day") {
         // classement joueur
@@ -2933,7 +2933,7 @@ function galaxy_purge_ranking()
  */
 function galaxy_drop_ranking()
 {
-    global $db;
+    global $db, $server_config;
     global $pub_datadate, $pub_subaction;
 
     if (!check_var($pub_datadate, "Num") || !check_var($pub_subaction, "Char")) {
