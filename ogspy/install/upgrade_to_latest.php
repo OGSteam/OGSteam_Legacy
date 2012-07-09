@@ -763,8 +763,7 @@ switch ($ogsversion) {
 	        " player varchar(30) NOT NULL,".
         	" ally varchar(100) NOT NULL,".
         	" points int(11) NOT NULL default '0',".
-        	" sender_id int(11) NOT NULL default '0',".
-        	" nb_spacecraft int(11) NOT NULL default '0',".
+        	" sender_id int(11) NOT NULL default '0',".        	
         	" PRIMARY KEY  (rank,datadate),".
         	" KEY datadate (datadate,player),".
         	" KEY player (player)".
@@ -831,9 +830,21 @@ switch ($ogsversion) {
 		
 	case '3.1.0':
 		$requests[] = "UPDATE ".TABLE_CONFIG." SET config_value = '3.1.1' WHERE config_name = 'version'";
-        // modif user
+        // MODIF TABLE_USER
         $requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_type` enum('FF','GMFF','GMGC') AFTER `rank_added_ogs`"; // Type de barre utilisée par le user
 		$requests[] = "ALTER TABLE `".TABLE_USER."` ADD `xtense_version` VARCHAR(10) AFTER `xtense_type`"; // Type de barre utilisée par le user
+		
+		// MODIF TABLE_RANK_PLAYER_MILITARY
+		$requests[] = "ALTER TABLE `".TABLE_RANK_PLAYER_MILITARY."` ADD `nb_spacecraft` int(11) NOT NULL default '0' AFTER `sender_id`"; // Ajout nombre de vaisseaux au classement militaire joueur
+		                                          
+		// SUPPRESSIONS ANCIENS CLASSEMENTS : TABLE_RANK_PLAYER_FLEET, TABLE_RANK_PLAYER_RESEARCH, TABLE_RANK_ALLY_FLEET & TABLE_RANK_ALLY_RESEARCH
+		$requests[] = "DROP TABLE `".TABLE_RANK_PLAYER_FLEET."`"; 	// ancien classement flotte
+		$requests[] = "DROP TABLE `".TABLE_RANK_PLAYER_RESEARCH."`";// ancien classement recherche
+		$requests[] = "DROP TABLE `".TABLE_RANK_ALLY_FLEET."`";		// ancien classement flotte
+		$requests[] = "DROP TABLE `".TABLE_RANK_ALLY_RESEARCH."`";	// ancien classement recherche
+		$requests[] = "DROP TABLE `".TABLE_SPY."`";					// ancienne table des RE
+		$requests[] = "DROP TABLE `".TABLE_UNIVERSE_TEMPORARY."`";	// ancienne table temporaire univers
+		
 		
 		$ogsversion = '3.1.1';
 		$up_to_date = true;

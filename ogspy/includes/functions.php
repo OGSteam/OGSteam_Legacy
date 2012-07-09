@@ -719,8 +719,9 @@ function db_optimize($maintenance_action = false)
         $request = 'OPTIMIZE TABLE ' . $table;
         $db->sql_query($request);
     }
-    $request = 'TRUNCATE ' . TABLE_UNIVERSE_TEMPORARY;
-    $db->sql_query($request);
+    // 09-07-2012 : Commenté car cette table n'est plus utilisée
+    //$request = 'TRUNCATE ' . TABLE_UNIVERSE_TEMPORARY;
+    //$db->sql_query($request);
 
     $dbSize_after = db_size_info();
     $dbSize_after = $dbSize_after["Total"];
@@ -742,24 +743,15 @@ function resize_db($new_num_of_galaxies, $new_num_of_systems)
 
     // si on reduit on doit supprimez toutes les entrées qui font reference au systemes ou galaxies que l'on va enlevez
     if ($new_num_of_galaxies < intval($server_config['num_of_galaxies'])) {
-        $db->sql_query("DELETE FROM " . TABLE_SPY . " WHERE spy_galaxy > $new_num_of_galaxies");
         $db->sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE galaxy > $new_num_of_galaxies");
         $db->sql_query("UPDATE " . TABLE_USER . " SET user_galaxy=1 WHERE user_galaxy > $new_num_of_galaxies");
         $db->sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE galaxy > $new_num_of_galaxies");
     }
     if ($new_num_of_systems < intval($server_config['num_of_systems'])) {
-        $db->sql_query("DELETE FROM " . TABLE_SPY . " WHERE spy_system > $new_num_of_systems");
         $db->sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE system > $new_num_of_systems");
         $db->sql_query("UPDATE " . TABLE_USER . " SET user_system=1 WHERE user_system > $new_num_of_systems");
         $db->sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE system > $new_num_of_systems");
     }
-
-    $request = "ALTER TABLE `" . TABLE_SPY .
-        "` CHANGE `spy_galaxy` `spy_galaxy` ENUM(";
-    for ($i = 1; $i < $new_num_of_galaxies; $i++)
-        $request .= "'$i' , ";
-    $request .= "'$new_num_of_galaxies') NOT NULL DEFAULT '1'";
-    $db->sql_query($request);
 
     $request = "ALTER TABLE `" . TABLE_UNIVERSE . "` CHANGE `galaxy` `galaxy` ENUM(";
     for ($i = 1; $i < $new_num_of_galaxies; $i++)
