@@ -508,12 +508,12 @@ CREATE TABLE ogspy_universe (
 ## Structure de la table `ogspy_universe_temporary`
 ## 
 
-CREATE TABLE ogspy_universe_temporary (
-  player varchar(20) NOT NULL default '',
-  ally varchar(20) NOT NULL default '',
-  `status` varchar(5) NOT NULL,
-  `timestamp` int(11) NOT NULL default '0'
-) ;
+##CREATE TABLE ogspy_universe_temporary (
+##  player varchar(20) NOT NULL default '',
+##  ally varchar(20) NOT NULL default '',
+##  `status` varchar(5) NOT NULL,
+##  `timestamp` int(11) NOT NULL default '0'
+##) ;
 
 ## ########################################################
 

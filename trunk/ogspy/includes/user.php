@@ -860,9 +860,6 @@ function user_delete()
         " set sender_id = 0 where sender_id = " . $pub_user_id;
     $db->sql_query($request);
 
-    $request = "update " . TABLE_SPY . " set sender_id = 0 where sender_id = " . $pub_user_id;
-    $db->sql_query($request);
-
     $request = "update " . TABLE_UNIVERSE .
         " set last_update_user_id = 0 where last_update_user_id = " . $pub_user_id;
     $db->sql_query($request);

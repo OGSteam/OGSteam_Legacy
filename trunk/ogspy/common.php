@@ -105,7 +105,7 @@ if (!defined("INSTALL_IN_PROGRESS")) {
 
     if (!defined("UPGRADE_IN_PROGRESS")) {
         session();
-        //maintenance_action();
+        maintenance_action();
     }
 }
 
