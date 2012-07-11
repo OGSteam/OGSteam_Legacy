@@ -493,52 +493,6 @@ function galaxy_search()
                 $select = "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name";
                 $request = $select . $request;
                 break;
-
-            case "spy":
-                $galaxy_start = intval($pub_galaxy_down);
-                $galaxy_end = intval($pub_galaxy_up);
-                $system_start = intval($pub_system_down);
-                $system_end = intval($pub_system_up);
-                $row_start = intval($pub_row_down);
-                $row_end = intval($pub_row_up);
-
-                if ($galaxy_start < 1 || $galaxy_start > intval($server_config['num_of_galaxies']) ||
-                    $galaxy_end < 1 || $galaxy_end > intval($server_config['num_of_galaxies']))
-                    break;
-                if ($system_start < 1 || $system_start > intval($server_config['num_of_systems']) ||
-                    $system_end < 1 || $system_end > intval($server_config['num_of_systems']))
-                    break;
-                if ($pub_row_active) {
-                    if ($row_start < 1 || $row_start > 15 || $row_end < 1 || $row_end > 15)
-                        break;
-                }
-
-                $select = "select count(distinct spy_galaxy, spy_system, spy_row)";
-                $request = " from " . TABLE_SPY . ", " . TABLE_UNIVERSE . " left join " .
-                    TABLE_USER;
-                $request .= " on last_update_user_id = user_id";
-                $request .= " where active = '1'";
-                $request .= " and galaxy = spy_galaxy";
-                $request .= " and system = spy_system";
-                $request .= " and row = spy_row";
-                $request .= " and galaxy between $galaxy_start and $galaxy_end";
-                $request .= " and system between $system_start and $system_end";
-                if ($pub_row_active) {
-                    $request .= " and spy_row between $row_start and $row_end";
-                }
-                if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] !=
-                    1 && $user_data["user_coadmin"] != 1) {
-                    foreach ($ally_protection as $v) {
-                        $request .= " and ally <> '" . $db->sql_escape_string($v) . "'";
-                    }
-                }
-
-                $result = $db->sql_query($select . $request);
-                list($total_row) = $db->sql_fetch_row($result);
-
-                $select = "select distinct galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name";
-                $request = $select . $request;
-                break;
         }
 
         if (isset($request)) {
@@ -595,9 +549,8 @@ function galaxy_search()
                 if (in_array($row["ally"], $allied))
                     $friend = true;
 
-                $request = "select * from " . TABLE_SPY .
-                    " where active = '1' and spy_galaxy = " . $row["galaxy"] . " and spy_system = " .
-                    $row["system"] . " and spy_row = " . $row["row"];
+                $request = "select * from " . TABLE_PARSEDSPY .
+                    " where active = '1' and coordinates = '" . $row["galaxy"] . ":" . $row["system"] . ":" . $row["row"] ."'";
                 $result_2 = $db->sql_query($request);
                 $report_spy = $db->sql_numrows($result_2);
                 $search_result[] = array("galaxy" => $row["galaxy"], "system" => $row["system"],
@@ -1342,15 +1295,8 @@ function galaxy_add_system($galaxy, $system, $row, $moon, $name, $ally, $player,
         if ($error)
             return false;
 
-        if ($player != "") {
-            $request = "insert into " . TABLE_UNIVERSE_TEMPORARY .
-                " (player, ally, status, timestamp) values ('" . $db->sql_escape_string($player) .
-                "', '" . $db->sql_escape_string($ally) . "', '" . $db->sql_escape_string($status) .
-                "', '" . $timestamp . "')";
-            $db->sql_query($request);
-        } else {
-            $request = "update " . TABLE_SPY . " set active = '0' where spy_galaxy = '" . $galaxy .
-                "' and spy_system = " . $system . " and spy_row = '" . $row . "'";
+        if ($player == "") {
+            $request = "update " . TABLE_PARSEDSPY . " set active = '0' where coordinates = '" . $galaxy . ":" . $system . ":" . $row . "'";
             $db->sql_query($request);
         }
     }
@@ -1375,11 +1321,12 @@ function galaxy_add_system_ally()
     $request .= ") ;";
     $db->sql_query($request);
 
-    $request = "insert into " . $table;
+    // 09-07-2012 : Commenté car cette table n'est plus utilisée
+    /*$request = "insert into " . $table;
     $request .= " select player, ally, status, max(timestamp)";
     $request .= " from " . TABLE_UNIVERSE_TEMPORARY;
     $request .= " group by player, ally";
-    $db->sql_query($request);
+    $db->sql_query($request);*/
 
     $request = "delete from " . $table;
     $request .= " using " . TABLE_UNIVERSE . " u, " . $table;
@@ -1395,7 +1342,8 @@ function galaxy_add_system_ally()
     $request = "drop table " . $table;
     $db->sql_query($request);
 
-    $request = "truncate " . TABLE_UNIVERSE_TEMPORARY;
+    // 09-07-2012 : Commenté car cette table n'est plus utilisée
+    //$request = "truncate " . TABLE_UNIVERSE_TEMPORARY;
     $result = $db->sql_query($request);
 }
 
@@ -1536,6 +1484,7 @@ function galaxy_ImportSpy()
 /**
  * Renvoi des rapports d'espionnage vers OGS
  */
+/*
 function galaxy_ExportSpy()
 {
     global $db, $user_data;
@@ -1576,9 +1525,9 @@ function galaxy_ExportSpy()
     log_("export_spy_sector", array($i, $galaxy, $system));
 
     //Statistiques serveur
-    /*//Incompatible MySQL 4.0
-    $request = "insert into ".TABLE_STATISTIC." values ('spyexport_ogs', '".$i."')";
-    $request .= " on duplicate key update statistic_value = statistic_value + ".$i."";*/
+    //Incompatible MySQL 4.0
+    //$request = "insert into ".TABLE_STATISTIC." values ('spyexport_ogs', '".$i."')";
+    //$request .= " on duplicate key update statistic_value = statistic_value + ".$i."";
     $request = "update " . TABLE_STATISTIC .
         " set statistic_value = statistic_value + " . $i;
     $request .= " where statistic_name = 'spyexport_ogs'";
@@ -1591,10 +1540,11 @@ function galaxy_ExportSpy()
 
     exit();
 }
-
+*/
 /**
  * Envoi des rapports d'espionnage vers OGS à partir d'une date
  */
+/*
 function galaxy_ExportSpy_since()
 {
     global $db, $user_data;
@@ -1647,10 +1597,12 @@ function galaxy_ExportSpy_since()
 
     exit();
 }
+*/
 
 /**
  * Ajout de rapport d'espionnage
  */
+/*
 function galaxy_add_spy($galaxy, $system, $row, $planet, $timestamp, $report, $phalanx,
     $gate)
 {
@@ -1722,6 +1674,7 @@ function galaxy_add_spy($galaxy, $system, $row, $planet, $timestamp, $report, $p
     }
     return false;
 }
+*/
 
 /**
  * Récupération des rapports d'espionnage
@@ -1847,15 +1800,15 @@ function galaxy_purge_spy()
     }
     $max_keepspyreport = intval($server_config["max_keepspyreport"]);
 
-    $request = "select spy_id from " . TABLE_SPY .
-        " where active = '0' or datadate < " . (time() - 60 * 60 * 24 * $max_keepspyreport);
+    $request = "select id_spy from " . TABLE_PARSEDSPY .
+        " where active = '0' or dateRE < " . (time() - 60 * 60 * 24 * $max_keepspyreport);
     $result = $db->sql_query($request);
 
     while (list($spy_id) = $db->sql_fetch_row($result)) {
         $request = "select * from " . TABLE_USER_SPY . " where spy_id = " . $spy_id;
         $result2 = $db->sql_query($request);
         if ($db->sql_numrows($result2) == 0) {
-            $request = "delete from " . TABLE_SPY . " where spy_id = " . $spy_id;
+            $request = "delete from " . TABLE_PARSEDSPY . " where id_spy = " . $spy_id;
             $db->sql_query($request);
         }
     }
@@ -3985,18 +3938,15 @@ function import_RE()
 {
     global $db;
 
-    $rq = 'SELECT sender_id, rawdata, datadate, spy_galaxy, spy_system, spy_row FROM ' .
-        TABLE_SPY;
+    $rq = 'SELECT sender_id, dateRE, coordinates FROM ' . TABLE_PARSEDSPY;
     $res = $db->sql_query($rq);
     $error = false;
-    while (list($sender_id, $rawdata, $datadate, $spy_galaxy, $spy_system, $spy_row) =
+    while (list($sender_id, $dateRE, $coordinates) =
         $db->sql_fetch_row($res)) {
-        $rq = 'SELECT id_spy FROM ' . TABLE_PARSEDSPY . ' WHERE coordinates = "' . $spy_galaxy .
-            ':' . $spy_system . ':' . $spy_row . '"
-			AND dateRE=' . $datadate;
+        $rq = 'SELECT id_spy FROM ' . TABLE_PARSEDSPY . ' WHERE coordinates = "' . $coordinates . "' AND dateRE=" . $datadate;
         $res_already_inserted = $db->sql_query($rq);
         $already_inserted = $db->sql_numrows($res_already_inserted);
-        if ($already_inserted == 1 || !insert_RE($rawdata, $sender_id))
+        if ($already_inserted == 1 || !insert_RE(null, $sender_id))
             $error = true;
     }
     return $error;
