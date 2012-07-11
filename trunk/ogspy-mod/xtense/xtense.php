@@ -157,7 +157,7 @@ switch ($pub_type){
 			
 			
 			$home = home_check($planet_type, $coords);
-			add_log('overview', $home[0]);
+			
 			if ($home[0] == 'full') {
 				$io->set(array(
 						'type' => 'home full'
@@ -864,12 +864,13 @@ switch ($pub_type){
 		$io->set(array('function' => 'hostiles',
 					   		'type' => 'hostiles'
 		));
+		add_log('info', array('toolbar' => $toolbar_info, 'message' => "envoie une flotte hostile de " . $line['attacker_name']));
 	break;
 		
 	case 'checkhostiles': // Verification des flotttes Hostiles
 		$user_attack="";
 		$query = "SELECT DISTINCT(hos.user_id) AS user_id, user_name "
-				."FROM " . TABLE_USER . " user, ogspy_barym_hostiles hos "
+				."FROM " . TABLE_USER . " user, ".$table_prefix."hostiles hos "
 				."WHERE user.user_id=hos.user_id";
 		$result = $db->sql_query($query);
 		$isAttack=0;
@@ -884,6 +885,7 @@ switch ($pub_type){
 							'check' => $isAttack,
 							'user' => $user_attack
 		));
+		add_log('info', array('toolbar' => $toolbar_info, 'message' => "vérifie les flottes hostiles de la communauté"));
 	break;
 		
 	case 'messages': //PAGE MESSAGES
@@ -1046,6 +1048,7 @@ switch ($pub_type){
 							'deuterium' => $line['deuterium']
 					);
 					$call->add('trade', $trade);
+					add_log('info', array('toolbar' => $toolbar_info, 'message' => "envoie une livraison amie provenant de " . $line['trader']));
 				break;
 				
 				case 'trade_me': // MES LIVRAISONS
@@ -1066,6 +1069,7 @@ switch ($pub_type){
 							'deuterium' => $line['deuterium']
 					);
 					$call->add('trade_me', $trade_me);
+					add_log('info', array('toolbar' => $toolbar_info, 'message' => "envoie une de ses livraison effectuée pour " . $line['trader']));
 				break;
 			}
 			
@@ -1077,7 +1081,7 @@ switch ($pub_type){
 	break;
 
 	default:
-		die('hack');
+		die('hack '.$pub_type);
 }
 
 $call->apply();
