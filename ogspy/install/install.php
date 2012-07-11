@@ -25,6 +25,17 @@ define("INSTALL_IN_PROGRESS", true);
 @chmod("../mod",0777);
 @chmod("../mod/autoupdate/tmp",0777);
 
+if(!(version_compare(PHP_VERSION, "5.0.0") >= 0)){
+	echo "<br /><br />";
+	echo "<table align='center'><tr><th colspan ='2'><font color='red'>Installation impossible :</font></th><tr/>";
+	echo "<tr><td colspan='2'>Pour pouvoir effectuer une installation complète d'OGSpy,";
+	echo "<br/>votre hébergement doit être doté au minimum de la version 5 de PHP !";
+	echo "<br/><br/>Vous disposez actuellement de la version : " . PHP_VERSION;
+	echo "<tr align='center'><td colspan='2'><a href='install.php'>Rafraichir</a></td></tr>";
+	echo "</table>";
+	exit();	
+}
+
 /**
 * Affiche une boite d'erreur de permission
 */

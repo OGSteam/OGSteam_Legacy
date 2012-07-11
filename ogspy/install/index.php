@@ -60,6 +60,14 @@ if (isset($pub_redirection)) {
 			</td>
 		</tr>
 		<tr><td>&nbsp;</td></tr>
+<?php 	
+	if(!(version_compare(PHP_VERSION, "5.0.0") >= 0)){
+		echo "<tr><td style='font-size: 24px;'><font color='red'>Version de PHP insuffisante</font></td></tr>";
+		echo "<tr><td><font color='red'>Pour pouvoir effectuer une installation complète d'OGSpy, votre hébergement doit être doté au minimum de la version 5 de PHP.";
+		echo "<br/><br/>Vous disposez actuellement de la version : " . PHP_VERSION;
+		echo "</font></td></tr>";
+	}
+?>
 		<tr><td>&nbsp;</td></tr>
 		<form action="index.php" method="POST">
 		<tr>
