@@ -16,52 +16,17 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 require_once("views/page_header.php");
 if ( !function_exists('json_decode')) die("Autoupdate ne peut fonctionner correctement sans la librairie JSON, Merci de mettre à jour PHP(>= 5.2)");
 require_once("mod/autoupdate/functions.php");
+require_once("mod/autoupdate/lang_main.php");
 
 
-if (empty($pub_sub) OR $pub_sub == 'tableau' OR $pub_sub == 'maj' OR $pub_sub == 'down' OR $pub_sub == 'admin') {
-	/**
-	*Récupère les paramètres de configuration
-	*/
-	if (file_exists("mod/autoupdate/parameters.php")) {
-		require_once("mod/autoupdate/parameters.php");
-	} else {
-		$result = generate_parameters(0, 1, 1, date("d"), date("H"), 0, 0, 1);
-	}
-}
 /**
 * Défini où se trouve le fichier qui contient les dernières versions des mods.
 * Différent suivant si allow_url_fopen est activé ou non. S'il n'est pas activé, on va chercher le fichier en local après téléchargement.
 */
-if(DOWNJSON == 0) {
+if(mod_get_option("DOWNJSON")) {
 	DEFINE("JSON_FILE","http://update.ogsteam.fr/update.json");
 } else {
 	DEFINE("JSON_FILE","parameters/modupdate.json");
-}
-
-
-/**
-*Récupère le fichier de langue pour la langue approprié
-*/
-if (!empty($server_config['language'])) {
-	if (is_dir("mod/autoupdate/".$server_config['language'])) {
-		require_once("mod/autoupdate/".$server_config['language']."/lang_main.php");
-	} else {
-		require_once("mod/autoupdate/french/lang_main.php");
-	}
-} else {
-	if (!is_dir("mod/autoupdate/french")) {
-		echo "Retélécharger le mod via : <a href='http://ogsteam.fr/downloadmod.php?mod=autoupdate'>Zip link</a><br />\n";
-		exit;
-	} else {
-		require_once("mod/autoupdate/french/lang_main.php");
-	}
-}
-
-$d = "mod/autoupdate/";
-
-if (!file_exists($d."admin.php") AND !file_exists($d."functions.php") AND !file_exists($d."ziplib") AND !is_dir($d."tmp")) {
-	echo "Retélécharger le mod via : <a href='http://ogsteam.fr/downloadmod.php?mod=autoupdate'>Zip link</a><br />\n";
-	exit;
 }
 
 if (!isset($pub_sub)) {
@@ -69,7 +34,7 @@ if (!isset($pub_sub)) {
 	$pub_sub = "tableau";
 } else $sub = $pub_sub;
 
-if ($user_data["user_admin"] == 1 OR (COADMIN == 1 AND $user_data["user_coadmin"] == 1)) {
+if ($user_data["user_admin"] == 1 OR $user_data["user_coadmin"] == 1) {
 	if ($sub != "tableau") {
 		$bouton1 = "\t\t"."<td class='c' align='center' width='150' style='cursor:pointer' onclick=\"window.location = 'index.php?action=autoupdate&sub=tableau';\">";
 
@@ -124,32 +89,6 @@ if(!empty($pub_maj) AND $pub_maj == 'yes') {
 		$maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
 	} else {
 		$maj = $lang['autoupdate_tableau_uptodateoff']."<br />\n<br />\n";
-	}
-} else $maj = "";
-
-/**
-*Si le chargement de la page contient la variable GET['maj'] == all on fait une MaJ global des mods et on envoie le résultat
-*/
-if (!empty($pub_maj) AND $pub_maj == 'all') {
-	$request1 = "select id, title, root, link, version, active from ".TABLE_MOD." order by position, title";
-	$result1 = $db->sql_query($request1);
-	while (list($pub_mod_id, $title, $root, $link, $version, $active) = $db->sql_fetch_row($result1)) {
-		if (file_exists("mod/".$root."/version.txt")) {
-			//Vérification disponibilité mise à jour de version
-			$line = file("mod/".$root."/version.txt");
-			$up_to_date = true;
-			if (isset($line[1])) {
-				if (file_exists("mod/".$root."/update.php")) {
-					$up_to_date = (strcasecmp($version, trim($line[1])) >= 0) ? true : false;
-				}
-			}
-			if (!$up_to_date) {
-				if (require_once("mod/".$root."/update.php")) {
-					log_("mod_update", $title);
-					$maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
-				}
-			}
-		}
 	}
 } else $maj = "";
 

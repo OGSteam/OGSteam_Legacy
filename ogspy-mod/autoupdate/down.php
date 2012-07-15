@@ -15,7 +15,7 @@ if (!defined('IN_SPYOGAME')) die("Hacking attempt");
 */
 require_once("views/page_header.php");
 
-if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) {
+if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) {
 	
 	// Récupérer la liste des modules installés
 	$sql = "SELECT title,root,version from ".TABLE_MOD;
@@ -45,7 +45,7 @@ if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin']
 	<tr>
 		<td class='c'><?php echo $lang['autoupdate_tableau_namemod']; ?></td>
 		<td class='c' width="150"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
-		<?php if($user_data['user_admin'] == 1 OR (COADMIN == 1 AND $user_data['user_coadmin'] == 1)) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
+		<?php if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
 	</tr>
 	<?php	
 	//
