@@ -53,7 +53,7 @@ $mod_names = array_keys($data); // Récupération des clés
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_version']; ?></td>
 		<td class='c' width = "50"><?php echo $lang['autoupdate_tableau_versionSVN']; ?></td>
         <?php if($user_data['user_admin'] == 1 OR $user_data['user_coadmin'] == 1) echo '<td class=\'c\' width = "100">'.$lang['autoupdate_tableau_action'].'</td>'; ?>
-		<?php if(mod_get_option("MAJ_TRUNK") == 1) echo "<td class='c' width = '50'>"; echo $lang['autoupdate_tableau_versionTrunk']; ?></td>
+		<?php if(mod_get_option("MAJ_TRUNK") == 1){ echo "<td class='c' width = '50'>"; echo $lang['autoupdate_tableau_versionTrunk']."</td>"; }?>
 	</tr>
 <?php	
 	
@@ -86,10 +86,12 @@ $mod_names = array_keys($data); // Récupération des clés
 							}
 						}
 						echo "</th>\n";
-                        echo "\t\t<th>";
-                        $ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
-                        echo "<font color='lime'>".$ziplink."</font>";
-                        echo "</th>\n";
+                        if(mod_get_option("MAJ_TRUNK") == 1){
+							echo "\t\t<th>";
+							$ziplink = "<a href='index.php?action=autoupdate&sub=maj&mod=".$cur_modname."&tag=trunk'>Télécharger</a>";
+							echo "<font color='lime'>".$ziplink."</font>";
+							echo "</th>\n";
+						}
 					}
 
 				}

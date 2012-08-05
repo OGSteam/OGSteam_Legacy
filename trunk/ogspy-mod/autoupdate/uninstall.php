@@ -18,7 +18,9 @@ uninstall_mod($mod_unistall_name,$mod_uninstall_table);
 if(file_exists("mod/autoupdate/modupdate.json")) {
 	unlink("mod/autoupdate/modupdate.json");
 }
-if(file_exists("mod/modupdate.json")) {
-	unlink("mod/modupdate.json");
+if(file_exists("parameters/modupdate.json")) {
+	unlink("parameters/modupdate.json");
 }
+
+mod_del_all_option ();
 ?>
