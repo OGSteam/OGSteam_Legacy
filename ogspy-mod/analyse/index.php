@@ -31,11 +31,11 @@
 	}
 	function montd($arg){
 		$rowWidth = 14;
-		return $tdlime = "<th class='c' width='".$rowWidth."%'><a href='index.php?action=analyseI&subaction=$arg' style='color: lime;'>";
+		return $tdlime = "<th class='c' width='".$rowWidth."%'><a href='index.php?action=inactifs&subaction=$arg' style='color: lime;'>";
 	}
 	require_once("views/page_header.php");
 
-	$query = "SELECT `active`,`root` FROM `".TABLE_MOD."` WHERE `action`='analyseI' AND `active`='1' LIMIT 1";
+	$query = "SELECT `active`,`root` FROM `".TABLE_MOD."` WHERE `action`='inactifs' AND `active`='1' LIMIT 1";
 	if (!$db->sql_numrows($db->sql_query($query))) die('Mod désactivé !');
 	$result = $db->sql_query($query);
 	list($active,$root) = $db->sql_fetch_row($result);
@@ -57,7 +57,7 @@
 	}
 	else $uni_trouve = false;
 		
-	define('ACTION','analyse');
+	define('ACTION','inactifs');
 	//define('UNITROUVE',false);
 	define('UNITROUVE',$uni_trouve);
 	define('SEARCH','index.php?action=search&type_search=player&string_search=');
