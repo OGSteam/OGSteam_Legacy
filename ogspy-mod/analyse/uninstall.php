@@ -11,14 +11,9 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-global $db;
-global $table_prefix;
+global $db, $table_prefix;
+$mod_uninstall_name = "analyse";
+$mod_uninstall_table = $table_prefix."inactivite";
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
-// suppression de la table inactivite si elle existe
-$query = "DROP TABLE IF EXISTS `".$table_prefix.'inactivite'."`";
-$db->sql_query($query);
-
-$query = "DELETE FROM ".TABLE_MOD." WHERE root='analyseI'";
-
-$db->sql_query($query);
 ?>
