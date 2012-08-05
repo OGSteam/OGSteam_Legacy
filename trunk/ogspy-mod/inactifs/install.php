@@ -12,7 +12,7 @@ if (!defined('IN_SPYOGAME')) {
 global $db, $table_prefix;
 
 $is_ok = false;
-$mod_folder = "analyse";
+$mod_folder = "inactifs";
 $is_ok = install_mod ($mod_folder);
 
 if ($is_ok == true){

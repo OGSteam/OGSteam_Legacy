@@ -12,8 +12,8 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 global $db, $table_prefix;
-$mod_folder = "analyse";
-$mod_name = "analyse";
+$mod_folder = "inactifs";
+$mod_name = "Analyse Inactifs";
 update_mod($mod_folder, $mod_name);
 
 ?>
