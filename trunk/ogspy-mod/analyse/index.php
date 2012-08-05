@@ -57,7 +57,7 @@
 	}
 	else $uni_trouve = false;
 		
-	define('ACTION','analyseI');
+	define('ACTION','analyse');
 	//define('UNITROUVE',false);
 	define('UNITROUVE',$uni_trouve);
 	define('SEARCH','index.php?action=search&type_search=player&string_search=');

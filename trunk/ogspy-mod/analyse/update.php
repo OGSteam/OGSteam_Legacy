@@ -11,12 +11,9 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-global $db;
-if (file_exists('mod/analyseI/version.txt')) { 
-	$file = file('mod/analyseI/version.txt'); 
-}
+global $db, $table_prefix;
+$mod_folder = "analyse";
+$mod_name = "analyse";
+update_mod($mod_folder, $mod_name);
 
-// mise à jour du numéro de version
-	$query  = "UPDATE `".TABLE_MOD."` SET `version` = ".trim($file[1])." WHERE `root` = 'analyseI'";
-	$db->sql_query($query);
 ?>
