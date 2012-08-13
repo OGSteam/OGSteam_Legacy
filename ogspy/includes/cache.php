@@ -6,7 +6,8 @@
 * @subpackage main
 * @author Machine ( inspiré du syteme fluxbb )
 * @copyright Copyright &copy; 2007, http://ogsteam.fr/
-* @version 3.07 
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @version 3.0.7 
 */
 
 if (!defined('IN_SPYOGAME')) {
@@ -15,7 +16,9 @@ if (!defined('IN_SPYOGAME')) {
 
 
 /**
+ * Fonction generate_config_cache()
  * Genere le fichier cache
+ * @todo Queries : "select * from " . TABLE_CONFIG, 
  */
 function generate_config_cache()
 {
@@ -49,8 +52,10 @@ function generate_config_cache()
     
     
 /**
- * Genere le fichier mod
+ * Fonction generate_mod_cache()
+ * Description : Genere le fichier mod
  * 
+ * @todo Queries : "SELECT action ,  menu ,  root, link, admin_only FROM ".TABLE_MOD." WHERE active = '1' order by position, title" 
  */
 function generate_mod_cache()
 {
@@ -80,17 +85,11 @@ function generate_mod_cache()
         
     }	
      
-    }
-  
-  
-  
-   
-    
-    
-
+}
 
 /**
- * Genere tous les fichiers caches 
+ * Fonction generate_all_cache()
+ * Description: Genere tous les fichiers caches
  */
 function generate_all_cache()
 {
@@ -100,8 +99,7 @@ function generate_all_cache()
         
         // on les génére a nouveau
         generate_config_cache();
-        generate_mod_cache;
-        
+        generate_mod_cache;        
 }
 
 ?>
