@@ -163,7 +163,7 @@ function password_generator()
     return $password;
 }
 /**
- * Initialisation du tableau de confifuration $cache_mod
+ * Initialisation du tableau de configuration $cache_mod
  */
 function init_mod_cache()
 {
@@ -190,7 +190,7 @@ function init_mod_cache()
 }
 
 /**
- * Initialisation du tableau de confifuration $server_config
+ * Initialisation du tableau de configuration $server_config
  */
 function init_serverconfig()
 {
@@ -215,7 +215,23 @@ function init_serverconfig()
     }
 
 }
-
+/**
+ *  Mets à jour en base toutes les informations de la page paramètres d'affichage de l'administration du serveur OGSpy.
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_portee_missil ." where config_name = 'portee_missil'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_stat . " where config_name = 'galaxy_by_line_stat'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_stat . " where config_name = 'system_by_line_stat'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_user ."' where config_name = 'open_user'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_admin . "' where config_name = 'open_admin'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_stat_view ." where config_name = 'enable_stat_view'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_members_view ." where config_name = 'enable_members_view'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_nb_colonnes_ally) ."' where config_name = 'nb_colonnes_ally'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($color_ally) . "' where config_name = 'color_ally'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_ally ." where config_name = 'galaxy_by_line_ally'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_ally ." where config_name = 'system_by_line_ally'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_enable_register_view ."' where config_name = 'enable_register_view'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_alliance) ."' where config_name = 'register_alliance'";
+  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_forum) ."' where config_name = 'register_forum'";
+ */
 function set_server_view()
 {
     global $db, $user_data;
@@ -362,12 +378,42 @@ function set_server_view()
         "' where config_name = 'register_forum'";
     $db->sql_query($request);
 
-    // mise a jour des caches avec les mofids
+    // mise a jour des caches avec les modifs
     generate_config_cache();
     log_("set_server_view");
     redirection("index.php?action=administration&subaction=affichage");
 }
-
+/**
+ *  Mets à jour en base toutes les informations de la page paramètres du serveur de l'administration du serveur OGSpy.
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_server_active ." where config_name = 'server_active'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_debug_log ." where config_name = 'debug_log'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_block_ratio ." where config_name = 'block_ratio'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_log_phperror ." where config_name = 'log_phperror'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_favorites ." where config_name = 'max_favorites'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_favorites_spy ." where config_name = 'max_favorites_spy'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_ratio_limit ." where config_name = 'ratio_limit'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_spyreport ." where config_name = 'max_spyreport'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_battlereport ." where config_name = 'max_battlereport'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_session_time ." where config_name = 'session_time'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_keeplog ." where config_name = 'max_keeplog'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_default_skin) . "' where config_name = 'default_skin'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_reason) . "' where config_name = 'reason'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_ally_protection) ."' where config_name = 'ally_protection'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_url_forum) . "' where config_name = 'url_forum'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_keeprank ." where config_name = 'max_keeprank'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_keeprank_criterion) ."' where config_name = 'keeprank_criterion'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_max_keepspyreport ." where config_name = 'max_keepspyreport'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_servername) . "' where config_name = 'servername'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_allied) . "' where config_name = 'allied'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_disable_ip_check ." where config_name = 'disable_ip_check'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_num_of_galaxies ." where config_name = 'num_of_galaxies'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_num_of_systems ." where config_name = 'num_of_systems'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_ddr ."' where config_name = 'ddr'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_astro_strict ."' where config_name = 'astro_strict'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_speed_uni ." where config_name = 'speed_uni'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_mod_cache ." where config_name = 'mod_cache'";
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_config_cache ." where config_name = 'config_cache'";
+ */
 function set_serverconfig()
 {
     global $db, $user_data, $server_config;
@@ -668,6 +714,7 @@ function set_serverconfig()
 /**
  * Renvoi un tableau contenant la taille de la base
  * @return Array [Server], et [Total]
+ * @todo : Query : "SHOW TABLE STATUS"
  */
 function db_size_info()
 {
@@ -705,6 +752,7 @@ function db_size_info()
 /**
  *  Routine d'Optimisation de la base de donnée
  *  @param boolean $maintenance_action true si aucune redirection souhaité,false pour avoir une redirection sur un message de résumé
+  * @todo : Query : "SHOW TABLES"
  */
 function db_optimize($maintenance_action = false)
 {
@@ -736,12 +784,24 @@ function db_optimize($maintenance_action = false)
  * @param int $new_num_of_galaxies Nombre de Galaxies
  * @param int $new_num_of_systems Nombre de systèmes
  * @return null
+  * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE galaxy > $new_num_of_galaxies");
+  * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_galaxy=1 WHERE user_galaxy > $new_num_of_galaxies");
+  * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE galaxy > $new_num_of_galaxies");
+  * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE system > $new_num_of_systems");
+  * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_system=1 WHERE user_system > $new_num_of_systems");
+  * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE system > $new_num_of_systems");
+  * @todo : Query : "ALTER TABLE `" . TABLE_UNIVERSE . "` CHANGE `galaxy` `galaxy` ENUM("; -> Voir Fonction
+  * @todo : Query : "ALTER TABLE `" . TABLE_USER ." CHANGE `user_galaxy` `user_galaxy` -> Voir fonction
+  * @todo : Query : $request = "ALTER TABLE `" . TABLE_USER_FAVORITE ."` CHANGE `galaxy` `galaxy` ENUM(" -> Voir fonction
+  * @todo : Query : "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_galaxies','$new_num_of_galaxies')";
+  * @todo : Query : $requests = "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_systems','$new_num_of_systems')";
+  
  */
 function resize_db($new_num_of_galaxies, $new_num_of_systems)
 {
     global $db, $db_host, $db_user, $db_password, $db_database, $table_prefix, $server_config;
 
-    // si on reduit on doit supprimez toutes les entrées qui font reference au systemes ou galaxies que l'on va enlevez
+    // si on reduit on doit supprimez toutes les entrées qui font reference au systemes ou galaxies que l'on va enlever
     if ($new_num_of_galaxies < intval($server_config['num_of_galaxies'])) {
         $db->sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE galaxy > $new_num_of_galaxies");
         $db->sql_query("UPDATE " . TABLE_USER . " SET user_galaxy=1 WHERE user_galaxy > $new_num_of_galaxies");
@@ -1023,7 +1083,9 @@ function log_purge()
         rmdir($root . $d);
     }
 }
-
+/**
+ * Formatage d'un nombre : Utile d'avoir une fonction pour ça ?
+ */
 function formate_number($number, $decimal = 0)
 {
     return number_format($number, $decimal, ",", " ");
@@ -1046,7 +1108,9 @@ function maintenance_action()
         $db->sql_query($request);
     }
 }
-
+/**
+ * Vérification de l'intégrité d'une variable en fonction de son type(Pseudo, Mot de passe, nombre,...)
+ */
 function check_var($value, $type_check, $mask = "", $auth_null = true)
 {
     if ($auth_null && $value == "") {
@@ -1156,7 +1220,9 @@ function check_var($value, $type_check, $mask = "", $auth_null = true)
 
     return true;
 }
-
+/**
+ * Raz des ratios d'import de données
+ */
 function admin_raz_ratio($maintenance_action = false)
 {
     global $db, $user_data;
@@ -1184,7 +1250,9 @@ function benchmark()
 
     return $mtime;
 }
-
+/**
+ * Vérification des données passées en paramètres via un GET
+ */
 function check_getvalue($secvalue)
 {
     if (!is_array($secvalue)) {
@@ -1205,7 +1273,9 @@ function check_getvalue($secvalue)
     }
     return true;
 }
-
+/**
+ * Vérification des données passées en paramètres via un POST
+ */
 function check_postvalue($secvalue)
 {
     if (!is_array($secvalue)) {
@@ -1224,7 +1294,16 @@ function check_postvalue($secvalue)
 
 
 //\\ fonctions utilisable pour les mods //\\
-
+/**
+ * Fonction pour installer un mod
+ * @param string $mod_folder : Nom du dossier contenant le mod
+ * @todo Query: "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] ."'"."'"
+ * @todo Query: "INSERT INTO " . TABLE_MOD .
+                " (title, menu, action, root, link, version, active,admin_only) VALUES ('" . $value_mod[0] .
+                "','" . $value_mod[1] . "','" . $value_mod[2] . "','" . $value_mod[3] . "','" .
+                $value_mod[4] . "','" . $mod_version . "','" . $value_mod[5] . "','" . $value_mod[6] .
+                "')"
+ */
 function install_mod($mod_folder)
 {
     global $db;
@@ -1244,8 +1323,7 @@ function install_mod($mod_folder)
 
 
     // On vérifie si le mod est déjà installé""
-    $check = "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] .
-        "'";
+    $check = "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] ."'";
     $query_check = $db->sql_query($check);
     $result_check = $db->sql_numrows($query_check);
 
@@ -1263,18 +1341,26 @@ function install_mod($mod_folder)
         }
     return $is_ok;
 }
-
-
+/**
+ * Fonction pour désinstaller un mod
+ * @param string $mod_uninstall_name : Nom du mod
+ * @param string $mod_uninstall_table : Nom de table associée au mod à désinstaller
+ * @todo Query: "DELETE FROM " . TABLE_MOD . " WHERE title='" . $mod_uninstall_name ."'
+ */
 function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
 {
     global $db;
-    $db->sql_query("DELETE FROM " . TABLE_MOD . " WHERE title='" . $mod_uninstall_name .
-        "';");
+    $db->sql_query("DELETE FROM " . TABLE_MOD . " WHERE title='" . $mod_uninstall_name ."';");
     if (!empty($mod_uninstall_table)) {
         $db->sql_query("DROP TABLE IF EXISTS " . $mod_uninstall_table . "");
     }
 }
-
+/**
+ * Fonction pour mettre à jour un mod
+ * @param string $mod_folder : Nom du dossier où se trouve le mod
+ * @param string $mod_name : Nom du mod
+ * @todo Query: "UPDATE " . TABLE_MOD . " SET version='" . $mod_version ."' WHERE action='" . $mod_name . "'";
+ */
 function update_mod($mod_folder, $mod_name)
 {
     global $db;
