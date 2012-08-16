@@ -1,7 +1,7 @@
 <?php
-/**  Fonctions relatives a la création de graphique js via l api hightcharts
+/** OGSpy Charts library (Hightcharts)
  * @package OGSpy
- * @subpackage main
+ * @subpackage Charts
  * @author Machine 
  * @copyright Copyright &copy; 2007, http://ogsteam.fr/
  * @version 3.1.0 
@@ -9,7 +9,6 @@
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
 
 /**
  * create_pie()
