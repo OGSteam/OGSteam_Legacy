@@ -1,10 +1,9 @@
 <?php
-/** $Id: galaxy.php 7194 2011-09-27 07:42:42Z superbox $ **/
 /**
-* Fonctions relatives aux données galaxies/planètes
+* Functions relatives to the data cache file system
 * @package OGSpy
-* @subpackage main
-* @author Machine ( inspiré du syteme fluxbb )
+* @subpackage Data Cache
+* @author Machine ( inspired by fluxbb cache system )
 * @copyright Copyright &copy; 2007, http://ogsteam.fr/
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @version 3.0.7 
@@ -16,8 +15,8 @@ if (!defined('IN_SPYOGAME')) {
 
 
 /**
- * Fonction generate_config_cache()
- * Genere le fichier cache
+ * Function generate_config_cache()
+ * Initialize the Cache filesystem
  * @todo Queries : "select * from " . TABLE_CONFIG, 
  */
 function generate_config_cache()
@@ -52,9 +51,9 @@ function generate_config_cache()
     
     
 /**
- * Fonction generate_mod_cache()
- * Description : Genere le fichier mod
- * 
+ * Function generate_mod_cache()
+ *
+ * Generates the mod cache file system
  * @todo Queries : "SELECT action ,  menu ,  root, link, admin_only FROM ".TABLE_MOD." WHERE active = '1' order by position, title" 
  */
 function generate_mod_cache()
@@ -89,7 +88,7 @@ function generate_mod_cache()
 
 /**
  * Fonction generate_all_cache()
- * Description: Genere tous les fichiers caches
+ * Description: Generates the all cache file system
  */
 function generate_all_cache()
 {

@@ -1,23 +1,21 @@
 <?php
-/** $Id$ **/
 /**
- * Fonctions globales d'Ogspy
+ * OGSpy Global functions
  * @package OGSpy
- * @subpackage main
+ * @subpackage Common
  * @author Kyser
- * @copyright Copyright &copy; 2007, http://ogsteam.fr/
- * @version 3.04b ($Rev$)
+ * @copyright Copyright &copy; 2012, http://www.ogsteam.fr/
+ * @version 3.1.1 ($Rev$)
  * @modified $Date$
  * @link $HeadURL$
+ * $Id$
  */
-
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
 /**
- * Redirection des url
- * @param string $url Url de destination
+ * URL Redirection
+ * @param string $url target URL
  */
 function redirection($url)
 {
@@ -29,18 +27,17 @@ function redirection($url)
     }
 }
 /**
- * Verifie les droits en écriture d'ogspy sur un fichier ou repertoire 
- * @param string $path le fichier ou repertoire à tester
- * @return boolean True si accés en écriture
- * @comment http://fr.php.net/manual/fr/function.is-writable.php#68598
+ * Check if the folder is writable or not
+ * @param string $path The file or the folder to check
+ * @return boolean true if the file or the folder is writable
+ * @link http://fr.php.net/manual/fr/function.is-writable.php#68598
  */
 function is__writable($path)
 {
-
-    if ($path{strlen($path) - 1} == '/')
+    if ($path{strlen($path) - 1} == '/'){
         return is__writable($path . uniqid(mt_rand()) . '.tmp');
 
-    elseif (@ereg('.tmp', $path)) {
+    }elseif (@ereg('.tmp', $path)) {
 
         if (!($f = @fopen($path, 'w+')))
             return false;
@@ -48,16 +45,16 @@ function is__writable($path)
         unlink($path);
         return true;
 
-    } else
+    } else{
         die("return 0; // Or return error - invalid path...<br>" . getcwd() . "<br>$path");
-
+	}
 }
 /**
- * Ecrit un texte ou un tableau de texte dans un fichier
- * @param string $file Nom du fichier
- * @param string $mode Mode d'ouverture du fichier
- * @param string|Array $text Chaine ou tableau a écrire
- * @return boolean false si échec
+ * Write a text or a table in a file
+ * @param string $file Filename
+ * @param string $mode File Opening Mode
+ * @param string|Array $text String or table to write
+ * @return boolean false if failed
  */
 function write_file($file, $mode, $text)
 {
@@ -78,11 +75,11 @@ function write_file($file, $mode, $text)
 }
 
 /**
- * Ecrit un texte ou un tableau de texte dans un fichier compressé gz
- * @param string $file Nom du fichier
- * @param string $mode Mode d'ouverture du fichier
- * @param string|Array $text Chaine ou tableau a écrire
- * @return boolean false si échec
+ * Write a text or a table in a gz compressed file
+ * @param string $file Filename
+ * @param string $mode File Opening Mode
+ * @param string|Array $text String or table to write
+ * @return boolean false if failed
  */
 function write_file_gz($file, $mode, $text)
 {
@@ -103,9 +100,9 @@ function write_file_gz($file, $mode, $text)
 }
 
 /**
- * Codage d'ip en hexadecimal
- * @param string $ip sous la forme xxx.xxx.xxx.xxx en IPv4 et xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx en IPv6
- * @return string IP codé en hexa : HHHHHHHH en IPv4 et HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH en IPv6
+ * Convert an IP in Hex Format
+ * @param string $ip format xxx.xxx.xxx.xxx in IPv4 and xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx in IPv6
+ * @return string IP in hex : HHHHHHHH for IPv4 and HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH for IPv6
  */
 function encode_ip ($ip)
 {
@@ -120,14 +117,12 @@ function encode_ip ($ip)
 }
 
 /**
- * Décodage d'ip d'hexadecimal à la forme xxx.xxx.xxx.xxx
- * @param string $ip_encode IP encodé
- * @return string IP sous la forme xxx.xxx.xxx.xxx
+ * Convert an IP in Hex format to an IPv4 or IPv6 format
+ * @param string $int_ip IP encoded
+ * @return string $ip format xxx.xxx.xxx.xxx in IPv4 and xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx in IPv6
  */
 function decode_ip($int_ip)
-{
-    
- 
+{ 
     if (strlen($int_ip) == 32) {
         $int_ip = substr(chunk_split($int_ip, 4, ':'), 0, 39);
         $int_ip = ':'. implode(':', array_map("hexhex", explode(':',$int_ip))) .':';
@@ -144,13 +139,18 @@ function decode_ip($int_ip)
     $hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
     return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
 }
-
+/**
+ * Converts a hex value to another hew value (depnding of the current php version on the server)
+ * @param string $value The initial hexvalue
+ * @return string the new hew value
+ */
 function hexhex($value) {
 	return dechex(hexdec($value));
 };
 
 /**
- * Génératrice de mot de passe de 6 caractères
+ * Generates a random password with 6 chars
+ * @return string $password The generated password
  */
 function password_generator()
 {
@@ -163,7 +163,9 @@ function password_generator()
     return $password;
 }
 /**
- * Initialisation du tableau de configuration $cache_mod
+ * Initialisation of the cache for all Mod settings
+ * 
+ * Generates a file which contains all configurations for different installed OGSpy Modules
  */
 function init_mod_cache()
 {
@@ -190,7 +192,9 @@ function init_mod_cache()
 }
 
 /**
- * Initialisation du tableau de configuration $server_config
+ * Initialisation of the cache for all Server settings
+ * 
+ * Generates a file which contains all configurations for the OGSpy Server
  */
 function init_serverconfig()
 {
@@ -216,21 +220,21 @@ function init_serverconfig()
 
 }
 /**
- *  Mets à jour en base toutes les informations de la page paramètres d'affichage de l'administration du serveur OGSpy.
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_portee_missil ." where config_name = 'portee_missil'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_stat . " where config_name = 'galaxy_by_line_stat'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_stat . " where config_name = 'system_by_line_stat'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_user ."' where config_name = 'open_user'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_admin . "' where config_name = 'open_admin'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_stat_view ." where config_name = 'enable_stat_view'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_members_view ." where config_name = 'enable_members_view'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_nb_colonnes_ally) ."' where config_name = 'nb_colonnes_ally'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($color_ally) . "' where config_name = 'color_ally'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_ally ." where config_name = 'galaxy_by_line_ally'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_ally ." where config_name = 'system_by_line_ally'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_enable_register_view ."' where config_name = 'enable_register_view'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_alliance) ."' where config_name = 'register_alliance'";
-  * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_forum) ."' where config_name = 'register_forum'";
+ *  Updates in the database all configurations displayed in the display administration Page.
+ * @todo Query: update  . TABLE_CONFIG .  set config_value =  . $pub_enable_portee_missil . where config_name = \'portee_missil\'
+ * @todo Query: "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_stat . " where config_name = 'galaxy_by_line_stat'"
+ * @todo Query: "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_stat . " where config_name = 'system_by_line_stat'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_user ."' where config_name = 'open_user'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_open_admin . "' where config_name = 'open_admin'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_stat_view ." where config_name = 'enable_stat_view'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_enable_members_view ." where config_name = 'enable_members_view'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_nb_colonnes_ally) ."' where config_name = 'nb_colonnes_ally'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($color_ally) . "' where config_name = 'color_ally'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_galaxy_by_line_ally ." where config_name = 'galaxy_by_line_ally'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_system_by_line_ally ." where config_name = 'system_by_line_ally'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $pub_enable_register_view ."' where config_name = 'enable_register_view'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_alliance) ."' where config_name = 'register_alliance'"
+ * @todo Query : "update " . TABLE_CONFIG . " set config_value = '" . $db->sql_escape_string($pub_register_forum) ."' where config_name = 'register_forum'"
  */
 function set_server_view()
 {
@@ -384,7 +388,7 @@ function set_server_view()
     redirection("index.php?action=administration&subaction=affichage");
 }
 /**
- *  Mets à jour en base toutes les informations de la page paramètres du serveur de l'administration du serveur OGSpy.
+ *  Updates in the database all configurations displayed in the parameters administration Page.
  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_server_active ." where config_name = 'server_active'";
  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_debug_log ." where config_name = 'debug_log'";
  * @todo Query : "update " . TABLE_CONFIG . " set config_value = " . $pub_block_ratio ." where config_name = 'block_ratio'";
@@ -712,7 +716,7 @@ function set_serverconfig()
     redirection("index.php?action=administration&subaction=parameter");
 }
 /**
- * Renvoi un tableau contenant la taille de la base
+ * Returns the Status of the Database used size.
  * @return Array [Server], et [Total]
  * @todo : Query : "SHOW TABLE STATUS"
  */
@@ -750,9 +754,9 @@ function db_size_info()
     return $dbSize_info;
 }
 /**
- *  Routine d'Optimisation de la base de donnée
- *  @param boolean $maintenance_action true si aucune redirection souhaité,false pour avoir une redirection sur un message de résumé
-  * @todo : Query : "SHOW TABLES"
+ * Function to Optimize all tables of the OGSpy Database
+ * @param boolean $maintenance_action true if no url redirection is requested,false to redirect to another page
+ * @todo : Query : "SHOW TABLES"
  */
 function db_optimize($maintenance_action = false)
 {
@@ -780,23 +784,22 @@ function db_optimize($maintenance_action = false)
     }
 }
 /**
- * Adaptation de la base aux nombres de galaxies et systemes
- * @param int $new_num_of_galaxies Nombre de Galaxies
- * @param int $new_num_of_systems Nombre de systèmes
+ * Adapt the database to fit on the number of galaxies and solar systems
+ * @param int $new_num_of_galaxies Galaxy total
+ * @param int $new_num_of_systems Solar Systems total
  * @return null
-  * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE galaxy > $new_num_of_galaxies");
-  * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_galaxy=1 WHERE user_galaxy > $new_num_of_galaxies");
-  * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE galaxy > $new_num_of_galaxies");
-  * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE system > $new_num_of_systems");
-  * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_system=1 WHERE user_system > $new_num_of_systems");
-  * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE system > $new_num_of_systems");
-  * @todo : Query : "ALTER TABLE `" . TABLE_UNIVERSE . "` CHANGE `galaxy` `galaxy` ENUM("; -> Voir Fonction
-  * @todo : Query : "ALTER TABLE `" . TABLE_USER ." CHANGE `user_galaxy` `user_galaxy` -> Voir fonction
-  * @todo : Query : $request = "ALTER TABLE `" . TABLE_USER_FAVORITE ."` CHANGE `galaxy` `galaxy` ENUM(" -> Voir fonction
-  * @todo : Query : "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_galaxies','$new_num_of_galaxies')";
-  * @todo : Query : $requests = "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_systems','$new_num_of_systems')";
-  
- */
+ * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE galaxy > $new_num_of_galaxies");
+ * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_galaxy=1 WHERE user_galaxy > $new_num_of_galaxies");
+ * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE galaxy > $new_num_of_galaxies");
+ * @todo : Query : sql_query("DELETE FROM " . TABLE_UNIVERSE . " WHERE system > $new_num_of_systems");
+ * @todo : Query : sql_query("UPDATE " . TABLE_USER . " SET user_system=1 WHERE user_system > $new_num_of_systems");
+ * @todo : Query : sql_query("DELETE FROM " . TABLE_USER_FAVORITE . " WHERE system > $new_num_of_systems");
+ * @todo : Query : "ALTER TABLE `" . TABLE_UNIVERSE . "` CHANGE `galaxy` `galaxy` ENUM("; -> Voir Fonction
+ * @todo : Query : "ALTER TABLE `" . TABLE_USER ." CHANGE `user_galaxy` `user_galaxy` -> Voir fonction
+ * @todo : Query : $request = "ALTER TABLE `" . TABLE_USER_FAVORITE ."` CHANGE `galaxy` `galaxy` ENUM(" -> Voir fonction
+ * @todo : Query : "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_galaxies','$new_num_of_galaxies')";
+ * @todo : Query : $requests = "REPLACE INTO " . TABLE_CONFIG ." (config_name, config_value) VALUES ('num_of_systems','$new_num_of_systems')";
+*/
 function resize_db($new_num_of_galaxies, $new_num_of_systems)
 {
     global $db, $db_host, $db_user, $db_password, $db_database, $table_prefix, $server_config;
@@ -845,8 +848,8 @@ function resize_db($new_num_of_galaxies, $new_num_of_systems)
     log_("set_db_size");
 }
 /**
- * Taille des logs sur le serveur
- * @return Array tableau [type] et [size]
+ * File Log size on the Server
+ * @return Array tableau [type] and [size]
  */
 function log_size_info()
 {
@@ -889,10 +892,10 @@ function log_size_info()
     return $log_size_info;
 }
 /**
- * Verifie l'existence de log à une date donné
- * @param int $date Date demandé
- * @return boolean 
- * @internal Bien trop compliqué pour une simple vérification d'existence... 
+ * Checks the availability of a log File
+ * @param int $date Requested Date 
+ * @return boolean true if the log file exists
+ * @internal To be improved...
  */
 function log_check_exist($date)
 {
@@ -940,7 +943,7 @@ function log_check_exist($date)
     return true;
 }
 /**
- * Envoi d'une archive ZIP au browser d'un log pour une date donné
+ * Sends a Compressed archive to the browser for a specific date
  * @global array $user_data
  */
 function log_extractor()
@@ -1016,7 +1019,7 @@ function log_extractor()
 }
 
 /**
- * Effacement du log séléctioné
+ * Deletes a specified Log File
  *
  */
 function log_remove()
@@ -1044,7 +1047,7 @@ function log_remove()
 }
 
 /**
- * Purge des fichiers logs , selon configuration du serveur
+ * Log file cleaning according the the Server configuration
  */
 function log_purge()
 {
@@ -1084,7 +1087,10 @@ function log_purge()
     }
 }
 /**
- * Formatage d'un nombre : Utile d'avoir une fonction pour ça ?
+ * Formats a number.
+ * @param int $number The value to be converted
+ * @param int $decimal Sets the number of decimal points.
+ * @return string The number with the new formatting
  */
 function formate_number($number, $decimal = 0)
 {
@@ -1092,7 +1098,7 @@ function formate_number($number, $decimal = 0)
 }
 
 /**
- * Maintenance du serveur (Purge des galaxies,des rapports d'espionages,des logs, et optimisation de la base)
+ * Server Maintenance (Cleaning of Galaxy, Spy reports and Logs)
  */
 function maintenance_action()
 {
@@ -1109,7 +1115,12 @@ function maintenance_action()
     }
 }
 /**
- * Vérification de l'intégrité d'une variable en fonction de son type(Pseudo, Mot de passe, nombre,...)
+ * Security Function : Variable Verification according the type(Pseudo, Password, string, number,...)
+ * @param string $value Value of the data to check
+ * @param string $type_check Type of the value (Pseudo_Groupname, Pseudo_ingame, Password, Text, CharNum, Char, Num, Galaxies, URL, Special)
+ * @param string $mask Can be used to specify a Regex for the check when the type is set as Special
+ * @param boolean $auth_null Workarround linked to the authentification
+ * @return boolean true if the value is ok or empty and false if the checking has failed.
  */
 function check_var($value, $type_check, $mask = "", $auth_null = true)
 {
@@ -1221,7 +1232,8 @@ function check_var($value, $type_check, $mask = "", $auth_null = true)
     return true;
 }
 /**
- * Raz des ratios d'import de données
+ * Resets the User for imported datas.
+ * @param boolean $maintenance_action If true the function does not redirect the user to the raz_ration Page
  */
 function admin_raz_ratio($maintenance_action = false)
 {
@@ -1240,7 +1252,8 @@ function admin_raz_ratio($maintenance_action = false)
     }
 }
 /**
- * Valeur courant de microtime() formaté pour les benchmarks et mesure de temps
+ *  Microtime Value formatted for benchmark functions
+ * @return int Current microtime
  */
 function benchmark()
 {
@@ -1251,7 +1264,9 @@ function benchmark()
     return $mtime;
 }
 /**
- * Vérification des données passées en paramètres via un GET
+ * Security : HTTP GET Data verifications
+ * @param string $secvalue The value to be checked
+ * @return boolean true if the verification is ok
  */
 function check_getvalue($secvalue)
 {
@@ -1274,7 +1289,9 @@ function check_getvalue($secvalue)
     return true;
 }
 /**
- * Vérification des données passées en paramètres via un POST
+ * Security : HTTP POST Data verifications
+ * @param string $secvalue The value to be checked
+ * @return boolean true if the verification is ok
  */
 function check_postvalue($secvalue)
 {
@@ -1295,14 +1312,15 @@ function check_postvalue($secvalue)
 
 //\\ fonctions utilisable pour les mods //\\
 /**
- * Fonction pour installer un mod
- * @param string $mod_folder : Nom du dossier contenant le mod
+ * Funtion to install a new mod in OGSpy
+ * @param string $mod_folder : Folder name which contains the mod
  * @todo Query: "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] ."'"."'"
  * @todo Query: "INSERT INTO " . TABLE_MOD .
                 " (title, menu, action, root, link, version, active,admin_only) VALUES ('" . $value_mod[0] .
                 "','" . $value_mod[1] . "','" . $value_mod[2] . "','" . $value_mod[3] . "','" .
                 $value_mod[4] . "','" . $mod_version . "','" . $value_mod[5] . "','" . $value_mod[6] .
                 "')"
+ * @return boolean true if the mod has been correctly installed
  */
 function install_mod($mod_folder)
 {
@@ -1342,9 +1360,9 @@ function install_mod($mod_folder)
     return $is_ok;
 }
 /**
- * Fonction pour désinstaller un mod
- * @param string $mod_uninstall_name : Nom du mod
- * @param string $mod_uninstall_table : Nom de table associée au mod à désinstaller
+ * Function to uninstall an OGSpy Module
+ * @param string $mod_uninstall_name : Mod name
+ * @param string $mod_uninstall_table : Name of the Database table used by the Mod that we need to remove
  * @todo Query: "DELETE FROM " . TABLE_MOD . " WHERE title='" . $mod_uninstall_name ."'
  */
 function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
@@ -1356,10 +1374,11 @@ function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
     }
 }
 /**
- * Fonction pour mettre à jour un mod
- * @param string $mod_folder : Nom du dossier où se trouve le mod
- * @param string $mod_name : Nom du mod
+ * Fonction to update the OGSpy mod
+ * @param string $mod_folder : Folder name which contains the mod
+ * @param string $mod_name : Mod name
  * @todo Query: "UPDATE " . TABLE_MOD . " SET version='" . $mod_version ."' WHERE action='" . $mod_name . "'";
+  * @return boolean true if the mod has been correctly updated
  */
 function update_mod($mod_folder, $mod_name)
 {
@@ -1382,8 +1401,10 @@ function update_mod($mod_folder, $mod_name)
 }
 
 /**
- * Fonction de hachage
+ * OGSpy Hash Function
+ * @param string The string to Hash (usually the password)
  * todo : remplacer les sha1(md5()) d'ogspy par la fonction'
+ * @return string Returns the hash of the input function
  */
 function crypto($str)
 {
@@ -1391,8 +1412,9 @@ function crypto($str)
 }
 
 /**
- * Création du fichier de d identification ogspy 
- * key unique par ogspy
+ * OGSpy Key Generator : This key will be the unique id of the current OGSpy installation.
+ *
+ * The current OGSpy Key is written in a file named parameters/key.php
  */
 function generate_key()
 {
