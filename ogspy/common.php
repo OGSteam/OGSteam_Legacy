@@ -55,7 +55,9 @@ require_once ("includes/chart_js.php");
 require_once ("includes/ogs.php");
 
 //Récupération des valeur GET, POST, COOKIE
-@import_request_variables('GP', "pub_");
+extract($_GET,EXTR_PREFIX_ALL , "pub");
+extract($_POST,EXTR_PREFIX_ALL , "pub");
+extract($_COOKIE,EXTR_PREFIX_ALL , "pub");
 
 foreach ($_GET as $secvalue) {
     if (!check_getvalue($secvalue)) {
