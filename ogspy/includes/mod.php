@@ -1,7 +1,6 @@
 <?php
-/** $Id$ **/
 /**
-* Fonctions relatives aux mod d'OGSpy
+* Fonctions used for OGSpy Mods
 * @package OGSpy
 * @subpackage mods
 * @author Kyser (inspiré des sources d'Aéris) - http://ogsteam.fr/
@@ -10,6 +9,7 @@
 * @version 3.04b ($Rev$)
 * @modified $Date$
 * @link $HeadURL$
+* $Id$
 */
 
 if (!defined('IN_SPYOGAME')) {
@@ -17,9 +17,9 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 /**
-* Récupération de la liste des mods - 
-* @comment Pour les users loggés en admin uniquement
-* 
+* Fetch the mod list (admin only)
+* @return The list of mods in an array.
+* @todo Query : "select id, title, root, link, version, active, admin_only from ".TABLE_MOD." order by position, title";
 */
 function mod_list() {
 	global $db, $user_data;
@@ -99,7 +99,8 @@ function mod_list() {
 	return $mod_list;
 }
 /**
-* Je sais pas trop ce qu'elle checke cette fonction... <-- Doc à remplacer ? :p
+* Function mod_check : Checks if an unauthorized user tries to install a mod without being admin or with wrong parameters
+* @param string $check type of varaible to be checked
 */
 function mod_check($check) {
 	global $user_data;
@@ -122,8 +123,13 @@ function mod_check($check) {
 }
 
 /**
-* Installation d'un module OGSpy à partir de son nom de repertoire
+* Installs a Mod from a mod folder name
 * @global $pub_directory
+* @todo Query : "SELECT title FROM " . TABLE_MOD . " WHERE title='" . $value_mod[0] .
+* @todo Query : "select id from ".TABLE_MOD." where root = '{$pub_directory}'"
+* @todo Query : "select max(position) from ".TABLE_MOD
+* @todo Query : "update ".TABLE_MOD." set position = ".($position+1)." where root = '{$pub_directory}'"
+* @todo Query :  "select title from ".TABLE_MOD." where id = '{$mod_id}'"
 */
 function mod_install () {
 	global $db;
@@ -211,7 +217,9 @@ function mod_install () {
 }
 
 /**
-* Mise à jour d'un mod
+* mod_update : Updates a mod version
+* @todo Query :  "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+* @todo Query :  "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
 */
 function mod_update () {
 	global $db, $pub_mod_id;
@@ -268,8 +276,6 @@ function mod_update () {
         
         }
 
-
-
 	if (file_exists("mod/".$root."/update.php")) {
 		require_once("mod/".$root."/update.php");
 
@@ -283,7 +289,11 @@ function mod_update () {
 }
 
 /**
-* Suppression d'un mod
+* mod_uninstall : Uninstall a mod from the database (Mod files are not deleted)
+* @todo Query : "select root from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+* @todo Query : "delete from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+* 
 */
 function mod_uninstall () {
 	global $db;
@@ -311,7 +321,9 @@ function mod_uninstall () {
 }
 
 /**
-* Activation d'un mod
+* Mod Activation
+* @todo Query : "update ".TABLE_MOD." set active='1' where id = '{$pub_mod_id}'"
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
 */
 function mod_active () {
 	global $db;
@@ -331,7 +343,9 @@ generate_mod_cache();
 }
 
 /**
-* Désactivation d'un mod
+* Disables a Mod
+* @todo Query : "update ".TABLE_MOD." set active='0' where id = '{$pub_mod_id}'"
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
 */
 function mod_disable () {
 	global $db;
@@ -352,7 +366,11 @@ function mod_disable () {
 
 // Modifs par naruto kun
 
-//Vue d'un mod
+/**
+* Set the visibility of the mod (Admin)
+* @todo Query : "update ".TABLE_MOD." set active='0' where id = '{$pub_mod_id}'"
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+*/
 function mod_admin () {
 	global $db;
 	global $pub_mod_id;
@@ -371,7 +389,11 @@ function mod_admin () {
 	redirection("index.php?action=administration&subaction=mod");
 }
 
-//Vue d'un mod
+/**
+* Set the visibility of the mod (User)
+* @todo Query : "update ".TABLE_MOD." set admin_only='0' where id = '{$pub_mod_id}'"
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
+*/
 function mod_normal () {
 	global $db;
 	global $pub_mod_id;
@@ -389,11 +411,12 @@ function mod_normal () {
     generate_mod_cache();
 	redirection("index.php?action=administration&subaction=mod");
 }
-
-//fin des modifs
-
 /**
-* Ordonnancement des mod
+* Function to set the position of a mod into the mod list
+* @param string $order up or down according to the new desired postion.
+* @todo Query : "select id from ".TABLE_MOD." order by position, title"
+* @todo Query : "update ".TABLE_MOD." set position = ".$i." where id = ".key($mods)
+* @todo Query : "select title from ".TABLE_MOD." where id = '{$pub_mod_id}'"
 */
 function mod_sort ($order) {
 	global $db;
@@ -433,9 +456,12 @@ function mod_sort ($order) {
 	redirection("index.php?action=administration&subaction=mod");
 }
 /**
-* Renvoi le numéro de version du mod en cours d'execution. Basé sur le paramètre $pub_action
+* Returns the version number of the current Mod.
+* 
+* The function uses the $pub_action value to know what is the current mod 
 * @global $pub_action
-* @return string Numéro de version du mod en cours
+* @return string NCurrent mod version number
+* @todo Query : "select `version` from ".TABLE_MOD." where root = '{$pub_action}'"
 */
 function mod_version () {
 	global $db;
@@ -451,11 +477,12 @@ function mod_version () {
 	return "(ModInconnu:'{$pub_action}')";
 }
 /**
-* Permet d'ajouter un paramétre de configuration et sa valeur pour un mod donné
-* @param string $param Nom du paramètre de configuration
-* @param string $value Valeur du paramètre de configuration
+* Mod Configs: Add or updates a configuration option for the mod
+* @param string $param Name of the parameter
+* @param string $value Value of the parameter
 * @global $db
-* @return boolean Retourne true/false selon le résultat de l'enregistrement en base de données
+* @return boolean returns true if the parameter is correctly saved. false in other cases.
+* @todo Query : 'REPLACE INTO ' . TABLE_MOD_CFG . ' VALUES ("' . $nom_mod . '", "' . $param . '", "' . $value . '")'
 */
 function mod_set_option ( $param, $value, $nom_mod='' ) {
 	global $db;
@@ -474,10 +501,11 @@ function mod_set_option ( $param, $value, $nom_mod='' ) {
 	return true;
 }
 /**
-* Permet d'effacer un paramétre de configuration pour un mod donné
-* @param string $param Nom du paramètre de configuration
+* Mod Configs: Deletes a parameter for a mod
+* @param string $param Name of the parameter
 * @global $db
-* @return boolean Retourne true/false selon le résultat de l'enregistrement en base de données
+* @return boolean returns true if the parameter is correctly saved. false in other cases.
+* @todo Query : 'DELETE FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '" AND `config` = "' . $param . '"'
 */
 function mod_del_option ( $param ) {
 	global $db;
@@ -489,10 +517,11 @@ function mod_del_option ( $param ) {
 	return true;
 }
 /**
-* Permet de lire la valeur d'un paramétre de configuration pour un mod donné
-* @param string $param Nom du paramètre de configuration
+* Mod Configs : Reads a parameter value for the current mod
+* @param string $param Name of the parameter
 * @global $db
-* @return string Retourne la valeur du paramètre demandé
+* @return string Returns the value of the requested parameter
+* @todo Query : 'SELECT value FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '" AND `config` = "' . $param . '"'
 */
 function mod_get_option ( $param ) {
 	global $db;
@@ -501,17 +530,17 @@ function mod_get_option ( $param ) {
 	if ( !check_var($param, "Text") ) redirection("index.php?action=message&id_message=errordata&info");
 	$query = 'SELECT value FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '" AND `config` = "' . $param . '"';
 	$result = $db->sql_query($query);
-	if ( ! list ( $value ) = $db->sql_fetch_row ( $result ) ) return '';
+	if ( ! list ( $value ) = $db->sql_fetch_row ( $result ) ) return '-1';
 	return $value;
 }
 /**
-* Récupère le nom du mod courant
-* La fonction n'admet pas de paramètre
+* Mod Configs : Gets the current mod name
 * @global $db
 * @global $pub_action
 * @global $directory
 * @global $mod_id
-* @return string Retourne le nom du mod demandé
+* @return string Returns the current mod name
+* @todo Query : 'SELECT `action` FROM ' . TABLE_MOD . ' WHERE id=' . $pub_mod_id
 */
 function mod_get_nom() {
 	global $db;
@@ -534,9 +563,10 @@ function mod_get_nom() {
 	return $nom_mod;
 }
 /**
-* Permet d'effacer tous les paramétres de configuration pour un mod donné
+* Deletes all configurations for the current mod 
 * @global $db
-* @return boolean Retourne true/false selon le résultat de l'effacement en base de données
+* @return boolean Returns true if at least one entry has been deleted. False if nothing has been removed.
+* @todo Query : 'DELETE FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '"'
 */
 function mod_del_all_option () {
 	global $db;
