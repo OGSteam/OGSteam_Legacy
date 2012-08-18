@@ -357,12 +357,6 @@ if (strstr($_SERVER['HTTP_USER_AGENT'], "OGSClient") === false) {
 		mod_sort("down");
 		break;
 
-		//
-		case "import_RE" :
-		import_RE();
-		redirection("index.php?action=galaxy");
-		break;
-
 
 		//----------------------------------------//
 		//--- ---//

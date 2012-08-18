@@ -2232,32 +2232,6 @@ function UNparseRE($id_RE)
 }
 
 
-/**
- * Enregistrement des RE "ancien format" vers le nouveau format
- * @global $db Connexion à la base de données
- * @return boolean true si OK, false si erreur
- * 
- * supprimer bouton correspondant dans admin avant de supp cette fonction
- */
-function import_RE()
-{
-    global $db;
-
-    $rq = 'SELECT sender_id, dateRE, coordinates FROM ' . TABLE_PARSEDSPY;
-    $res = $db->sql_query($rq);
-    $error = false;
-    while (list($sender_id, $dateRE, $coordinates) =
-        $db->sql_fetch_row($res)) {
-        $rq = 'SELECT id_spy FROM ' . TABLE_PARSEDSPY . ' WHERE coordinates = "' . $coordinates . "' AND dateRE=" . $datadate;
-        $res_already_inserted = $db->sql_query($rq);
-        $already_inserted = $db->sql_numrows($res_already_inserted);
-        if ($already_inserted == 1 || !insert_RE(null, $sender_id))
-            $error = true;
-    }
-    return $error;
-}
-
-
 ////////////////////////////////// AFFICHAGE SI MISSILE A PORTEE ////////////////////
 function portee_missiles ( $galaxy, $system )
 {
