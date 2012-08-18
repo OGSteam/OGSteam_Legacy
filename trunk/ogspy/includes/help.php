@@ -1,9 +1,11 @@
 <?php
 /** $Id$ **/
 /**
-* Fonctions d'aides Ogspy
+* Functions which informs the user about an item using a pop-up.
+* 
+* This function create a pop-up which informs the user about items in the user interface.
 * @package OGSpy
-* @subpackage main
+* @subpackage Help
 * @author Kyser
 * @copyright Copyright &copy; 2007, http://ogsteam.fr/
 * @version 3.04b ($Rev$)
@@ -47,11 +49,11 @@ $help["config_cache"] = "Durée de vie du cache config en seconde.";
 $help["mod_cache"] = "Durée de vie du cache mod en seconde..";
 
 /**
-* Création d'un lien d'aide en popup sur image
-* @param string $key Identifiant de l'aide
-* @param string $value Texte optionnel d'aide , lorsque $key n'est pas fourni
-* @param string $prefixe Chemin optionnel vers le root OGSpy
-* @return string le lien à insérer
+* help() creates a pop-up to display the help message on the mouse over.
+* @param string $key The Help message ID
+* @param string $value If the ID is not used, it is possible to use a custom message
+* @param string $prefixe Path to the OGSpy root (Not really used)
+* @return string The Html code to insert.
 */
 function help($key, $value = "", $prefixe = "") {
 	global $help;
