@@ -2,6 +2,7 @@
 /** $Id$ **/
 /**
  * Fonctions relatives aux données galaxies/planètes
+ * 
  * @package OGSpy
  * @subpackage main
  * @author Kyser
@@ -15,12 +16,11 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-// fichier des fonctions MIP (christ24)
-require_once ("galaxybis.php");
-
 /**
  * Vérification des droits OGSpy
  * @param string $action Droit interrogé
+ * @global array $user_data
+ * @global array $user_auth
  */
 
 function galaxy_check_auth($action)
@@ -101,9 +101,17 @@ function galaxy_check_auth($action)
 
 /**
  * Affichage des galaxies
- * @global $pub_galaxy
- * @global $pub_system
- * @global $pub_coordinates
+ * @global int $pub_galaxy
+ * @global int $pub_system
+ * @global string $pub_coordinates
+ * @global object $db
+ * @global array $user_data
+ * @global array $user_auth
+ * @global array $server_config
+ * @todo Query : "select row, name, ally, player, moon, phalanx, gate, last_update_moon, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on user_id = last_update_user_id  where galaxy = $pub_galaxy and system = $pub_system order by row"
+ * @todo Query : "select id_spy from " . TABLE_PARSEDSPY . " where active = '1' and coordinates = '$pub_galaxy:$pub_system:$row'"
+ * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where coordinates = '$pub_galaxy:$pub_system:$row'"
+ * @return array contenant un systeme solaire correspondant à $pub_galaxy et $pub_system
  */
 function galaxy_show()
 {
