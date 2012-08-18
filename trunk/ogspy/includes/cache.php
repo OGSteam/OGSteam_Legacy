@@ -13,7 +13,6 @@ if (!defined('IN_SPYOGAME')) {
 	die("Hacking attempt");
 }
 
-
 /**
  * Function generate_config_cache()
  * Initialize the Cache filesystem

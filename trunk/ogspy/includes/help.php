@@ -1,5 +1,4 @@
 <?php
-/** $Id$ **/
 /**
 * Functions which informs the user about an item using a pop-up.
 * 
@@ -11,6 +10,7 @@
 * @version 3.04b ($Rev$)
 * @modified $Date$
 * @link $HeadURL$
+* $Id$
 */
 
 if (!defined('IN_SPYOGAME')) {
