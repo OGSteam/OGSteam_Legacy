@@ -261,7 +261,7 @@ $db_size_info; ?></th>
 <tr>
 	<th><a>Nombre de session ouvertes</a></th><th><?php echo $connectes; ?><a href="index.php?action=drop_sessions"> (vider <?php echo
 help("drop_sessions"); ?>)</th>
-	<th colspan='2'><form action="index.php" method="get"><input type="hidden" name="action" value="import_RE"><input type="submit" value="Mettre &agrave; jour les rapports d'espionnage"></form></th>
+	<th colspan='2'>&nbsp;</th>
 </tr>
 <tr>
 	<th colspan='4'>&nbsp;</th>
