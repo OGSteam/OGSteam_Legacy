@@ -1,14 +1,14 @@
 <?php
-/** $Id$ **/
 /**
-* Fonctions de journalisation (log)  d'Ogspy
+* OGSpy Log Functions
 * @package OGSpy
-* @subpackage main
+* @subpackage Log
 * @author Kyser
-* @copyright Copyright &copy; 2007, http://ogsteam.fr/
-* @version 3.04b ($Rev$)
+* @copyright Copyright &copy; 2012, http://www.ogsteam.fr/
+* @version 3.1.1 ($Rev$)
 * @modified $Date$
 * @link $HeadURL$
+* $Id$
 */
 
 if (!defined('IN_SPYOGAME')) {
@@ -17,9 +17,14 @@ if (!defined('IN_SPYOGAME')) {
 global $ogspy_phperror;
 $ogspy_phperror=Array();
 /**
-* Entrée dans le journal d'une ligne d'information
-* @param string $parameter type d'information
-* @param mixed $option Données optionnelles
+* Function log_() to add a line to the Log File
+* 
+* Les types de Log peuvent être : mod, set_serverconfig, set_server_view, set_db_size, mod_install, mod_update, mod_uninstall, mod_active, mod_disable, mod_order, mod_normal,
+* mod_admin, mod_erreur_install_php, mod_erreur_install_txt, mod_erreur_update, mod_erreur_minuscule, mod_erreur_install_bis, mod_erreur_txt_warning, load_system, load_system_OGS,
+* get_system_OGS, load_spy, load_spy_OGS, export_spy_sector, export_spy_date, mysql_error, login, login_OGS, logout, modify_account, modify_account_admin, create_account, regeneratepwd,
+* create_usergroup, delete_usergroup, modify_usergroup, add_usergroup, del_usergroup, load_rank, get_rank, erreur_config_cache, erreur_mod_cache, key, check_var, debug, php-error)
+* @param string $parameter Log type  
+* @param mixed $option Optionnal data
 */
 function log_ ($parameter, $option=0) {
 	global $db, $user_data, $server_config,$pub_action;
@@ -304,8 +309,12 @@ function log_ ($parameter, $option=0) {
 	write_file(PATH_LOG_TODAY.$fichier, "a", $line);
 }
 /**
-* Error handler PHP : log des erreurs PHP dans la journalisation d'OGSpy
-* Optionnellement mise en place dans common.php , si $server_config["no_phperror"] n'est pas flaggé à 1
+* Error handler PHP : Loogin PHP errors
+* Works only if php errors are enabled in the server configuration $server_config["no_phperror"].
+* @param int $code Error code
+* @param string $message Error message
+* @param string $file Filename
+* @param int $line Error line
 */
 function ogspy_error_handler($code, $message, $file, $line) {
 	global $ogspy_phperror;
