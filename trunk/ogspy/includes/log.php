@@ -19,7 +19,7 @@ $ogspy_phperror=Array();
 /**
 * Function log_() to add a line to the Log File
 * 
-* Les types de Log peuvent être : mod, set_serverconfig, set_server_view, set_db_size, mod_install, mod_update, mod_uninstall, mod_active, mod_disable, mod_order, mod_normal,
+* Log types can be : mod, set_serverconfig, set_server_view, set_db_size, mod_install, mod_update, mod_uninstall, mod_active, mod_disable, mod_order, mod_normal,
 * mod_admin, mod_erreur_install_php, mod_erreur_install_txt, mod_erreur_update, mod_erreur_minuscule, mod_erreur_install_bis, mod_erreur_txt_warning, load_system, load_system_OGS,
 * get_system_OGS, load_spy, load_spy_OGS, export_spy_sector, export_spy_date, mysql_error, login, login_OGS, logout, modify_account, modify_account_admin, create_account, regeneratepwd,
 * create_usergroup, delete_usergroup, modify_usergroup, add_usergroup, del_usergroup, load_rank, get_rank, erreur_config_cache, erreur_mod_cache, key, check_var, debug, php-error)
