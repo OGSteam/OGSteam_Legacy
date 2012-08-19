@@ -1,15 +1,16 @@
 <?php
-/** $Id: mysql.php 7224 2011-10-27 13:51:12Z machine $ **/
 /**
-* Classe d'accés à la BDD SQlite
+* Classe d'acces a la BDD SQlite
 * @package OGSpy
-* @subpackage main
+* @subpackage SQlite
 * @author DarkNoon (Based on Kyser Work)
 * @created 15/11/2005
 * @copyright Copyright &copy; 2012, http://board.ogsteam.fr/
 * @version 3.04b ($Rev: 7224 $)
 * @modified $Date: 2011-10-27 15:51:12 +0200 (jeu., 27 oct. 2011) $
 * @link $HeadURL: http://svn.ogsteam.fr/trunk/ogspy/includes/mysql.php $
+* @ignore Not used in OGSpy yet
+* $Id: mysql.php 7224 2011-10-27 13:51:12Z machine $
 */
 
 if (!defined('IN_SPYOGAME')) {
