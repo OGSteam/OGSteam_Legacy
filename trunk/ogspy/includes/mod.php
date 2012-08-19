@@ -460,8 +460,9 @@ function mod_sort ($order) {
 * 
 * The function uses the $pub_action value to know what is the current mod 
 * @global $pub_action
-* @return string NCurrent mod version number
+* @return string Current mod version number
 * @todo Query : "select `version` from ".TABLE_MOD." where root = '{$pub_action}'"
+* @api
 */
 function mod_version () {
 	global $db;
@@ -484,6 +485,7 @@ function mod_version () {
 * @global $db
 * @return boolean returns true if the parameter is correctly saved. false in other cases.
 * @todo Query : 'REPLACE INTO ' . TABLE_MOD_CFG . ' VALUES ("' . $nom_mod . '", "' . $param . '", "' . $value . '")'
+* @api
 */
 function mod_set_option ( $param, $value, $nom_mod='' ) {
 	global $db;
@@ -507,6 +509,7 @@ function mod_set_option ( $param, $value, $nom_mod='' ) {
 * @global $db
 * @return boolean returns true if the parameter is correctly saved. false in other cases.
 * @todo Query : 'DELETE FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '" AND `config` = "' . $param . '"'
+* @api
 */
 function mod_del_option ( $param ) {
 	global $db;
@@ -523,6 +526,7 @@ function mod_del_option ( $param ) {
 * @global $db
 * @return string Returns the value of the requested parameter
 * @todo Query : 'SELECT value FROM ' . TABLE_MOD_CFG . ' WHERE `mod` = "' . $nom_mod . '" AND `config` = "' . $param . '"'
+* @api
 */
 function mod_get_option ( $param ) {
 	global $db;

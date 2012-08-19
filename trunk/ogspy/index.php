@@ -1,6 +1,6 @@
 <?php
 /**
- * Fichier principal d'ogspy : index.php appellé lors de tout accés
+ * Fichier principal d'ogspy
  * @package OGSpy
  * @subpackage main
  * @author Kyser

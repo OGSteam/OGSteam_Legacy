@@ -57,9 +57,26 @@ function DieSQLError($query){
 * @subpackage MySql
 */
 class sql_db {
+/**
+* Instance variable
+* @access private
+* @var int
+*/
   private static $_instance = false; //(singleton)
+/**
+* Connection ID
+* @var int
+*/
   var $db_connect_id;
+/**
+* DB Result
+* @var mixed
+*/
   var $result;
+/**
+* Nb of Queries done
+* @var int
+*/
   var $nb_requete = 0;
     
 /**
