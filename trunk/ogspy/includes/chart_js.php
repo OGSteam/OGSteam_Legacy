@@ -12,14 +12,15 @@ if (!defined('IN_SPYOGAME')) {
 
 /**
  * create_pie()
- * genere le script js d un camenbert
- *  le nom du grah = nom du $conteneur
+ * Generate the JS Code for a Pie chart
+ * Graph Name = $conteneur
  * 
  * @param mixed $_data 
  * @param mixed $_legend
  * @param mixed $_title
  * @param mixed $conteneur
- * @return string contenant script js
+ * @param boolean $theme
+ * @return string the gerated JS Code
  */
 function create_pie($_data, $_legend, $_title, $conteneur, $theme = true)
 {
@@ -117,13 +118,30 @@ $(document).ready(function() {
 
     return $retour;
 }
-
+/**
+ * create_curves()
+ * Generate the JS Code for a Curves chart
+ * 
+ * @param string $_player
+ * @param int $_date_min
+ * @param int $_date_max
+ * @param string $_comp
+ * @return string the gerated JS Code
+ * @todo Revoir les erreurs : la variable $conteneur semble incorrecte
+ * @todo Query : "select datadate, rank, points";
+            $request .= " from " . $table;
+            $request .= " where player = '" . $db->sql_escape_string($player)
+ * @todo Query : $request = "select datadate, rank, points";
+            $request .= " from " . $table;
+            $request .= " where player = '" . $db->sql_escape_string($player_comp) .
+                "'";
+            $request .= " order by datadate desc";
+ */
 
 function create_curves($_player, $_date_min, $_date_max, $_comp)
 {
     global $db;
     $retour = "";
-
 
     if (!isset($_player)) {
         $retour .= affiche_error($conteneur, 'erreur 3');
@@ -248,10 +266,9 @@ if(isset($data['points'])){
 //}
 //
 
-
 /**
  * affiche_error()
- * permet l affichage d une erreur dans un conteneur determiné 
+ * Displays an error message in the selected container 
  * 
  * @param mixed $conteneur
  * @param mixed $error
@@ -270,7 +287,11 @@ function affiche_error($conteneur, $error)
     return $retour;
 }
 
-
+/**
+ * graph_theme()
+ * Returns all the css for the OGSpy Graph 
+ * 
+ */
 function graph_theme()
 {
     $retour = " 
@@ -543,11 +564,19 @@ Highcharts.theme = {
 // Apply the theme
 var highchartsOptions = Highcharts.setOptions(Highcharts.theme); ";
     return $retour;
-
-
 }
 
-
+/**
+ * create_multi_curve()
+ * Generate the JS Code for a Multiple Curves chart
+ * 
+ * @param string $titre
+ * @param string $sous_titre
+ * @param string $data
+ * @param string $names
+ * @param string $conteneur
+ * @return string the gerated JS Code
+ */
 function create_multi_curve($titre, $sous_titre, $data, $names, $conteneur)
 {
     global $zoom , $server_config; // on recupere le zoom s il existe

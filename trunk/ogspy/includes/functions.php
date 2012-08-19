@@ -1321,6 +1321,7 @@ function check_postvalue($secvalue)
                 $value_mod[4] . "','" . $mod_version . "','" . $value_mod[5] . "','" . $value_mod[6] .
                 "')"
  * @return boolean true if the mod has been correctly installed
+ * @api
  */
 function install_mod($mod_folder)
 {
@@ -1364,6 +1365,7 @@ function install_mod($mod_folder)
  * @param string $mod_uninstall_name : Mod name
  * @param string $mod_uninstall_table : Name of the Database table used by the Mod that we need to remove
  * @todo Query: "DELETE FROM " . TABLE_MOD . " WHERE title='" . $mod_uninstall_name ."'
+ * @api
  */
 function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
 {
@@ -1378,7 +1380,8 @@ function uninstall_mod($mod_uninstall_name, $mod_uninstall_table)
  * @param string $mod_folder : Folder name which contains the mod
  * @param string $mod_name : Mod name
  * @todo Query: "UPDATE " . TABLE_MOD . " SET version='" . $mod_version ."' WHERE action='" . $mod_name . "'";
-  * @return boolean true if the mod has been correctly updated
+ * @return boolean true if the mod has been correctly updated
+ * @api [Mod] Function to be called in the update.php file to set up the new version.
  */
 function update_mod($mod_folder, $mod_name)
 {
