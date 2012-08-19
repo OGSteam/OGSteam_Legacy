@@ -1,15 +1,15 @@
 <?php
-/** $Id$ **/
 /**
-* Classe d'accés à la BDD MySQL
+* MySql database Managment Class
 * @package OGSpy
-* @subpackage main
+* @subpackage MySql
 * @author Kyser
 * @created 15/11/2005
 * @copyright Copyright &copy; 2007, http://ogsteam.fr/
 * @version 3.04b ($Rev$)
 * @modified $Date$
 * @link $HeadURL$
+* $Id$
 */
 
 if (!defined('IN_SPYOGAME')) {
@@ -17,8 +17,8 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 /**
-* Affichage d'une erreur SQL et sortie du script
-* @param string $query Requête SQL fautive
+* Displays an Error message and exits OGSpy
+* @param string $query Faulty SQL Request
 */
 function DieSQLError($query){
   echo "<table align=center border=1>\n";
@@ -52,7 +52,7 @@ function DieSQLError($query){
 }
 
 /**
-* Classe d'accès MySQL
+* OGSpy MySQL Database Class
 */
 class sql_db {
   private static $_instance = false; //(singleton)
@@ -65,14 +65,13 @@ class sql_db {
 * (singleton)
 */   
     public static function getInstance($sqlserver, $sqluser, $sqlpassword, $database){  
-       if( self::$_instance === false ){  
+
+		if( self::$_instance === false ){  
            self::$_instance = new sql_db($sqlserver, $sqluser, $sqlpassword, $database);  
-       }  
+		}  
   
        return self::$_instance;  
    }  
-    
-    
     
 /**
 * Constructeur
@@ -123,8 +122,6 @@ class sql_db {
 		unset($this->result);
 		$result = @mysql_close($this->db_connect_id); //deconnection
 		self::$_instance=false;
-
-
   }
 /**
 * Requête SQL
@@ -259,10 +256,7 @@ class sql_db {
     else {
       return false;
     }
-    
-    
   }
-  
-  
+
 }
 ?>

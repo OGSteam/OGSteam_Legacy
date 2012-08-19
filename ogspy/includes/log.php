@@ -309,7 +309,7 @@ function log_ ($parameter, $option=0) {
 	write_file(PATH_LOG_TODAY.$fichier, "a", $line);
 }
 /**
-* Error handler PHP : Loogin PHP errors
+* Error handler PHP : Loging PHP errors
 * Works only if php errors are enabled in the server configuration $server_config["no_phperror"].
 * @param int $code Error code
 * @param string $message Error message

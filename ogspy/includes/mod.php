@@ -1,9 +1,9 @@
 <?php
 /**
-* Fonctions used for OGSpy Mods
+* Functions used for OGSpy Mods
 * @package OGSpy
 * @subpackage mods
-* @author Kyser (inspiré des sources d'Aéris) - http://ogsteam.fr/
+* @author Kyser
 * @created 21/07/2006
 * @copyright Copyright &copy; 2007, http://ogsteam.fr/
 * @version 3.04b ($Rev$)
@@ -480,6 +480,7 @@ function mod_version () {
 * Mod Configs: Add or updates a configuration option for the mod
 * @param string $param Name of the parameter
 * @param string $value Value of the parameter
+* @param string $nom_mod Mod name
 * @global $db
 * @return boolean returns true if the parameter is correctly saved. false in other cases.
 * @todo Query : 'REPLACE INTO ' . TABLE_MOD_CFG . ' VALUES ("' . $nom_mod . '", "' . $param . '", "' . $value . '")'

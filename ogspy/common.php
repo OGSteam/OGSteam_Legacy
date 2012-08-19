@@ -1,6 +1,6 @@
 <?php
 /**
- * Fichier d'inclusion et de définitions communes - Common php
+ * Main file which do includes et set up all data for the application
  * @package OGSpy
  * @subpackage main
  * @author Kyser
