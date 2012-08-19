@@ -1,15 +1,15 @@
 <?php
-
 /**
- * Classe d'accès à la BDD SQlite
+ * Classe d'acces a la BDD SQlite
  * @package OGSpy
- * @subpackage main
+ * @subpackage SQlite
  * @author Ninety
  * @created 20/02/2012
  * @copyright Copyright &copy; 2012, http://board.ogsteam.fr/
  * @version 3.1.0 ($Rev: 7224 $)
  * @modified $Date: 2011-10-27 15:51:12 +0200 (jeu., 27 oct. 2011) $
  * @link $HeadURL: http://svn.ogsteam.fr/trunk/ogspy/includes/sqlite3.php $
+ * @ignore Not used in OGSpy yet
  */
 
 if (!defined('IN_SPYOGAME'))
