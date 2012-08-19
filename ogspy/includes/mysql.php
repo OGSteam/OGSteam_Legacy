@@ -53,6 +53,8 @@ function DieSQLError($query){
 
 /**
 * OGSpy MySQL Database Class
+* @package OGSpy
+* @subpackage MySql
 */
 class sql_db {
   private static $_instance = false; //(singleton)
@@ -61,8 +63,11 @@ class sql_db {
   var $nb_requete = 0;
     
 /**
-* recuperation de l instance en cours, ou création le cas echeant
-* (singleton)
+* Get the current class database instance. Creates it if dosen't exists (singleton)
+* @param string $sqlserver MySQL Server Name
+* @param string $sqluser MySQL User Name
+* @param string $sqlpassword MySQL User Password
+* @param string $database MySQL Database Name
 */   
     public static function getInstance($sqlserver, $sqluser, $sqlpassword, $database){  
 
@@ -74,8 +79,12 @@ class sql_db {
    }  
     
 /**
-* Constructeur
-* passage en fonction privé (singleton)
+* Class Constructor
+* @param string $sqlserver MySQL Server Name
+* @param string $sqluser MySQL User Name
+* @param string $sqlpassword MySQL User Password
+* @param string $database MySQL Database Name
+* @return True if the connection has been created sucessfully
 */
  
     private  function sql_db($sqlserver, $sqluser, $sqlpassword, $database) {
@@ -108,7 +117,7 @@ class sql_db {
   }
 
 /**
-* empeche fonction magique __clone
+* Overload the __clone function. To forbid the use of this function for this class.
 */    
     public function __clone(){  
        throw new Exception('Cet objet ne peut pas être cloné');
@@ -116,7 +125,7 @@ class sql_db {
    }  
 
 /**
-* Fermeture de la BDD
+* Closing the Connection with the MySQL Server
 */
   function sql_close() {
 		unset($this->result);
@@ -124,7 +133,10 @@ class sql_db {
 		self::$_instance=false;
   }
 /**
-* Requête SQL
+* MySQL Request Function
+* @param string $query The MySQL Query
+* @param boolean $Auth_dieSQLError True if a SQL error sneed to stop the application
+* @param boolean $save True to save the Query in the MySQL Logfile (if enabled)
 */
   function sql_query($query = "", $Auth_dieSQLError = true, $save = true) {
     global $sql_timing, $server_config;
@@ -156,7 +168,9 @@ class sql_db {
     return $this->result;
   }
 /**
-* Récupération d'une ligne d'enregistrement
+* Gets the result of the Query and returns it in a simple array
+* @param int $query_id The Query id.
+* @return the array containing the Database result
 */
   function sql_fetch_row($query_id = 0) {
     if(!$query_id) {
@@ -168,10 +182,11 @@ class sql_db {
     else {
       return false;
     }
-    
   }
 /**
-* Récupération d'un tableau associatif d'une ligne d'enregistrement
+* Gets the result of the Query and returns it in a associative array
+* @param int $query_id The Query id.
+* @return the associative array containing the Database result
 */
   function sql_fetch_assoc($query_id = 0) {
     if(!$query_id) {
@@ -185,7 +200,9 @@ class sql_db {
     }
   }
 /**
-* Nombre de lignes concernées par la dernière requête
+* Gets the number of results returned by the Query
+* @param int $query_id The Query id.
+* @return the number of results
 */
   function sql_numrows($query_id = 0) {
     if(!$query_id) {
@@ -200,7 +217,8 @@ class sql_db {
     }
   }
 /**
-* Nombre de ligne affectés
+* Gets the number of affected rows by the Query
+* @return the number of affected rows
 */
   function sql_affectedrows() {
     if($this->db_connect_id) {
@@ -212,7 +230,8 @@ class sql_db {
     }
   }
 /**
-* Identificateur unique de la dernière insertion SQL
+* Identifier of the last insertion Query
+* @return Returs the id
 */
   function sql_insertid(){
     if($this->db_connect_id) {
@@ -224,13 +243,16 @@ class sql_db {
     }
   }
 /**
-* Libération des ressources
+* Free MySQL ressources on the latest Query result
+* @param int $query_id The Query id.
 */
   function sql_free_result($query_id = 0) {
     mysql_free_result($query_id);
   }
 /**
-* renvoie sous forme d'un tableau de la dernière erreur SQL
+* Returns the latest Query Error.
+* @param int $query_id The Query id.
+* @return an array with the error code and the error message
 */
   function sql_error($query_id = 0) {
     $result["message"] = @mysql_error($this->db_connect_id);
@@ -240,14 +262,17 @@ class sql_db {
   }
   
  /**
-* renvoie le nombre de requete
+* Returns the number of queries done.
+* @return The number of queries done.
 */
   function sql_nb_requete() {
         return $this->nb_requete;
   }
   
- /**
-* Protège les caractères spéciaux SQL
+/**
+* Escapes all characters to set up the Query
+* @param string $str The string to escape
+* @return the escaped string
 */
   function sql_escape_string($str) {
     if(isset($str)) {
