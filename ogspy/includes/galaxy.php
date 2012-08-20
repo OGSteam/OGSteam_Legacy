@@ -18,6 +18,7 @@ if (!defined('IN_SPYOGAME')) {
 
 /**
  * Vérification des droits OGSpy
+ * 
  * @param string $action Droit interrogé
  * @global array $user_data
  * @global array $user_auth
@@ -101,10 +102,11 @@ function galaxy_check_auth($action)
 
 /**
  * Affichage des galaxies
+ * 
  * @global int $pub_galaxy
  * @global int $pub_system
  * @global string $pub_coordinates
- * @global object $db
+ * @global object mysql $db
  * @global array $user_data
  * @global array $user_auth
  * @global array $server_config
@@ -197,6 +199,17 @@ function galaxy_show()
 
 /**
  * Affichage des systèmes
+ * 
+ * @global int $pub_galaxy
+ * @global int $pub_system_down
+ * @global int $pub_system_up
+ * @global object mysql $db
+ * @global array $user_data
+ * @global array $user_auth
+ * @global array $server_config
+ * @todo Query : "select system, row, name, ally, player, moon, phalanx, gate, last_update_moon, status, last_update from " . TABLE_UNIVERSE . " where galaxy = $pub_galaxy and system between " . $pub_system_down . " and " . $pub_system_up . " order by system, row";
+ * @todo Query : "select * from " . TABLE_PARSEDSPY . " where active = '1' and coordinates = '$pub_galaxy:$system:$row'";
+ * @return array contenant les  systeme solaire compris entre $pub_system_down et $pub_system_up
  */
 function galaxy_show_sector()
 {
@@ -278,8 +291,41 @@ function galaxy_show_sector()
 
 /**
  * Fonctions de recherches
+ * 
+ * @global object mysql $db
+ * @global array $user_data
+ * @global array $user_auth
+ * @global array $server_config
+ * @global string $pub_string_search
+ * @global string $pub_type_search type de recherche a effectuer : (player|ally|planet|colonization|moon|away)
+ * @global int $pub_strict
+ * @global int $pub_sort (0|1|2) ordre des resultats (order by galaxy/system/row|order by ally/player/galaxy/systems/row|order by player/galaxy/system/row) 
+ * @global int $pub_sort2 : (0|1) ordre des resultats recherche (asc|desc) 
+ * @global int $pub_galaxy_down
+ * @global int $pub_galaxy_up
+ * @global int $pub_system_down
+ * @global int $pub_system_up
+ * @global int $pub_row_down
+ * @global int $pub_row_up
+ * @global ??? $pub_row_active
+ * @global int $pub_page page courante ( pagination )
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER on last_update_user_id = user_id where player like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'";}
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER on last_update_user_id = user_id where player like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'";}
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on last_update_user_id = user_id where ally like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "' }}
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on last_update_user_id = user_id where ally like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "' }}
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER . ' on last_update_user_id = user_id where name like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "' }}
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER . ' on last_update_user_id = user_id where name like '" . $db->sql_escape_string($search) . "' if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "' }}
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER ." on last_update_user_id = user_id where player = '' and galaxy between $galaxy_start and $galaxy_end and system between $system_start and $system_end if ($pub_row_active) {and row between $row_start and $row_end }
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER ." on last_update_user_id = user_id where player = '' and galaxy between $galaxy_start and $galaxy_end and system between $system_start and $system_end if ($pub_row_active) {and row between $row_start and $row_end }
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on last_update_user_id = user_id  where moon = '1' and galaxy between $galaxy_start and $galaxy_end and system between $system_start and $system_end if ($pub_row_active) { and row between $row_start and $row_end } if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'  }}
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on last_update_user_id = user_id  where moon = '1' and galaxy between $galaxy_start and $galaxy_end and system between $system_start and $system_end if ($pub_row_active) { and row between $row_start and $row_end } if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'  }}
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " left join " . TABLE_USER ." on last_update_user_id = user_id where status like ('%i%') and galaxy between $galaxy_start and $galaxy_end  and system between $system_start and $system_end if ($pub_row_active) { and row between $row_start and $row_end } if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'}}
+ * @todo Query : "select galaxy, system, row, moon, phalanx, gate, last_update_moon, ally, player, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER ." on last_update_user_id = user_id where status like ('%i%') and galaxy between $galaxy_start and $galaxy_end  and system between $system_start and $system_end if ($pub_row_active) { and row between $row_start and $row_end } if ($user_auth["server_show_positionhided"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) { foreach ($ally_protection as $v) { and ally <> '" . $db->sql_escape_string($v) . "'}}
+ * @todo Query : pour toutes les requetes : voir $pub_sort et $pub_sort2 pour pour ordonnancement des resultats de la requete ($order =  "order by galaxy" . $order2 . ", system" . $order2 . ", row " . $order2 . "|" order by ally" . $order2 . ", player" . $order2 . ", galaxy" . $order2 . ", system" . $order2 . ", row" . $order2 . "|" order by player" . $order2 . ", galaxy" . $order2 . ", system" . $order2 . ", row" . $order2 . " )
+ * @todo Query : "select * from " . TABLE_PARSEDSPY . " where active = '1' and coordinates = '" . $row["galaxy"] . ":" . $row["system"] . ":" . $row["row"] ."'"
+ * @return array resultat de la recherche + numero de la page
  */
-function galaxy_search()
+ function galaxy_search()
 {
     global $db, $user_data, $user_auth, $server_config;
     global $pub_string_search, $pub_type_search, $pub_strict, $pub_sort, $pub_sort2,
@@ -575,6 +621,15 @@ function galaxy_search()
 
 /**
  * Récupération des statistiques des galaxies
+ * 
+ * @param int $step
+ * @global object mysql $db
+ * @global array $user_data
+ * @global array $server_config
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE ." where galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1)
+ * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " where player = '' and galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1);
+ * @todo Query : "select max(last_update) from " . TABLE_UNIVERSE ." where galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1);
+ * @return array contenant planete colonisé ou non, par galaxy / systems
  */
 function galaxy_statistic($step = 50)
 {
@@ -620,6 +675,10 @@ function galaxy_statistic($step = 50)
 
 /**
  * Listing des alliances
+ * 
+ * @global object mysql $db
+ * @todo Query : "select distinct ally from " . TABLE_UNIVERSE . " order by ally"
+ * @return array contenant les noms des alliances
  */
 function galaxy_ally_listing()
 {
@@ -639,6 +698,16 @@ function galaxy_ally_listing()
 
 /**
  * Récupération position alliance
+ * 
+ * @param int $step
+ * @global object mysql $db
+ * @global array $user_data
+ * @global array $user_auth
+ * @global array $server_config
+ * @global array $pub_ally_
+ * @global int $nb_colonnes_ally
+ * @todo Query : "select galaxy, system, row, player from " . TABLE_UNIVERSE . " where galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1) . " and ally like '" . $pub_ally_name . "' order by player, galaxy, system, row";
+ * @return array $statictics contenant la position de tous les joueurs de toutes les alliances non protegers par galaxie / systeme
  */
 function galaxy_ally_position($step = 50)
 {
@@ -707,6 +776,7 @@ function galaxy_ally_position($step = 50)
 
 /**
  * Enregistrement des données erronées envoyées via le navigateur dans les logs
+ * 
  * @param string $datas Données du navigateur
  */
 function galaxy_getsource_error($datas)
@@ -722,244 +792,187 @@ function galaxy_getsource_error($datas)
 
 /**
  * Récupération des données transmises via le navigateur
+ * 
+ * @todo Dark : il me semble que ce soit un controleur sur les anciennes données envoyées et anciennement traité par ogspy en attente de confirmation de ta part ...
  */
 function galaxy_getsource()
 {
-    global $db, $user_data, $user_auth, $server_config;
-    global $pub_data, $pub_datatype;
-
-    if (!isset($pub_data) || !isset($pub_datatype)) {
-        redirection("index.php?action=message&id_message=errorfatal&info");
-    }
-
-    $lines = array();
-    $lines = explode(chr(10), $pub_data);
-
-    switch ($pub_datatype) {
-        case "basic":
-            if (($user_auth["server_set_system"] != 1 && $user_auth["server_set_spy"] != 1) &&
-                $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
-                redirection("index.php?action=message&id_message=errorfatal&info");
-            }
-            continue;
-
-        case "combat_report":
-            galaxy_check_auth("set_rc");
-            insert_RC($pub_data);
-            break;
-
-        case "general_player":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "fleet_player":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "research_player":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "general_ally":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "fleet_ally":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "research_ally":
-            galaxy_check_auth("set_ranking");
-            galaxy_getranking($lines, $pub_datatype);
-            break;
-
-        case "none":
-            redirection("index.php");
-
-
-        default:
-            redirection("index.php?action=message&id_message=errorfatal&info");
-    }
-
-    $nb_lines = sizeof($lines);
-    $files = $lines;
-    $authentification = true;
-
-    $checking = false;
-    for ($i = 0; $i < $nb_lines; $i++) {
-        $line = $lines[$i];
-
-        if (preg_match("#Système solaire#", $line)) {
-            if ($user_auth["server_set_system"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
-                1) {
-                redirection("index.php?action=message&id_message=errorfatal&info");
-            }
-            $lines = array_values($lines);
-            $system_added = galaxy_system($lines);
-            break;
-        } elseif (preg_match("/Matières premières sur/", $line)) {
-            if ($user_auth["server_set_spy"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
-                1) {
-                redirection("index.php?action=message&id_message=errorfatal&info");
-            }
-            $lines = array_values($lines);
-            $report_added = galaxy_spy($lines);
-            break;
-        }
-        unset($lines[$i]);
-    }
-
-    if (isset($system_added)) {
-        if ($system_added !== false) {
-            list($galaxy, $system) = $system_added;
-
-            if ($server_config["debug_log"] == "1") {
-                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
-                    "_sys_G$galaxy" . "S" . "$system.txt";
-                write_file($nomfichier, "w", $files);
-            }
-            log_("load_system", array($galaxy, $system));
-
-            //Statistiques serveur
-            /*//Incompatible MySQL 4.0
-            $request = "insert into ".TABLE_STATISTIC." values ('planetimport_server', '15')";
-            $request .= " on duplicate key update statistic_value = statistic_value + 15";
-            $db->sql_query($request);*/
-            $request = "update " . TABLE_STATISTIC .
-                " set statistic_value = statistic_value + 15";
-            $request .= " where statistic_name = 'planetimport_server'";
-            $db->sql_query($request);
-            if ($db->sql_affectedrows() == 0) {
-                $request = "insert ignore into " . TABLE_STATISTIC .
-                    " values ('planetimport_server', '15')";
-                $db->sql_query($request);
-            }
-
-            redirection("index.php?galaxy=$galaxy&system=$system");
-        }
-    }
-    if (isset($report_added)) {
-        if ($report_added !== false) {
-
-            if ($server_config["debug_log"] == "1") {
-                //Sauvegarde données transmises
-                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
-                    "_spy(" . sizeof($report_added) . ").txt";
-                write_file($nomfichier, "w", $files);
-            }
-            log_("load_spy", sizeof($report_added));
-
-            //Statistiques serveur
-            $request = "update " . TABLE_STATISTIC .
-                " set statistic_value = statistic_value + " . sizeof($report_added);
-            $request .= " where statistic_name = 'spyimport_server'";
-            $db->sql_query($request);
-            if ($db->sql_affectedrows() == 0) {
-                $request = "insert ignore into " . TABLE_STATISTIC .
-                    " values ('spyimport_server', '" . sizeof($report_added) . "')";
-                $db->sql_query($request);
-            }
-            $recup = "SELECT spy_added_web FROM " . TABLE_USER . " WHERE user_id =" . $user_data["user_id"];
-            $recup = $db->sql_query($recup);
-            $valeur = $db->sql_fetch_row($recup);
-            $query = "Update `" . TABLE_USER . "` SET `spy_added_web` = '" . ($valeur[0] +
-                sizeof($report_added)) . "' WHERE `user_id` = '" . $user_data["user_id"] . "'";
-            $db->sql_query($query);
-            $reports = "";
-            foreach ($report_added as $v) {
-                list($added, $coordinates, $timestamp) = $v;
-                $reports .= $added . "~" . $coordinates . "~" . $timestamp . "¤";
-            }
-            $reports = substr($reports, 0, strlen($reports) - 2);
-            redirection("index.php?action=message&id_message=spy_added&info=" . $reports);
-        }
-    }
-
-    galaxy_getsource_error($files);
-    redirection("index.php?action=message&id_message=errorfatal&info");
+// global $db, $user_data, $user_auth, $server_config;
+//    global $pub_data, $pub_datatype;
+//
+//    if (!isset($pub_data) || !isset($pub_datatype)) {
+//        redirection("index.php?action=message&id_message=errorfatal&info");
+//    }
+//
+//    $lines = array();
+//    $lines = explode(chr(10), $pub_data);
+//
+//    switch ($pub_datatype) {
+//        case "basic":
+//            if (($user_auth["server_set_system"] != 1 && $user_auth["server_set_spy"] != 1) &&
+//                $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
+//                redirection("index.php?action=message&id_message=errorfatal&info");
+//            }
+//            continue;
+//
+//        case "combat_report":
+//            galaxy_check_auth("set_rc");
+//            insert_RC($pub_data);
+//            break;
+//
+//        case "general_player":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "fleet_player":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "research_player":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "general_ally":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "fleet_ally":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "research_ally":
+//            galaxy_check_auth("set_ranking");
+//            galaxy_getranking($lines, $pub_datatype);
+//            break;
+//
+//        case "none":
+//            redirection("index.php");
+//
+//
+//        default:
+//            redirection("index.php?action=message&id_message=errorfatal&info");
+//    }
+//
+//    $nb_lines = sizeof($lines);
+//    $files = $lines;
+//    $authentification = true;
+//
+//    $checking = false;
+//    for ($i = 0; $i < $nb_lines; $i++) {
+//        $line = $lines[$i];
+//
+//        if (preg_match("#Système solaire#", $line)) {
+//            if ($user_auth["server_set_system"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
+//                1) {
+//                redirection("index.php?action=message&id_message=errorfatal&info");
+//            }
+//            $lines = array_values($lines);
+//            $system_added = galaxy_system($lines);
+//            break;
+//        } elseif (preg_match("/Matières premières sur/", $line)) {
+//            if ($user_auth["server_set_spy"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
+//                1) {
+//                redirection("index.php?action=message&id_message=errorfatal&info");
+//            }
+//            $lines = array_values($lines);
+//            $report_added = galaxy_spy($lines);
+//            break;
+//        }
+//        unset($lines[$i]);
+//    }
+//
+//    if (isset($system_added)) {
+//        if ($system_added !== false) {
+//            list($galaxy, $system) = $system_added;
+//
+//            if ($server_config["debug_log"] == "1") {
+//                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
+//                    "_sys_G$galaxy" . "S" . "$system.txt";
+//                write_file($nomfichier, "w", $files);
+//            }
+//            log_("load_system", array($galaxy, $system));
+//
+//            //Statistiques serveur
+//            /*//Incompatible MySQL 4.0
+//            $request = "insert into ".TABLE_STATISTIC." values ('planetimport_server', '15')";
+//            $request .= " on duplicate key update statistic_value = statistic_value + 15";
+//            $db->sql_query($request);*/
+//            $request = "update " . TABLE_STATISTIC .
+//                " set statistic_value = statistic_value + 15";
+//            $request .= " where statistic_name = 'planetimport_server'";
+//            $db->sql_query($request);
+//            if ($db->sql_affectedrows() == 0) {
+//                $request = "insert ignore into " . TABLE_STATISTIC .
+//                    " values ('planetimport_server', '15')";
+//                $db->sql_query($request);
+//            }
+//
+//            redirection("index.php?galaxy=$galaxy&system=$system");
+//        }
+//    }
+//    if (isset($report_added)) {
+//        if ($report_added !== false) {
+//
+//            if ($server_config["debug_log"] == "1") {
+//                //Sauvegarde données transmises
+//                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
+//                    "_spy(" . sizeof($report_added) . ").txt";
+//                write_file($nomfichier, "w", $files);
+//            }
+//            log_("load_spy", sizeof($report_added));
+//
+//            //Statistiques serveur
+//            $request = "update " . TABLE_STATISTIC .
+//                " set statistic_value = statistic_value + " . sizeof($report_added);
+//            $request .= " where statistic_name = 'spyimport_server'";
+//            $db->sql_query($request);
+//            if ($db->sql_affectedrows() == 0) {
+//                $request = "insert ignore into " . TABLE_STATISTIC .
+//                    " values ('spyimport_server', '" . sizeof($report_added) . "')";
+//                $db->sql_query($request);
+//            }
+//            $recup = "SELECT spy_added_web FROM " . TABLE_USER . " WHERE user_id =" . $user_data["user_id"];
+//            $recup = $db->sql_query($recup);
+//            $valeur = $db->sql_fetch_row($recup);
+//            $query = "Update `" . TABLE_USER . "` SET `spy_added_web` = '" . ($valeur[0] +
+//                sizeof($report_added)) . "' WHERE `user_id` = '" . $user_data["user_id"] . "'";
+//            $db->sql_query($query);
+//            $reports = "";
+//            foreach ($report_added as $v) {
+//                list($added, $coordinates, $timestamp) = $v;
+//                $reports .= $added . "~" . $coordinates . "~" . $timestamp . "¤";
+//            }
+//            $reports = substr($reports, 0, strlen($reports) - 2);
+//            redirection("index.php?action=message&id_message=spy_added&info=" . $reports);
+//        }
+//    }
+//
+//    galaxy_getsource_error($files);
+//    redirection("index.php?action=message&id_message=errorfatal&info");
 }
-
-/**
- * Ajout d'un système
- */
-function galaxy_system($lines)
-{
-    $OK = false;
-    $status = array_fill(1, 15, "");
-    $galaxy = "";
-    $system = "";
-    $now = time();
-    $regExp = '/(\d{1,2})\s+([A-Za-z0-9àâäéèêëìïîòöôùüûç_\-\. ]+?)(?:\s\([0-9min \*]+\))?(\s+Lune \(Taille : \d+\))?\s{2,}([A-Za-z0-9àâäéèêëìïîòöôùüûç_\-\. ]+?)(\s\([iIbvdf ]+\))?\s{2,}([A-Za-z0-9àâäéèêëìïîòöôùüûç_\-\. ]+?)?\s+(?:Espionner[A-Za-z ]+)?/';
-    for ($i = 0; $i < sizeof($lines); $i++) {
-        $line = $lines[$i];
-
-        if (preg_match("#^Système solaire (\d+?):(\d+?)$#", trim($line), $arr)) {
-            $galaxy = $arr[1];
-            $system = $arr[2];
-            $solar_system = array_fill(1, 15, array("moon" => "0", "planet" => "", "ally" =>
-                "", "player" => "", "status" => ""));
-            $OK = true;
-            continue;
-        }
-
-        if ($OK) {
-            for (; $i < sizeof($lines); $i++) {
-                $line = $lines[$i];
-                $planet = "";
-                $ally = "";
-                $player = "";
-                $moon = 0;
-                $statuts = "";
-                //Modification pour compatibilité v0.78c
-                if (preg_match($regExp, $line, $regs)) {
-                    if (!empty($regs[4]) && $regs[4] != ' ') {
-                        $row = $regs[1];
-                        $planet = $regs[2];
-                        $moon = (!empty($regs[3])) ? 1 : 0;
-                        $player = $regs[4];
-                        $status = (isset($regs[5]) && $regs[5] != 'Espionner') ? $regs[5] : '';
-                        $ally = (isset($regs[6]) && $regs[6] != 'Espionner') ? $regs[6] : '';
-                        $solar_system[$row] = array("moon" => $moon, "planet" => $planet, "ally" => $ally,
-                            "player" => $player, "status" => $status);
-                    }
-                }
-            }
-            //Fin de la modification pour compatibilité v0.78c
-            $row = 1;
-            foreach ($solar_system as $v) {
-                if ($galaxy != "" && $system != "") {
-                    if (!galaxy_add_system($galaxy, $system, $row, $v["moon"], $v["planet"], $v["ally"],
-                        $v["player"], $v["status"], $now)) {
-                        return false;
-                    }
-                }
-                $row++;
-            }
-
-            break;
-        }
-    }
-
-    if (!$OK && $galaxy <> "" && $system <> "") {
-        for ($row = 1; $row <= 15; $row++) {
-            galaxy_add_system($galaxy, $system, $row, "0", "", "", "", "", $now);
-        }
-    }
-    galaxy_add_system_ally();
-
-    return array($galaxy, $system);
-}
-
 
 
 
 /**
  * Récupération des rapports d'espionnage
+ * 
+ * @global object mysql $db
+ * @global array $server_config
+ * @global int $pub_galaxy
+ * @global int $pub_system
+ * @global int $pub_row
+ * @global int $pub_spy_id
+ * @todo Query : "select name from " . TABLE_UNIVERSE . " where galaxy = " .intval($pub_galaxy) . " and system = " . intval($pub_system) . " and row = " .  intval($pub_row)
+ * @todo Query : "select id_spy, user_name, dateRE from " . TABLE_PARSEDSPY . " left join " . TABLE_USER ." on user_id = sender_id where active = '1'  and coordinates = '" . intval($pub_galaxy) . ":" . intval($pub_system) . ":" . intval($pub_row) . "'  and BaLu<=0 and Pha<=0 and PoSa<=0 and planet_name='" . $astre_name['name'] . "' order by dateRE desc LIMIT 1"
+ * @todo Query : "select id_spy, user_name, dateRE from " . TABLE_PARSEDSPY . " left join " . TABLE_USER ." on user_id = sender_id  where id_spy = " . intval($pub_spy_id) ."  and BaLu<=0 and Pha<=0 and PoSa<=0 and planet_name='" . $astre_name['name'] . "' order by dateRE desc LIMIT 1"
+ * @todo Query : "select id_spy, user_name, dateRE from " . TABLE_PARSEDSPY . " left join " . TABLE_USER ." on user_id = sender_id where active = '1'  and coordinates = '" . intval($pub_galaxy) . ":" . intval($pub_system) . ":" . intval($pub_row) . "'  and M<=0 and C<=0 and D<=0 and CES<=0 and CEF<=0 and UdN<=0 and Lab<=0 and Ter<=0 and Silo<=0 and not planet_name='" . order by dateRE desc LIMIT 1"
+ * @todo Query : "select id_spy, user_name, dateRE from " . TABLE_PARSEDSPY . " left join " . TABLE_USER ." on user_id = sender_id  where where id_spy = " . intval($pub_spy_id) and M<=0 and C<=0 and D<=0 and CES<=0 and CEF<=0 and UdN<=0 and Lab<=0 and Ter<=0 and Silo<=0 and not planet_name='" .$astre_name['name'] . "' order by dateRE desc LIMIT 1"
+ * @return $reports 
  */
 function galaxy_reportspy_show()
 {
@@ -1033,11 +1046,20 @@ function galaxy_reportspy_show()
 
 /**
  * Récupération des rapports de combat
+ * 
+ * @global object mysql $db
+ * @global array $server_config
+ * @global int $pub_galaxy
+ * @global int $pub_system
+ * @global int $pub_row
+ * @global int $pub_rc_id
+ * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where coordinates = '" . intval($pub_galaxy) . ':' . intval($pub_system) .:' . intval($pub_row) . "' order by dateRC desc";"
+ * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where id_rc = " . intval($pub_rc_id);
  */
 function galaxy_reportrc_show()
 {
     global $db;
-    global $pub_galaxy, $pub_system, $pub_row, $pub_spy_id, $server_config;
+    global $pub_galaxy, $pub_system, $pub_row, $pub_rc_id, $server_config;
 
     if (!check_var($pub_galaxy, "Num") || !check_var($pub_system, "Num") || !
         check_var($pub_row, "Num")) {
@@ -1958,6 +1980,7 @@ function galaxy_obsolete()
 
 /**
  * Reconstruction des RE
+ * 
  * @global $table_prefix, $db
  * @param string $id_RE RE à reconstituer
  * @return string $template_RE reconstitué
