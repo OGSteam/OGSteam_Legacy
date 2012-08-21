@@ -4,7 +4,7 @@
  * Fonctions relatives aux données galaxies/planètes
  * 
  * @package OGSpy
- * @subpackage main
+ * @subpackage galaxy
  * @author Kyser
  * @copyright Copyright &copy; 2007, http://ogsteam.fr/
  * @version 3.05 ($Rev$)
@@ -790,171 +790,6 @@ function galaxy_getsource_error($datas)
     }
 }
 
-/**
- * Récupération des données transmises via le navigateur
- * 
- * @todo Dark : il me semble que ce soit un controleur sur les anciennes données envoyées et anciennement traité par ogspy en attente de confirmation de ta part ...
- */
-function galaxy_getsource()
-{
-// global $db, $user_data, $user_auth, $server_config;
-//    global $pub_data, $pub_datatype;
-//
-//    if (!isset($pub_data) || !isset($pub_datatype)) {
-//        redirection("index.php?action=message&id_message=errorfatal&info");
-//    }
-//
-//    $lines = array();
-//    $lines = explode(chr(10), $pub_data);
-//
-//    switch ($pub_datatype) {
-//        case "basic":
-//            if (($user_auth["server_set_system"] != 1 && $user_auth["server_set_spy"] != 1) &&
-//                $user_data["user_admin"] != 1 && $user_data["user_coadmin"] != 1) {
-//                redirection("index.php?action=message&id_message=errorfatal&info");
-//            }
-//            continue;
-//
-//        case "combat_report":
-//            galaxy_check_auth("set_rc");
-//            insert_RC($pub_data);
-//            break;
-//
-//        case "general_player":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "fleet_player":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "research_player":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "general_ally":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "fleet_ally":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "research_ally":
-//            galaxy_check_auth("set_ranking");
-//            galaxy_getranking($lines, $pub_datatype);
-//            break;
-//
-//        case "none":
-//            redirection("index.php");
-//
-//
-//        default:
-//            redirection("index.php?action=message&id_message=errorfatal&info");
-//    }
-//
-//    $nb_lines = sizeof($lines);
-//    $files = $lines;
-//    $authentification = true;
-//
-//    $checking = false;
-//    for ($i = 0; $i < $nb_lines; $i++) {
-//        $line = $lines[$i];
-//
-//        if (preg_match("#Système solaire#", $line)) {
-//            if ($user_auth["server_set_system"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
-//                1) {
-//                redirection("index.php?action=message&id_message=errorfatal&info");
-//            }
-//            $lines = array_values($lines);
-//            $system_added = galaxy_system($lines);
-//            break;
-//        } elseif (preg_match("/Matières premières sur/", $line)) {
-//            if ($user_auth["server_set_spy"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
-//                1) {
-//                redirection("index.php?action=message&id_message=errorfatal&info");
-//            }
-//            $lines = array_values($lines);
-//            $report_added = galaxy_spy($lines);
-//            break;
-//        }
-//        unset($lines[$i]);
-//    }
-//
-//    if (isset($system_added)) {
-//        if ($system_added !== false) {
-//            list($galaxy, $system) = $system_added;
-//
-//            if ($server_config["debug_log"] == "1") {
-//                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
-//                    "_sys_G$galaxy" . "S" . "$system.txt";
-//                write_file($nomfichier, "w", $files);
-//            }
-//            log_("load_system", array($galaxy, $system));
-//
-//            //Statistiques serveur
-//            /*//Incompatible MySQL 4.0
-//            $request = "insert into ".TABLE_STATISTIC." values ('planetimport_server', '15')";
-//            $request .= " on duplicate key update statistic_value = statistic_value + 15";
-//            $db->sql_query($request);*/
-//            $request = "update " . TABLE_STATISTIC .
-//                " set statistic_value = statistic_value + 15";
-//            $request .= " where statistic_name = 'planetimport_server'";
-//            $db->sql_query($request);
-//            if ($db->sql_affectedrows() == 0) {
-//                $request = "insert ignore into " . TABLE_STATISTIC .
-//                    " values ('planetimport_server', '15')";
-//                $db->sql_query($request);
-//            }
-//
-//            redirection("index.php?galaxy=$galaxy&system=$system");
-//        }
-//    }
-//    if (isset($report_added)) {
-//        if ($report_added !== false) {
-//
-//            if ($server_config["debug_log"] == "1") {
-//                //Sauvegarde données transmises
-//                $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
-//                    "_spy(" . sizeof($report_added) . ").txt";
-//                write_file($nomfichier, "w", $files);
-//            }
-//            log_("load_spy", sizeof($report_added));
-//
-//            //Statistiques serveur
-//            $request = "update " . TABLE_STATISTIC .
-//                " set statistic_value = statistic_value + " . sizeof($report_added);
-//            $request .= " where statistic_name = 'spyimport_server'";
-//            $db->sql_query($request);
-//            if ($db->sql_affectedrows() == 0) {
-//                $request = "insert ignore into " . TABLE_STATISTIC .
-//                    " values ('spyimport_server', '" . sizeof($report_added) . "')";
-//                $db->sql_query($request);
-//            }
-//            $recup = "SELECT spy_added_web FROM " . TABLE_USER . " WHERE user_id =" . $user_data["user_id"];
-//            $recup = $db->sql_query($recup);
-//            $valeur = $db->sql_fetch_row($recup);
-//            $query = "Update `" . TABLE_USER . "` SET `spy_added_web` = '" . ($valeur[0] +
-//                sizeof($report_added)) . "' WHERE `user_id` = '" . $user_data["user_id"] . "'";
-//            $db->sql_query($query);
-//            $reports = "";
-//            foreach ($report_added as $v) {
-//                list($added, $coordinates, $timestamp) = $v;
-//                $reports .= $added . "~" . $coordinates . "~" . $timestamp . "¤";
-//            }
-//            $reports = substr($reports, 0, strlen($reports) - 2);
-//            redirection("index.php?action=message&id_message=spy_added&info=" . $reports);
-//        }
-//    }
-//
-//    galaxy_getsource_error($files);
-//    redirection("index.php?action=message&id_message=errorfatal&info");
-}
 
 
 
@@ -1055,6 +890,7 @@ function galaxy_reportspy_show()
  * @global int $pub_rc_id
  * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where coordinates = '" . intval($pub_galaxy) . ':' . intval($pub_system) .:' . intval($pub_row) . "' order by dateRC desc";"
  * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where id_rc = " . intval($pub_rc_id);
+ * @return array $reports contenant les rc mis en forme
  */
 function galaxy_reportrc_show()
 {
@@ -1094,6 +930,13 @@ function galaxy_reportrc_show()
 
 /**
  * Purge des rapports d'espionnage
+ * 
+ * @global object mysql $db
+ * @global array $server_config
+ * @todo Query : "select id_spy from " . TABLE_PARSEDSPY . " where active = '0' or dateRE < " . (time() - 60 * 60 * 24 * $max_keepspyreport)"
+ * @todo Query : "select * from " . TABLE_USER_SPY . " where spy_id = " . $spy_id"
+ * @todo Query : "delete from " . TABLE_PARSEDSPY . " where id_spy = " . $spy_id;
+ * 
  */
 function galaxy_purge_spy()
 {
@@ -1120,6 +963,11 @@ function galaxy_purge_spy()
 
 /**
  * Récupération des systèmes favoris
+ * 
+ * @global object mysql $db
+ * @global array $user_data
+ * @todo Query : "select galaxy, system from " . TABLE_USER_FAVORITE ." where user_id = " . $user_data["user_id"] . " order by galaxy, system";"
+ * @return array $favorite (galaxy/system)
  */
 function galaxy_getfavorites()
 {
@@ -1143,6 +991,19 @@ function galaxy_getfavorites()
 
 /**
  * Affichage classement des joueurs
+ * 
+ * @global object mysql $db
+ * @global string $pub_order_by general|eco|techno|military|military_b|military_l|military_d|honnor
+ * @global int $pub_date timestamp du classement désiré
+ * @global int $pub_interval 
+ * @todo Query : "SELECT rank FROM `" . $table . "` order by `rank` desc limit 0,1"
+ * @todo Query : "select max(datadate) from " . $table[$i]["tablename"]"
+ * @todo : Query : "select rank, player, ally, points, user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id" where rank between " . $limit_down . " and " . $limit_up . "  order by rank";" 
+ * @todo : Query : "select rank, player, ally, points, user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id" where rank between " . $limit_down . " and " . $limit_up . " and datadate = " . $db->sql_escape_string($last_ranking). " order by rank";" *    
+ * @todo : Query : "select distinct datadate from " . $table[$i]["tablename"] . " order by datadate desc"
+ * @todo : Query : "select rank, player, ally, points, user_name  from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id  where player = '" . $db->sql_escape_string(key($ranking)) . " and datadate = " . $db->sql_escape_string($last_ranking). " order by rank
+ * @todo : Query : "select rank, player, ally, points, user_name  from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id  where player = '" . $db->sql_escape_string(key($ranking)) . "  order by rank
+ * @return array array($order, $ranking, $ranking_available, $maxrank);
  */
 function galaxy_show_ranking_player()
 {
@@ -1279,6 +1140,20 @@ function galaxy_show_ranking_player()
 
 /**
  * Affichage classement des alliances
+ * 
+ * @global object mysql $db
+ * @global string $pub_order_by general|eco|techno|military|military_b|military_l|military_d|honnor
+ * @global int $pub_date timestamp du classement désiré
+ * @global int $pub_interval 
+ * @global int $pub_suborder : member
+ * @todo Query : "SELECT rank FROM `" . $table . "` order by `rank` desc limit 0,1"
+ * @todo Query : "select max(datadate) from " . $table[$i]["tablename"]
+ * @todo Query : "select rank, ally, number_member, points,  user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id where rank between " . $limit_down . " and " . $limit_up . "  and datadate = " . $db->sql_escape_string($last_ranking) ." order by " . $pub_order_by2;"
+ * @todo Query : ""select rank, ally, number_member, points,  user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER . " on sender_id = user_id where rank between " . $limit_down . " and " . $limit_up . "  order by " . $pub_order_by2;"
+ * @todo Query : "select distinct datadate from " . $table[$i]["tablename"] . order by datadate desc"
+ * @todo Query : "select rank, ally, number_member, points,  user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER. " on sender_id = user_id where ally = '" . $db->sql_escape_string(key($ranking)) . "'  and datadate = " . $db->sql_escape_string($last_ranking) ." order by rank";
+ * @todo Query : "select rank, ally, number_member, points,  user_name from " . $table[$i]["tablename"] . " left join " . TABLE_USER. " on sender_id = user_id where ally = '" . $db->sql_escape_string(key($ranking)) . "'  order by rank";
+ * @return array array($order, $ranking, $ranking_available, $maxrank)
  */
 function galaxy_show_ranking_ally()
 {
@@ -1422,6 +1297,12 @@ function galaxy_show_ranking_ally()
 
 /**
  * Affichage classement d'un joueur particulier
+ * 
+ * @param string $player nom du joueur recherche
+ * @param boolean $last le dernier classement ou tous les classements 
+ * @global object mysql $db
+ * @todo Query :  "select datadate, rank, points from " . $table . " where player = '" . $db->sql_escape_string($player) . "  order by datadate desc";
+ * @return array $ranking
  */
 function galaxy_show_ranking_unique_player($player, $last = false)
 {
@@ -1458,7 +1339,13 @@ function galaxy_show_ranking_unique_player($player, $last = false)
 }
 
 /**
- * Affichage classement d'une ally particulière
+ * Affichage classement d'une ally particuliere
+ * 
+ * @param string $ally nom de l alliance recherche
+ * @param boolean $last le dernier classement ou tous les classements 
+ * @global object mysql $db
+ * @todo Query : "select datadate, rank, points, number_member from " . $table . " where ally = '" . $db->sql_escape_string($ally) . "  order by datadate desc";
+ * @return array $ranking
  */
 function galaxy_show_ranking_unique_ally($ally, $last = false)
 {
@@ -1498,185 +1385,16 @@ function galaxy_show_ranking_unique_ally($ally, $last = false)
     return $ranking;
 }
 
-/**
- * Récupération du classement joueurs
- */
-function galaxy_getranking($lines, $datatype)
-{
-    global $db, $user_data, $server_config;
 
-    switch ($datatype) {
-        case "general_player":
-            $ranktable = TABLE_RANK_PLAYER_POINTS;
-            break;
-        case "fleet_player":
-            $ranktable = TABLE_RANK_PLAYER_FLEET;
-            break;
-        case "research_player":
-            $ranktable = TABLE_RANK_PLAYER_RESEARCH;
-            break;
-
-        case "general_ally":
-            $ranktable = TABLE_RANK_ALLY_POINTS;
-            break;
-        case "fleet_ally":
-            $ranktable = TABLE_RANK_ALLY_FLEET;
-            break;
-        case "research_ally":
-            $ranktable = TABLE_RANK_ALLY_RESEARCH;
-            break;
-
-        default:
-            redirection("index.php?action=message&id_message=errorfatal&info");
-    }
-
-    $time = time() - 60 * 4;
-    if ($time > mktime(0, 0, 0) && $time < mktime(8, 0, 0))
-        $timestamp = mktime(0, 0, 0);
-    if ($time > mktime(8, 0, 0) && $time < mktime(16, 0, 0))
-        $timestamp = mktime(8, 0, 0);
-    if ($time > mktime(16, 0, 0) && $time < (mktime(0, 0, 0) + 60 * 60 * 24))
-        $timestamp = mktime(16, 0, 0);
-
-    $files = array();
-    $OK = false;
-    $last_position = 0;
-    $index = 0;
-    if (preg_match("#player#", $datatype)) {
-        for ($i = 0; $i < sizeof($lines); $i++) {
-            $line = trim($lines[$i]);
-
-            if (!$OK && preg_match("#^Place+\s+Joueur+\s+Alliance+\s+Points$#", $line)) {
-                $OK = true;
-                $position = 0;
-                continue;
-            }
-
-            if ($OK) {
-                $files[] = $line;
-
-                $index++;
-                //3 lignes , Compatibilité 0.76 , les . dans les nombres http://ogsteam.fr/forums/viewtopic.php?pid=27522#p27522
-                preg_match("#^(\d+)\s+\S\s+(.*?)\s+(?:\s+Envoyer\sun\smessage)?\s+(.*?)?\s+([^\s][0-9.]*)$#",
-                    $line, $arr);
-                list($text, $position, $player, $ally, $points) = $arr;
-                $points = str_replace('.', '', $points);
-
-                if (!is_numeric($position) || !is_string($player) || !is_string($ally) || !
-                    is_numeric($points)) {
-                    return false;
-                }
-                if ($last_position != 0) {
-                    if ($last_position + 1 != $position) {
-                        return false;
-                    }
-                }
-                $ranking[$position] = array("player" => $player, "ally" => $ally, "points" => $points);
-                $last_position = $position;
-                if ($index == 100)
-                    break;
-            }
-        }
-    } else {
-        for ($i = 0; $i < sizeof($lines); $i++) {
-            $line = trim($lines[$i]);
-
-            if (!$OK && preg_match("#^Place+\s+Alliance+\s+Memb.+\s+(Milliers de )?points+\s+par membre$#i",
-                $line)) {
-                $OK = true;
-                $position = 0;
-                continue;
-            }
-
-            if ($OK) {
-                $files[] = $line;
-
-                $index++;
-                //5 lignes , Compatibilité 0.76 , les . dans les nombres http://ogsteam.fr/forums/viewtopic.php?pid=27522#p27522 et posts suivants
-                preg_match("#^(\d+)\s+\S\s+(.*?)\s+([^\s][0-9.]*)\s+([^\s][0-9.]*)\s+([^\s][0-9.]*)$#",
-                    $line, $arr);
-                list($text, $position, $ally, $nb_member, $points, $points_per_member) = $arr;
-                $nb_member = str_replace('.', '', $nb_member);
-
-                $points = str_replace('.', '', $points);
-                $points_per_member = str_replace('.', '', $points_per_member);
-
-                if (!is_numeric($position) || !is_string($ally) || !is_numeric($nb_member) || !
-                    is_numeric($points) || !is_numeric($points_per_member)) {
-                    return false;
-                }
-                if ($last_position != 0) {
-                    if ($last_position + 1 != $position) {
-                        return false;
-                    }
-                }
-                $ranking[$position] = array("ally" => $ally, "number_member" => $nb_member,
-                    "points" => $points, "points_per_member" => $points_per_member);
-                $last_position = $position;
-                if ($index == 100)
-                    break;
-            }
-        }
-    }
-
-    if (!$OK) {
-        redirection("index.php?action=ranking");
-    }
-
-    if ($server_config["debug_log"] == "1") {
-        //Sauvegarde données tranmises
-        $nomfichier = PATH_LOG_TODAY . date("ymd_His") . "_ID" . $user_data["user_id"] .
-            "_ranking_" . $datatype . ".txt";
-        write_file($nomfichier, "w", $files);
-    }
-
-    while ($rankline = current($ranking)) {
-        if (preg_match("#player#", $datatype)) {
-            $request = "insert ignore into " . $ranktable;
-            $request .= " (datadate, rank, player, ally, points, sender_id)";
-            $request .= " values (" . $timestamp . ", " . key($ranking) . ", '" . $db->
-                sql_escape_string($rankline["player"]) . "', '" . $db->sql_escape_string($rankline["ally"]) .
-                "'," . $rankline["points"] . ", " . $user_data["user_id"] . ")";
-        } else {
-            $request = "insert ignore into " . $ranktable;
-            $request .= " (datadate, rank, ally, number_member, points, points_per_member, sender_id)";
-            $request .= " values (" . $timestamp . ", " . key($ranking) . ", '" . $db->
-                sql_escape_string($rankline["ally"]) . "', " . $rankline["number_member"] . ", " .
-                $rankline["points"] . ", " . $rankline["points_per_member"] . ", " . $user_data["user_id"] .
-                ")";
-        }
-        $db->sql_query($request);
-
-        next($ranking);
-    }
-
-    user_set_stat(null, null, null, null, null, $index);
-
-    if (preg_match("#player#", $datatype)) {
-        log_("load_rank", array("WEB", $datatype, "player", $timestamp, $index));
-    } else {
-        log_("load_rank", array("WEB", $datatype, "ally", $timestamp, $index));
-    }
-
-    //Statistiques serveur
-    $request = "update " . TABLE_STATISTIC .
-        " set statistic_value = statistic_value + " . sizeof($ranking);
-    $request .= " where statistic_name = 'rankimport_server'";
-    $db->sql_query($request);
-    if ($db->sql_affectedrows() == 0) {
-        $request = "insert ignore into " . TABLE_STATISTIC .
-            " values ('rankimport_server', '" . sizeof($ranking) . "')";
-        $db->sql_query($request);
-    }
-
-    if (preg_match("#player#", $datatype))
-        redirection("index.php?action=ranking&subaction=player");
-    if (preg_match("#ally#", $datatype))
-        redirection("index.php?action=ranking&subaction=ally");
-}
 
 /**
  * Suppression automatique de classements joueurs & alliances
+ * 
+ * @global object mysql $db
+ * @global array $server_config
+ * @todo Query : "delete from " . $table . " where datadate < " . (time()) - 60 * 60 * 24 * $max_keeprank)
+ * @todo Query : "select distinct datadate from " . $table ." order by datadate desc limit 0, " . $max_keeprank
+ * @todo Query : "delete from " . $table . " where datadate < " . $datadate
  */
 function galaxy_purge_ranking()
 {
@@ -1725,6 +1443,13 @@ function galaxy_purge_ranking()
 
 /**
  * Suppression manuelle de classements
+ * 
+ * @global object mysql $db
+ * @global array $server_config
+ * @global int $pub_datadate
+ * @global string $pub_subaction : (player|ally)
+ * @todo Query : "delete from " . $table . " where datadate = " .intval($pub_datadate);
+ * 
  */
 function galaxy_drop_ranking()
 {
@@ -1743,23 +1468,18 @@ function galaxy_drop_ranking()
     }
 
     if ($pub_subaction == "player") {
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_POINTS . " where datadate = " .
+        
+         $tables_player = array(TABLE_RANK_PLAYER_POINTS, TABLE_RANK_PLAYER_ECO,
+        TABLE_RANK_PLAYER_TECHNOLOGY, TABLE_RANK_PLAYER_MILITARY,
+        TABLE_RANK_PLAYER_MILITARY_BUILT, TABLE_RANK_PLAYER_MILITARY_LOOSE, TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
+        TABLE_RANK_PLAYER_HONOR);
+        
+                foreach ($tables_player as $table){
+                    
+          $requests[] = "delete from " . $table . " where datadate = " .
             intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_ECO . " where datadate = " .
-            intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_TECHNOLOGY .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY . " where datadate = " .
-            intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_BUILT .
-                    " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_LOOSE .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_MILITARY_DESTRUCT .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_PLAYER_HONOR . " where datadate = " .
-            intval($pub_datadate);
-
+                 }
+        
 
         foreach ($requests as $request) {
             $db->sql_query($request);
@@ -1767,23 +1487,18 @@ function galaxy_drop_ranking()
 
 
     } elseif ($pub_subaction == "ally") {
-        $requests[] = "delete from " . TABLE_RANK_ALLY_POINTS . " where datadate = " .
+        
+         $tables_ally = array(TABLE_RANK_ALLY_POINTS, TABLE_RANK_ALLY_ECO,
+        TABLE_RANK_ALLY_TECHNOLOGY, TABLE_RANK_ALLY_MILITARY,
+        TABLE_RANK_ALLY_MILITARY_BUILT, TABLE_RANK_ALLY_MILITARY_LOOSE, TABLE_RANK_ALLY_MILITARY_DESTRUCT,
+        TABLE_RANK_ALLY_HONOR);
+        
+            foreach ($tables_ally as $table){
+                    
+          $requests[] =  $requests[] = "delete from " . $tables_ally . " where datadate = " .
             intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_ECO . " where datadate = " .
-            intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_TECHNOLOGY .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY . " where datadate = " .
-            intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_BUILT .
-                    " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_LOOSE .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_MILITARY_DESTRUCT .
-            " where datadate = " . intval($pub_datadate);
-        $requests[] = "delete from " . TABLE_RANK_ALLY_HONOR . " where datadate = " .
-            intval($pub_datadate);
-        foreach ($requests as $request) {
+                 }
+              foreach ($requests as $request) {
             $db->sql_query($request);
         }
     }
@@ -1793,6 +1508,15 @@ function galaxy_drop_ranking()
 
 /**
  * Listing des phalanges
+ * 
+ * @param int $galaxy
+ * @param int $system
+ * @global object mysql $db
+ * @global array $server_config
+ * @global array $user_data
+ * @global array $user_auth
+ * @todo Query : "select galaxy, system, row, phalanx, gate, name, ally, player from " .TABLE_UNIVERSE . " where galaxy = " . $galaxy . " and moon = '1' and phalanx > 0 and system + (power(phalanx, 2) - 1) >= " . $system . " and system - (power(phalanx, 2) - 1) <= " . $system
+ * @return array $phalanxer (galaxy, system, row, phalanx, gate, name, ally, player)
  */
 function galaxy_get_phalanx($galaxy, $system)
 {
@@ -1822,6 +1546,14 @@ function galaxy_get_phalanx($galaxy, $system)
 
 /**
  * Affichage des systèmes solaires obsolètes
+ * 
+ * @global object mysql $db
+ * @global int $pub_perimeter
+ * @global int $pub_since
+ * @global string $pub_typesearch (M|P)
+ * @todo Query :  "select distinct galaxy, system" . $row_field . " from " . TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $indice_sup ." and " . $indice_inf ."  and galaxy = " . intval($pub_perimeter) . " order by galaxy, system, row limit 0, 51";
+ * @todo Query :  "select distinct galaxy, system" . $row_field . " from " . TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $indice_sup ." and " . $indice_inf ."  order by galaxy, system, row limit 0, 51";
+ * @return array $obsolete
  */
 function galaxy_obsolete()
 {
@@ -1834,15 +1566,29 @@ function galaxy_obsolete()
         if (!isset($pub_typesearch) || ($pub_typesearch != "M" && $pub_typesearch != "P"))
             $pub_typesearch = "P";
 
-        $timestamp = time();
-        $pub_since_56 = $timestamp - 60 * 60 * 24 * 56;
-        $pub_since_42 = $timestamp - 60 * 60 * 24 * 42;
-        $pub_since_28 = $timestamp - 60 * 60 * 24 * 28;
-        $pub_since_21 = $timestamp - 60 * 60 * 24 * 21;
-        $pub_since_14 = $timestamp - 60 * 60 * 24 * 14;
-        $pub_since_7 = $timestamp - 60 * 60 * 24 * 7;
 
-        if ($pub_typesearch == "P") {
+        $timestamp = time();
+        // tableau regroupant les valeurs possibles
+        $since = array(0,7,14,21,28,42,56,$timestamp - 1);
+        
+                // on regarde l existence de la variable
+        if(!in_array((int)$pub_since, $since)) {
+return $obsolete;
+}  
+   
+        // on recupere l indice de recherche
+        $indice = array_search((int)$pub_since, $since);
+        
+        // l indice ne peut pas etre le premier ou le dernier
+        if ($indice == 0 || $indice == (sizeof($since) - 1)) {
+            return $obsolete;
+        }
+        $indice_sup = $timestamp - 60 * 60 * 24 * $since[$indice+1] ;
+        $indice_inf = $timestamp - 60 * 60 * 24 * $since[$indice-1] ;
+        
+        // on peut maintenant lancer une requete générique
+        
+           if ($pub_typesearch == "P") {
             $field = "last_update";
             $row_field = "";
             $moon = 0;
@@ -1851,12 +1597,12 @@ function galaxy_obsolete()
             $row_field = ", row";
             $moon = 1;
         }
-
-        switch ($pub_since) {
-            case 56:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " < " . $pub_since_56;
-                if ($pub_perimeter != 0)
+        
+        
+       $request = "select distinct galaxy, system" . $row_field . " from " .
+                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $indice_sup .
+                    " and " . $indice_inf ;
+                 if ($pub_perimeter != 0)
                     $request .= " and galaxy = " . intval($pub_perimeter);
                 $request .= " order by galaxy, system, row limit 0, 51";
                 $result = $db->sql_query($request);
@@ -1868,110 +1614,12 @@ function galaxy_obsolete()
                     list($last_update) = $db->sql_fetch_row($result2);
                     $row["last_update"] = $last_update;
 
-                    $obsolete[56][] = $row;
+                    $obsolete[$since[$indice]][] = $row;
                 }
-
-            case 42:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $pub_since_56 .
-                    " and " . $pub_since_42;
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                $request .= " order by galaxy, system, row limit 0, 51";
-                $result = $db->sql_query($request);
-
-                while ($row = $db->sql_fetch_assoc($result)) {
-                    $request = "select min(" . $field . ") from " . TABLE_UNIVERSE .
-                        " where galaxy = " . $row["galaxy"] . " and system = " . $row["system"];
-                    $result2 = $db->sql_query($request);
-                    list($last_update) = $db->sql_fetch_row($result2);
-                    $row["last_update"] = $last_update;
-
-                    $obsolete[42][] = $row;
-                }
-
-            case 28:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $pub_since_42 .
-                    " and " . $pub_since_28;
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                $request .= " order by galaxy, system, row limit 0, 51";
-                $result = $db->sql_query($request);
-
-                while ($row = $db->sql_fetch_assoc($result)) {
-                    $request = "select min(" . $field . ") from " . TABLE_UNIVERSE .
-                        " where galaxy = " . $row["galaxy"] . " and system = " . $row["system"];
-                    $result2 = $db->sql_query($request);
-                    list($last_update) = $db->sql_fetch_row($result2);
-                    $row["last_update"] = $last_update;
-
-                    $obsolete[28][] = $row;
-                }
-
-            case 21:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $pub_since_28 .
-                    " and " . $pub_since_21;
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                $request .= " order by galaxy, system, row limit 0, 51";
-                $result = $db->sql_query($request);
-
-                while ($row = $db->sql_fetch_assoc($result)) {
-                    $request = "select min(" . $field . ") from " . TABLE_UNIVERSE .
-                        " where galaxy = " . $row["galaxy"] . " and system = " . $row["system"];
-                    $result2 = $db->sql_query($request);
-                    list($last_update) = $db->sql_fetch_row($result2);
-                    $row["last_update"] = $last_update;
-
-                    $obsolete[21][] = $row;
-                }
-
-            case 14:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $pub_since_21 .
-                    " and " . $pub_since_14;
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                $request .= " order by galaxy, system, row limit 0, 51";
-                $result = $db->sql_query($request);
-
-                while ($row = $db->sql_fetch_assoc($result)) {
-                    $request = "select min(" . $field . ") from " . TABLE_UNIVERSE .
-                        " where galaxy = " . $row["galaxy"] . " and system = " . $row["system"];
-                    $result2 = $db->sql_query($request);
-                    list($last_update) = $db->sql_fetch_row($result2);
-                    $row["last_update"] = $last_update;
-
-                    $obsolete[14][] = $row;
-                }
-
-            case 7:
-                $request = "select distinct galaxy, system" . $row_field . " from " .
-                    TABLE_UNIVERSE . " where moon = '" . $moon . "' and " . $field . " between " . $pub_since_14 .
-                    " and " . $pub_since_7;
-                if ($pub_perimeter != 0)
-                    $request .= " and galaxy = " . intval($pub_perimeter);
-                $request .= " order by galaxy, system, row limit 0, 51";
-                $result = $db->sql_query($request);
-
-                while ($row = $db->sql_fetch_assoc($result)) {
-                    $request = "select min(" . $field . ") from " . TABLE_UNIVERSE .
-                        " where galaxy = " . $row["galaxy"] . " and system = " . $row["system"];
-                    $result2 = $db->sql_query($request);
-                    list($last_update) = $db->sql_fetch_row($result2);
-                    $row["last_update"] = $last_update;
-
-                    $obsolete[7][] = $row;
-                }
-
-            default:
-                return $obsolete;
+     
+       
         }
-    }
+    
 
     return $obsolete;
 }
@@ -1981,8 +1629,11 @@ function galaxy_obsolete()
 /**
  * Reconstruction des RE
  * 
- * @global $table_prefix, $db
+ * @global array $table_prefix
+ * @global object mysql $db
  * @param string $id_RE RE à reconstituer
+ * @todo Query : 'SELECT planet_name, coordinates, metal, cristal, deuterium, energie, activite, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, DdR, BaLu, Pha, PoSa, LM, LLE, LLO, CG, AI, LP, PB, GB, MIC, MIP, PT, GT, CLE, CLO, CR, VB, VC, REC, SE, BMD, DST, EDLM, SAT, TRA, Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique, dateRE, proba FROM ' . TABLE_PARSEDSPY . ' WHERE id_spy=' . $id_RE
+ * @todo Query : 'SELECT player FROM " . TABLE_UNIVERSE . " WHERE concat(galaxy, ':', system, ':', row) = (SELECT coordinates FROM " .TABLE_PARSEDSPY . " WHERE id_spy=" . $id_RE . ")";
  * @return string $template_RE reconstitué
  */
 function UNparseRE($id_RE)
@@ -2263,7 +1914,18 @@ function UNparseRE($id_RE)
 }
 
 
-////////////////////////////////// AFFICHAGE SI MISSILE A PORTEE ////////////////////
+/**
+ * coordonnés des missiles A PORTEE
+ * 
+ * @param int $galaxy
+ * @param int $system
+ * @global array $user_data
+ * @global object mysql $db
+ * @todo Query : 'SELECT user_id, planet_id, coordinates, Silo FROM ' . TABLE_USER_BUILDING . ' WHERE Silo >= 3'
+ * @todo Query : 'SELECT RI FROM ' . TABLE_USER_TECHNOLOGY . ' where user_id = ' . $base_joueur
+ * @todo Query : 'SELECT MIP FROM ' . TABLE_USER_DEFENCE . ' where user_id = ' . $base_joueur . ' AND planet_id = ' . $base_id_planet;
+ *  
+ */
 function portee_missiles ( $galaxy, $system )
 {
   global $user_data,$db;
