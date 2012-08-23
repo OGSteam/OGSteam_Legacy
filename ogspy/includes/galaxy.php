@@ -1,7 +1,6 @@
 <?php
-/** $Id$ **/
 /**
- * Fonctions relatives aux données galaxies/planètes
+ * Fonctions relatives aux donnees galaxies/planetes
  * 
  * @package OGSpy
  * @subpackage galaxy
@@ -10,6 +9,7 @@
  * @version 3.05 ($Rev$)
  * @modified $Date$
  * @link $HeadURL$
+ * $Id$
  */
 
 if (!defined('IN_SPYOGAME')) {
@@ -17,9 +17,9 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 /**
- * Vérification des droits OGSpy
+ * Verification des droits OGSpy
  * 
- * @param string $action Droit interrogé
+ * @param string $action Droit interroge
  * @global array $user_data
  * @global array $user_auth
  */
@@ -96,10 +96,6 @@ function galaxy_check_auth($action)
     }
 }
 
-
-
-
-
 /**
  * Affichage des galaxies
  * 
@@ -113,7 +109,7 @@ function galaxy_check_auth($action)
  * @todo Query : "select row, name, ally, player, moon, phalanx, gate, last_update_moon, status, last_update, user_name from " . TABLE_UNIVERSE . " left join " . TABLE_USER . " on user_id = last_update_user_id  where galaxy = $pub_galaxy and system = $pub_system order by row"
  * @todo Query : "select id_spy from " . TABLE_PARSEDSPY . " where active = '1' and coordinates = '$pub_galaxy:$pub_system:$row'"
  * @todo Query : "select id_rc from " . TABLE_PARSEDRC . " where coordinates = '$pub_galaxy:$pub_system:$row'"
- * @return array contenant un systeme solaire correspondant à $pub_galaxy et $pub_system
+ * @return array contenant un systeme solaire correspondant a $pub_galaxy et $pub_system
  */
 function galaxy_show()
 {
@@ -198,7 +194,7 @@ function galaxy_show()
 }
 
 /**
- * Affichage des systèmes
+ * Affichage des systemes
  * 
  * @global int $pub_galaxy
  * @global int $pub_system_down
@@ -620,7 +616,7 @@ function galaxy_show_sector()
 }
 
 /**
- * Récupération des statistiques des galaxies
+ * Recuperation des statistiques des galaxies
  * 
  * @param int $step
  * @global object mysql $db
@@ -629,7 +625,7 @@ function galaxy_show_sector()
  * @todo Query : "select count(*) from " . TABLE_UNIVERSE ." where galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1)
  * @todo Query : "select count(*) from " . TABLE_UNIVERSE . " where player = '' and galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1);
  * @todo Query : "select max(last_update) from " . TABLE_UNIVERSE ." where galaxy = " . $galaxy . " and system between " . $system . " and " . ($system + $step - 1);
- * @return array contenant planete colonisé ou non, par galaxy / systems
+ * @return array contenant planete colonise ou non, par galaxy / systems
  */
 function galaxy_statistic($step = 50)
 {
@@ -697,7 +693,7 @@ function galaxy_ally_listing()
 }
 
 /**
- * Récupération position alliance
+ * Recuperation positions alliance
  * 
  * @param int $step
  * @global object mysql $db
@@ -775,9 +771,9 @@ function galaxy_ally_position($step = 50)
 }
 
 /**
- * Enregistrement des données erronées envoyées via le navigateur dans les logs
+ * Enregistrement des donnees erronees envoyees via le navigateur dans les logs
  * 
- * @param string $datas Données du navigateur
+ * @param string $datas Donnees du navigateur
  */
 function galaxy_getsource_error($datas)
 {
@@ -794,7 +790,7 @@ function galaxy_getsource_error($datas)
 
 
 /**
- * Récupération des rapports d'espionnage
+ * Recuperation des rapports d\'espionnage
  * 
  * @global object mysql $db
  * @global array $server_config
@@ -880,7 +876,7 @@ function galaxy_reportspy_show()
 }
 
 /**
- * Récupération des rapports de combat
+ * Recuperation des rapports de combat
  * 
  * @global object mysql $db
  * @global array $server_config
@@ -929,7 +925,7 @@ function galaxy_reportrc_show()
 }
 
 /**
- * Purge des rapports d'espionnage
+ * Purge des rapports d\'espionnage
  * 
  * @global object mysql $db
  * @global array $server_config
@@ -962,7 +958,7 @@ function galaxy_purge_spy()
 }
 
 /**
- * Récupération des systèmes favoris
+ * Recuperation des systemes favoris
  * 
  * @global object mysql $db
  * @global array $user_data
@@ -987,14 +983,12 @@ function galaxy_getfavorites()
     return $favorite;
 }
 
-
-
 /**
  * Affichage classement des joueurs
  * 
  * @global object mysql $db
  * @global string $pub_order_by general|eco|techno|military|military_b|military_l|military_d|honnor
- * @global int $pub_date timestamp du classement désiré
+ * @global int $pub_date timestamp du classement voulu
  * @global int $pub_interval 
  * @todo Query : "SELECT rank FROM `" . $table . "` order by `rank` desc limit 0,1"
  * @todo Query : "select max(datadate) from " . $table[$i]["tablename"]"
@@ -1143,7 +1137,7 @@ function galaxy_show_ranking_player()
  * 
  * @global object mysql $db
  * @global string $pub_order_by general|eco|techno|military|military_b|military_l|military_d|honnor
- * @global int $pub_date timestamp du classement désiré
+ * @global int $pub_date timestamp du classement voulu
  * @global int $pub_interval 
  * @global int $pub_suborder : member
  * @todo Query : "SELECT rank FROM `" . $table . "` order by `rank` desc limit 0,1"
@@ -1339,7 +1333,7 @@ function galaxy_show_ranking_unique_player($player, $last = false)
 }
 
 /**
- * Affichage classement d'une ally particuliere
+ * Affichage classement d\'une ally particuliere
  * 
  * @param string $ally nom de l alliance recherche
  * @param boolean $last le dernier classement ou tous les classements 
@@ -1384,8 +1378,6 @@ function galaxy_show_ranking_unique_ally($ally, $last = false)
 
     return $ranking;
 }
-
-
 
 /**
  * Suppression automatique de classements joueurs & alliances
@@ -1439,7 +1431,6 @@ function galaxy_purge_ranking()
       
     }
 }
-
 
 /**
  * Suppression manuelle de classements
@@ -1545,7 +1536,7 @@ function galaxy_get_phalanx($galaxy, $system)
 }
 
 /**
- * Affichage des systèmes solaires obsolètes
+ * Affichage des systemes solaires obsoletes
  * 
  * @global object mysql $db
  * @global int $pub_perimeter
@@ -1624,17 +1615,15 @@ return $obsolete;
     return $obsolete;
 }
 
-
-
 /**
  * Reconstruction des RE
  * 
  * @global array $table_prefix
  * @global object mysql $db
- * @param string $id_RE RE à reconstituer
+ * @param string $id_RE RE a reconstituer
  * @todo Query : 'SELECT planet_name, coordinates, metal, cristal, deuterium, energie, activite, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, Lab, Ter, Silo, DdR, BaLu, Pha, PoSa, LM, LLE, LLO, CG, AI, LP, PB, GB, MIC, MIP, PT, GT, CLE, CLO, CR, VB, VC, REC, SE, BMD, DST, EDLM, SAT, TRA, Esp, Ordi, Armes, Bouclier, Protection, NRJ, Hyp, RC, RI, PH, Laser, Ions, Plasma, RRI, Graviton, Astrophysique, dateRE, proba FROM ' . TABLE_PARSEDSPY . ' WHERE id_spy=' . $id_RE
  * @todo Query : 'SELECT player FROM " . TABLE_UNIVERSE . " WHERE concat(galaxy, ':', system, ':', row) = (SELECT coordinates FROM " .TABLE_PARSEDSPY . " WHERE id_spy=" . $id_RE . ")";
- * @return string $template_RE reconstitué
+ * @return string $template_RE reconstitue
  */
 function UNparseRE($id_RE)
 {
@@ -1915,7 +1904,7 @@ function UNparseRE($id_RE)
 
 
 /**
- * coordonnés des missiles A PORTEE
+ * coordonnees des missiles A PORTEE
  * 
  * @param int $galaxy
  * @param int $system
