@@ -1,24 +1,33 @@
 <?php
-/***************************************************************************
-*	filename	: ogame.php
-*	desc.		:
-*	Author		: Kyser - http://ogsteam.fr/
-*	created		: 17/12/2005
-*	modified	: 30/07/2006 00:00:00
-***************************************************************************/
-
+/**
+* OGame Games Formulas and Data
+* @package OGSpy
+* @subpackage Ogame Data
+* @author Kyser
+* @created 15/11/2005
+* @copyright Copyright &copy; 2012, http://ogsteam.fr/
+* @version 3.04b ($Rev$)
+* @modified $Date$
+* @link $HeadURL$
+* $Id$
+*/
 if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
-
-
 if (!isset($server_config['speed_uni'])) {
     $server_config['speed_uni'] = 1;
 }
 
-//Production par heure
-function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ =
-    0)
+/**
+* Gets the hourly production of a Mine or a solar plant.
+* @param string $building The building type
+* @param int $level The building level
+* @param int $officier Officer option enabled or not
+* @param int $temperature_max Max temprature of the current planet
+* @param int $NRJ Current value of Energy available on the planet
+* @return the result of the production on the specified building.
+*/
+function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ = 0)
 {
     // attention officier
     // pour m / c / d => geologue
@@ -75,14 +84,25 @@ function production($building, $level, $officier = 0, $temperature_max = 0, $NRJ
     return ($result);
 }
 
-//Production des satellites
+/**
+* Gets the energy production of satellites.
+* @param int $temperature_min Min temprature of the current planet
+* @param int $temperature_max Max temprature of the current planet
+* @param int $officier Officer option enabled or not
+* @return the result of the production on the specified building.
+*/
 function production_sat($temperature_min, $temperature_max, $officier = 0)
 {
     $ing = ($officier == 0) ? 1 : 1.10;
     return floor($ing * (((($temperature_min + $temperature_max) / 2) + 160) / 6));
 }
 
-//Consommation d'énergie
+/**
+* Gets the power consumption of the current building
+* @param string $building The building type
+* @param int $level Min The building Level
+* @return the building power consumption
+*/
 function consumption($building, $level)
 {
     global $server_config;
@@ -112,9 +132,21 @@ function consumption($building, $level)
     return ($result);
 }
 
-/// renvoit les donnees energetiques
-function ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temperature_max,
-    $NRJ)
+/**
+* Gets the production usage of the current planet
+* @param int $M Metal Mine Level
+* @param int $C Cristal Mine Level
+* @param int $D Deuterieum Mine Level
+* @param int $CES Solar Plant Level
+* @param int $CEF Fusion Plant Level
+* @param int $SAT Number of sattelites
+* @param int $ingenieur Ingenieur option enabled or not
+* @param int $temperature_min Min temprature of the current planet
+* @param int $temperature_max Max temprature of the current planet
+* @param int $NRJ NRJ available on the current planet
+* @return the ratio for the selected planet
+*/
+function ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temperature_max,$NRJ)
 {
     $consommation_E = 0; // la consommation
     $conso_M = consumption("M", $M);
@@ -144,16 +176,25 @@ function ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temp
 }
 
 
-//$M,$C,$D,$CES,$CEF => level
-//$SAT => nb
-// ingenieur/geologue  => 0ou1
-// le bilan energetique determine le ratio de production par rapport a la prod normale
-function bilan_production_ratio($M, $C, $D, $CES, $CEF, $SAT, $temperature_min,
-    $temperature_max, $NRJ = 0, $ingenieur = 0, $geologue = 0)
+/**
+* Calculates the Production corresponding to the current ratio
+* @param int $M Metal Mine Level
+* @param int $C Cristal Mine Level
+* @param int $D Deuterieum Mine Level
+* @param int $CES Solar Plant Level
+* @param int $CEF Fusion Plant Level
+* @param int $SAT Number of sattelites
+* @param int $temperature_min Min temprature of the current planet
+* @param int $temperature_max Max temprature of the current planet
+* @param int $NRJ NRJ available on the current planet
+* @param int $ingenieur Ingenieur option enabled or not
+* @param int $geologue Geologue option enabled or not
+* @return the production for each building for the selected planet according to the current ratio
+*/
+function bilan_production_ratio($M, $C, $D, $CES, $CEF, $SAT, $temperature_min, $temperature_max, $NRJ = 0, $ingenieur = 0, $geologue = 0)
 {
 
-    $tmp = ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temperature_max,
-        $NRJ);
+    $tmp = ratio($M, $C, $D, $CES, $CEF, $ingenieur, $SAT, $temperature_min, $temperature_max,$NRJ);
     $ratio = $tmp["ratio"];
     $consommation_E = $tmp["conso_E"];
     $production_E = $tmp["prod_E"];
@@ -185,7 +226,11 @@ function bilan_production_ratio($M, $C, $D, $CES, $CEF, $SAT, $temperature_min,
 }
 
 
-//Capacité des hangars de stockage
+/**
+* Calculates the Planet storage capacity (Taille Hangar)
+* @param int $level Storage building Level
+* @return the capacity
+*/
 function depot_capacity($level)
 {
     // capacité par défaut
@@ -199,14 +244,23 @@ function depot_capacity($level)
     return $result;
 }
 
-// Renvoie le nombre de planete max en fonction de la techno astro (PM incluse)
+/**
+* Returns the maximum numbers of planet slots available according to the Astrophysic level
+* @param int $level Astrophysic Level
+* @return the maximum number of planets
+*/
 function astro_max_planete($level)
 {
     global $server_config;
     return ($server_config['astro_strict'] && $level < 15) ? 9 : ceil($level / 2) + 1;
 }
 
-// Coûts d'amélioration des batiments et recherches
+/**
+* Calculates the price to upgrade a building to a defined level
+* @param int $level The wanted Level
+* @param string $building The building type
+* @return ressources required to upgrade the building
+*/
 function building_upgrade($building, $level)
 {
     switch ($building) {
@@ -479,7 +533,12 @@ function building_upgrade($building, $level)
     return array("M" => $M, "C" => $C, "D" => $D, "NRJ" => $NRJ);
 }
 
-//Coûts cumulés des batiments
+/**
+* Calculates the price of the a building corresponding to it current level
+* @param int $level The current Level
+* @param string $building The building type
+* @return ressources used to reach this level
+*/
 function building_cumulate($building, $level)
 {
     switch ($building) {
@@ -530,7 +589,11 @@ function building_cumulate($building, $level)
     return array("M" => $M, "C" => $C, "D" => $D);
 }
 
-//Coûts cumulés de tout les batiments
+/**
+* Calculates the price of all buildings
+* @param string $user_building The list of buildings with corresponding levels
+* @return the bild :-)
+*/
 function all_building_cumulate($user_building)
 {
 
@@ -562,7 +625,11 @@ function all_building_cumulate($user_building)
     return $total;
 }
 
-//Coûts cumulés de toutes les défenses
+/**
+* Calculates the price of all buildings
+* @param string $user_defence The list of defenses with the number of each building
+* @return the bild :-)
+*/
 function all_defence_cumulate($user_defence)
 {
 
@@ -587,7 +654,11 @@ function all_defence_cumulate($user_defence)
     return $total;
 }
 
-//Coûts cumulés de toutes les lunes
+/**
+* Calculates the price of all lunas
+* @param string $user_defence The list of buildings with corresponding levels on the luna
+* @return the bild :-)
+*/
 function all_lune_cumulate($user_building, $user_defence)
 {
 
@@ -596,7 +667,11 @@ function all_lune_cumulate($user_building, $user_defence)
     return $total;
 }
 
-//Coûts cumulés de toutes les recherches
+/**
+* Calculates the price of all researches
+* @param string $user_defence The list of technologies with corresponding levels
+* @return the bild :-)
+*/
 function all_technology_cumulate($user_technology)
 {
 
