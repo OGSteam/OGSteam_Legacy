@@ -5,7 +5,7 @@
  * 
  * @author Kyser
  * @package OGSpy
- * @subpackage includes
+ * @subpackage External communications API
  * @copyright Copyright &copy; 2007, http://ogsteam.fr/
  * @modified $Date: 2012-07-09 16:44:26 +0200 (lun., 09 juil. 2012) $
  * @author Kyser
@@ -18,7 +18,16 @@ if (!defined('IN_SPYOGAME')) {
     
     }
 /**
- * Envoi des données vers OGS
+ * Envoi des donnees vers OGS
+ * @todo Query : "select galaxy, system, row, moon, name, ally, player, status, user_name, last_update" .
+        " from " . TABLE_UNIVERSE . " left join " . TABLE_USER .
+        " on last_update_user_id = user_id" . $request_galaxy . $request_date .
+        " order by galaxy, system, row"
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . $i;
+    $request .= " where statistic_name = 'planetexport_ogs'"
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('planetexport_ogs', '" . $i . "')";
  */
 function galaxy_ExportPlanets()
 {
@@ -117,9 +126,7 @@ function galaxy_ExportPlanets()
             " values ('planetexport_ogs', '" . $i . "')";
         $db->sql_query($request);
     }
-
     //Statistiques joueur
-
     exit();
 }
     
@@ -127,6 +134,14 @@ function galaxy_ExportPlanets()
     
 /**
  * Envoi du classement alliance vers OGS
+ * @todo Query : "select rank, ally, number_member, points, points_per_member, user_name";
+    $request .= " from " . $ranktable . " left join " . TABLE_USER;
+    $request .= " on sender_id = user_id";
+    $request .= " where datadate = " . $timestamp;
+    $request .= " order by rank"
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . $i;
+    $request .= " where statistic_name = 'rankexport_ogs'";    
  */
 function galaxy_ExportRanking_ally()
 {
@@ -207,8 +222,18 @@ function galaxy_ExportRanking_ally()
     
     
     
-    /**
+/**
  * Envoi du classement joueur vers OGS
+ * @todo Query : "select rank, player, ally, points, user_name";
+    $request .= " from " . $ranktable . " left join " . TABLE_USER;
+    $request .= " on sender_id = user_id";
+    $request .= " where datadate = " . $timestamp;
+    $request .= " order by rank";
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . $i;
+    $request .= " where statistic_name = 'rankexport_ogs'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('rankexport_ogs', '" . $i . "')";
  */
 function galaxy_ExportRanking_player()
 {
@@ -288,7 +313,12 @@ function galaxy_ExportRanking_player()
 
 
 /**
- * Récupération des données transmises par OGS
+ * Recuperation des donnees transmises par OGS
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . ($totalinserted + $totalupdated);
+    $request .= " where statistic_name = 'planetimport_ogs'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('planetimport_ogs', '" . ($totalinserted + $totalupdated) . "')";    
  */
 function galaxy_ImportPlanets()
 {
@@ -440,7 +470,12 @@ function galaxy_ImportPlanets()
 
 
 /**
- * Récupération des rapports d'espionnage provenant de OGS
+ * Recuperation des rapports d'espionnage provenant de OGS
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . ($totalinserted + $totalupdated);
+    $request .= " where statistic_name = 'planetimport_ogs'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('planetimport_ogs', '" . ($totalinserted + $totalupdated) . "')"; 
  */
 function galaxy_ImportSpy()
 {
@@ -664,7 +699,13 @@ function galaxy_ExportSpy_since()
 
 
 /**
- * Récupération du classement joueur via OGS
+ * Recuperation du classement joueur via OGS
+ * @param string $ranktype Ranking type
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . ($totalinserted + $totalupdated);
+    $request .= " where statistic_name = 'rankimport_ogs'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('rankimport_ogs', '" . ($totalinserted + $totalupdated) . "')"; 
  */
 function galaxy_ImportRanking_player($ranktype)
 {
@@ -786,7 +827,13 @@ function galaxy_ImportRanking_player($ranktype)
 }
 
 /**
- * Récupération du classement alliance via OGS
+ * Recuperation du classement alliance via OGS
+ * @param string $ranktype Ranking type
+ * @todo Query : "update " . TABLE_STATISTIC .
+        " set statistic_value = statistic_value + " . ($totalinserted + $totalupdated);
+    $request .= " where statistic_name = 'rankimport_ogs'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC .
+            " values ('rankimport_ogs', '" . ($totalinserted + $totalupdated) . "')";
  */
 function galaxy_ImportRanking_ally($ranktype)
 {
@@ -915,6 +962,13 @@ function galaxy_ImportRanking_ally($ranktype)
 
 /**
  * Listing des classements disponibles sur le serveur pour envoi vers OGS
+ * @param string $type Player or Ally
+ * @todo Query: "select distinct datadate from " . $table_points .
+        " order by datadate desc";
+ * @todo Query: "select distinct datadate from " . $table_fleet .
+        " order by datadate desc";
+ * @todo Query:  "select distinct datadate from " . $table_research .
+        " order by datadate desc";
  */
 function galaxy_ShowAvailableRanking($type)
 {

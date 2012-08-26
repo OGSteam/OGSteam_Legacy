@@ -1,5 +1,4 @@
 <?php
-/** $Id$ **/
 /**
 * Fichier de gestion des sessions utilisateurs sur OGSpy
 * @package OGSpy
@@ -10,6 +9,7 @@
 * @author Kyser
 * @link $HeadURL$
 * @version 3.04b ( $Rev$ ) 
+* $Id$
 */
 
 
@@ -21,7 +21,12 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 /**
-* Démarrage d'une session utilisateur
+* Stating an user Session
+* @todo Query : "insert into ".TABLE_SESSIONS." (session_id, session_user_id, session_start, session_expire, session_ip) values (";
+		$request .="'".$cookie_id."', 0, ".time().", ".$cookie_expire.", '".$user_ip."')";
+ * @todo Query : "delete from ".TABLE_SESSIONS." where session_ip = '".$user_ip."' and session_ogs = '1'"
+ * @todo Query : "insert into ".TABLE_SESSIONS." (session_id, session_user_id, session_start, session_expire, session_ip, session_ogs) values (";
+		$request .="'".$cookie_id."', 0, ".time().", ".$cookie_expire.", '".$user_ip."', '1')";
 */
 function session_begin($user_ip) {
 	global $db, $cookie_id, $server_config;
@@ -50,7 +55,17 @@ function session_begin($user_ip) {
 }
 
 /**
-* récupère une eventuelle session en cours ou en cree une au besoin
+* Gets the current session and creates it if the session for the current user does not exists
+* @todo Query : "delete from ".TABLE_SESSIONS." where session_expire < ".time()
+* @todo Query : "select session_id from ".TABLE_SESSIONS.
+		" where session_id = '".$cookie_id."'".
+		" and session_ip = '".$user_ip."'";
+* @todo Query : "select session_id from ".TABLE_SESSIONS." left join ".TABLE_USER.
+				" on session_user_id = user_id".
+				" where session_id = '".$cookie_id."'".
+				" and disable_ip_check = '1'";
+* @todo Query : "update ".TABLE_SESSIONS." set session_ip = '".$user_ip."' where session_id = '".$cookie_id."'"        
+* @todo Query : "update ".TABLE_SESSIONS." set session_expire = ".$cookie_expire." where session_id = '".$cookie_id."'"        
 */
 function session() {
 	global $db, $user_ip, $cookie_id, $server_config;
@@ -115,7 +130,12 @@ function session() {
 }
 
 /**
-* Mise à jour des sessions dans la BDD 
+* Updates the session in the database and the cookie
+* @param int $user_id The current user
+* @param int $lastvisit Lastvisit timestamp
+* @todo Query : "update ".TABLE_SESSIONS." set session_user_id = ".$user_id.
+	", session_lastvisit = ".$lastvisit.
+	" where session_id = '".$cookie_id."'";
 */
 function session_set_user_id($user_id, $lastvisit=0) {
 	global $db, $user_ip, $cookie_id, $server_config;
@@ -186,7 +206,7 @@ function session_close($user_id = false) {
 }
 
 /**
-* Récupération des utilisateur en ligne
+* Recuperation des utilisateur en ligne
 */
 function session_whois_online() {
 	global $db, $server_config;
