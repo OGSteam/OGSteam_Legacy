@@ -12,7 +12,6 @@
 * $Id$
 */
 
-
 /**
 * Interdiction de l'appel direct
 */
@@ -151,7 +150,15 @@ function session_set_user_id($user_id, $lastvisit=0) {
 	session_set_user_data($cookie_id);
 }
 /**
-* Y a comme un probleme dans cette fonction... ne semble pas prendre de paramètres alors que la fonction précédente lui en donne un...
+* Set the user_data array according to the user parameters in the database
+* @param int $cookie_id The cookie id of the user
+* @todo Y a comme un probleme dans cette fonction... ne semble pas prendre de parametres alors que la fonction precedente lui en donne un...
+* @todo Query : "select user_id, user_name, user_admin, user_coadmin, user_galaxy, user_system, user_skin, session_lastvisit, user_stat_name, ";
+	$request .= "management_user, management_ranking, disable_ip_check, off_amiral, off_ingenieur, off_geologue, off_technocrate";
+	$request .= " from ".TABLE_USER." u, ".TABLE_SESSIONS." s";
+	$request .= " where u.user_id = s.session_user_id";
+	$request .= " and session_id = '".$cookie_id."'";
+	$request .= " and session_ip = '".$user_ip."'";
 */
 function session_set_user_data($cookie_id) {
 	global $db, $user_ip, $user_data, $user_auth, $server_config;
@@ -180,8 +187,13 @@ function session_set_user_data($cookie_id) {
 	}
 }
 /**
-* Fermeture d'une session utilisateur
-* @param int $user_id ID utilisateur , optionnel
+* Closing an user session
+* @param boolean $user_id ID user session
+* @todo Query: "delete from ".TABLE_SESSIONS.
+		" where session_id = '".$cookie_id."'";
+		if ( isset ( $server_config["disable_ip_check"] ) && $server_config["disable_ip_check"] != 1 )
+		  $request .= " and session_ip = '".$user_ip."'";
+* @todo Query: "delete from ".TABLE_SESSIONS." where session_user_id = ".$user_id;
 */
 function session_close($user_id = false) {
 	global $db, $user_ip, $cookie_id;
@@ -206,7 +218,12 @@ function session_close($user_id = false) {
 }
 
 /**
-* Recuperation des utilisateur en ligne
+* Who is Online ?
+* 
+* @todo Query $request = "select user_name, session_start, session_expire, session_ip, session_ogs";
+	$request .= " from ".TABLE_SESSIONS." left join ".TABLE_USER;
+	$request .= " on session_user_id = user_id";
+	$request .= " order by user_name";
 */
 function session_whois_online() {
 	global $db, $server_config;
