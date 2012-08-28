@@ -1,5 +1,4 @@
 <?php
-/** $Id$ **/
 /**
  * user.php Fonctions concernant les utilisateurs
  * @author Kyser
@@ -10,6 +9,7 @@
  * @author Kyser
  * @link $HeadURL$
  * @version 3.04b ( $Rev$ ) 
+ * $Id$
  */
 
 if (!defined('IN_SPYOGAME')) {
@@ -17,9 +17,9 @@ if (!defined('IN_SPYOGAME')) {
 }
 
 /**
- * Verification des droits utilisateurs sur une action avec redirection le cas échéant
- * @param string $action Action verifié
- * @param int $user_id identificateur optionnel de l'utilisateur testé
+ * Verification des droits utilisateurs sur une action avec redirection le cas echeant
+ * @param string $action Action verifie
+ * @param int $user_id identificateur optionnel de l'utilisateur teste
  */
 function user_check_auth($action, $user_id = null)
 {
@@ -63,6 +63,13 @@ function user_check_auth($action, $user_id = null)
  * @global string $pub_login
  * @global string $pub_password
  * @global string $pub_goto
+ * @todo Query : "select user_id, user_active from " . TABLE_USER .
+            " where user_name = '" .  $db->sql_escape_string($pub_login) .
+            "' and user_password = '" . md5(sha1($pub_password)) . "'";
+ * @todo Query : "select user_lastvisit from " . TABLE_USER . " where user_id = " . $user_id;
+ * @todo Query : "update " . TABLE_USER . " set user_lastvisit = " . time() ." where user_id = " . $user_id;
+ * @todo Query : "update " . TABLE_STATISTIC ." set statistic_value = statistic_value + 1" " where statistic_name = 'connection_server'";
+ * @todo Query : "insert ignore into " . TABLE_STATISTIC ." values ('connection_server', '1')";
  */
 function user_login()
 {
@@ -135,108 +142,7 @@ function user_login_redirection()
 }
 
 /**
- * Login d'un utilisateur OGS
- */
-function user_ogs_login()
-{
-    global $db, $user_data, $user_auth, $server_config;
-    global $pub_name, $pub_pass, $pub_ogsversion;
-
-    if (!check_var($pub_name, "Pseudo_Groupname") || !check_var($pub_pass,
-        "Password") || !check_var($pub_ogsversion, "Num")) {
-        die("<!-- [ErrorFatal=19] Données transmises incorrectes  -->");
-    }
-
-    //Refus des version OGS antérieure à 060601
-    if (strcasecmp($pub_ogsversion, "060601") < 0) {
-        die("<!-- [Login=0] La version d'Ogame Stratege utilisé n'est pas compatible avec ce serveur  -->");
-    }
-
-    if (isset($pub_name, $pub_pass)) {
-        $request = "select user_id, user_active from " . TABLE_USER .
-            " where user_name = '" .  $db->sql_escape_string($pub_name) .
-            "' and user_password = '" . md5(sha1($pub_pass)) . "'";
-        $result = $db->sql_query($request);
-        if (list($user_id, $user_active) = $db->sql_fetch_row($result)) {
-            session_set_user_id($user_id);
-
-            if ($user_auth["ogs_connection"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
-                1) {
-                die("<!-- [Login=0] [AccessDenied] Accès refusé  -->");
-            }
-
-            if ($user_active == 1) {
-                $request = "update " . TABLE_USER . " set user_lastvisit = " . time() .
-                    " where user_id = " . $user_id;
-                $db->sql_query($request);
-
-                /*//Incompatible MySQL 4.0
-                $request = "insert into ".TABLE_STATISTIC." values ('connection_ogs', '1')";
-                $request .= " on duplicate key update statistic_value = statistic_value + 1";
-                $db->sql_query($request);*/
-                $request = "update " . TABLE_STATISTIC .
-                    " set statistic_value = statistic_value + 1";
-                $request .= " where statistic_name = 'connection_ogs'";
-                $db->sql_query($request);
-                if ($db->sql_affectedrows() == 0) {
-                    $request = "insert ignore into " . TABLE_STATISTIC .
-                        " values ('connection_ogs', '1')";
-                    $db->sql_query($request);
-                }
-
-                log_('login_ogs');
-                echo "<!-- [Login=1] OGame Stratege SharingDB -->" . "\n";
-                echo "<!-- Servername = OGSPY -->" . "\n";
-                echo "<!-- ServerVersion = " . $server_config["version"] . " -->" . "\n";
-                echo "<!-- ServerInfo = By Kyser , http://www.ogsteam.fr -->" . "\n\n";
-
-                if ($user_auth["ogs_set_system"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ExportSysAuth=1] You are authorised to export Solar System -->" . "\n";
-                else
-                    echo "<!-- [ExportSysAuth=0] You are not authorised to export Solar System -->" .
-                        "\n";
-                if ($user_auth["ogs_get_system"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ImportSysAuth=1] You are authorised to import Solar System -->" . "\n";
-                else
-                    echo "<!-- [ImportSysAuth=0] You are not authorised to import Solar System -->" .
-                        "\n";
-                echo "\n";
-
-                if ($user_auth["ogs_set_spy"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ExportSpyAuth=1] You are authorised to export Spy Reports -->" . "\n";
-                else
-                    echo "<!-- [ExportSpyAuth=0] You are not authorised to export Spy Reports -->" .
-                        "\n";
-                if ($user_auth["ogs_get_spy"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ImportSpyAuth=1] You are authorised to import Spy Reports -->" . "\n";
-                else
-                    echo "<!-- [ImportSpyAuth=0] You are not authorised to import Spy Reports -->" .
-                        "\n";
-                echo "\n";
-
-                if ($user_auth["ogs_set_ranking"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ExportRankAuth=1] You are authorised to export Ranking -->" . "\n";
-                else
-                    echo "<!-- [ExportRankAuth=0] You are not authorised to export Ranking -->" . "\n";
-                if ($user_auth["ogs_get_ranking"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
-                    1)
-                    echo "<!-- [ImportRankAuth=1] You are authorised to import Ranking -->" . "\n";
-                else
-                    echo "<!-- [ImportRankAuth=0] You are not authorised to import Ranking -->" . "\n";
-
-                exit();
-            }
-        }
-    }
-    die("<!-- [ErrorFatal=20] Données transmises incorrectes  -->");
-}
-/**
- * Déconnection utilisateur
+ * Deconnection utilisateur
  */
 function user_logout()
 {
@@ -245,9 +151,9 @@ function user_logout()
     redirection("index.php");
 }
 /**
- * Vérification de la validité de inputs utilisateurs
- * @param string $type Type de variable testé (pseudo,groupname,password,galaxy,system)
- * @param string $string La chaine testé
+ * Verification de la validite des inputs utilisateurs
+ * @param string $type Type de variable verifie (pseudo,groupname,password,galaxy,system)
+ * @param string $string La chaine teste
  * @return false|string 
  */
 function string_check($type, $string)
@@ -316,7 +222,7 @@ function admin_user_set()
 }
 
 /**
- * Génération d'un mot de passe par l'admin pour un utilisateur
+ * Generation d'un mot de passe par l'admin pour un utilisateur
  */
 function admin_regeneratepwd()
 {
@@ -354,6 +260,7 @@ function admin_regeneratepwd()
 
 /**
  * Modification du profil par un utilisateur
+ * @todo Query : x11
  */
 function member_user_set()
 {
@@ -472,7 +379,8 @@ function member_user_set()
 }
 
 /**
- * Entrée en BD de données utilisateurs
+ * Entree en BDD de donnees utilisateur
+ * @todo Query x1
  */
 function user_set_general($user_id, $user_name = null, $user_password = null, $user_lastvisit = null,
     $user_galaxy = null, $user_system = null, $user_skin = null, $disable_ip_check = null)
@@ -542,6 +450,7 @@ function user_set_general($user_id, $user_name = null, $user_password = null, $u
 
 /**
  * Enregistrement des droits et status utilisateurs
+ * @todo Query : x2
  */
 function user_set_grant($user_id, $user_admin = null, $user_active = null, $user_coadmin = null,
     $management_user = null, $management_ranking = null)
@@ -597,6 +506,7 @@ function user_set_grant($user_id, $user_admin = null, $user_active = null, $user
 }
 /**
  * Enregistrement des statistiques utilisateurs
+ * @todo Query : x1
  */
 function user_set_stat($planet_added_web = null, $planet_added_ogs = null, $search = null,
     $spy_added_web = null, $spy_added_ogs = null, $rank_added_web = null, $rank_added_ogs = null,
@@ -642,11 +552,12 @@ function user_set_stat($planet_added_web = null, $planet_added_ogs = null, $sear
 }
 
 /**
- * Récupération d'une ligne d'information utilisateur
- * @param int $user_id Identificateur optionnel d'1 utilisateur spécifique 
- * @return Array Liste des utilisateurs ou de l'utilisateur spécifique
- * @comment Pourrait peut etre avantageusement remplacé par select * from TABLE_USER
- * @comment pour les éventuels champs supplémentaires
+ * Recuperation d'une ligne d'information utilisateur
+ * @param int $user_id Identificateur optionnel d'1 utilisateur specifique 
+ * @return Array Liste des utilisateurs ou de l'utilisateur specifique
+ * @comment Pourrait peut etre avantageusement remplace par select * from TABLE_USER
+ * @comment pour les eventuels champs supplementaires
+ * @todo Query : x1
  */
 function user_get($user_id = false)
 {
@@ -675,8 +586,9 @@ function user_get($user_id = false)
     return $info_users;
 }
 /**
- *  Récupération des droits d'un utilisateur
- * @param int $user_id Identificateur de l'utilisateur demandé
+ * Recuperation des droits d'un utilisateur
+ * @param int $user_id Identificateur de l'utilisateur demande
+ * @todo Query : x1
  * @return Array Tableau des droits
  */
 function user_get_auth($user_id)
@@ -746,8 +658,9 @@ function user_get_auth($user_id)
 }
 
 /**
- * Création d'un utilisateur à partie des données du formulaire admin
- * @comment redirection si erreur de type de donnée
+ * Creation d'un utilisateur a partir des donnees du formulaire admin
+ * @comment redirection si erreur de type de donnee
+ * @todo Query : x3
  */
 function user_create()
 {
@@ -810,6 +723,7 @@ function user_create()
 }
 /**
  * Suppression d'un utilisateur ($pub_user_id)
+ * @todo Query : x12
  */
 function user_delete()
 {
@@ -869,7 +783,8 @@ function user_delete()
     redirection("index.php?action=administration&subaction=member");
 }
 /**
- * Récupération des statistiques
+ * Recuperation des statistiques
+ * @todo Query : x1
  */
 function user_statistic()
 {
@@ -898,7 +813,7 @@ function user_statistic()
     return $user_statistic;
 }
 /**
- * Enregistrement des données Empires d'un utilisateur
+ * Enregistrement des donnees Empires d'un utilisateur
  */
 function user_set_empire()
 {

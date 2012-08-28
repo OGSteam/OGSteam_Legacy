@@ -1108,6 +1108,106 @@ function galaxy_ShowAvailableRanking($type)
     }
     exit();
 }
+/**
+ * Login d'un utilisateur OGS
+ */
+function user_ogs_login()
+{
+    global $db, $user_data, $user_auth, $server_config;
+    global $pub_name, $pub_pass, $pub_ogsversion;
 
+    if (!check_var($pub_name, "Pseudo_Groupname") || !check_var($pub_pass,
+        "Password") || !check_var($pub_ogsversion, "Num")) {
+        die("<!-- [ErrorFatal=19] Données transmises incorrectes  -->");
+    }
+
+    //Refus des version OGS antérieure à 060601
+    if (strcasecmp($pub_ogsversion, "060601") < 0) {
+        die("<!-- [Login=0] La version d'Ogame Stratege utilisé n'est pas compatible avec ce serveur  -->");
+    }
+
+    if (isset($pub_name, $pub_pass)) {
+        $request = "select user_id, user_active from " . TABLE_USER .
+            " where user_name = '" .  $db->sql_escape_string($pub_name) .
+            "' and user_password = '" . md5(sha1($pub_pass)) . "'";
+        $result = $db->sql_query($request);
+        if (list($user_id, $user_active) = $db->sql_fetch_row($result)) {
+            session_set_user_id($user_id);
+
+            if ($user_auth["ogs_connection"] != 1 && $user_data["user_admin"] != 1 && $user_data["user_coadmin"] !=
+                1) {
+                die("<!-- [Login=0] [AccessDenied] Accès refusé  -->");
+            }
+
+            if ($user_active == 1) {
+                $request = "update " . TABLE_USER . " set user_lastvisit = " . time() .
+                    " where user_id = " . $user_id;
+                $db->sql_query($request);
+
+                /*//Incompatible MySQL 4.0
+                $request = "insert into ".TABLE_STATISTIC." values ('connection_ogs', '1')";
+                $request .= " on duplicate key update statistic_value = statistic_value + 1";
+                $db->sql_query($request);*/
+                $request = "update " . TABLE_STATISTIC .
+                    " set statistic_value = statistic_value + 1";
+                $request .= " where statistic_name = 'connection_ogs'";
+                $db->sql_query($request);
+                if ($db->sql_affectedrows() == 0) {
+                    $request = "insert ignore into " . TABLE_STATISTIC .
+                        " values ('connection_ogs', '1')";
+                    $db->sql_query($request);
+                }
+
+                log_('login_ogs');
+                echo "<!-- [Login=1] OGame Stratege SharingDB -->" . "\n";
+                echo "<!-- Servername = OGSPY -->" . "\n";
+                echo "<!-- ServerVersion = " . $server_config["version"] . " -->" . "\n";
+                echo "<!-- ServerInfo = By Kyser , http://www.ogsteam.fr -->" . "\n\n";
+
+                if ($user_auth["ogs_set_system"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ExportSysAuth=1] You are authorised to export Solar System -->" . "\n";
+                else
+                    echo "<!-- [ExportSysAuth=0] You are not authorised to export Solar System -->" .
+                        "\n";
+                if ($user_auth["ogs_get_system"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ImportSysAuth=1] You are authorised to import Solar System -->" . "\n";
+                else
+                    echo "<!-- [ImportSysAuth=0] You are not authorised to import Solar System -->" .
+                        "\n";
+                echo "\n";
+
+                if ($user_auth["ogs_set_spy"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ExportSpyAuth=1] You are authorised to export Spy Reports -->" . "\n";
+                else
+                    echo "<!-- [ExportSpyAuth=0] You are not authorised to export Spy Reports -->" .
+                        "\n";
+                if ($user_auth["ogs_get_spy"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ImportSpyAuth=1] You are authorised to import Spy Reports -->" . "\n";
+                else
+                    echo "<!-- [ImportSpyAuth=0] You are not authorised to import Spy Reports -->" .
+                        "\n";
+                echo "\n";
+
+                if ($user_auth["ogs_set_ranking"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ExportRankAuth=1] You are authorised to export Ranking -->" . "\n";
+                else
+                    echo "<!-- [ExportRankAuth=0] You are not authorised to export Ranking -->" . "\n";
+                if ($user_auth["ogs_get_ranking"] == 1 || $user_data["user_admin"] == 1 || $user_data["user_coadmin"] ==
+                    1)
+                    echo "<!-- [ImportRankAuth=1] You are authorised to import Ranking -->" . "\n";
+                else
+                    echo "<!-- [ImportRankAuth=0] You are not authorised to import Ranking -->" . "\n";
+
+                exit();
+            }
+        }
+    }
+    die("<!-- [ErrorFatal=20] Données transmises incorrectes  -->");
+}
 
 ?>
