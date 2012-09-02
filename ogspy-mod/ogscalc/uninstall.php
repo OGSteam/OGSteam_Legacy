@@ -9,13 +9,13 @@
 **/
 
 if (!defined('IN_SPYOGAME'))
-{ 
-	die("Hacking attempt");
+{
+    exit('Hacking Attempt!');
 }
 
-global $db;
-
-// Suppression de la ligne, dans la table des mods.
-$db->sql_query("DELETE FROM ".TABLE_MOD." WHERE title='OGSCalc'");
-
+global $db, $table_prefix;
+ 
+$mod_uninstall_name  = 'OGSCalc'; 
+ 
+uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 ?>

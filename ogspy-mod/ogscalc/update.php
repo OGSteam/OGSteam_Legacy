@@ -8,25 +8,14 @@
 * @link http://www.ogsteam.fr/
 **/
 
-if(!defined('IN_SPYOGAME'))
-{ 
-	die("Hacking attempt");
+if (!defined('IN_SPYOGAME')) 
+{
+    exit('Hacking Attempt!');
 }
 
-// Recherche du nom du dossier.
-if(file_exists('mod/ogscalc/version.txt'))
-{
-	$path = 'ogscalc';
-}
-elseif(file_exists('mod/OGSCalc/version.txt'))
-{
-	$path = 'OGSCalc';
-}
-
-if(isset($path)) 
-{
-	$file = file('mod/'.$path.'/version.txt');
-	$db->sql_query('UPDATE '.TABLE_MOD.' SET root="'.$path.'", link="ogscalc.php", action="ogscalc", version="'.trim($file[1]).'" WHERE id="'.$pub_mod_id.'"');
-}
+$mod_folder = 'ogscalc';
+$mod_name   = 'OGSCalc';
+ 
+update_mod($mod_folder, $mod_name);
 
 ?>
