@@ -1,2 +1,0 @@
-Calculatrice universelle par <a href="http://forum.ogsteam.fr/index.php?action=emailuser;sa=email;uid=1">Aeris</a><br>
-<a href="http://jira.ogsteam.fr/browse/MODOGSCALC">Informations</a>
