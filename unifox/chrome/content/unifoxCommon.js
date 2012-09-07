@@ -27,7 +27,7 @@ var uf_defsList2 = new Array("D\u00E9fense","BFG" ,"Smart&nbsp;BFG" ,"Plate-Form
 var uf_technosList2 = new Array("Recherche","Armement","Bouclier","Blindage");*/
 
 var uf_days = new Array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
-var uf_months = new Array('Jan', 'F\u00E9v', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Ao\u00DB', 'Sep', 'Oct', 'Nov', 'D\u00E9c');
+var uf_months = new Array('Jan', 'F\u00E9v', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Ao\u00FB', 'Sep', 'Oct', 'Nov', 'D\u00E9c');
 
 var uf_colorsList =  new Array(
 	'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 
