@@ -1,5 +1,5 @@
 var uf_days = new Array('Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam');
-var uf_months = new Array('Jan', 'F\u00E9v', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Ao\u00DB', 'Sep', 'Oct', 'Nov', 'D\u00E9c');
+var uf_months = new Array('Jan', 'F\u00E9v', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Ao\u00FB', 'Sep', 'Oct', 'Nov', 'D\u00E9c');
 function uf_relativeDate(time) {
 date = new Date;
 date.setTime(time);
