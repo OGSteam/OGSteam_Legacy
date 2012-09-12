@@ -392,7 +392,7 @@ var XnewOgame = {
 		if(Xprefs.getBool('handle-hostiles')) {
 			// Recuperation des events
 			var eventlist = XajaxCompo(this.universe+"/game/index.php?page=eventList");
-			
+			//Xconsole(eventlist);
 			// Est-ce qu'aucune attaque est d�tect�e ?
 			if(eventlist.search("hostile") == -1){ 
 				Xconsole("Aucune flotte hostile en approche");
@@ -510,8 +510,9 @@ var XnewOgame = {
 			for(var i=0;i<idGroupees.snapshotLength;i++){
 				counterAg++;
 				var idGr = idGroupees.snapshotItem(i).nodeValue;
+//Xconsole("idGr="+idGr);
 				// Recuperation des vagues de l'attaque group�e 
-				var vagues = Xpath.getOrderedSnapshotNodes(doc,paths.group_id.formatPatern(0,idGr));
+				var vagues = Xpath.getOrderedSnapshotNodes(doc,paths.group_event.formatPatern(0,idGr));
 				
 				var counterVague=0;
 				// Parcours des vagues de l'AG
@@ -520,7 +521,8 @@ var XnewOgame = {
 					var vague = vagues.snapshotItem(f);
 					
 					var attack = Xpath.getSingleNode(doc,paths.group_attack.formatPatern(0,idGr));
-					var arrivalTime = Xpath.getStringValue(doc,paths.group_arrival_time,attack).trim();
+					var attackParent = Xpath.getSingleNode(doc,paths.group_attack_parent.formatPatern(0,idGr));
+					var arrivalTime = Xpath.getStringValue(doc,paths.group_arrival_time,attackParent).trim();
 		 		
 			 		var originAttackName = Xpath.getStringValue(doc,paths.group_origin_attack_planet,vague).trim();
 			 		var originAttackCoords = Xpath.getStringValue(doc,paths.group_origin_attack_coords,vague).trim().cleanCoords();
@@ -805,17 +807,26 @@ var XnewOgame = {
 	},
 
 	parseSystem : function() {
-		var target = this.doc.getElementById('galaxyContent');
+		var target = this.doc.getElementById('galaxyContent');		
 		target.win = this.win;
 		target.addEventListener("DOMNodeInserted", this.parseSystem_Inserted, false);
+		//target.addEventListener("DOMSubtreeModified", this.parseSystem_SubtreeModified, false);
 	},
-		
+	/*parseSystem_SubtreeModified : function (event) {		
+		var doc = event.target.ownerDocument;
+		var paths = XnewOgame.Xpaths.galaxy;		
+		var galaxy = Xpath.getSingleNode(doc,paths.galaxy_input).value.trim();
+		var system = Xpath.getSingleNode(doc,paths.system_input).value.trim();
+		Xconsole("SubtreeModified = "+galaxy+":"+system);
+	},*/
 	parseSystem_Inserted : function (event) {
 		var doc = event.target.ownerDocument;
-		var win = doc.getElementById('galaxyContent').win;
+		var win = doc.getElementById('galaxyContent');
 		var paths = XnewOgame.Xpaths.galaxy;
-		var galaxy = win.galaxy;
-		var system = win.system;
+		//var galaxy = win.galaxy;
+		//var system = win.system;		
+		var galaxy = Xpath.getSingleNode(doc,paths.galaxy_input).value.trim();
+		var system = Xpath.getSingleNode(doc,paths.system_input).value.trim();
 						
 		if (this.lastAction != 's:'+galaxy+':'+system){
 			var coords = [galaxy, system];
@@ -823,7 +834,7 @@ var XnewOgame = {
 				Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
 				return;
 			}
-			//XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
+			XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
 			Xconsole(Xl('system detected', coords[0], coords[1]));
 			//Xconsole("Univers="+XnewOgame.universe);
 				
@@ -1005,6 +1016,8 @@ var XnewOgame = {
 						var name = Xpath.getStringValue(doc,paths.player.playername,row).trim();
 						var player_id = Xpath.getStringValue(doc,paths.player.player_id,row).trim();
 						
+						var vaisseaux = Xpath.getStringValue(doc,paths.player.spacecraft,row).trimInt();
+												
 						if (player_id != '' ) {
 							player_id = player_id.match(/\&to\=(.*)\&ajax/);
 							player_id = player_id[1];
@@ -1013,7 +1026,7 @@ var XnewOgame = {
 							player_id = doc.cookie.match(/login_(.*)=U_/)[1];
 
 						//Xconsole('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
-						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points};
+						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points,nb_spacecraft:vaisseaux};
 					} else if(type[0] == 'ally') {
 						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
 						var moy = Xpath.getStringValue(doc,paths.ally.points_moy,row).replace("|.", "").trimInt();
@@ -1515,7 +1528,11 @@ var XnewOgame = {
 				var infos = message.match(new RegExp(this.regexps.messages.trade_message_infos));
 				
 				var ressourcesLivrees = message.match(new RegExp(this.regexps.messages.trade_message_infos_res_livrees)); // ressources livr�es
+//Xconsole(ressourcesLivrees[1]);
 				var ressources = ressourcesLivrees[1].match(new RegExp(this.regexps.messages.trade_message_infos_res)); // Quantit� de ressources livr�es
+//Xconsole(ressources[1]);
+//Xconsole(ressources[2]);
+//Xconsole(ressources[3]);
 
 				var met=ressources[1].trimInt();
 				var cri=ressources[2].trimInt();
