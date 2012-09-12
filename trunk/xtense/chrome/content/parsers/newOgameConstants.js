@@ -45,7 +45,9 @@ XnewOgame.Xpaths = {
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 		ally_id : 'descendant::a[@target="_ally"]/@href',
 		table_galaxy : '//table[@id="galaxytable"]/tbody',
-		table_galaxy_header : '//table[@id="galaxytable"]/tbody/tr[@class="info info_header"]'
+		table_galaxy_header : '//table[@id="galaxytable"]/tbody/tr[@class="info info_header"]',
+		galaxy_input : '//table[@id="galaxytableHead"]//input[@id="galaxy_input"]',
+		system_input : '//table[@id="galaxytableHead"]//input[@id="system_input"]'
 	},
 	
 	levels : {
@@ -104,11 +106,12 @@ XnewOgame.Xpaths = {
 		player : {
 			playername : "td[@class=\'name\']//a[contains(@href,\'galaxy\') and contains(@href,\'system\')]/span/text()",
 			player_id : "td[@class=\'sendmsg\']//a[contains(@href,\'writemessage\')]/@href",
+			spacecraft : "td[@class=\'score tipsStandard\']/@title"
 		},
 		
 		ally : {
 			members : "td[@class=\'name tipsStandard\']/text()",
-			points_moy :  "td[@class=\'score tipsStandard\']/@title",
+			points_moy :  "td[@class=\'score tipsStandard\']/@title"
 		}
 	},
 	
@@ -146,7 +149,7 @@ XnewOgame.Xpaths = {
 	eventlist : {
 		overview_event : '//span[@id="eventHostile"]/text()',
 		attack_id : '@id',
-		attack_event : '//tr[@class="eventFleet hostile"]',
+		attack_event : '//tr[@class="eventFleet"]',
 		attack_arrival_time : 'td[@class="arrivalTime"]/text()',
 		attack_origin_attack_planet : 'td[@class="originFleet"]/text()',
 		attack_origin_attack_coords : 'td[@class="coordsOrigin"]/a/text()',
@@ -154,9 +157,10 @@ XnewOgame.Xpaths = {
 		attack_destination_planet : 'td[@class="destFleet"]/text()',
 		attack_destination_coords : 'td[@class="destCoords"]/a/text()',
 		attack_url_composition_flotte : 'td[@class="icon_movement"]/span/@href',
-		group_id : '//tr[@class="allianceAttack hostile"]/td[a/@class="toggleInfos infosClosed"]/a/@rel',
+		group_id : '//tr[@class="allianceAttack"]/td[a/@class="toggleInfos infosClosed"]/a/@rel',
 		group_event : '//tr[starts-with(@class,"partnerInfo {0}")]',
 		group_attack : '//tr[@class="allianceAttack hostile" and td[a/@class="toggleInfos infosClosed"]/a/@rel=\'{0}\']',
+		group_attack_parent : '//tr[@class="allianceAttack" and td[a/@rel=\'{0}\']]',
 		group_arrival_time : 'td[@class="arrivalTime"]/text()',
 		group_origin_attack_planet : 'td[@class="originFleet"]/a/text()',
 		group_origin_attack_coords : 'td[@class="coordsOrigin"]/a/text()',
@@ -208,7 +212,7 @@ XnewOgame.regexps = {
 		trade_message_infos : 'Une flotte .trang.re de (.*) [(](.*)\\[(\\d+:\\d+:\\d+)\\][)] a livr. des ressources . (.*) \\[(\\d+:\\d+:\\d+)\\]',
 		trade_message_infos_me : 'Votre flotte de la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] a atteint la plan.te (.*) \\[(\\d+:\\d+:\\d+)\\] et y a livr. les ressources suivantes',
 		trade_message_infos_res_livrees : '(.*)Vous aviez [:]',
-		trade_message_infos_res : 'tal(.*)Cristal(.*)Deut.rium(.*)',
+		trade_message_infos_res : 'M.tal(.*)Cristal(.*)Deut.rium(.*)',
 		trade_message_infos_me_res : 'tal(.*)Cristal(.*)Deut.rium(.*)'
 	},
 	spy : {
