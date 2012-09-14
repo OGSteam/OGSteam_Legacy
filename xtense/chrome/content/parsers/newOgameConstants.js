@@ -149,7 +149,7 @@ XnewOgame.Xpaths = {
 	eventlist : {
 		overview_event : '//span[@id="eventHostile"]/text()',
 		attack_id : '@id',
-		attack_event : '//tr[@class="eventFleet"]',
+		attack_event : '//tr[@class="eventFleet" and td[contains(@class,"hostile")]]',
 		attack_arrival_time : 'td[@class="arrivalTime"]/text()',
 		attack_origin_attack_planet : 'td[@class="originFleet"]/text()',
 		attack_origin_attack_coords : 'td[@class="coordsOrigin"]/a/text()',
