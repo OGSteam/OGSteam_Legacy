@@ -32,7 +32,7 @@ window.on('load', function(){
 });
 
 var Xtense = {
-	VERSION: '2.4.2',
+	VERSION: '2.4.3',
 	TYPE: 'FF',
 	REVISION: 0,
 	PLUGIN_REQUIRED: '2.4.1',
