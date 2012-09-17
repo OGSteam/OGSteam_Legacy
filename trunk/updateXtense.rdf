@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$8fpsQ"
-                   em:version="2.4.2"
-                   em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$cfpsQ"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$7fpsQ">
-    <RDF:li RDF:resource="rdf:#$8fpsQ"/>
+  <RDF:Seq RDF:about="rdf:#$SEO5D1">
+    <RDF:li RDF:resource="rdf:#$TEO5D1"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJgH8ReswHjGM37seh9P2uHtHhgRQFAU77GHX2GYUgk6Km2c8oUL2OLE5Z6fRV0WHQSc0G5tLBT4gPynga7oh2iokyfTwKnKY0xvTOTtw14hcapEvs6pxPCRoGOYooVTYVM6rjHoURtB5G20yCSoVRxXfI5VCxj2DJbQKDuNpkgZ">
-    <em:updates RDF:resource="rdf:#$7fpsQ"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJaGMNcZhAJ5mNS0dUHCSoUEs2fzdGzD3AP7OyHvJhqpsteb0mJ9XmX42x92B6DCRAvn7OSDEY5BG/x2Bax6s0iywaD6KUsIC+Kzh7PmVUzT/YdZK5hu2bff6ycPyW6Abare3oy2rMhelA+2tROkfhwud2sLYYzt7aCM6EkqbvVU">
+    <em:updates RDF:resource="rdf:#$SEO5D1"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$cfpsQ"
+  <RDF:Description RDF:about="rdf:#$XEO5D1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
-                   em:maxVersion="13.*"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.2"
-                   em:updateHash="sha1:195cdfcb51ba04e268cae3cd4603225f19d40dac" />
+                   em:maxVersion="16.*"
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.3"
+                   em:updateHash="sha1:f4191b50a3a23fdbf8f0ae19df7092fe5f272ccd" />
+  <RDF:Description RDF:about="rdf:#$TEO5D1"
+                   em:version="2.4.3"
+                   em:name="Xtense for Firefox">
+    <em:targetApplication RDF:resource="rdf:#$XEO5D1"/>
+  </RDF:Description>
 </RDF:RDF>
