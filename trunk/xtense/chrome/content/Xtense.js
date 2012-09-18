@@ -32,7 +32,7 @@ window.on('load', function(){
 });
 
 var Xtense = {
-	VERSION: '2.4.3',
+	VERSION: '2.4.4',
 	TYPE: 'FF',
 	REVISION: 0,
 	PLUGIN_REQUIRED: '2.4.1',
@@ -143,10 +143,11 @@ var Xtense = {
 	        
 			var url = null;
 			try {
-				url = doc.location.href;
+				url = doc.location.href;				
+			} catch (e) {
+				Xconsole("Problème de récupération de l'URL : "+e.message);
 			}
-			catch (e) {}
-			
+			Xconsole("onPageLoad - url:"+url);
 			if (url == null)
 				return;
 			if (url == 'about:blank' || url.match('delivery.ads.gfsrv.net') || !url) //delivery.ads.gfsrv.net -> Pub sur le cÃ´tÃ©

@@ -20,27 +20,28 @@ XnewOgame.Xpaths = {
 		planet_type: "//meta[@name=\'ogame-planet-type\']/@content"
 	},
 	ally_members_list : {
-		rows : '//table[@class="members zebra bborder"]/tbody/tr',
+		rows : '//table[@id="member-list"]/tbody/tr',
 		player : 'td[1]',
-		rank : 'td[4]/span',
-		points : 'td[4]/span/@title',
-		coords : 'td[5]/a',
+		rank : 'td[4]/a',
+		points : 'td[4]/@title',
+		coords : 'td[5]/span/a',
 		tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
 	},
 	
 	galaxy : { 
 		rows : '//tr[@class="row"]',
 		position : 'td[contains(@class, "position")]/text()',
-		planetname : 'td[@class="planetname"]/text()',
-		planetname_l : 'td[@class="planetname"]/a/text()',
+		planetname : 'td[contains(@class,"planetname")]/text()',
+		planetname_l : 'td[contains(@class,"planetname")]/a/text()',
 		planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
-		moon : 'td[@class="moon"]/a',
-		debris : 'descendant::li[@class="debris-content"]',
-		playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en general, span pour joueur courant,
-		playername2 : 'td[contains(@class,"playername")]/*[2]', //Pour joueur bandit ou empereur
+		moon : 'td[contains(@class,"moon")]/a',
+		debris : 'descendant::li[contains(@class,"debris-content")]',
+		playername : 'td[contains(@class,"playername")]//span[starts-with(@class,"status_")]/text()',//* pour a en general, span pour joueur courant,
+		playername2 : 'td[contains(@class,"playername")]/*[2]/text()', //Pour joueur bandit ou empereur
 		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
 		allytag : 'td[contains(@class, "allytag")]/span/text()',
-		status : 'descendant::span[@class="status"]',
+		status : 'descendant::span[starts-with(@class,"status_") and @title]',
+		status_baned : 'descendant::span[starts-with(@class,"status_")]/a[@title]/text()',
 		activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
 		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
 		ally_id : 'descendant::a[@target="_ally"]/@href',
@@ -87,8 +88,8 @@ XnewOgame.Xpaths = {
 	planetData : {
 		name : "id('selectedPlanetName')",
 		name_planete : "//span[@class='planet-name']",
-		coords : "//div[@class='smallplanet']/a[contains(@class,'active') or @href='#']/span[@class='planet-koords']",
-		coords_unique_planet : "//div[@class='smallplanet']/a[contains(@class,'') or @href='#']/span[@class='planet-koords']"
+		coords : "//div[@id='planetList']//a[contains(@class,'planetlink') and contains(@class,'active')]/span[contains(@class,'planet-koords')]",
+		coords_unique_planet : "//div[@id='planetList']//a[contains(@class,'') or @href='#']/span[contains(@class,'planet-koords')]"
 	},
 	
 	ranking : { 
