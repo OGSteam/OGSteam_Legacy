@@ -49,6 +49,9 @@ String.prototype.getInts = function (/*separator*/) {
 	/*if(typeof separator!="undefined")reg=new Regexp("[0-9("+separator+")]+","g");
 	else reg=new Regexp("[0-9("+separator+")]+","g");*/
 	var v = this.match(/[0-9][0-9.]*/g);
+	if (v == null) {
+		return 0;
+	}
 	v.forEach(function (el, index, arr) { arr[index] = parseInt(el.replace(/\./g, '')); });
 	return v;
 }
