@@ -854,19 +854,19 @@ var XnewOgame = {
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
 					var player2 = Xpath.getStringValue(doc,paths.playername2,row).trim();
 					var player_tooltip = Xpath.getStringValue(doc,paths.playername_tooltip,row).trim();
-							
-					//if (player_tooltip == '') {
+					
+					if (player_tooltip == '') {
 						if (player == '') {
-						//	if (player2 == '') {
+							if (player2 == '') {
 								Xconsole('row '+i+' has no player name');
 								continue;
-						//	} else {
-						//		player = player2;
-						//	}
+							} else {
+								player = player2;
+							}
 						}
-					//} else {
-					//	player = player_tooltip;
-					//}
+					} else {
+						player = player_tooltip;
+					}
 					
 					if (name_tooltip == '') {
 						if (name == '') {

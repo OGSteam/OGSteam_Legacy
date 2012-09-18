@@ -38,7 +38,7 @@ XnewOgame.Xpaths = {
 		debris : 'descendant::li[contains(@class,"debris-content")]',
 		playername : 'td[contains(@class,"playername")]//span[starts-with(@class,"status_")]/text()',//* pour a en general, span pour joueur courant,
 		playername2 : 'td[contains(@class,"playername")]/*[2]/text()', //Pour joueur bandit ou empereur
-		playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
+		playername_tooltip : 'td[contains(@class,"playername")]//div[contains(@id,"player")]/h1/span/text()',
 		allytag : 'td[contains(@class, "allytag")]/span/text()',
 		status : 'descendant::span[starts-with(@class,"status_") and @title]',
 		status_baned : 'descendant::span[starts-with(@class,"status_")]/a[@title]/text()',
