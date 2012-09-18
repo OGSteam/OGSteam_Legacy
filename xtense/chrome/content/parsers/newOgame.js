@@ -102,7 +102,8 @@ var XnewOgame = {
 				Tab.setStatus(Xl('wait send'), XLOG_NORMAL, {url: url});
 				return true;
 			}
-			if(this.win.resourceTickerMetal || page == 'messages' || page == 'rc')
+			//if(this.win.resourceTickerMetal || page == 'messages' || page == 'rc')
+			if(this.win.resourceTickerMetal || page == 'rc')
 				this.sendPage(page);
 			return true;
 		} catch (e) {
@@ -155,7 +156,7 @@ var XnewOgame = {
 		else if (page == 'ranking')		Request = this.parseRanking();
 		else if (page == 'ally_list') 	Request = this.parseAlly_list();
 		else if (page == 'rc') 			Request = this.parseRc();
-		else if (page == 'messages') 	Request = this.parseMessage();
+		else if (page == 'messages') Request = this.parseMessage();
 		else if (page == 'trader') 		Request = this.parseTrader();
 		else this.Tab.setStatus('invalid page type: "'+page+'"', XLOG_ERROR, {url: this.url});
 				
@@ -853,17 +854,19 @@ var XnewOgame = {
 					var player = Xpath.getStringValue(doc,paths.playername,row).trim();
 					var player2 = Xpath.getStringValue(doc,paths.playername2,row).trim();
 					var player_tooltip = Xpath.getStringValue(doc,paths.playername_tooltip,row).trim();
-					
-					if (player_tooltip == '') {
+							
+					//if (player_tooltip == '') {
 						if (player == '') {
-							if (player2 == '') {
+						//	if (player2 == '') {
 								Xconsole('row '+i+' has no player name');
 								continue;
-							} else
-								player = player2;
+						//	} else {
+						//		player = player2;
+						//	}
 						}
-					} else
-						player = player_tooltip;
+					//} else {
+					//	player = player_tooltip;
+					//}
 					
 					if (name_tooltip == '') {
 						if (name == '') {
@@ -885,16 +888,18 @@ var XnewOgame = {
 					var moon = Xpath.getUnorderedSnapshotNodes(doc,paths.moon,row);
 					moon = moon.snapshotLength > 0 ? 1 : 0;
 
-					var status = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
-					if(status.snapshotLength>0){
-						status = status.snapshotItem(0);
-						status = status.textContent;
-						status = status.match(/\((.*)\)/);
-						status = status ? status[1] : "";
-						status = status.trimAll();
+					var statusNodes = Xpath.getUnorderedSnapshotNodes(doc,paths.status,row);
+					var status="";
+					if(statusNodes.snapshotLength>0){
+						for (var j = 0; j < statusNodes.snapshotLength ; j++) {
+							status+=statusNodes.snapshotItem(j).textContent.trimAll();
+						}
+					} else {
+						 status = "";
 					}
-					else status = "";
-
+					var baned = Xpath.getStringValue(doc,paths.status_baned,row).trim();
+					status=baned+status;
+					
 					var activity = Xpath.getStringValue(doc,paths.activity,row).trim();
 					//activity = activity.match(/: (.*)/);
 					/*if(activity)
@@ -928,7 +933,7 @@ var XnewOgame = {
 					}
 					else
 						ally_id = '0';
-					
+
 					var r = {player_id:player_id,planet_name:name,moon:moon,player_name:player,status:status,ally_id:ally_id,ally_tag:allytag,debris:debris,activity:activity};
 					rowsData[position]=r;
 				}
@@ -1376,6 +1381,19 @@ var XnewOgame = {
 	},
 	
 	parseMessage : function () {
+		alert("parseMessage");
+		
+		var target = this.doc.getElementById('messages');
+		target.win = this.win;
+		target.addEventListener("DOMNodeInserted", this.parseMessageTest, true);
+	},
+
+parseMessageTest : function () {
+alert("Ajout dans messages !");
+},
+
+	parseMessageInserted : function () {
+		Xconsole("Start parseMessage");
 		var paths = this.Xpaths.messages;
 		var data = {};		
 		var from = Xpath.getStringValue(this.doc,paths.from).trim();
