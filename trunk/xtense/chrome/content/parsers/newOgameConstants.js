@@ -111,8 +111,8 @@ XnewOgame.Xpaths = {
 		},
 		
 		ally : {
-			members : "td[@class=\'name tipsStandard\']/text()",
-			points_moy :  "td[@class=\'score tipsStandard\']/@title"
+			members : "td[@class=\'name\'][2]/text()",
+			points_moy :  "td[@class=\'score\']/div/text()"
 		}
 	},
 	
