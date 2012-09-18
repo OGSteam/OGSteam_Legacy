@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$SEO5D1">
-    <RDF:li RDF:resource="rdf:#$TEO5D1"/>
+  <RDF:Description RDF:about="rdf:#$OxvjP2"
+                   em:version="2.4.4"
+                   em:name="Xtense for Firefox">
+    <em:targetApplication RDF:resource="rdf:#$SxvjP2"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$NxvjP2">
+    <RDF:li RDF:resource="rdf:#$OxvjP2"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJaGMNcZhAJ5mNS0dUHCSoUEs2fzdGzD3AP7OyHvJhqpsteb0mJ9XmX42x92B6DCRAvn7OSDEY5BG/x2Bax6s0iywaD6KUsIC+Kzh7PmVUzT/YdZK5hu2bff6ycPyW6Abare3oy2rMhelA+2tROkfhwud2sLYYzt7aCM6EkqbvVU">
-    <em:updates RDF:resource="rdf:#$SEO5D1"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAGyeYSwk0VeJaAZDVZ9LmdJlpKMADHKFW0gh5Afzbz2m2n4uVt/p5s5IdFgui2OKjDgwEoiUX+5mUOAIYqZ/c6fb8KWB1aiT9UgMe2dNkMymF7OOUSHgXv2iuthXha5vaYMmZtNtt76UBQYJDfc4IeAKcOQlfOIKdsftxQCK/tqd">
+    <em:updates RDF:resource="rdf:#$NxvjP2"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$XEO5D1"
+  <RDF:Description RDF:about="rdf:#$SxvjP2"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="16.*"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.3"
-                   em:updateHash="sha1:f4191b50a3a23fdbf8f0ae19df7092fe5f272ccd" />
-  <RDF:Description RDF:about="rdf:#$TEO5D1"
-                   em:version="2.4.3"
-                   em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$XEO5D1"/>
-  </RDF:Description>
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.4"
+                   em:updateHash="sha1:e0cb97c599e43d104158808e0859014cc8342fa8" />
 </RDF:RDF>
