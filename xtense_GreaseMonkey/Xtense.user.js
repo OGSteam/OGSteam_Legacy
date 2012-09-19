@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	    Xtense-GM
-// @version     2.4.2.2
+// @version     2.4.2.3
 // @updateURL   http://userscripts.org/scripts/source/112690.meta.js
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
@@ -10,7 +10,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.2.2";
+var VERSION = "2.4.2.3";
 var TYPE = "GM-";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
@@ -181,8 +181,7 @@ function Xajax(obj) {
             "Content-Type": "application/x-www-form-urlencoded"
           },
           onload: function(response) {
-            response.content = response.responseText;
-            handleResponse(response);
+           handleResponse(response);
           }
         });
     }
@@ -264,7 +263,7 @@ function handle_current_page(){
 	var regShipyard = new RegExp(/(shipyard)/);
 	var regFleet1 = new RegExp(/(fleet1)/);
 	var regDefense = new RegExp(/(defense)/);
-	var regMessages = new RegExp(/(showmessage)/);
+	var regMessages = new RegExp(/(messages)/);
 	var regCombatreport = new RegExp(/(combatreport)/);
 	var regAlliance = new RegExp(/(alliance)/);
 	var regStats = new RegExp(/(highscore)/);
@@ -284,7 +283,7 @@ function handle_current_page(){
                                         GM_getValue(prefix_GMData +'handle.msg.rc.cdr','false').toString() == 'true' ||
                                         GM_getValue(prefix_GMData +'handle.msg.expeditions','false').toString() == 'true' ||
                                         GM_getValue(prefix_GMData +'handle.msg.commerce','false').toString() == 'true' 
-                                        ){parse_messages();}} 
+                                        ){get_message_content();}} 
 	else if(regCombatreport.test(url)){ if(GM_getValue(prefix_GMData +'handle.msg.rc','false').toString() == 'true'){parse_rc();}}
 	else if(regAlliance.test(url))	{ if(GM_getValue(prefix_GMData +'handle.alliance','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ally_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }}
 	else if(regStats.test(url))	{ if(GM_getValue(prefix_GMData +'handle.stats','false').toString() == 'true' || GM_getValue(prefix_GMData +'manual.send','false').toString() == 'true'){GM_setValue(prefix_GMData +'lastAction','');get_ranking_content();GM_setValue(prefix_GMData +'manual.send','false');} else { manual_send(); }} 
@@ -1026,6 +1025,7 @@ function parse_messages(){
 	var paths = XtenseXpaths.messages;
 	var data = {};		
 	var from = XPath.getStringValue(document,paths.from).trim();
+    log('from: ' + from);
 	var to = XPath.getStringValue(document,paths.to).trim();
 	var subject = XPath.getStringValue(document,paths.subject).trim();
 	var date = XPath.getStringValue(document,paths.date).trim();
@@ -1415,6 +1415,41 @@ function get_ranking_content(){
 			if (settings.url.indexOf("page=highscoreContent") == -1) return;
 
 			parse_ranking_inserted();
+			
+		}));
+
+	}
+
+}
+/* Fonction ajoutant lancant le parsing de la vue classement quand celle-ci est chargée */
+function get_message_content(){
+    log("Entering get_message_content");
+	if (isChrome || isOpera) //Pour Chrome :-)
+	{	
+		/* Page Messages */
+		var target = document.getElementById('messages');
+		//target.removeEventListener("DOMNodeInserted");
+		//target.removeEventListener("DOMContentLoaded");
+		target.addEventListener("DOMNodeInserted", parse_messages, false);		
+		target.addEventListener("DOMContentLoaded", parse_messages, false);		
+
+	}else{// Pour Firefox Notamment
+          
+		function safeWrap(f)
+		{
+			return function()
+			{
+				setTimeout.apply(window, [f, 0].concat([].slice.call(arguments)));
+			};
+		}
+		//la division dans lequel le résultat de la requête ajax est placé a l'id galaxyContent
+		
+		unsafeWindow.$("#messages").ajaxSuccess(safeWrap(function(e,xhr,settings)
+		{
+			//l'url de la requête ajax contient page=galaxyContent
+			if (settings.url.indexOf("page=showmessage") == -1) return;
+
+			parse_messages();
 			
 		}));
 
@@ -1912,14 +1947,14 @@ XtenseXpaths = {
 		galaxy : { 
 			rows : '//tr[contains(@class, "row")]',
 			position : 'td[contains(@class, "position")]/text()',
-			planetname : 'td[@class="planetname"]/text()',
-			planetname_l : 'td[@class="planetname"]/a/text()',
-			planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
-			moon : 'td[@class="moon"]/a',
+			planetname : 'td[contains(@class, "planetname")]/text()',
+			planetname_l : 'td[contains(@class, "planetname"]/a/text()',
+			planetname_tooltip : 'td[contains(@class, "microplanet")]/div[contains(@class,"galaxyTooltip")]/h1/span/text()',
+			moon : 'td[contains(@class, "moon")]/a',
 			debris : 'descendant::li[@class="debris-content"]',
-			playername : 'td[contains(@class,"playername")]/*[1]',//* pour a en general, span pour joueur courant,
-			playername2 : 'td[contains(@class,"playername")]/*[2]', //Pour joueur bandit ou empereur
-			playername_tooltip : 'td[contains(@class,"playername")]/div/div/h4/span/span/text()',
+			playername : 'td[contains(@class,"status_abbr_")]/*[1]',//* pour a en general, span pour joueur courant,
+			playername2 : 'td[contains(@class,"status_abbr_")]/*[2]', //Pour joueur bandit ou empereur
+			playername_tooltip : 'td[contains(@class,"playername")]/div[contains(@class,"galaxyTooltip")]/h1/span/text()',
 			allytag : 'td[contains(@class, "allytag")]/span/text()',
 			status : 'descendant::span[@class="status"]',
 			activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
@@ -2196,10 +2231,7 @@ function initOGSpyCommunication (){
 }
 /* Interpretation des retours Xtense (module OGSPY) */
 function handleResponse(Response) {
-    Response.content = Response.responseText;
-	log(Response.content);
-	//if (Server.cached()) var message_start = '"'+Server.name+'" : ';
-	//else var message_start = Xl('response start', Server.n+1);
+	log(Response.responseText);
 	var message_start = '"'+GM_getValue(prefix_GMData +'server.name','')+'" : ';
 	
 	//var extra = {Request: Request, Server: Server, Response: Response, page: Request.data.type};
@@ -2212,26 +2244,26 @@ function handleResponse(Response) {
 	} else {		
 		var type = XLOG_SUCCESS;
 		
-		if (Response.content == '' || typeof(Response.content)== 'undefined') {
+		if (Response.responseText == '' || typeof(Response.responseText)== 'undefined') {
 			setStatus(XLOG_ERROR, message_start + Xl('empty_response') + extra);
 			return;
 		}
 		
-		if (Response.content == 'hack') {
+		if (Response.responseText == 'hack') {
 			setStatus(XLOG_ERROR, message_start + Xl('response_hack') + extra);
 			return;
 		}
 		
 		var data = {};
-		if (Response.content.match(/^\(\{.*\}\)$/g)){
-			data = eval(Response.content);
+		if (Response.responseText.match(/^\(\{.*\}\)$/g)){
+			data = eval(Response.responseText);
 		} else {
 			var match = null;
-			if ((match = Response.content.match(/\(\{.*\}\)/))) {
+			if ((match = Response.responseText.match(/\(\{.*\}\)/))) {
 				data = eval(match[0]);
 				// Message d'avertissement
 				type = XLOG_WARNING;
-				log("full response:"+escape(Response.content));
+				log("full response:"+escape(Response.responseText));
 			} else {
 				// Message d'erreur
 				setStatus(XLOG_ERROR, message_start + Xl('invalid_response') + extra);
@@ -2259,7 +2291,7 @@ function handleResponse(Response) {
 				else if (code == 'plugin config')		message = Xl('error_plugin_config');
 				else if (code == 'plugin univers')		message = Xl('error_plugin_univers');
 				else if (code == 'grant') 				message = Xl('error_grant_start') + Xl('error grant '+ data.access);
-				else 									message = Xl('unknow_response', code, Response.content);
+				else 									message = Xl('unknow_response', code, Response.responseText);
 			} else {
 				if (code == 'home updated' && data.page=='overview') 			message = Xl('success_home_updated', Xl('page_overview',data.page));
 				else if (code == 'system')				message = Xl('success_system', data.galaxy, data.system);
@@ -2273,7 +2305,7 @@ function handleResponse(Response) {
 				else if (code == 'ranking') 			message = Xl('success_ranking', Xl('ranking_'+data.type1), Xl('ranking_'+data.type2), data.offset, data.offset+99);			
 				else if (code == 'ally_list')			message = Xl('success_ally_list', data.tag);
 				else if (code == 'spy') 				message = Xl('success_spy');
-				else 									message = Xl('unknow_response', code, Response.content);
+				else 									message = Xl('unknow_response', code, Response.responseText);
 			}
 			
 			//if (Xprefs.getBool('display-execution-time') && data.execution) message = '['+data.execution+' ms] '+ message_start + message;
@@ -2608,7 +2640,7 @@ if (XtenseMetas.getLanguage() == 'en') {
 					109 : 'Technologie Armes',		
 					110 : 'Technologie Bouclier', 
 					111 : 'Technologie Protection des vaisseaux spatiaux', 		
-					113 : 'Technologie Energie', 
+					113 : 'Technologie .nergie', 
 					114 : 'Technologie Hyperespace', 
 					115 : 'Réacteur à combustion', 			
 					117 : 'Réacteur à impulsion', 
