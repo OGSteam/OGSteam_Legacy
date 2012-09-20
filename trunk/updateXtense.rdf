@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$OxvjP2"
-                   em:version="2.4.4"
+  <RDF:Description RDF:about="rdf:#$ytMcA2"
+                   em:version="2.4.5"
                    em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$SxvjP2"/>
+    <em:targetApplication RDF:resource="rdf:#$CtMcA2"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$NxvjP2">
-    <RDF:li RDF:resource="rdf:#$OxvjP2"/>
+  <RDF:Seq RDF:about="rdf:#$xtMcA2">
+    <RDF:li RDF:resource="rdf:#$ytMcA2"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAGyeYSwk0VeJaAZDVZ9LmdJlpKMADHKFW0gh5Afzbz2m2n4uVt/p5s5IdFgui2OKjDgwEoiUX+5mUOAIYqZ/c6fb8KWB1aiT9UgMe2dNkMymF7OOUSHgXv2iuthXha5vaYMmZtNtt76UBQYJDfc4IeAKcOQlfOIKdsftxQCK/tqd">
-    <em:updates RDF:resource="rdf:#$NxvjP2"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBABcg2i+E6tF7x64SnPHl3ZkUJ84zR8A92XW+t46/yzYj5l03xaSUMX+8DKJok8BdP/JHXMk/9+JCQ6+k9/4EgWQiNRWpA1z3La7P74E0zYGJVdqjnsJrbOnul+lYWH7xXrR/hXWKblZ+nhevEknDHpITyckQ143fZz0JUesJd9Cz">
+    <em:updates RDF:resource="rdf:#$xtMcA2"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$SxvjP2"
+  <RDF:Description RDF:about="rdf:#$CtMcA2"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="16.*"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.4"
-                   em:updateHash="sha1:e0cb97c599e43d104158808e0859014cc8342fa8" />
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.5"
+                   em:updateHash="sha1:192508c2d57dff40dee549c662fb22e3c79071d6" />
 </RDF:RDF>
