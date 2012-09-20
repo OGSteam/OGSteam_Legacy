@@ -33,7 +33,7 @@ XnewOgame.Xpaths = {
 		position : 'td[contains(@class, "position")]/text()',
 		planetname : 'td[contains(@class,"planetname")]/text()',
 		planetname_l : 'td[contains(@class,"planetname")]/a/text()',
-		planetname_tooltip : 'td[@class="tipsGalaxy microplanet"]/div/div/h4/span/span/text()',
+		planetname_tooltip : 'td[contains(@class,"microplanet")]//div[contains(@id,"planet")]/h1/span/text()',
 		moon : 'td[contains(@class,"moon")]/a',
 		debris : 'descendant::li[contains(@class,"debris-content")]',
 		playername : 'td[contains(@class,"playername")]//span[starts-with(@class,"status_")]/text()',//* pour a en general, span pour joueur courant,
@@ -56,17 +56,21 @@ XnewOgame.Xpaths = {
 	},
 	
 	messages : {
-		from : '//tr[1]/td',
-		to : '//tr[2]/td',
-		subject : '//tr[3]/td',
-		date : '//tr[4]/td',
-		reply : "//*[contains(@class,'toolbar')]/li[contains(@class,'reply')]",
+		showmessage : '//div[@class="showmessage"]',
+		combatreport : '//div[@class="combatreport"]',
+		messageid : "@data-message-id",
+		messagebox : '//div[contains(@class,"messagebox")]',
+		from : '//div[@class="infohead"]/table/tbody/tr[1]/td/span',
+		to : '//div[@class="infohead"]/table/tbody/tr[2]/td/text()',
+		subject : '//div[@class="infohead"]/table/tbody/tr[3]/td/text()',
+		date : '//div[@class="infohead"]/table/tbody/tr[4]/td/text()',
+		reply : '//*[contains(@class,"toolbar")]/li[contains(@class,"reply")]',
 		contents : {
 			'spy' : '//div[@class="note"]',
-			'msg': '//div[@class="note"]',
+			'msg': '//div[contains(@class,"other")]',
 			'ally_msg': '//div[@class="note"]',
 			'expedition': '//div[@class="note"]',
-			'rc': '//div[@id="battlereport"]',
+			'rc': '//div[contains(@class,"battlereport")]',
 			'rc_cdr': '//div[@class="note"]',
 			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
 			'livraison': '//div[@class="note"]',
@@ -74,8 +78,8 @@ XnewOgame.Xpaths = {
 		},
 		spy : {
 			playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',
-			fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
-			moon : '//a[@class="buttonSave"]'
+			fleetdefbuildings : '//table[contains(@class,"fleetdefbuildings")]//th[@class="area"]',
+			moon : '//td[@class="attack"]/a/@href'
 		}
 	},
 	

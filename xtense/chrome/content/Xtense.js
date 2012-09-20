@@ -147,7 +147,7 @@ var Xtense = {
 			} catch (e) {
 				Xconsole("Problème de récupération de l'URL : "+e.message);
 			}
-			Xconsole("onPageLoad - url:"+url);
+			//Xconsole("onPageLoad - url:"+url);
 			if (url == null)
 				return;
 			if (url == 'about:blank' || url.match('delivery.ads.gfsrv.net') || !url) //delivery.ads.gfsrv.net -> Pub sur le cÃ´tÃ©
