@@ -1259,13 +1259,11 @@ function parse_spy_report(RE) {
 	var typs = [];
 	var res = new Array();
 	
-	var isMoon = false;
-	//if(data['BaLu'] > 0) isMoon = true; //si il y a une base lunaire, alors c'est une lune
-	var moonNode = XPath.getSingleNode(document, paths.moon);
-
-	isMoon = (moonNode.href).match(new RegExp(locales['moon'] + XtenseRegexps.moon))[1] == '3' ? true : false;
+	var attackRef = XPath.getStringValue(document, paths.moon);
+	var isMoon = attackRef.search("type=3") > -1 ? true : false;
+	//isMoon = (moonNode.href).match(new RegExp(locales['moon'] + XtenseRegexps.moon))[1] == '3' ? true : false;
 	var playerName = XPath.getStringValue(document, paths.playername).trim();
-	var types = XPath.getOrderedSnapshotNodes(document,paths.fleetdefbuildings);
+	var types = XPath.getOrderedSnapshotNodes(document,paths.materialfleetdefbuildings);
 	if(types.snapshotLength > 0){
 	   	for(var table=0;table<types.snapshotLength;table++){
 			var type = types.snapshotItem(table).textContent.trim();
@@ -1774,8 +1772,8 @@ function displayXtense(){
     		document.getElementById('menuTable').removeChild(document.getElementById('optionXtense'));
     	}
     	menuAlliance.parentNode.insertBefore(li1, menuAlliance.nextSibling);
-    } else if(document.getElementById('messagebox')){ // Dans les messages ?
-    	var toolbarMessage = XPath.getSingleNode(document,"//div[@id='messagebox']//ul[contains(@class,'toolbar')]");
+    } else if(document.getElementById('messages')){ // Dans les messages ?
+    	var toolbarMessage = XPath.getSingleNode(document,"//span[contains(@id,'ui-dialog-title']");
     	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
         
         var liXtense = document.createElement("li");
@@ -1944,51 +1942,60 @@ XtenseXpaths = {
 			cases : ".//*[@id='diameterContentField']/span[2]/text()",
 			temperatures : ".//*[@id='temperatureContentField']/text()"
 		},
-		galaxy : { 
-			rows : '//tr[contains(@class, "row")]',
-			position : 'td[contains(@class, "position")]/text()',
-			planetname : 'td[contains(@class, "planetname")]/text()',
-			planetname_l : 'td[contains(@class, "planetname"]/a/text()',
-			planetname_tooltip : 'td[contains(@class, "microplanet")]/div[contains(@class,"galaxyTooltip")]/h1/span/text()',
-			moon : 'td[contains(@class, "moon")]/a',
-			debris : 'descendant::li[@class="debris-content"]',
-			playername : 'td[contains(@class,"status_abbr_")]/*[1]',//* pour a en general, span pour joueur courant,
-			playername2 : 'td[contains(@class,"status_abbr_")]/*[2]', //Pour joueur bandit ou empereur
-			playername_tooltip : 'td[contains(@class,"playername")]/div[contains(@class,"galaxyTooltip")]/h1/span/text()',
-			allytag : 'td[contains(@class, "allytag")]/span/text()',
-			status : 'descendant::span[@class="status"]',
-			activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
-			player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
-			ally_id : 'descendant::a[@target="_ally"]/@href'
-		},
+	galaxy : { 
+		rows : '//tr[@class="row"]',
+		position : 'td[contains(@class, "position")]/text()',
+		planetname : 'td[contains(@class,"planetname")]/text()',
+		planetname_l : 'td[contains(@class,"planetname")]/a/text()',
+		planetname_tooltip : 'td[contains(@class,"microplanet")]//div[contains(@id,"planet")]/h1/span/text()',
+		moon : 'td[contains(@class,"moon")]/a',
+		debris : 'descendant::li[contains(@class,"debris-content")]',
+		playername : 'td[contains(@class,"playername")]//span[starts-with(@class,"status_")]/text()',//* pour a en general, span pour joueur courant,
+		playername2 : 'td[contains(@class,"playername")]/*[2]/text()', //Pour joueur bandit ou empereur
+		playername_tooltip : 'td[contains(@class,"playername")]//div[contains(@id,"player")]/h1/span/text()',
+		allytag : 'td[contains(@class, "allytag")]/span/text()',
+		status : 'descendant::span[starts-with(@class,"status_") and @title]',
+		status_baned : 'descendant::span[starts-with(@class,"status_")]/a[@title]/text()',
+		activity : 'td[contains(@class,"microplanet")]/div[contains(@class,"activity")]/text()',
+		player_id : 'descendant::a[contains(@href,"writemessage")]/@href',
+		ally_id : 'descendant::a[@target="_ally"]/@href',
+		table_galaxy : '//table[@id="galaxytable"]/tbody',
+		table_galaxy_header : '//table[@id="galaxytable"]/tbody/tr[@class="info info_header"]',
+		galaxy_input : '//table[@id="galaxytableHead"]//input[@id="galaxy_input"]',
+		system_input : '//table[@id="galaxytableHead"]//input[@id="system_input"]'
+	},
 		
 		levels : {
 			level : '//span[@class="level"]/text()'
 		},
 		
 		messages : {
-			from : '//tr[1]/td',
-			to : '//tr[2]/td',
-			subject : '//tr[3]/td',
-			date : '//tr[4]/td',
-			reply : "//*[contains(@class,'toolbar')]/li[contains(@class,'reply')]",
-			contents : {
-				'spy' : '//div[@class="note"]',
-				'msg': '//div[@class="note"]',
-				'ally_msg': '//div[@class="note"]',
-				'expedition': '//div[@class="note"]',
-				'rc': '//div[@id="battlereport"]',
-				'rc_cdr': '//div[@class="note"]',
-				'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
-				'livraison': '//div[@class="note"]',
-				'livraison_me': '//div[@class="note"]'
-			},
-			spy : {
-                playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',				
-				fleetdefbuildings : '//table[contains(@class, "spy")]//th[@colspan="6"]',
-				moon : '//a[@class="buttonSave"]'				
-			}
+		showmessage : '//div[@class="showmessage"]',
+		combatreport : '//div[@class="combatreport"]',
+		messageid : "@data-message-id",
+		messagebox : '//div[contains(@class,"messagebox")]',
+		from : '//div[@class="infohead"]/table/tbody/tr[1]/td/span',
+		to : '//div[@class="infohead"]/table/tbody/tr[2]/td/text()',
+		subject : '//div[@class="infohead"]/table/tbody/tr[3]/td/text()',
+		date : '//div[@class="infohead"]/table/tbody/tr[4]/td/text()',
+		reply : '//*[contains(@class,"toolbar")]/li[contains(@class,"reply")]',
+		contents : {
+			'spy' : '//div[@class="note"]',
+			'msg': '//div[contains(@class,"other")]',
+			'ally_msg': '//div[@class="note"]',
+			'expedition': '//div[@class="note"]',
+			'rc': '//div[contains(@class,"battlereport")]',
+			'rc_cdr': '//div[@class="note"]',
+			'ennemy_spy': '//div[@class="textWrapper"]/div[@class="note"]',
+			'livraison': '//div[@class="note"]',
+			'livraison_me': '//div[@class="note"]'
 		},
+		spy : {
+			playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',
+			materialfleetdefbuildings : '//table[contains(@class,"fleetdefbuildings") or contains(@class,"material spy")]//th[@class="area"]',
+			moon : '//td[@class="attack"]/a/@href'
+		}
+	},
 		
 		parseTableStruct : {
 			units : "id('buttonz')//ul/li/div/div",
@@ -2607,9 +2614,9 @@ if (XtenseMetas.getLanguage() == 'en') {
 			'units' : {
 				'resources': {
 					601:'Métal:',
-					602:'Cristal',
-					603:'Deutérium',
-					604:'Energie'
+					602:'Cristal:',
+					603:'Deutérium:',
+					604:'Energie:'
 				},
 				'buildings' : { 
 					1 : 'Mine de métal',						
