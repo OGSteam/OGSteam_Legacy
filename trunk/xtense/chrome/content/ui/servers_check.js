@@ -89,17 +89,15 @@ var Xcheck = {
 				this.next();
 				return;
 			}
-			Xconsole(Response.content);
+			//Xconsole(Response.content);
 			Xdump(Response.content);
 			
 			var data = {};
-			if (Response.content.match(/^\(\{.*\}\)$/g)) 
-				{
-				Xconsole("only content");
+			if (Response.content.match(/^\(\{.*\}\)$/g)) {
+				//Xconsole("only content");
 				data = eval(Response.content);
-				}
-			else {
-				Xconsole("not only content");
+			} else {
+				//Xconsole("not only content");
 				var match = null;
 				if ((match = Response.content.match(/\(\{.*\}\)/g)) !== null) {
 					data = eval(match[0]);
@@ -118,7 +116,7 @@ var Xcheck = {
 					return;
 				}
 			}
-			Xconsole("coucou");
+			//Xconsole("coucou");
 			Xdump(data);
 			// Erreurs
 			if (data.status == 0) {

@@ -49,7 +49,7 @@ var Xoptions = {
 			window.sizeToContent();
 		} catch(e) {
 			show_backtrace(e);
-			Xconsole('erreur'+boolPrefs[i]+' '+i);
+			//Xconsole('erreur'+boolPrefs[i]+' '+i);
 		}
 	},
 	

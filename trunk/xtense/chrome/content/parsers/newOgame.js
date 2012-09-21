@@ -85,7 +85,7 @@ var XnewOgame = {
 			}
 			
 			var page = this.getPage(url);
-			Xconsole("page:"+page);
+			//Xconsole("page:"+page);
 			if (page == 'rc') 
 				Xtoolbar.show();
 		} catch(e) {
@@ -135,7 +135,7 @@ var XnewOgame = {
 	
 	checkHostilesOnOGSPY : function () {		
 	 		var dureeDepuisDernierCheckHostile = (new Date().getTime()) - (this.lastCheckHostile==null?0:this.lastCheckHostile);
-			Xconsole("CheckHostile : limite="+(parseInt(this.MINUTES_TO_CHECK_HOSTILES) * 60 * 1000)+"; duree="+dureeDepuisDernierCheckHostile);
+			//Xconsole("CheckHostile : limite="+(parseInt(this.MINUTES_TO_CHECK_HOSTILES) * 60 * 1000)+"; duree="+dureeDepuisDernierCheckHostile);
 			if(dureeDepuisDernierCheckHostile > ( parseInt(this.MINUTES_TO_CHECK_HOSTILES) * 60 * 1000)){
 				this.lastCheckHostile=new Date().getTime();
 				//Xconsole("Check Hostile !");
@@ -273,7 +273,7 @@ var XnewOgame = {
 					data = eval(match[0]);
 					// Message d'avertissement
 					type = XLOG_WARNING;
-					Xconsole("full response:"+escape(Response.content));
+					//Xconsole("full response:"+escape(Response.content));
 				} else {
 					// Message d'erreur
 					Request.Tab.setStatus(message_start + Xl('invalid response'), XLOG_ERROR, extra);
@@ -367,7 +367,7 @@ var XnewOgame = {
 		var coords = null;
 		var coords_list = Xpath.getStringValue(this.doc, paths.coords); //Si plusieurs plan�tes
 		if (!coords_list) {
-			Xconsole("plan&egrave;te unique");
+			//Xconsole("plan&egrave;te unique");
 			coords_list = Xpath.getStringValue(this.doc, paths.coords_unique_planet); //Si 1 seule plan�te
 		}
 		coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1]; //On r�cup�re les coordonn�es
@@ -382,7 +382,7 @@ var XnewOgame = {
 	    var deut = Xpath.getStringValue(this.doc, paths.deuterium).trimInt();
 		var antimater = Xpath.getStringValue(this.doc, paths.antimatiere).trimInt();
 	    var energy = Xpath.getStringValue(this.doc, paths.energie).trimInt();
-		Xconsole("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
+		//Xconsole("metal="+metal+", cristal="+cristal+", deuterium="+deut+", antimatiere="+antimater+", energie="+energy);
 		return Array(metal,cristal,deut,antimater,energy);
 	},
 
@@ -396,20 +396,20 @@ var XnewOgame = {
 			//Xconsole(eventlist);
 			// Est-ce qu'aucune attaque est d�tect�e ?
 			if(eventlist.search("hostile") == -1){ 
-				Xconsole("Aucune flotte hostile en approche");
+				//Xconsole("Aucune flotte hostile en approche");
 				
 				var target = this.doc.getElementById('contentWrapper');
 				target.win = this.win;
 				target.removeEventListener("DOMNodeInserted", this.getHostiles, false);
 				
-				Xconsole("Envoi de la suppression des events sur OGSPY");
+				//Xconsole("Envoi de la suppression des events sur OGSPY");
 				Request = XnewOgame.newRequest();				
 				Request.set('type','hostiles');
 				Request.set('data', {clean:1});					
 				Request.set('lang',XnewOgame.lang);
 				Request.send(XnewOgame.servers);	
 			} else {
-				Xconsole("Attaque(s) en approche d�tect�es");
+				//Xconsole("Attaque(s) en approche d�tect�es");
 				
 				// R�cup�ration de flottes en attaque		
 				var target = this.doc.getElementById('contentWrapper');
@@ -489,7 +489,7 @@ var XnewOgame = {
 		 			var comp=tabCompo[j].getBetweenHTML();
 		 			compoTotale+=(j<(tabCompo.length-2))?comp+",":comp;
 		 		}
-				Xconsole(attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
+				//Xconsole(attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
 				
 				var attack = {id:idAttack,player_id:playerId,ally_id:allyId,arrival_time:arrivalTime,origin_attack_name:originAttackName,origin_attack_coords:originAttackCoords,attacker_name:attacker,destination_name:destName,destination_coords:destCoords,composition:compoTotale};
 				
@@ -543,7 +543,7 @@ var XnewOgame = {
 			 			var comp=tabCompo[j].getBetweenHTML();
 			 			compoTotale+=(j<(tabCompo.length-2))?comp+",":comp;
 			 		}
-					Xconsole("AG "+counterAg+" - Vague "+counterVague+" : "+attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
+					//Xconsole("AG "+counterAg+" - Vague "+counterVague+" : "+attacker+" de la planete "+originAttackName+" ("+originAttackCoords+") {"+compoTotale+"} attaque votre planete "+destName+" ("+destCoords+") a "+arrivalTime);
 					var group = {id:idGr.replace("union",""),id_vague:counterVague,player_id:playerId,ally_id:allyId,arrival_time:arrivalTime,origin_attack_name:originAttackName,origin_attack_coords:originAttackCoords,attacker_name:attacker,destination_name:destName,destination_coords:destCoords,composition:compoTotale};
 					
 					Request = XnewOgame.newRequest();				
@@ -557,7 +557,7 @@ var XnewOgame = {
 			if(hostiles.snapshotLength == 0 && idGroupees.snapshotLength == 0){
 				var target = this.doc.getElementById('contentWrapper');
 				target.removeEventListener("DOMNodeInserted", this.getHostiles, false);
-				Xconsole("Aucune flotte hostile en approche");
+				//Xconsole("Aucune flotte hostile en approche");
 			}			  
 		}		
 	},
@@ -709,7 +709,7 @@ var XnewOgame = {
 			var fieldName = this.getDbFieldName(id);
 			
 			Request.set(fieldName, this.parseIntWithMultiplier(m2[2]));
-			Xconsole(this.page+' '+m[i][1]+' '+m[i][2]+' '+this.database[this.page][parseInt(m[i][1])]);
+			//Xconsole(this.page+' '+m[i][1]+' '+m[i][2]+' '+this.database[this.page][parseInt(m[i][1])]);
 		}
 		
 		Request.set(this.getPlanetData());
@@ -826,17 +826,17 @@ var XnewOgame = {
 		if (this.lastAction != 's:'+galaxy+':'+system){
 			var coords = [galaxy, system];
 			if (isNaN(coords[0]) || isNaN(coords[1])) {
-				Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
+				//Xconsole(Xl('invalid system')+' '+coords[0]+' '+coords[1]);
 				return;
 			}
 			//XnewOgame.Tab.setStatus(Xl('system detected', coords[0], coords[1]), XLOG_NORMAL, {url: this.url});
-			Xconsole(Xl('system detected', coords[0], coords[1]));
+			//Xconsole(Xl('system detected', coords[0], coords[1]));
 			
 			var rows = Xpath.getUnorderedSnapshotNodes(doc,paths.rows);
-			Xconsole(paths.rows+' '+rows.snapshotLength);
+			//Xconsole(paths.rows+' '+rows.snapshotLength);
 			if(rows.snapshotLength > 0) {
 				var Request = XnewOgame.newRequest();
-				Xconsole(rows.snapshotLength+' rows found');
+				//Xconsole(rows.snapshotLength+' rows found');
 				var rowsData = [];
 				for (var i = 0; i < rows.snapshotLength ; i++) {
 					var row = rows.snapshotItem(i);
@@ -850,7 +850,7 @@ var XnewOgame = {
 					if (player_tooltip == '') {
 						if (player == '') {
 							if (player2 == '') {
-								Xconsole('row '+i+' has no player name');
+								//Xconsole('row '+i+' has no player name');
 								continue;
 							} else {
 								player = player2;
@@ -863,7 +863,7 @@ var XnewOgame = {
 					if (name_tooltip == '') {
 						if (name == '') {
 							if (name_l == '') {
-								Xconsole('row '+i+' has no planet name');
+								//Xconsole('row '+i+' has no planet name');
 								continue;
 							} else
 								name = name_l;
@@ -873,7 +873,7 @@ var XnewOgame = {
 
 					var position = Xpath.getNumberValue(doc,paths.position,row);
 					if(isNaN(position)) {
-						Xconsole('position '+position+' is not a number');
+						//Xconsole('position '+position+' is not a number');
 						continue;
 					}
 
@@ -1036,7 +1036,7 @@ var XnewOgame = {
 				}
 				
 				if(this.lastAction != 'r:'+type[0]+':'+type[1]+':'+type[2]+':'+offset) {
-					Xconsole('r:'+type[0]+':'+type[1]+':'+offset); 
+					//Xconsole('r:'+type[0]+':'+type[1]+':'+offset); 
 					//XnewOgame.Tab.setStatus(Xl('ranking detected', Xl('ranking '+type[0]), Xl('ranking '+type[1])));
 					if (offset != 0 && length != 0) {
 						Request.set(
@@ -1173,7 +1173,7 @@ var XnewOgame = {
 						}
 					}
 				}
-				Xconsole("Unites="+values.snapshotLength);
+				//Xconsole("Unites="+values.snapshotLength);
 								
 				//Type de l'unit�
 				var types = Xpath.getOrderedSnapshotNodes(doc,paths.list_types, info);
@@ -1191,7 +1191,7 @@ var XnewOgame = {
 						}
 					}
 				}
-				Xconsole("Type des Unites="+types.snapshotLength);
+				//Xconsole("Type des Unites="+types.snapshotLength);
 
 				//Nom joueur et coordonn�es
 				var dest = 0;
@@ -1236,7 +1236,7 @@ var XnewOgame = {
 					var type = "D";
 				}
 				
-				Xconsole("player="+player+"**coords="+coords);
+				//Xconsole("player="+player+"**coords="+coords);
 				
 				//Technos
 				var weapons = Xpath.getStringValue(doc,paths.infos.weapons,info).trim();
@@ -1324,7 +1324,7 @@ var XnewOgame = {
 		
 		var playerName = Xpath.getSingleNode(doc, paths.playername).textContent.trim();
 		
-		var types = Xpath.getOrderedSnapshotNodes(doc,paths.fleetdefbuildings);
+		var types = Xpath.getOrderedSnapshotNodes(doc,paths.materialfleetdefbuildings);
 		if(types.snapshotLength > 0){
 		   	for(var table=0;table<types.snapshotLength;table++){
 				var type = types.snapshotItem(table).textContent.trim();
@@ -1337,10 +1337,11 @@ var XnewOgame = {
 				if(typs[k].match(new RegExp(spyStrings['groups'][i], 'gi'))){
 					for (var j in spyStrings['units'][i]) {
 						var m = XnewOgame.getElementInSpyReport(RE,spyStrings['units'][i][j]);
-						if(m != -1)
+						if(m > -1){
 							data[XnewOgame.database[i][j]] = m;
-						else
+						} else {
 							data[XnewOgame.database[i][j]] = 0;
+						}
 					}
 				}
 			}
@@ -1353,14 +1354,11 @@ var XnewOgame = {
 		};
 	},
 	
-	getElementInSpyReport : function (RE,elem) {
+	getElementInSpyReport : function (RE,elem) {		
 		var num = -1;
 		var reg = new RegExp(elem+'\\D+(\\d[\\d.]*)');//recupere le nombre le plus proche apres le texte
-		var m = reg.exec(RE);
-		
-		if(m)
-			num = m[1].trimInt();
-
+		var m = reg.exec(RE);		
+		if(m) num = m[1].trimInt();
 		return num;
 	},
 	
@@ -1376,26 +1374,11 @@ var XnewOgame = {
 	},
 	
 	parseMessage : function () {
-		Xconsole("parseMessage");
+		//Xconsole("parseMessage");
 		
 		var target = this.doc.getElementById('messages');
 		target.win = this.win;
 		target.addEventListener("DOMNodeInserted", this.parseMessageInserted, true);
-	},
-
-	parseMessageTest : function (event) {
-		var doc = event.target.ownerDocument;
-		var messages = Xpath.getOrderedSnapshotNodes(doc,"//div[@class='showmessage']",null);
-		
-		if(messages.snapshotLength > 0) {
-			var message = messages.snapshotItem(0);
-			var messageId = Xpath.getStringValue(doc,"@data-message-id",message);
-			if(this.lastAction != "messageId:"+messageId){
-				var data = Xpath.getSingleNode(doc,"//div[@class='note']",message).textContent;
-				Xconsole("Message "+messageId+"="+data);
-				this.lastAction = "messageId:"+messageId;
-			}
-		}		
 	},
 
 	parseMessageInserted : function (event) {
@@ -1413,13 +1396,13 @@ var XnewOgame = {
 									
 				if(combatreport.snapshotLength > 0) {
 					if(this.lastAction != "combatreport:"+messageId){
-						Xconsole("Traitement du rapport de combat");
+						//Xconsole("Traitement du rapport de combat");
 						this.lastAction = "combatreport:"+messageId;
 						XnewOgame.parseRc(doc);
 					}
 				} else {
 					if(this.lastAction != "message:"+messageId){
-						Xconsole("Traitement du message");
+						//Xconsole("Traitement du message");
 						this.lastAction = "message:"+messageId;
 						var messageBox = Xpath.getSingleNode(doc,paths.messagebox,messageNode);
 							
@@ -1447,7 +1430,9 @@ var XnewOgame = {
 								data.coords = coords;
 								data.subject = subject;
 								data.message = message;						
-							} else Xconsole('The message is not a private message');
+							} else {
+								//Xconsole('The message is not a private message');
+							}
 						}
 						
 						// Messages d'alliance
@@ -1460,7 +1445,9 @@ var XnewOgame = {
 								data.from = m[1];
 								data.tag = m[1];
 								data.message = message;
-							} else Xconsole('The message is not an ally message');
+							} else {
+								//Xconsole('The message is not an ally message');
+							}
 						}
 						
 						var locales = XnewOgame.l('messages');
@@ -1469,7 +1456,7 @@ var XnewOgame = {
 						if(Xprefs.getBool('msg-spy')) {
 							var m = subject.match(new RegExp(locales['espionage of']+XnewOgame.regexps.planetNameAndCoords));
 							if(m){
-								Xconsole('spy detected');						
+								//Xconsole('spy detected');						
 								
 								var contentNode = Xpath.getSingleNode(doc,paths.contents['spy']);
 								var content = contentNode.innerHTML;
@@ -1489,7 +1476,9 @@ var XnewOgame = {
 								
 								Ximplements(data, XnewOgame.parseSpyReport(content,doc));		
 								data.type = 'spy';
-							} else Xconsole('The message is not a spy report');
+							} else { 
+								//Xconsole('The message is not a spy report');
+							}
 						}
 						
 						// Espionnages ennemis
@@ -1505,7 +1494,9 @@ var XnewOgame = {
 									data.to = m[2];
 									data.proba = m[3];
 								}
-							} else Xconsole('The message is not an ennemy spy');
+							} else {
+								//Xconsole('The message is not an ennemy spy');
+							}
 						}
 						
 						//RC
@@ -1515,7 +1506,7 @@ var XnewOgame = {
 								var rapport = Xpath.getStringValue(doc,paths.contents['rc']).trim();
 								var m2 = rapport.match(new RegExp(locales['combat defence']+XnewOgame.regexps.planetNameAndCoords));
 								if (m2) {
-									Xconsole('({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
+									//Xconsole('({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
 									Xprefs.setChar('rc-temp', '({name: "'+m2[1]+'", coords: "'+m2[2]+'"})');
 								}
 							}
@@ -1538,7 +1529,9 @@ var XnewOgame = {
 									data.M_total = nums[2];
 									data.C_total = nums[3];
 								}
-							} else Xconsole('The message is not a harvesting report');
+							} else {
+								//Xconsole('The message is not a harvesting report');
+							}
 						}
 						
 						// Expeditions
@@ -1553,7 +1546,9 @@ var XnewOgame = {
 								data.type = 'expedition';
 								data.coords = coords;
 								data.content = message;
-							} else Xconsole('The message is not an expedition report');
+							} else {
+								//Xconsole('The message is not an expedition report');
+							}
 						}
 				
 						// Commerce
@@ -1587,7 +1582,7 @@ var XnewOgame = {
 								data.cristal = cri;
 								data.deuterium = deut;
 								
-								Xconsole('Livraison du joueur ('+infos[1].trim()+') de la plan�te '+infos[2].trim()+'('+infos[3].trim()+')sur ma plan�te '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+								//Xconsole('Livraison du joueur ('+infos[1].trim()+') de la plan�te '+infos[2].trim()+'('+infos[3].trim()+')sur ma plan�te '+infos[4].trim()+'('+infos[5].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 								
 							} else if (m2!=null) { // Livraison sur la plan�te d'un ami
 								var message = Xpath.getStringValue(doc,paths.contents['livraison_me']).trim(); // Corps du message
@@ -1603,7 +1598,7 @@ var XnewOgame = {
 								if(mesPlanetes!=null && mesPlanetes.snapshotLength > 0){
 								   	for(var i=0;i<mesPlanetes.snapshotLength;i++){
 										var coord = mesPlanetes.snapshotItem(i).textContent.trim();
-										Xconsole('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
+										//Xconsole('Coordonnees='+coord+' | planeteLivraison='+planeteLivraison);
 										if(coord.search(planeteLivraison) > -1){
 											 isMyPlanet=true;
 											 break;
@@ -1629,7 +1624,7 @@ var XnewOgame = {
 									data.cristal = cri;
 									data.deuterium = deut;
 									
-									Xconsole('Je livre de ma plan�te '+infos[1].trim()+'('+infos[2].trim()+') sur la plan�te '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
+									//Xconsole('Je livre de ma plan�te '+infos[1].trim()+'('+infos[2].trim()+') sur la plan�te '+infos[3].trim()+'('+infos[4].trim()+') : Metal='+met+' Cristal='+cri+' Deuterium='+deut);
 								}
 								
 							}/* else {

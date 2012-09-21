@@ -16,9 +16,9 @@ XnewOgame.locales = {
 			'units' : {
 				'resources': {
 					601:'Métal:',
-					602:'Cristal',
-					603:'Deutérium',
-					604:'Energie'
+					602:'Cristal:',
+					603:'Deutérium:',
+					604:'Energie:'
 				},
 				'buildings' : { 
 					1 : 'Mine de métal',						

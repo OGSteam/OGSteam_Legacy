@@ -170,7 +170,7 @@ function XparseDate(dateString,handler) {
 			time.setYear(m[handler.fields.year]);
 		if(handler.fields.month!=-1)
 			time.setMonth(m[handler.fields.month]*1-1);
-		//Xconsole('month:'+m[handler.fields.month]+'|'+parseInt(m[handler.fields.month].trimZeros()));
+		Xconsole('month:'+m[handler.fields.month]+'|'+parseInt(m[handler.fields.month].trimZeros()));
 		if(handler.fields.day!=-1)
 			time.setDate(m[handler.fields.day]);
 		if(handler.fields.hour!=-1)
@@ -180,7 +180,7 @@ function XparseDate(dateString,handler) {
 		if(handler.fields.sec!=-1)
 			time.setSeconds(m[handler.fields.sec]);
 	}
-	//Xconsole(m+' | '+time);
+	Xconsole(m+' | '+time);
 	time =  Math.floor(time.getTime()/1000);//division par 1000 pour un timestamp php
 	return time;
 }
