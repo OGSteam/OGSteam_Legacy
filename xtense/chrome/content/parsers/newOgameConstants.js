@@ -78,7 +78,7 @@ XnewOgame.Xpaths = {
 		},
 		spy : {
 			playername : '//table[@class="material spy"]//span[contains(@class,"status")]/text()',
-			fleetdefbuildings : '//table[contains(@class,"fleetdefbuildings")]//th[@class="area"]',
+			materialfleetdefbuildings : '//table[contains(@class,"fleetdefbuildings") or contains(@class,"material spy")]//th[@class="area"]',
 			moon : '//td[@class="attack"]/a/@href'
 		}
 	},

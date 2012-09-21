@@ -14,7 +14,7 @@ function Request(Tab, callback, scope) {
 			
 			if (Xprefs.getBool('spy-debug')) postData += '&spy_debug=1';
 			if (Xprefs.getBool('dev')) postData += '&dev=1';
-			Xconsole("sending "+postData+" to "+server.url+" from "+server.univers);
+			//Xconsole("sending "+postData+" to "+server.url+" from "+server.univers);
 			new Xajax({
 				url: server.url,
 				post: postData,

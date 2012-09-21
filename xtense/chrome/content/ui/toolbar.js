@@ -54,7 +54,7 @@ var Xtoolbar = {
 			if ('data' in stringStream) stringStream.data = dataString;
 			else 						stringStream.setData(dataString, dataString.length);
 			
-			Xconsole(url+"\n"+dataString);
+			//Xconsole(url+"\n"+dataString);
 			
 			var postData = Cc['@mozilla.org/network/mime-input-stream;1'].createInstance(Ci.nsIMIMEInputStream);
 			postData.addHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -83,7 +83,7 @@ var Xtoolbar = {
 			if ('data' in stringStream) stringStream.data = dataString;
 			else 						stringStream.setData(dataString, dataString.length);
 			
-			Xconsole(url+"\n"+dataString);
+			//Xconsole(url+"\n"+dataString);
 			
 			var postData = Cc['@mozilla.org/network/mime-input-stream;1'].createInstance(Ci.nsIMIMEInputStream);
 			postData.addHeader('Content-Type', 'application/x-www-form-urlencoded');
