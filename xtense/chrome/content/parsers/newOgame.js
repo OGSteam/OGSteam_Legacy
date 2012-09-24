@@ -357,20 +357,15 @@ var XnewOgame = {
 	},
 
 	getPlanetData : function () {
-		var paths = this.Xpaths.planetData;
+		var paths = this.Xpaths.metas;
 
-		if(this.win.resourceTickerMetal.production == '0' && this.win.resourceTickerCrystal.production == '0') { //si le coeficient de ressour est a 0 c'est une lune
+		var type = Xpath.getStringValue(this.doc, paths.planet_type);
+		if(type == 'moon') {
 			this.planet_type = '1';
 		} else this.planet_type = '0';
-		
-		var name = Xpath.getStringValue(this.doc, paths.name);
-		var coords = null;
-		var coords_list = Xpath.getStringValue(this.doc, paths.coords); //Si plusieurs plan�tes
-		if (!coords_list) {
-			//Xconsole("plan&egrave;te unique");
-			coords_list = Xpath.getStringValue(this.doc, paths.coords_unique_planet); //Si 1 seule plan�te
-		}
-		coords = coords_list.match(new RegExp(this.regexps.planetCoords))[1]; //On r�cup�re les coordonn�es
+
+		var name = Xpath.getStringValue(this.doc, paths.planet_name);
+		var coords = Xpath.getStringValue(this.doc, paths.planet_coords);
 		
 		return {planet_name: name, coords : coords, planet_type : this.planet_type};
 	},
