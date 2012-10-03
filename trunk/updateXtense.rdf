@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$sfErF"
-                   em:version="2.4.6"
-                   em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$wfErF"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$rfErF">
-    <RDF:li RDF:resource="rdf:#$sfErF"/>
+  <RDF:Seq RDF:about="rdf:#$.tV4p3">
+    <RDF:li RDF:resource="rdf:#$+tV4p3"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAAZcQkHXjTaSPD9mp0L9obCCjflynEhbWpII0Pq3l2oUEUImirR+RlYZ/u071qxriIT+b1RcHTFbFEKdLvyoxDVB1kKvMsmnlUcPQH0/mDBo5r7C9bc5uqvpXXXoaueg4OP+vekUnW7YfznjIDSck9E1akAfrIjbXpEaNTC2bUDE">
-    <em:updates RDF:resource="rdf:#$rfErF"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAH8j+FqO6pHrZkKoVGFZp6dlCQVGyztBNTp2cmU0GjYVyLau0wOD+EJP8BYIjGFedY3RX5ESgPNAjjR4QJ78O7cACXUf+L0/DnyM7RkrcCIRCj2la3fbcaY2Rujk3Tv4gN2bcJ/1lEcRpOOgMaBrJVHNx+ZULOO+9GS6mH6BaxzU">
+    <em:updates RDF:resource="rdf:#$.tV4p3"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$wfErF"
+  <RDF:Description RDF:about="rdf:#$3uV4p3"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="16.*"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.6"
-                   em:updateHash="sha1:5267219370c2d73a9266f838b366879af6169687" />
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.7"
+                   em:updateHash="sha1:e35cb23a8b613c8a0ddd0ae793f56272e8addc68" />
+  <RDF:Description RDF:about="rdf:#$+tV4p3"
+                   em:version="2.4.7"
+                   em:name="Xtense for Firefox">
+    <em:targetApplication RDF:resource="rdf:#$3uV4p3"/>
+  </RDF:Description>
 </RDF:RDF>
