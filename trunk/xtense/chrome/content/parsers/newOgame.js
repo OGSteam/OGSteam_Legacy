@@ -362,11 +362,11 @@ var XnewOgame = {
 		var type = Xpath.getStringValue(this.doc, paths.planet_type);
 		if(type == 'moon') {
 			this.planet_type = '1';
-		} else this.planet_type = '0';
-
+		} else {
+			this.planet_type = '0';
+		}
 		var name = Xpath.getStringValue(this.doc, paths.planet_name);
-		var coords = Xpath.getStringValue(this.doc, paths.planet_coords);
-		
+		var coords = Xpath.getStringValue(this.doc, paths.planet_coords);		
 		return {planet_name: name, coords : coords, planet_type : this.planet_type};
 	},
 	
