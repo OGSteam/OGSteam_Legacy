@@ -1020,10 +1020,10 @@ var XnewOgame = {
 						//Xconsole('row '+i+' > player_id:'+player_id+',player_name:'+name+',ally_id:'+ally_id+',ally_tag:'+ally+',points:'+points);		
 						var r = {player_id:player_id,player_name:name,ally_id:ally_id,ally_tag:ally,points:points,nb_spacecraft:vaisseaux};
 					} else if(type[0] == 'ally') {
-						var members = Xpath.getStringValue(doc,paths.ally.members,row).getInts();
+						var members = Xpath.getStringValue(doc,paths.ally.members,row).trim().getInts();
 						var moy = Xpath.getStringValue(doc,paths.ally.points_moy,row).replace("|.", "").trimInt();
 						
-						//Xconsole('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);
+						//Xconsole('row '+i+' > ally_id:'+ally_id+',ally_tag:'+ally+',members:'+members+',points:'+points+',mean:'+moy);						
 						var r = {ally_id:ally_id,ally_tag:ally,members:members,points:points,mean:moy};
 					}
 					rowsData[n]=r;
@@ -1045,7 +1045,7 @@ var XnewOgame = {
 								time: time
 							}
 						);
-						
+						//Xdump(rowsData);						
 						Request.set('lang',XnewOgame.lang);
 						Request.send(XnewOgame.servers);
 					}
@@ -1436,6 +1436,8 @@ var XnewOgame = {
 							if(m){
 								var contentNode = Xpath.getSingleNode(doc,paths.contents['ally_msg'],messageBox);
 								var message = contentNode.innerHTML.replace(new RegExp(XnewOgame.regexps.ally_msg_player_name, "g"), "$1");
+								if(message.search("<") > -1 && message.search(">") > -1) message=contentNode.textContent.trim(); // patch des tag html qui bloquent l'envoi 
+
 								data.type = 'ally_msg';
 								data.from = m[1];
 								data.tag = m[1];
@@ -1631,7 +1633,7 @@ var XnewOgame = {
 						if(data.type == ''){
 							this.Tab.setStatus(Xl('no messages'), XLOG_NORMAL, {url: this.url});
 							return false;
-						} else {
+						} else {							
 							var Request = XnewOgame.newRequest();
 							Request.set('data', data);
 							Request.set('type', 'messages');
