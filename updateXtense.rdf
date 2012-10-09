@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$.tV4p3">
-    <RDF:li RDF:resource="rdf:#$+tV4p3"/>
+  <RDF:Seq RDF:about="rdf:#$073M.3">
+    <RDF:li RDF:resource="rdf:#$173M.3"/>
   </RDF:Seq>
-  <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAH8j+FqO6pHrZkKoVGFZp6dlCQVGyztBNTp2cmU0GjYVyLau0wOD+EJP8BYIjGFedY3RX5ESgPNAjjR4QJ78O7cACXUf+L0/DnyM7RkrcCIRCj2la3fbcaY2Rujk3Tv4gN2bcJ/1lEcRpOOgMaBrJVHNx+ZULOO+9GS6mH6BaxzU">
-    <em:updates RDF:resource="rdf:#$.tV4p3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$3uV4p3"
+  <RDF:Description RDF:about="rdf:#$573M.3"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="16.*"
-                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.7"
-                   em:updateHash="sha1:e35cb23a8b613c8a0ddd0ae793f56272e8addc68" />
-  <RDF:Description RDF:about="rdf:#$+tV4p3"
-                   em:version="2.4.7"
+                   em:updateLink="http://update.ogsteam.fr/xtense/download.php?download=xtense-2.4.8"
+                   em:updateHash="sha1:20bfb06c5e8e4d67a2def88d318c95a5af7b89d8" />
+  <RDF:Description RDF:about="rdf:#$173M.3"
+                   em:version="2.4.8"
                    em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$3uV4p3"/>
+    <em:targetApplication RDF:resource="rdf:#$573M.3"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAClvL9LehEIMT18YkGlGYoFVX8tZoj772SqZG59F65aqNt6FEMiTpkACc52pyFXSuBuG0zoVpBBQqCTAVKt2k24478rMxRQnQymMnK2Hsomo995XVjhaSwg3inGFW6YC/ekxNYlXNAKK/vo6rDI52Ln58FCd0MKPWXByryhf4G0R">
+    <em:updates RDF:resource="rdf:#$073M.3"/>
   </RDF:Description>
 </RDF:RDF>
