@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name	    Xtense-GM
-// @version     2.4.8.1
+// @version     2.4.8.2
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @updateURL   http://userscripts.org/scripts/source/112690.meta.js
@@ -12,7 +12,7 @@
 // ==/UserScript==
 
 // Variables Xtense
-var VERSION = "2.4.8.1";
+var VERSION = "2.4.8.2";
 var TYPE = "GM-";
 var PLUGIN_REQUIRED = "2.4.0";
 var callback = null;
@@ -233,7 +233,22 @@ function XtenseParseDate(dateString,handler) {
 }
 // Fonction SHA et MD5
 eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('l 3Q(w){l P(n,s){e 2w=(n<<s)|(n>>>(32-s));f 2w};l 2z(1w){e 1c="";e i;e 2d;e 1Y;J(i=0;i<=6;i+=2){2d=(1w>>>(i*4+4))&1X;1Y=(1w>>>(i*4))&1X;1c+=2d.1N(16)+1Y.1N(16)}f 1c};l 1a(1w){e 1c="";e i;e v;J(i=7;i>=0;i--){v=(1w>>>(i*4))&1X;1c+=v.1N(16)}f 1c};l 1K(q){q=q.2q(/\\r\\n/g,"\\n");e u="";J(e n=0;n<q.T;n++){e c=q.L(n);Y(c<X){u+=M.N(c)}1e Y((c>2k)&&(c<2r)){u+=M.N((c>>6)|2s);u+=M.N((c&1b)|X)}1e{u+=M.N((c>>12)|2t);u+=M.N(((c>>6)&1b)|X);u+=M.N((c&1b)|X)}}f u};e 1E;e i,j;e W=2o 1L(3B);e 1r=2i;e 1x=2j;e 1i=2f;e 1h=2g;e 1B=3F;e A,B,C,D,E;e K;w=1K(w);e O=w.T;e S=2o 1L();J(i=0;i<O-3;i+=4){j=w.L(i)<<24|w.L(i+1)<<16|w.L(i+2)<<8|w.L(i+3);S.1j(j)}3G(O%4){1Q 0:i=3T;1M;1Q 1:i=w.L(O-1)<<24|3r;1M;1Q 2:i=w.L(O-2)<<24|w.L(O-1)<<16|2F;1M;1Q 3:i=w.L(O-3)<<24|w.L(O-2)<<16|w.L(O-1)<<8|2n;1M}S.1j(i);2p((S.T%16)!=14)S.1j(0);S.1j(O>>>29);S.1j((O<<3)&R);J(1E=0;1E<S.T;1E+=16){J(i=0;i<16;i++)W[i]=S[1E+i];J(i=16;i<=2h;i++)W[i]=P(W[i-3]^W[i-8]^W[i-14]^W[i-16],1);A=1r;B=1x;C=1i;D=1h;E=1B;J(i=0;i<=19;i++){K=(P(A,5)+((B&C)|(~B&D))+E+W[i]+3c)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=20;i<=39;i++){K=(P(A,5)+(B^C^D)+E+W[i]+3s)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=3U;i<=2N;i++){K=(P(A,5)+((B&C)|(B&D)|(C&D))+E+W[i]+2V)&R;E=D;D=C;C=P(B,30);B=A;A=K}J(i=2Y;i<=2h;i++){K=(P(A,5)+(B^C^D)+E+W[i]+2R)&R;E=D;D=C;C=P(B,30);B=A;A=K}1r=(1r+A)&R;1x=(1x+B)&R;1i=(1i+C)&R;1h=(1h+D)&R;1B=(1B+E)&R}e K=1a(1r)+1a(1x)+1a(1i)+1a(1h)+1a(1B);f K.2v()}l 33(q){l 1v(1z,2c){f(1z<<2c)|(1z>>>(32-2c))}l h(1W,1U){e 1V,1T,1d,1f,18;1d=(1W&2a);1f=(1U&2a);1V=(1W&1O);1T=(1U&1O);18=(1W&2u)+(1U&2u);Y(1V&1T){f(18^2a^1d^1f)}Y(1V|1T){Y(18&1O){f(18^3a^1d^1f)}1e{f(18^1O^1d^1f)}}1e{f(18^1d^1f)}}l F(x,y,z){f(x&y)|((~x)&z)}l G(x,y,z){f(x&z)|(y&(~z))}l H(x,y,z){f(x^y^z)}l I(x,y,z){f(y^(x|(~z)))}l o(a,b,c,d,x,s,U){a=h(a,h(h(F(b,c,d),x),U));f h(1v(a,s),b)};l t(a,b,c,d,x,s,U){a=h(a,h(h(G(b,c,d),x),U));f h(1v(a,s),b)};l m(a,b,c,d,x,s,U){a=h(a,h(h(H(b,c,d),x),U));f h(1v(a,s),b)};l p(a,b,c,d,x,s,U){a=h(a,h(h(I(b,c,d),x),U));f h(1v(a,s),b)};l 2e(q){e Z;e 1C=q.T;e 26=1C+8;e 2m=(26-(26%2l))/2l;e 1P=(2m+1)*16;e V=1L(1P-1);e 1y=0;e Q=0;2p(Q<1C){Z=(Q-(Q%4))/4;1y=(Q%4)*8;V[Z]=(V[Z]|(q.L(Q)<<1y));Q++}Z=(Q-(Q%4))/4;1y=(Q%4)*8;V[Z]=V[Z]|(2n<<1y);V[1P-2]=1C<<3;V[1P-1]=1C>>>29;f V};l 1q(1z){e 1S="",1R="",27,1t;J(1t=0;1t<=3;1t++){27=(1z>>>(1t*8))&3u;1R="0"+27.1N(16);1S=1S+1R.3w(1R.T-2,2)}f 1S};l 1K(q){q=q.2q(/\\r\\n/g,"\\n");e u="";J(e n=0;n<q.T;n++){e c=q.L(n);Y(c<X){u+=M.N(c)}1e Y((c>2k)&&(c<2r)){u+=M.N((c>>6)|2s);u+=M.N((c&1b)|X)}1e{u+=M.N((c>>12)|2t);u+=M.N(((c>>6)&1b)|X);u+=M.N((c&1b)|X)}}f u};e x=1L();e k,2b,1Z,25,28,a,b,c,d;e 1o=7,1m=12,1n=17,1p=22;e 1I=5,1J=9,1k=14,1u=20;e 1g=4,1A=11,1F=16,1D=23;e 1s=6,1l=10,1G=15,1H=21;q=1K(q);x=2e(q);a=2i;b=2j;c=2f;d=2g;J(k=0;k<x.T;k+=16){2b=a;1Z=b;25=c;28=d;a=o(a,b,c,d,x[k+0],1o,2B);d=o(d,a,b,c,x[k+1],1m,2C);c=o(c,d,a,b,x[k+2],1n,2E);b=o(b,c,d,a,x[k+3],1p,2G);a=o(a,b,c,d,x[k+4],1o,2H);d=o(d,a,b,c,x[k+5],1m,2I);c=o(c,d,a,b,x[k+6],1n,2K);b=o(b,c,d,a,x[k+7],1p,2L);a=o(a,b,c,d,x[k+8],1o,3j);d=o(d,a,b,c,x[k+9],1m,3k);c=o(c,d,a,b,x[k+10],1n,2O);b=o(b,c,d,a,x[k+11],1p,2P);a=o(a,b,c,d,x[k+12],1o,2U);d=o(d,a,b,c,x[k+13],1m,2T);c=o(c,d,a,b,x[k+14],1n,2W);b=o(b,c,d,a,x[k+15],1p,31);a=t(a,b,c,d,x[k+1],1I,34);d=t(d,a,b,c,x[k+6],1J,35);c=t(c,d,a,b,x[k+11],1k,36);b=t(b,c,d,a,x[k+0],1u,38);a=t(a,b,c,d,x[k+5],1I,3b);d=t(d,a,b,c,x[k+10],1J,3d);c=t(c,d,a,b,x[k+15],1k,3e);b=t(b,c,d,a,x[k+4],1u,3g);a=t(a,b,c,d,x[k+9],1I,3i);d=t(d,a,b,c,x[k+14],1J,3l);c=t(c,d,a,b,x[k+3],1k,3m);b=t(b,c,d,a,x[k+8],1u,3n);a=t(a,b,c,d,x[k+13],1I,3o);d=t(d,a,b,c,x[k+2],1J,3q);c=t(c,d,a,b,x[k+7],1k,3t);b=t(b,c,d,a,x[k+12],1u,3x);a=m(a,b,c,d,x[k+5],1g,3y);d=m(d,a,b,c,x[k+8],1A,3z);c=m(c,d,a,b,x[k+11],1F,3C);b=m(b,c,d,a,x[k+14],1D,3E);a=m(a,b,c,d,x[k+1],1g,3H);d=m(d,a,b,c,x[k+4],1A,3I);c=m(c,d,a,b,x[k+7],1F,3K);b=m(b,c,d,a,x[k+10],1D,3L);a=m(a,b,c,d,x[k+13],1g,3M);d=m(d,a,b,c,x[k+0],1A,3N);c=m(c,d,a,b,x[k+3],1F,3P);b=m(b,c,d,a,x[k+6],1D,3S);a=m(a,b,c,d,x[k+9],1g,2x);d=m(d,a,b,c,x[k+12],1A,2A);c=m(c,d,a,b,x[k+15],1F,2D);b=m(b,c,d,a,x[k+2],1D,2M);a=p(a,b,c,d,x[k+0],1s,2Q);d=p(d,a,b,c,x[k+7],1l,2S);c=p(c,d,a,b,x[k+14],1G,2Z);b=p(b,c,d,a,x[k+5],1H,37);a=p(a,b,c,d,x[k+12],1s,3f);d=p(d,a,b,c,x[k+3],1l,3D);c=p(c,d,a,b,x[k+10],1G,3p);b=p(b,c,d,a,x[k+1],1H,3v);a=p(a,b,c,d,x[k+8],1s,3A);d=p(d,a,b,c,x[k+15],1l,3J);c=p(c,d,a,b,x[k+6],1G,3O);b=p(b,c,d,a,x[k+13],1H,2y);a=p(a,b,c,d,x[k+4],1s,2J);d=p(d,a,b,c,x[k+11],1l,2X);c=p(c,d,a,b,x[k+2],1G,3h);b=p(b,c,d,a,x[k+9],1H,3R);a=h(a,2b);b=h(b,1Z);c=h(c,25);d=h(d,28)}e K=1q(a)+1q(b)+1q(c)+1q(d);f K.2v()}',62,243,'||||||||||||||var|return||AddUnsigned||||function|HH||FF|II|string|||GG|utftext||msg|||||||||||||for|temp|charCodeAt|String|fromCharCode|msg_len|rotate_left|lByteCount|0x0ffffffff|word_array|length|ac|lWordArray||128|if|lWordCount|||||||||lResult||cvt_hex|63|str|lX8|else|lY8|S31|H3|H2|push|S23|S42|S12|S13|S11|S14|WordToHex|H0|S41|lCount|S24|RotateLeft|val|H1|lBytePosition|lValue|S32|H4|lMessageLength|S34|blockstart|S33|S43|S44|S21|S22|Utf8Encode|Array|break|toString|0x40000000|lNumberOfWords|case|WordToHexValue_temp|WordToHexValue|lY4|lY|lX4|lX|0x0f|vl|BB||||||CC|lNumberOfWords_temp1|lByte|DD||0x80000000|AA|iShiftBits|vh|ConvertToWordArray|0x98BADCFE|0x10325476|79|0x67452301|0xEFCDAB89|127|64|lNumberOfWords_temp2|0x80|new|while|replace|2048|192|224|0x3FFFFFFF|toLowerCase|t4|0xD9D4D039|0x4E0811A1|lsb_hex|0xE6DB99E5|0xD76AA478|0xE8C7B756|0x1FA27CF8|0x242070DB|0x08000|0xC1BDCEEE|0xF57C0FAF|0x4787C62A|0xF7537E82|0xA8304613|0xFD469501|0xC4AC5665|59|0xFFFF5BB1|0x895CD7BE|0xF4292244|0xCA62C1D6|0x432AFF97|0xFD987193|0x6B901122|0x8F1BBCDC|0xA679438E|0xBD3AF235|60|0xAB9423A7||0x49B40821||MD5|0xF61E2562|0xC040B340|0x265E5A51|0xFC93A039|0xE9B6C7AA||0xC0000000|0xD62F105D|0x5A827999|0x2441453|0xD8A1E681|0x655B59C3|0xE7D3FBC8|0x2AD7D2BB|0x21E1CDE6|0x698098D8|0x8B44F7AF|0xC33707D6|0xF4D50D87|0x455A14ED|0xA9E3E905|0xFFEFF47D|0xFCEFA3F8|0x0800000|0x6ED9EBA1|0x676F02D9|255|0x85845DD1|substr|0x8D2A4C8A|0xFFFA3942|0x8771F681|0x6FA87E4F|80|0x6D9D6122|0x8F0CCC92|0xFDE5380C|0xC3D2E1F0|switch|0xA4BEEA44|0x4BDECFA9|0xFE2CE6E0|0xF6BB4B60|0xBEBFBC70|0x289B7EC6|0xEAA127FA|0xA3014314|0xD4EF3085|SHA1|0xEB86D391|0x4881D05|0x080000000|40'.split('|'),0,{}))
-
+//Fonction pour récupérer les nodes par nom de classe : http://www.developpez.net/forums/d620166/webmasters-developpement-web/javascript/dom-javascript-getelement-class/
+function getElementByAttr(e,attr,value)
+{
+	var tab = [];
+	if (e.getAttribute && e.getAttribute(attr)==value)
+	  tab.push(e);
+ 
+	var n = e.firstChild;
+	if (n==null || typeof n=='undefined') return tab;
+	do
+	{
+	  var tab2 = getElementByAttr(n,attr,value);
+		tab = tab.concat(tab2);
+	}while((n = n.nextSibling)!=null)
+	return tab;
+}
 /************************** Fin Utilities *******************************/
 
 
@@ -353,15 +368,6 @@ function parse_galaxy_system_inserted(event){
 	
 				var moon = XPath.getUnorderedSnapshotNodes(document,paths.moon,row);
 				moon = moon.snapshotLength > 0 ? 1 : 0;
-				/*var status = XPath.getUnorderedSnapshotNodes(document,paths.status,row);
-				if(status.snapshotLength>0){
-					status = status.snapshotItem(0);
-					status = status.textContent;
-					status = status.match(/\((.*)\)/);
-					status = status ? status[1] : "";
-					status = status.trimAll();
-				}
-				else status = "";*/
                 
                 var statusNodes = XPath.getUnorderedSnapshotNodes(document,paths.status,row);
 				var status="";
@@ -428,23 +434,20 @@ log('row '+position+' > player_id:'+player_id+',planet_name:'+name+',moon:'+moon
 			XtenseRequest.send();
 			GM_setValue(prefix_GMData +'lastAction','s:'+coords[0]+':'+coords[1]);
 		}
-		get_galaxycontent();
 	}
 }
 
 /* Fonction appelée lors d'évenement sur le chargement de la page d'alliance */
-function parse_ally_inserted(event) {
-		try {
+function parse_ally_inserted() {
 			//log("last_action="+GM_getValue(prefix_GMData +'lastAction',''));
 			if (GM_getValue(prefix_GMData +'lastAction','') != 'ally_list'){
 				setStatus(XLOG_NORMAL,Xl('ally_list_detected'));
 				
-				//var doc = event.target.ownerDocument;
 				var paths = XtenseXpaths.ally_members_list;
 				var rows = XPath.getOrderedSnapshotNodes(document,paths.rows);
 				var rowsData = [];
 				
-				//log(rows.snapshotLength+" membres à envoyer !");
+				log(rows.snapshotLength+" membres à envoyer !");
 				
 				for (var i = 0; i < rows.snapshotLength; i++) {
 					var row = rows.snapshotItem(i);
@@ -474,9 +477,6 @@ function parse_ally_inserted(event) {
 				}
 				get_ally_content();
 			}
-		} catch (e) {
-			throw_error(e);
-		}
 }
 
 /* Fonction appelée lors d'évenement sur le chargement des classements */
@@ -1585,10 +1585,10 @@ function displayOptions(){
 	options+= '<td class="champ"><label class="styled textBeefy">Mot de passe</label></td>';
 	options+= '<td class="value"><input class="speed" id="server.pwd" value="'+GM_getValue(prefix_GMData +'server.pwd','mot de passe')+'" size="35" alt="24" type="password"/></td>';
 	options+= '</tr>';
-	options+= '<tr>';
+	/*options+= '<tr>';
 	options+= '<td class="champ"><label class="styled textBeefy">Initialiser le serveur ?</label></td>';
 	options+= '<td class="value"><input class="speed" id="server.check" size="35" alt="24" type="checkbox"'+ server_check +'/></td>';
-	options+= '</tr>';
+	options+= '</tr>';*/
 	options+= '</tbody></table>';
 	options+= '</div>';			
 	/*---------------------------- Pages -----------------------------------------------*/
@@ -1776,9 +1776,9 @@ function displayXtense(){
     
     //Lien vers OGSpy
     var ogspy_link = GM_getValue(prefix_GMData +'server.url.plugin','http://www.ogsteam.fr').split('mod')[0];
-    
+    log(getElementByAttr(document,"className","showmessage"));
     // Page classique
-    if (document.getElementById('playerName') && !document.getElementById('messagebox') && !document.getElementById('combatreport')){
+    if (document.getElementById('playerName') && !document.getElementById('ui-dialog-title-1') && !document.getElementById('combatreport')){
 		var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
     
     	var aAttrs = "";    
@@ -1802,8 +1802,9 @@ function displayXtense(){
     		document.getElementById('menuTable').removeChild(document.getElementById('optionXtense'));
     	}
     	menuAlliance.parentNode.insertBefore(li1, menuAlliance.nextSibling);
-    } else if(document.getElementById('messages')){ // Dans les messages ?
-    	var toolbarMessage = XPath.getSingleNode(document,"//span[contains(@id,'ui-dialog-title']");
+    } else if(getElementByAttr(document,"className","showmessage")){ // Dans les messages ?
+    	log("icon for messages");
+        var toolbarMessage = XPath.getSingleNode(document,"//div[contains(@id,'messages']");
     	var icone = 'data:image/gif;base64,R0lGODlhJgAdAMZ8AAAAABwgJTU4OhwhJRYaHjQ3OQcICjM2OA8SFQoMDxsgJB0hJjI1Nw8TFQcICAQEBDE0NgwPEAECAiYoKREVGB8lKi4yNCMlJgoNDzAzNiMnKzE0NxATFgsNECwuMAEBASotMB4iJyImKg8SFg4PDw8QESEjJQICAiAkKRgZGhsdHhUWFwoLCwoMDjI2OBcbHxsgIw0PEhsfIx8jJywvMh8hIhobHB8kKQkMDQYICQoNECwwMxcZGQsOER0iJygrLxweHysuMSUoLAkLDiQnKwwPESElKTM2NyAiIwcKCyAjJxoeISIlKiIkJRIWGRQWFiosLSUnKDAzNBscHRoeIgMEBDAyNA4ODyAkKAcICQkKCwwQEiMnKhwgJBIVGRAQEScqLiosLgcJCgcJCzQ2OAQEBQgICAkJCiksMCQmJwYHCSAjKC0vMQYGBh4jJyUpLSksLRAUFygsLzM2OSsuLyotMQwNDTAzNS4xMiwvMAkJDAkLDf///////////////yH5BAEAAH8ALAAAAAAmAB0AAAf+gH+CFQOFhoeIiRWCjI2ON4cBkpKIlIgVMI6af4SFk5+gk5UwBJuNBIahqqs+paaCBKuyoG4BA66vBFSgAr2+k74CnwoBuKaxkz7AvZ9rAcyTCgrGm8iq0Mug0tSa1qG/ktiTXbevsDKfC5/YwqvcjgTosszt7uZ/BN7f4Kov741i8gkcKLAXwYNZ7gFYyLAhQ18OIyqM6DCYAIoMJ2JceBFAr40ANGLs6PEjRpERTXJUyVBCSHMbWa48CZOizJUkG6IsGaxhT4k1I7oESXHnwqFEHd7LAUBN0qT3huDYI3VMEgNYs27EmkOLnnt/tsQoUqRHh7MY0iZY24KtDh0gAHpEmAtWkBMvceJw2NsAQV+/IwALpkChruHDiBPXDQQAOw==';
         
         var liXtense = document.createElement("li");
@@ -1887,14 +1888,14 @@ XtenseXpaths = {
 			planet_coords: "//meta[@name=\'ogame-planet-coordinates\']/@content",
 			planet_type: "//meta[@name=\'ogame-planet-type\']/@content"
 		},
-		ally_members_list : {
-			rows : '//table[@class="members zebra bborder"]/tbody/tr',
-			player : 'td[1]',
-			rank : 'td[4]/span',
-			points : 'td[4]/span/@title',
-			coords : 'td[5]/a',
-			tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
-		},
+        ally_members_list : {
+            rows : '//table[@id="member-list"]/tbody/tr',
+            player : 'td[1]',
+            rank : 'td[4]/a',
+            points : 'td[4]/@title',
+            coords : 'td[5]/span/a',
+            tag : '//table[@class="members bborder"]/tbody/tr[2]/td[2]/span'
+        },
 		overview : {
 			cases : ".//*[@id='diameterContentField']/span[2]/text()",
 			temperatures : ".//*[@id='temperatureContentField']/text()"
@@ -1997,21 +1998,19 @@ XtenseXpaths = {
 			antimatiere : "//span[@id=\'resources_darkmatter\']/text()",
 			energie : "//span[@id=\'resources_energy\']/text()"	
 		},
-		
-		rc : {
-			list_infos : '//div[contains(@class,"combatreport")]',
-			list_rounds : '//div[@class="round_info"]',
-			infos: {
-				player : 'span[contains(@class, "name")]',
-				weapons : 'span[contains(@class, "weapons")]',
-				destroyed : 'span[contains(@class, "destroyed")]'
-			},
-			list_types : 'table/tbody/tr[1]/th',
-			list_values : 'table/tbody/tr[2]/td',
-			result : '//div[@id="combat_result"]',
-			combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
-		},
-		
+        rc : {
+            list_infos : '//td[@class="newBack"]/center',
+            list_rounds : '//div[@class="round_info"]',
+            infos : {
+                player : 'span[contains(@class, "name")]',
+                weapons : 'span[contains(@class, "weapons")]',
+                destroyed : 'span[contains(@class, "destroyed")]'
+            },
+            list_types : 'table/tbody/tr[1]/th',
+            list_values : 'table/tbody/tr[2]/td',
+            result : '//div[@id="combat_result"]',
+            combat_round : '//div[@id="master"]'//div[@class="combat_round"]'
+        },		
 		writemessage : {
 			form : '//form[1]',
 			from : 'id("wrapper")/form/div/table/tbody/tr[1]/td',
@@ -2436,127 +2435,7 @@ function initLocales(){
 };
 if (XtenseMetas.getLanguage() == 'en') { 
 //TODO : à traduire !! 
-    Xlang = {
-        http_status_403: 'statut 403, Impossible d\'acceder au plugin Xtense.',
-        http_status_404: 'statut 404, Plugin Xtense introuvable, vérifiez que vous avez bien mis la bonne adresse vers le plugin Xtense',
-        http_status_500: 'statut 500: Erreur interne au serveur.',
-        http_timeout: 'Le serveur n\'a pas répondu à temps. Verifiez que votre hébergeur ne rencontre pas des problêmes de reseau.',
-        //
-        empty_response : 'Réponse du plugin vide',
-        invalid_response : 'Impossible de récupérer les données envoyées par le plugin, verifiez que votre hebergeur ne rajoute pas de la pub, ce qui peut provoquer cette erreur.',
-        //
-        php_version : 'La version PHP de votre hébergement n\'est pas assez récente. Xtense requiert au minimum la version 5.1 de PHP.',
-        wrong_version_plugin : 'Vous ne pouvez pas vous connecter au plugin, sa version est trop vielle pour pouvoir être utilisée avec votre barre d\'outils. Version du plugin : $1, version requise : $2 \nVous devez mettre à jour le plugin Xtense avant de pouvoir continuer', // Actual pluhin version, version required
-        wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-        wrong_version_toolbar : 'Vous ne pouvez pas vous connecter au plugin avec votre version de Xtense.\nVotre version : $1, requise : $2\nVous devez mettre à jour votre barre d\'outils Xtense avant de pouvoir continuer', // Actual toolbar version, version required
-        server_active: 'le serveur OGSpy est pour le moment désactivé',
-        plugin_connections: 'Connexions au plugin Xtense désactivées',
-        plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-        plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-        username: 'Le compte "$1" est inconnu. Attention à la casse (différence Majuscules / minuscules)', // Username
-        password: 'Votre mot de passe n\'est pas bon. Attention à la casse (différence Majuscules / minuscules)',
-        user_active: 'Votre compte est inactif, vous ne pouvez pas vous connecter',
-        //
-        informations : 'Informations',
-        server_name : 'Nom du serveur OGSpy', // Server name TODO : A internationaliser dans les options
-        version : 'Version', // version
-        //
-        grant_can : 'pouvez',
-        grant_cannot : 'ne pouvez pas',
-        grant_system : 'Vous $1 ajouter des systêmes solaires', // can / cannot
-        grant_ranking : 'Vous $1 ajouter des classements', // can / cannot
-        grant_empire : 'Vous $1 mettre à jour votre espace personnel (Batiments, Recherches, Empire...)', // can / cannot
-        grant_messages : 'Vous $1 ajouter de messages (Rapports d\'espionnages, Rapports de combats, Espionnages ennemis...)', // can / cannot
-        //
-        unknow_page: 'Page inconnue',
-        Xtense_activated : 'Activer',
-        Xtense_deactivated : 'Desactiver',
-        wait_send: 'En attente de l\'envoi manuel des données',
-        unavailable_parser_lang: 'Xtense ne prend pas en charge ce serveur de jeu ($1)', // lang (ogame domain extension) TODO
-        //
-        overview_detected: 'Vue générale détectée',
-        buildings_detected: 'Batiments détectés',
-        installations_detected: 'Installations détectés',
-        researchs_detected: 'Recherches détectés',
-        fleet_detected: 'Flotte détectée',
-        defense_detected: 'Défenses détectés',
-        messages_detected: 'Page de messages détectée',
-        ranking_detected: 'Statistiques $2 des $1 détectées', // Primary type (ally/player), Secondary type (points, research, fleet)
-        ally_list_detected: 'Liste des joueurs de l\'alliance détectée',
-        system_detected: 'Système solaire détecté: ', // Galaxy, System
-        re_detected: 'Rapport d\'espionnage détecté',
-        rc_detected: 'Rapport de combat détecté',
-        res_detected: 'Message de commerce détecté',
-        //
-        ranking_player: 'joueurs',
-        ranking_ally: 'alliances',
-        ranking_points: 'points',
-        ranking_fleet: 'militaire',
-        ranking_research: 'recherches',
-        ranking_defense: 'défense',
-        ranking_buildings: 'bâtiments',
-		ranking_fleet5 : 'militaire construit',
-        ranking_fleet6 : 'militaire destruction',
-        ranking_fleet4 : 'militaire pertes',
-        ranking_fleet7 : 'militaire honneur',
-        ranking_economy : 'économique',
-        //
-        invalid_system : 'Systême solaire non pris en compte',
-        invalid_ranking : 'Page des statistiques invalide',
-        invalid_rc : 'Rapport de combat invalide (Contact perdu)',
-        no_ranking : 'Aucun classement à envoyer',
-        no_messages : 'Aucun message à envoyer',
-
-        // Responses
-        response_start: 'Serveur $1 : ', // Serveur number
-        http_status_unknow : 'Code d\'erreur Inconnu $1', // Http status
-        response_hack : 'Les données envoyées ont été refusées par le plugin Xtense',
-        //
-        error_php_version : 'Le plugin requiert PHP 5.1 pour fonctionner, la version actuelle ($1) n\'est pas assez récente',
-        error_wrong_version_plugin : 'La version du mod Xtense sur le serveur est incompatible avec la version de votre barre d\'outils (requise: $1, version du mod : $2)', // required version, actual version
-        error_wrong_version_xtense : 'Votre fichier xtense.php n\'a pas la même version que celle du plugin installé',
-        error_wrong_version_toolbar : 'La version de la barre d\'outils Xtense est incompatible avec celle du plugin (requise: $1, votre version: $2)', // required version, actual version
-        error_server_active : 'Serveur OGSpy inactif (Raison: $1)', // reason
-        error_username: 'Pseudo invalide',
-        error_password: 'Mot de passe invalide',
-        error_user_active: 'Votre compte est inactif',
-        error_home_full: 'Votre espace personnel est plein, impossible de rajouter une nouvelle planête',
-        error_plugin_connections: 'Connexions au plugin Xtense non autorisées',
-        error_plugin_config: 'Plugin Xtense non configuré par votre administrateur, impossible de l\'utiliser',
-        error_plugin_univers: 'Numéro d\'univers d\'Ogame invalide sur cet OGSpy',
-        error_grant_start: 'Vous ne possédez pas les autorisations nécessaires pour envoyer ',
-        error_grant_empire: 'des pages de votre empire (Bâtiments, Laboratoire...)',
-        error_grant_messages: 'des messages',
-        error_grant_system: 'des systèmes solaires',
-        error_grant_ranking: 'des classements',
-        //
-        success_home_updated : 'Espace personnel mis à jour ($1)', // Page name
-        success_system : 'Mise à jour du système solaire [$1:$2] effectuée', // Galaxy, System
-        success_ranking : 'Classement $2 des $1 ($3-$4) mis à jour', // Primary type, secondary type, offset min, offset max
-        success_rc : 'Rapport de combat envoyé',
-        success_ally_list : 'Liste des joueurs de l\'alliance [$1] correctement envoyée', // TAG
-        success_messages : 'Message correctement envoyé',
-        success_fleetSending : 'Départ de flotte correctement envoyé',
-        success_spy : 'Rapport d\'espionnage correctement envoyé',
-        success_res : 'Message de commerce correctement envoyé',
-        success_research : 'Mise à jour des technologies effectuée',
-        success_buildings : 'Mise à jour des bâtiments effectuée',
-        success_station : 'Mise à jour des installations effectuée',
-        //
-        unknow_response: 'Code réponse inconnu : "$1", data: "$2"', // code, content
-        //
-        page_overview: 'Vue générale',
-        page_buildings: 'Bâtiments',
-        page_installations: 'Installations',
-        page_labo: 'Laboratoire',
-        page_defense: 'Défense',
-        page_fleet: 'Flotte',
-        page_fleetSending: 'Départ de flotte',
-        //
-        //'PM':'MP',
-        call_messages : '-- Messages renvoyés par les appels'
-  
-    };
+    //Xlang = {};
 
 }
 	Ximplements(XtenseLocales , {
@@ -2743,114 +2622,7 @@ if (XtenseMetas.getLanguage() == 'en') {
 	},
 	
 	'en': {
-		'spy reports' : {
-			'groups' : {
-				'resources': 'Resources',
-				'buildings': 'Buildings',
-				'defense':  'Defense',
-				'fleet': 'Fleet',
-				'researchs': 'Research'
-			},
-			'units' : {
-				'resources': {
-					601:'Metal',
-					602:'Crystal',
-					603:'Deuterium',
-					604:'Energy'
-				},
-				'buildings' : { 
-					1 : 'Metal Mine',						
-					2 : 'Crystal Mine', 
-					3 : 'Deuterium Synthesizer', 
-					4 : 'Solar Plant', 				
-					12 : 'Fusion Reactor', 
-					14 : 'Robotics Factory', 
-					15 : 'Nanite Factory', 			
-					21 : 'Shipyard', 
-					22 : 'Metal Storage', 
-					23 : 'Crystal Storage', 			
-					24 : 'Deuterium Tank', 
-					31 : 'Research Lab', 
-					33 : 'Terraformer', 				
-					34 : 'Alliance Depot', 
-					44 : 'Missile Silo', 
-					41 : 'Lunar Base', 		
-					42 : 'Sensor Phalanx', 
-					43 : 'Jump Gate'
-				},
-				'researchs' :  { 
-					106 : 'Espionage Technology', 
-					108 : 'Computer Technology', 
-					109 : 'Weapons Technology',		
-					110 : 'Shielding Technology', 
-					111 : 'Armour Technology', 		
-					113 : 'Energy Technology', 
-					114 : 'Hyperspace Technology', 
-					115 : 'Combustion Drive', 			
-					117 : 'Impulse Drive', 
-					118 : 'Hyperspace Drive', 
-					120 : 'Laser Technology', 	
-					121 : 'Ion Technology', 
-					122 : 'Plasma Technology', 
-					123 : 'Intergalactic Research Network', 		
-					124 : 'Expedition Technology',
-					199 : 'Graviton Technology'
-				},
-				'fleet' :  { 		
-					202 : 'Small Cargo', 
-					203 : 'Large Cargo', 
-					204 : 'Light Fighter', 
-					205 : 'Heavy Fighter',		
-					206 : 'Cruiser', 
-					207 : 'Battleship', 
-					208 : 'Colony Ship', 
-					209 : 'Recycler', 				
-					210 : 'Espionage Probe', 
-					211 : 'Bomber', 
-					212 : 'Solar Satellite', 
-					213 : 'Destroyer', 		
-					214 : 'Deathstar', 
-					215 : 'Battlecruiser',
-				},	
-				'defense' :  { 	
-					401 : 'Rocket Launcher', 
-					402 : 'Light Laser', 
-					403 : 'Heavy Laser', 
-					404 : 'Gauss Cannon',			
-					405 : 'Ion Cannon', 
-					406 : 'Plasma Turret', 
-					407 : 'Small Shield Dome', 
-					408 : 'Large Shield Dome', 			
-					502 : 'Anti-Ballistic Missiles', 
-					503 : 'Interplanetary Missiles'
-				}
-			}
-		},
-		
-		
-		'dates' : {
-			'messages' : {
-				regexp: '(\\d+)-(\\d+)[^\\d]+(\\d+):(\\d+):(\\d+)',
-				fields: { 
-					year: -1,
-					month:1,
-					day:2,
-					hour:3,
-					min:4,
-					sec:5 
-				}
-			}
-		},
-		
-		'messages' : {
-			'espionage of': 'Espionage report of',
-			'espionage prob': 'Chance of counter-espionage',
-			'fleet command' : 'Fleet Command',
-			'expedition result' : 'Expedition Result \\[(\\d+:\\d+:\\d+)\\]',
-			'espionnage action' : 'Espionage action',
-			'fleet': 'Fleet',
-			'harvesting': 'Harvesting report from DF'
-		}
+//TODO
 	}
 });
 }
