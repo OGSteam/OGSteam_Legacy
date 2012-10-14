@@ -4,6 +4,7 @@
 // @author      OGSteam
 // @namespace	xtense.ogsteam.fr
 // @updateURL   http://userscripts.org/scripts/source/112690.meta.js
+// @downloadURL https://userscripts.org/scripts/source/112690.user.js
 // @include     http://*.ogame.*/game/index.php*
 // @grant       GM_getValue
 // @grant       GM_setValue
