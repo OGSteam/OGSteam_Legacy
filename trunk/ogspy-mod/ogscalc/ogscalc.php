@@ -197,9 +197,9 @@ $ta_batiments[1] = Array ('48,24,0,1.6', 'C', 'mine_cristal', 'Mine de cristal')
 $ta_batiments[2] = Array ('225,75,0,1.5', 'D', 'synthetiseur_deuterium', 'Synthétiseur de deutérium');
 $ta_batiments[3] = Array ('75,30,0,1.5', 'CES', 'centrale_solaire', 'Centrale électrique solaire');
 $ta_batiments[4] = Array ('900,360,180,1.8', 'CEF', 'reacteur_fusion', 'Centrale électrique de fusion');
-$ta_batiments[5] = Array ('2000,0,0,2', 'HM', 'hangar_metal', 'Hangar de métal');
-$ta_batiments[6] = Array ('2000,1000,0,2', 'HC', 'hangar_cristal', 'Hangar de cristal');
-$ta_batiments[7] = Array ('2000,2000,0,2', 'HD', 'reservoir_deuterium', 'Réservoir de deutérium');
+$ta_batiments[5] = Array ('1000,0,0,2', 'HM', 'hangar_metal', 'Hangar de métal');
+$ta_batiments[6] = Array ('1000,500,0,2', 'HC', 'hangar_cristal', 'Hangar de cristal');
+$ta_batiments[7] = Array ('1000,1000,0,2', 'HD', 'reservoir_deuterium', 'Réservoir de deutérium');
 $ta_batiments[8] = Array ('2645,0,0,2', 'CM', 'cachette_metal', 'Cachette de métal camouflée');
 $ta_batiments[9] = Array ('2645,1322,0,2', 'CC', 'cachette_cristal', 'Cachette de cristal souterraine');
 $ta_batiments[10] = Array ('2645,2645,0,2', 'CD', 'cachette_deuterium', 'Cachette de deutérium sous-marine');
@@ -390,7 +390,7 @@ $s_html .= '</fieldset>';
 $s_html_vaisseaux = '';
 
 // 0 = parametre ; 1 = code ; 2 = nom
-$ta_vaisseaux[0] = Array ('200,1000,200,2', 'pt', 'Petit transporteur');
+$ta_vaisseaux[0] = Array ('2000,2000,0', 'pt', 'Petit transporteur');
 $ta_vaisseaux[1] = Array ('6000,6000,0', 'gt', 'Grand transporteur');
 $ta_vaisseaux[2] = Array ('3000,1000,0', 'cle', 'Chasseur léger');
 $ta_vaisseaux[3] = Array ('6000,4000,0', 'clo', 'Chasseur lourd');
