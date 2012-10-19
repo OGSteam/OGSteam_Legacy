@@ -223,9 +223,10 @@ require_once 'views/page_header.php';
 			
 			switch ($v['xtense_type']) {
 				case 'FF': $xtense_type = 'Firefox ('. $v['xtense_version'] .')'; break;
-				case 'GMFF': $xtense_type = 'GreaseMonkey Firefox ('. $v['xtense_version'] .')'; break;
-				case 'GMGC': $xtense_type = 'GreaseMonkey Google Chrome ('. $v['xtense_version'] .')'; break;
-				default: $xtense_type = 'N/A';
+				case 'GM-FF': $xtense_type = 'GreaseMonkey Firefox ('. $v['xtense_version'] .')'; break;
+				case 'GM-GC': $xtense_type = 'GreaseMonkey Google Chrome ('. $v['xtense_version'] .')'; break;
+				case 'GM-OP': $xtense_type = 'GreaseMonkey Opéra ('. $v['xtense_version'] .')'; break;
+				default: $xtense_type = 'N/A ('.$v['xtense_type'].')';
 			}
 			
 			echo '<tr>';
