@@ -48,7 +48,8 @@ if($nbHostiles==0){
 		// Attaques Simples du user_id
 		$query = "SELECT arrival_time, hosatt.id_attack AS id_attack, hosatt.id_vague AS id_vague, attacker, origin_planet, origin_coords, cible_planet, cible_coords "
 		."FROM " . TABLE_HOSTILES_ATTACKS . " hosatt, " . TABLE_HOSTILES . " hos"
-		." WHERE hos.id_attack = hosatt.id_attack AND hosatt.id_vague='0' AND hos.user_id = '" . $user_id ."'";
+		." WHERE hos.id_attack = hosatt.id_attack AND hosatt.id_vague='0' AND hos.user_id = '" . $user_id ."'"
+		."ORDER BY arrival_time ASC";
 		$result = $db->sql_query($query);
 		
 		$query = "SELECT  `user_name` FROM ". TABLE_USER ." WHERE `user_id`=".$user_id;
@@ -75,7 +76,7 @@ if($nbHostiles==0){
 		while(list($arrival_time, $id_attack, $id_vague, $attacker, $origin_planet, $origin_coords, $cible_planet, $cible_coords) = $db->sql_fetch_row($result) ){
 			
 			echo "<tr>".
-					"<th align='center'>" . $attacker . ")</th>".
+					"<th align='center'>" . $attacker . "</th>".
 					"<th align='center'>" . $origin_planet . "(" . $origin_coords . ")</th>".
 					"<th align='center'>" . $cible_planet . "(" . $cible_coords . ")</th>".
 					"<th align='center'>" . $arrival_time . "</th>".
@@ -99,7 +100,7 @@ if($nbHostiles==0){
 	$query = "SELECT DISTINCT(user_id) "
 			."FROM " . TABLE_HOSTILES_ATTACKS . " hosatt, " . TABLE_HOSTILES . " hos "
 			."WHERE hos.id_attack = hosatt.id_attack AND id_vague!='0' "
-			."ORDER BY user_id ASC";
+			."ORDER BY user_id ASC, arrival_time ASC";
 	$userIdsAG = $db->sql_query($query);
 	
 	while(list($user_id) = $db->sql_fetch_row($userIdsAG) ){
