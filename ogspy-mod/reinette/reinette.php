@@ -80,23 +80,19 @@ if (!$db->sql_numrows($query)) {
 
 // table sur lesquel on peut travailler
 $table_can_use = array( //  "ogspy_parsedspy" => TABLE_PARSEDSPY,
-    "universe" => TABLE_UNIVERSE, 
-    'rank_ally_points' => TABLE_RANK_ALLY_POINTS,
-    'rank_player_points' => TABLE_RANK_PLAYER_POINTS, 
-    'rank_player_eco' =>    TABLE_RANK_PLAYER_ECO,
-    'rank_player_Research' => TABLE_RANK_PLAYER_TECHNOLOGY,
+    "universe" => TABLE_UNIVERSE, 'rank_ally_points' => TABLE_RANK_ALLY_POINTS,
+    'rank_player_points' => TABLE_RANK_PLAYER_POINTS, 'rank_player_eco' =>
+    TABLE_RANK_PLAYER_ECO, 'rank_player_Research' => TABLE_RANK_PLAYER_TECHNOLOGY,
     'rank_player_Military' => TABLE_RANK_PLAYER_MILITARY,
     'rank_player_Military_Built' => TABLE_RANK_PLAYER_MILITARY_BUILT,
     'rank_player_Military_Lost' => TABLE_RANK_PLAYER_MILITARY_LOOSE,
     'rank_player_Military_Destroyed' => TABLE_RANK_PLAYER_MILITARY_DESTRUCT,
-    'rank_player_honnor' => TABLE_RANK_PLAYER_HONOR, 
-    'rank_ally_economique' =>  TABLE_RANK_ALLY_ECO, 
-    'rank_ally_technology' => TABLE_RANK_ALLY_TECHNOLOGY,
-    'rank_ally_military' => TABLE_RANK_ALLY_MILITARY, 
-    'rank_ally_military_built' =>  TABLE_RANK_ALLY_MILITARY_BUILT,
-     'rank_ally_military_loose' =>   TABLE_RANK_ALLY_MILITARY_LOOSE, 
-     'rank_ally_military_destruct' =>    TABLE_RANK_ALLY_MILITARY_DESTRUCT, 
-     'rank_ally_honor' => TABLE_RANK_ALLY_HONOR);
+    'rank_player_honnor' => TABLE_RANK_PLAYER_HONOR, 'rank_ally_economique' =>
+    TABLE_RANK_ALLY_ECO, 'rank_ally_technology' => TABLE_RANK_ALLY_TECHNOLOGY,
+    'rank_ally_military' => TABLE_RANK_ALLY_MILITARY, 'rank_ally_military_built' =>
+    TABLE_RANK_ALLY_MILITARY_BUILT, 'rank_ally_military_loose' =>
+    TABLE_RANK_ALLY_MILITARY_LOOSE, 'rank_ally_military_destruct' =>
+    TABLE_RANK_ALLY_MILITARY_DESTRUCT, 'rank_ally_honor' => TABLE_RANK_ALLY_HONOR);
 
 if (!array_key_exists(($pub_table), $table_can_use)) {
     db_xml::generate_simple_xlm(array('ref' => 'Erreur 14', 'cause' =>
@@ -112,11 +108,10 @@ if ($user_data['grant']["set_rank"] == 0 || $user_data['grant']["set_universe"] 
 }
 
 if (function_exists($pub_table)) {
-$func = $pub_table; 
-$func($pub_data,$table_can_use[$pub_table]);           // Appel foo()
+    $func = $pub_table;
+    $func($pub_data, $table_can_use[$pub_table]); // Appel foo()
 } else {
     db_xml::generate_simple_xlm(array('ref' => 'Erreur 25', 'cause' =>
         'fonction n existant pas' . $pub_table), 'Erreur');
     die;
 }
-
