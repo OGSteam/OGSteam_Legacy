@@ -99,16 +99,18 @@ die;
 $min = (int)$pub_min;
 $max = (int)$pub_max;
 $timestamp = $timestamp ;
- $request = "select galaxy, system, row, last_update from " . TABLE_UNIVERSE . " WHERE system <= ".$max." and system >= ".$min." and galaxy = ".$g ;
+ $request = "select galaxy, system, row, last_update , phalanx ,gate from " . TABLE_UNIVERSE . " WHERE system <= ".$max." and system >= ".$min." and galaxy = ".$g ;
 $result = $db->sql_query($request);
+
 $old_value = array();
- while (list($galaxy, $system, $row, $last_update) = $db->sql_fetch_row($result)) 
- {
-  $old_value[$galaxy][$system][$row]=$last_update ;
-   
-    }
-    
-  
+$phalange = array() ;
+$porte_de_saut = array ();
+
+while ($row = $db->sql_fetch_assoc($result)) {
+  $old_value[$row["galaxy"]][$row["system"]][$row["row"]]=$row["last_update"] ;
+  $phalange[$row["galaxy"]][$row["system"]][$row["row"]]=$row["phalanx"] ;
+ $porte_de_saut[$row["galaxy"]][$row["system"]][$row["row"]]=$row["gate"] ;
+}
    
 
 
@@ -145,6 +147,18 @@ foreach($element as $elements)
   //$mn = iif($m==0 , "" , quote(utf8_decode($elements->getElementsByTagName('mn')->item(0)->nodeValue))); 
   $d =  (int)$elements->getElementsByTagName('d')->item(0)->nodeValue;
   $u =  $user_data['user_id'];
+  
+  // version 0.0.2 ajout porte de saut et phalange
+  $p = 0;
+  $g = 0 ;
+ if ( $m != 0 ){
+   $phalanx = (int)$phalange[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue];
+   $gate = (int)$porte_de_saut[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue];
+
+ }
+  
+  
+  
  //<serverdata>
   //  <n>Akira</n>
   //  <a>KISSCOOL</a>
@@ -157,8 +171,10 @@ foreach($element as $elements)
  //   <mn>SOL</mn>
   //  <d>1340203405</d>
  // </serverdata>
+ 
+ //phalanx	gate
 
-$query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).  '", "' .$db->sql_escape_string($st). '", ' .(int)$g. ', ' . (int)$s . ', ' . (int)$r . ', "' . $db->sql_escape_string($pn) . '","' . (int)$m . '",' .(int)$d. ', ' .(int)$u. ')';
+$query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).  '", "' .$db->sql_escape_string($st). '", ' .(int)$g. ', ' . (int)$s . ', ' . (int)$r . ', "' . $db->sql_escape_string($pn) . '","' . (int)$m . '",' .(int)$d. ', ' .(int)$u. ', ' .(int)$gate. ', ' .(int)$phalanx. ')';
   
      }
      
@@ -169,7 +185,7 @@ $query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).
 $table = $table_can_use[$pub_table];
 
 if (count($query) > 0 ){
-$db->sql_query('REPLACE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query));
+$db->sql_query('REPLACE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id , gate, phalanx) VALUES ' . implode(',', $query));
  db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Mise a jour de  '.count($query).' lignes'), 'Reussi');
 
 //echo 'INSERT IGNORE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query);
