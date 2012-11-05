@@ -26,29 +26,7 @@ function redirection($url)
         exit();
     }
 }
-/**
- * Check if the folder is writable or not
- * @param string $path The file or the folder to check
- * @return boolean true if the file or the folder is writable
- * @link http://fr.php.net/manual/fr/function.is-writable.php#68598
- */
-function is__writable($path)
-{
-    if ($path{strlen($path) - 1} == '/'){
-        return is__writable($path . uniqid(mt_rand()) . '.tmp');
 
-    }elseif (@ereg('.tmp', $path)) {
-
-        if (!($f = @fopen($path, 'w+')))
-            return false;
-        fclose($f);
-        unlink($path);
-        return true;
-
-    } else{
-        die("return 0; // Or return error - invalid path...<br>" . getcwd() . "<br>$path");
-	}
-}
 /**
  * Write a text or a table in a file
  * @param string $file Filename

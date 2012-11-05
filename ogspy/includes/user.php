@@ -860,7 +860,9 @@ function user_set_empire()
     redirection("index.php?action=home&subaction=empire");
 }
 /**
- * Enregistrement de toutes les données empires
+ * Enregistrement de toutes les donnees empires
+ * @param array $data All data related to the empire
+ * @todo Query : x5
  */
 function user_set_all_empire($data)
 {
@@ -1112,6 +1114,7 @@ function user_set_all_empire($data)
 
 /**
  * remise en ordre des lunes en fonctions des positions des planetes
+ * @todo Query : x6
  */
 function user_set_all_empire_resync_moon()
 {
@@ -1172,6 +1175,7 @@ function user_set_all_empire_resync_moon()
 /**
  * remise en ordre des planetes sans espaces vides ...
  * ( les id doivent se suivre 101,102,103 etc etc)
+ * @todo Query : x3
  */
 function user_set_all_empire_resync_planet()
 {
@@ -1224,7 +1228,11 @@ function user_set_all_empire_resync_planet()
     }
 
 }
-
+/**
+ * Build the array with Empire data
+ *
+ * @todo Query : x3
+ */
 function user_set_building($data, $planet_id, $planet_name, $fields, $coordinates,
     $temperature_min, $temperature_max, $satellite)
 {
@@ -1341,7 +1349,11 @@ function user_set_building($data, $planet_id, $planet_name, $fields, $coordinate
 
     redirection("index.php?action=home&subaction=empire&view=" . $pub_view);
 }
-
+/**
+ * Build the array with technology data
+ *
+ * @todo Query : x2
+ */
 function user_set_technology($data)
 {
     global $db, $user_data;
@@ -1401,7 +1413,8 @@ function user_set_technology($data)
     redirection("index.php?action=home&subaction=empire");
 }
 /**
- * Enregistrement des défenses de l'utilisateurs
+ * Enregistrement des defenses de l'utilisateurs
+ * @todo Query : x3
  */
 function user_set_defence($data, $planet_id, $planet_name, $fields, $coordinates,
     $temperature_min, $temperature_max, $satellite)
@@ -1501,7 +1514,6 @@ function user_get_empire()
 {
     global $db, $user_data;
 
-
     $planet = array(false, "user_id" => "", "planet_name" => "", "coordinates" => "",
         "fields" => "", "fields_used" => "", "temperature_min" => "", "temperature_max" =>
         "", "Sat" => "", "M" => 0, "C" => 0, "D" => 0, "CES" => 0, "CEF" => 0, "UdR" =>
@@ -1511,15 +1523,12 @@ function user_get_empire()
     $defence = array("LM" => 0, "LLE" => 0, "LLO" => 0, "CG" => 0, "AI" => 0, "LP" =>
         0, "PB" => 0, "GB" => 0, "MIC" => 0, "MIP" => 0);
 
-
     // pour affichage on selectionne 9 planetes minis
-
     if (find_nb_planete_user() < 9) {
         $nb_planete = 9;
     } else {
         $nb_planete = find_nb_planete_user();
     }
-
 
     // on met les planete a 0
     for ($i = 101; $i <= ($nb_planete + 100); $i++) {
@@ -1530,7 +1539,6 @@ function user_get_empire()
     for ($i = 201; $i <= ($nb_planete + 200); $i++) {
         $user_building[$i] = $planet;
     }
-
 
     $request = "select planet_id, planet_name, `coordinates`, `fields`, temperature_min, temperature_max, Sat, M, C, D, CES, CEF, UdR, UdN, CSp, HM, HC, HD, CM, CC, CD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
     $request .= " from " . TABLE_USER_BUILDING;
