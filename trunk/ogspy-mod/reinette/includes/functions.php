@@ -1,5 +1,11 @@
 <?php
-/// a voir
+global $table_prefix;
+
+define("TABLE_TMP", $table_prefix."tmp_universe");
+
+
+
+
 function valid_date($time)
 {
     /// il faut garder le format ogspy ( toutes les 8 heeures ... ) )
@@ -78,12 +84,6 @@ $element = $data->getElementsByTagName('x');
 // dans un premier temps on recupere le timestamp de la maj
 $timestamp = $element->item(0)->getElementsByTagName('d')->item(0)->nodeValue;
 
-
-// on supprime de la table uni tout ce qui est plus ancien
-
-//$request = "DELETE FROM ".$table_can_use[$pub_table]." WHERE last_update < ".$timestamp." and galaxy = ".$g ;
-//$db->sql_query($request);
-
 // on prepare la requete
 $query = array();
 
@@ -95,47 +95,13 @@ die;
 } 
 
 
-// récuperation des ss sup et min  et preparations des anciennes valeurs
-$min = (int)$pub_min;
-$max = (int)$pub_max;
 $timestamp = $timestamp ;
- $request = "select galaxy, system, row, last_update , phalanx ,gate from " . TABLE_UNIVERSE . " WHERE system <= ".$max." and system >= ".$min." and galaxy = ".$g ;
-$result = $db->sql_query($request);
 
-$old_value = array();
-$phalange = array() ;
-$porte_de_saut = array ();
-
-while ($row = $db->sql_fetch_assoc($result)) {
-  $old_value[$row["galaxy"]][$row["system"]][$row["row"]]=$row["last_update"] ;
-  $phalange[$row["galaxy"]][$row["system"]][$row["row"]]=$row["phalanx"] ;
- $porte_de_saut[$row["galaxy"]][$row["system"]][$row["row"]]=$row["gate"] ;
-}
-   
 
 
 foreach($element as $elements)
 {
-    // dans le doute on ne fait rien
-    $can_update = false;
-    
-     // on update que si le last_update de old_value est inferieur
-    if (isset($old_value[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue])){ // on ne peut comparer que si existe, si existe pas c que pas besoinde maj
-    
-     if ( $old_value[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue] < (int)$elements->getElementsByTagName('d')->item(0)->nodeValue)
-     {
-        $can_update = true;
-      }
-   
-     }
-     else 
-     {
-          $can_update = true;
-        
-     }
-     
-     if ($can_update == true){
-          
+  
   $n =  iif($elements->getElementsByTagName('n')->item(0)->nodeValue == null ||$elements->getElementsByTagName('n')->item(0)->nodeValue == "", "" ,quote(utf8_decode($elements->getElementsByTagName('n')->item(0)->nodeValue))); 
   $a =  iif($elements->getElementsByTagName('a')->item(0)->nodeValue == null ||$elements->getElementsByTagName('a')->item(0)->nodeValue == "", "" ,quote(utf8_decode($elements->getElementsByTagName('a')->item(0)->nodeValue))); 
   $st =  quote(utf8_decode($elements->getElementsByTagName('st')->item(0)->nodeValue));
@@ -148,44 +114,41 @@ foreach($element as $elements)
   $d =  (int)$elements->getElementsByTagName('d')->item(0)->nodeValue;
   $u =  $user_data['user_id'];
   
-  // version 0.0.2 ajout porte de saut et phalange
-  $p = 0;
-  $g = 0 ;
- if ( $m != 0 ){
-   $phalanx = (int)$phalange[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue];
-   $gate = (int)$porte_de_saut[(int)$elements->getElementsByTagName('g')->item(0)->nodeValue][(int)$elements->getElementsByTagName('s')->item(0)->nodeValue][(int)$elements->getElementsByTagName('r')->item(0)->nodeValue];
 
- }
-  
-  
-  
- //<serverdata>
-  //  <n>Akira</n>
-  //  <a>KISSCOOL</a>
-  //  <st />
-  //  <g>1</g>
- //   <s>1</s>
- //   <r>6</r>
- //   <pn>N?o-Tokyo</pn>
-  //  <m>33620234</m>
- //   <mn>SOL</mn>
-  //  <d>1340203405</d>
- // </serverdata>
- 
- //phalanx	gate
 
-$query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).  '", "' .$db->sql_escape_string($st). '", ' .(int)$g. ', ' . (int)$s . ', ' . (int)$r . ', "' . $db->sql_escape_string($pn) . '","' . (int)$m . '",' .(int)$d. ', ' .(int)$u. ', ' .(int)$gate. ', ' .(int)$phalanx. ')';
+$query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).  '", "' .$db->sql_escape_string($st). '", "' .(int)$g. '", "' . (int)$s . '", "' . (int)$r . '", "' . $db->sql_escape_string($pn) . '","' . (int)$m . '","' .(int)$d. '","' .(int)$u. '")';
   
      }
      
    
-} 
+ //} 
 
 // var_dump($query) ;
 $table = $table_can_use[$pub_table];
 
 if (count($query) > 0 ){
-$db->sql_query('REPLACE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id , gate, phalanx) VALUES ' . implode(',', $query));
+    
+ // on remplit la table tampon  
+$db->sql_query('REPLACE INTO ' . TABLE_TMP .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update ,last_update_user_id) VALUES ' . implode(',', $query));
+//$db->sql_query('REPLACE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id , gate, phalanx) VALUES ' . implode(',', $query));
+
+// requete de mise a jour a partir du tampon
+$req_update = "";
+$req_update .= " UPDATE ".TABLE_UNIVERSE." as U INNER JOIN ".TABLE_TMP." as T ";
+$req_update .= " ON ";
+$req_update .= "  ( U.galaxy = T.galaxy AND U.row = T.row  AND U.system = T.system )   ";
+$req_update .= " SET ";
+$req_update .= " U.moon = T.moon , U.name = T.name  , U.ally = T.ally , U.player = T.player , U.status = T.status   , U.last_update = T.last_update   , U.last_update_user_id = T.last_update_user_id  ";
+$req_update .= " WHERE  ";
+$req_update .= "  U.last_update < T.last_update ";
+
+$db->sql_query($req_update);
+
+// on vide la table tampon
+$req_truncate = " ";
+$req_truncate.= "TRUNCATE ".TABLE_TMP." ";
+$db->sql_query($req_truncate);
+
  db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Mise a jour de  '.count($query).' lignes'), 'Reussi');
 
 //echo 'INSERT IGNORE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query);
