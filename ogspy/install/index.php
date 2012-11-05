@@ -61,12 +61,12 @@ if (isset($pub_redirection)) {
 		</tr>
 		<tr><td>&nbsp;</td></tr>
 <?php 	
-	if(!(version_compare(PHP_VERSION, "5.0.0") >= 0)){
-		echo "<tr><td style='font-size: 24px;'><font color='red'>Version de PHP insuffisante</font></td></tr>";
-		echo "<tr><td><font color='red'>Pour pouvoir effectuer une installation complète d'OGSpy, votre hébergement doit être doté au minimum de la version 5 de PHP.";
-		echo "<br/><br/>Vous disposez actuellement de la version : " . PHP_VERSION;
-		echo "</font></td></tr>";
-	}
+if(!(version_compare(PHP_VERSION, "5.0.0") >= 0)){
+    echo "<tr><td style='font-size: 24px;'><font color='red'>Version de PHP insuffisante</font></td></tr>";
+    echo "<tr><td><font color='red'>Pour pouvoir effectuer une installation complète d'OGSpy, votre hébergement doit être doté au minimum de la version 5 de PHP.";
+    echo "<br/><br/>Vous disposez actuellement de la version : " . PHP_VERSION;
+    echo "</font></td></tr>";
+}else{
 ?>
 		<tr><td>&nbsp;</td></tr>
 		<form action="index.php" method="POST">
@@ -83,6 +83,9 @@ if (isset($pub_redirection)) {
 		</table>
 	</td>
 </tr>
+<?php
+} // Fin Version compare
+?>
 <tr align="center">
 	<td>
 		<center><font size="2"><i><b>OGSpy</b> is an <b>OGSteam Software</b> (c) 2005-2012</i><br />v <?php echo $install_version ;?></font></center>
