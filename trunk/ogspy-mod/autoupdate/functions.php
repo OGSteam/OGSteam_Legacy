@@ -24,6 +24,51 @@ function versionmod() {
 	$fetch = $db->sql_fetch_assoc($query);
 	return $fetch['version'];
 }
+function upgrade_ogspy_mod($mod){
+	global $db, $lang;
+    // On vérifie si le mod est déjà installé
+    $check = "SELECT title FROM " . TABLE_MOD . " WHERE root='" . $mod .
+        "'";
+    $query_check = $db->sql_query($check);
+    $result_check = $db->sql_numrows($query_check);
+
+    if ($result_check != 0) { 
+    // Si le mod existe, on fait une mise à jour
+        if (file_exists("mod/".$mod."/update.php"))
+        {
+            require_once("mod/".$mod."/update.php");
+            generate_all_cache();
+            log_("mod_update", $mod);
+            $maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
+        } else{
+            $maj = $lang['autoupdate_tableau_uptodateoff']."<br />\n<br />\n";
+        }
+        return $maj;
+        
+    }else{
+        // Si le mod n'existe pas, on fait une installation
+        if (file_exists("mod/".$mod."/install.php"))
+        {
+            require_once("mod/".$mod."/install.php");
+            generate_all_cache();
+            log_("mod_install", $mod);
+            $maj = $lang['autoupdate_tableau_installok']."<br />\n<br />\n";
+        } else{
+            $maj = $lang['autoupdate_tableau_installoff']."<br />\n<br />\n";
+        }
+        return $maj;
+                
+    }
+}
+function rrmdir($dir) {
+    foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            rrmdir($file);
+        else
+            unlink($file);
+    }
+    rmdir($dir);
+}
 
 /**
 *Copie le fichier modupdate.json dans mod/modupdate.json
@@ -41,22 +86,6 @@ global $lang;
 
         return $affiche;
     }   
-}
-function io_mkdir_p($target) {
-	if (@is_dir($target)||empty($target)) return 1;
-	if (@file_exists($target) && !is_dir($target)) return 0;
-	if (io_mkdir_p(substr($target,0,strrpos($target,'/')))) {
-		$ret=false;
-		if (! file_exists($target)) $ret = @mkdir($target,0777);
-		if (is_dir($target)) chmod($target, 0777);
-		return $ret;
-	}
-	return 0;
-}	
-
-function ap_mkdir($d) {
-	$ok = io_mkdir_p($d);
-	return $ok;
 }
 
 /**
@@ -90,36 +119,6 @@ function tableau($tableau, $type = "maj") {
 	}
 }
 
-if (! function_exists("is__writable") ) {
-/**
-* Verifie les droits en écriture d'ogspy sur un fichier ou repertoire 
-* @param string $path le fichier ou repertoire à tester
-* @return boolean True si accés en écriture
-* @comment http://fr.php.net/manual/fr/function.is-writable.php#68598
-*/
-	function is__writable($path)
-	{
-	
-	    if ($path{strlen($path)-1}=='/')
-	       
-	        return is__writable($path.uniqid(mt_rand()).'.tmp');
-	   
-	    elseif (ereg('.tmp', $path))
-	    {
-	       
-	        if (!($f = @fopen($path, 'w+')))
-	            return false;
-	        fclose($f);
-	        unlink($path);
-	        return true;
-	
-	    }
-	    else
-	       
-	        return 0; // Or return error - invalid path...
-	
-	}
-}
 function getmodlist(){
 	global $ban_mod;
 	// Récupérer la liste des dernières versions dans le fichier JSON
