@@ -19,7 +19,7 @@ require_once ("mod/{$root}/includes/functions.php");
 
 
 $mod_uninstall_name = "reinette";
-$mod_uninstall_table = TABLE_TMP;
+$mod_uninstall_table = TABLE_TMP.','.TABLE_CFG;
 uninstall_mod ($mod_uninstall_name, $mod_uninstall_table);
 
 
