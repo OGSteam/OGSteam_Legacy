@@ -36,7 +36,19 @@ require_once ("mod/{$root}/includes/functions.php");
 				$db->sql_query($query);
 
 
-		//si besoin de creer des tables, à faire ici
+	 	$query = "CREATE TABLE `".TABLE_CFG."` (
+					config_name varchar(255) NOT NULL default '',
+                    config_value varchar(255) NOT NULL default '',
+				  PRIMARY KEY  (config_name))";
+				$db->sql_query($query);
+
+// on injecte les valeurs
+insert_config("nb_maj_uni","0");
+insert_config("nb_maj_stat","0");
+insert_config("last_maj_uni","1");
+insert_config("last_maj_stat","1");
+insert_config("version_pommedapi","0.0.0.3"); // version minimum pomme d api
+insert_config("nb_ss_par_envoi","50"); // version minimum pomme d api
 
 	}
 
