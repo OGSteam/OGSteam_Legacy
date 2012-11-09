@@ -47,7 +47,42 @@ function count_ss($g){
                   $db->sql_query('INSERT  IGNORE  INTO ' . TABLE_UNIVERSE .  ' ( galaxy,system,row) VALUES ' . implode(',', $query));
         
     }
+ function  destroy_galaxie(){
+        global $db;
+      	$query = "TRUNCATE TABLE `". TABLE_UNIVERSE ."`";
+	    $result = $db->sql_query($query);
+      
+    }
+function journal($ar)
+{
+    global $pub_user , $pub_pays , $pub_uni , $pub_table , $pub_min,$pub_max  , $pub_sub_value , $_SERVER , $pub_version , $pub_soft;
+        $sub_txt = "|version =".$pub_version."|soft =".$pub_soft."|uni =".$pub_uni."|pays=".$pub_pays."|users=".$pub_user."|table=".$pub_table;
+        if ($pub_table == "universe" )
+        {
+            $sub_txt .= "|galaxie =".$pub_sub_value."|system_min=".$pub_min."|system_max=".$pub_max;
+            }
+          
+        // mise en log
+        $txt = implode("|",$ar);
+        log_("mod",$txt.$sub_txt."|");//.$_SERVER["REMOTE_ADDR"]);
+     
+}
 
+function valid_version($soft_mini,$soft_reel)
+{
+if (compteur_version($soft_mini) == compteur_version($soft_reel)){ return true ;}
+  return false;  
+}
+function compteur_version($v){
+    $tab = split('.',$v);
+    if (count($tab) != 4 ){ return 0 ;}
+    $total =(int)$tab[0] * 100000000;
+    $total = $total + (int)$tab[1] * 1000000;
+    $total = $total + (int)$tab[2] * 10000;
+    $total = $total + (int)$tab[3] * 100;
+    
+    return $total;
+}
 function valid_date($time)
 {
     /// il faut garder le format ogspy ( toutes les 8 heeures ... ) )
@@ -85,7 +120,8 @@ if ($element->length==0) {
 
 die;
 } 
-                
+    
+$date_for_stat = 0;                
 foreach($element as $elements)
 {
 $nb_total++;    
@@ -97,11 +133,24 @@ $s = $elements->getElementsByTagName('s')->item(0)->nodeValue;
 
 $query[] = '(' . valid_date((int)$d) . ', ' . (int)$p .  ', "' . quote(utf8_decode($n)) . '", "' . quote(utf8_decode($a)) . '", ' . (int)$s . ', ' . $user_data['user_id'] . ')';
 
+$date_for_stat =valid_date((int)$d) ;
 } 
 
 $db->sql_query('REPLACE INTO ' . $table .  ' (datadate, rank, player, ally, points, sender_id) VALUES ' . implode(',', $query));
 //echo 'REPLACE INTO ' . $table .  ' (datadate, rank, player, ally, points, sender_id) VALUES ' . implode(',', $query);
 db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Insertion de '.$nb_total.' lignes'), 'Réussi');
+
+
+  // mise a jour du nb de modif
+$avant = find_config("nb_maj_stat");
+$apres = $avant + $nb_total ;
+
+insert_config("nb_maj_stat",$apres);
+insert_config("last_maj_stat",$date_for_stat);
+
+
+
+
 
 die;
 
@@ -168,7 +217,7 @@ $query[] = '("' .$db->sql_escape_string($n). '", "' .$db->sql_escape_string($a).
 // var_dump($query) ;
 $table = $table_can_use[$pub_table];
 
-if (count($query) > 0 ){
+
     
  // on remplit la table tampon  
 $db->sql_query('REPLACE INTO ' . TABLE_TMP .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update ,last_update_user_id) VALUES ' . implode(',', $query));
@@ -185,24 +234,30 @@ $req_update .= " WHERE  ";
 $req_update .= "  U.last_update < T.last_update ";
 
 $db->sql_query($req_update);
+// on recupere le nb de ligne modifié
+$nb_modif = $db->sql_affectedrows();
+
 
 // on vide la table tampon
 $req_truncate = " ";
 $req_truncate.= "TRUNCATE ".TABLE_TMP." ";
 $db->sql_query($req_truncate);
 
- db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Mise a jour de  '.count($query).' lignes'), 'Reussi');
+ db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Mise a jour de  '.$nb_modif.' lignes'), 'Reussi');
 
-//echo 'INSERT IGNORE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query);
-die;  
-  }
-  else{
-    //$db->sql_query('REPLACE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query));
-db_xml::generate_simple_xlm(array('ref' => 'Message ogspy', 'cause' => 'Mise a jour de 0 lignes'), 'Reussi');
+  
+  // mise a jour du nb de modif
+$avant = find_config("nb_maj_uni");
+$apres = $avant + $nb_modif ;
 
-//echo 'INSERT IGNORE INTO ' . $table .  ' ( player , ally, status,galaxy,system,row,name,moon,last_update,last_update_user_id) VALUES ' . implode(',', $query);
-die;  
-  }
+insert_config("nb_maj_uni",$apres);
+insert_config("last_maj_uni",$timestamp);
+
+
+die; 
+  
+  
+  
 }      
 
 
@@ -247,4 +302,42 @@ function quote($str)
 
 function iif($condition,$ok,$nok='') {
 	return ($condition ? $ok : $nok);
+}
+
+
+
+//http://seebz.net/9-la-date-en-francais-avec-php.html
+function date_fr($format, $timestamp=false) {
+	if ( !$timestamp ) $date_en = date($format);
+	else               $date_en = date($format,$timestamp);
+
+	$texte_en = array(
+		"Monday", "Tuesday", "Wednesday", "Thursday",
+		"Friday", "Saturday", "Sunday", "January",
+		"February", "March", "April", "May",
+		"June", "July", "August", "September",
+		"October", "November", "December"
+	);
+	$texte_fr = array(
+		"Lundi", "Mardi", "Mercredi", "Jeudi",
+		"Vendredi", "Samedi", "Dimanche", "Janvier",
+		"F&eacute;vrier", "Mars", "Avril", "Mai",
+		"Juin", "Juillet", "Ao&ucirc;t", "Septembre",
+		"Octobre", "Novembre", "D&eacute;cembre"
+	);
+	$date_fr = str_replace($texte_en, $texte_fr, $date_en);
+
+	$texte_en = array(
+		"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun",
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+		"Aug", "Sep", "Oct", "Nov", "Dec"
+	);
+	$texte_fr = array(
+		"Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim",
+		"Jan", "F&eacute;v", "Mar", "Avr", "Mai", "Jui",
+		"Jui", "Ao&ucirc;", "Sep", "Oct", "Nov", "D&eacute;c"
+	);
+	$date_fr = str_replace($texte_en, $texte_fr, $date_fr);
+
+	return $date_fr;
 }
