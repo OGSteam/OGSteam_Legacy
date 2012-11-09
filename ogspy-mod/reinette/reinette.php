@@ -38,6 +38,18 @@ if (!isset($pub_uni)) {
     die;
 } // pas de passeword
 
+if (!isset($pub_version)) {
+    db_xml::generate_simple_xlm(array('ref' => 'Erreur 31', 'cause' => 'Pas connaissance de la version du soft'),
+        'Erreur');
+    die;
+} // pas de passeword
+
+if (!isset($pub_soft)) {
+    db_xml::generate_simple_xlm(array('ref' => 'Erreur 32', 'cause' => 'Application sans nom'),
+        'Erreur');
+    die;
+} // pas de passeword
+
 // on recherche les infos du compte joueur
 $query = $db->sql_query('SELECT * FROM ' . TABLE_USER . ' WHERE user_name = "' .
     $db->sql_escape_string($pub_user) . '"');
@@ -61,6 +73,13 @@ if (!$db->sql_numrows($query)) {
         die;
     }
 
+    if (valid_version(find_config("version_pommedapi"),$pub_version) == false){
+         db_xml::generate_simple_xlm(array('ref' => 'Erreur 33', 'cause' =>
+            'Probleme de version '.find_config("version_pommedapi").' !<= '.$pub_version), 'Erreur');
+        die; 
+        
+        
+    }
     // admin only
     if ($user_data['user_admin'] == 0 && $user_data['user_coadmin'] == 0) {
         db_xml::generate_simple_xlm(array('ref' => 'Erreur 22', 'cause' =>
