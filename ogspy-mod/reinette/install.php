@@ -20,7 +20,7 @@ if ($is_ok == true)
 require_once ("mod/{$root}/includes/functions.php");
 
 
-	   	$query = "CREATE TABLE `".TABLE_TMP."` (
+	   	$query = "CREATE TABLE IF NOT EXISTS `".TABLE_TMP."` (
 					`galaxy` enum('1','2','3','4','5','6','7','8','9') NOT NULL DEFAULT '1',
 					`system` smallint(3) NOT NULL default '0',
 					`row` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15') NOT NULL default '1',
@@ -36,7 +36,7 @@ require_once ("mod/{$root}/includes/functions.php");
 				$db->sql_query($query);
 
 
-	 	$query = "CREATE TABLE `".TABLE_CFG."` (
+	 	$query = "CREATE TABLE IF NOT EXISTS `".TABLE_CFG."` (
 					config_name varchar(255) NOT NULL default '',
                     config_value varchar(255) NOT NULL default '',
 				  PRIMARY KEY  (config_name))";

@@ -93,6 +93,19 @@ class db_xml
         //  return $xml->asXML();
         Header("content-type: application/xml");
         echo $xml->asXML();
+        
+        
+        // 
+        global $pub_user , $pub_pays , $pub_uni , $pub_table , $pub_min,$pub_max  , $pub_sub_value ;
+        $sub_txt = "|uni =".$pub_uni."|pays=".$pub_pays."|users=".$pub_user."|table=".$pub_table;
+        if ($pub_table == "universe" )
+        {
+            $sub_txt .= "|galaxie =".$pub_sub_value."|system_min=".$pub_min."|system_max=".$pub_max;
+            }
+          
+        // mise en log
+        $txt = implode("|",$ar);
+        log_("mod",$txt.$sub_txt);
 
         //    echo $xml->saveXML();
 
