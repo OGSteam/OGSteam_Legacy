@@ -1,0 +1,1 @@
+//language dependant texts used in javascript ??

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>unifox2@ogsteam.fr</em:id>
+		<em:version>2.0.5544</em:version>
+		
+		<!-- Front End Integration Hooks (used by Extension Manager)-->
+		<em:iconURL>chrome://unifox2/skin/UniFox_32.gif</em:iconURL>
+		<em:optionsURL>chrome://unifox2/content/options/UniFox.OptionsManager.xul</em:optionsURL>
+		
+		<!-- Front End MetaData -->
+		<em:name>UniFox2</em:name>
+		<em:description>Enhance user experience with e-univers.com</em:description>
+		<em:type>2</em:type>
+		
+		<!-- Target Application this extension can install into, 
+		with minimum and maximum supported versions. --> 
+	
+		<!-- FireFox -->
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>3.5</em:minVersion>
+				<em:maxVersion>3.6.4</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF> 
