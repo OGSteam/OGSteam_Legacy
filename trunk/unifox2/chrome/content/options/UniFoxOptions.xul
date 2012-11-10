@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/skin/pref/pref.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://unifox2/locale/unifox.dtd" >
+
+<dialog id="UniFoxOptionsDialog"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&unifox2.options.options;"
+	ondialogaccept="return UniFox.OptionsManager.unload();" 
+	onload="UniFox.OptionsManager.load(); window.sizeToContent();"
+	buttons="accept, cancel"
+	height="550"
+	>	<!--width="535"-->
+<vbox>
+	<!-- Generic files -->
+	<script type="application/x-javascript" src="chrome://global/content/strres.js"/>
+	<script type="application/x-javascript" src="chrome://unifox2/content/commons/UniFox.Entities.js"/>
+	<script type="application/x-javascript" src="chrome://unifox2/content/commons/UniFox.Checker.js"/>
+	<script type="application/x-javascript" src="chrome://unifox2/content/commons/UFUtils.js"/>
+	<!-- End of Generic files -->
+	
+	<script type="application/x-javascript" src="chrome://unifox2/content/options/UniFox.OptionsManager.js"/>
+	
+	<tabbox id="tabbox" flex="1" style="overflow: -moz-scrollbars-vertical;">
+		<tabs id="tabs">
+			<tab linkedpanel="inviPanel" id="inviTab0" name="inviTab" hidden="true"/>
+			<tab linkedpanel="loginPanel" id="loginTab" label="&unifox2.options.tabs.login;" selected="true"/>
+			<tab linkedpanel="overviewPanel" id="overviewTab" label="&unifox2.options.tabs.overview;"/>
+			<tab linkedpanel="buildingsPanel" id="buildingsTab" label="&unifox2.options.tabs.buildings;"/>
+			<tab linkedpanel="laboPanel" id="laboTab" label="&unifox2.options.tabs.labo;"/>
+			<tab linkedpanel="shipyardPanel" id="shipyardTab" label="&unifox2.options.tabs.shipyard;"/>
+			<tab linkedpanel="defensePanel" id="defenseTab" label="&unifox2.options.tabs.defense;"/>
+			<tab linkedpanel="fleetPanel" id="fleetTab" label="&unifox2.options.tabs.fleet;"/>
+			<tab linkedpanel="messagesPanel" id="messagesTab" label="&unifox2.options.tabs.messages;"/>
+			<tab linkedpanel="othersPanel" id="othersTab" label="&unifox2.options.tabs.others;"/>
+		</tabs>
+		<tabpanels id="tabpanels" flex="1" >
+			<tabpanel orient="vertical" id="inviPanel">
+				<vbox id="inviVbox" >	
+				</vbox>
+			</tabpanel>
+			<tabpanel orient="vertical" id="loginPanel">
+				<vbox id="loginVbox" >	
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="overviewPanel">
+				<vbox id="overviewVbox" >	
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="buildingsPanel">
+				<vbox id="buildingsVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="laboPanel">
+				<vbox id="laboVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="shipyardPanel">
+				<vbox id="shipyardVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="defensePanel">
+				<vbox id="defenseVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="fleetPanel">
+				<vbox id="fleetVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="messagesPanel">
+				<vbox id="messagesVbox" >
+				</vbox>	
+			</tabpanel>
+			<tabpanel orient="vertical" id="othersPanel">
+				<vbox id="othersVbox" >
+				</vbox>	
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</vbox>
+</dialog>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://unifox2/locale/unifox.dtd">
+
+<overlay id="UniFoxOverlay"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:nc="http://home.netscape.com/NC-rdf#"
+      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	  
+		<!-- Generic files -->
+		<script type="application/x-javascript" src="chrome://global/content/strres.js"/>
+
+		<script type="application/x-javascript" src="chrome://unifox2/content/commons/UniFox.Entities.js" />
+		<script type="application/x-javascript" src="chrome://unifox2/content/commons/UniFox.Checker.js" />
+		<script type="application/x-javascript" src="chrome://unifox2/content/commons/UFUtils.js" />
+		<!-- End of Generic files -->
+		
+		<script type="application/x-javascript" src="chrome://unifox2/content/UniFox.PageHandler.js" />
+		<script type="application/x-javascript" src="chrome://unifox2/content/UniFox.js" />
+		
+		
+		
+	
+	
+	<popup id="contentAreaContextMenu">
+		<menuseparator/>
+		<menuitem id="unifox2-menu-configure" label="&unifox2.menu.configure;" oncommand="UFUtils.openUnifoxOptions();"/>
+		<menuitem id="unifox2-menu-enable" label="" oncommand="UniFox.browserHandler.switchEnableUniFoxCommand();"/>
+	</popup>
+	
+	<commandset id="mainCommandSet">
+		<command id="ufRestartFirefox" oncommand="UFUtils.restartApp();" />
+		<command id="openUnifoxOptions" oncommand="UFUtils.openUnifoxOptions();" />
+	</commandset>
+
+	<keyset id="mainKeyset">
+		<key id="key_configureUnifox" 
+					 key="u" 
+					 modifiers="alt,accel" 
+					 command="openUnifoxOptions"/>
+		<key id="key_restartFirefoxByUnifox" 
+					 key="g" 
+					 modifiers="alt,accel" 
+					 command="ufRestartFirefox"/>
+	</keyset>
+</overlay>

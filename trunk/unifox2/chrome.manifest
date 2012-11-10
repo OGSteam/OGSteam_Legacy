@@ -1,0 +1,9 @@
+content	unifox2	chrome/content/ contentaccessible=yes 
+
+overlay	chrome://browser/content/browser.xul	chrome://unifox2/content/UniFoxOverlay.xul
+
+locale	unifox2	fr-FR	chrome/locale/fr-FR/
+
+skin	unifox2	classic	chrome/skin/classic/
+
+

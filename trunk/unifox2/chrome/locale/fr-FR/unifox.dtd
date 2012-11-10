@@ -1,0 +1,27 @@
+<!-- fr-FR -->
+
+<!ENTITY unifox2.menu.configure 
+	"Configurer UniFox2">
+	
+<!ENTITY unifox2.options.options 
+	"Options">
+<!ENTITY unifox2.options.tabs.login
+	"Login">
+<!ENTITY unifox2.options.tabs.overview
+	"Vue g&#233;n&#233;rale">
+<!ENTITY unifox2.options.tabs.buildings
+	"B&#226;timents">
+<!ENTITY unifox2.options.tabs.labo
+	"Recherches">
+<!ENTITY unifox2.options.tabs.shipyard
+	"Vaisseaux">
+<!ENTITY unifox2.options.tabs.defense
+	"D&#233;fenses">
+<!ENTITY unifox2.options.tabs.fleet
+	"Flotte">
+<!ENTITY unifox2.options.tabs.messages
+	"Messages">
+<!ENTITY unifox2.options.tabs.others
+	"Autres">
+
+	
