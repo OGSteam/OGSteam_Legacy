@@ -32,11 +32,13 @@ if($user_data['user_admin'] == 1) {
 			die("Erreur: Le répertoire OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
 		}
       
-       //$modzip = "http://update.ogsteam.fr/".$toolroot."/download.php?download=".$toolroot."-".$version;
-       $modzip = "http://darkcity.fr/ogspy311.zip";
-
+        if( $version == 'trunk'){
+            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/tip.zip";
+        }else{
+            $toolzip = "https://bitbucket.org/ogsteam/".$toolroot."/get/".$version.".zip";
+        }
        
-		if(copy($modzip , './mod/autoupdate/tmp/'.$toolroot.'.zip')) {
+		if(copy($toolzip , './mod/autoupdate/tmp/'.$toolroot.'.zip')) {
                 echo '<table align="center" style="width : 400px">'."\n";
                 
 			if ($zip->open('./mod/autoupdate/tmp/'.$toolroot.'.zip') === TRUE) {
@@ -44,11 +46,17 @@ if($user_data['user_admin'] == 1) {
                 echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_downok'].'</td>'."\n";
                 echo "\t".'</tr>'."\n";
                 
-                $zip->extractTo(".");
+                $zip->extractTo("./mod/autoupdate/tmp/".$toolroot."/"); //On extrait le mod dans le répertoire temporaire d'autoupdate
                 $zip->close();
                 
                 unlink("./mod/autoupdate/tmp/".$toolroot.".zip");
+
+                $nom_répertoire = glob("./mod/autoupdate/tmp/".$toolroot."/*-".$toolroot."*",GLOB_ONLYDIR);//On récupère le nom du répertoire
+                $folder = explode('/', $nom_répertoire[0]);
+                rcopy("./mod/autoupdate/tmp/".$toolroot."/".$folder[5],".");
+                rrmdir("./mod/autoupdate/tmp/".$toolroot);
                 
+                //On passe au script de mise à jour.
                 if (!is_writable("./install")) {
                     die("Erreur: Le répertoire install OGSpy doit etre accessible en écriture (755) ".__FILE__. "(Ligne: ".__LINE__.")");
                 }
@@ -78,8 +86,10 @@ if($user_data['user_admin'] == 1) {
     }else{
             echo '<table>'."\n";
             echo "\t".'<tr>'."\n";
-            echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJ_wantupdate'].'</td>'."\n";
+            echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJtool_wantbackup'].'</td>'."\n";
+            echo "\t\t".'<td class="c">'.$lang['autoupdate_MaJtool_wantupdate'].$toolroot.' '.$version.' ?</td>'."\n";
             echo "\t\t".'<th><a href="index.php?action=autoupdate&sub=tool_upgrade&confirmed=yes&tool='.$toolroot.'&tag='.$version.'">'.$lang['autoupdate_MaJ_linkupdate'].'</a></th>'."\n";
+            echo "\t\t".'<td class="c">'.$lang['autoupdate_tableau_back'].'</td>'."\n";
             echo "\t".'</tr>'."\n";
             echo '</table>'."\n";
 	}

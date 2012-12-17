@@ -12,7 +12,8 @@ if (!defined('IN_SPYOGAME')) {
     die("Hacking attempt");
 }
 
-require_once("mod/autoupdate/ban_list.php");
+require_once("mod/autoupdate/mod_list.php");
+require_once("includes/cache.php");
 
 /**
 *Récupère la version du mod
@@ -37,7 +38,7 @@ function upgrade_ogspy_mod($mod){
         if (file_exists("mod/".$mod."/update.php"))
         {
             require_once("mod/".$mod."/update.php");
-            generate_all_cache();
+            generate_mod_cache();
             log_("mod_update", $mod);
             $maj = $lang['autoupdate_tableau_uptodateok']."<br />\n<br />\n";
         } else{
@@ -60,32 +61,27 @@ function upgrade_ogspy_mod($mod){
                 
     }
 }
-function rrmdir($dir) {
-    foreach(glob($dir . '/*') as $file) {
-        if(is_dir($file))
-            rrmdir($file);
-        else
-            unlink($file);
-    }
-    rmdir($dir);
-}
-
-/**
-*Copie le fichier modupdate.json dans mod/modupdate.json
-*/
-function copymodupdate() {
-global $lang;
-
-    if(time() > (mod_get_option('LAST_MODLIST_UPDATE') + mod_get_option('CYCLEMAJ') * 3600)){
-        if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")) {
-            $affiche = "<br />\n".$lang['autoupdate_tableau_error2'];
-        } else {
-            $affiche = "<br />\n".$lang['autoupdate_tableau_ok'];
-            mod_set_option('LAST_MODLIST_UPDATE', time());
-        }
-
-        return $affiche;
-    }   
+ function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ }
+// copies files and non-empty directories
+function rcopy($src, $dst) {
+  if (is_dir($src)) {
+    if(!is_dir($dst)) mkdir($dst);
+    $files = scandir($src);
+    foreach ($files as $file)
+    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file");
+  }
+  else if (file_exists($src)) copy($src, $dst);
 }
 
 /**
@@ -97,7 +93,7 @@ function tableau($tableau, $type = "maj") {
 		$fichier = explode("/", $key);
 		$nom = "";
 		for($i = 1; $i < count($fichier); $i++) {
-			if (count($fichier) >= 3 AND count($fichier) != $i AND $i > 1) {
+			if (count($fichier) >= 3 && count($fichier) != $i && $i > 1) {
 				$slash = "/";
 			} else {
 				$slash = "";
@@ -105,7 +101,7 @@ function tableau($tableau, $type = "maj") {
 			$nom .= $slash.$fichier[$i];
 		}
 		$explode = explode(".", $key);
-		if ($nom != "" AND $explode[0] != $key) {
+		if ($nom != "" && $explode[0] != $key) {
 			if ($type == "maj") {
 				$etat = $lang['autoupdate_MaJ_uptodateok'];
 			} else if ($type == "down") {
@@ -119,25 +115,4 @@ function tableau($tableau, $type = "maj") {
 	}
 }
 
-function getmodlist(){
-	global $ban_mod;
-	// Récupérer la liste des dernières versions dans le fichier JSON
-    if(!file_exists("parameters/modupdate.json")) {
-	//Retry once to not overload the server.
-		if (!copy("http://update.ogsteam.fr/mods/latest.php", "parameters/modupdate.json")){
-			die ("Fichier JSON Introuvable !");
-		}
-	}
-	$contents = file_get_contents("parameters/modupdate.json");	
-	$results = utf8_encode($contents);
-	$data = json_decode($results, true);
-	//Suppresion des Mods interdits
-	if( mod_get_option("BAN_MODS") == 1){
-		foreach( $ban_mod as $to_ban)
-		{
-			unset($data[$to_ban]);
-		}
-	}
-	return $data;	
-}	
 ?>
