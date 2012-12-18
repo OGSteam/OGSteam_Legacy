@@ -3,21 +3,22 @@
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBALZMZ9tRUByPuDJkmwVCcwp7h/GPgrkHklEYgrAhY5UWT91pjYVDRVTCFY4KJaunb+MGaAol128CshyenW9TNVG2WzQw+rE6Umy2dk3tqzM15UVY6Jwoz+1hV0m0fKvBk7blFVYgubtBzNubhCG8ru6UExILXyH6imwXB46jpVVL">
-    <em:updates RDF:resource="rdf:#$+QW6r"/>
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBABRYHSTfzFSBTb224qdxFuVomrqv+YCkTHWHvdxMUYBMvUM8kecktXIugaUj0ljXxHnEKtKvEDfM+O0p7VwbFgO5Nri82NXiQ5KiKS9EKELF16/Qtk5vmm/adbyl2ANq4uCFwPLo+U86AW3AudYtCgEF1ndZogDSivW3NVgRONfH">
+    <em:updates RDF:resource="rdf:#$bRW6r"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$4RW6r"
+  <RDF:Description RDF:about="rdf:#$gRW6r"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="2.0.*"
                    em:maxVersion="18.*"
                    em:updateInfoURL="https://bitbucket.org/Jedinight/xtense-for-firefox/downloads/release-notes.xhtml"
-                   em:updateLink="https://bitbucket.org/Jedinight/xtense-for-firefox/downloads/xtense-2.5.0.xpi" />
-  <RDF:Description RDF:about="rdf:#$0RW6r"
+                   em:updateLink="https://bitbucket.org/Jedinight/xtense-for-firefox/downloads/xtense-2.5.0.xpi"
+                   em:updateHash="sha1:a24477c2894c3ccd907ba23e988b1fd16abed043" />
+  <RDF:Seq RDF:about="rdf:#$bRW6r">
+    <RDF:li RDF:resource="rdf:#$cRW6r"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="rdf:#$cRW6r"
                    em:version="2.5.0"
                    em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$4RW6r"/>
+    <em:targetApplication RDF:resource="rdf:#$gRW6r"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$+QW6r">
-    <RDF:li RDF:resource="rdf:#$0RW6r"/>
-  </RDF:Seq>
 </RDF:RDF>
