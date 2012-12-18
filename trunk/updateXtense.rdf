@@ -2,7 +2,9 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$073M.3">
+<<<<<<< .mine  <RDF:Description RDF:about="rdf:#$QQW6r"
+                   em:version="2.5.0"
+=======  <RDF:Seq RDF:about="rdf:#$073M.3">
     <RDF:li RDF:resource="rdf:#$173M.3"/>
   </RDF:Seq>
   <RDF:Description RDF:about="rdf:#$573M.3"
@@ -13,11 +15,23 @@
                    em:updateHash="sha1:20bfb06c5e8e4d67a2def88d318c95a5af7b89d8" />
   <RDF:Description RDF:about="rdf:#$173M.3"
                    em:version="2.4.8"
-                   em:name="Xtense for Firefox">
-    <em:targetApplication RDF:resource="rdf:#$573M.3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
-                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAClvL9LehEIMT18YkGlGYoFVX8tZoj772SqZG59F65aqNt6FEMiTpkACc52pyFXSuBuG0zoVpBBQqCTAVKt2k24478rMxRQnQymMnK2Hsomo995XVjhaSwg3inGFW6YC/ekxNYlXNAKK/vo6rDI52Ln58FCd0MKPWXByryhf4G0R">
+>>>>>>> .theirs                   em:name="Xtense for Firefox">
+<<<<<<< .mine    <em:targetApplication RDF:resource="rdf:#$UQW6r"/>
+=======    <em:targetApplication RDF:resource="rdf:#$573M.3"/>
+>>>>>>> .theirs  </RDF:Description>
+<<<<<<< .mine  <RDF:Seq RDF:about="rdf:#$PQW6r">
+    <RDF:li RDF:resource="rdf:#$QQW6r"/>
+  </RDF:Seq>
+=======>>>>>>> .theirs  <RDF:Description RDF:about="urn:mozilla:extension:ogsteam@ogsteam.fr"
+<<<<<<< .mine                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBALZMZ9tRUByPuDJkmwVCcwp7h/GPgrkHklEYgrAhY5UWT91pjYVDRVTCFY4KJaunb+MGaAol128CshyenW9TNVG2WzQw+rE6Umy2dk3tqzM15UVY6Jwoz+1hV0m0fKvBk7blFVYgubtBzNubhCG8ru6UExILXyH6imwXB46jpVVL">
+    <em:updates RDF:resource="rdf:#$PQW6r"/>
+=======                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAClvL9LehEIMT18YkGlGYoFVX8tZoj772SqZG59F65aqNt6FEMiTpkACc52pyFXSuBuG0zoVpBBQqCTAVKt2k24478rMxRQnQymMnK2Hsomo995XVjhaSwg3inGFW6YC/ekxNYlXNAKK/vo6rDI52Ln58FCd0MKPWXByryhf4G0R">
     <em:updates RDF:resource="rdf:#$073M.3"/>
-  </RDF:Description>
-</RDF:RDF>
+>>>>>>> .theirs  </RDF:Description>
+<<<<<<< .mine  <RDF:Description RDF:about="rdf:#$UQW6r"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="2.0.*"
+                   em:maxVersion="18.*"
+                   em:updateInfoURL="https://bitbucket.org/Jedinight/xtense-for-firefox/downloads/release-notes.xhtml"
+                   em:updateLink="https://bitbucket.org/Jedinight/xtense-for-firefox/downloads/xtense-2.5.0.xpi" />
+=======>>>>>>> .theirs</RDF:RDF>
